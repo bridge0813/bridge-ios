@@ -12,6 +12,15 @@
 		7B71E7452A9330C6001B5D2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7442A9330C6001B5D2C /* ViewController.swift */; };
 		7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E7492A9330C7001B5D2C /* Assets.xcassets */; };
 		7B71E74D2A9330C7001B5D2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E74B2A9330C7001B5D2C /* LaunchScreen.storyboard */; };
+		7B71E7562A933BF5001B5D2C /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7552A933BF5001B5D2C /* RxBlocking */; };
+		7B71E7582A933BF5001B5D2C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7572A933BF5001B5D2C /* RxCocoa */; };
+		7B71E75A2A933BF5001B5D2C /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7592A933BF5001B5D2C /* RxRelay */; };
+		7B71E75C2A933BF5001B5D2C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E75B2A933BF5001B5D2C /* RxSwift */; };
+		7B71E75F2A933C18001B5D2C /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E75E2A933C18001B5D2C /* FlexLayout */; };
+		7B71E7612A933C18001B5D2C /* FlexLayoutYoga in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7602A933C18001B5D2C /* FlexLayoutYoga */; };
+		7B71E7632A933C18001B5D2C /* FlexLayoutYogaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7622A933C18001B5D2C /* FlexLayoutYogaKit */; };
+		7B71E7662A933C25001B5D2C /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7652A933C25001B5D2C /* PinLayout */; };
+		7B71E7692A933D8A001B5D2C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E7682A933D8A001B5D2C /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +31,7 @@
 		7B71E7492A9330C7001B5D2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B71E74C2A9330C7001B5D2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B71E74E2A9330C7001B5D2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B71E7682A933D8A001B5D2C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +39,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B71E75A2A933BF5001B5D2C /* RxRelay in Frameworks */,
+				7B71E7582A933BF5001B5D2C /* RxCocoa in Frameworks */,
+				7B71E75F2A933C18001B5D2C /* FlexLayout in Frameworks */,
+				7B71E7632A933C18001B5D2C /* FlexLayoutYogaKit in Frameworks */,
+				7B71E75C2A933BF5001B5D2C /* RxSwift in Frameworks */,
+				7B71E7562A933BF5001B5D2C /* RxBlocking in Frameworks */,
+				7B71E7662A933C25001B5D2C /* PinLayout in Frameworks */,
+				7B71E7612A933C18001B5D2C /* FlexLayoutYoga in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +78,7 @@
 				7B71E7492A9330C7001B5D2C /* Assets.xcassets */,
 				7B71E74B2A9330C7001B5D2C /* LaunchScreen.storyboard */,
 				7B71E74E2A9330C7001B5D2C /* Info.plist */,
+				7B71E7682A933D8A001B5D2C /* .swiftlint.yml */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
@@ -74,12 +93,23 @@
 				7B71E7392A9330C6001B5D2C /* Sources */,
 				7B71E73A2A9330C6001B5D2C /* Frameworks */,
 				7B71E73B2A9330C6001B5D2C /* Resources */,
+				7B71E7672A933D27001B5D2C /* SwiftLint Run Script */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Bridge;
+			packageProductDependencies = (
+				7B71E7552A933BF5001B5D2C /* RxBlocking */,
+				7B71E7572A933BF5001B5D2C /* RxCocoa */,
+				7B71E7592A933BF5001B5D2C /* RxRelay */,
+				7B71E75B2A933BF5001B5D2C /* RxSwift */,
+				7B71E75E2A933C18001B5D2C /* FlexLayout */,
+				7B71E7602A933C18001B5D2C /* FlexLayoutYoga */,
+				7B71E7622A933C18001B5D2C /* FlexLayoutYogaKit */,
+				7B71E7652A933C25001B5D2C /* PinLayout */,
+			);
 			productName = Bridge;
 			productReference = 7B71E73D2A9330C6001B5D2C /* Bridge.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +138,11 @@
 				Base,
 			);
 			mainGroup = 7B71E7342A9330C6001B5D2C;
+			packageReferences = (
+				7B71E7542A933BF5001B5D2C /* XCRemoteSwiftPackageReference "RxSwift" */,
+				7B71E75D2A933C18001B5D2C /* XCRemoteSwiftPackageReference "FlexLayout" */,
+				7B71E7642A933C25001B5D2C /* XCRemoteSwiftPackageReference "PinLayout" */,
+			);
 			productRefGroup = 7B71E73E2A9330C6001B5D2C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -122,12 +157,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B71E7692A933D8A001B5D2C /* .swiftlint.yml in Resources */,
 				7B71E74D2A9330C7001B5D2C /* LaunchScreen.storyboard in Resources */,
 				7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7B71E7672A933D27001B5D2C /* SwiftLint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7B71E7392A9330C6001B5D2C /* Sources */ = {
@@ -346,6 +403,76 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7B71E7542A933BF5001B5D2C /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		7B71E75D2A933C18001B5D2C /* XCRemoteSwiftPackageReference "FlexLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/FlexLayout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		7B71E7642A933C25001B5D2C /* XCRemoteSwiftPackageReference "PinLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/PinLayout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7B71E7552A933BF5001B5D2C /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B71E7542A933BF5001B5D2C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		7B71E7572A933BF5001B5D2C /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B71E7542A933BF5001B5D2C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		7B71E7592A933BF5001B5D2C /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B71E7542A933BF5001B5D2C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		7B71E75B2A933BF5001B5D2C /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B71E7542A933BF5001B5D2C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		7B71E75E2A933C18001B5D2C /* FlexLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B71E75D2A933C18001B5D2C /* XCRemoteSwiftPackageReference "FlexLayout" */;
+			productName = FlexLayout;
+		};
+		7B71E7602A933C18001B5D2C /* FlexLayoutYoga */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B71E75D2A933C18001B5D2C /* XCRemoteSwiftPackageReference "FlexLayout" */;
+			productName = FlexLayoutYoga;
+		};
+		7B71E7622A933C18001B5D2C /* FlexLayoutYogaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B71E75D2A933C18001B5D2C /* XCRemoteSwiftPackageReference "FlexLayout" */;
+			productName = FlexLayoutYogaKit;
+		};
+		7B71E7652A933C25001B5D2C /* PinLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B71E7642A933C25001B5D2C /* XCRemoteSwiftPackageReference "PinLayout" */;
+			productName = PinLayout;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7B71E7352A9330C6001B5D2C /* Project object */;
 }
