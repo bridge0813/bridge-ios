@@ -9,6 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    let dictionary: Dictionary = ["apple" : "zzz"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

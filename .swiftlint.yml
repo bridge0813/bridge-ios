@@ -1,0 +1,11 @@
+disabled_rules: # Default Rules에서 비활성화 할 규칙
+- line_length
+- trailing_whitespace
+- vertical_whitespace
+
+included: # 규칙을 적용할 경로
+
+excluded: # 규칙을 적용하지 않을 경로
+- DerivedData
+- Development/bridge-ios/Bridge/Application/AppDelegate.swift
+- Development/bridge-ios/Bridge/Application/SceneDelegate.swift

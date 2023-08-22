@@ -20,7 +20,7 @@
 		7B71E7612A933C18001B5D2C /* FlexLayoutYoga in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7602A933C18001B5D2C /* FlexLayoutYoga */; };
 		7B71E7632A933C18001B5D2C /* FlexLayoutYogaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7622A933C18001B5D2C /* FlexLayoutYogaKit */; };
 		7B71E7662A933C25001B5D2C /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7652A933C25001B5D2C /* PinLayout */; };
-		7B71E7692A933D8A001B5D2C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E7682A933D8A001B5D2C /* .swiftlint.yml */; };
+		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		7B71E7492A9330C7001B5D2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B71E74C2A9330C7001B5D2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B71E74E2A9330C7001B5D2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B71E7682A933D8A001B5D2C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +56,7 @@
 		7B71E7342A9330C6001B5D2C = {
 			isa = PBXGroup;
 			children = (
+				7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */,
 				7B71E73F2A9330C6001B5D2C /* Bridge */,
 				7B71E73E2A9330C6001B5D2C /* Products */,
 			);
@@ -94,7 +95,6 @@
 				7B71E74B2A9330C7001B5D2C /* LaunchScreen.storyboard */,
 				7B71E7492A9330C7001B5D2C /* Assets.xcassets */,
 				7B71E74E2A9330C7001B5D2C /* Info.plist */,
-				7B71E7682A933D8A001B5D2C /* .swiftlint.yml */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -106,10 +106,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7B71E7512A9330C7001B5D2C /* Build configuration list for PBXNativeTarget "Bridge" */;
 			buildPhases = (
+				7B71E7672A933D27001B5D2C /* SwiftLint Run Script */,
 				7B71E7392A9330C6001B5D2C /* Sources */,
 				7B71E73A2A9330C6001B5D2C /* Frameworks */,
 				7B71E73B2A9330C6001B5D2C /* Resources */,
-				7B71E7672A933D27001B5D2C /* SwiftLint Run Script */,
 			);
 			buildRules = (
 			);
@@ -173,7 +173,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B71E7692A933D8A001B5D2C /* .swiftlint.yml in Resources */,
+				7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */,
 				7B71E74D2A9330C7001B5D2C /* LaunchScreen.storyboard in Resources */,
 				7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */,
 			);
@@ -184,6 +184,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		7B71E7672A933D27001B5D2C /* SwiftLint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -348,6 +349,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Bridge/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "브릿지";
@@ -376,6 +378,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Bridge/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "브릿지";
