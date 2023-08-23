@@ -73,20 +73,20 @@
 		7B71E73F2A9330C6001B5D2C /* Bridge */ = {
 			isa = PBXGroup;
 			children = (
-				7B71E76A2A935D20001B5D2C /* Application */,
+				7B71E76A2A935D20001B5D2C /* App */,
 				7B71E76B2A935D4D001B5D2C /* Resources */,
 				7B71E7442A9330C6001B5D2C /* ViewController.swift */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
 		};
-		7B71E76A2A935D20001B5D2C /* Application */ = {
+		7B71E76A2A935D20001B5D2C /* App */ = {
 			isa = PBXGroup;
 			children = (
 				7B71E7402A9330C6001B5D2C /* AppDelegate.swift */,
 				7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */,
 			);
-			path = Application;
+			path = App;
 			sourceTree = "<group>";
 		};
 		7B71E76B2A935D4D001B5D2C /* Resources */ = {
