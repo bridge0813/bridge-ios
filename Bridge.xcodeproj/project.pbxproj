@@ -56,8 +56,8 @@
 		7B71E7342A9330C6001B5D2C = {
 			isa = PBXGroup;
 			children = (
-				7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */,
 				7B71E73F2A9330C6001B5D2C /* Bridge */,
+				7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */,
 				7B71E73E2A9330C6001B5D2C /* Products */,
 			);
 			sourceTree = "<group>";
