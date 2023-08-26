@@ -20,21 +20,11 @@ protocol Coordinator: AnyObject {
     
     func start()
     func finish()
-    func popViewController()
-    func dismiss()
 }
 
 extension Coordinator {
     func finish() {
         childCoordinators.removeAll()
         delegate?.didFinish(childCoordinator: self)
-    }
-    
-    func popViewController() {
-        navigationController.popViewController(animated: true)
-    }
-    
-    func dismiss() {
-        navigationController.dismiss(animated: true)
     }
 }
