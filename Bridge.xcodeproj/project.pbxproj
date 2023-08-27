@@ -40,7 +40,7 @@
 		7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageType.swift; sourceTree = "<group>"; };
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
-		7BB2C2512A99AB4500AA2328 /* ChatRoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatRoomListViewController.swift; path = Bridge/Sources/Presenter/Tab/Chat/ChatRoomListViewController.swift; sourceTree = SOURCE_ROOT; };
+		7BB2C2512A99AB4500AA2328 /* ChatRoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatRoomListViewController.swift; path = Bridge/Sources/Presenter/Tab/Chat/ChatRoomList/ChatRoomListViewController.swift; sourceTree = SOURCE_ROOT; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,8 +167,7 @@
 			children = (
 				7BB2C2512A99AB4500AA2328 /* ChatRoomListViewController.swift */,
 			);
-			name = ChatRoomList;
-			path = "Chat깨ㅐㅡList";
+			path = ChatRoomList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
