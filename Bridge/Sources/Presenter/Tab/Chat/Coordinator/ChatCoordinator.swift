@@ -9,7 +9,7 @@ import UIKit
 
 protocol ChatCoordinatorProtocol: Coordinator {
     func showChatRoomListViewController()
-    func connectChatRoomDetailFlow()
+    func showChatRoomDetailViewController()
 }
 
 final class ChatCoordinator: ChatCoordinatorProtocol {
@@ -47,7 +47,7 @@ extension ChatCoordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func connectChatRoomDetailFlow() {
+    func showChatRoomDetailViewController() {
         // ChatRoomDetailCoordinator로 연결...
     }
 }
