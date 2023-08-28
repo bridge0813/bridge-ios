@@ -53,13 +53,13 @@ private extension TabBarCoordinator {
     func connectTabCoordinator(of page: TabBarPageType, to tabNavigationController: UINavigationController) {
         switch page {
         case .main:
-            self.connectMainFlow(to: tabNavigationController)
+            connectMainFlow(to: tabNavigationController)
             
         case .management:
             return
             
         case .chat:
-            self.connectChatFlow(to: tabNavigationController)
+            connectChatFlow(to: tabNavigationController)
             
         case .my:
             return

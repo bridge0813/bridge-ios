@@ -8,11 +8,11 @@
 import UIKit
 
 protocol MainCoordinatorProtocol: Coordinator {
-    func connectToNotificationView()
-    func connectToFilterView()
-    func connectToSearchView()
-    func connectToDetailView()
-    func connectToWriteView()
+    func connectToNotificationFlow()
+    func connectToFilterFlow()
+    func connectToSearchFlow()
+    func connectToDetailFlow()
+    func connectToWriteFlow()
 }
 
 final class MainCoordinator: MainCoordinatorProtocol {
@@ -40,9 +40,9 @@ extension MainCoordinator {
 
 // MARK: - MainCoordinatorProtocol Method
 extension MainCoordinator {
-    func connectToNotificationView() { }
-    func connectToFilterView() { }
-    func connectToSearchView() { }
-    func connectToDetailView() { }
-    func connectToWriteView() { }
+    func connectToNotificationFlow() { }
+    func connectToFilterFlow() { }
+    func connectToSearchFlow() { }
+    func connectToDetailFlow() { }
+    func connectToWriteFlow() { }
 }
