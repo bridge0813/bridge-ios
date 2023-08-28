@@ -53,7 +53,7 @@ private extension TabBarCoordinator {
     func connectTabCoordinator(of page: TabBarPageType, to tabNavigationController: UINavigationController) {
         switch page {
         case .main:
-            return
+            self.connectMainFlow(to: tabNavigationController)
             
         case .management:
             return
@@ -66,7 +66,11 @@ private extension TabBarCoordinator {
         }
     }
     
-    func connectMainFlow(to tabNavigationController: UINavigationController) { }
+    func connectMainFlow(to tabNavigationController: UINavigationController) {
+        let mainCoordinator = MainCoordinator(navigationController: tabNavigationController)
+        mainCoordinator.start()
+        childCoordinators.append(mainCoordinator)
+    }
     
     func connectManagementFlow(to tabNavigationController: UINavigationController) { }
     
