@@ -9,10 +9,10 @@ import UIKit
 
 protocol MainCoordinatorProtocol: Coordinator {
     func connectToNotificationFlow()
-    func connectToFilterFlow()
-    func connectToSearchFlow()
-    func connectToDetailFlow()
-    func connectToWriteFlow()
+    func connectToProjectFilteringFlow()
+    func connectToProjectSearchFlow()
+    func connectToProjectDetailFlow()
+    func connectToCreateProjectFlow()
 }
 
 final class MainCoordinator: MainCoordinatorProtocol {
@@ -41,8 +41,8 @@ extension MainCoordinator {
 // MARK: - MainCoordinatorProtocol Method
 extension MainCoordinator {
     func connectToNotificationFlow() { }
-    func connectToFilterFlow() { }
-    func connectToSearchFlow() { }
-    func connectToDetailFlow() { }
-    func connectToWriteFlow() { }
+    func connectToProjectFilteringFlow() { }
+    func connectToProjectSearchFlow() { }
+    func connectToProjectDetailFlow() { }
+    func connectToCreateProjectFlow() { }
 }
