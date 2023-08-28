@@ -25,6 +25,8 @@
 		7BA36C9B2A9C5091000DAB02 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C9A2A9C5091000DAB02 /* ChatRoom.swift */; };
 		7BA36C9D2A9C5105000DAB02 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C9C2A9C5105000DAB02 /* Chat.swift */; };
 		7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C9E2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift */; };
+		7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CA32A9C6849000DAB02 /* DefaultChatRoomRepository.swift */; };
+		7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CA62A9C688C000DAB02 /* ChatRoomRepository.swift */; };
 		7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */; };
 		7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2402A9851B600AA2328 /* Coordinator.swift */; };
 		7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */; };
@@ -47,6 +49,8 @@
 		7BA36C9A2A9C5091000DAB02 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		7BA36C9C2A9C5105000DAB02 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		7BA36C9E2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveChatRoomUseCase.swift; sourceTree = "<group>"; };
+		7BA36CA32A9C6849000DAB02 /* DefaultChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatRoomRepository.swift; sourceTree = "<group>"; };
+		7BA36CA62A9C688C000DAB02 /* ChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomRepository.swift; sourceTree = "<group>"; };
 		7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2402A9851B600AA2328 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -134,7 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA36C922A9C4CE5000DAB02 /* Entities */,
-				7BA36C932A9C4CF4000DAB02 /* Repositories */,
+				7BA36C932A9C4CF4000DAB02 /* RepositoryInterfaces */,
 				7BA36C942A9C4CFF000DAB02 /* UseCases */,
 			);
 			path = Domain;
@@ -148,11 +152,12 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		7BA36C932A9C4CF4000DAB02 /* Repositories */ = {
+		7BA36C932A9C4CF4000DAB02 /* RepositoryInterfaces */ = {
 			isa = PBXGroup;
 			children = (
+				7BA36CA52A9C6878000DAB02 /* Chat */,
 			);
-			path = Repositories;
+			path = RepositoryInterfaces;
 			sourceTree = "<group>";
 		};
 		7BA36C942A9C4CFF000DAB02 /* UseCases */ = {
@@ -189,10 +194,43 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
+		7BA36CA02A9C67F6000DAB02 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7BA36CA12A9C680A000DAB02 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		7BA36CA12A9C680A000DAB02 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				7BA36CA22A9C681B000DAB02 /* Chat */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		7BA36CA22A9C681B000DAB02 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				7BA36CA32A9C6849000DAB02 /* DefaultChatRoomRepository.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		7BA36CA52A9C6878000DAB02 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				7BA36CA62A9C688C000DAB02 /* ChatRoomRepository.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		7BB2C2422A98538000AA2328 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				7B71E76A2A935D20001B5D2C /* App */,
+				7BA36CA02A9C67F6000DAB02 /* Data */,
 				7BA36C912A9C4CD9000DAB02 /* Domain */,
 				7BB2C2432A98540A00AA2328 /* Presenter */,
 			);
@@ -361,6 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
 				7BA36C9D2A9C5105000DAB02 /* Chat.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
 				7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */,
@@ -372,6 +411,7 @@
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
+				7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
