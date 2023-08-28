@@ -26,6 +26,8 @@
 		7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */; };
 		7BB2C2522A99AB4500AA2328 /* ChatRoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2512A99AB4500AA2328 /* ChatRoomListViewController.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
+		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
+		7CF93E072A9C65870013EBD6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E062A9C65870013EBD6 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2512A99AB4500AA2328 /* ChatRoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatRoomListViewController.swift; path = Bridge/Sources/Presenter/Tab/Chat/ChatRoomList/ChatRoomListViewController.swift; sourceTree = SOURCE_ROOT; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		7CF93E062A9C65870013EBD6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB2C2442A98542700AA2328 /* Coordinator */,
+				7CF93E012A9C64EB0013EBD6 /* Main */,
 				7BB2C24A2A985A0400AA2328 /* Chat */,
 			);
 			path = Tab;
@@ -168,6 +173,31 @@
 				7BB2C2512A99AB4500AA2328 /* ChatRoomListViewController.swift */,
 			);
 			path = ChatRoomList;
+			sourceTree = "<group>";
+		};
+		7CF93E012A9C64EB0013EBD6 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7CF93E022A9C65040013EBD6 /* Coordinator */,
+				7CF93E032A9C650D0013EBD6 /* MainHome */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		7CF93E022A9C65040013EBD6 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		7CF93E032A9C650D0013EBD6 /* MainHome */ = {
+			isa = PBXGroup;
+			children = (
+				7CF93E062A9C65870013EBD6 /* MainViewController.swift */,
+			);
+			path = MainHome;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,7 +316,9 @@
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
+				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
+				7CF93E072A9C65870013EBD6 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
