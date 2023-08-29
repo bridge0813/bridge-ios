@@ -37,7 +37,7 @@ final class ChatRoomListViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let chatRooms = fetchChatRoomsUseCase.execute().share()
         
-        chatRooms.subscribe(onNext: { print($0) })  // 연결 확인용
+        chatRooms.subscribe(onNext: { print($0) }).disposed(by: disposeBag)  // 연결 확인용
         // ...
         return Output(chatRooms: chatRooms.asDriver(onErrorJustReturn: [ChatRoom.onError]))
     }
