@@ -21,6 +21,6 @@ final class DefaultFetchChatRoomsUseCase: FetchChatRoomsUseCase {
     }
     
     func execute() -> Observable<[ChatRoom]> {
-        chatRoomRepository.fetch()
+        chatRoomRepository.fetchChatRooms()
     }
 }

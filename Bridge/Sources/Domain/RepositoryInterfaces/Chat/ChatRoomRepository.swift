@@ -8,6 +8,6 @@
 import RxSwift
 
 protocol ChatRoomRepository {
-    func fetch() -> Observable<[ChatRoom]>
-    func leave() -> Single<Void>
+    func fetchChatRooms() -> Observable<[ChatRoom]>
+    func leaveChatRoom() -> Single<Void>
 }

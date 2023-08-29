@@ -12,7 +12,7 @@ final class DefaultChatRoomRepository: ChatRoomRepository {
     
     // TODO: newtwork service 의존성에서 아래 작업 해야함
     
-    func fetch() -> Observable<[ChatRoom]> {
+    func fetchChatRooms() -> Observable<[ChatRoom]> {
         Observable.just([
             ChatRoom(
                 id: "1",
@@ -25,7 +25,7 @@ final class DefaultChatRoomRepository: ChatRoomRepository {
         ])
     }
     
-    func leave() -> Single<Void> {
+    func leaveChatRoom() -> Single<Void> {
         .just(())
     }
 }
