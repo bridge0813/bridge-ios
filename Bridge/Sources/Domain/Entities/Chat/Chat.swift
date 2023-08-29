@@ -20,6 +20,5 @@ struct Chat {
         case opponent
     }
     
-    // TODO: API, 디자인 확인하고 수정
     let content: String
 }
