@@ -13,7 +13,7 @@ struct ChatRoom {
     let name: String
     let time: Date
     let messageType: Chat.MessageType
-    let preview: String
+    let messagePreview: String
 }
 
 extension ChatRoom {
@@ -24,7 +24,7 @@ extension ChatRoom {
             name: "오류",
             time: Date(),
             messageType: .text,
-            preview: "오류가 발생했습니다."
+            messagePreview: "오류가 발생했습니다."
         )
     }
 }

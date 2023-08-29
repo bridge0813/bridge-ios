@@ -20,7 +20,7 @@ final class DefaultChatRoomRepository: ChatRoomRepository {
                 name: "정호윤",
                 time: Date(),
                 messageType: .text,
-                preview: "안녕하세요!"
+                messagePreview: "안녕하세요!"
             )
         ])
     }
