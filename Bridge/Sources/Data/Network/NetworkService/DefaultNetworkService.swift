@@ -1,5 +1,5 @@
 //
-//  ChatService.swift
+//  DefaultNetworkService.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/08/29.
@@ -8,13 +8,7 @@
 import Foundation
 import RxSwift
 
-protocol ChatRoomNetworkService {
-    func request(_ endpoint: Endpoint) -> Observable<Data>
-    
-    func requestTestData() -> Observable<[ChatRoomDTO]>
-}
-
-final class DefaultChatRoomNetworkService: ChatRoomNetworkService {
+final class DefaultNetworkService: NetworkService {
     
     func request(_ endpoint: Endpoint) -> Observable<Data> {
         guard let urlRequest = endpoint.toURLRequest() else { return .error(NetworkError.invalidURL) }

@@ -10,14 +10,14 @@ import RxSwift
 
 final class DefaultChatRoomRepository: ChatRoomRepository {
     
-    private let chatRoomNetworkService: ChatRoomNetworkService
+    private let networkService: NetworkService
     
-    init(chatRoomNetworkService: ChatRoomNetworkService) {
-        self.chatRoomNetworkService = chatRoomNetworkService
+    init(networkService: NetworkService) {
+        self.networkService = networkService
     }
     
     func fetchChatRooms() -> Observable<[ChatRoom]> {
-        chatRoomNetworkService
+        networkService
             .requestTestData()
             .map { data -> [ChatRoom] in data.compactMap { $0.toModel() } }
     }
