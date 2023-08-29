@@ -10,19 +10,16 @@ import RxSwift
 
 final class DefaultChatRoomRepository: ChatRoomRepository {
     
-    // TODO: newtwork service 의존성에서 아래 작업 해야함
+    private let chatRoomNetworkService: ChatRoomNetworkService
+    
+    init(chatRoomNetworkService: ChatRoomNetworkService) {
+        self.chatRoomNetworkService = chatRoomNetworkService
+    }
     
     func fetchChatRooms() -> Observable<[ChatRoom]> {
-        Observable.just([
-            ChatRoom(
-                id: "1",
-                profileImage: nil,
-                name: "정호윤",
-                time: Date(),
-                messageType: .text,
-                messagePreview: "안녕하세요!"
-            )
-        ])
+        chatRoomNetworkService
+            .requestTestData()
+            .map { data -> [ChatRoom] in data.compactMap { $0.toModel() } }
     }
     
     func leaveChatRoom() -> Single<Void> {

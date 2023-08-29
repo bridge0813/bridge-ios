@@ -26,7 +26,8 @@ final class ChatCoordinator: ChatCoordinatorProtocol {
         self.navigationController = navigationController
         self.childCoordinators = []
         
-        chatRoomRepository = DefaultChatRoomRepository()
+        let chatRoomNetworkService = DefaultChatRoomNetworkService()
+        chatRoomRepository = DefaultChatRoomRepository(chatRoomNetworkService: chatRoomNetworkService)
         fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
     }
