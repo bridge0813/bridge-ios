@@ -21,7 +21,7 @@
 		7B71E7662A933C25001B5D2C /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7652A933C25001B5D2C /* PinLayout */; };
 		7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */; };
 		7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C8F2A9C4BB3000DAB02 /* ChatRoomListViewModel.swift */; };
-		7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C972A9C503C000DAB02 /* FetchChatRoomsUseCase.swift */; };
+		7BA36C982A9C503C000DAB02 /* ObserveChatRoomsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C972A9C503C000DAB02 /* ObserveChatRoomsUseCase.swift */; };
 		7BA36C9B2A9C5091000DAB02 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C9A2A9C5091000DAB02 /* ChatRoom.swift */; };
 		7BA36C9D2A9C5105000DAB02 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C9C2A9C5105000DAB02 /* Chat.swift */; };
 		7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C9E2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift */; };
@@ -53,7 +53,7 @@
 		7B71E74E2A9330C7001B5D2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		7BA36C8F2A9C4BB3000DAB02 /* ChatRoomListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomListViewModel.swift; sourceTree = "<group>"; };
-		7BA36C972A9C503C000DAB02 /* FetchChatRoomsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChatRoomsUseCase.swift; sourceTree = "<group>"; };
+		7BA36C972A9C503C000DAB02 /* ObserveChatRoomsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserveChatRoomsUseCase.swift; sourceTree = "<group>"; };
 		7BA36C9A2A9C5091000DAB02 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		7BA36C9C2A9C5105000DAB02 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		7BA36C9E2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveChatRoomUseCase.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 		7BA36C962A9C4D5A000DAB02 /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
-				7BA36C972A9C503C000DAB02 /* FetchChatRoomsUseCase.swift */,
+				7BA36C972A9C503C000DAB02 /* ObserveChatRoomsUseCase.swift */,
 				7BA36C9E2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift */,
 			);
 			path = ChatRoom;
@@ -494,7 +494,7 @@
 				7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
-				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
+				7BA36C982A9C503C000DAB02 /* ObserveChatRoomsUseCase.swift in Sources */,
 				7BB2C2522A99AB4500AA2328 /* ChatRoomListViewController.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
 				7BA36CB92A9D9A29000DAB02 /* HTTP.swift in Sources */,
@@ -653,6 +653,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = K9M6C75JFU;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Bridge/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "브릿지";
@@ -687,6 +688,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = K9M6C75JFU;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Bridge/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "브릿지";
