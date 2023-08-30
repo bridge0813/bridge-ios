@@ -50,6 +50,7 @@
 		7C569CFA2A9F6D5A0063D362 /* ObserveProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF92A9F6D5A0063D362 /* ObserveProjectsUseCase.swift */; };
 		7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */; };
 		7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D022A9F72320063D362 /* ProjectDTO.swift */; };
+		7C569D062A9F776B0063D362 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D052A9F776B0063D362 /* Date+Extension.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 		7CF93E072A9C65870013EBD6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E062A9C65870013EBD6 /* MainViewController.swift */; };
@@ -93,6 +94,7 @@
 		7C569CF92A9F6D5A0063D362 /* ObserveProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserveProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
 		7C569D022A9F72320063D362 /* ProjectDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDTO.swift; sourceTree = "<group>"; };
+		7C569D052A9F776B0063D362 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		7CF93E062A9C65870013EBD6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				7BA36CA02A9C67F6000DAB02 /* Data */,
 				7BA36C912A9C4CD9000DAB02 /* Domain */,
 				7BB2C2432A98540A00AA2328 /* Presenter */,
+				7C569D042A9F77330063D362 /* Extension */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -431,6 +434,14 @@
 				7C569D022A9F72320063D362 /* ProjectDTO.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		7C569D042A9F77330063D362 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7C569D052A9F776B0063D362 /* Date+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		7CF93E012A9C64EB0013EBD6 /* Main */ = {
@@ -585,6 +596,7 @@
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
 				7BA36C9B2A9C5091000DAB02 /* ChatRoom.swift in Sources */,
 				7BA36CCE2A9E185A000DAB02 /* ChatRoomTableViewCell.swift in Sources */,
+				7C569D062A9F776B0063D362 /* Date+Extension.swift in Sources */,
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
