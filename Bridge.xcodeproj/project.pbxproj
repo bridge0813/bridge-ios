@@ -48,6 +48,7 @@
 		7C569CF52A9F67E00063D362 /* RecruitmentField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF42A9F67E00063D362 /* RecruitmentField.swift */; };
 		7C569CF72A9F69970063D362 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF62A9F69970063D362 /* MainViewModel.swift */; };
 		7C569CFA2A9F6D5A0063D362 /* ObserveProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF92A9F6D5A0063D362 /* ObserveProjectsUseCase.swift */; };
+		7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 		7CF93E072A9C65870013EBD6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E062A9C65870013EBD6 /* MainViewController.swift */; };
@@ -89,6 +90,7 @@
 		7C569CF42A9F67E00063D362 /* RecruitmentField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentField.swift; sourceTree = "<group>"; };
 		7C569CF62A9F69970063D362 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C569CF92A9F6D5A0063D362 /* ObserveProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserveProjectsUseCase.swift; sourceTree = "<group>"; };
+		7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		7CF93E062A9C65870013EBD6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 		7BA36C932A9C4CF4000DAB02 /* RepositoryInterfaces */ = {
 			isa = PBXGroup;
 			children = (
+				7C569CFB2A9F6F8A0063D362 /* Main */,
 				7BA36CA52A9C6878000DAB02 /* Chat */,
 			);
 			path = RepositoryInterfaces;
@@ -411,6 +414,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		7C569CFB2A9F6F8A0063D362 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		7CF93E012A9C64EB0013EBD6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,6 +578,7 @@
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7C569CF52A9F67E00063D362 /* RecruitmentField.swift in Sources */,
+				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */,
 				7BA36CB52A9D9828000DAB02 /* Endpoint.swift in Sources */,
