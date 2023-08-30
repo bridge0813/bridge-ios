@@ -15,7 +15,7 @@ final class ChatRoomListViewController: UIViewController {
     
     init(viewModel: ChatRoomListViewModel) {
         self.viewModel = viewModel
-        viewModel.transform(input: ChatRoomListViewModel.Input(leaveTrigger: PublishRelay<Int>()))
+
         super.init(nibName: nil, bundle: nil)  // 얘도 수정...
     }
     
