@@ -44,6 +44,8 @@
 		7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */; };
 		7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */; };
 		7BB2C2522A99AB4500AA2328 /* ChatRoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2512A99AB4500AA2328 /* ChatRoomListViewController.swift */; };
+		7C569CF32A9F67C60063D362 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF22A9F67C60063D362 /* Project.swift */; };
+		7C569CF52A9F67E00063D362 /* RecruitmentField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF42A9F67E00063D362 /* RecruitmentField.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 		7CF93E072A9C65870013EBD6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E062A9C65870013EBD6 /* MainViewController.swift */; };
@@ -81,6 +83,8 @@
 		7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageType.swift; sourceTree = "<group>"; };
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2512A99AB4500AA2328 /* ChatRoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatRoomListViewController.swift; path = Bridge/Sources/Presenter/Tab/Chat/ChatRoomList/ChatRoomListViewController.swift; sourceTree = SOURCE_ROOT; };
+		7C569CF22A9F67C60063D362 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		7C569CF42A9F67E00063D362 /* RecruitmentField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentField.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		7CF93E062A9C65870013EBD6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 		7BA36C922A9C4CE5000DAB02 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				7C569CF12A9F67860063D362 /* Main */,
 				7BA36C992A9C5081000DAB02 /* Chat */,
 			);
 			path = Entities;
@@ -384,6 +389,15 @@
 			path = ChatRoomList;
 			sourceTree = "<group>";
 		};
+		7C569CF12A9F67860063D362 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7C569CF22A9F67C60063D362 /* Project.swift */,
+				7C569CF42A9F67E00063D362 /* RecruitmentField.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		7CF93E012A9C64EB0013EBD6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,10 +551,12 @@
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
+				7C569CF52A9F67E00063D362 /* RecruitmentField.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */,
 				7BA36CB52A9D9828000DAB02 /* Endpoint.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
+				7C569CF32A9F67C60063D362 /* Project.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
