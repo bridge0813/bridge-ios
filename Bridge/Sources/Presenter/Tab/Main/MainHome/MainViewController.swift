@@ -10,8 +10,10 @@ import RxCocoa
 import RxSwift
 
 final class MainViewController: UIViewController {
+    // MARK: - Properties
     let viewModel: MainViewModel
     
+    // MARK: - Initializer
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
         let n = viewModel.transform(input: MainViewModel.Input(viewDidLoadTrigger: PublishRelay<Void>()))
@@ -23,9 +25,12 @@ final class MainViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .green
     }
+    
+    // MARK: - Methods
 }

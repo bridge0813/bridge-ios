@@ -9,12 +9,15 @@ import Foundation
 import RxSwift
 
 final class DefaultProjectRepository: ProjectRepository {
+    // MARK: - Properties
     private let networkService: NetworkService
     
+    // MARK: - Initializer
     init(networkService: NetworkService) {
         self.networkService = networkService
     }
     
+    // MARK: - Methods
     func observeProjects() -> Observable<[Project]> {
         networkService
             .requestTestProjectsData()

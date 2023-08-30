@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Protocol
 protocol MainCoordinatorProtocol: Coordinator {
     func connectToNotificationFlow()
     func connectToProjectFilteringFlow()
@@ -26,7 +27,7 @@ final class MainCoordinator: MainCoordinatorProtocol {
     private let observeProjectsUseCase: ObserveProjectsUseCase
     
     
-    // MARK: - Initializers
+    // MARK: - Initializer
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []

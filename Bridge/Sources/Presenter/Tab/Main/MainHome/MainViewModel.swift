@@ -23,7 +23,7 @@ final class MainViewModel: ViewModelType {
     private weak var coordinator: MainCoordinator?
     private let observeProjectsUseCase: ObserveProjectsUseCase
     
-    // MARK: - Initializers
+    // MARK: - Initializer
     init(
         coordinator: MainCoordinator,
         observeProjectsUseCase: ObserveProjectsUseCase
