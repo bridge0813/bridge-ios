@@ -16,16 +16,28 @@ protocol MainCoordinatorProtocol: Coordinator {
 }
 
 final class MainCoordinator: MainCoordinatorProtocol {
+    // MARK: - Properties
     
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
+    private let projectRepository: ProjectRepository
+    private let observeProjectsUseCase: ObserveProjectsUseCase
+    
+    
+    // MARK: - Initializers
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []
+
+        let networkService = DefaultNetworkService()
+        projectRepository = DefaultProjectRepository(networkService: networkService)
+        observeProjectsUseCase = DefaultObserveProjectsUseCase(projectRepository: projectRepository)
     }
     
+    
+    // MARK: - Methods
     func start() {
         showMainViewController()
     }
@@ -33,7 +45,12 @@ final class MainCoordinator: MainCoordinatorProtocol {
 
 extension MainCoordinator {
     func showMainViewController() {
-        let mainVC = MainViewController()
+        let mainViewModel = MainViewModel(
+            coordinator: self,
+            observeProjectsUseCase: observeProjectsUseCase
+        )
+        
+        let mainVC = MainViewController(viewModel: mainViewModel)
         navigationController.pushViewController(mainVC, animated: true)
     }
 }
