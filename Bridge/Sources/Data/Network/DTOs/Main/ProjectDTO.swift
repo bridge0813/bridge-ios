@@ -17,3 +17,5 @@ struct ProjectDTO: Codable {
     let endDate: Date
     let deadlineDate: Date  // 공고 모집마감 날짜
 }
+
+
