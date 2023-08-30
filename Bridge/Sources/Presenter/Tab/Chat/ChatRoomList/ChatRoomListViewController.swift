@@ -6,9 +6,23 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
-class ChatRoomListViewController: UIViewController {
-
+final class ChatRoomListViewController: UIViewController {
+    
+    let viewModel: ChatRoomListViewModel
+    
+    init(viewModel: ChatRoomListViewModel) {
+        self.viewModel = viewModel
+        viewModel.transform(input: ChatRoomListViewModel.Input(leaveTrigger: PublishRelay<Int>()))
+        super.init(nibName: nil, bundle: nil)  // 얘도 수정...
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBlue

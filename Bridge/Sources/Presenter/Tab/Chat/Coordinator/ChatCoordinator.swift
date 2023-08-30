@@ -7,7 +7,10 @@
 
 import UIKit
 
-protocol ChatCoordinatorProtocol: Coordinator { }
+protocol ChatCoordinatorProtocol: Coordinator {
+    func showChatRoomListViewController()
+    func showChatRoomDetailViewController()
+}
 
 final class ChatCoordinator: ChatCoordinatorProtocol {
     
@@ -15,9 +18,18 @@ final class ChatCoordinator: ChatCoordinatorProtocol {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
+    private let chatRoomRepository: ChatRoomRepository
+    private let fetchChatRoomsUseCase: ObserveChatRoomsUseCase
+    private let leaveChatRoomUseCase: LeaveChatRoomUseCase
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []
+        
+        let networkService = DefaultNetworkService()
+        chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
+        fetchChatRoomsUseCase = DefaultObserveChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
+        leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
     }
     
     func start() {
@@ -27,7 +39,16 @@ final class ChatCoordinator: ChatCoordinatorProtocol {
 
 extension ChatCoordinator {
     func showChatRoomListViewController() {
-        let viewController = ChatRoomListViewController()
+        let chatRoomListViewModel = ChatRoomListViewModel(
+            coordinator: self,
+            fetchChatRoomsUseCase: fetchChatRoomsUseCase,
+            leaveChatRoomUseCase: leaveChatRoomUseCase
+        )
+        let viewController = ChatRoomListViewController(viewModel: chatRoomListViewModel)
         navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func showChatRoomDetailViewController() {
+        // ChatRoomDetailCoordinator로 연결...
     }
 }
