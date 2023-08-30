@@ -56,10 +56,10 @@ final class DefaultNetworkService: NetworkService {
         
         let projectDTO = ProjectDTO(
             id: "1",
-            title: "웹 사이트 개발자 구합니다",
+            title: "개발자, 디자이너 구합니다",
             fields: testFields,
-            requiredFieldTag: ["디자이너"],
-            requiredStackTag: ["UI/UX"],
+            requiredFieldTag: ["개발자", "디자이너"],
+            requiredStackTag: ["iOS", "BackEnd", "UI/UX"],
             startDate: currentDate,
             endDate: testEndDate,
             deadlineDate: testEndDate

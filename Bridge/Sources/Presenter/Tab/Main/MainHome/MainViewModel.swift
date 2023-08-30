@@ -18,12 +18,12 @@ final class MainViewModel: ViewModelType {
         var projects: Driver<[Project]>
     }
 
-    //MARK: - Properties
+    // MARK: - Properties
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
     private let observeProjectsUseCase: ObserveProjectsUseCase
     
-    //MARK: - Initializers
+    // MARK: - Initializers
     init(
         coordinator: MainCoordinator,
         observeProjectsUseCase: ObserveProjectsUseCase
@@ -32,7 +32,7 @@ final class MainViewModel: ViewModelType {
         self.observeProjectsUseCase = observeProjectsUseCase
     }
     
-    //MARK: - Methods
+    // MARK: - Methods
     func transform(input: Input) -> Output {
         let projects = observeProjectsUseCase.execute().share()
         projects.subscribe(onNext: { print($0) }).disposed(by: disposeBag)
