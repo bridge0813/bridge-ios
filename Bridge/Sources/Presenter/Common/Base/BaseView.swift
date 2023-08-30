@@ -18,7 +18,7 @@ class BaseView: UIView {
         backgroundColor = .white
         
         configureAttributes()
-        configureUI()
+        configureLayouts()
         bind()
     }
     
@@ -31,7 +31,7 @@ class BaseView: UIView {
     func configureAttributes() { }
     
     /// UI와 관련된 속성들(뷰 계층, 레이아웃 등)을 설정하기 위한 메서드
-    func configureUI() { }
+    func configureLayouts() { }
     
     /// 뷰 모델과 뷰를 바인딩하기 위한 메서드
     func bind() { }
