@@ -19,7 +19,7 @@ final class ChatCoordinator: ChatCoordinatorProtocol {
     var childCoordinators: [Coordinator]
     
     private let chatRoomRepository: ChatRoomRepository
-    private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
+    private let fetchChatRoomsUseCase: ObserveChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
     
     init(navigationController: UINavigationController) {
@@ -28,7 +28,7 @@ final class ChatCoordinator: ChatCoordinatorProtocol {
         
         let networkService = DefaultNetworkService()
         chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
-        fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
+        fetchChatRoomsUseCase = DefaultObserveChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
     }
     

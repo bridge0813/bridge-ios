@@ -16,7 +16,7 @@ final class DefaultChatRoomRepository: ChatRoomRepository {
         self.networkService = networkService
     }
     
-    func fetchChatRooms() -> Observable<[ChatRoom]> {
+    func observeChatRooms() -> Observable<[ChatRoom]> {
         networkService
             .requestTestData()
             .map { data -> [ChatRoom] in data.compactMap { $0.toModel() } }
