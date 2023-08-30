@@ -38,6 +38,7 @@
 		7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CC82A9E1640000DAB02 /* Reusable.swift */; };
 		7BA36CCE2A9E185A000DAB02 /* ChatRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CCD2A9E185A000DAB02 /* ChatRoomTableViewCell.swift */; };
 		7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CCF2A9E1888000DAB02 /* BaseTableViewCell.swift */; };
+		7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CD22A9F3F6B000DAB02 /* BaseView.swift */; };
 		7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */; };
 		7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2402A9851B600AA2328 /* Coordinator.swift */; };
 		7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */; };
@@ -75,6 +76,7 @@
 		7BA36CC82A9E1640000DAB02 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		7BA36CCD2A9E185A000DAB02 /* ChatRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewCell.swift; sourceTree = "<group>"; };
 		7BA36CCF2A9E1888000DAB02 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		7BA36CD22A9F3F6B000DAB02 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2402A9851B600AA2328 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 		7BA36CC22A9E10FA000DAB02 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				7BA36CD22A9F3F6B000DAB02 /* BaseView.swift */,
 				7BA36CC32A9E1134000DAB02 /* BaseViewController.swift */,
 				7BA36CCF2A9E1888000DAB02 /* BaseTableViewCell.swift */,
 			);
@@ -545,6 +548,7 @@
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
+				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7CF93E072A9C65870013EBD6 /* MainViewController.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 			);
