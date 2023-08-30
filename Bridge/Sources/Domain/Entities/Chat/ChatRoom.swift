@@ -28,3 +28,5 @@ extension ChatRoom {
         )
     }
 }
+
+extension ChatRoom: Hashable { }
