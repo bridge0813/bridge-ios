@@ -11,7 +11,7 @@ import RxSwift
 final class ChatRoomListViewModel: ViewModelType {
     
     struct Input {
-        var leaveTrigger: PublishRelay<Int>
+        var leaveChatRoomTrigger: PublishRelay<Int>
     }
     
     struct Output {
