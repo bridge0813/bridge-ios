@@ -33,6 +33,11 @@
 		7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CBB2A9DA2D1000DAB02 /* NetworkService.swift */; };
 		7BA36CBF2A9DA44F000DAB02 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CBE2A9DA44F000DAB02 /* NetworkError.swift */; };
 		7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CC02A9DE219000DAB02 /* DefaultNetworkService.swift */; };
+		7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CC32A9E1134000DAB02 /* BaseViewController.swift */; };
+		7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CC62A9E14BD000DAB02 /* UITableView+.swift */; };
+		7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CC82A9E1640000DAB02 /* Reusable.swift */; };
+		7BA36CCE2A9E185A000DAB02 /* ChatRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CCD2A9E185A000DAB02 /* ChatRoomTableViewCell.swift */; };
+		7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CCF2A9E1888000DAB02 /* BaseTableViewCell.swift */; };
 		7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */; };
 		7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2402A9851B600AA2328 /* Coordinator.swift */; };
 		7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */; };
@@ -65,6 +70,11 @@
 		7BA36CBB2A9DA2D1000DAB02 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		7BA36CBE2A9DA44F000DAB02 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		7BA36CC02A9DE219000DAB02 /* DefaultNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkService.swift; sourceTree = "<group>"; };
+		7BA36CC32A9E1134000DAB02 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		7BA36CC62A9E14BD000DAB02 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
+		7BA36CC82A9E1640000DAB02 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		7BA36CCD2A9E185A000DAB02 /* ChatRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewCell.swift; sourceTree = "<group>"; };
+		7BA36CCF2A9E1888000DAB02 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2402A9851B600AA2328 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -146,6 +156,9 @@
 			isa = PBXGroup;
 			children = (
 				7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */,
+				7BA36CC82A9E1640000DAB02 /* Reusable.swift */,
+				7BA36CC22A9E10FA000DAB02 /* Base */,
+				7BA36CC52A9E148C000DAB02 /* Extensions */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -288,6 +301,23 @@
 			path = NetworkService;
 			sourceTree = "<group>";
 		};
+		7BA36CC22A9E10FA000DAB02 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7BA36CC32A9E1134000DAB02 /* BaseViewController.swift */,
+				7BA36CCF2A9E1888000DAB02 /* BaseTableViewCell.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		7BA36CC52A9E148C000DAB02 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7BA36CC62A9E14BD000DAB02 /* UITableView+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7BB2C2422A98538000AA2328 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +379,7 @@
 			children = (
 				7BA36C8F2A9C4BB3000DAB02 /* ChatRoomListViewModel.swift */,
 				7BB2C2512A99AB4500AA2328 /* ChatRoomListViewController.swift */,
+				7BA36CCD2A9E185A000DAB02 /* ChatRoomTableViewCell.swift */,
 			);
 			path = ChatRoomList;
 			sourceTree = "<group>";
@@ -492,13 +523,17 @@
 				7BA36CBF2A9DA44F000DAB02 /* NetworkError.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
 				7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */,
+				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
+				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* ObserveChatRoomsUseCase.swift in Sources */,
 				7BB2C2522A99AB4500AA2328 /* ChatRoomListViewController.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
 				7BA36CB92A9D9A29000DAB02 /* HTTP.swift in Sources */,
+				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
 				7BA36C9B2A9C5091000DAB02 /* ChatRoom.swift in Sources */,
+				7BA36CCE2A9E185A000DAB02 /* ChatRoomTableViewCell.swift in Sources */,
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
@@ -507,6 +542,7 @@
 				7BA36CB52A9D9828000DAB02 /* Endpoint.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
+				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
 				7CF93E072A9C65870013EBD6 /* MainViewController.swift in Sources */,

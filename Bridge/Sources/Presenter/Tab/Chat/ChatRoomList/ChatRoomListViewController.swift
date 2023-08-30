@@ -6,25 +6,44 @@
 //
 
 import UIKit
+import FlexLayout
+import PinLayout
 import RxCocoa
 import RxSwift
 
-final class ChatRoomListViewController: UIViewController {
+final class ChatRoomListViewController: BaseViewController {
     
-    let viewModel: ChatRoomListViewModel
+    private lazy var chatRoomListTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(ChatRoomTableViewCell.self)
+        return tableView
+    }()
+    
+    private var dataSource: UITableViewDiffableDataSource<Section, ChatRoom>?
+    
+    private let viewModel: ChatRoomListViewModel
+    private let leaveTrigger = PublishRelay<Int>()
     
     init(viewModel: ChatRoomListViewModel) {
         self.viewModel = viewModel
-
-        super.init(nibName: nil, bundle: nil)  // 얘도 수정...
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
+
     }
+}
+
+// MARK: - Diffable data source
+extension ChatRoomListViewController {
+    enum Section: CaseIterable {
+        case main
+    }
+    
+}
+
+// MARK: - Delegate
+extension ChatRoomListViewController: UITableViewDelegate {
+    
 }
