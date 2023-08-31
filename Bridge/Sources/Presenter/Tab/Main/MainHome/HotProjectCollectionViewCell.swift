@@ -7,6 +7,6 @@
 
 import UIKit
 
-final class HotProjectCollectionViewCell: UICollectionViewCell {
+final class HotProjectCollectionViewCell: BaseCollectionViewCell {
     
 }
