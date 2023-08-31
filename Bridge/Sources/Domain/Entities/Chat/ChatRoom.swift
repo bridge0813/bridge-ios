@@ -17,16 +17,14 @@ struct ChatRoom {
 }
 
 extension ChatRoom {
-    static var onError: Self {
-        ChatRoom(
-            id: UUID().uuidString,
-            profileImage: nil,
-            name: "오류",
-            time: Date(),
-            messageType: .text,
-            messagePreview: "오류가 발생했습니다."
-        )
-    }
+    static let onError = ChatRoom(
+        id: UUID().uuidString,
+        profileImage: nil,
+        name: "오류",
+        time: Date(),
+        messageType: .text,
+        messagePreview: "오류가 발생했습니다."
+    )
 }
 
 extension ChatRoom: Hashable { }
