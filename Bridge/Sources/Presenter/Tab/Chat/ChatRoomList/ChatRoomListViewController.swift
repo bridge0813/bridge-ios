@@ -61,7 +61,6 @@ final class ChatRoomListViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         chatRoomListTableView.pin.all()
-        chatRoomListTableView.flex.layout()
     }
     
     override func bind() {
@@ -95,16 +94,14 @@ extension ChatRoomListViewController {
     }
     
     func configureDataSource() -> DataSource {
-        UITableViewDiffableDataSource(
-            tableView: chatRoomListTableView
-        ) { [weak self] tableView, indexPath, itemIdentifier in
-            guard let cell = tableView.dequeueReusableCell(
-                ChatRoomCell.self,
-                for: indexPath
-            ) else { return UITableViewCell() }
-
-            // TODO: binding
+        UITableViewDiffableDataSource(tableView: chatRoomListTableView) { [weak self] tableView, indexPath, item in
+            guard let self, let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else {
+                return UITableViewCell()
+            }
             cell.selectionStyle = .none
+            
+            let chatRoom = self.viewModel.observeChatRoom(item)
+            cell.bind(chatRoom)
             return cell
         }
     }
