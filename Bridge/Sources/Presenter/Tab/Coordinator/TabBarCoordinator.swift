@@ -40,7 +40,7 @@ private extension TabBarCoordinator {
         tabBarController.viewControllers = viewControllers
         navigationController.setNavigationBarHidden(true, animated: false)
         navigationController.pushViewController(tabBarController, animated: false)
-        configureAppearance()
+        configureBarAppearance()
     }
     
     func createTabNavigationController(of page: TabBarPageType) -> UINavigationController {
@@ -101,27 +101,22 @@ extension TabBarCoordinator {
 
 // MARK: - Bar appearance
 private extension TabBarCoordinator {
-    func configureAppearance() {
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.configureWithOpaqueBackground()
-        tabBarAppearance.backgroundColor = .white
-        tabBarAppearance.stackedLayoutAppearance.normal.iconColor = .gray
-        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .black
-        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
-        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        UITabBar.appearance().standardAppearance = tabBarAppearance
-        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-        
+    func configureBarAppearance() {
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.backgroundColor = .white
-        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        navigationBarAppearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        navigationBarAppearance.buttonAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        UIBarButtonItem.appearance().tintColor = .black
+        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+        navigationBarAppearance.buttonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.black]
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .black
+        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.black]
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
     }
 }
 
