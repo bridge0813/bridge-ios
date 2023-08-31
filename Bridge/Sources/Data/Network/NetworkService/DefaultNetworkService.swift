@@ -45,24 +45,17 @@ final class DefaultNetworkService: NetworkService {
     }
     
     func requestTestProjectsData() -> Observable<[ProjectDTO]> {
-        let testFields = [
-            RecruitmentField.developer(.iOS(2)),
-            RecruitmentField.designer(.uiux(2)),
-            RecruitmentField.developer(.backend(2))
-        ]
-        
         let currentDate = Date()
-        let testEndDate = Calendar.current.date(byAdding: .day, value: 20, to: currentDate) ?? Date()
         
         let projectDTO = ProjectDTO(
             id: "1",
             title: "개발자, 디자이너 구합니다",
-            fields: testFields,
-            requiredFieldTag: ["개발자", "디자이너"],
-            requiredStackTag: ["iOS", "BackEnd", "UI/UX"],
+            numberOfRecruits: 6,
+            recruitmentField: ["개발자", "디자이너"],
+            techStackTags: ["iOS", "BackEnd", "UI/UX"],
             startDate: currentDate,
-            endDate: testEndDate,
-            deadlineDate: testEndDate
+            endDate: currentDate,
+            deadlineDate: currentDate
         )
         
         return Observable.just([projectDTO])
