@@ -9,5 +9,6 @@ import RxSwift
 
 protocol ChatRoomRepository {
     func observeChatRooms() -> Observable<[ChatRoom]>
+    func observeChatRoom(id: String) -> Observable<ChatRoom>
     func leaveChatRoom() -> Single<Void>
 }
