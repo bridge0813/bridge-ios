@@ -22,24 +22,29 @@ final class ChatRoomListViewModel: ViewModelType {
     
     private weak var coordinator: ChatCoordinator?
     private let observeChatRoomsUseCase: ObserveChatRoomsUseCase
+    private let observeChatRoomUseCase: ObserveChatRoomUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
     
     init(
         coordinator: ChatCoordinator,
-        fetchChatRoomsUseCase: ObserveChatRoomsUseCase,
+        observeChatRoomsUseCase: ObserveChatRoomsUseCase,
+        observeChatRoomUseCase: ObserveChatRoomUseCase,
         leaveChatRoomUseCase: LeaveChatRoomUseCase
     ) {
         self.coordinator = coordinator
-        self.observeChatRoomsUseCase = fetchChatRoomsUseCase
+        self.observeChatRoomsUseCase = observeChatRoomsUseCase
+        self.observeChatRoomUseCase = observeChatRoomUseCase
         self.leaveChatRoomUseCase = leaveChatRoomUseCase
     }
     
     func transform(input: Input) -> Output {
         let chatRooms = observeChatRoomsUseCase.execute().share()
-        
-        chatRooms.subscribe(onNext: { print($0) }).disposed(by: disposeBag)  // 연결 확인용
-        // ...
+        // TODO: Input handling
         return Output(chatRooms: chatRooms.asDriver(onErrorJustReturn: [ChatRoom.onError]))
+    }
+    
+    func observeChatRoom(_ chatRoom: ChatRoom) -> Driver<ChatRoom> {
+        observeChatRoomUseCase.execute(id: chatRoom.id).asDriver(onErrorJustReturn: ChatRoom.onError)
     }
 }
 
