@@ -53,6 +53,8 @@
 		7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D022A9F72320063D362 /* ProjectDTO.swift */; };
 		7C569D062A9F776B0063D362 /* Date+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D052A9F776B0063D362 /* Date+Utilities.swift */; };
 		7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D082A9F7E160063D362 /* DefaultProjectRepository.swift */; };
+		7C569D0B2AA0AA280063D362 /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D0A2AA0AA280063D362 /* HotProjectCollectionViewCell.swift */; };
+		7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 		7CF93E072A9C65870013EBD6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E062A9C65870013EBD6 /* MainViewController.swift */; };
@@ -99,6 +101,8 @@
 		7C569D022A9F72320063D362 /* ProjectDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDTO.swift; sourceTree = "<group>"; };
 		7C569D052A9F776B0063D362 /* Date+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utilities.swift"; sourceTree = "<group>"; };
 		7C569D082A9F7E160063D362 /* DefaultProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProjectRepository.swift; sourceTree = "<group>"; };
+		7C569D0A2AA0AA280063D362 /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
+		7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		7CF93E062A9C65870013EBD6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -331,6 +335,7 @@
 				7BA36CD22A9F3F6B000DAB02 /* BaseView.swift */,
 				7BA36CC32A9E1134000DAB02 /* BaseViewController.swift */,
 				7BA36CCF2A9E1888000DAB02 /* BaseTableViewCell.swift */,
+				7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */,
 			);
 			path = Bases;
 			sourceTree = "<group>";
@@ -488,6 +493,7 @@
 			children = (
 				7C569CF62A9F69970063D362 /* MainViewModel.swift */,
 				7CF93E062A9C65870013EBD6 /* MainViewController.swift */,
+				7C569D0A2AA0AA280063D362 /* HotProjectCollectionViewCell.swift */,
 			);
 			path = MainHome;
 			sourceTree = "<group>";
@@ -626,6 +632,8 @@
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
 				7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */,
+				7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */,
+				7C569D0B2AA0AA280063D362 /* HotProjectCollectionViewCell.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */,
 				7BA36CB52A9D9828000DAB02 /* Endpoint.swift in Sources */,
