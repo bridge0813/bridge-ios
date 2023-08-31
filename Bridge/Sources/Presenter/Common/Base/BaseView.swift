@@ -1,24 +1,24 @@
 //
-//  BaseTableViewCell.swift
+//  BaseView.swift
 //  Bridge
 //
-//  Created by 정호윤 on 2023/08/29.
+//  Created by 정호윤 on 2023/08/30.
 //
 
 import UIKit
 import RxSwift
 
-class BaseTableViewCell: UITableViewCell {
-
+class BaseView: UIView {
+    
     var disposeBag = DisposeBag()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         backgroundColor = .white
         
         configureAttributes()
-        configureUI()
+        configureLayouts()
         bind()
     }
     
@@ -31,7 +31,7 @@ class BaseTableViewCell: UITableViewCell {
     func configureAttributes() { }
     
     /// UI와 관련된 속성들(뷰 계층, 레이아웃 등)을 설정하기 위한 메서드
-    func configureUI() { }
+    func configureLayouts() { }
     
     /// 뷰 모델과 뷰를 바인딩하기 위한 메서드
     func bind() { }
