@@ -43,7 +43,7 @@ final class ChatRoomListViewModel: ViewModelType {
     }
 }
 
-// MARK: Coordinator
+// MARK: - Coordinator
 extension ChatRoomListViewModel {
     func showChatRoomDetailViewController(of chatRoom: ChatRoom) {
         coordinator?.showChatRoomDetailViewController()
