@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 
+/// 채팅방 목록을 관찰하는 유스케이스
 protocol ObserveChatRoomsUseCase {
     func execute() -> Observable<[ChatRoom]>
 }
