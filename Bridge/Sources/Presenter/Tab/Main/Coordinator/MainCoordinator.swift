@@ -18,7 +18,6 @@ protocol MainCoordinatorProtocol: Coordinator {
 
 final class MainCoordinator: MainCoordinatorProtocol {
     // MARK: - Properties
-    
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
