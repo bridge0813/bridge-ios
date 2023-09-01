@@ -9,28 +9,68 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-final class MainViewController: UIViewController {
+final class MainViewController: BaseViewController {
     // MARK: - Properties
-    let viewModel: MainViewModel
+    private lazy var projectCollectionView: UICollectionView = {
+        let layout = createCompositionalLayout()
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(HotProjectCollectionViewCell.self)
+        
+        return collectionView
+    }()
+
+    private let viewModel: MainViewModel
+    private let viewDidLoadTrigger = PublishRelay<Void>()
     
     // MARK: - Initializer
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
-        let n = viewModel.transform(input: MainViewModel.Input(viewDidLoadTrigger: PublishRelay<Void>()))
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init()
     }
     
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .green
     }
     
     // MARK: - Methods
+    
+}
+
+// MARK: - CompositionalLayout
+extension MainViewController {
+    private func createCompositionalLayout() -> UICollectionViewLayout {
+        
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
+            return self?.createHotProjectSection()
+        }
+
+        return layout
+    }
+    
+    private func createHotProjectSection() -> NSCollectionLayoutSection {
+        /// item 설정
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 5)
+        
+        /// group 설정
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(200),
+            heightDimension: .absolute(170)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        /// section 설정
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 50, trailing: 10)
+        
+        return section
+    }
 }
