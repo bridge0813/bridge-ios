@@ -14,4 +14,6 @@ protocol NetworkService {
     // MARK: - For test
     func requestTestProjectsData() -> Observable<[ProjectDTO]>
     func requestTestChatRooms() -> Observable<[ChatRoomDTO]>
+    
+    func leaveChatRoom(id: String) -> Single<Void>
 }

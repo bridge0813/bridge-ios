@@ -18,10 +18,16 @@ final class DefaultChatRoomRepository: ChatRoomRepository {
     func fetchChatRooms() -> Observable<[ChatRoom]> {
         networkService
             .requestTestChatRooms()
-            .map { data -> [ChatRoom] in data.compactMap { $0.toModel() } }
+            .map { data -> [ChatRoom] in
+                data.compactMap { $0.toModel() }
+            }
     }
     
-    func leaveChatRoom() -> Single<Void> {
-        .just(())
+    func leaveChatRoom(id: String) -> Single<Void> {
+        networkService
+            .leaveChatRoom(id: id)
+            .map {
+                $0
+            }
     }
 }
