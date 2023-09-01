@@ -68,3 +68,12 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
         projectBackgroundView.flex.layout()
     }
 }
+
+// MARK: - Configuration
+extension HotProjectCollectionViewCell {
+    func configureCell(with project: Project) {
+        titleLabel.text = project.title
+        dDayLabel.text = "\(project.dDays)"
+        recruitsLabel.text = "\(project.numberOfRecruits)"
+    }
+}

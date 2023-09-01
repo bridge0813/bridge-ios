@@ -33,3 +33,5 @@ extension Project {
         )
     }
 }
+
+extension Project: Hashable { }

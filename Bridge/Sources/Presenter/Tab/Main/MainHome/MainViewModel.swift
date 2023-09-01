@@ -35,7 +35,6 @@ final class MainViewModel: ViewModelType {
     // MARK: - Methods
     func transform(input: Input) -> Output {
         let projects = observeProjectsUseCase.execute().share()
-        projects.subscribe(onNext: { print($0) }).disposed(by: disposeBag)
         
         return Output(projects: projects.asDriver(onErrorJustReturn: [Project.onError]))
     }

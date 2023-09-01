@@ -40,6 +40,10 @@ final class MainViewController: BaseViewController {
     private let viewModel: MainViewModel
     private let viewDidLoadTrigger = PublishRelay<Void>()
     
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, Project>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Project>
+    private var dataSource: DataSource?
+    
     // MARK: - Initializer
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -91,6 +95,21 @@ final class MainViewController: BaseViewController {
         }
     }
     
+    override func configureAttributes() {
+        dataSource = configureDataSource()
+        configureNavigationUI()
+    }
+    
+    override func bind() {
+        let input = MainViewModel.Input(viewDidLoadTrigger: viewDidLoadTrigger)
+        let output = viewModel.transform(input: input)
+        
+        output.projects
+            .compactMap { [weak self] projects in self?.createCurrentSnapshot(with: projects) }
+            .drive { [weak self] snapshot in self?.dataSource?.apply(snapshot) }
+            .disposed(by: disposeBag)
+    }
+    
 }
 // MARK: - CompositionalLayout
 extension MainViewController {
@@ -125,5 +144,34 @@ extension MainViewController {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 50, trailing: 10)
         
         return section
+    }
+}
+
+// MARK: - Diffable data source
+extension MainViewController {
+    enum Section: CaseIterable {
+        case main
+    }
+    
+    func configureDataSource() -> DataSource {
+        DataSource(collectionView: projectCollectionView,
+                   cellProvider: { collectionView, indexPath, item in
+
+            guard let cell = collectionView.dequeueReusableCell(
+                HotProjectCollectionViewCell.self,
+                for: indexPath)
+            else { return UICollectionViewCell() }
+            
+            cell.configureCell(with: item)
+            print(item.title)
+            return cell
+        })
+    }
+    
+    func createCurrentSnapshot(with projects: [Project]) -> Snapshot {
+        var snapshot = Snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(projects)
+        return snapshot
     }
 }
