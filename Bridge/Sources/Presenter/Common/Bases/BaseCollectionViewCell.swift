@@ -5,8 +5,8 @@
 //  Created by 엄지호 on 2023/08/31.
 //
 
-import RxSwift
 import UIKit
+import RxSwift
 
 class BaseCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
