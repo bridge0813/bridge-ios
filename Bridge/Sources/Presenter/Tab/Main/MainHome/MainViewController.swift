@@ -19,6 +19,7 @@ final class MainViewController: BaseViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(HotProjectCollectionViewCell.self)
+        collectionView.register(ProjectSectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProjectSectionHeaderView.identifier)
         
         return collectionView
     }()
@@ -131,6 +132,13 @@ extension MainViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         
+        /// header 설정
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(60)
+        )
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        
         /// group 설정
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .absolute(170),
@@ -140,6 +148,7 @@ extension MainViewController {
         
         /// section 설정
         let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [header]
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
         
@@ -154,9 +163,9 @@ extension MainViewController {
     }
     
     func configureDataSource() -> DataSource {
-        DataSource(collectionView: projectCollectionView,
-                   cellProvider: { collectionView, indexPath, item in
-
+        let dataSource = DataSource(collectionView: projectCollectionView,
+                                    cellProvider: { collectionView, indexPath, item in
+            
             guard let cell = collectionView.dequeueReusableCell(
                 HotProjectCollectionViewCell.self,
                 for: indexPath)
@@ -166,6 +175,27 @@ extension MainViewController {
             print(item.title)
             return cell
         })
+        
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            
+            if kind == UICollectionView.elementKindSectionHeader {
+                
+                guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: ProjectSectionHeaderView.identifier,
+                    for: indexPath) as? ProjectSectionHeaderView else {
+                    return UICollectionReusableView()
+                }
+                
+                headerView.configureHeader(titleText: "인기 폭발 프로젝트", decoText: "HOT")
+                
+                return headerView
+            }
+            
+            return UICollectionReusableView()
+        }
+        
+        return dataSource
     }
     
     func createCurrentSnapshot(with projects: [Project]) -> Snapshot {
