@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import FlexLayout
+import PinLayout
 import RxCocoa
 import RxSwift
 
 final class MainViewController: BaseViewController {
     // MARK: - Properties
+    private let containerView = UIView()
     private lazy var projectCollectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         
@@ -30,6 +33,9 @@ final class MainViewController: BaseViewController {
         
         return button
     }()
+    
+    private let filterButton = UIButton()
+    private let searchBar = UISearchBar()
     
     private let viewModel: MainViewModel
     private let viewDidLoadTrigger = PublishRelay<Void>()
@@ -51,11 +57,36 @@ final class MainViewController: BaseViewController {
         configureNavigationUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        containerView.pin.all(view.pin.safeArea)
+        containerView.flex.layout()
+    }
+    
     // MARK: - Methods
     private func configureNavigationUI() {
         navigationItem.titleView = NavigationTitleView(title: "Bridge")  // 임의설정
         navigationItem.rightBarButtonItem = goToNotificationButton
         navigationController?.navigationBar.tintColor = .black
+    }
+    
+    override func configureLayouts() {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
+        let buttonImage = UIImage(systemName: "line.3.horizontal", withConfiguration: imageConfig)
+        filterButton.setImage(buttonImage, for: .normal)
+        filterButton.tintColor = .black
+        
+        
+        view.addSubview(containerView)
+        containerView.flex.direction(.column).define { flex in
+            /// 상단 메뉴 버튼 및 서치바
+            flex.addItem().direction(.row).justifyContent(.start).define { flex in
+                flex.addItem(filterButton).marginLeft(10)
+                flex.addItem(searchBar).shrink(1)
+            }
+            
+            /// 컬렉션 뷰
+            flex.addItem(projectCollectionView).grow(1).marginTop(10)
+        }
     }
     
 }
