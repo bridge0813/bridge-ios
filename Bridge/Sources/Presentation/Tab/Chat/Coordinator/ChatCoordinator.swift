@@ -19,8 +19,7 @@ final class ChatCoordinator: ChatCoordinatorProtocol {
     var childCoordinators: [Coordinator]
     
     private let chatRoomRepository: ChatRoomRepository
-    private let observeChatRoomsUseCase: ObserveChatRoomsUseCase
-    private let observeChatRoomUseCase: ObserveChatRoomUseCase
+    private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
     
     init(navigationController: UINavigationController) {
@@ -29,8 +28,7 @@ final class ChatCoordinator: ChatCoordinatorProtocol {
         
         let networkService = DefaultNetworkService()
         chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
-        observeChatRoomsUseCase = DefaultObserveChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
-        observeChatRoomUseCase = DefaultObserveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
+        fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
     }
     
@@ -43,7 +41,7 @@ extension ChatCoordinator {
     func showChatRoomListViewController() {
         let chatRoomListViewModel = ChatRoomListViewModel(
             coordinator: self,
-            observeChatRoomsUseCase: observeChatRoomsUseCase,
+            fetchChatRoomsUseCase: fetchChatRoomsUseCase,
             leaveChatRoomUseCase: leaveChatRoomUseCase
         )
         let viewController = ChatRoomListViewController(viewModel: chatRoomListViewModel)

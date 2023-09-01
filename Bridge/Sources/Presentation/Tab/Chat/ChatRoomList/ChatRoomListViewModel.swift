@@ -21,21 +21,21 @@ final class ChatRoomListViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     
     private weak var coordinator: ChatCoordinator?
-    private let observeChatRoomsUseCase: ObserveChatRoomsUseCase
+    private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
     
     init(
         coordinator: ChatCoordinator,
-        observeChatRoomsUseCase: ObserveChatRoomsUseCase,
+        fetchChatRoomsUseCase: FetchChatRoomsUseCase,
         leaveChatRoomUseCase: LeaveChatRoomUseCase
     ) {
         self.coordinator = coordinator
-        self.observeChatRoomsUseCase = observeChatRoomsUseCase
+        self.fetchChatRoomsUseCase = fetchChatRoomsUseCase
         self.leaveChatRoomUseCase = leaveChatRoomUseCase
     }
     
     func transform(input: Input) -> Output {
-        let chatRooms = observeChatRoomsUseCase.execute().share()
+        let chatRooms = fetchChatRoomsUseCase.execute().share()
         // TODO: Input handling
         return Output(chatRooms: chatRooms.asDriver(onErrorJustReturn: [ChatRoom.onError]))
     }

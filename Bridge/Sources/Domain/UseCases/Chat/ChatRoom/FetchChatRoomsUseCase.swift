@@ -1,5 +1,5 @@
 //
-//  ObserveChatRoomsUseCase.swift
+//  FetchChatRoomsUseCase.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/08/28.
@@ -7,12 +7,11 @@
 
 import RxSwift
 
-/// 채팅방 목록을 관찰하는 유스케이스
-protocol ObserveChatRoomsUseCase {
+protocol FetchChatRoomsUseCase {
     func execute() -> Observable<[ChatRoom]>
 }
 
-final class DefaultObserveChatRoomsUseCase: ObserveChatRoomsUseCase {
+final class DefaultFetchChatRoomsUseCase: FetchChatRoomsUseCase {
     
     private let chatRoomRepository: ChatRoomRepository
     
@@ -21,6 +20,6 @@ final class DefaultObserveChatRoomsUseCase: ObserveChatRoomsUseCase {
     }
     
     func execute() -> Observable<[ChatRoom]> {
-        chatRoomRepository.observeChatRooms()
+        chatRoomRepository.fetchChatRooms()
     }
 }
