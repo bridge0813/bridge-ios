@@ -68,12 +68,3 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
         projectBackgroundView.flex.layout()
     }
 }
-
-// MARK: - Configuration
-//private extension ChatRoomCell {
-//    func configureCell(with chatRoom: ChatRoom) {
-//        nameLabel.text = chatRoom.name
-//        timeLabel.text = chatRoom.time.formatted()
-//        messagePreviewLabel.text = chatRoom.messagePreview
-//    }
-//}
