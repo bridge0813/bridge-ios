@@ -77,7 +77,8 @@ final class ChatRoomListViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         chatRoomListTableView.rx.itemSelected
-            .bind(onNext: { [weak self] indexPath in self?.showChatRoomDetailViewController(at: indexPath) })
+            .withUnretained(self)
+            .bind(onNext: { _, indexPath in self.showChatRoomDetailViewController(at: indexPath) })
             .disposed(by: disposeBag)
     }
     
