@@ -176,26 +176,31 @@ extension MainViewController {
             return cell
         })
         
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            
-            if kind == UICollectionView.elementKindSectionHeader {
-                
-                guard let headerView = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: kind,
-                    withReuseIdentifier: ProjectSectionHeaderView.identifier,
-                    for: indexPath) as? ProjectSectionHeaderView else {
-                    return UICollectionReusableView()
-                }
-                
-                headerView.configureHeader(titleText: "인기 폭발 프로젝트", decoText: "HOT")
-                
-                return headerView
-            }
-            
-            return UICollectionReusableView()
+        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            self?.createSectionHeader(collectionView: collectionView, kind: kind, indexPath: indexPath)
         }
         
         return dataSource
+    }
+    
+    func createSectionHeader(
+        collectionView: UICollectionView,
+        kind: String,
+        indexPath: IndexPath
+    ) -> UICollectionReusableView? {
+        if kind == UICollectionView.elementKindSectionHeader {
+            
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: ProjectSectionHeaderView.identifier,
+                for: indexPath) as? ProjectSectionHeaderView else {
+                return UICollectionReusableView()
+            }
+            
+            headerView.configureHeader(titleText: "인기 폭발 프로젝트", decoText: "HOT")
+            return headerView
+        }
+        return UICollectionReusableView()
     }
     
     func createCurrentSnapshot(with projects: [Project]) -> Snapshot {
