@@ -19,7 +19,18 @@ final class MainViewController: BaseViewController {
         
         return collectionView
     }()
-
+    
+    private lazy var goToNotificationButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            image: UIImage(systemName: "bell"),
+            style: .done,
+            target: self,
+            action: nil
+        )
+        
+        return button
+    }()
+    
     private let viewModel: MainViewModel
     private let viewDidLoadTrigger = PublishRelay<Void>()
     
@@ -35,10 +46,19 @@ final class MainViewController: BaseViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        configureNavigationUI()
+    }
+    
     // MARK: - Methods
+    private func configureNavigationUI() {
+        navigationItem.titleView = NavigationTitleView(title: "Bridge")  // 임의설정
+        navigationItem.rightBarButtonItem = goToNotificationButton
+        navigationController?.navigationBar.tintColor = .black
+    }
     
 }
-
 // MARK: - CompositionalLayout
 extension MainViewController {
     private func createCompositionalLayout() -> UICollectionViewLayout {
