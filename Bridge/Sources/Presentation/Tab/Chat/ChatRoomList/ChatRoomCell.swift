@@ -8,7 +8,6 @@
 import UIKit
 import FlexLayout
 import PinLayout
-import RxSwift
 
 final class ChatRoomCell: BaseTableViewCell {
     
@@ -66,7 +65,6 @@ final class ChatRoomCell: BaseTableViewCell {
         nameLabel.text = ""
         timeLabel.text = ""
         messagePreviewLabel.text = ""
-        disposeBag = DisposeBag()
     }
     
     // MARK: - Configurations
