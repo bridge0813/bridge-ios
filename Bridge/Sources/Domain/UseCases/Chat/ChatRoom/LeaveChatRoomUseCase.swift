@@ -20,6 +20,6 @@ final class DefaultLeaveChatRoomUseCase: LeaveChatRoomUseCase {
     }
     
     func execute(id: String) -> Observable<Void> {
-        chatRoomRepository.leaveChatRoom().asObservable()
+        chatRoomRepository.leaveChatRoom(id: id).asObservable()
     }
 }
