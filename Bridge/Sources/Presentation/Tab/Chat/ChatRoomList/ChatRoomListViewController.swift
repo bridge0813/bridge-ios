@@ -103,6 +103,7 @@ extension ChatRoomListViewController {
             
             let chatRoom = self.viewModel.observeChatRoom(item)
             cell.bind(chatRoom)
+            print(#function)
             return cell
         }
     }
