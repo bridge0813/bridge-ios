@@ -22,18 +22,15 @@ final class ChatRoomListViewModel: ViewModelType {
     
     private weak var coordinator: ChatCoordinator?
     private let observeChatRoomsUseCase: ObserveChatRoomsUseCase
-    private let observeChatRoomUseCase: ObserveChatRoomUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
     
     init(
         coordinator: ChatCoordinator,
         observeChatRoomsUseCase: ObserveChatRoomsUseCase,
-        observeChatRoomUseCase: ObserveChatRoomUseCase,
         leaveChatRoomUseCase: LeaveChatRoomUseCase
     ) {
         self.coordinator = coordinator
         self.observeChatRoomsUseCase = observeChatRoomsUseCase
-        self.observeChatRoomUseCase = observeChatRoomUseCase
         self.leaveChatRoomUseCase = leaveChatRoomUseCase
     }
     
@@ -41,10 +38,6 @@ final class ChatRoomListViewModel: ViewModelType {
         let chatRooms = observeChatRoomsUseCase.execute().share()
         // TODO: Input handling
         return Output(chatRooms: chatRooms.asDriver(onErrorJustReturn: [ChatRoom.onError]))
-    }
-    
-    func observeChatRoom(_ chatRoom: ChatRoom) -> Driver<ChatRoom> {
-        observeChatRoomUseCase.execute(id: chatRoom.id).asDriver(onErrorJustReturn: ChatRoom.onError)
     }
 }
 

@@ -44,7 +44,6 @@ extension ChatCoordinator {
         let chatRoomListViewModel = ChatRoomListViewModel(
             coordinator: self,
             observeChatRoomsUseCase: observeChatRoomsUseCase,
-            observeChatRoomUseCase: observeChatRoomUseCase,
             leaveChatRoomUseCase: leaveChatRoomUseCase
         )
         let viewController = ChatRoomListViewController(viewModel: chatRoomListViewModel)
