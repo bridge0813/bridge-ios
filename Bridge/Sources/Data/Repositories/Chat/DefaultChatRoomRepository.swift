@@ -5,7 +5,6 @@
 //  Created by 정호윤 on 2023/08/28.
 //
 
-import Foundation
 import RxSwift
 
 final class DefaultChatRoomRepository: ChatRoomRepository {
@@ -16,9 +15,9 @@ final class DefaultChatRoomRepository: ChatRoomRepository {
         self.networkService = networkService
     }
     
-    func observeChatRooms() -> Observable<[ChatRoom]> {
+    func fetchChatRooms() -> Observable<[ChatRoom]> {
         networkService
-            .requestTestData()
+            .requestTestChatRooms()
             .map { data -> [ChatRoom] in data.compactMap { $0.toModel() } }
     }
     

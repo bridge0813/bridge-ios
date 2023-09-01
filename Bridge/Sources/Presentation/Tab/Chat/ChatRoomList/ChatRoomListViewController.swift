@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FlexLayout
 import PinLayout
 import RxCocoa
 import RxSwift
@@ -23,8 +22,8 @@ final class ChatRoomListViewController: BaseViewController {
         return tableView
     }()
     
-    typealias DataSource = UITableViewDiffableDataSource<Section, ChatRoom>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, ChatRoom>
+    private typealias DataSource = UITableViewDiffableDataSource<Section, ChatRoom>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, ChatRoom>
     private var dataSource: DataSource?
     
     private let viewModel: ChatRoomListViewModel
@@ -61,7 +60,6 @@ final class ChatRoomListViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         chatRoomListTableView.pin.all()
-        chatRoomListTableView.flex.layout()
     }
     
     override func bind() {
@@ -69,8 +67,12 @@ final class ChatRoomListViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.chatRooms
-            .compactMap { [weak self] chatRooms in self?.createCurrentSnapshot(with: chatRooms) }
-            .drive { [weak self] currentSnapshot in self?.dataSource?.apply(currentSnapshot) }
+            .compactMap { [weak self] chatRooms in
+                self?.createCurrentSnapshot(with: chatRooms)
+            }
+            .drive { [weak self] currentSnapshot in
+                self?.dataSource?.apply(currentSnapshot)
+            }
             .disposed(by: disposeBag)
         
         chatRoomListTableView.rx
@@ -78,13 +80,12 @@ final class ChatRoomListViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         chatRoomListTableView.rx.itemSelected
-            .bind(onNext: { [weak self] indexPath in self?.showChatRoomDetailViewController(at: indexPath) })
+            .withUnretained(self)
+            .subscribe(onNext: { _, indexPath in
+                guard let chatRoom = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+                self.viewModel.showChatRoomDetailViewController(of: chatRoom)
+            })
             .disposed(by: disposeBag)
-    }
-    
-    private func showChatRoomDetailViewController(at indexPath: IndexPath) {
-        guard let chatRoom = dataSource?.itemIdentifier(for: indexPath) else { return }
-        viewModel.showChatRoomDetailViewController(of: chatRoom)
     }
 }
 
@@ -94,22 +95,18 @@ extension ChatRoomListViewController {
         case main
     }
     
-    func configureDataSource() -> DataSource {
-        UITableViewDiffableDataSource(
-            tableView: chatRoomListTableView
-        ) { [weak self] tableView, indexPath, itemIdentifier in
-            guard let cell = tableView.dequeueReusableCell(
-                ChatRoomCell.self,
-                for: indexPath
-            ) else { return UITableViewCell() }
-
-            // TODO: binding
+    private func configureDataSource() -> DataSource {
+        UITableViewDiffableDataSource(tableView: chatRoomListTableView) { tableView, indexPath, item in
+            guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else {
+                return UITableViewCell()
+            }
             cell.selectionStyle = .none
+            cell.configureCell(with: item)
             return cell
         }
     }
     
-    func createCurrentSnapshot(with chatRoom: [ChatRoom]) -> Snapshot {
+    private func createCurrentSnapshot(with chatRoom: [ChatRoom]) -> Snapshot {
         var snapshot = Snapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(chatRoom)

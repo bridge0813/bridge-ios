@@ -11,7 +11,7 @@ import RxSwift
 protocol NetworkService {
     func request(_ endpoint: Endpoint) -> Observable<Data>
     
-    func requestTestData() -> Observable<[ChatRoomDTO]>  // 임시
-    
-    func requestTestProjectsData() -> Observable<[ProjectDTO]> // 임시
+    // MARK: - For test
+    func requestTestProjectsData() -> Observable<[ProjectDTO]>
+    func requestTestChatRooms() -> Observable<[ChatRoomDTO]>
 }

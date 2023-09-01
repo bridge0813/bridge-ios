@@ -15,7 +15,8 @@ final class DefaultNetworkService: NetworkService {
         return URLSession.shared.rx.data(request: urlRequest).asObservable()
     }
     
-    func requestTestData() -> Observable<[ChatRoomDTO]> {
+    // MARK: - For test
+    func requestTestChatRooms() -> Observable<[ChatRoomDTO]> {
         Observable.just([
             ChatRoomDTO(
                 id: "1",
@@ -40,6 +41,14 @@ final class DefaultNetworkService: NetworkService {
                 time: Date(),
                 messageType: .text,
                 messagePreview: "메시지 미리보기 3"
+            ),
+            ChatRoomDTO(
+                id: "4",
+                profileImage: nil,
+                name: "홍길동",
+                time: Date(),
+                messageType: .text,
+                messagePreview: "메시지 미리보기 4"
             )
         ])
     }
