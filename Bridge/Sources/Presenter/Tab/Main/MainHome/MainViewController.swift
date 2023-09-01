@@ -58,7 +58,7 @@ final class MainViewController: BaseViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        containerView.pin.all(view.pin.safeArea)
+        containerView.pin.all(view.pin.safeArea).marginTop(10)
         containerView.flex.layout()
     }
     
@@ -75,13 +75,15 @@ final class MainViewController: BaseViewController {
         filterButton.setImage(buttonImage, for: .normal)
         filterButton.tintColor = .black
         
+        searchBar.placeholder = "검색해주세요."
+        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)  // 서치바 라인 삭제
         
         view.addSubview(containerView)
         containerView.flex.direction(.column).define { flex in
             /// 상단 메뉴 버튼 및 서치바
-            flex.addItem().direction(.row).justifyContent(.start).define { flex in
+            flex.addItem().height(70).direction(.row).justifyContent(.start).alignItems(.stretch).define { flex in
                 flex.addItem(filterButton).marginLeft(10)
-                flex.addItem(searchBar).shrink(1)
+                flex.addItem(searchBar).shrink(1).marginLeft(5).marginRight(5)
             }
             
             /// 컬렉션 뷰
