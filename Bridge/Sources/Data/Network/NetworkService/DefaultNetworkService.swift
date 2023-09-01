@@ -25,7 +25,6 @@ final class DefaultNetworkService: NetworkService {
             
             if let index = DefaultNetworkService.chatRoomDTOs.firstIndex(where: { $0.id == id }) {
                 DefaultNetworkService.chatRoomDTOs.remove(at: index)
-                print(DefaultNetworkService.chatRoomDTOs)
                 single(.success(()))
             } else {
                 single(.failure(NetworkError.unknown))
