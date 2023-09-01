@@ -5,7 +5,6 @@
 //  Created by 정호윤 on 2023/08/28.
 //
 
-import Foundation
 import RxSwift
 
 /// 채팅방 목록을 관찰하는 유스케이스

@@ -5,7 +5,6 @@
 //  Created by 정호윤 on 2023/08/28.
 //
 
-import Foundation
 import RxSwift
 
 final class DefaultChatRoomRepository: ChatRoomRepository {

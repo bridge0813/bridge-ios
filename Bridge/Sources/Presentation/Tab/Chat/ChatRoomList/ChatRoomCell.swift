@@ -8,7 +8,6 @@
 import UIKit
 import FlexLayout
 import PinLayout
-import RxCocoa
 import RxSwift
 
 final class ChatRoomCell: BaseTableViewCell {
@@ -60,12 +59,6 @@ final class ChatRoomCell: BaseTableViewCell {
         return label
     }()
     
-    func bind(_ chatRoom: Driver<ChatRoom>) {
-        chatRoom
-            .drive { [weak self] chatRoom in self?.configureCell(with: chatRoom) }
-            .disposed(by: disposeBag)
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -109,7 +102,7 @@ final class ChatRoomCell: BaseTableViewCell {
 }
 
 // MARK: - Configuration
-private extension ChatRoomCell {
+extension ChatRoomCell {
     func configureCell(with chatRoom: ChatRoom) {
         nameLabel.text = chatRoom.name
         timeLabel.text = chatRoom.time.formatted()

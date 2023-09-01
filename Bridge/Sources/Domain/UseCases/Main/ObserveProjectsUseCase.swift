@@ -5,7 +5,6 @@
 //  Created by 엄지호 on 2023/08/30.
 //
 
-import Foundation
 import RxSwift
 
 protocol ObserveProjectsUseCase {

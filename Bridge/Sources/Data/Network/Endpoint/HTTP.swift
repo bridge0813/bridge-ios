@@ -5,8 +5,6 @@
 //  Created by 정호윤 on 2023/08/29.
 //
 
-import Foundation
-
 enum HTTPMethod: String {
     case GET
     case POST, PUT, PATCH
