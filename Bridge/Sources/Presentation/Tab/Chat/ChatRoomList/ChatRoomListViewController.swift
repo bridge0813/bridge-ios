@@ -27,7 +27,7 @@ final class ChatRoomListViewController: BaseViewController {
     private var dataSource: DataSource?
     
     private let viewModel: ChatRoomListViewModel
-    private let leaveChatRoomTrigger = PublishRelay<Int>()
+    private let leaveChatRoomTrigger = PublishRelay<IndexPath>()
     
     init(viewModel: ChatRoomListViewModel) {
         self.viewModel = viewModel
@@ -63,7 +63,14 @@ final class ChatRoomListViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = ChatRoomListViewModel.Input(leaveChatRoomTrigger: leaveChatRoomTrigger)
+        chatRoomListTableView.rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        let input = ChatRoomListViewModel.Input(
+            itemSelected: chatRoomListTableView.rx.itemSelected.asObservable(),
+            leaveChatRoomTrigger: leaveChatRoomTrigger
+        )
         let output = viewModel.transform(input: input)
         
         output.chatRooms
@@ -73,18 +80,6 @@ final class ChatRoomListViewController: BaseViewController {
             .drive { [weak self] currentSnapshot in
                 self?.dataSource?.apply(currentSnapshot)
             }
-            .disposed(by: disposeBag)
-        
-        chatRoomListTableView.rx
-            .setDelegate(self)
-            .disposed(by: disposeBag)
-        
-        chatRoomListTableView.rx.itemSelected
-            .withUnretained(self)
-            .subscribe(onNext: { _, indexPath in
-                guard let chatRoom = self.dataSource?.itemIdentifier(for: indexPath) else { return }
-                self.viewModel.showChatRoomDetailViewController(of: chatRoom)
-            })
             .disposed(by: disposeBag)
     }
 }
@@ -116,5 +111,15 @@ extension ChatRoomListViewController {
 
 // MARK: - Delegate
 extension ChatRoomListViewController: UITableViewDelegate {
-    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "나가기") { [weak self] _, _, completion in
+            self?.leaveChatRoomTrigger.accept(indexPath)
+            completion(true)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
