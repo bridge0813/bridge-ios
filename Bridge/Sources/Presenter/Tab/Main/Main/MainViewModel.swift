@@ -15,7 +15,8 @@ final class MainViewModel: ViewModelType {
     }
     
     struct Output {
-        var projects: Driver<[Project]>
+        var hotProjects: Driver<[Project]>
+        var mainProjects: Driver<[Project]>
     }
 
     // MARK: - Properties
@@ -34,9 +35,24 @@ final class MainViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let projects = observeProjectsUseCase.execute().share()
+        let allProjects = observeProjectsUseCase.execute().share()  // Observable<[Project]>
         
-        return Output(projects: projects.asDriver(onErrorJustReturn: [Project.onError]))
+        /// scrapCount를 비교하여, 인기 섹션에 들어갈 데이터를 가공.
+        let hotProjects = allProjects.map { allProjects in
+            return allProjects.sorted(by: { $0.scrapCount > $1.scrapCount })
+                .prefix(5)
+                .map { project in
+                    var hotProject = project
+                    hotProject.id = project.id + "_hot"
+                    
+                    return hotProject
+                }
+        }
+        .asDriver(onErrorJustReturn: [Project.onError])
+        
+        let mainProjects = allProjects.asDriver(onErrorJustReturn: [Project.onError])
+        
+        return Output(hotProjects: hotProjects, mainProjects: mainProjects)
     }
 }
 
