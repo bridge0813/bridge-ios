@@ -105,9 +105,13 @@ final class MainViewController: BaseViewController {
         let input = MainViewModel.Input(viewDidLoadTrigger: viewDidLoadTrigger)
         let output = viewModel.transform(input: input)
         
-        output.projects
-            .compactMap { [weak self] projects in self?.createCurrentSnapshot(with: projects) }
-            .drive { [weak self] snapshot in self?.dataSource?.apply(snapshot) }
+        Driver.combineLatest(output.hotProjects, output.mainProjects)
+            .compactMap { [weak self] hotProjects, mainProjects in
+                self?.createCurrentSnapshot(hotProjects: hotProjects, mainProjects: mainProjects)
+            }
+            .drive { [weak self] snapshot in
+                self?.dataSource?.apply(snapshot)
+            }
             .disposed(by: disposeBag)
     }
     
@@ -266,11 +270,11 @@ extension MainViewController {
         return UICollectionReusableView()
     }
     
-    func createCurrentSnapshot(with projects: [Project]) -> Snapshot {
+    func createCurrentSnapshot(hotProjects: [Project], mainProjects: [Project]) -> Snapshot {
         var snapshot = Snapshot()
         snapshot.appendSections([.hot, .main])
-        snapshot.appendItems(projects, toSection: .hot)
-        snapshot.appendItems(projects, toSection: .main)
+        snapshot.appendItems(hotProjects, toSection: .hot)
+        snapshot.appendItems(mainProjects, toSection: .main)
         return snapshot
     }
 }

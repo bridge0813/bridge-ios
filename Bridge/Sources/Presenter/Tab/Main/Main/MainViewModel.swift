@@ -38,6 +38,7 @@ final class MainViewModel: ViewModelType {
         let allProjects = observeProjectsUseCase.execute().share()  // Observable<[Project]>
         
         /// scrapCount를 비교하여, 인기 섹션에 들어갈 데이터를 가공.
+        /// id에 "hot"을 추가하는 과정은 mainProjects와 겹치는 id가 없기 위해서.
         let hotProjects = allProjects.map { allProjects in
             return allProjects.sorted(by: { $0.scrapCount > $1.scrapCount })
                 .prefix(5)
