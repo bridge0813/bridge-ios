@@ -38,10 +38,10 @@ final class MainViewController: BaseViewController {
     
     private let filterButton: UIButton = {
         let button = UIButton()
-        
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
         let buttonImage = UIImage(systemName: "line.3.horizontal", withConfiguration: imageConfig)
         button.setImage(buttonImage, for: .normal)
+        button.tintColor = .black
         
         return button
     }()
