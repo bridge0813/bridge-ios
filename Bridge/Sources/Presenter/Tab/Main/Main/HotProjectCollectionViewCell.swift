@@ -80,7 +80,7 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
         projectBackgroundView.flex.direction(.column).padding(5).define { flex in
             flex.addItem(rankingImageView).position(.absolute).top(-1).right(7).size(23)
             
-            flex.addItem(titleLabel).height(50).marginTop(10).marginLeft(8).marginRight(30)
+            flex.addItem(titleLabel).height(50).marginTop(7).marginLeft(8).marginRight(20)
             
             flex.addItem(dDayLabel).height(25).width(60).marginLeft(8).marginTop(10)
             

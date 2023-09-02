@@ -102,6 +102,8 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
         projectBackgroundView.layer.shadowRadius = 1.0
         projectBackgroundView.clipsToBounds = true
         projectBackgroundView.layer.masksToBounds = false
+        
+        
     }
     
     override func layoutSubviews() {
