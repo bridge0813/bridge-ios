@@ -49,7 +49,6 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
         
         dDayLabel.textColor = .darkGray
         dDayLabel.font = .systemFont(ofSize: 13.5)
-        dDayLabel.clipsToBounds = true
         dDayLabel.layer.cornerRadius = 13
         dDayLabel.layer.borderColor = UIColor.darkGray.cgColor
         dDayLabel.layer.borderWidth = 1
@@ -74,8 +73,6 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
         projectBackgroundView.layer.shadowOpacity = 0.5
         projectBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
         projectBackgroundView.layer.shadowRadius = 1.0
-        projectBackgroundView.clipsToBounds = true
-        projectBackgroundView.layer.masksToBounds = false
         
         projectBackgroundView.flex.direction(.column).padding(5).define { flex in
             flex.addItem(rankingImageView).position(.absolute).top(-1).right(7).size(23)

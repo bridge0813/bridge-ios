@@ -52,7 +52,6 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
         
         dDayLabel.textColor = .blue
         dDayLabel.font = .systemFont(ofSize: 13.5)
-        dDayLabel.clipsToBounds = true
         dDayLabel.layer.cornerRadius = 13
         dDayLabel.layer.borderColor = UIColor.blue.cgColor
         dDayLabel.layer.borderWidth = 1
@@ -60,7 +59,6 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
         
         tagLabel1.textColor = .darkGray
         tagLabel1.font = .systemFont(ofSize: 13.5)
-        tagLabel1.clipsToBounds = true
         tagLabel1.layer.cornerRadius = 13
         tagLabel1.layer.borderColor = UIColor.darkGray.cgColor
         tagLabel1.layer.borderWidth = 1
@@ -68,7 +66,6 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
         
         tagLabel2.textColor = .darkGray
         tagLabel2.font = .systemFont(ofSize: 13.5)
-        tagLabel2.clipsToBounds = true
         tagLabel2.layer.cornerRadius = 13
         tagLabel2.layer.borderColor = UIColor.darkGray.cgColor
         tagLabel2.layer.borderWidth = 1
@@ -100,7 +97,6 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
         projectBackgroundView.layer.shadowOpacity = 0.5
         projectBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
         projectBackgroundView.layer.shadowRadius = 1.0
-        projectBackgroundView.layer.masksToBounds = false
         
         projectBackgroundView.flex.direction(.column).padding(5).define { flex in
             flex.addItem().direction(.row).justifyContent(.spaceBetween).define { flex in
