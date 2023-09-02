@@ -197,22 +197,38 @@ extension MainViewController {
 // MARK: - Diffable data source
 extension MainViewController {
     enum Section: CaseIterable {
+        case hot
         case main
     }
     
     func configureDataSource() -> DataSource {
-        let dataSource = DataSource(collectionView: projectCollectionView,
-                                    cellProvider: { collectionView, indexPath, item in
-            
-            guard let cell = collectionView.dequeueReusableCell(
-                HotProjectCollectionViewCell.self,
-                for: indexPath)
-            else { return UICollectionViewCell() }
-            
-            cell.configureCell(with: item)
-            print(item.title)
-            return cell
-        })
+        let dataSource = DataSource(
+            collectionView: projectCollectionView,
+            cellProvider: { collectionView, indexPath, item in
+                
+                let section = Section.allCases[indexPath.section]
+                
+                switch section {
+                case .hot:
+                    guard let cell = collectionView.dequeueReusableCell(
+                        HotProjectCollectionViewCell.self,
+                        for: indexPath)
+                    else { return UICollectionViewCell() }
+                    
+                    cell.configureCell(with: item)
+                    return cell
+                    
+                case .main:
+                    guard let cell = collectionView.dequeueReusableCell(
+                        ProjectCollectionViewCell.self,
+                        for: indexPath)
+                    else { return UICollectionViewCell() }
+                    
+                    cell.configureCell(with: item)
+                    return cell
+                }
+            }
+        )
         
         dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             self?.createSectionHeader(collectionView: collectionView, kind: kind, indexPath: indexPath)
@@ -243,8 +259,9 @@ extension MainViewController {
     
     func createCurrentSnapshot(with projects: [Project]) -> Snapshot {
         var snapshot = Snapshot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(projects)
+        snapshot.appendSections([.hot, .main])
+        snapshot.appendItems(projects, toSection: .hot)
+        snapshot.appendItems(projects, toSection: .main)
         return snapshot
     }
 }
