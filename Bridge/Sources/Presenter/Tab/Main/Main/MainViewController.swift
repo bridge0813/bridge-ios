@@ -19,6 +19,7 @@ final class MainViewController: BaseViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(HotProjectCollectionViewCell.self)
+        collectionView.register(ProjectCollectionViewCell.self)
         collectionView.register(ProjectSectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProjectSectionHeaderView.identifier)
         
         return collectionView
@@ -54,7 +55,6 @@ final class MainViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -115,11 +115,18 @@ final class MainViewController: BaseViewController {
 // MARK: - CompositionalLayout
 extension MainViewController {
     private func createCompositionalLayout() -> UICollectionViewLayout {
-        
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
-            return self?.createHotProjectSection()
+            
+            if sectionIndex == 0 {
+                return self?.createHotProjectSection()
+            }
+            
+            if sectionIndex == 1 {
+                return self?.createProjectSection()
+            }
+            
+            return nil
         }
-
         return layout
     }
     
@@ -151,6 +158,37 @@ extension MainViewController {
         section.boundarySupplementaryItems = [header]
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        
+        return section
+    }
+    
+    private func createProjectSection() -> NSCollectionLayoutSection {
+        /// item 설정
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        /// header 설정
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(60)
+        )
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        
+        /// group 설정
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(180)
+        )
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        /// section 설정
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [header]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 5, trailing: 10)
         
         return section
     }
