@@ -36,8 +36,22 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
-    private let filterButton = UIButton()
-    private let searchBar = UISearchBar()
+    private let filterButton: UIButton = {
+        let button = UIButton()
+        
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
+        let buttonImage = UIImage(systemName: "line.3.horizontal", withConfiguration: imageConfig)
+        button.setImage(buttonImage, for: .normal)
+        
+        return button
+    }()
+
+    private let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "검색해주세요."
+        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)  // 서치바 라인 삭제
+        return searchBar
+    }()
     
     private let viewModel: MainViewModel
     private let viewDidLoadTrigger = PublishRelay<Void>()
@@ -75,14 +89,6 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureLayouts() {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
-        let buttonImage = UIImage(systemName: "line.3.horizontal", withConfiguration: imageConfig)
-        filterButton.setImage(buttonImage, for: .normal)
-        filterButton.tintColor = .black
-        
-        searchBar.placeholder = "검색해주세요."
-        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)  // 서치바 라인 삭제
-        
         view.addSubview(containerView)
         containerView.flex.direction(.column).define { flex in
             /// 상단 메뉴 버튼 및 서치바
