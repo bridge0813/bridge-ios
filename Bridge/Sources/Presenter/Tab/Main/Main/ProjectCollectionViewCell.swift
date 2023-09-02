@@ -117,6 +117,9 @@ extension ProjectCollectionViewCell {
     func configureCell(with project: Project) {
         titleLabel.text = project.title
         dDayLabel.text = "D-\(project.dDays)"
+        tagLabel1.text = project.recruitmentField[0]
+        tagLabel2.text = project.techStackTags[0]
         recruitsLabel.text = "\(project.numberOfRecruits)명 모집"
+        periodLabel.text = "\(project.startDate)-\(project.endDate)"
     }
 }
