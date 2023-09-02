@@ -22,7 +22,7 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
     
     private let personImageView = UIImageView()
     private let recruitsLabel = UILabel()
-    private let scrapImageView = UIImageView()
+    private let scrapButton = UIButton()
 
     func bind(_ chatRoom: Driver<Project>) {
         
@@ -62,9 +62,10 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
         recruitsLabel.textColor = .darkGray
         recruitsLabel.font = .boldSystemFont(ofSize: 15)
         
-        scrapImageView.image = UIImage(systemName: "star")
-        scrapImageView.backgroundColor = .clear
-        scrapImageView.tintColor = .gray
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
+        let buttonImage = UIImage(systemName: "star", withConfiguration: imageConfig)
+        scrapButton.setImage(buttonImage, for: .normal)
+        scrapButton.tintColor = .gray
         
         addSubview(projectBackgroundView)
         projectBackgroundView.backgroundColor = .white
@@ -90,7 +91,7 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
                         flex.addItem(recruitsLabel).marginLeft(5)
                     }
                     
-                    flex.addItem(scrapImageView).size(23).marginRight(7)
+                    flex.addItem(scrapButton).size(23).marginRight(5)
                 }
             }
         }
