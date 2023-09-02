@@ -8,8 +8,6 @@
 import UIKit
 import FlexLayout
 import PinLayout
-import RxCocoa
-import RxSwift
 
 final class ChatRoomCell: BaseTableViewCell {
     
@@ -32,14 +30,12 @@ final class ChatRoomCell: BaseTableViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "정호윤"
         label.font = .boldSystemFont(ofSize: 14)
         return label
     }()
     
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "오후 10시 10분"
         label.textColor = .systemGray
         label.font = .systemFont(ofSize: 10)
         return label
@@ -47,7 +43,6 @@ final class ChatRoomCell: BaseTableViewCell {
     
     private let messagePreviewLabel: UILabel = {
         let label = UILabel()
-        label.text = "안녕하세요 iOS 개발자 정호윤입니다!"
         label.font = .systemFont(ofSize: 14)
         return label
     }()
@@ -63,12 +58,6 @@ final class ChatRoomCell: BaseTableViewCell {
         return label
     }()
     
-    func bind(_ chatRoom: Driver<ChatRoom>) {
-        chatRoom
-            .drive { [weak self] chatRoom in self?.configureCell(with: chatRoom) }
-            .disposed(by: disposeBag)
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -76,7 +65,6 @@ final class ChatRoomCell: BaseTableViewCell {
         nameLabel.text = ""
         timeLabel.text = ""
         messagePreviewLabel.text = ""
-        disposeBag = DisposeBag()
     }
     
     // MARK: - Configurations
@@ -112,7 +100,7 @@ final class ChatRoomCell: BaseTableViewCell {
 }
 
 // MARK: - Configuration
-private extension ChatRoomCell {
+extension ChatRoomCell {
     func configureCell(with chatRoom: ChatRoom) {
         nameLabel.text = chatRoom.name
         timeLabel.text = chatRoom.time.formatted()

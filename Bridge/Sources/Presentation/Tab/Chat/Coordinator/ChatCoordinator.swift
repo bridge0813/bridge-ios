@@ -9,7 +9,7 @@ import UIKit
 
 protocol ChatCoordinatorProtocol: Coordinator {
     func showChatRoomListViewController()
-    func showChatRoomDetailViewController()
+    func showChatRoomDetailViewController(of: ChatRoom)
 }
 
 final class ChatCoordinator: ChatCoordinatorProtocol {
@@ -19,7 +19,7 @@ final class ChatCoordinator: ChatCoordinatorProtocol {
     var childCoordinators: [Coordinator]
     
     private let chatRoomRepository: ChatRoomRepository
-    private let fetchChatRoomsUseCase: ObserveChatRoomsUseCase
+    private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
     
     init(navigationController: UINavigationController) {
@@ -28,7 +28,7 @@ final class ChatCoordinator: ChatCoordinatorProtocol {
         
         let networkService = DefaultNetworkService()
         chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
-        fetchChatRoomsUseCase = DefaultObserveChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
+        fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
     }
     
@@ -48,7 +48,7 @@ extension ChatCoordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func showChatRoomDetailViewController() {
+    func showChatRoomDetailViewController(of chatRoom: ChatRoom) {
         // ChatRoomDetailCoordinator로 연결...
     }
 }

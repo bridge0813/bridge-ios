@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FlexLayout
 import PinLayout
 import RxCocoa
 import RxSwift
@@ -23,12 +22,12 @@ final class ChatRoomListViewController: BaseViewController {
         return tableView
     }()
     
-    typealias DataSource = UITableViewDiffableDataSource<Section, ChatRoom>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, ChatRoom>
+    private typealias DataSource = UITableViewDiffableDataSource<Section, ChatRoom>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, ChatRoom>
     private var dataSource: DataSource?
     
     private let viewModel: ChatRoomListViewModel
-    private let leaveChatRoomTrigger = PublishRelay<Int>()
+    private let leaveChatRoomTrigger = PublishRelay<IndexPath>()
     
     init(viewModel: ChatRoomListViewModel) {
         self.viewModel = viewModel
@@ -61,30 +60,27 @@ final class ChatRoomListViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         chatRoomListTableView.pin.all()
-        chatRoomListTableView.flex.layout()
     }
     
     override func bind() {
-        let input = ChatRoomListViewModel.Input(leaveChatRoomTrigger: leaveChatRoomTrigger)
-        let output = viewModel.transform(input: input)
-        
-        output.chatRooms
-            .compactMap { [weak self] chatRooms in self?.createCurrentSnapshot(with: chatRooms) }
-            .drive { [weak self] currentSnapshot in self?.dataSource?.apply(currentSnapshot) }
-            .disposed(by: disposeBag)
-        
         chatRoomListTableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
         
-        chatRoomListTableView.rx.itemSelected
-            .bind(onNext: { [weak self] indexPath in self?.showChatRoomDetailViewController(at: indexPath) })
+        let input = ChatRoomListViewModel.Input(
+            itemSelected: chatRoomListTableView.rx.itemSelected.asObservable(),
+            leaveChatRoomTrigger: leaveChatRoomTrigger
+        )
+        let output = viewModel.transform(input: input)
+        
+        output.chatRooms
+            .compactMap { [weak self] chatRooms in
+                self?.createCurrentSnapshot(with: chatRooms)
+            }
+            .drive { [weak self] currentSnapshot in
+                self?.dataSource?.apply(currentSnapshot)
+            }
             .disposed(by: disposeBag)
-    }
-    
-    private func showChatRoomDetailViewController(at indexPath: IndexPath) {
-        guard let chatRoom = dataSource?.itemIdentifier(for: indexPath) else { return }
-        viewModel.showChatRoomDetailViewController(of: chatRoom)
     }
 }
 
@@ -94,22 +90,18 @@ extension ChatRoomListViewController {
         case main
     }
     
-    func configureDataSource() -> DataSource {
-        UITableViewDiffableDataSource(
-            tableView: chatRoomListTableView
-        ) { [weak self] tableView, indexPath, itemIdentifier in
-            guard let cell = tableView.dequeueReusableCell(
-                ChatRoomCell.self,
-                for: indexPath
-            ) else { return UITableViewCell() }
-
-            // TODO: binding
+    private func configureDataSource() -> DataSource {
+        UITableViewDiffableDataSource(tableView: chatRoomListTableView) { tableView, indexPath, item in
+            guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else {
+                return UITableViewCell()
+            }
             cell.selectionStyle = .none
+            cell.configureCell(with: item)
             return cell
         }
     }
     
-    func createCurrentSnapshot(with chatRoom: [ChatRoom]) -> Snapshot {
+    private func createCurrentSnapshot(with chatRoom: [ChatRoom]) -> Snapshot {
         var snapshot = Snapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(chatRoom)
@@ -119,5 +111,15 @@ extension ChatRoomListViewController {
 
 // MARK: - Delegate
 extension ChatRoomListViewController: UITableViewDelegate {
-    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "나가기") { [weak self] _, _, completion in
+            self?.leaveChatRoomTrigger.accept(indexPath)
+            completion(true)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
