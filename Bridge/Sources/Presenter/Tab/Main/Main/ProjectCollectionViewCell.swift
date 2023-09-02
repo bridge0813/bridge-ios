@@ -47,7 +47,7 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Configurations
     override func configureLayouts() {
         titleLabel.textColor = .black
-        titleLabel.font = .boldSystemFont(ofSize: 16)
+        titleLabel.font = .boldSystemFont(ofSize: 18)
         titleLabel.numberOfLines = 2
         
         dDayLabel.textColor = .blue
@@ -100,10 +100,35 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
         projectBackgroundView.layer.shadowOpacity = 0.5
         projectBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
         projectBackgroundView.layer.shadowRadius = 1.0
-        projectBackgroundView.clipsToBounds = true
         projectBackgroundView.layer.masksToBounds = false
         
-        
+        projectBackgroundView.flex.direction(.column).padding(5).define { flex in
+            flex.addItem().direction(.row).justifyContent(.spaceBetween).define { flex in
+                flex.addItem(titleLabel).height(50).width(150).marginTop(10).marginLeft(15)
+                flex.addItem(dDayLabel).width(60).height(25).marginTop(10).marginRight(15)
+            }
+            
+            flex.addItem().direction(.row).alignItems(.center).marginTop(10).define { flex in
+                flex.addItem(tagLabel1).width(60).height(25).marginLeft(15)
+                flex.addItem(tagLabel2).width(60).height(25).marginLeft(8)
+            }
+            
+            flex.addItem().grow(1)  // 빈 공간을 채우는 아이템 추가
+            
+            flex.addItem().direction(.row).marginBottom(10).justifyContent(.spaceBetween).define { flex in
+                flex.addItem().direction(.row).alignItems(.center).define { flex in
+                    flex.addItem(personImageView).size(15).marginLeft(15)
+                    flex.addItem(recruitsLabel).marginLeft(5)
+                }
+                
+                flex.addItem().direction(.row).alignItems(.center).define { flex in
+                    flex.addItem(rectangleImageView).size(15)
+                    flex.addItem(periodLabel).marginLeft(5)
+                }
+                
+                flex.addItem(scrapButton).size(23).marginRight(15)
+            }
+        }
     }
     
     override func layoutSubviews() {
