@@ -57,6 +57,7 @@
 		7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */; };
 		7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */; };
 		7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D122AA1E7020063D362 /* ProjectSectionHeaderView.swift */; };
+		7C569D152AA311620063D362 /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D142AA311620063D362 /* ProjectCollectionViewCell.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 		7CF93E072A9C65870013EBD6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E062A9C65870013EBD6 /* MainViewController.swift */; };
@@ -107,6 +108,7 @@
 		7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		7C569D122AA1E7020063D362 /* ProjectSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSectionHeaderView.swift; sourceTree = "<group>"; };
+		7C569D142AA311620063D362 /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		7CF93E062A9C65870013EBD6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -481,7 +483,7 @@
 			isa = PBXGroup;
 			children = (
 				7CF93E022A9C65040013EBD6 /* Coordinator */,
-				7CF93E032A9C650D0013EBD6 /* MainHome */,
+				7CF93E032A9C650D0013EBD6 /* Main */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -494,14 +496,15 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		7CF93E032A9C650D0013EBD6 /* MainHome */ = {
+		7CF93E032A9C650D0013EBD6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				7C569CF62A9F69970063D362 /* MainViewModel.swift */,
 				7CF93E062A9C65870013EBD6 /* MainViewController.swift */,
 				7C569D0A2AA0AA280063D362 /* HotProjectCollectionViewCell.swift */,
+				7C569D142AA311620063D362 /* ProjectCollectionViewCell.swift */,
 			);
-			path = MainHome;
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -613,6 +616,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C569D152AA311620063D362 /* ProjectCollectionViewCell.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* NavigationTitleView.swift in Sources */,
 				7BA36C9D2A9C5105000DAB02 /* Chat.swift in Sources */,
