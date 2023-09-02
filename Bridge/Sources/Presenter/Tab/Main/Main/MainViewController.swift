@@ -251,7 +251,16 @@ extension MainViewController {
                 return UICollectionReusableView()
             }
             
-            headerView.configureHeader(titleText: "인기 폭발 프로젝트", decoText: "HOT")
+            let section = Section.allCases[indexPath.section]
+            
+            switch section {
+            case .hot:
+                headerView.configureHeader(titleText: "인기 폭발 프로젝트", decoText: "HOT")
+                
+            case .main:
+                headerView.configureHeader(titleText: "모집중인 프로젝트", decoText: "NEW")
+            }
+    
             return headerView
         }
         return UICollectionReusableView()
