@@ -16,6 +16,7 @@ struct ProjectDTO: Codable {
     let startDate: Date
     let endDate: Date
     let deadlineDate: Date
+    let scrapCount: Int
 }
 
 extension ProjectDTO {
@@ -29,7 +30,7 @@ extension ProjectDTO {
             dDays: Date().calculateDDay(to: endDate),
             startDate: startDate.toString(),
             endDate: endDate.toString(),
-            scrapCount: 0
+            scrapCount: scrapCount
         )
     }
 }

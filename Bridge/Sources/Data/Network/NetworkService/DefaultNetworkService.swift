@@ -56,7 +56,8 @@ final class DefaultNetworkService: NetworkService {
                 techStackTags: ["iOS", "BackEnd", "UI/UX"],
                 startDate: currentDate,
                 endDate: currentDate,
-                deadlineDate: currentDate
+                deadlineDate: currentDate,
+                scrapCount: 5
             ),
             ProjectDTO(
                 id: "2",
@@ -66,7 +67,8 @@ final class DefaultNetworkService: NetworkService {
                 techStackTags: ["iOS", "BackEnd", "UI/UX"],
                 startDate: currentDate,
                 endDate: currentDate,
-                deadlineDate: currentDate
+                deadlineDate: currentDate,
+                scrapCount: 4
             ),
             ProjectDTO(
                 id: "3",
@@ -76,7 +78,8 @@ final class DefaultNetworkService: NetworkService {
                 techStackTags: ["iOS", "BackEnd", "UI/UX"],
                 startDate: currentDate,
                 endDate: currentDate,
-                deadlineDate: currentDate
+                deadlineDate: currentDate,
+                scrapCount: 3
             ),
             ProjectDTO(
                 id: "4",
@@ -86,7 +89,8 @@ final class DefaultNetworkService: NetworkService {
                 techStackTags: ["iOS", "BackEnd", "UI/UX"],
                 startDate: currentDate,
                 endDate: currentDate,
-                deadlineDate: currentDate
+                deadlineDate: currentDate,
+                scrapCount: 2
             )
         ])
     }
