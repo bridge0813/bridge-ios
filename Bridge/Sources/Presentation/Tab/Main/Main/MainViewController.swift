@@ -211,7 +211,7 @@ extension MainViewController {
         case main
     }
     
-    func configureDataSource() -> DataSource {
+    private func configureDataSource() -> DataSource {
         let dataSource = DataSource(
             collectionView: projectCollectionView,
             cellProvider: { collectionView, indexPath, item in
@@ -247,7 +247,7 @@ extension MainViewController {
         return dataSource
     }
     
-    func createSectionHeader(
+    private func createSectionHeader(
         collectionView: UICollectionView,
         kind: String,
         indexPath: IndexPath
