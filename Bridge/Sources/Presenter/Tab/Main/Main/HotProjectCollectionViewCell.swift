@@ -84,16 +84,17 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
             
             flex.addItem(dDayLabel).height(25).width(60).marginLeft(8).marginTop(10)
             
-            flex.addItem().direction(.column).grow(1).marginLeft(8).justifyContent(.end).define { flex in
-                flex.addItem().direction(.row).marginBottom(10).justifyContent(.spaceBetween).define { flex in
-                    flex.addItem().direction(.row).alignItems(.center).define { flex in
-                        flex.addItem(personImageView).size(15)
-                        flex.addItem(recruitsLabel).marginLeft(5)
-                    }
-                    
-                    flex.addItem(scrapButton).size(23).marginRight(5)
+            flex.addItem().grow(1)  // 빈 공간을 채우는 아이템 추가
+            
+            flex.addItem().direction(.row).justifyContent(.spaceBetween).alignItems(.center).define { flex in
+                flex.addItem().direction(.row).alignItems(.center).marginBottom(10).define { flex in
+                    flex.addItem(personImageView).size(15).marginLeft(10)
+                    flex.addItem(recruitsLabel).marginLeft(5)
                 }
+                
+                flex.addItem(scrapButton).size(23).marginRight(5).marginBottom(10)
             }
+            
         }
     }
     
