@@ -15,17 +15,75 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
     private let projectBackgroundView = UIView()
     
-    private let titleLabel = UILabel()
-    private let dDayLabel = UILabel()
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .black,
+            font: .boldSystemFont(ofSize: 18),
+            numberOfLines: 2
+        )
+        return label
+    }()
     
-    private let tagLabel1 = UILabel()
-    private let tagLabel2 = UILabel()
+    private let dDayLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .blue,
+            font: .systemFont(ofSize: 13.5),
+            textAlignment: .center
+        )
+        label.layer.cornerRadius = 13
+        label.layer.borderColor = UIColor.blue.cgColor
+        label.layer.borderWidth = 1
+        return label
+    }()
+    
+    private let tagLabel1: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .darkGray,
+            font: .systemFont(ofSize: 13.5),
+            textAlignment: .center
+        )
+        label.layer.cornerRadius = 13
+        label.layer.borderColor = UIColor.darkGray.cgColor
+        label.layer.borderWidth = 1
+        return label
+    }()
+    
+    private let tagLabel2: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .darkGray,
+            font: .systemFont(ofSize: 13.5),
+            textAlignment: .center
+        )
+        label.layer.cornerRadius = 13
+        label.layer.borderColor = UIColor.darkGray.cgColor
+        label.layer.borderWidth = 1
+        return label
+    }()
     
     private let personImageView = UIImageView()
-    private let recruitsLabel = UILabel()
+    
+    private let recruitsLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .darkGray,
+            font: .boldSystemFont(ofSize: 15)
+        )
+        return label
+    }()
     
     private let rectangleImageView = UIImageView()
-    private let periodLabel = UILabel()
+    private let periodLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .darkGray,
+            font: .boldSystemFont(ofSize: 15)
+        )
+        return label
+    }()
     
     private let scrapButton = UIButton()
 
@@ -46,44 +104,13 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Configurations
     override func configureLayouts() {
-        titleLabel.textColor = .black
-        titleLabel.font = .boldSystemFont(ofSize: 18)
-        titleLabel.numberOfLines = 2
-        
-        dDayLabel.textColor = .blue
-        dDayLabel.font = .systemFont(ofSize: 13.5)
-        dDayLabel.layer.cornerRadius = 13
-        dDayLabel.layer.borderColor = UIColor.blue.cgColor
-        dDayLabel.layer.borderWidth = 1
-        dDayLabel.textAlignment = .center
-        
-        tagLabel1.textColor = .darkGray
-        tagLabel1.font = .systemFont(ofSize: 13.5)
-        tagLabel1.layer.cornerRadius = 13
-        tagLabel1.layer.borderColor = UIColor.darkGray.cgColor
-        tagLabel1.layer.borderWidth = 1
-        tagLabel1.textAlignment = .center
-        
-        tagLabel2.textColor = .darkGray
-        tagLabel2.font = .systemFont(ofSize: 13.5)
-        tagLabel2.layer.cornerRadius = 13
-        tagLabel2.layer.borderColor = UIColor.darkGray.cgColor
-        tagLabel2.layer.borderWidth = 1
-        tagLabel2.textAlignment = .center
-        
         personImageView.image = UIImage(systemName: "person.fill")
         personImageView.backgroundColor = .clear
         personImageView.tintColor = .darkGray
         
-        recruitsLabel.textColor = .darkGray
-        recruitsLabel.font = .boldSystemFont(ofSize: 15)
-        
         rectangleImageView.image = UIImage(systemName: "rectangle.fill")
         rectangleImageView.backgroundColor = .clear
         rectangleImageView.tintColor = .darkGray
-        
-        periodLabel.textColor = .darkGray
-        periodLabel.font = .boldSystemFont(ofSize: 15)
         
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
         let buttonImage = UIImage(systemName: "star", withConfiguration: imageConfig)
