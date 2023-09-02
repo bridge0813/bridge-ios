@@ -13,7 +13,16 @@ import RxSwift
 
 final class ProjectCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
-    private let projectBackgroundView = UIView()
+    private let projectBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.shadowRadius = 1.0
+        return view
+    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -64,7 +73,13 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let personImageView = UIImageView()
+    private let personImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "person.fill")
+        imageView.tintColor = .darkGray
+        
+        return imageView
+    }()
     
     private let recruitsLabel: UILabel = {
         let label = UILabel()
@@ -75,7 +90,14 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let rectangleImageView = UIImageView()
+    private let rectangleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "rectangle.fill")
+        imageView.tintColor = .darkGray
+        
+        return imageView
+    }()
+    
     private let periodLabel: UILabel = {
         let label = UILabel()
         label.configureLabel(
@@ -85,7 +107,16 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let scrapButton = UIButton()
+    private let scrapButton: UIButton = {
+        let button = UIButton()
+        
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
+        let buttonImage = UIImage(systemName: "star", withConfiguration: imageConfig)
+        button.setImage(buttonImage, for: .normal)
+        button.tintColor = .gray
+        
+        return button
+    }()
 
     func bind(_ chatRoom: Driver<Project>) {
         
@@ -104,26 +135,7 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Configurations
     override func configureLayouts() {
-        personImageView.image = UIImage(systemName: "person.fill")
-        personImageView.backgroundColor = .clear
-        personImageView.tintColor = .darkGray
-        
-        rectangleImageView.image = UIImage(systemName: "rectangle.fill")
-        rectangleImageView.backgroundColor = .clear
-        rectangleImageView.tintColor = .darkGray
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
-        let buttonImage = UIImage(systemName: "star", withConfiguration: imageConfig)
-        scrapButton.setImage(buttonImage, for: .normal)
-        scrapButton.tintColor = .gray
-        
         addSubview(projectBackgroundView)
-        projectBackgroundView.backgroundColor = .white
-        projectBackgroundView.layer.cornerRadius = 10
-        projectBackgroundView.layer.shadowColor = UIColor.black.cgColor
-        projectBackgroundView.layer.shadowOpacity = 0.5
-        projectBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        projectBackgroundView.layer.shadowRadius = 1.0
         
         projectBackgroundView.flex.direction(.column).padding(5).define { flex in
             flex.addItem().direction(.row).justifyContent(.spaceBetween).define { flex in

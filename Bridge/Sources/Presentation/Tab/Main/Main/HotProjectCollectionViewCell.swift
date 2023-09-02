@@ -13,16 +13,75 @@ import RxSwift
 
 final class HotProjectCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
-    private let projectBackgroundView = UIView()
+    private let projectBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.shadowRadius = 1.0
+        return view
+    }()
     
-    private let rankingImageView = UIImageView()
+    private let rankingImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "bookmark.fill")
+        imageView.tintColor = .blue
+        
+        return imageView
+    }()
     
-    private let titleLabel = UILabel()
-    private let dDayLabel = UILabel()
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .black,
+            font: .boldSystemFont(ofSize: 16),
+            numberOfLines: 2
+        )
+        return label
+    }()
     
-    private let personImageView = UIImageView()
-    private let recruitsLabel = UILabel()
-    private let scrapButton = UIButton()
+    private let dDayLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .blue,
+            font: .systemFont(ofSize: 13.5),
+            textAlignment: .center
+        )
+        label.layer.cornerRadius = 13
+        label.layer.borderColor = UIColor.blue.cgColor
+        label.layer.borderWidth = 1
+        return label
+    }()
+    
+    private let personImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "person.fill")
+        imageView.tintColor = .darkGray
+        
+        return imageView
+    }()
+    
+    private let recruitsLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .darkGray,
+            font: .boldSystemFont(ofSize: 15)
+        )
+        return label
+    }()
+    
+    private let scrapButton: UIButton = {
+        let button = UIButton()
+        
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
+        let buttonImage = UIImage(systemName: "star", withConfiguration: imageConfig)
+        button.setImage(buttonImage, for: .normal)
+        button.tintColor = .gray
+        
+        return button
+    }()
 
     func bind(_ chatRoom: Driver<Project>) {
         
@@ -39,41 +98,7 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Configurations
     override func configureLayouts() {
-        rankingImageView.image = UIImage(systemName: "bookmark.fill")
-        rankingImageView.backgroundColor = .clear
-        rankingImageView.tintColor = .blue
-        
-        titleLabel.textColor = .black
-        titleLabel.font = .boldSystemFont(ofSize: 16)
-        titleLabel.numberOfLines = 2
-        
-        dDayLabel.textColor = .darkGray
-        dDayLabel.font = .systemFont(ofSize: 13.5)
-        dDayLabel.layer.cornerRadius = 13
-        dDayLabel.layer.borderColor = UIColor.darkGray.cgColor
-        dDayLabel.layer.borderWidth = 1
-        dDayLabel.textAlignment = .center
-        
-        personImageView.image = UIImage(systemName: "person.fill")
-        personImageView.backgroundColor = .clear
-        personImageView.tintColor = .darkGray
-        
-        recruitsLabel.textColor = .darkGray
-        recruitsLabel.font = .boldSystemFont(ofSize: 15)
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
-        let buttonImage = UIImage(systemName: "star", withConfiguration: imageConfig)
-        scrapButton.setImage(buttonImage, for: .normal)
-        scrapButton.tintColor = .gray
-        
         addSubview(projectBackgroundView)
-        projectBackgroundView.backgroundColor = .white
-        projectBackgroundView.layer.cornerRadius = 10
-        projectBackgroundView.layer.shadowColor = UIColor.black.cgColor
-        projectBackgroundView.layer.shadowOpacity = 0.5
-        projectBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        projectBackgroundView.layer.shadowRadius = 1.0
-        
         projectBackgroundView.flex.direction(.column).padding(5).define { flex in
             flex.addItem(rankingImageView).position(.absolute).top(-1).right(7).size(23)
             
