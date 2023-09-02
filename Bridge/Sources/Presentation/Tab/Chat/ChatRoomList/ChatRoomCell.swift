@@ -16,15 +16,15 @@ final class ChatRoomCell: BaseTableViewCell {
         let view = UIView()
         view.backgroundColor = .systemGray5
         view.layer.cornerRadius = 16
-        view.clipsToBounds = true
         return view
     }()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .systemGray4
+        imageView.layer.cornerRadius = 22
         imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -54,6 +54,7 @@ final class ChatRoomCell: BaseTableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 12)
         label.textAlignment = .center
+        label.layer.cornerRadius = 9
         label.clipsToBounds = true
         return label
     }()
@@ -67,34 +68,37 @@ final class ChatRoomCell: BaseTableViewCell {
         messagePreviewLabel.text = ""
     }
     
-    // MARK: - Configurations
+    // MARK: - Layouts
     override func configureLayouts() {
         contentView.addSubview(chatRoomBackgroundView)
         
-        let padding: CGFloat = 24
-        let margin: CGFloat = 8
+        let componentOffset: CGFloat = 8
+        let containeroffset: CGFloat = 24
         
-        chatRoomBackgroundView.flex.direction(.row).padding(padding).alignItems(.center).define { flex in
-            flex.addItem(profileImageView).size(44).cornerRadius(22).aspectRatio(1)
+        chatRoomBackgroundView.flex.direction(.row).alignItems(.center).define { flex in
+            flex.addItem(profileImageView).size(44).marginLeft(containeroffset)
             
-            flex.addItem().direction(.column).width(200).marginHorizontal(margin * 2).define { flex in
-                flex.addItem().direction(.row).marginBottom(margin).define { flex in
-                    flex.addItem(nameLabel)
-                    flex.addItem(timeLabel).marginLeft(margin)
+            flex.addItem().direction(.column).marginHorizontal(16).define { flex in
+                flex.addItem().direction(.row).marginBottom(componentOffset).define { flex in
+                    flex.addItem(nameLabel).grow(1)
+                    flex.addItem().size(componentOffset)
+                    flex.addItem(timeLabel).shrink(1)
                 }
                 
                 flex.addItem(messagePreviewLabel)
             }
             
-            flex.addItem(unreadMessagesCountLabel).size(18).cornerRadius(9)
+            flex.addItem(unreadMessagesCountLabel).size(18).position(.absolute).right(containeroffset)
         }
     }
+
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let offset: CGFloat = 16
-        chatRoomBackgroundView.pin.top(offset).left(offset).right(offset).bottom()
+        let horizontalMargin: CGFloat = 16
+        let verticalMargin: CGFloat = 8
+        chatRoomBackgroundView.pin.horizontally(horizontalMargin).vertically(verticalMargin)
         chatRoomBackgroundView.flex.layout()
     }
 }
