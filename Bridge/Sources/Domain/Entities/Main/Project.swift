@@ -9,7 +9,7 @@ import Foundation
 
 // TODO: - 데이터 구조에 따라 수정필요
 struct Project {
-    var id: String
+    let id: String
     let title: String
     let numberOfRecruits: Int                   // 총 모집 인원
     let recruitmentField: [String]              // 모집 분야

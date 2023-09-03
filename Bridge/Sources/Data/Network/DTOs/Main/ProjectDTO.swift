@@ -26,7 +26,7 @@ extension ProjectDTO {
             numberOfRecruits: numberOfRecruits,
             recruitmentField: recruitmentField,
             techStackTags: techStackTags,
-            dDays: Date().calculateDDay(to: endDate),
+            dDays: Date().calculateDDay(to: deadlineDate),
             startDate: startDate.toString(),
             endDate: endDate.toString()
         )

@@ -8,10 +8,10 @@
 import Foundation
 
 struct HotProject {
-    var id: String
+    let id: String
     let title: String
-    let numberOfRecruits: Int                   // 총 모집 인원
-    let dDays: Int                              // 공고 마감일까지 D-Day
+    let numberOfRecruits: Int
+    let dDays: Int
 }
 
 extension HotProject {
