@@ -12,21 +12,32 @@ import PinLayout
 final class ProjectSectionHeaderView: BaseCollectionReusableView {
     // MARK: - Properties
     private let containerView = UIView()
-    let titleLabel = UILabel()
-    let decoLabel = UILabel()
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .black,
+            font: .boldSystemFont(ofSize: 27)
+        )
+        return label
+    }()
+    
+    let decoLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .white,
+            font: .systemFont(ofSize: 15),
+            textAlignment: .center
+        )
+        label.layer.cornerRadius = 12
+        label.clipsToBounds = true
+        label.backgroundColor = .gray
+        
+        return label
+    }()
     
     // MARK: - Configurations
     override func configureLayouts() {
-        titleLabel.textColor = .black
-        titleLabel.font = .boldSystemFont(ofSize: 27)
-        
-        decoLabel.textColor = .white
-        decoLabel.font = .systemFont(ofSize: 15)
-        decoLabel.clipsToBounds = true
-        decoLabel.layer.cornerRadius = 12
-        decoLabel.backgroundColor = .gray
-        decoLabel.textAlignment = .center
-        
         addSubview(containerView)
         containerView.flex.direction(.row).justifyContent(.start).alignItems(.center).define { flex in
             flex.addItem(titleLabel).marginLeft(10)
