@@ -28,7 +28,7 @@ extension ProjectDTO {
             techStackTags: techStackTags,
             dDays: Date().calculateDDay(to: endDate),
             startDate: startDate.toString(),
-            endDate: endDate.toString(),
+            endDate: endDate.toString()
         )
     }
 }
