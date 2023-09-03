@@ -8,6 +8,6 @@
 import RxSwift
 
 protocol ProjectRepository {
-    func observeProjects() -> Observable<[Project]>
+    func fetchProjects() -> Observable<[Project]>
     func fetchHotProjects() -> Observable<[HotProject]>
 }

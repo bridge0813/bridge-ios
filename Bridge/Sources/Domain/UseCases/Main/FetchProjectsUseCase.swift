@@ -19,6 +19,6 @@ final class DefaultFetchProjectsUseCase: FetchProjectsUseCase {
     }
     
     func execute() -> Observable<[Project]> {
-        projectRepository.observeProjects()
+        projectRepository.fetchProjects()
     }
 }
