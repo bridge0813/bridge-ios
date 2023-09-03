@@ -212,33 +212,32 @@ extension MainViewController {
     
     private func configureDataSource() -> DataSource {
         let dataSource = DataSource(
-            collectionView: projectCollectionView,
-            cellProvider: { collectionView, indexPath, item in
-                
-                let section = Section.allCases[indexPath.section]
-                
-                switch section {
-                case .hot:
-                    guard let cell = collectionView.dequeueReusableCell(
-                        HotProjectCollectionViewCell.self,
-                        for: indexPath)
-                    else { return UICollectionViewCell() }
-                    
-                    cell.configureCell(with: item)
-                    return cell
-                    
-                case .main:
-                    guard let cell = collectionView.dequeueReusableCell(
-                        ProjectCollectionViewCell.self,
-                        for: indexPath)
-                    else { return UICollectionViewCell() }
-                    
-                    cell.configureCell(with: item)
-                    return cell
-                }
+            collectionView: projectCollectionView
+        ) { collectionView, indexPath, item in
+            
+            let section = Section.allCases[indexPath.section]
+
+            switch section {
+            case .hot:
+                guard let cell = collectionView.dequeueReusableCell(
+                    HotProjectCollectionViewCell.self,
+                    for: indexPath)
+                else { return UICollectionViewCell() }
+
+                cell.configureCell(with: item)
+                return cell
+
+            case .main:
+                guard let cell = collectionView.dequeueReusableCell(
+                    ProjectCollectionViewCell.self,
+                    for: indexPath)
+                else { return UICollectionViewCell() }
+
+                cell.configureCell(with: item)
+                return cell
             }
-        )
-        
+        }
+
         dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             self?.createSectionHeader(collectionView: collectionView, kind: kind, indexPath: indexPath)
         }
