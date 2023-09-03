@@ -22,20 +22,20 @@ final class MainViewModel: ViewModelType {
     // MARK: - Properties
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
-    private let observeProjectsUseCase: ObserveProjectsUseCase
+    private let fetchProjectsUseCase: FetchProjectsUseCase
     
     // MARK: - Initializer
     init(
         coordinator: MainCoordinator,
-        observeProjectsUseCase: ObserveProjectsUseCase
+        fetchProjectsUseCase: FetchProjectsUseCase
     ) {
         self.coordinator = coordinator
-        self.observeProjectsUseCase = observeProjectsUseCase
+        self.fetchProjectsUseCase = fetchProjectsUseCase
     }
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let allProjects = observeProjectsUseCase.execute().share()  // Observable<[Project]>
+        let allProjects = fetchProjectsUseCase.execute().share()  // Observable<[Project]>
         
         /// scrapCount를 비교하여, 인기 섹션에 들어갈 데이터를 가공.
         /// id에 "hot"을 추가하는 과정은 mainProjects와 겹치는 id가 없기 위해서.
