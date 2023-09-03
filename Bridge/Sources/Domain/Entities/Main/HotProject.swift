@@ -25,4 +25,4 @@ extension HotProject {
     }
 }
 
-extension HotProject: Hashable { }
+extension HotProject: ProjectItemProtocol { }

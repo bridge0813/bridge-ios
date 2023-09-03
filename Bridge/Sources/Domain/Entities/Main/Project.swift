@@ -34,4 +34,4 @@ extension Project {
     }
 }
 
-extension Project: Hashable { }
+extension Project: ProjectItemProtocol { }
