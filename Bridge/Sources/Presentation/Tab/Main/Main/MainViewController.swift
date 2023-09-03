@@ -20,7 +20,10 @@ final class MainViewController: BaseViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(HotProjectCollectionViewCell.self)
         collectionView.register(ProjectCollectionViewCell.self)
-        collectionView.register(ProjectSectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProjectSectionHeaderView.identifier)
+        collectionView.register(
+            ProjectSectionHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
+        )
         
         return collectionView
     }()
@@ -255,9 +258,10 @@ extension MainViewController {
         if kind == UICollectionView.elementKindSectionHeader {
             
             guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                ProjectSectionHeaderView.self,
                 ofKind: kind,
-                withReuseIdentifier: ProjectSectionHeaderView.identifier,
-                for: indexPath) as? ProjectSectionHeaderView else {
+                for: indexPath
+            ) else {
                 return UICollectionReusableView()
             }
             

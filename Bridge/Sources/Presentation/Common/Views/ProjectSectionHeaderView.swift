@@ -9,35 +9,14 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class ProjectSectionHeaderView: UICollectionReusableView {
+final class ProjectSectionHeaderView: BaseCollectionReusableView {
     // MARK: - Properties
-    static let identifier = "ProjectSectionHeaderView"
-
     private let containerView = UIView()
     let titleLabel = UILabel()
     let decoLabel = UILabel()
     
-    // MARK: - Initializer
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        configureLayouts()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        containerView.pin.all()
-        containerView.flex.layout()
-    }
-    
     // MARK: - Configurations
-    func configureLayouts() {
-        backgroundColor = .clear
-        
+    override func configureLayouts() {
         titleLabel.textColor = .black
         titleLabel.font = .boldSystemFont(ofSize: 27)
         
@@ -53,6 +32,12 @@ final class ProjectSectionHeaderView: UICollectionReusableView {
             flex.addItem(titleLabel).marginLeft(10)
             flex.addItem(decoLabel).marginLeft(10).width(42).height(25)
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        containerView.pin.all()
+        containerView.flex.layout()
     }
 }
 // MARK: - Configuration
