@@ -91,7 +91,7 @@ extension ChatRoomListViewController {
     }
     
     private func configureDataSource() -> DataSource {
-        UITableViewDiffableDataSource(tableView: chatRoomListTableView) { tableView, indexPath, item in
+        DataSource(tableView: chatRoomListTableView) { tableView, indexPath, item in
             guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else {
                 return UITableViewCell()
             }
