@@ -129,16 +129,12 @@ final class MainViewController: BaseViewController {
 extension MainViewController {
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
+            let section = Section.allCases[sectionIndex]
             
-            if sectionIndex == 0 {
-                return self?.createHotProjectSection()
+            switch section {
+            case .hot: return self?.createHotProjectSection()
+            case .main: return self?.createProjectSection()
             }
-            
-            if sectionIndex == 1 {
-                return self?.createProjectSection()
-            }
-            
-            return nil
         }
         return layout
     }
