@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 
 final class DefaultNetworkService: NetworkService {
-    
     func request(_ endpoint: Endpoint) -> Observable<Data> {
         guard let urlRequest = endpoint.toURLRequest() else { return .error(NetworkError.invalidURL) }
         return URLSession.shared.rx.data(request: urlRequest).asObservable()
@@ -117,6 +116,11 @@ final class DefaultNetworkService: NetworkService {
             )
         ])
     }
+    
+    func requestTestHotProjectsData() -> Observable<[HotProjectDTO]> {
+        Observable.just(DefaultNetworkService.hotProjectDTOs)
+    }
+    
 }
 
 // MARK: - For test
@@ -153,6 +157,39 @@ extension DefaultNetworkService {
             time: Date(),
             messageType: .text,
             messagePreview: "메시지 미리보기 4"
+        )
+    ]
+    
+    static var hotProjectDTOs = [
+        HotProjectDTO(
+            id: "1",
+            title: "웹 사이트 디자이너 구해요!!",
+            numberOfRecruits: 3,
+            deadlineDate: Date()
+        ),
+        HotProjectDTO(
+            id: "2",
+            title: "여행 플랫폼 개발자 구해요!",
+            numberOfRecruits: 8,
+            deadlineDate: Date()
+        ),
+        HotProjectDTO(
+            id: "3",
+            title: "모집 플랫폼 디자이너 모집해요",
+            numberOfRecruits: 6,
+            deadlineDate: Date()
+        ),
+        HotProjectDTO(
+            id: "4",
+            title: "iOS 개발자 구해요",
+            numberOfRecruits: 5,
+            deadlineDate: Date()
+        ),
+        HotProjectDTO(
+            id: "5",
+            title: "백엔드 개발자 구해요",
+            numberOfRecruits: 4,
+            deadlineDate: Date()
         )
     ]
 }
