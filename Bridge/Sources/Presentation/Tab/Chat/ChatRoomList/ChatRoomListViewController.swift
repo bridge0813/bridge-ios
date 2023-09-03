@@ -17,7 +17,7 @@ final class ChatRoomListViewController: BaseViewController {
         tableView.register(ChatRoomCell.self)
         tableView.backgroundColor = .white
         tableView.rowHeight = 104
-        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         tableView.separatorStyle = .none
         return tableView
     }()
@@ -91,7 +91,7 @@ extension ChatRoomListViewController {
     }
     
     private func configureDataSource() -> DataSource {
-        UITableViewDiffableDataSource(tableView: chatRoomListTableView) { tableView, indexPath, item in
+        DataSource(tableView: chatRoomListTableView) { tableView, indexPath, item in
             guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else {
                 return UITableViewCell()
             }
