@@ -23,7 +23,7 @@ final class MainCoordinator: MainCoordinatorProtocol {
     var childCoordinators: [Coordinator]
     
     private let projectRepository: ProjectRepository
-    private let observeProjectsUseCase: ObserveProjectsUseCase
+    private let fetchProjectsUseCase: FetchProjectsUseCase
     
     
     // MARK: - Initializer
@@ -33,7 +33,7 @@ final class MainCoordinator: MainCoordinatorProtocol {
 
         let networkService = DefaultNetworkService()
         projectRepository = DefaultProjectRepository(networkService: networkService)
-        observeProjectsUseCase = DefaultObserveProjectsUseCase(projectRepository: projectRepository)
+        fetchProjectsUseCase = DefaultFetchProjectsUseCase(projectRepository: projectRepository)
     }
     
     
@@ -47,7 +47,7 @@ extension MainCoordinator {
     func showMainViewController() {
         let mainViewModel = MainViewModel(
             coordinator: self,
-            observeProjectsUseCase: observeProjectsUseCase
+            fetchProjectsUseCase: fetchProjectsUseCase
         )
         
         let mainVC = MainViewController(viewModel: mainViewModel)

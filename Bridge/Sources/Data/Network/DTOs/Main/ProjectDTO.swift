@@ -16,6 +16,7 @@ struct ProjectDTO: Codable {
     let startDate: Date
     let endDate: Date
     let deadlineDate: Date
+    let favorites: Int
 }
 
 extension ProjectDTO {
@@ -28,7 +29,8 @@ extension ProjectDTO {
             techStackTags: techStackTags,
             dDays: Date().calculateDDay(to: endDate),
             startDate: startDate.toString(),
-            endDate: endDate.toString()
+            endDate: endDate.toString(),
+            favorites: favorites
         )
     }
 }
