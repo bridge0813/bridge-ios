@@ -13,7 +13,7 @@ final class ProjectSectionHeaderView: BaseCollectionReusableView {
     // MARK: - Properties
     private let containerView = UIView()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.configureLabel(
             textColor: .black,
@@ -22,7 +22,7 @@ final class ProjectSectionHeaderView: BaseCollectionReusableView {
         return label
     }()
     
-    let decoLabel: UILabel = {
+    private let supplementaryLabel: UILabel = {
         let label = UILabel()
         label.configureLabel(
             textColor: .white,
@@ -41,7 +41,7 @@ final class ProjectSectionHeaderView: BaseCollectionReusableView {
         addSubview(containerView)
         containerView.flex.direction(.row).justifyContent(.start).alignItems(.center).define { flex in
             flex.addItem(titleLabel).marginLeft(10)
-            flex.addItem(decoLabel).marginLeft(10).width(42).height(25)
+            flex.addItem(supplementaryLabel).marginLeft(10).width(42).height(25)
         }
     }
     
@@ -53,8 +53,8 @@ final class ProjectSectionHeaderView: BaseCollectionReusableView {
 }
 // MARK: - Configuration
 extension ProjectSectionHeaderView {
-    func configureHeader(titleText: String, decoText: String) {
+    func configureHeader(titleText: String, subText: String) {
         titleLabel.text = titleText
-        decoLabel.text = decoText
+        supplementaryLabel.text = subText
     }
 }

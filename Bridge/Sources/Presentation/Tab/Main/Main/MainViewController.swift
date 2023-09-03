@@ -269,10 +269,10 @@ extension MainViewController {
             
             switch section {
             case .hot:
-                headerView.configureHeader(titleText: "인기 폭발 프로젝트", decoText: "HOT")
+                headerView.configureHeader(titleText: "인기 폭발 프로젝트", subText: "HOT")
                 
             case .main:
-                headerView.configureHeader(titleText: "모집중인 프로젝트", decoText: "NEW")
+                headerView.configureHeader(titleText: "모집중인 프로젝트", subText: "NEW")
             }
     
             return headerView
