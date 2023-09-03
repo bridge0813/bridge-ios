@@ -15,7 +15,7 @@ final class MainViewModel: ViewModelType {
     }
     
     struct Output {
-        var hotProjects: Driver<[Project]>
+        var hotProjects: Driver<[HotProject]>
         var mainProjects: Driver<[Project]>
     }
 
@@ -23,23 +23,46 @@ final class MainViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
     private let fetchProjectsUseCase: FetchProjectsUseCase
+    private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
     // MARK: - Initializer
     init(
         coordinator: MainCoordinator,
-        fetchProjectsUseCase: FetchProjectsUseCase
+        fetchProjectsUseCase: FetchProjectsUseCase,
+        fetchHotProjectsUseCase: FetchHotProjectsUseCase
     ) {
         self.coordinator = coordinator
         self.fetchProjectsUseCase = fetchProjectsUseCase
+        self.fetchHotProjectsUseCase = fetchHotProjectsUseCase
     }
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let allProjects = fetchProjectsUseCase.execute().share()  // Observable<[Project]>
-        let mainProjects = allProjects.asDriver(onErrorJustReturn: [Project.onError])
+        let hotProjects = BehaviorRelay<[HotProject]>(value: [])
+        let mainProjects = BehaviorRelay<[Project]>(value: [])
         
-        return Output(hotProjects: hotProjects, mainProjects: mainProjects)
+        input.viewDidLoadTrigger
+            .withUnretained(self)
+            .flatMap { _ in
+                self.fetchHotProjectsUseCase.execute()
+            }
+            .bind(to: hotProjects)
+            .disposed(by: disposeBag)
+        
+        input.viewDidLoadTrigger
+            .withUnretained(self)
+            .flatMap { _ in
+                self.fetchProjectsUseCase.execute()
+            }
+            .bind(to: mainProjects)
+            .disposed(by: disposeBag)
+        
+        return Output(
+            hotProjects: hotProjects.asDriver(onErrorJustReturn: [HotProject.onError]),
+            mainProjects: mainProjects.asDriver(onErrorJustReturn: [Project.onError])
+        )
     }
+
 }
 
 // MARK: - Coordinator
