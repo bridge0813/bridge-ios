@@ -47,7 +47,7 @@ final class DefaultNetworkService: NetworkService {
                 startDate: currentDate,
                 endDate: currentDate,
                 deadlineDate: currentDate,
-                scrapCount: 10
+                favorites: 10
             ),
             ProjectDTO(
                 id: "2",
@@ -58,7 +58,7 @@ final class DefaultNetworkService: NetworkService {
                 startDate: currentDate,
                 endDate: currentDate,
                 deadlineDate: currentDate,
-                scrapCount: 9
+                favorites: 9
             ),
             ProjectDTO(
                 id: "3",
@@ -69,7 +69,7 @@ final class DefaultNetworkService: NetworkService {
                 startDate: currentDate,
                 endDate: currentDate,
                 deadlineDate: currentDate,
-                scrapCount: 8
+                favorites: 8
             ),
             ProjectDTO(
                 id: "4",
@@ -80,7 +80,7 @@ final class DefaultNetworkService: NetworkService {
                 startDate: currentDate,
                 endDate: currentDate,
                 deadlineDate: currentDate,
-                scrapCount: 7
+                favorites: 7
             ),
             ProjectDTO(
                 id: "1",
@@ -91,7 +91,7 @@ final class DefaultNetworkService: NetworkService {
                 startDate: currentDate,
                 endDate: currentDate,
                 deadlineDate: currentDate,
-                scrapCount: 6
+                favorites: 6
             ),
             ProjectDTO(
                 id: "2",
@@ -102,7 +102,7 @@ final class DefaultNetworkService: NetworkService {
                 startDate: currentDate,
                 endDate: currentDate,
                 deadlineDate: currentDate,
-                scrapCount: 5
+                favorites: 5
             ),
             ProjectDTO(
                 id: "3",
@@ -113,7 +113,7 @@ final class DefaultNetworkService: NetworkService {
                 startDate: currentDate,
                 endDate: currentDate,
                 deadlineDate: currentDate,
-                scrapCount: 4
+                favorites: 4
             )
         ])
     }
