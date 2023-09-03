@@ -17,7 +17,6 @@ struct Project {
     let dDays: Int                              // 공고 마감일까지 D-Day
     let startDate: String                       // 프로젝트 시작일
     let endDate: String                         // 프로젝트 마감일
-    let favorites: Int                         // 스크랩 갯수
 }
 
 extension Project {
@@ -30,8 +29,7 @@ extension Project {
             techStackTags: [],
             dDays: 0,
             startDate: "",
-            endDate: "",
-            favorites: 0
+            endDate: ""
         )
     }
 }
