@@ -30,7 +30,7 @@ extension ProjectDTO {
             dDays: Date().calculateDDay(to: endDate),
             startDate: startDate.toString(),
             endDate: endDate.toString(),
-            scrapCount: scrapCount
+            favorites: scrapCount
         )
     }
 }
