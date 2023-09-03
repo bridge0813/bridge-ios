@@ -24,7 +24,7 @@ final class MainCoordinator: MainCoordinatorProtocol {
     
     private let projectRepository: ProjectRepository
     private let fetchProjectsUseCase: FetchProjectsUseCase
-    
+    private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
     // MARK: - Initializer
     init(navigationController: UINavigationController) {
@@ -34,6 +34,7 @@ final class MainCoordinator: MainCoordinatorProtocol {
         let networkService = DefaultNetworkService()
         projectRepository = DefaultProjectRepository(networkService: networkService)
         fetchProjectsUseCase = DefaultFetchProjectsUseCase(projectRepository: projectRepository)
+        fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
     }
     
     
@@ -47,7 +48,8 @@ extension MainCoordinator {
     func showMainViewController() {
         let mainViewModel = MainViewModel(
             coordinator: self,
-            fetchProjectsUseCase: fetchProjectsUseCase
+            fetchProjectsUseCase: fetchProjectsUseCase,
+            fetchHotProjectsUseCase: fetchHotProjectsUseCase
         )
         
         let mainVC = MainViewController(viewModel: mainViewModel)
