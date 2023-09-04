@@ -7,11 +7,11 @@
 
 import RxSwift
 
-protocol FetchProjectsUseCase {
+protocol FetchAllProjectsUseCase {
     func execute() -> Observable<[Project]>
 }
 
-final class DefaultFetchProjectsUseCase: FetchProjectsUseCase {
+final class DefaultFetchAllProjectsUseCase: FetchAllProjectsUseCase {
     private let projectRepository: ProjectRepository
     
     init(projectRepository: ProjectRepository) {
@@ -19,6 +19,6 @@ final class DefaultFetchProjectsUseCase: FetchProjectsUseCase {
     }
     
     func execute() -> Observable<[Project]> {
-        projectRepository.fetchProjects()
+        projectRepository.fetchAllProjects()
     }
 }
