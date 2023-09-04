@@ -23,8 +23,8 @@ final class DefaultNetworkService: NetworkService {
     func leaveChatRoom(id: String) -> Single<Void> {
         Single.create { single in
             
-            if let index = DefaultNetworkService.chatRoomDTOs.firstIndex(where: { $0.id == id }) {
-                DefaultNetworkService.chatRoomDTOs.remove(at: index)
+            if let index = ChatRoomDTO.testArray.firstIndex(where: { $0.id == id }) {
+                ChatRoomDTO.testArray.remove(at: index)
                 single(.success(()))
             } else {
                 single(.failure(NetworkError.unknown))
@@ -117,19 +117,4 @@ final class DefaultNetworkService: NetworkService {
             )
         ])
     }
-}
-
-// MARK: - For test
-extension DefaultNetworkService {
-    static var chatRoomDTOs = [
-        ChatRoomDTO(
-            id: "1",
-            profileImage: "1",
-            name: "정호윤",
-            latestMessageReceivedTime: "1",
-            latestMessageType: "1",
-            latestMessageContent: "1",
-            unreadMessageCount: 0
-        ),
-    ]
 }
