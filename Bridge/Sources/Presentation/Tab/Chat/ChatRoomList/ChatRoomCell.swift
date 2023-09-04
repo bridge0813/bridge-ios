@@ -31,23 +31,25 @@ final class ChatRoomCell: BaseTableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 14)
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
-    private let timeLabel: UILabel = {
+    private let latestMessageReceivedTimeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray
         label.font = .systemFont(ofSize: 10)
         return label
     }()
     
-    private let messagePreviewLabel: UILabel = {
+    private let latestMessageContentLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
-    private let unreadMessagesCountLabel: UILabel = {
+    private let unreadMessageCountLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .systemRed
         label.text = "1"
@@ -64,8 +66,8 @@ final class ChatRoomCell: BaseTableViewCell {
         
         profileImageView.image = nil
         nameLabel.text = ""
-        timeLabel.text = ""
-        messagePreviewLabel.text = ""
+        latestMessageReceivedTimeLabel.text = ""
+        latestMessageContentLabel.text = ""
     }
     
     // MARK: - Layouts
@@ -78,17 +80,17 @@ final class ChatRoomCell: BaseTableViewCell {
         chatRoomBackgroundView.flex.direction(.row).alignItems(.center).define { flex in
             flex.addItem(profileImageView).size(44).marginLeft(containeroffset)
             
-            flex.addItem().direction(.column).marginHorizontal(16).define { flex in
+            flex.addItem().direction(.column).width(192).marginHorizontal(16).define { flex in
                 flex.addItem().direction(.row).marginBottom(componentOffset).define { flex in
-                    flex.addItem(nameLabel).grow(1)
+                    flex.addItem(nameLabel).shrink(1)
                     flex.addItem().size(componentOffset)
-                    flex.addItem(timeLabel).shrink(1)
+                    flex.addItem(latestMessageReceivedTimeLabel).grow(1)
                 }
                 
-                flex.addItem(messagePreviewLabel)
+                flex.addItem(latestMessageContentLabel)
             }
             
-            flex.addItem(unreadMessagesCountLabel).size(18).position(.absolute).right(containeroffset)
+            flex.addItem(unreadMessageCountLabel).size(18).position(.absolute).right(containeroffset)
         }
     }
 
@@ -107,7 +109,7 @@ final class ChatRoomCell: BaseTableViewCell {
 extension ChatRoomCell {
     func configureCell(with chatRoom: ChatRoom) {
         nameLabel.text = chatRoom.name
-        timeLabel.text = chatRoom.latestMessage.receivedTime
-        messagePreviewLabel.text = chatRoom.latestMessage.content
+        latestMessageReceivedTimeLabel.text = chatRoom.latestMessage.receivedTime
+        latestMessageContentLabel.text = chatRoom.latestMessage.content
     }
 }

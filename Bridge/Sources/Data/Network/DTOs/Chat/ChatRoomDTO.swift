@@ -67,7 +67,7 @@ extension ChatRoomDTO {
             name: "채팅방 2",
             latestMessageReceivedTime: "2023-09-04T15:45:10+00:00",
             latestMessageType: "text",
-            latestMessageContent: "수신된 가장 최근 메시지 중 긴 메시지가 어떻게 보여질지에 대한 테스트입니다.",
+            latestMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
             unreadMessageCount: 0
         ),
         ChatRoomDTO(
