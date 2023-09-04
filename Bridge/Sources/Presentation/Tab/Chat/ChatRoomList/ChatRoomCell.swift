@@ -1,5 +1,5 @@
 //
-//  ChatRoomTableViewCell.swift
+//  ChatRoomCell.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/08/29.
@@ -106,7 +106,7 @@ final class ChatRoomCell: BaseTableViewCell {
 // MARK: - Configuration
 extension ChatRoomCell {
     func configureCell(with chatRoom: ChatRoom) {
-        nameLabel.text = chatRoom.name
+        nameLabel.text = chatRoom.sender
         timeLabel.text = chatRoom.time.formatted()
         messagePreviewLabel.text = chatRoom.messagePreview
     }
