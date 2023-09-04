@@ -15,7 +15,7 @@ final class MainViewModel: ViewModelType {
     }
     
     struct Output {
-        var hotProjects: Driver<[HotProject]>
+        var hotProjects: Driver<[Project]>
         var mainProjects: Driver<[Project]>
     }
 
@@ -38,7 +38,7 @@ final class MainViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let hotProjects = BehaviorRelay<[HotProject]>(value: [])
+        let hotProjects = BehaviorRelay<[Project]>(value: [])
         let mainProjects = BehaviorRelay<[Project]>(value: [])
         
         input.viewDidLoadTrigger
@@ -58,7 +58,7 @@ final class MainViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            hotProjects: hotProjects.asDriver(onErrorJustReturn: [HotProject.onError]),
+            hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
             mainProjects: mainProjects.asDriver(onErrorJustReturn: [Project.onError])
         )
     }

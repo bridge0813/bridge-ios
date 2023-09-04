@@ -122,7 +122,7 @@ extension DefaultNetworkService {
             deadlineDate: Date()
         ),
         HotProjectDTO(
-            id: "1",
+            id: "5",
             title: "여행 플랫폼 개발자 구해요!",
             numberOfRecruits: 1,
             recruitmentField: ["개발자", "디자이너"],
@@ -175,7 +175,7 @@ extension DefaultNetworkService {
             deadlineDate: Date()
         ),
         ProjectDTO(
-            id: "1",
+            id: "5",
             title: "모임 플랫폼 디자이너 구합니다",
             numberOfRecruits: 1,
             recruitmentField: ["개발자", "디자이너"],

@@ -60,7 +60,7 @@ final class MainViewController: BaseViewController {
     private let viewDidLoadTrigger = PublishRelay<Void>()
     
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Project>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Project>
+    typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Project>
     private var dataSource: DataSource?
     
     // MARK: - Initializer
@@ -72,6 +72,7 @@ final class MainViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewDidLoadTrigger.accept(())
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -114,16 +115,18 @@ final class MainViewController: BaseViewController {
         let input = MainViewModel.Input(viewDidLoadTrigger: viewDidLoadTrigger)
         let output = viewModel.transform(input: input)
         
-        Driver.combineLatest(output.hotProjects, output.mainProjects)
-            .compactMap { [weak self] hotProjects, mainProjects in
-                self?.createCurrentSnapshot(hotProjects: hotProjects, mainProjects: mainProjects)
-            }
-            .drive { [weak self] snapshot in
-                self?.dataSource?.apply(snapshot)
-            }
+        output.hotProjects
+            .drive(onNext: { [weak self] hotProjects in
+                self?.applySectionSnapshot(to: .hot, with: hotProjects)
+            })
+            .disposed(by: disposeBag)
+        
+        output.mainProjects
+            .drive(onNext: { [weak self] mainProjects in
+                self?.applySectionSnapshot(to: .main, with: mainProjects)
+            })
             .disposed(by: disposeBag)
     }
-    
 }
 // MARK: - CompositionalLayout
 extension MainViewController {
@@ -275,11 +278,9 @@ extension MainViewController {
         return UICollectionReusableView()
     }
     
-    func createCurrentSnapshot(hotProjects: [Project], mainProjects: [Project]) -> Snapshot {
-        var snapshot = Snapshot()
-        snapshot.appendSections([.hot, .main])
-        snapshot.appendItems(hotProjects, toSection: .hot)
-        snapshot.appendItems(mainProjects, toSection: .main)
-        return snapshot
+    private func applySectionSnapshot(to section: Section, with projects: [Project]) {
+        var snapshot = SectionSnapshot()
+        snapshot.append(projects)
+        dataSource?.apply(snapshot, to: section)
     }
 }
