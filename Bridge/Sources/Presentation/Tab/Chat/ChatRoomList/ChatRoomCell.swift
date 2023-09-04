@@ -75,10 +75,10 @@ final class ChatRoomCell: BaseTableViewCell {
         contentView.addSubview(chatRoomBackgroundView)
         
         let componentOffset: CGFloat = 8
-        let containeroffset: CGFloat = 24
+        let containerOffset: CGFloat = 24
         
         chatRoomBackgroundView.flex.direction(.row).alignItems(.center).define { flex in
-            flex.addItem(profileImageView).size(44).marginLeft(containeroffset)
+            flex.addItem(profileImageView).size(44).marginLeft(containerOffset)
             
             flex.addItem().direction(.column).width(192).marginHorizontal(16).define { flex in
                 flex.addItem().direction(.row).marginBottom(componentOffset).define { flex in
@@ -90,7 +90,7 @@ final class ChatRoomCell: BaseTableViewCell {
                 flex.addItem(latestMessageContentLabel)
             }
             
-            flex.addItem(unreadMessageCountLabel).size(18).position(.absolute).right(containeroffset)
+            flex.addItem(unreadMessageCountLabel).size(18).position(.absolute).right(containerOffset)
         }
     }
 
