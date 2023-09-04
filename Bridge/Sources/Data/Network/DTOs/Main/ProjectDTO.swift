@@ -32,3 +32,58 @@ extension ProjectDTO {
         )
     }
 }
+
+extension ProjectDTO {
+    static var projectTestArray = [
+        ProjectDTO(
+            id: "1",
+            title: "모임 플랫폼 디자이너 구합니다",
+            numberOfRecruits: 1,
+            recruitmentField: ["개발자", "디자이너"],
+            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            startDate: Date(),
+            endDate: Date(),
+            deadlineDate: Date()
+        ),
+        ProjectDTO(
+            id: "2",
+            title: "웹 사이트 디자이너 구해요!!",
+            numberOfRecruits: 1,
+            recruitmentField: ["개발자", "디자이너"],
+            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            startDate: Date(),
+            endDate: Date(),
+            deadlineDate: Date()
+        ),
+        ProjectDTO(
+            id: "3",
+            title: "개발자, 디자이너 구합니다",
+            numberOfRecruits: 6,
+            recruitmentField: ["개발자", "디자이너"],
+            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            startDate: Date(),
+            endDate: Date(),
+            deadlineDate: Date()
+        ),
+        ProjectDTO(
+            id: "4",
+            title: "iOS 개발자 구합니다",
+            numberOfRecruits: 4,
+            recruitmentField: ["개발자", "디자이너"],
+            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            startDate: Date(),
+            endDate: Date(),
+            deadlineDate: Date()
+        ),
+        ProjectDTO(
+            id: "5",
+            title: "모임 플랫폼 디자이너 구합니다",
+            numberOfRecruits: 1,
+            recruitmentField: ["개발자", "디자이너"],
+            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            startDate: Date(),
+            endDate: Date(),
+            deadlineDate: Date()
+        )
+    ]
+}
