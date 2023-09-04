@@ -43,7 +43,7 @@ extension String {
         // Date 객체를 "오전/오후 x시 x분" 형태로 변환
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
-        formatter.setLocalizedDateFormatFromTemplate("ahmm")
+        formatter.dateFormat = "a h시 mm분"
         
         return formatter.string(from: date)
     }
