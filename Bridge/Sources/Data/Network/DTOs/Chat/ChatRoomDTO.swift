@@ -14,7 +14,7 @@ struct ChatRoomDTO: Codable {
     let latestMessageReceivedTime: String
     let latestMessageType: String
     let latestMessageContent: String
-    let unreadMessageCount: Int
+    let unreadMessageCount: String
 }
 
 // MARK: - For test
@@ -29,7 +29,7 @@ extension ChatRoomDTO {
                 type: .text,
                 content: latestMessageContent
             ),
-            unreadMessageCount: 0
+            unreadMessageCount: unreadMessageCount
         )
     }
 }
@@ -59,7 +59,7 @@ extension ChatRoomDTO {
             latestMessageReceivedTime: "2023-09-04T09:15:30+00:00",
             latestMessageType: "text",
             latestMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
-            unreadMessageCount: 0
+            unreadMessageCount: "0"
         ),
         ChatRoomDTO(
             id: "2",
@@ -68,7 +68,7 @@ extension ChatRoomDTO {
             latestMessageReceivedTime: "2023-09-04T15:45:10+00:00",
             latestMessageType: "text",
             latestMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
-            unreadMessageCount: 0
+            unreadMessageCount: "100"
         ),
         ChatRoomDTO(
             id: "3",
@@ -77,7 +77,7 @@ extension ChatRoomDTO {
             latestMessageReceivedTime: "2023-09-04T11:00:00+00:00",
             latestMessageType: "image",
             latestMessageContent: "이미지가 수신된 경우의 미리보기 메시지입니다.",
-            unreadMessageCount: 0
+            unreadMessageCount: "3"
         ),
         ChatRoomDTO(
             id: "4",
@@ -86,7 +86,7 @@ extension ChatRoomDTO {
             latestMessageReceivedTime: "2023-09-04T19:30:20+00:00",
             latestMessageType: "text",
             latestMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
-            unreadMessageCount: 0
+            unreadMessageCount: "999"
         ),
         ChatRoomDTO(
             id: "5",
@@ -95,7 +95,7 @@ extension ChatRoomDTO {
             latestMessageReceivedTime: "2023-09-04T04:55:55+00:00",
             latestMessageType: "text",
             latestMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
-            unreadMessageCount: 0
+            unreadMessageCount: "1"
         ),
         ChatRoomDTO(
             id: "6",
@@ -104,7 +104,7 @@ extension ChatRoomDTO {
             latestMessageReceivedTime: "2023-09-04T12:34:56+00:00",
             latestMessageType: "text",
             latestMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
-            unreadMessageCount: 0
+            unreadMessageCount: "7"
         )
     ]
 }

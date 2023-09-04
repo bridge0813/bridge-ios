@@ -52,11 +52,9 @@ final class ChatRoomCell: BaseTableViewCell {
     private let unreadMessageCountLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .systemRed
-        label.text = "1"
         label.textColor = .white
         label.font = .systemFont(ofSize: 12)
         label.textAlignment = .center
-        label.layer.cornerRadius = 9
         label.clipsToBounds = true
         return label
     }()
@@ -90,10 +88,10 @@ final class ChatRoomCell: BaseTableViewCell {
                 flex.addItem(latestMessageContentLabel)
             }
             
-            flex.addItem(unreadMessageCountLabel).size(18).position(.absolute).right(containerOffset)
+            flex.addItem(unreadMessageCountLabel).position(.absolute).right(containerOffset)
         }
     }
-
+    
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -111,5 +109,53 @@ extension ChatRoomCell {
         nameLabel.text = chatRoom.name
         latestMessageReceivedTimeLabel.text = chatRoom.latestMessage.receivedTime
         latestMessageContentLabel.text = chatRoom.latestMessage.content
+        configureUnreadMessageCountLabel(Int(chatRoom.unreadMessageCount) ?? 0)
+    }
+}
+
+// MARK: - 읽지 않은 메시지 개수에 따른 디스플레이 설정
+private extension ChatRoomCell {
+    func configureUnreadMessageCountLabel(_ unreadMessageCount: Int) {
+        let displayState = UnreadMessageDisplayState(unreadMessageCount)
+        
+        unreadMessageCountLabel.flex.isIncludedInLayout(displayState.shouldIncludeInLayout)
+        unreadMessageCountLabel.text = displayState.text
+        
+        let size = displayState.size(of: unreadMessageCountLabel.font)
+        let width = max(size.width + 6, 18)
+        unreadMessageCountLabel.flex.width(width).height(18).cornerRadius(9)
+    }
+    
+    enum UnreadMessageDisplayState {
+        case hidden
+        case general(Int)
+        case exceededLimit(Int)
+        
+        init(_ unreadMessageCount: Int, limit: Int = 300) {
+            switch unreadMessageCount {
+            case 0:           self = .hidden
+            case 1 ... limit: self = .general(unreadMessageCount)
+            default:          self = .exceededLimit(limit)
+            }
+        }
+        
+        var text: String? {
+            switch self {
+            case .hidden:                   return nil
+            case .general(let count):       return "\(count)"
+            case .exceededLimit(let count): return "\(count)+"
+            }
+        }
+        
+        var shouldIncludeInLayout: Bool {
+            switch self {
+            case .hidden:                  return false
+            case .general, .exceededLimit: return true
+            }
+        }
+        
+        func size(of font: UIFont) -> CGSize {
+            text?.size(withAttributes: [.font: font]) ?? CGSize()
+        }
     }
 }

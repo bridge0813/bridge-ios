@@ -25,7 +25,7 @@ struct ChatRoom {
     let latestMessage: LatestMessage
 
     /// 읽지 않은 메시지 개수
-    let unreadMessageCount: Int
+    let unreadMessageCount: String
 }
 
 extension ChatRoom {
@@ -38,7 +38,7 @@ extension ChatRoom {
             type: .text,
             content: "메시지를 불러올 수 없습니다."
         ),
-        unreadMessageCount: 0
+        unreadMessageCount: "0"
     )
 }
 
