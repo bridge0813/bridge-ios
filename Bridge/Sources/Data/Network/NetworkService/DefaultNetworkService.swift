@@ -17,7 +17,7 @@ final class DefaultNetworkService: NetworkService {
     
     // MARK: - For test
     func requestTestChatRooms() -> Observable<[ChatRoomDTO]> {
-        Observable.just(DefaultNetworkService.chatRoomDTOs)
+        Observable.just(ChatRoomDTO.testArray)
     }
     
     func leaveChatRoom(id: String) -> Single<Void> {
@@ -124,35 +124,12 @@ extension DefaultNetworkService {
     static var chatRoomDTOs = [
         ChatRoomDTO(
             id: "1",
-            profileImage: nil,
+            profileImage: "1",
             name: "정호윤",
-            time: Date(),
-            messageType: .text,
-            messagePreview: "메시지 미리보기 1"
+            latestMessageReceivedTime: "1",
+            latestMessageType: "1",
+            latestMessageContent: "1",
+            unreadMessageCount: 0
         ),
-        ChatRoomDTO(
-            id: "2",
-            profileImage: nil,
-            name: "엄지호",
-            time: Date(),
-            messageType: .text,
-            messagePreview: "메시지 미리보기 2"
-        ),
-        ChatRoomDTO(
-            id: "3",
-            profileImage: nil,
-            name: "홍길동",
-            time: Date(),
-            messageType: .text,
-            messagePreview: "메시지 미리보기 3"
-        ),
-        ChatRoomDTO(
-            id: "4",
-            profileImage: nil,
-            name: "홍길동",
-            time: Date(),
-            messageType: .text,
-            messagePreview: "메시지 미리보기 4"
-        )
     ]
 }

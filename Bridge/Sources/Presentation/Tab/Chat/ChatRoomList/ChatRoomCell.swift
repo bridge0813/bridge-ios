@@ -106,8 +106,8 @@ final class ChatRoomCell: BaseTableViewCell {
 // MARK: - Configuration
 extension ChatRoomCell {
     func configureCell(with chatRoom: ChatRoom) {
-        nameLabel.text = chatRoom.sender
-        timeLabel.text = chatRoom.time.formatted()
-        messagePreviewLabel.text = chatRoom.messagePreview
+        nameLabel.text = chatRoom.name
+        timeLabel.text = chatRoom.latestMessage.receivedTime
+        messagePreviewLabel.text = chatRoom.latestMessage.content
     }
 }
