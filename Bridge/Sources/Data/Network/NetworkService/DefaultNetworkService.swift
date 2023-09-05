@@ -37,8 +37,8 @@ final class DefaultNetworkService: NetworkService {
         Observable.just(ProjectDTO.projectTestArray)
     }
     
-    func requestTestHotProjectsData() -> Observable<[HotProjectDTO]> {
-        Observable.just(HotProjectDTO.hotProjectTestArray)
+    func requestTestHotProjectsData() -> Observable<[ProjectDTO]> {
+        Observable.just(ProjectDTO.hotProjectTestArray)
     }
     
 }

@@ -23,10 +23,10 @@ final class DefaultProjectRepository: ProjectRepository {
             .map { data -> [Project] in data.compactMap { $0.toModel() } }
     }
     
-    func fetchHotProjects() -> Observable<[HotProject]> {
+    func fetchHotProjects() -> Observable<[Project]> {
         networkService
             .requestTestHotProjectsData()
-            .map { data -> [HotProject] in
+            .map { data -> [Project] in
                 data.compactMap { $0.toModel() }
             }
     }

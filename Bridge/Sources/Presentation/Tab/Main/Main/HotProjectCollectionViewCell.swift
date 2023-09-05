@@ -130,7 +130,7 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
 
 // MARK: - Configuration
 extension HotProjectCollectionViewCell {
-    func configureCell(with project: HotProject) {
+    func configureCell(with project: Project) {
         titleLabel.text = project.title
         dDayLabel.text = "D-\(project.dDays)"
         recruitsLabel.text = "\(project.numberOfRecruits)명 모집"
