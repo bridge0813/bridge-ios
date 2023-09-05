@@ -55,6 +55,7 @@
 		7C4270222AA4CE32009BE6AF /* HotProjectDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270212AA4CE32009BE6AF /* HotProjectDTO.swift */; };
 		7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */; };
 		7C42702E2AA6F5FF009BE6AF /* HotProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C42702D2AA6F5FF009BE6AF /* HotProject.swift */; };
+		7C4270302AA6F71B009BE6AF /* ProjectItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C42702F2AA6F71B009BE6AF /* ProjectItems.swift */; };
 		7C569CF32A9F67C60063D362 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF22A9F67C60063D362 /* Project.swift */; };
 		7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */; };
 		7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */; };
@@ -111,6 +112,7 @@
 		7C4270212AA4CE32009BE6AF /* HotProjectDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectDTO.swift; sourceTree = "<group>"; };
 		7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHotProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C42702D2AA6F5FF009BE6AF /* HotProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProject.swift; sourceTree = "<group>"; };
+		7C42702F2AA6F71B009BE6AF /* ProjectItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectItems.swift; sourceTree = "<group>"; };
 		7C569CF22A9F67C60063D362 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 			children = (
 				7C569CF22A9F67C60063D362 /* Project.swift */,
 				7C42702D2AA6F5FF009BE6AF /* HotProject.swift */,
+				7C42702F2AA6F71B009BE6AF /* ProjectItems.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
+				7C4270302AA6F71B009BE6AF /* ProjectItems.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
 				7C569D032A9F72320063D362 /* AllProjectDTO.swift in Sources */,
 				7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */,
