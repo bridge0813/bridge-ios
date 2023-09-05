@@ -76,3 +76,10 @@ extension ChatRoomListViewModel {
         fetchChatRoomsUseCase.execute()
     }
 }
+
+// MARK: Data source
+extension ChatRoomListViewModel {
+    enum Section: CaseIterable {
+        case main
+    }
+}
