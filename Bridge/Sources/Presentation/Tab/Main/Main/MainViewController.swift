@@ -59,8 +59,8 @@ final class MainViewController: BaseViewController {
     private let viewModel: MainViewModel
     private let viewDidLoadTrigger = PublishRelay<Void>()
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, Project>
-    typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Project>
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, ProjectItems>
+    typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<ProjectItems>
     private var dataSource: DataSource?
     
     // MARK: - Initializer
@@ -227,7 +227,10 @@ extension MainViewController {
                     for: indexPath)
                 else { return UICollectionViewCell() }
 
-                cell.configureCell(with: item)
+                if case .hotProject(let hotProject) = item {
+                    cell.configureCell(with: hotProject)
+                }
+                
                 return cell
 
             case .all:
@@ -236,7 +239,10 @@ extension MainViewController {
                     for: indexPath)
                 else { return UICollectionViewCell() }
 
-                cell.configureCell(with: item)
+                if case .project(let project) = item {
+                    cell.configureCell(with: project)
+                }
+                
                 return cell
             }
         }
@@ -278,7 +284,7 @@ extension MainViewController {
         return UICollectionReusableView()
     }
     
-    private func applySectionSnapshot(to section: Section, with projects: [Project]) {
+    private func applySectionSnapshot(to section: Section, with projects: [ProjectItems]) {
         var snapshot = SectionSnapshot()
         snapshot.append(projects)
         dataSource?.apply(snapshot, to: section)
