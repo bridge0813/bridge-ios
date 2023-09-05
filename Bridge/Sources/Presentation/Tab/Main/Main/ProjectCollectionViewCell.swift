@@ -11,7 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
-final class AllProjectCollectionViewCell: BaseCollectionViewCell {
+final class ProjectCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
     private let projectBackgroundView: UIView = {
         let view = UIView()
@@ -175,7 +175,7 @@ final class AllProjectCollectionViewCell: BaseCollectionViewCell {
 }
 
 // MARK: - Configuration
-extension AllProjectCollectionViewCell {
+extension ProjectCollectionViewCell {
     func configureCell(with project: Project) {
         titleLabel.text = project.title
         dDayLabel.text = "D-\(project.dDays)"

@@ -8,19 +8,19 @@
 import Foundation
 
 enum ProjectItems {
-    case hotProject(HotProject)
-    case project(Project)
+    case hot(HotProject)
+    case main(Project)
 }
 
 extension ProjectItems: Hashable {
     func hash(into hasher: inout Hasher) {
         switch self {
-        case .hotProject(let hotProject):
-            hasher.combine("hotProject")
+        case .hot(let hotProject):
+            hasher.combine("hot")
             hasher.combine(hotProject)
             
-        case .project(let project):
-            hasher.combine("project")
+        case .main(let project):
+            hasher.combine("main")
             hasher.combine(project)
         }
     }

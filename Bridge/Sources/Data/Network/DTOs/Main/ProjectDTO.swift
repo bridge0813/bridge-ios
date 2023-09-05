@@ -1,5 +1,5 @@
 //
-//  AllProjectDTO.swift
+//  ProjectDTO.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/08/30.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AllProjectDTO: Codable {
+struct ProjectDTO: Codable {
     let id: String
     let title: String
     let numberOfRecruits: Int
@@ -18,7 +18,7 @@ struct AllProjectDTO: Codable {
     let deadlineDate: Date
 }
 
-extension AllProjectDTO {
+extension ProjectDTO {
     func toModel() -> Project {
         Project(
             id: id,
@@ -33,9 +33,9 @@ extension AllProjectDTO {
     }
 }
 
-extension AllProjectDTO {
+extension ProjectDTO {
     static var projectTestArray = [
-        AllProjectDTO(
+        ProjectDTO(
             id: "1",
             title: "모임 플랫폼 디자이너 구합니다",
             numberOfRecruits: 1,
@@ -45,7 +45,7 @@ extension AllProjectDTO {
             endDate: Date(),
             deadlineDate: Date()
         ),
-        AllProjectDTO(
+        ProjectDTO(
             id: "2",
             title: "웹 사이트 디자이너 구해요!!",
             numberOfRecruits: 1,
@@ -55,7 +55,7 @@ extension AllProjectDTO {
             endDate: Date(),
             deadlineDate: Date()
         ),
-        AllProjectDTO(
+        ProjectDTO(
             id: "3",
             title: "개발자, 디자이너 구합니다",
             numberOfRecruits: 6,
@@ -65,7 +65,7 @@ extension AllProjectDTO {
             endDate: Date(),
             deadlineDate: Date()
         ),
-        AllProjectDTO(
+        ProjectDTO(
             id: "4",
             title: "iOS 개발자 구합니다",
             numberOfRecruits: 4,
@@ -75,7 +75,7 @@ extension AllProjectDTO {
             endDate: Date(),
             deadlineDate: Date()
         ),
-        AllProjectDTO(
+        ProjectDTO(
             id: "5",
             title: "모임 플랫폼 디자이너 구합니다",
             numberOfRecruits: 1,

@@ -19,7 +19,7 @@ final class MainViewController: BaseViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(HotProjectCollectionViewCell.self)
-        collectionView.register(AllProjectCollectionViewCell.self)
+        collectionView.register(ProjectCollectionViewCell.self)
         collectionView.register(
             ProjectSectionHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
@@ -121,9 +121,9 @@ final class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        output.allProjects
-            .drive(onNext: { [weak self] allProjects in
-                self?.applySectionSnapshot(to: .all, with: allProjects)
+        output.projects
+            .drive(onNext: { [weak self] projects in
+                self?.applySectionSnapshot(to: .main, with: projects)
             })
             .disposed(by: disposeBag)
     }
@@ -136,7 +136,7 @@ extension MainViewController {
             
             switch section {
             case .hot: return self?.createHotProjectSection()
-            case .all: return self?.createProjectSection()
+            case .main: return self?.createProjectSection()
             }
         }
         return layout
@@ -210,7 +210,7 @@ extension MainViewController {
 extension MainViewController {
     enum Section: CaseIterable {
         case hot
-        case all
+        case main
     }
     
     private func configureDataSource() -> DataSource {
@@ -227,19 +227,19 @@ extension MainViewController {
                     for: indexPath)
                 else { return UICollectionViewCell() }
 
-                if case .hotProject(let hotProject) = item {
+                if case .hot(let hotProject) = item {
                     cell.configureCell(with: hotProject)
                 }
                 
                 return cell
 
-            case .all:
+            case .main:
                 guard let cell = collectionView.dequeueReusableCell(
-                    AllProjectCollectionViewCell.self,
+                    ProjectCollectionViewCell.self,
                     for: indexPath)
                 else { return UICollectionViewCell() }
 
-                if case .project(let project) = item {
+                if case .main(let project) = item {
                     cell.configureCell(with: project)
                 }
                 
@@ -275,7 +275,7 @@ extension MainViewController {
             case .hot:
                 headerView.configureHeader(titleText: "인기 폭발 프로젝트", subText: "HOT")
                 
-            case .all:
+            case .main:
                 headerView.configureHeader(titleText: "모집중인 프로젝트", subText: "NEW")
             }
     

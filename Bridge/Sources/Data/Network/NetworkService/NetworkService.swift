@@ -12,7 +12,7 @@ protocol NetworkService {
     func request(_ endpoint: Endpoint) -> Observable<Data>
     
     // MARK: - For test
-    func requestTestProjectsData() -> Observable<[AllProjectDTO]>
+    func requestTestProjectsData() -> Observable<[ProjectDTO]>
     func requestTestHotProjectsData() -> Observable<[HotProjectDTO]>
     func requestTestChatRooms() -> Observable<[ChatRoomDTO]>
     

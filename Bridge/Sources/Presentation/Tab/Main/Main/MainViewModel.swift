@@ -16,7 +16,7 @@ final class MainViewModel: ViewModelType {
     
     struct Output {
         var hotProjects: Driver<[ProjectItems]>
-        var allProjects: Driver<[ProjectItems]>
+        var projects: Driver<[ProjectItems]>
     }
 
     // MARK: - Properties
@@ -39,7 +39,7 @@ final class MainViewModel: ViewModelType {
     // MARK: - Methods
     func transform(input: Input) -> Output {
         let hotProjects = BehaviorRelay<[ProjectItems]>(value: [])
-        let allProjects = BehaviorRelay<[ProjectItems]>(value: [])
+        let projects = BehaviorRelay<[ProjectItems]>(value: [])
         
         input.viewDidLoadTrigger
             .withUnretained(self)
@@ -47,7 +47,7 @@ final class MainViewModel: ViewModelType {
                 self.fetchHotProjectsUseCase.execute()
             }
             .map { hotProjects in
-                hotProjects.map { ProjectItems.hotProject($0) }
+                hotProjects.map { ProjectItems.hot($0) }
             }
             .bind(to: hotProjects)
             .disposed(by: disposeBag)
@@ -57,15 +57,15 @@ final class MainViewModel: ViewModelType {
             .flatMap { _ in
                 self.fetchProjectsUseCase.execute()
             }
-            .map { allProjects in
-                allProjects.map { ProjectItems.project($0) }
+            .map { projects in
+                projects.map { ProjectItems.main($0) }
             }
-            .bind(to: allProjects)
+            .bind(to: projects)
             .disposed(by: disposeBag)
         
         return Output(
-            hotProjects: hotProjects.asDriver(onErrorJustReturn: [ProjectItems.hotProject(HotProject.onError)]),
-            allProjects: allProjects.asDriver(onErrorJustReturn: [ProjectItems.project(Project.onError)])
+            hotProjects: hotProjects.asDriver(onErrorJustReturn: [ProjectItems.hot(HotProject.onError)]),
+            projects: projects.asDriver(onErrorJustReturn: [ProjectItems.main(Project.onError)])
         )
     }
 
