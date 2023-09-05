@@ -20,5 +20,10 @@ struct Chat {
         case opponent
     }
     
+    enum State {
+        case read
+        case unread
+    }
+    
     let content: String
 }
