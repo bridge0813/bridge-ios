@@ -107,7 +107,8 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureAttributes() {
-        dataSource = configureDataSource()
+        configureCellDataSource()
+        configureHeaderDataSource()
         configureNavigationUI()
     }
     
@@ -213,23 +214,23 @@ extension MainViewController {
         case main
     }
     
-    private func configureDataSource() -> DataSource {
-        let dataSource = DataSource(
+    private func configureCellDataSource() {
+        dataSource = DataSource(
             collectionView: projectCollectionView
         ) { collectionView, indexPath, item in
             
             let section = Section.allCases[indexPath.section]
-
+            
             switch section {
             case .hot:
                 guard let cell = collectionView.dequeueReusableCell(
                     HotProjectCollectionViewCell.self,
                     for: indexPath)
                 else { return UICollectionViewCell() }
-
+                
                 cell.configureCell(with: item)
                 return cell
-
+                
             case .main:
                 guard let cell = collectionView.dequeueReusableCell(
                     ProjectCollectionViewCell.self,
@@ -240,42 +241,28 @@ extension MainViewController {
                 return cell
             }
         }
-
-        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-            self?.createSectionHeader(collectionView: collectionView, kind: kind, indexPath: indexPath)
-        }
-        
-        return dataSource
     }
     
-    private func createSectionHeader(
-        collectionView: UICollectionView,
-        kind: String,
-        indexPath: IndexPath
-    ) -> UICollectionReusableView? {
-        if kind == UICollectionView.elementKindSectionHeader {
-            
-            guard let headerView = collectionView.dequeueReusableSupplementaryView(
+    private func configureHeaderDataSource() {
+        dataSource?.supplementaryViewProvider = { collectionview, kind, indexPath in
+            guard kind == UICollectionView.elementKindSectionHeader else {
+                return UICollectionReusableView()
+            }
+                
+            guard let headerView = collectionview.dequeueReusableSupplementaryView(
                 ProjectSectionHeaderView.self,
                 ofKind: kind,
                 for: indexPath
             ) else {
                 return UICollectionReusableView()
             }
-            
-            let section = Section.allCases[indexPath.section]
-            
-            switch section {
-            case .hot:
-                headerView.configureHeader(titleText: "인기 폭발 프로젝트", subText: "HOT")
                 
-            case .main:
-                headerView.configureHeader(titleText: "모집중인 프로젝트", subText: "NEW")
-            }
-    
+            let section = Section.allCases[indexPath.section]
+            let headerType: ProjectSectionHeaderView.HeaderType = (section == .hot) ? .hot : .main
+            headerView.configureHeader(type: headerType)
+            
             return headerView
         }
-        return UICollectionReusableView()
     }
     
     private func applySectionSnapshot(to section: Section, with projects: [Project]) {

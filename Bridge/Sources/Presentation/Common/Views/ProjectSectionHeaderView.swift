@@ -53,8 +53,27 @@ final class ProjectSectionHeaderView: BaseCollectionReusableView {
 }
 // MARK: - Configuration
 extension ProjectSectionHeaderView {
-    func configureHeader(titleText: String, subText: String) {
-        titleLabel.text = titleText
-        supplementaryLabel.text = subText
+    enum HeaderType {
+        case hot
+        case main
+        
+        var titleText: String {
+            switch self {
+            case .hot: return "인기 폭발 프로젝트"
+            case .main: return "모집중인 프로젝트"
+            }
+        }
+        
+        var subText: String {
+            switch self {
+            case .hot: return "HOT"
+            case .main: return "NEW"
+            }
+        }
+    }
+    
+    func configureHeader(type: HeaderType) {
+        titleLabel.text = type.titleText
+        supplementaryLabel.text = type.subText
     }
 }
