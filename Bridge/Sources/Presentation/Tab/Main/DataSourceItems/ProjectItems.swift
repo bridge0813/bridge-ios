@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ProjectItems: Hashable {
+enum ProjectItem: Hashable {
     case hot(HotProject)
     case main(Project)
 }
