@@ -19,7 +19,7 @@ final class DefaultChatRoomRepository: ChatRoomRepository {
         networkService
             .requestTestChatRooms()
             .map { data -> [ChatRoom] in
-                data.compactMap { $0.toModel() }
+                data.compactMap { $0.toDomain() }
             }
     }
     
