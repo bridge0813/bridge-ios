@@ -66,6 +66,11 @@ final class MainViewModel: ViewModelType {
 }
 
 // MARK: - Coordinator
+
+// MARK: - Data Section
 extension MainViewModel {
-    
+    enum Section: CaseIterable {
+        case hot
+        case main
+    }
 }

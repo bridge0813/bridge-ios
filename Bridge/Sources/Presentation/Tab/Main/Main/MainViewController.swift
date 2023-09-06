@@ -58,7 +58,7 @@ final class MainViewController: BaseViewController {
     
     private let viewModel: MainViewModel
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, Project>
+    typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
     typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Project>
     private var dataSource: DataSource?
     
@@ -131,7 +131,7 @@ final class MainViewController: BaseViewController {
 extension MainViewController {
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
-            let section = Section.allCases[sectionIndex]
+            let section = MainViewModel.Section.allCases[sectionIndex]
             
             switch section {
             case .hot: return self?.createHotProjectSection()
@@ -207,17 +207,12 @@ extension MainViewController {
 
 // MARK: - Diffable data source
 extension MainViewController {
-    enum Section: CaseIterable {
-        case hot
-        case main
-    }
-    
     private func configureCellDataSource() {
         dataSource = DataSource(
             collectionView: projectCollectionView
         ) { collectionView, indexPath, item in
             
-            let section = Section.allCases[indexPath.section]
+            let section = MainViewModel.Section.allCases[indexPath.section]
             
             switch section {
             case .hot:
@@ -255,7 +250,7 @@ extension MainViewController {
                 return UICollectionReusableView()
             }
                 
-            let section = Section.allCases[indexPath.section]
+            let section = MainViewModel.Section.allCases[indexPath.section]
             let headerType: ProjectSectionHeaderView.HeaderType = (section == .hot) ? .hot : .main
             headerView.configureHeader(type: headerType)
             
@@ -263,7 +258,7 @@ extension MainViewController {
         }
     }
     
-    private func applySectionSnapshot(to section: Section, with projects: [Project]) {
+    private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [Project]) {
         var snapshot = SectionSnapshot()
         snapshot.append(projects)
         dataSource?.apply(snapshot, to: section)
