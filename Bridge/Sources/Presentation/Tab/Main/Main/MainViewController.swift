@@ -56,6 +56,24 @@ final class MainViewController: BaseViewController {
         return searchBar
     }()
     
+    private let writeProjectButton: UIButton = {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
+        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+        var configuration = UIButton.Configuration.tinted()
+        configuration.image = image
+        configuration.imagePlacement = .leading
+        configuration.imagePadding = 5
+        configuration.title = "글쓰기"
+        configuration.attributedTitle?.font = .boldSystemFont(ofSize: 20)
+        
+        let button = UIButton(configuration: configuration)
+        button.tintColor = .white
+        button.layer.cornerRadius = 23
+        button.backgroundColor = .gray
+        
+        return button
+    }()
+    
     private let viewModel: MainViewModel
     
     typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
@@ -81,6 +99,11 @@ final class MainViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         containerView.pin.all(view.pin.safeArea).marginTop(10)
         containerView.flex.layout()
+        writeProjectButton.pin
+            .bottom(view.pin.safeArea.bottom + 15)
+            .right(15)
+            .width(110)
+            .height(50)
     }
     
     // MARK: - Methods
@@ -92,6 +115,7 @@ final class MainViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(containerView)
+        view.addSubview(writeProjectButton)
         containerView.flex.direction(.column).define { flex in
             /// 상단 메뉴 버튼 및 서치바
             flex.addItem().height(70).direction(.row).justifyContent(.start).alignItems(.stretch).define { flex in
