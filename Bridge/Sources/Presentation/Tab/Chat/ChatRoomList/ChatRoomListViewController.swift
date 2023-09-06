@@ -51,7 +51,8 @@ final class ChatRoomListViewController: BaseViewController {
     }
     
     private func configureNavigationController() {
-        navigationItem.titleView = NavigationTitleView(title: "채팅")
+        let navigationTitleView = NavigationTitleView(title: "채팅")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationTitleView)
     }
     
     override func configureLayouts() {
