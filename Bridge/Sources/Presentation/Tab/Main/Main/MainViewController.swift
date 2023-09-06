@@ -292,16 +292,27 @@ extension MainViewController {
         case imageOnly
     }
 
+    // MARK: - Button Animation
+    private func animateLayoutChange(to mode: WriteButtonLayout) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.applyLayout(with: mode)
+            self?.applyConfiguration(with: mode)
+        }
+    }
+    
+    // MARK: - Button Layout
     private func applyLayout(with layout: WriteButtonLayout) {
         switch layout {
         case .imageAndText:
             layoutButton(width: 110, height: 50)
+            writeProjectButton.layer.cornerRadius = 23
             
         case .imageOnly:
             layoutButton(width: 60, height: 60)
+            writeProjectButton.layer.cornerRadius = 30
         }
     }
-
+    
     private func layoutButton(width: CGFloat, height: CGFloat) {
         writeProjectButton.pin
             .bottom(view.pin.safeArea.bottom + 15)
@@ -310,42 +321,17 @@ extension MainViewController {
             .height(height)
     }
     
-    private func bindCollectionViewScrollToLayoutMode() {
-        projectCollectionView.rx
-            .didScroll
-            .withUnretained(self)
-            .map { owner, _ in
-                owner.projectCollectionView.contentOffset.y
-            }
-            .map { $0 <= 0 ? WriteButtonLayout.imageAndText : WriteButtonLayout.imageOnly }
-            .distinctUntilChanged()
-            .bind(to: currentLayoutMode)
-            .disposed(by: disposeBag)
+    // MARK: - Button Configuration
+    private func applyConfiguration(with layout: WriteButtonLayout) {
+        switch layout {
+        case .imageAndText:
+            writeProjectButton.configuration = textAndImageConfig()
+            
+        case .imageOnly:
+            writeProjectButton.configuration = imageOnlyConfig()
+        }
     }
-    
-    private func bindWriteButtonLayoutMode() {
-        currentLayoutMode
-            .asObservable()
-            .withUnretained(self)
-            .subscribe(onNext: { owner, mode in
-                UIView.animate(withDuration: 0.3) {
-                    switch mode {
-                    case .imageAndText:
-                        owner.writeProjectButton.configuration = self.textAndImageConfig()
-                        owner.writeProjectButton.layer.cornerRadius = 23
-                        owner.layoutButton(width: 110, height: 50)
-                        
-                    case .imageOnly:
-                        owner.writeProjectButton.configuration = self.imageOnlyConfig()
-                        owner.writeProjectButton.layer.cornerRadius = 30
-                        owner.layoutButton(width: 60, height: 60)
-                        
-                    }
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-    
+
     private func textAndImageConfig() -> UIButton.Configuration {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
@@ -370,5 +356,29 @@ extension MainViewController {
         configuration.baseBackgroundColor = .darkGray
         
         return configuration
+    }
+    
+    // MARK: - Bind Method
+    private func bindCollectionViewScrollToLayoutMode() {
+        projectCollectionView.rx
+            .didScroll
+            .withUnretained(self)
+            .map { owner, _ in
+                owner.projectCollectionView.contentOffset.y
+            }
+            .map { $0 <= 0 ? WriteButtonLayout.imageAndText : WriteButtonLayout.imageOnly }
+            .distinctUntilChanged()
+            .bind(to: currentLayoutMode)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindWriteButtonLayoutMode() {
+        currentLayoutMode
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { owner, mode in
+                owner.animateLayoutChange(to: mode)
+            })
+            .disposed(by: disposeBag)
     }
 }
