@@ -1,5 +1,5 @@
 //
-//  Chat.swift
+//  Message.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/08/28.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Chat {
+struct Message {
     
     enum MessageType: String, Codable {
         case text
