@@ -125,6 +125,12 @@ final class HotProjectCollectionViewCell: BaseCollectionViewCell {
         
         projectBackgroundView.pin.all().margin(10)
         projectBackgroundView.flex.layout()
+        /// 그림자를 렌더링할 때, 성능 문제가 있기 때문에 그림자 영역을 미리 그려주어야 함.
+        /// 뷰의 bounds가 레이아웃에 의해 먼저 설정되고 'shadowPath' 를 설정해주어야 하기 때문에 이 위치에 해당.
+        projectBackgroundView.layer.shadowPath = UIBezierPath(
+            roundedRect: projectBackgroundView.bounds,
+            cornerRadius: 10
+        ).cgPath
     }
 }
 
