@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 
 final class DefaultNetworkService: NetworkService {
-    
     func request(_ endpoint: Endpoint) -> Observable<Data> {
         guard let urlRequest = endpoint.toURLRequest() else { return .error(NetworkError.invalidURL) }
         return URLSession.shared.rx.data(request: urlRequest).asObservable()
@@ -35,86 +34,11 @@ final class DefaultNetworkService: NetworkService {
     }
     
     func requestTestProjectsData() -> Observable<[ProjectDTO]> {
-        let currentDate = Date()
-        
-        return Observable.just([
-            ProjectDTO(
-                id: "1",
-                title: "모임 플랫폼 디자이너 구합니다",
-                numberOfRecruits: 1,
-                recruitmentField: ["개발자", "디자이너"],
-                techStackTags: ["iOS", "BackEnd", "UI/UX"],
-                startDate: currentDate,
-                endDate: currentDate,
-                deadlineDate: currentDate,
-                favorites: 10
-            ),
-            ProjectDTO(
-                id: "2",
-                title: "웹 사이트 디자이너 구해요!!",
-                numberOfRecruits: 1,
-                recruitmentField: ["개발자", "디자이너"],
-                techStackTags: ["iOS", "BackEnd", "UI/UX"],
-                startDate: currentDate,
-                endDate: currentDate,
-                deadlineDate: currentDate,
-                favorites: 9
-            ),
-            ProjectDTO(
-                id: "3",
-                title: "개발자, 디자이너 구합니다",
-                numberOfRecruits: 6,
-                recruitmentField: ["개발자", "디자이너"],
-                techStackTags: ["iOS", "BackEnd", "UI/UX"],
-                startDate: currentDate,
-                endDate: currentDate,
-                deadlineDate: currentDate,
-                favorites: 8
-            ),
-            ProjectDTO(
-                id: "4",
-                title: "iOS 개발자 구합니다",
-                numberOfRecruits: 4,
-                recruitmentField: ["개발자", "디자이너"],
-                techStackTags: ["iOS", "BackEnd", "UI/UX"],
-                startDate: currentDate,
-                endDate: currentDate,
-                deadlineDate: currentDate,
-                favorites: 7
-            ),
-            ProjectDTO(
-                id: "1",
-                title: "모임 플랫폼 디자이너 구합니다",
-                numberOfRecruits: 1,
-                recruitmentField: ["개발자", "디자이너"],
-                techStackTags: ["iOS", "BackEnd", "UI/UX"],
-                startDate: currentDate,
-                endDate: currentDate,
-                deadlineDate: currentDate,
-                favorites: 6
-            ),
-            ProjectDTO(
-                id: "2",
-                title: "웹 사이트 디자이너 구해요!!",
-                numberOfRecruits: 1,
-                recruitmentField: ["개발자", "디자이너"],
-                techStackTags: ["iOS", "BackEnd", "UI/UX"],
-                startDate: currentDate,
-                endDate: currentDate,
-                deadlineDate: currentDate,
-                favorites: 5
-            ),
-            ProjectDTO(
-                id: "3",
-                title: "개발자, 디자이너 구합니다",
-                numberOfRecruits: 6,
-                recruitmentField: ["개발자", "디자이너"],
-                techStackTags: ["iOS", "BackEnd", "UI/UX"],
-                startDate: currentDate,
-                endDate: currentDate,
-                deadlineDate: currentDate,
-                favorites: 4
-            )
-        ])
+        Observable.just(ProjectDTO.projectTestArray)
     }
+    
+    func requestTestHotProjectsData() -> Observable<[ProjectDTO]> {
+        Observable.just(ProjectDTO.hotProjectTestArray)
+    }
+    
 }

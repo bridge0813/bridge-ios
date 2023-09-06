@@ -17,9 +17,18 @@ final class DefaultProjectRepository: ProjectRepository {
     }
     
     // MARK: - Methods
-    func observeProjects() -> Observable<[Project]> {
+    func fetchAllProjects() -> Observable<[Project]> {
         networkService
             .requestTestProjectsData()
             .map { data -> [Project] in data.compactMap { $0.toModel() } }
     }
+    
+    func fetchHotProjects() -> Observable<[Project]> {
+        networkService
+            .requestTestHotProjectsData()
+            .map { data -> [Project] in
+                data.compactMap { $0.toModel() }
+            }
+    }
+    
 }

@@ -57,10 +57,9 @@ final class MainViewController: BaseViewController {
     }()
     
     private let viewModel: MainViewModel
-    private let viewDidLoadTrigger = PublishRelay<Void>()
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, Project>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Project>
+    typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
+    typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Project>
     private var dataSource: DataSource?
     
     // MARK: - Initializer
@@ -106,30 +105,33 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureAttributes() {
-        dataSource = configureDataSource()
+        configureCellDataSource()
+        configureHeaderDataSource()
         configureNavigationUI()
     }
     
     override func bind() {
-        let input = MainViewModel.Input(viewDidLoadTrigger: viewDidLoadTrigger)
+        let input = MainViewModel.Input(viewDidLoadTrigger: Observable.just(()))
         let output = viewModel.transform(input: input)
         
-        Driver.combineLatest(output.hotProjects, output.mainProjects)
-            .compactMap { [weak self] hotProjects, mainProjects in
-                self?.createCurrentSnapshot(hotProjects: hotProjects, mainProjects: mainProjects)
-            }
-            .drive { [weak self] snapshot in
-                self?.dataSource?.apply(snapshot)
-            }
+        output.hotProjects
+            .drive(onNext: { [weak self] hotProjects in
+                self?.applySectionSnapshot(to: .hot, with: hotProjects)
+            })
+            .disposed(by: disposeBag)
+        
+        output.projects
+            .drive(onNext: { [weak self] projects in
+                self?.applySectionSnapshot(to: .main, with: projects)
+            })
             .disposed(by: disposeBag)
     }
-    
 }
 // MARK: - CompositionalLayout
 extension MainViewController {
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
-            let section = Section.allCases[sectionIndex]
+            let section = MainViewModel.Section.allCases[sectionIndex]
             
             switch section {
             case .hot: return self?.createHotProjectSection()
@@ -205,81 +207,58 @@ extension MainViewController {
 
 // MARK: - Diffable data source
 extension MainViewController {
-    enum Section: CaseIterable {
-        case hot
-        case main
-    }
-    
-    private func configureDataSource() -> DataSource {
-        let dataSource = DataSource(
+    private func configureCellDataSource() {
+        dataSource = DataSource(
             collectionView: projectCollectionView
         ) { collectionView, indexPath, item in
             
-            let section = Section.allCases[indexPath.section]
-
+            let section = MainViewModel.Section.allCases[indexPath.section]
+            
             switch section {
             case .hot:
                 guard let cell = collectionView.dequeueReusableCell(
                     HotProjectCollectionViewCell.self,
                     for: indexPath)
                 else { return UICollectionViewCell() }
-
+                
                 cell.configureCell(with: item)
                 return cell
-
+                
             case .main:
                 guard let cell = collectionView.dequeueReusableCell(
                     ProjectCollectionViewCell.self,
                     for: indexPath)
                 else { return UICollectionViewCell() }
-
+                
                 cell.configureCell(with: item)
                 return cell
             }
         }
-
-        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-            self?.createSectionHeader(collectionView: collectionView, kind: kind, indexPath: indexPath)
-        }
-        
-        return dataSource
     }
     
-    private func createSectionHeader(
-        collectionView: UICollectionView,
-        kind: String,
-        indexPath: IndexPath
-    ) -> UICollectionReusableView? {
-        if kind == UICollectionView.elementKindSectionHeader {
-            
-            guard let headerView = collectionView.dequeueReusableSupplementaryView(
+    private func configureHeaderDataSource() {
+        dataSource?.supplementaryViewProvider = { collectionview, kind, indexPath in
+            guard kind == UICollectionView.elementKindSectionHeader else {
+                return UICollectionReusableView()
+            }
+                
+            guard let headerView = collectionview.dequeueReusableSupplementaryView(
                 ProjectSectionHeaderView.self,
                 ofKind: kind,
                 for: indexPath
             ) else {
                 return UICollectionReusableView()
             }
-            
-            let section = Section.allCases[indexPath.section]
-            
-            switch section {
-            case .hot:
-                headerView.configureHeader(titleText: "인기 폭발 프로젝트", subText: "HOT")
                 
-            case .main:
-                headerView.configureHeader(titleText: "모집중인 프로젝트", subText: "NEW")
-            }
-    
+            headerView.configureHeader(with: indexPath)
+            
             return headerView
         }
-        return UICollectionReusableView()
     }
     
-    func createCurrentSnapshot(hotProjects: [Project], mainProjects: [Project]) -> Snapshot {
-        var snapshot = Snapshot()
-        snapshot.appendSections([.hot, .main])
-        snapshot.appendItems(hotProjects, toSection: .hot)
-        snapshot.appendItems(mainProjects, toSection: .main)
-        return snapshot
+    private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [Project]) {
+        var snapshot = SectionSnapshot()
+        snapshot.append(projects)
+        dataSource?.apply(snapshot, to: section)
     }
 }
