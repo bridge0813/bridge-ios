@@ -1,17 +1,17 @@
 //
-//  ObserveProjectsUseCase.swift
+//  File.swift
 //  Bridge
 //
-//  Created by 엄지호 on 2023/08/30.
+//  Created by 엄지호 on 2023/09/03.
 //
 
 import RxSwift
 
-protocol FetchProjectsUseCase {
+protocol FetchHotProjectsUseCase {
     func execute() -> Observable<[Project]>
 }
 
-final class DefaultFetchProjectsUseCase: FetchProjectsUseCase {
+final class DefaultFetchHotProjectsUseCase: FetchHotProjectsUseCase {
     private let projectRepository: ProjectRepository
     
     init(projectRepository: ProjectRepository) {
@@ -19,6 +19,6 @@ final class DefaultFetchProjectsUseCase: FetchProjectsUseCase {
     }
     
     func execute() -> Observable<[Project]> {
-        projectRepository.observeProjects()
+        projectRepository.fetchHotProjects()
     }
 }

@@ -11,53 +11,66 @@ import RxSwift
 final class MainViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
-        var viewDidLoadTrigger: PublishRelay<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
+        var viewDidLoadTrigger: Observable<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
     }
     
     struct Output {
         var hotProjects: Driver<[Project]>
-        var mainProjects: Driver<[Project]>
+        var projects: Driver<[Project]>
     }
 
     // MARK: - Properties
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
-    private let fetchProjectsUseCase: FetchProjectsUseCase
+    private let fetchProjectsUseCase: FetchAllProjectsUseCase
+    private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
     // MARK: - Initializer
     init(
         coordinator: MainCoordinator,
-        fetchProjectsUseCase: FetchProjectsUseCase
+        fetchProjectsUseCase: FetchAllProjectsUseCase,
+        fetchHotProjectsUseCase: FetchHotProjectsUseCase
     ) {
         self.coordinator = coordinator
         self.fetchProjectsUseCase = fetchProjectsUseCase
+        self.fetchHotProjectsUseCase = fetchHotProjectsUseCase
     }
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let allProjects = fetchProjectsUseCase.execute().share()  // Observable<[Project]>
+        let hotProjects = BehaviorRelay<[Project]>(value: [])
+        let projects = BehaviorRelay<[Project]>(value: [])
         
-        /// scrapCount를 비교하여, 인기 섹션에 들어갈 데이터를 가공.
-        /// id에 "hot"을 추가하는 과정은 mainProjects와 겹치는 id가 없기 위해서.
-        let hotProjects = allProjects.map { allProjects in
-            return allProjects.sorted(by: { $0.favorites > $1.favorites })
-                .prefix(5)
-                .map { project in
-                    var hotProject = project
-                    hotProject.id = project.id + "_hot"
-                    
-                    return hotProject
-                }
-        }
-        .asDriver(onErrorJustReturn: [Project.onError])
+        input.viewDidLoadTrigger
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.fetchHotProjectsUseCase.execute()
+            }
+            .bind(to: hotProjects)
+            .disposed(by: disposeBag)
         
-        let mainProjects = allProjects.asDriver(onErrorJustReturn: [Project.onError])
+        input.viewDidLoadTrigger
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.fetchProjectsUseCase.execute()
+            }
+            .bind(to: projects)
+            .disposed(by: disposeBag)
         
-        return Output(hotProjects: hotProjects, mainProjects: mainProjects)
+        return Output(
+            hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
+            projects: projects.asDriver(onErrorJustReturn: [Project.onError])
+        )
     }
+
 }
 
 // MARK: - Coordinator
+
+// MARK: - Data Section
 extension MainViewModel {
-    
+    enum Section: CaseIterable {
+        case hot
+        case main
+    }
 }
