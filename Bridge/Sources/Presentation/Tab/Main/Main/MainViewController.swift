@@ -56,8 +56,8 @@ final class MainViewController: BaseViewController {
         return searchBar
     }()
     
-    private var currentLayoutMode: LayoutMode = .text
-    private let writeProjectButton: UIButton = {
+    private let currentLayoutMode = BehaviorRelay<LayoutMode>(value: .text)
+    private lazy var writeProjectButton: UIButton = {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
         var configuration = UIButton.Configuration.tinted()
@@ -100,7 +100,6 @@ final class MainViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         containerView.pin.all(view.pin.safeArea).marginTop(10)
         containerView.flex.layout()
-        layoutWriteButton(with: currentLayoutMode)
     }
     
     // MARK: - Methods
@@ -135,6 +134,8 @@ final class MainViewController: BaseViewController {
         projectCollectionView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
+        
+        bindCollectionViewScrollToLayoutMode()
         
         let input = MainViewModel.Input(viewDidLoadTrigger: Observable.just(()))
         let output = viewModel.transform(input: input)
@@ -296,6 +297,19 @@ extension MainViewController {
     enum LayoutMode {
         case text
         case image
+    }
+    
+    private func bindCollectionViewScrollToLayoutMode() {
+        projectCollectionView.rx
+            .didScroll
+            .withUnretained(self)
+            .map { owner, _ in
+                owner.projectCollectionView.contentOffset.y
+            }
+            .map { $0 <= 0 ? LayoutMode.text : LayoutMode.image }
+            .distinctUntilChanged()
+            .bind(to: currentLayoutMode)
+            .disposed(by: disposeBag)
     }
     
     private func layoutWriteButton(with mode: LayoutMode) {
