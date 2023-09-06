@@ -136,6 +136,7 @@ final class MainViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         bindCollectionViewScrollToLayoutMode()
+        bindWriteButtonLayoutMode()
         
         let input = MainViewModel.Input(viewDidLoadTrigger: Observable.just(()))
         let output = viewModel.transform(input: input)
@@ -330,28 +331,27 @@ extension MainViewController {
             .disposed(by: disposeBag)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y <= 0 {
-            // 최상위에 도달
-            if currentLayoutMode != .text {
-                UIView.animate(withDuration: 0.3) { [weak self] in
-                    self?.writeProjectButton.configuration = self?.plusTextConfiguration()
-                    self?.writeProjectButton.layer.cornerRadius = 23
-                    self?.layoutWriteButton(with: .text)
+    private func bindWriteButtonLayoutMode() {
+        currentLayoutMode
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { owner, mode in
+                UIView.animate(withDuration: 0.3) {
+                    switch mode {
+                    case .imageAndText:
+                        owner.writeProjectButton.configuration = self.plusTextConfiguration()
+                        owner.writeProjectButton.layer.cornerRadius = 23
+                        owner.layoutButton(width: 110, height: 50)
+                        
+                    case .imageOnly:
+                        owner.writeProjectButton.configuration = self.onlyImageConfiguration()
+                        owner.writeProjectButton.layer.cornerRadius = 30
+                        owner.layoutButton(width: 60, height: 60)
+                        
+                    }
                 }
-                currentLayoutMode = .text
-            }
-            
-        } else {
-            if currentLayoutMode != .image {
-                UIView.animate(withDuration: 0.3) { [weak self] in
-                    self?.writeProjectButton.configuration = self?.onlyImageConfiguration()
-                    self?.writeProjectButton.layer.cornerRadius = 30
-                    self?.layoutWriteButton(with: .image)
-                }
-                currentLayoutMode = .image
-            }
-        }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func plusTextConfiguration() -> UIButton.Configuration {
