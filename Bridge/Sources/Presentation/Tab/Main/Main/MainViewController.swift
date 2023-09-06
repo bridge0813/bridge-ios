@@ -56,6 +56,7 @@ final class MainViewController: BaseViewController {
         return searchBar
     }()
     
+    private var currentLayoutMode: LayoutMode = .text
     private let writeProjectButton: UIButton = {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
@@ -99,11 +100,7 @@ final class MainViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         containerView.pin.all(view.pin.safeArea).marginTop(10)
         containerView.flex.layout()
-        writeProjectButton.pin
-            .bottom(view.pin.safeArea.bottom + 15)
-            .right(15)
-            .width(110)
-            .height(50)
+        layoutWriteButton(with: currentLayoutMode)
     }
     
     // MARK: - Methods
@@ -135,6 +132,10 @@ final class MainViewController: BaseViewController {
     }
     
     override func bind() {
+        projectCollectionView.rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
+        
         let input = MainViewModel.Input(viewDidLoadTrigger: Observable.just(()))
         let output = viewModel.transform(input: input)
         
@@ -284,5 +285,80 @@ extension MainViewController {
         var snapshot = SectionSnapshot()
         snapshot.append(projects)
         dataSource?.apply(snapshot, to: section)
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+extension MainViewController: UICollectionViewDelegate { }
+
+// MARK: - ScrollEvent
+extension MainViewController {
+    enum LayoutMode {
+        case text
+        case image
+    }
+    
+    private func layoutWriteButton(with mode: LayoutMode) {
+        switch mode {
+        case .text:
+            writeProjectButton.pin
+                .bottom(view.pin.safeArea.bottom + 15)
+                .right(15)
+                .width(110)
+                .height(50)
+            
+        case .image:
+            writeProjectButton.pin
+                .bottom(view.pin.safeArea.bottom + 15)
+                .right(15)
+                .width(60)
+                .height(60)
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 0 {
+            // 최상위에 도달
+            if currentLayoutMode != .text {
+                UIView.animate(withDuration: 0.3) { [weak self] in
+                    self?.writeProjectButton.configuration = self?.plusTextConfiguration()
+                    self?.writeProjectButton.layer.cornerRadius = 23
+                    self?.layoutWriteButton(with: .text)
+                }
+                currentLayoutMode = .text
+            }
+            
+        } else {
+            if currentLayoutMode != .image {
+                UIView.animate(withDuration: 0.3) { [weak self] in
+                    self?.writeProjectButton.configuration = self?.onlyImageConfiguration()
+                    self?.writeProjectButton.layer.cornerRadius = 30
+                    self?.layoutWriteButton(with: .image)
+                }
+                currentLayoutMode = .image
+            }
+        }
+    }
+    
+    private func plusTextConfiguration() -> UIButton.Configuration {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
+        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+        var configuration = UIButton.Configuration.tinted()
+        configuration.image = image
+        configuration.imagePlacement = .leading
+        configuration.imagePadding = 5
+        configuration.title = "글쓰기"
+        configuration.attributedTitle?.font = .boldSystemFont(ofSize: 20)
+        
+        return configuration
+    }
+    
+    private func onlyImageConfiguration() -> UIButton.Configuration {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
+        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+        var configuration = UIButton.Configuration.tinted()
+        configuration.image = image
+        
+        return configuration
     }
 }
