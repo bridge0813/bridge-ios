@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */; };
 		7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7402A9330C6001B5D2C /* AppDelegate.swift */; };
 		7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */; };
 		7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E7492A9330C7001B5D2C /* Assets.xcassets */; };
@@ -23,7 +24,7 @@
 		7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C8F2A9C4BB3000DAB02 /* ChatRoomListViewModel.swift */; };
 		7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C972A9C503C000DAB02 /* FetchChatRoomsUseCase.swift */; };
 		7BA36C9B2A9C5091000DAB02 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C9A2A9C5091000DAB02 /* ChatRoom.swift */; };
-		7BA36C9D2A9C5105000DAB02 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C9C2A9C5105000DAB02 /* Chat.swift */; };
+		7BA36C9D2A9C5105000DAB02 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C9C2A9C5105000DAB02 /* Message.swift */; };
 		7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C9E2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift */; };
 		7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CA32A9C6849000DAB02 /* DefaultChatRoomRepository.swift */; };
 		7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CA62A9C688C000DAB02 /* ChatRoomRepository.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		7B71E73D2A9330C6001B5D2C /* Bridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B71E7402A9330C6001B5D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,7 +79,7 @@
 		7BA36C8F2A9C4BB3000DAB02 /* ChatRoomListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomListViewModel.swift; sourceTree = "<group>"; };
 		7BA36C972A9C503C000DAB02 /* FetchChatRoomsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChatRoomsUseCase.swift; sourceTree = "<group>"; };
 		7BA36C9A2A9C5091000DAB02 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
-		7BA36C9C2A9C5105000DAB02 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		7BA36C9C2A9C5105000DAB02 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7BA36C9E2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveChatRoomUseCase.swift; sourceTree = "<group>"; };
 		7BA36CA32A9C6849000DAB02 /* DefaultChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatRoomRepository.swift; sourceTree = "<group>"; };
 		7BA36CA62A9C688C000DAB02 /* ChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomRepository.swift; sourceTree = "<group>"; };
@@ -255,7 +257,7 @@
 		7BA36C992A9C5081000DAB02 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				7BA36C9C2A9C5105000DAB02 /* Chat.swift */,
+				7BA36C9C2A9C5105000DAB02 /* Message.swift */,
 				7BA36C9A2A9C5091000DAB02 /* ChatRoom.swift */,
 			);
 			path = Chat;
@@ -356,6 +358,7 @@
 		7BA36CC52A9E148C000DAB02 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */,
 				7BA36CC62A9E14BD000DAB02 /* UITableView+.swift */,
 				7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */,
 				7C42701B2AA394EF009BE6AF /* UILabel+.swift */,
@@ -628,9 +631,10 @@
 				7C42701A2AA377FE009BE6AF /* ProjectCollectionViewCell.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* NavigationTitleView.swift in Sources */,
-				7BA36C9D2A9C5105000DAB02 /* Chat.swift in Sources */,
+				7BA36C9D2A9C5105000DAB02 /* Message.swift in Sources */,
 				7BA36CBF2A9DA44F000DAB02 /* NetworkError.swift in Sources */,
-				7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */,
+				7C569CFA2A9F6D5A0063D362 /* FetchProjectsUseCase.swift in Sources */,
+				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
 				7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,

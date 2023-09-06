@@ -11,7 +11,7 @@ struct ChatRoom {
     /// 가장 최근에 수신된 메시지와 관련된 정보를 저장하기 위한 타입
     struct LatestMessage {
         let receivedTime: String
-        let type: Chat.MessageType
+        let type: Message.MessageType
         let content: String
     }
     

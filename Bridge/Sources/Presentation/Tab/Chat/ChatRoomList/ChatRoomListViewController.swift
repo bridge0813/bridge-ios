@@ -22,8 +22,8 @@ final class ChatRoomListViewController: BaseViewController {
         return tableView
     }()
     
-    private typealias DataSource = UITableViewDiffableDataSource<Section, ChatRoom>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, ChatRoom>
+    private typealias DataSource = UITableViewDiffableDataSource<ChatRoomListViewModel.Section, ChatRoom>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<ChatRoomListViewModel.Section, ChatRoom>
     private var dataSource: DataSource?
     
     private let viewModel: ChatRoomListViewModel
@@ -68,6 +68,7 @@ final class ChatRoomListViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         let input = ChatRoomListViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
             itemSelected: chatRoomListTableView.rx.itemSelected.asObservable(),
             leaveChatRoomTrigger: leaveChatRoomTrigger
         )
@@ -85,11 +86,7 @@ final class ChatRoomListViewController: BaseViewController {
 }
 
 // MARK: - Diffable data source
-extension ChatRoomListViewController {
-    enum Section: CaseIterable {
-        case main
-    }
-    
+extension ChatRoomListViewController {   
     private func configureDataSource() -> DataSource {
         DataSource(tableView: chatRoomListTableView) { tableView, indexPath, item in
             guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else {

@@ -12,6 +12,7 @@ import RxSwift
 final class ChatRoomListViewModel: ViewModelType {
     
     struct Input {
+        let viewWillAppear: Observable<Bool>
         let itemSelected: Observable<IndexPath>
         let leaveChatRoomTrigger: PublishRelay<IndexPath>
     }
@@ -37,42 +38,50 @@ final class ChatRoomListViewModel: ViewModelType {
     }
     
     func transform(input: Input) -> Output {
-        let chatRooms = BehaviorRelay<[ChatRoom]>(value: [])
-        
-        fetchChatRooms()
-            .bind(to: chatRooms)
-            .disposed(by: disposeBag)
+        let chatRooms = input.viewWillAppear
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.fetchChatRooms()
+            }
         
         input.itemSelected
             .withLatestFrom(chatRooms) { indexPath, chatRooms in
                 chatRooms[indexPath.row]
             }
             .withUnretained(self)
-            .subscribe(onNext: { _, chatRoom in
-                self.coordinator?.showChatRoomDetailViewController(of: chatRoom)
+            .subscribe(onNext: { owner, chatRoom in
+                owner.coordinator?.showChatRoomDetailViewController(of: chatRoom)
             })
             .disposed(by: disposeBag)
         
-        input.leaveChatRoomTrigger
+        let reloadedChatRooms = input.leaveChatRoomTrigger
             .withLatestFrom(chatRooms) { indexPath, chatRooms in
                 chatRooms[indexPath.row]
             }
             .withUnretained(self)
-            .flatMap { _, chatRoom in
-                self.leaveChatRoomUseCase.execute(id: chatRoom.id)
+            .flatMap { owner, chatRoom in
+                owner.leaveChatRoomUseCase.execute(id: chatRoom.id)
             }
-            .flatMap { _ in
-                self.fetchChatRooms()
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.fetchChatRooms()
             }
-            .bind(to: chatRooms)
-            .disposed(by: disposeBag)
         
-        return Output(chatRooms: chatRooms.asDriver(onErrorJustReturn: [ChatRoom.onError]))
+        return Output(chatRooms: Observable.merge(chatRooms, reloadedChatRooms)
+            .asDriver(onErrorJustReturn: [ChatRoom.onError])
+        )
     }
 }
 
 extension ChatRoomListViewModel {
     private func fetchChatRooms() -> Observable<[ChatRoom]> {
         fetchChatRoomsUseCase.execute()
+    }
+}
+
+// MARK: Data source
+extension ChatRoomListViewModel {
+    enum Section: CaseIterable {
+        case main
     }
 }
