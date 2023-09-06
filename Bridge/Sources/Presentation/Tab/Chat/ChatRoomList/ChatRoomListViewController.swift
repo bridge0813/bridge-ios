@@ -68,6 +68,7 @@ final class ChatRoomListViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         let input = ChatRoomListViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
             itemSelected: chatRoomListTableView.rx.itemSelected.asObservable(),
             leaveChatRoomTrigger: leaveChatRoomTrigger
         )
