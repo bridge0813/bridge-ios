@@ -48,8 +48,8 @@ final class ChatRoomListViewModel: ViewModelType {
                 chatRooms[indexPath.row]
             }
             .withUnretained(self)
-            .subscribe(onNext: { _, chatRoom in
-                self.coordinator?.showChatRoomDetailViewController(of: chatRoom)
+            .subscribe(onNext: { owner, chatRoom in
+                owner.coordinator?.showChatRoomDetailViewController(of: chatRoom)
             })
             .disposed(by: disposeBag)
         
@@ -58,11 +58,12 @@ final class ChatRoomListViewModel: ViewModelType {
                 chatRooms[indexPath.row]
             }
             .withUnretained(self)
-            .flatMap { _, chatRoom in
-                self.leaveChatRoomUseCase.execute(id: chatRoom.id)
+            .flatMap { owner, chatRoom in
+                owner.leaveChatRoomUseCase.execute(id: chatRoom.id)
             }
-            .flatMap { _ in
-                self.fetchChatRooms()
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.fetchChatRooms()
             }
             .bind(to: chatRooms)
             .disposed(by: disposeBag)
