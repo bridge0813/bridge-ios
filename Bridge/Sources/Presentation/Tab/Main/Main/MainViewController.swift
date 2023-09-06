@@ -92,6 +92,7 @@ final class MainViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         containerView.pin.all(view.pin.safeArea).marginTop(10)
         containerView.flex.layout()
+        bindWriteButtonLayoutMode()
     }
     
     // MARK: - Methods
@@ -128,7 +129,6 @@ final class MainViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         bindCollectionViewScrollToLayoutMode()
-        bindWriteButtonLayoutMode()
         
         let input = MainViewModel.Input(viewDidLoadTrigger: Observable.just(()))
         let output = viewModel.transform(input: input)
