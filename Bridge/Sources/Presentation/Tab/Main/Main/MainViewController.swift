@@ -58,19 +58,11 @@ final class MainViewController: BaseViewController {
     
     private let currentLayoutMode = BehaviorRelay<WriteButtonLayout>(value: .imageAndText)
     private lazy var writeProjectButton: UIButton = {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
-        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
-        var configuration = UIButton.Configuration.tinted()
-        configuration.image = image
-        configuration.imagePlacement = .leading
-        configuration.imagePadding = 5
-        configuration.title = "글쓰기"
-        configuration.attributedTitle?.font = .boldSystemFont(ofSize: 20)
-        
-        let button = UIButton(configuration: configuration)
+        let button = UIButton(configuration: textAndImageConfig())
         button.tintColor = .white
         button.layer.cornerRadius = 23
         button.backgroundColor = .gray
+        button.clipsToBounds = true
         
         return button
     }()
@@ -339,12 +331,12 @@ extension MainViewController {
                 UIView.animate(withDuration: 0.3) {
                     switch mode {
                     case .imageAndText:
-                        owner.writeProjectButton.configuration = self.plusTextConfiguration()
+                        owner.writeProjectButton.configuration = self.textAndImageConfig()
                         owner.writeProjectButton.layer.cornerRadius = 23
                         owner.layoutButton(width: 110, height: 50)
                         
                     case .imageOnly:
-                        owner.writeProjectButton.configuration = self.onlyImageConfiguration()
+                        owner.writeProjectButton.configuration = self.imageOnlyConfig()
                         owner.writeProjectButton.layer.cornerRadius = 30
                         owner.layoutButton(width: 60, height: 60)
                         
@@ -354,24 +346,28 @@ extension MainViewController {
             .disposed(by: disposeBag)
     }
     
-    private func plusTextConfiguration() -> UIButton.Configuration {
+    private func textAndImageConfig() -> UIButton.Configuration {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+        
         var configuration = UIButton.Configuration.tinted()
         configuration.image = image
         configuration.imagePlacement = .leading
         configuration.imagePadding = 5
         configuration.title = "글쓰기"
         configuration.attributedTitle?.font = .boldSystemFont(ofSize: 20)
+        configuration.baseBackgroundColor = .darkGray
         
         return configuration
     }
     
-    private func onlyImageConfiguration() -> UIButton.Configuration {
+    private func imageOnlyConfig() -> UIButton.Configuration {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+        
         var configuration = UIButton.Configuration.tinted()
         configuration.image = image
+        configuration.baseBackgroundColor = .darkGray
         
         return configuration
     }
