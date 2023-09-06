@@ -56,7 +56,7 @@ final class MainViewController: BaseViewController {
         return searchBar
     }()
     
-    private let currentLayoutMode = BehaviorRelay<LayoutMode>(value: .text)
+    private let currentLayoutMode = BehaviorRelay<WriteButtonLayout>(value: .imageAndText)
     private lazy var writeProjectButton: UIButton = {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
@@ -294,9 +294,27 @@ extension MainViewController: UICollectionViewDelegate { }
 
 // MARK: - ScrollEvent
 extension MainViewController {
-    enum LayoutMode {
-        case text
-        case image
+    enum WriteButtonLayout {
+        case imageAndText
+        case imageOnly
+    }
+
+    private func applyLayout(with layout: WriteButtonLayout) {
+        switch layout {
+        case .imageAndText:
+            layoutButton(width: 110, height: 50)
+            
+        case .imageOnly:
+            layoutButton(width: 60, height: 60)
+        }
+    }
+
+    private func layoutButton(width: CGFloat, height: CGFloat) {
+        writeProjectButton.pin
+            .bottom(view.pin.safeArea.bottom + 15)
+            .right(15)
+            .width(width)
+            .height(height)
     }
     
     private func bindCollectionViewScrollToLayoutMode() {
@@ -306,28 +324,10 @@ extension MainViewController {
             .map { owner, _ in
                 owner.projectCollectionView.contentOffset.y
             }
-            .map { $0 <= 0 ? LayoutMode.text : LayoutMode.image }
+            .map { $0 <= 0 ? WriteButtonLayout.imageAndText : WriteButtonLayout.imageOnly }
             .distinctUntilChanged()
             .bind(to: currentLayoutMode)
             .disposed(by: disposeBag)
-    }
-    
-    private func layoutWriteButton(with mode: LayoutMode) {
-        switch mode {
-        case .text:
-            writeProjectButton.pin
-                .bottom(view.pin.safeArea.bottom + 15)
-                .right(15)
-                .width(110)
-                .height(50)
-            
-        case .image:
-            writeProjectButton.pin
-                .bottom(view.pin.safeArea.bottom + 15)
-                .right(15)
-                .width(60)
-                .height(60)
-        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
