@@ -57,7 +57,6 @@ final class MainViewController: BaseViewController {
     }()
     
     private let viewModel: MainViewModel
-    private let viewDidLoadTrigger = PublishRelay<Void>()
     
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Project>
     typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Project>
@@ -72,7 +71,6 @@ final class MainViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewDidLoadTrigger.accept(())
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -113,7 +111,7 @@ final class MainViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = MainViewModel.Input(viewDidLoadTrigger: viewDidLoadTrigger)
+        let input = MainViewModel.Input(viewDidLoadTrigger: Observable.just(()))
         let output = viewModel.transform(input: input)
         
         output.hotProjects

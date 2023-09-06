@@ -11,7 +11,7 @@ import RxSwift
 final class MainViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
-        var viewDidLoadTrigger: PublishRelay<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
+        var viewDidLoadTrigger: Observable<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
     }
     
     struct Output {
@@ -43,16 +43,16 @@ final class MainViewModel: ViewModelType {
         
         input.viewDidLoadTrigger
             .withUnretained(self)
-            .flatMap { _ in
-                self.fetchHotProjectsUseCase.execute()
+            .flatMap { owner, _ in
+                owner.fetchHotProjectsUseCase.execute()
             }
             .bind(to: hotProjects)
             .disposed(by: disposeBag)
         
         input.viewDidLoadTrigger
             .withUnretained(self)
-            .flatMap { _ in
-                self.fetchProjectsUseCase.execute()
+            .flatMap { owner, _ in
+                owner.fetchProjectsUseCase.execute()
             }
             .bind(to: projects)
             .disposed(by: disposeBag)
