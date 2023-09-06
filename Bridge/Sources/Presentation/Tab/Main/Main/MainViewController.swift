@@ -250,9 +250,7 @@ extension MainViewController {
                 return UICollectionReusableView()
             }
                 
-            let section = MainViewModel.Section.allCases[indexPath.section]
-            let headerType: ProjectSectionHeaderView.HeaderType = (section == .hot) ? .hot : .main
-            headerView.configureHeader(type: headerType)
+            headerView.configureHeader(with: indexPath)
             
             return headerView
         }

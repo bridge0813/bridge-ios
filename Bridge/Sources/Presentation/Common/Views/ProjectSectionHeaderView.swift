@@ -72,8 +72,9 @@ extension ProjectSectionHeaderView {
         }
     }
     
-    func configureHeader(type: HeaderType) {
-        titleLabel.text = type.titleText
-        supplementaryLabel.text = type.subText
+    func configureHeader(with indexPath: IndexPath) {
+        let headerType: HeaderType = (indexPath.section == 0) ? .hot : .main
+        titleLabel.text = headerType.titleText
+        supplementaryLabel.text = headerType.subText
     }
 }
