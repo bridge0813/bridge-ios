@@ -57,10 +57,9 @@ final class MainViewController: BaseViewController {
     }()
     
     private let currentLayoutMode = BehaviorRelay<WriteButtonLayout>(value: .imageAndText)
-    private lazy var writeProjectButton: UIButton = {
+    private lazy var createProjectButton: UIButton = {
         let button = UIButton(configuration: textAndImageConfig())
         button.tintColor = .white
-        button.layer.cornerRadius = 23
         button.backgroundColor = .gray
         button.clipsToBounds = true
         
@@ -104,7 +103,7 @@ final class MainViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(containerView)
-        view.addSubview(writeProjectButton)
+        view.addSubview(createProjectButton)
         containerView.flex.direction(.column).define { flex in
             /// 상단 메뉴 버튼 및 서치바
             flex.addItem().height(70).direction(.row).justifyContent(.start).alignItems(.stretch).define { flex in
@@ -305,16 +304,16 @@ extension MainViewController {
         switch layout {
         case .imageAndText:
             layoutButton(width: 110, height: 50)
-            writeProjectButton.layer.cornerRadius = 23
+            createProjectButton.layer.cornerRadius = 23
             
         case .imageOnly:
             layoutButton(width: 60, height: 60)
-            writeProjectButton.layer.cornerRadius = 30
+            createProjectButton.layer.cornerRadius = 30
         }
     }
     
     private func layoutButton(width: CGFloat, height: CGFloat) {
-        writeProjectButton.pin
+        createProjectButton.pin
             .bottom(view.pin.safeArea.bottom + 15)
             .right(15)
             .width(width)
@@ -325,17 +324,17 @@ extension MainViewController {
     private func applyConfiguration(with layout: WriteButtonLayout) {
         switch layout {
         case .imageAndText:
-            writeProjectButton.configuration = textAndImageConfig()
+            createProjectButton.configuration = textAndImageConfig()
             
         case .imageOnly:
-            writeProjectButton.configuration = imageOnlyConfig()
+            createProjectButton.configuration = imageOnlyConfig()
         }
     }
 
     private func textAndImageConfig() -> UIButton.Configuration {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
-        
+    
         var configuration = UIButton.Configuration.tinted()
         configuration.image = image
         configuration.imagePlacement = .leading

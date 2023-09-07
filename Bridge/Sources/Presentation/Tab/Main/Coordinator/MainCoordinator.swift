@@ -13,7 +13,7 @@ protocol MainCoordinatorProtocol: Coordinator {
     func connectToProjectFilteringFlow()
     func connectToProjectSearchFlow()
     func connectToProjectDetailFlow()
-    func connectToWriteProjectFlow()
+    func connectToCreateProjectFlow()
 }
 
 final class MainCoordinator: MainCoordinatorProtocol {
@@ -63,5 +63,5 @@ extension MainCoordinator {
     func connectToProjectFilteringFlow() { }
     func connectToProjectSearchFlow() { }
     func connectToProjectDetailFlow() { }
-    func connectToWriteProjectFlow() { }
+    func connectToCreateProjectFlow() { }
 }
