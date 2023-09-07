@@ -13,7 +13,7 @@ import RxSwift
 
 final class MainViewController: BaseViewController {
     // MARK: - Properties
-    private let containerView = UIView()
+    private let rootFlexContainer = UIView()
     private lazy var projectCollectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         
@@ -56,6 +56,15 @@ final class MainViewController: BaseViewController {
         return searchBar
     }()
     
+    private lazy var createProjectButton: UIButton = {
+        let button = UIButton(configuration: createConfigForBoth())
+        button.tintColor = .white
+        button.backgroundColor = .gray
+        button.clipsToBounds = true
+        
+        return button
+    }()
+    
     private let viewModel: MainViewModel
     
     typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
@@ -71,6 +80,7 @@ final class MainViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,8 +89,8 @@ final class MainViewController: BaseViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        containerView.pin.all(view.pin.safeArea).marginTop(10)
-        containerView.flex.layout()
+        rootFlexContainer.pin.all(view.pin.safeArea).marginTop(10)
+        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Methods
@@ -91,8 +101,9 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureLayouts() {
-        view.addSubview(containerView)
-        containerView.flex.direction(.column).define { flex in
+        view.addSubview(rootFlexContainer)
+        
+        rootFlexContainer.flex.direction(.column).define { flex in
             /// 상단 메뉴 버튼 및 서치바
             flex.addItem().height(70).direction(.row).justifyContent(.start).alignItems(.stretch).define { flex in
                 flex.addItem(filterButton).marginLeft(10)
@@ -101,6 +112,14 @@ final class MainViewController: BaseViewController {
             
             /// 컬렉션 뷰
             flex.addItem(projectCollectionView).grow(1).marginTop(10)
+            
+            flex.addItem(createProjectButton)
+                .cornerRadius(23)
+                .position(.absolute)
+                .right(15)
+                .bottom(15)
+                .width(110)
+                .height(50)
         }
     }
     
@@ -111,7 +130,14 @@ final class MainViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = MainViewModel.Input(viewDidLoadTrigger: Observable.just(()))
+        projectCollectionView.rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        let input = MainViewModel.Input(
+            viewDidLoad: Observable.just(()),
+            didScroll: projectCollectionView.rx.contentOffset.asObservable()
+        )
         let output = viewModel.transform(input: input)
         
         output.hotProjects
@@ -123,6 +149,12 @@ final class MainViewController: BaseViewController {
         output.projects
             .drive(onNext: { [weak self] projects in
                 self?.applySectionSnapshot(to: .main, with: projects)
+            })
+            .disposed(by: disposeBag)
+        
+        output.layoutMode
+            .drive(onNext: { [weak self] mode in
+                self?.animateLayoutChange(to: mode)
             })
             .disposed(by: disposeBag)
     }
@@ -260,5 +292,77 @@ extension MainViewController {
         var snapshot = SectionSnapshot()
         snapshot.append(projects)
         dataSource?.apply(snapshot, to: section)
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+extension MainViewController: UICollectionViewDelegate { }
+
+// MARK: - ScrollEvent
+extension MainViewController {
+    // MARK: - Button Animation
+    private func animateLayoutChange(to mode: MainViewModel.CreateButtonDisplayState) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.updateButtonLayout(for: mode)
+            self?.updateButtonConfig(for: mode)
+        }
+    }
+    
+    // MARK: - Button Layout
+    private func updateButtonLayout(for state: MainViewModel.CreateButtonDisplayState) {
+        switch state {
+        case .both:
+            layoutCreateButton(width: 110, height: 50, radius: 23)
+            
+        case .only:
+            layoutCreateButton(width: 60, height: 60, radius: 30)
+        }
+    }
+    
+    private func layoutCreateButton(width: CGFloat, height: CGFloat, radius: CGFloat) {
+        createProjectButton.flex
+            .position(.absolute)
+            .cornerRadius(radius)
+            .width(width)
+            .height(height)
+        
+        rootFlexContainer.flex.layout()
+    }
+    
+    // MARK: - Button Configuration
+    private func updateButtonConfig(for state: MainViewModel.CreateButtonDisplayState) {
+        switch state {
+        case .both:
+            createProjectButton.configuration = createConfigForBoth()
+            
+        case .only:
+            createProjectButton.configuration = createConfigForOnly()
+        }
+    }
+
+    private func createConfigForBoth() -> UIButton.Configuration {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
+        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+    
+        var configuration = UIButton.Configuration.tinted()
+        configuration.image = image
+        configuration.imagePlacement = .leading
+        configuration.imagePadding = 5
+        configuration.title = "글쓰기"
+        configuration.attributedTitle?.font = .boldSystemFont(ofSize: 20)
+        configuration.baseBackgroundColor = .darkGray
+        
+        return configuration
+    }
+    
+    private func createConfigForOnly() -> UIButton.Configuration {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
+        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+        
+        var configuration = UIButton.Configuration.tinted()
+        configuration.image = image
+        configuration.baseBackgroundColor = .darkGray
+        
+        return configuration
     }
 }

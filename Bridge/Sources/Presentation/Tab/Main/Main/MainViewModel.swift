@@ -5,18 +5,23 @@
 //  Created by 엄지호 on 2023/08/30.
 //
 
+import CoreFoundation
+import CoreGraphics
 import RxCocoa
 import RxSwift
 
 final class MainViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
-        var viewDidLoadTrigger: Observable<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
+        let viewDidLoad: Observable<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
+        let didScroll: Observable<CGPoint>
+        
     }
     
     struct Output {
-        var hotProjects: Driver<[Project]>
-        var projects: Driver<[Project]>
+        let hotProjects: Driver<[Project]>
+        let projects: Driver<[Project]>
+        let layoutMode: Driver<CreateButtonDisplayState>
     }
 
     // MARK: - Properties
@@ -41,7 +46,7 @@ final class MainViewModel: ViewModelType {
         let hotProjects = BehaviorRelay<[Project]>(value: [])
         let projects = BehaviorRelay<[Project]>(value: [])
         
-        input.viewDidLoadTrigger
+        input.viewDidLoad
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.fetchHotProjectsUseCase.execute()
@@ -49,7 +54,7 @@ final class MainViewModel: ViewModelType {
             .bind(to: hotProjects)
             .disposed(by: disposeBag)
         
-        input.viewDidLoadTrigger
+        input.viewDidLoad
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.fetchProjectsUseCase.execute()
@@ -57,9 +62,15 @@ final class MainViewModel: ViewModelType {
             .bind(to: projects)
             .disposed(by: disposeBag)
         
+        let layoutMode = input.didScroll
+            .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: .both)
+        
         return Output(
             hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
-            projects: projects.asDriver(onErrorJustReturn: [Project.onError])
+            projects: projects.asDriver(onErrorJustReturn: [Project.onError]),
+            layoutMode: layoutMode
         )
     }
 
@@ -67,10 +78,15 @@ final class MainViewModel: ViewModelType {
 
 // MARK: - Coordinator
 
-// MARK: - Data Section
+// MARK: - UI DataSource
 extension MainViewModel {
     enum Section: CaseIterable {
         case hot
         case main
+    }
+    
+    enum CreateButtonDisplayState {
+        case both
+        case only
     }
 }

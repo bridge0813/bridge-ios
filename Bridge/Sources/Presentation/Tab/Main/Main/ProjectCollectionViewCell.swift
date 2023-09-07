@@ -171,6 +171,10 @@ final class ProjectCollectionViewCell: BaseCollectionViewCell {
         
         projectBackgroundView.pin.all().margin(10)
         projectBackgroundView.flex.layout()
+        projectBackgroundView.layer.shadowPath = UIBezierPath(
+            roundedRect: projectBackgroundView.bounds,
+            cornerRadius: 10
+        ).cgPath
     }
 }
 
