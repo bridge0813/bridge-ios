@@ -5,8 +5,7 @@
 //  Created by 엄지호 on 2023/08/30.
 //
 
-import CoreFoundation
-import CoreGraphics
+import Foundation
 import RxCocoa
 import RxSwift
 
@@ -18,6 +17,7 @@ final class MainViewModel: ViewModelType {
         let notificationTap: Observable<Void>
         let filterTap: Observable<Void>
         let searchTap: Observable<String?>
+        let itemSelected: Observable<IndexPath>
     }
     
     struct Output {
@@ -91,6 +91,17 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        input.itemSelected
+            .withUnretained(self)
+            .subscribe(onNext: { owner, indexPath in
+                owner.showProjectDetail(
+                    from: indexPath,
+                    hotProjects: hotProjects.value,
+                    mainProjects: projects.value
+                )
+            })
+            .disposed(by: disposeBag)
+        
         return Output(
             hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
             projects: projects.asDriver(onErrorJustReturn: [Project.onError]),
@@ -102,8 +113,25 @@ final class MainViewModel: ViewModelType {
 
 // MARK: - Coordinator
 extension MainViewModel {
-    
+    private func showProjectDetail(
+        from indexPath: IndexPath,
+        hotProjects: [Project],
+        mainProjects: [Project]
+    ) {
+        let section = Section.allCases[indexPath.section]
+        
+        switch section {
+        case .hot:
+            let project = hotProjects[indexPath.row]
+            coordinator?.connectToProjectDetailFlow(with: project)
+            
+        case .main:
+            let project = mainProjects[indexPath.row]
+            coordinator?.connectToProjectDetailFlow(with: project)
+        }
+    }
 }
+
 // MARK: - UI DataSource
 extension MainViewModel {
     enum Section: CaseIterable {

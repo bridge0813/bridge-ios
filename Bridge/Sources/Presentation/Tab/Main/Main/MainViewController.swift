@@ -135,7 +135,8 @@ final class MainViewController: BaseViewController {
             didScroll: projectCollectionView.rx.contentOffset.asObservable(),
             notificationTap: goToNotificationButton.rx.tap.asObservable(),
             filterTap: filterButton.rx.tap.asObservable(),
-            searchTap: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text)
+            searchTap: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text),
+            itemSelected: projectCollectionView.rx.itemSelected.asObservable()
         )
         let output = viewModel.transform(input: input)
         
