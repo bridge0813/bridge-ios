@@ -53,6 +53,12 @@ final class ChatRoomListViewController: BaseViewController {
     private func configureNavigationController() {
         let navigationTitleView = NavigationTitleView(title: "채팅")
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationTitleView)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "bell"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
     }
     
     override func configureLayouts() {
