@@ -57,7 +57,7 @@ final class MainViewController: BaseViewController {
     }()
     
     private lazy var createProjectButton: UIButton = {
-        let button = UIButton(configuration: textAndImageConfig())
+        let button = UIButton(configuration: bothConfig())
         button.tintColor = .white
         button.backgroundColor = .gray
         button.clipsToBounds = true
@@ -301,7 +301,7 @@ extension MainViewController {
     private func animateLayoutChange(to mode: MainViewModel.CreateButtonDisplayState) {
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.updateButtonLayout(for: mode)
-            self?.applyConfiguration(with: mode)
+            self?.updateButtonConfig(for: mode)
         }
     }
     
@@ -327,17 +327,17 @@ extension MainViewController {
     }
     
     // MARK: - Button Configuration
-    private func applyConfiguration(with layout: MainViewModel.CreateButtonDisplayState) {
-        switch layout {
+    private func updateButtonConfig(for state: MainViewModel.CreateButtonDisplayState) {
+        switch state {
         case .both:
-            createProjectButton.configuration = textAndImageConfig()
+            createProjectButton.configuration = createConfigForBoth()
             
         case .only:
-            createProjectButton.configuration = imageOnlyConfig()
+            createProjectButton.configuration = createConfigForOnly()
         }
     }
 
-    private func textAndImageConfig() -> UIButton.Configuration {
+    private func createConfigForBoth() -> UIButton.Configuration {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
     
@@ -352,7 +352,7 @@ extension MainViewController {
         return configuration
     }
     
-    private func imageOnlyConfig() -> UIButton.Configuration {
+    private func createConfigForOnly() -> UIButton.Configuration {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
         
