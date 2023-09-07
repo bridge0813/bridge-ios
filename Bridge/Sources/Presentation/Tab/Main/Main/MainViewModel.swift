@@ -25,7 +25,6 @@ final class MainViewModel: ViewModelType {
     }
 
     // MARK: - Properties
-    var isInitialLayout = false  // viewDidLayoutSubviews() 내에서 레이아웃 설정 메서드가 딱 한번만 호출되도록
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
     private let fetchProjectsUseCase: FetchAllProjectsUseCase

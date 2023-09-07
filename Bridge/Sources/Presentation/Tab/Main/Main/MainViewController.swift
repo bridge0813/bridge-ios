@@ -57,7 +57,7 @@ final class MainViewController: BaseViewController {
     }()
     
     private lazy var createProjectButton: UIButton = {
-        let button = UIButton(configuration: bothConfig())
+        let button = UIButton(configuration: createConfigForBoth())
         button.tintColor = .white
         button.backgroundColor = .gray
         button.clipsToBounds = true
@@ -91,11 +91,6 @@ final class MainViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         rootFlexContainer.pin.all(view.pin.safeArea).marginTop(10)
         rootFlexContainer.flex.layout()
-        
-        if !viewModel.isInitialLayout {
-            updateButtonLayout(for: .both)
-            viewModel.isInitialLayout = true
-        }
     }
     
     // MARK: - Methods
@@ -107,7 +102,7 @@ final class MainViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        view.addSubview(createProjectButton)
+        
         rootFlexContainer.flex.direction(.column).define { flex in
             /// 상단 메뉴 버튼 및 서치바
             flex.addItem().height(70).direction(.row).justifyContent(.start).alignItems(.stretch).define { flex in
@@ -117,6 +112,14 @@ final class MainViewController: BaseViewController {
             
             /// 컬렉션 뷰
             flex.addItem(projectCollectionView).grow(1).marginTop(10)
+            
+            flex.addItem(createProjectButton)
+                .cornerRadius(23)
+                .position(.absolute)
+                .right(15)
+                .bottom(15)
+                .width(110)
+                .height(50)
         }
     }
     
@@ -309,21 +312,21 @@ extension MainViewController {
     private func updateButtonLayout(for state: MainViewModel.CreateButtonDisplayState) {
         switch state {
         case .both:
-            layoutCreateButton(width: 110, height: 50)
-            createProjectButton.layer.cornerRadius = 23
+            layoutCreateButton(width: 110, height: 50, radius: 23)
             
         case .only:
-            layoutCreateButton(width: 60, height: 60)
-            createProjectButton.layer.cornerRadius = 30
+            layoutCreateButton(width: 60, height: 60, radius: 30)
         }
     }
     
-    private func layoutCreateButton(width: CGFloat, height: CGFloat) {
-        createProjectButton.pin
-            .bottom(view.pin.safeArea.bottom + 15)
-            .right(15)
+    private func layoutCreateButton(width: CGFloat, height: CGFloat, radius: CGFloat) {
+        createProjectButton.flex
+            .position(.absolute)
+            .cornerRadius(radius)
             .width(width)
             .height(height)
+        
+        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Button Configuration
