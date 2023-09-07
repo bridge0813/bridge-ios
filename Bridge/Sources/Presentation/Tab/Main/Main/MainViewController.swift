@@ -13,7 +13,7 @@ import RxSwift
 
 final class MainViewController: BaseViewController {
     // MARK: - Properties
-    private let containerView = UIView()
+    private let rootFlexContainer = UIView()
     private lazy var projectCollectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         
@@ -89,12 +89,12 @@ final class MainViewController: BaseViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        containerView.pin.all(view.pin.safeArea).marginTop(10)
-        containerView.flex.layout()
+        rootFlexContainer.pin.all(view.pin.safeArea).marginTop(10)
+        rootFlexContainer.flex.layout()
         
-        if !viewModel.didInitialLayout {
-            applyLayout(with: .imageAndText)
-            viewModel.didInitialLayout = true
+        if !viewModel.isInitialLayout {
+            updateButtonLayout(for: .both)
+            viewModel.isInitialLayout = true
         }
     }
     
@@ -106,9 +106,9 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureLayouts() {
-        view.addSubview(containerView)
+        view.addSubview(rootFlexContainer)
         view.addSubview(createProjectButton)
-        containerView.flex.direction(.column).define { flex in
+        rootFlexContainer.flex.direction(.column).define { flex in
             /// 상단 메뉴 버튼 및 서치바
             flex.addItem().height(70).direction(.row).justifyContent(.start).alignItems(.stretch).define { flex in
                 flex.addItem(filterButton).marginLeft(10)
@@ -132,8 +132,8 @@ final class MainViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         let input = MainViewModel.Input(
-            viewDidLoadTrigger: Observable.just(()),
-            didScrollTriigger: projectCollectionView.rx.contentOffset.asObservable()
+            viewDidLoad: Observable.just(()),
+            didScroll: projectCollectionView.rx.contentOffset.asObservable()
         )
         let output = viewModel.transform(input: input)
         
@@ -298,27 +298,27 @@ extension MainViewController: UICollectionViewDelegate { }
 // MARK: - ScrollEvent
 extension MainViewController {
     // MARK: - Button Animation
-    private func animateLayoutChange(to mode: MainViewModel.WriteButtonLayout) {
+    private func animateLayoutChange(to mode: MainViewModel.CreateButtonDisplayState) {
         UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.applyLayout(with: mode)
+            self?.updateButtonLayout(for: mode)
             self?.applyConfiguration(with: mode)
         }
     }
     
     // MARK: - Button Layout
-    private func applyLayout(with layout: MainViewModel.WriteButtonLayout) {
-        switch layout {
-        case .imageAndText:
-            layoutButton(width: 110, height: 50)
+    private func updateButtonLayout(for state: MainViewModel.CreateButtonDisplayState) {
+        switch state {
+        case .both:
+            layoutCreateButton(width: 110, height: 50)
             createProjectButton.layer.cornerRadius = 23
             
-        case .imageOnly:
-            layoutButton(width: 60, height: 60)
+        case .only:
+            layoutCreateButton(width: 60, height: 60)
             createProjectButton.layer.cornerRadius = 30
         }
     }
     
-    private func layoutButton(width: CGFloat, height: CGFloat) {
+    private func layoutCreateButton(width: CGFloat, height: CGFloat) {
         createProjectButton.pin
             .bottom(view.pin.safeArea.bottom + 15)
             .right(15)
@@ -327,12 +327,12 @@ extension MainViewController {
     }
     
     // MARK: - Button Configuration
-    private func applyConfiguration(with layout: MainViewModel.WriteButtonLayout) {
+    private func applyConfiguration(with layout: MainViewModel.CreateButtonDisplayState) {
         switch layout {
-        case .imageAndText:
+        case .both:
             createProjectButton.configuration = textAndImageConfig()
             
-        case .imageOnly:
+        case .only:
             createProjectButton.configuration = imageOnlyConfig()
         }
     }

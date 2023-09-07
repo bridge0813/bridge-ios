@@ -13,19 +13,19 @@ import RxSwift
 final class MainViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
-        let viewDidLoadTrigger: Observable<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
-        let didScrollTriigger: Observable<CGPoint>
+        let viewDidLoad: Observable<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
+        let didScroll: Observable<CGPoint>
         
     }
     
     struct Output {
         let hotProjects: Driver<[Project]>
         let projects: Driver<[Project]>
-        let layoutMode: Driver<WriteButtonLayout>
+        let layoutMode: Driver<CreateButtonDisplayState>
     }
 
     // MARK: - Properties
-    var didInitialLayout = false  // viewDidLayoutSubviews() 내에서 레이아웃 설정 메서드가 딱 한번만 호출되도록
+    var isInitialLayout = false  // viewDidLayoutSubviews() 내에서 레이아웃 설정 메서드가 딱 한번만 호출되도록
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
     private let fetchProjectsUseCase: FetchAllProjectsUseCase
@@ -47,7 +47,7 @@ final class MainViewModel: ViewModelType {
         let hotProjects = BehaviorRelay<[Project]>(value: [])
         let projects = BehaviorRelay<[Project]>(value: [])
         
-        input.viewDidLoadTrigger
+        input.viewDidLoad
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.fetchHotProjectsUseCase.execute()
@@ -55,7 +55,7 @@ final class MainViewModel: ViewModelType {
             .bind(to: hotProjects)
             .disposed(by: disposeBag)
         
-        input.viewDidLoadTrigger
+        input.viewDidLoad
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.fetchProjectsUseCase.execute()
@@ -63,10 +63,10 @@ final class MainViewModel: ViewModelType {
             .bind(to: projects)
             .disposed(by: disposeBag)
         
-        let layoutMode = input.didScrollTriigger
-            .map { $0.y <= 0 ? WriteButtonLayout.imageAndText : .imageOnly }
+        let layoutMode = input.didScroll
+            .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
             .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: .imageAndText)
+            .asDriver(onErrorJustReturn: .both)
         
         return Output(
             hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
@@ -86,8 +86,8 @@ extension MainViewModel {
         case main
     }
     
-    enum WriteButtonLayout {
-        case imageAndText
-        case imageOnly
+    enum CreateButtonDisplayState {
+        case both
+        case only
     }
 }
