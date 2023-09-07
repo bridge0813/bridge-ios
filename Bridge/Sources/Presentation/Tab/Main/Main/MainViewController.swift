@@ -130,15 +130,12 @@ final class MainViewController: BaseViewController {
     }
     
     override func bind() {
-        projectCollectionView.rx
-            .setDelegate(self)
-            .disposed(by: disposeBag)
-        
         let input = MainViewModel.Input(
             viewDidLoad: Observable.just(()),
             didScroll: projectCollectionView.rx.contentOffset.asObservable(),
             notificationTap: goToNotificationButton.rx.tap.asObservable(),
-            filterTap: filterButton.rx.tap.asObservable()
+            filterTap: filterButton.rx.tap.asObservable(),
+            searchTap: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text)
         )
         let output = viewModel.transform(input: input)
         
@@ -158,6 +155,10 @@ final class MainViewController: BaseViewController {
             .drive(onNext: { [weak self] mode in
                 self?.animateLayoutChange(to: mode)
             })
+            .disposed(by: disposeBag)
+        
+        projectCollectionView.rx
+            .setDelegate(self)
             .disposed(by: disposeBag)
     }
 }

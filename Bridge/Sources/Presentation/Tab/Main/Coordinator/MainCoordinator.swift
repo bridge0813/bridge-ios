@@ -11,7 +11,7 @@ import UIKit
 protocol MainCoordinatorProtocol: Coordinator {
     func connectToNotificationFlow()
     func connectToProjectFilteringFlow()
-    func connectToProjectSearchFlow()
+    func connectToProjectSearchFlow(with query: String)
     func connectToProjectDetailFlow()
     func connectToCreateProjectFlow()
 }
@@ -65,7 +65,9 @@ extension MainCoordinator {
     func connectToProjectFilteringFlow() {
         print("필터 뷰 이동")
     }
-    func connectToProjectSearchFlow() { }
+    func connectToProjectSearchFlow(with query: String) {
+        print(query)
+    }
     func connectToProjectDetailFlow() { }
     func connectToCreateProjectFlow() { }
 }

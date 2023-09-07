@@ -17,6 +17,7 @@ final class MainViewModel: ViewModelType {
         let didScroll: Observable<CGPoint>
         let notificationTap: Observable<Void>
         let filterTap: Observable<Void>
+        let searchTap: Observable<String?>
     }
     
     struct Output {
@@ -79,6 +80,14 @@ final class MainViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.connectToProjectFilteringFlow()
+            })
+            .disposed(by: disposeBag)
+        
+        input.searchTap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, text in
+                guard let text else { return }
+                owner.coordinator?.connectToProjectSearchFlow(with: text)
             })
             .disposed(by: disposeBag)
         
