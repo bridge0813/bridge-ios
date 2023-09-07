@@ -137,7 +137,8 @@ final class MainViewController: BaseViewController {
         let input = MainViewModel.Input(
             viewDidLoad: Observable.just(()),
             didScroll: projectCollectionView.rx.contentOffset.asObservable(),
-            notificationTap: goToNotificationButton.rx.tap.asObservable()
+            notificationTap: goToNotificationButton.rx.tap.asObservable(),
+            filterTap: filterButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
         

@@ -62,7 +62,9 @@ extension MainCoordinator {
     func connectToNotificationFlow() {
         print("알림 뷰 이동")
     }
-    func connectToProjectFilteringFlow() { }
+    func connectToProjectFilteringFlow() {
+        print("필터 뷰 이동")
+    }
     func connectToProjectSearchFlow() { }
     func connectToProjectDetailFlow() { }
     func connectToCreateProjectFlow() { }
