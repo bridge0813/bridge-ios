@@ -18,6 +18,7 @@ final class MainViewModel: ViewModelType {
         let filterTap: Observable<Void>
         let searchTap: Observable<String?>
         let itemSelected: Observable<IndexPath>
+        let createTap: Observable<Void>
     }
     
     struct Output {
@@ -99,6 +100,13 @@ final class MainViewModel: ViewModelType {
                     hotProjects: hotProjects.value,
                     mainProjects: projects.value
                 )
+            })
+            .disposed(by: disposeBag)
+        
+        input.createTap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.connectToCreateProjectFlow()
             })
             .disposed(by: disposeBag)
         

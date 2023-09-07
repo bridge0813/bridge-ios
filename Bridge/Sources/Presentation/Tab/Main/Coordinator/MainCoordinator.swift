@@ -75,5 +75,7 @@ extension MainCoordinator {
         print(project.title)
     }
     
-    func connectToCreateProjectFlow() { }
+    func connectToCreateProjectFlow() {
+        print("모집글 작성 뷰 이동")
+    }
 }
