@@ -104,9 +104,7 @@ private extension TabBarCoordinator {
     func configureBarAppearance() {
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
-        navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
-        navigationBarAppearance.buttonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.black]
+        UINavigationBar.appearance().tintColor = .black
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance
