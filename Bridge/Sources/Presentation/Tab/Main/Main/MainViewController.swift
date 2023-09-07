@@ -56,7 +56,6 @@ final class MainViewController: BaseViewController {
         return searchBar
     }()
     
-    private let currentLayoutMode = BehaviorRelay<WriteButtonLayout>(value: .imageAndText)
     private lazy var createProjectButton: UIButton = {
         let button = UIButton(configuration: textAndImageConfig())
         button.tintColor = .white
@@ -91,7 +90,6 @@ final class MainViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         containerView.pin.all(view.pin.safeArea).marginTop(10)
         containerView.flex.layout()
-        bindWriteButtonLayoutMode()
     }
     
     // MARK: - Methods
@@ -127,7 +125,7 @@ final class MainViewController: BaseViewController {
             .setDelegate(self)
             .disposed(by: disposeBag)
         
-        bindCollectionViewScrollToLayoutMode()
+        bindCollectionViewScrollToLayoutChange()
         
         let input = MainViewModel.Input(viewDidLoadTrigger: Observable.just(()))
         let output = viewModel.transform(input: input)
@@ -358,7 +356,7 @@ extension MainViewController {
     }
     
     // MARK: - Bind Method
-    private func bindCollectionViewScrollToLayoutMode() {
+    private func bindCollectionViewScrollToLayoutChange() {
         projectCollectionView.rx
             .didScroll
             .withUnretained(self)
@@ -367,16 +365,8 @@ extension MainViewController {
             }
             .map { $0 <= 0 ? WriteButtonLayout.imageAndText : WriteButtonLayout.imageOnly }
             .distinctUntilChanged()
-            .bind(to: currentLayoutMode)
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindWriteButtonLayoutMode() {
-        currentLayoutMode
-            .asObservable()
-            .withUnretained(self)
-            .subscribe(onNext: { owner, mode in
-                owner.animateLayoutChange(to: mode)
+            .subscribe(onNext: { [weak self] mode in
+                self?.animateLayoutChange(to: mode)
             })
             .disposed(by: disposeBag)
     }
