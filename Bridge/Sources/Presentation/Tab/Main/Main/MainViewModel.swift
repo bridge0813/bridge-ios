@@ -73,4 +73,9 @@ extension MainViewModel {
         case hot
         case main
     }
+    
+    enum WriteButtonLayout {
+        case imageAndText
+        case imageOnly
+    }
 }

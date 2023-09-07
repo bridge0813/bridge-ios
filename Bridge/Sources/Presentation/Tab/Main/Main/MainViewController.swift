@@ -65,6 +65,8 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
+    var didInitialLayout = false
+    
     private let viewModel: MainViewModel
     
     typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
@@ -90,6 +92,11 @@ final class MainViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         containerView.pin.all(view.pin.safeArea).marginTop(10)
         containerView.flex.layout()
+        
+        if !didInitialLayout {
+            applyLayout(with: .imageAndText)
+            didInitialLayout = true
+        }
     }
     
     // MARK: - Methods
@@ -284,13 +291,8 @@ extension MainViewController: UICollectionViewDelegate { }
 
 // MARK: - ScrollEvent
 extension MainViewController {
-    enum WriteButtonLayout {
-        case imageAndText
-        case imageOnly
-    }
-
     // MARK: - Button Animation
-    private func animateLayoutChange(to mode: WriteButtonLayout) {
+    private func animateLayoutChange(to mode: MainViewModel.WriteButtonLayout) {
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.applyLayout(with: mode)
             self?.applyConfiguration(with: mode)
@@ -298,7 +300,7 @@ extension MainViewController {
     }
     
     // MARK: - Button Layout
-    private func applyLayout(with layout: WriteButtonLayout) {
+    private func applyLayout(with layout: MainViewModel.WriteButtonLayout) {
         switch layout {
         case .imageAndText:
             layoutButton(width: 110, height: 50)
@@ -319,7 +321,7 @@ extension MainViewController {
     }
     
     // MARK: - Button Configuration
-    private func applyConfiguration(with layout: WriteButtonLayout) {
+    private func applyConfiguration(with layout: MainViewModel.WriteButtonLayout) {
         switch layout {
         case .imageAndText:
             createProjectButton.configuration = textAndImageConfig()
