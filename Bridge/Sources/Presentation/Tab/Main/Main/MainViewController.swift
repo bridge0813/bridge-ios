@@ -65,8 +65,6 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
-    var didInitialLayout = false
-    
     private let viewModel: MainViewModel
     
     typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
@@ -94,9 +92,9 @@ final class MainViewController: BaseViewController {
         containerView.pin.all(view.pin.safeArea).marginTop(10)
         containerView.flex.layout()
         
-        if !didInitialLayout {
+        if !viewModel.didInitialLayout {
             applyLayout(with: .imageAndText)
-            didInitialLayout = true
+            viewModel.didInitialLayout = true
         }
     }
     
