@@ -14,11 +14,11 @@ final class MainViewModel: ViewModelType {
     struct Input {
         let viewDidLoad: Observable<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
         let didScroll: Observable<CGPoint>
-        let notificationTap: Observable<Void>
-        let filterTap: Observable<Void>
-        let searchTap: Observable<String?>
+        let notifButtonDidTap: Observable<Void>
+        let filterButtonDidTap: Observable<Void>
+        let searchButtonDidTap: Observable<String?>
         let itemSelected: Observable<IndexPath>
-        let createTap: Observable<Void>
+        let createButtonDidTap: Observable<Void>
     }
     
     struct Output {
@@ -70,21 +70,21 @@ final class MainViewModel: ViewModelType {
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: .both)
         
-        input.notificationTap
+        input.notifButtonDidTap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.connectToNotificationFlow()
             })
             .disposed(by: disposeBag)
         
-        input.filterTap
+        input.filterButtonDidTap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.connectToProjectFilteringFlow()
             })
             .disposed(by: disposeBag)
         
-        input.searchTap
+        input.searchButtonDidTap
             .withUnretained(self)
             .subscribe(onNext: { owner, text in
                 guard let text else { return }
@@ -103,7 +103,7 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        input.createTap
+        input.createButtonDidTap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.connectToCreateProjectFlow()
