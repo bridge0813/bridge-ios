@@ -63,7 +63,7 @@ final class MainViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         let layoutMode = input.didScrollTriigger
-            .map { $0.y <= 0 ? WriteButtonLayout.imageAndText : .imageOnly}
+            .map { $0.y <= 0 ? WriteButtonLayout.imageAndText : .imageOnly }
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: .imageAndText)
         
@@ -78,7 +78,7 @@ final class MainViewModel: ViewModelType {
 
 // MARK: - Coordinator
 
-// MARK: - Data Section
+// MARK: - UI DataSource
 extension MainViewModel {
     enum Section: CaseIterable {
         case hot

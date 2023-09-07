@@ -82,6 +82,7 @@ final class MainViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -363,5 +364,4 @@ extension MainViewController {
         
         return configuration
     }
-    
 }
