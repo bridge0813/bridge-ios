@@ -15,7 +15,7 @@ final class MainViewModel: ViewModelType {
     struct Input {
         let viewDidLoad: Observable<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
         let didScroll: Observable<CGPoint>
-        
+        let notificationTap: Observable<Void>
     }
     
     struct Output {
@@ -67,6 +67,13 @@ final class MainViewModel: ViewModelType {
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: .both)
         
+        input.notificationTap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.connectToNotificationFlow()
+            })
+            .disposed(by: disposeBag)
+        
         return Output(
             hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
             projects: projects.asDriver(onErrorJustReturn: [Project.onError]),
@@ -77,7 +84,9 @@ final class MainViewModel: ViewModelType {
 }
 
 // MARK: - Coordinator
-
+extension MainViewModel {
+    
+}
 // MARK: - UI DataSource
 extension MainViewModel {
     enum Section: CaseIterable {

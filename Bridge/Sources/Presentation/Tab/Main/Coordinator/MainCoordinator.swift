@@ -59,7 +59,9 @@ extension MainCoordinator {
 
 // MARK: - MainCoordinatorProtocol Method
 extension MainCoordinator {
-    func connectToNotificationFlow() { }
+    func connectToNotificationFlow() {
+        print("알림 뷰 이동")
+    }
     func connectToProjectFilteringFlow() { }
     func connectToProjectSearchFlow() { }
     func connectToProjectDetailFlow() { }
