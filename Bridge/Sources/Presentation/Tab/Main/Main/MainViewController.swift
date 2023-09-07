@@ -132,9 +132,10 @@ final class MainViewController: BaseViewController {
             .setDelegate(self)
             .disposed(by: disposeBag)
         
-        bindCollectionViewScrollToLayoutChange()
-        
-        let input = MainViewModel.Input(viewDidLoadTrigger: Observable.just(()))
+        let input = MainViewModel.Input(
+            viewDidLoadTrigger: Observable.just(()),
+            didScrollTriigger: projectCollectionView.rx.contentOffset.asObservable()
+        )
         let output = viewModel.transform(input: input)
         
         output.hotProjects
@@ -146,6 +147,12 @@ final class MainViewController: BaseViewController {
         output.projects
             .drive(onNext: { [weak self] projects in
                 self?.applySectionSnapshot(to: .main, with: projects)
+            })
+            .disposed(by: disposeBag)
+        
+        output.layoutMode
+            .drive(onNext: { [weak self] mode in
+                self?.animateLayoutChange(to: mode)
             })
             .disposed(by: disposeBag)
     }
@@ -357,19 +364,4 @@ extension MainViewController {
         return configuration
     }
     
-    // MARK: - Bind Method
-    private func bindCollectionViewScrollToLayoutChange() {
-        projectCollectionView.rx
-            .didScroll
-            .withUnretained(self)
-            .map { owner, _ in
-                owner.projectCollectionView.contentOffset.y
-            }
-            .map { $0 <= 0 ? WriteButtonLayout.imageAndText : WriteButtonLayout.imageOnly }
-            .distinctUntilChanged()
-            .subscribe(onNext: { [weak self] mode in
-                self?.animateLayoutChange(to: mode)
-            })
-            .disposed(by: disposeBag)
-    }
 }

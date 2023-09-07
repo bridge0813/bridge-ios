@@ -5,18 +5,23 @@
 //  Created by 엄지호 on 2023/08/30.
 //
 
+import CoreFoundation
+import CoreGraphics
 import RxCocoa
 import RxSwift
 
 final class MainViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
-        var viewDidLoadTrigger: Observable<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
+        let viewDidLoadTrigger: Observable<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
+        let didScrollTriigger: Observable<CGPoint>
+        
     }
     
     struct Output {
-        var hotProjects: Driver<[Project]>
-        var projects: Driver<[Project]>
+        let hotProjects: Driver<[Project]>
+        let projects: Driver<[Project]>
+        let layoutMode: Driver<WriteButtonLayout>
     }
 
     // MARK: - Properties
@@ -57,9 +62,15 @@ final class MainViewModel: ViewModelType {
             .bind(to: projects)
             .disposed(by: disposeBag)
         
+        let layoutMode = input.didScrollTriigger
+            .map { $0.y <= 0 ? WriteButtonLayout.imageAndText : .imageOnly}
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: .imageAndText)
+        
         return Output(
             hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
-            projects: projects.asDriver(onErrorJustReturn: [Project.onError])
+            projects: projects.asDriver(onErrorJustReturn: [Project.onError]),
+            layoutMode: layoutMode
         )
     }
 
