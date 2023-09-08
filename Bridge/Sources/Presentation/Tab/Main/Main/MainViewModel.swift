@@ -46,6 +46,7 @@ final class MainViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
+        // MARK: - Fetch Projects
         let hotProjects = input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
@@ -60,10 +61,12 @@ final class MainViewModel: ViewModelType {
             }
             .share(replay: 1)
         
+        // MARK: - Button State
         let layoutMode = input.didScroll
             .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
             .distinctUntilChanged()
         
+        // MARK: - Button Actions
         input.notificationButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
@@ -93,6 +96,7 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // MARK: - Item Selected
         input.itemSelected
             .withUnretained(self)
             .flatMap { owner, indexPath -> Observable<Project> in
