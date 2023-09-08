@@ -12,13 +12,13 @@ import RxSwift
 final class MainViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
-        let viewDidLoad: Observable<Void>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
+        let viewWillAppear: Observable<Bool>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
         let didScroll: Observable<CGPoint>
-        let notifButtonDidTap: Observable<Void>
-        let filterButtonDidTap: Observable<Void>
-        let searchButtonDidTap: Observable<String?>
+        let notificationButtonTapped: Observable<Void>
+        let filterButtonTapped: Observable<Void>
+        let searchButtonTapped: Observable<String?>
         let itemSelected: Observable<IndexPath>
-        let createButtonDidTap: Observable<Void>
+        let createButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -103,7 +103,7 @@ extension MainViewModel {
     private func bindHotProjects(from input: Input) -> BehaviorRelay<[Project]> {
         let hotProjects = BehaviorRelay<[Project]>(value: [])
         
-        input.viewDidLoad
+        input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.fetchHotProjectsUseCase.execute()
@@ -117,7 +117,7 @@ extension MainViewModel {
     private func bindMainProjects(from input: Input) -> BehaviorRelay<[Project]> {
         let projects = BehaviorRelay<[Project]>(value: [])
         
-        input.viewDidLoad
+        input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.fetchProjectsUseCase.execute()
@@ -135,7 +135,7 @@ extension MainViewModel {
     }
     
     private func bindNotifButtonDidTap(from input: Input) {
-        input.notifButtonDidTap
+        input.notificationButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.connectToNotificationFlow()
@@ -144,7 +144,7 @@ extension MainViewModel {
     }
     
     private func bindFilterButtonDidTap(from input: Input) {
-        input.filterButtonDidTap
+        input.filterButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.connectToProjectFilteringFlow()
@@ -153,7 +153,7 @@ extension MainViewModel {
     }
     
     private func bindSearchButtonDidTap(from input: Input) {
-        input.searchButtonDidTap
+        input.searchButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, text in
                 guard let text else { return }
@@ -163,7 +163,7 @@ extension MainViewModel {
     }
     
     private func bindCreateButtonDidTap(from input: Input) {
-        input.createButtonDidTap
+        input.createButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.connectToCreateProjectFlow()

@@ -131,13 +131,13 @@ final class MainViewController: BaseViewController {
     
     override func bind() {
         let input = MainViewModel.Input(
-            viewDidLoad: Observable.just(()),
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
             didScroll: projectCollectionView.rx.contentOffset.asObservable(),
-            notifButtonDidTap: goToNotificationButton.rx.tap.asObservable(),
-            filterButtonDidTap: filterButton.rx.tap.asObservable(),
-            searchButtonDidTap: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text),
+            notificationButtonTapped: goToNotificationButton.rx.tap.asObservable(),
+            filterButtonTapped: filterButton.rx.tap.asObservable(),
+            searchButtonTapped: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text),
             itemSelected: projectCollectionView.rx.itemSelected.asObservable(),
-            createButtonDidTap: createProjectButton.rx.tap.asObservable()
+            createButtonTapped: createProjectButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
         
@@ -157,10 +157,6 @@ final class MainViewController: BaseViewController {
             .drive(onNext: { [weak self] mode in
                 self?.animateLayoutChange(to: mode)
             })
-            .disposed(by: disposeBag)
-        
-        projectCollectionView.rx
-            .setDelegate(self)
             .disposed(by: disposeBag)
     }
 }
@@ -299,9 +295,6 @@ extension MainViewController {
         dataSource?.apply(snapshot, to: section)
     }
 }
-
-// MARK: - UICollectionViewDelegate
-extension MainViewController: UICollectionViewDelegate { }
 
 // MARK: - ScrollEvent
 extension MainViewController {
