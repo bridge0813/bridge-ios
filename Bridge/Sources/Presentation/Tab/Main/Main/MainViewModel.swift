@@ -65,10 +65,7 @@ final class MainViewModel: ViewModelType {
             .bind(to: projects)
             .disposed(by: disposeBag)
         
-        let layoutMode = input.didScroll
-            .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
-            .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: .both)
+        let layoutMode = calculateButtonState(from: input)
         
         input.notifButtonDidTap
             .withUnretained(self)
@@ -150,5 +147,15 @@ extension MainViewModel {
     enum CreateButtonDisplayState {
         case both
         case only
+    }
+}
+
+// MARK: - Binding
+extension MainViewModel {
+    private func calculateButtonState(from input: Input) -> Driver<CreateButtonDisplayState> {
+        return input.didScroll
+            .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: .both)
     }
 }
