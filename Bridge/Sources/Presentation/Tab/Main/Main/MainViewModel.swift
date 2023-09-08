@@ -46,26 +46,10 @@ final class MainViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let hotProjects = BehaviorRelay<[Project]>(value: [])
-        let projects = BehaviorRelay<[Project]>(value: [])
+        let hotProjects = bindHotProjects(from: input)
+        let projects = bindMainProjects(from: input)
         
-        input.viewDidLoad
-            .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.fetchHotProjectsUseCase.execute()
-            }
-            .bind(to: hotProjects)
-            .disposed(by: disposeBag)
-        
-        input.viewDidLoad
-            .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.fetchProjectsUseCase.execute()
-            }
-            .bind(to: projects)
-            .disposed(by: disposeBag)
-        
-        let layoutMode = calculateButtonState(from: input)
+        let layoutMode = bindButtonDisplayState(from: input)
         
         input.notifButtonDidTap
             .withUnretained(self)
@@ -152,7 +136,35 @@ extension MainViewModel {
 
 // MARK: - Binding
 extension MainViewModel {
-    private func calculateButtonState(from input: Input) -> Driver<CreateButtonDisplayState> {
+    private func bindHotProjects(from input: Input) -> BehaviorRelay<[Project]> {
+        let hotProjects = BehaviorRelay<[Project]>(value: [])
+        
+        input.viewDidLoad
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.fetchHotProjectsUseCase.execute()
+            }
+            .bind(to: hotProjects)
+            .disposed(by: disposeBag)
+        
+        return hotProjects
+    }
+    
+    private func bindMainProjects(from input: Input) -> BehaviorRelay<[Project]> {
+        let projects = BehaviorRelay<[Project]>(value: [])
+        
+        input.viewDidLoad
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.fetchProjectsUseCase.execute()
+            }
+            .bind(to: projects)
+            .disposed(by: disposeBag)
+        
+        return projects
+    }
+    
+    private func bindButtonDisplayState(from input: Input) -> Driver<CreateButtonDisplayState> {
         return input.didScroll
             .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
             .distinctUntilChanged()
