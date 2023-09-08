@@ -46,15 +46,63 @@ final class MainViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let hotProjects = bindHotProjects(from: input)
-        let projects = bindMainProjects(from: input)
-        let layoutMode = bindButtonDisplayState(from: input)
+        let hotProjects = input.viewWillAppear
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.fetchHotProjectsUseCase.execute()
+            }
+            .share(replay: 1)
         
-        bindNotifButtonDidTap(from: input)
-        bindFilterButtonDidTap(from: input)
-        bindSearchButtonDidTap(from: input)
-        bindCreateButtonDidTap(from: input)
-        bindItemSelected(from: input, hotProjects: hotProjects.value, mainProjects: projects.value)
+        let projects = input.viewWillAppear
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.fetchProjectsUseCase.execute()
+            }
+            .share(replay: 1)
+        
+        let layoutMode = input.didScroll
+            .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
+            .distinctUntilChanged()
+        
+        input.notificationButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.connectToNotificationFlow()
+            })
+            .disposed(by: disposeBag)
+        
+        input.filterButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.connectToProjectFilteringFlow()
+            })
+            .disposed(by: disposeBag)
+    
+        input.searchButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, text in
+                guard let text else { return }
+                owner.coordinator?.connectToProjectSearchFlow(with: text)
+            })
+            .disposed(by: disposeBag)
+        
+        input.createButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.connectToCreateProjectFlow()
+            })
+            .disposed(by: disposeBag)
+        
+        input.itemSelected
+            .withUnretained(self)
+            .flatMap { owner, indexPath -> Observable<Project> in
+                owner.findProjectByIndex(indexPath, hotProjects: hotProjects, mainProjects: projects)
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, project in
+                owner.coordinator?.connectToProjectDetailFlow(with: project.id)
+            })
+            .disposed(by: disposeBag)
         
         return Output(
             hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
@@ -66,23 +114,7 @@ final class MainViewModel: ViewModelType {
 
 // MARK: - Coordinator
 extension MainViewModel {
-    private func showProjectDetail(
-        from indexPath: IndexPath,
-        hotProjects: [Project],
-        mainProjects: [Project]
-    ) {
-        let section = Section.allCases[indexPath.section]
-        
-        switch section {
-        case .hot:
-            let project = hotProjects[indexPath.row]
-            coordinator?.connectToProjectDetailFlow(with: project)
-            
-        case .main:
-            let project = mainProjects[indexPath.row]
-            coordinator?.connectToProjectDetailFlow(with: project)
-        }
-    }
+    
 }
 
 // MARK: - UI DataSource
@@ -98,89 +130,21 @@ extension MainViewModel {
     }
 }
 
-// MARK: - Binding
+// MARK: - UtilityMethods
 extension MainViewModel {
-    private func bindHotProjects(from input: Input) -> BehaviorRelay<[Project]> {
-        let hotProjects = BehaviorRelay<[Project]>(value: [])
-        
-        input.viewWillAppear
-            .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.fetchHotProjectsUseCase.execute()
-            }
-            .bind(to: hotProjects)
-            .disposed(by: disposeBag)
-        
-        return hotProjects
-    }
+    private func findProjectByIndex(
+        _ indexPath: IndexPath,
+        hotProjects: Observable<[Project]>,
+        mainProjects: Observable<[Project]>
+    ) -> Observable<Project> {
+        let section = Section.allCases[indexPath.section]
     
-    private func bindMainProjects(from input: Input) -> BehaviorRelay<[Project]> {
-        let projects = BehaviorRelay<[Project]>(value: [])
-        
-        input.viewWillAppear
-            .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.fetchProjectsUseCase.execute()
-            }
-            .bind(to: projects)
-            .disposed(by: disposeBag)
-        
-        return projects
-    }
-    
-    private func bindButtonDisplayState(from input: Input) -> Observable<CreateButtonDisplayState> {
-        return input.didScroll
-            .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
-            .distinctUntilChanged()
-    }
-    
-    private func bindNotifButtonDidTap(from input: Input) {
-        input.notificationButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.connectToNotificationFlow()
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindFilterButtonDidTap(from input: Input) {
-        input.filterButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.connectToProjectFilteringFlow()
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindSearchButtonDidTap(from input: Input) {
-        input.searchButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, text in
-                guard let text else { return }
-                owner.coordinator?.connectToProjectSearchFlow(with: text)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindCreateButtonDidTap(from input: Input) {
-        input.createButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.connectToCreateProjectFlow()
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindItemSelected(from input: Input, hotProjects: [Project], mainProjects: [Project]) {
-        input.itemSelected
-            .withUnretained(self)
-            .subscribe(onNext: { owner, indexPath in
-                owner.showProjectDetail(
-                    from: indexPath,
-                    hotProjects: hotProjects,
-                    mainProjects: mainProjects
-                )
-            })
-            .disposed(by: disposeBag)
+        switch section {
+        case .hot:
+            return hotProjects.map { $0[indexPath.row] }
+            
+        case .main:
+            return mainProjects.map { $0[indexPath.row] }
+        }
     }
 }

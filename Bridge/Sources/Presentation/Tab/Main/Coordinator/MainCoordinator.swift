@@ -12,7 +12,7 @@ protocol MainCoordinatorProtocol: Coordinator {
     func connectToNotificationFlow()
     func connectToProjectFilteringFlow()
     func connectToProjectSearchFlow(with query: String)
-    func connectToProjectDetailFlow(with project: Project)
+    func connectToProjectDetailFlow(with id: String)
     func connectToCreateProjectFlow()
 }
 
@@ -71,8 +71,8 @@ extension MainCoordinator {
         print(query)
     }
     
-    func connectToProjectDetailFlow(with project: Project) {
-        print(project.title)
+    func connectToProjectDetailFlow(with id: String) {
+        print(id)
     }
     
     func connectToCreateProjectFlow() {
