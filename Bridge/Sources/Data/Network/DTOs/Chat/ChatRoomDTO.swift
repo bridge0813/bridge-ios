@@ -68,7 +68,7 @@ extension ChatRoomDTO {
             latestMessageReceivedTime: "2023-09-04T15:45:10+00:00",
             latestMessageType: "text",
             latestMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
-            unreadMessageCount: "100"
+            unreadMessageCount: "10"
         ),
         ChatRoomDTO(
             id: "3",
@@ -77,7 +77,7 @@ extension ChatRoomDTO {
             latestMessageReceivedTime: "2023-09-04T11:00:00+00:00",
             latestMessageType: "image",
             latestMessageContent: "이미지가 수신된 경우의 미리보기 메시지입니다.",
-            unreadMessageCount: "3"
+            unreadMessageCount: "1000"
         ),
         ChatRoomDTO(
             id: "4",
