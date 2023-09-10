@@ -130,13 +130,14 @@ final class MainViewController: BaseViewController {
     }
     
     override func bind() {
-        projectCollectionView.rx
-            .setDelegate(self)
-            .disposed(by: disposeBag)
-        
         let input = MainViewModel.Input(
-            viewDidLoad: Observable.just(()),
-            didScroll: projectCollectionView.rx.contentOffset.asObservable()
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            didScroll: projectCollectionView.rx.contentOffset.asObservable(),
+            notificationButtonTapped: goToNotificationButton.rx.tap.asObservable(),
+            filterButtonTapped: filterButton.rx.tap.asObservable(),
+            searchButtonTapped: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text),
+            itemSelected: projectCollectionView.rx.itemSelected.asObservable(),
+            createButtonTapped: createProjectButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
         
@@ -294,9 +295,6 @@ extension MainViewController {
         dataSource?.apply(snapshot, to: section)
     }
 }
-
-// MARK: - UICollectionViewDelegate
-extension MainViewController: UICollectionViewDelegate { }
 
 // MARK: - ScrollEvent
 extension MainViewController {
