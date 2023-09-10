@@ -46,20 +46,39 @@ final class MainViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        // MARK: - Fetch Projects
-        let hotProjects = input.viewWillAppear
-            .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.fetchHotProjectsUseCase.execute()
-            }
-            .share(replay: 1)
+        let hotProjects = BehaviorRelay<[Project]>(value: [])
+        let projects = BehaviorRelay<[Project]>(value: [])
         
-        let projects = input.viewWillAppear
+        // MARK: - Fetch Projects
+        input.viewWillAppear
             .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.fetchProjectsUseCase.execute()
+            .flatMapLatest { owner, _ -> Observable<[Project]> in
+                return owner.fetchHotProjectsUseCase.execute()
             }
-            .share(replay: 1)
+            .distinctUntilChanged()
+            .bind(to: hotProjects)
+            .disposed(by: disposeBag)
+
+        input.viewWillAppear
+            .withUnretained(self)
+            .flatMapLatest { owner, _ -> Observable<[Project]> in
+                return owner.fetchProjectsUseCase.execute()
+            }
+            .distinctUntilChanged()
+            .bind(to: projects)
+            .disposed(by: disposeBag)
+        
+        // MARK: - Item Selected
+        input.itemSelected
+            .withUnretained(self)
+            .map { owner, indexPath in
+                owner.findProjectByIndex(indexPath, hotProjects: hotProjects.value, projects: projects.value)
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, project in
+                owner.coordinator?.connectToProjectDetailFlow(with: project.id)
+            })
+            .disposed(by: disposeBag)
         
         // MARK: - Button State
         let layoutMode = input.didScroll
@@ -96,18 +115,6 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        // MARK: - Item Selected
-        input.itemSelected
-            .withUnretained(self)
-            .flatMap { owner, indexPath -> Observable<Project> in
-                owner.findProjectByIndex(indexPath, hotProjects: hotProjects, mainProjects: projects)
-            }
-            .withUnretained(self)
-            .subscribe(onNext: { owner, project in
-                owner.coordinator?.connectToProjectDetailFlow(with: project.id)
-            })
-            .disposed(by: disposeBag)
-        
         return Output(
             hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
             projects: projects.asDriver(onErrorJustReturn: [Project.onError]),
@@ -138,17 +145,17 @@ extension MainViewModel {
 extension MainViewModel {
     private func findProjectByIndex(
         _ indexPath: IndexPath,
-        hotProjects: Observable<[Project]>,
-        mainProjects: Observable<[Project]>
-    ) -> Observable<Project> {
+        hotProjects: [Project],
+        projects: [Project]
+    ) -> Project {
         let section = Section.allCases[indexPath.section]
     
         switch section {
         case .hot:
-            return hotProjects.map { $0[indexPath.row] }
+            return hotProjects[indexPath.row]
             
         case .main:
-            return mainProjects.map { $0[indexPath.row] }
+            return projects[indexPath.row]
         }
     }
 }
