@@ -131,7 +131,7 @@ final class MainViewController: BaseViewController {
     
     override func bind() {
         let input = MainViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asObservable().share(),
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
             didScroll: projectCollectionView.rx.contentOffset.asObservable(),
             notificationButtonTapped: goToNotificationButton.rx.tap.asObservable(),
             filterButtonTapped: filterButton.rx.tap.asObservable(),
