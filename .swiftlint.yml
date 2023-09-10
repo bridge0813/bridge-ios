@@ -22,7 +22,6 @@ opt_in_rules: # 활성화 할 규칙
 - fatal_error_message
 - force_unwrapping
 - implicitly_unwrapped_optional
-- indentation_width
 - literal_expression_end_indentation
 - multiline_arguments
 - multiline_function_chains
