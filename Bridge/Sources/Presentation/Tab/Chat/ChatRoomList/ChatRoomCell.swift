@@ -122,7 +122,7 @@ private extension ChatRoomCell {
         unreadMessageCountLabel.text = displayState.text
         
         let size = displayState.size(of: unreadMessageCountLabel.font)
-        let width = max(size.width + 6, 18)
+        let width = max(size.width + 12, 18)
         unreadMessageCountLabel.flex.width(width).height(18).cornerRadius(9)
     }
     
@@ -131,7 +131,7 @@ private extension ChatRoomCell {
         case general(Int)
         case exceededLimit(Int)
         
-        init(_ unreadMessageCount: Int, limit: Int = 300) {
+        init(_ unreadMessageCount: Int, limit: Int = 999) {
             switch unreadMessageCount {
             case 0:           self = .hidden
             case 1 ... limit: self = .general(unreadMessageCount)
