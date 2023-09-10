@@ -37,12 +37,18 @@ final class ChatRoomListViewModel: ViewModelType {
         self.leaveChatRoomUseCase = leaveChatRoomUseCase
     }
     
+    // TODO: apns 들어오면 구조 바꿔야할수도
+    // TODO: 뷰컨에서 채팅방 0개일 때에 대한 플레이스홀더 디자인 필요할듯
     func transform(input: Input) -> Output {
-        let chatRooms = input.viewWillAppear
+        let chatRooms = BehaviorRelay<[ChatRoom]>(value: [])
+        
+        input.viewWillAppear
             .withUnretained(self)
-            .flatMap { owner, _ in
+            .flatMapLatest { owner, _ in
                 owner.fetchChatRooms()
             }
+            .bind(to: chatRooms)
+            .disposed(by: disposeBag)
         
         input.itemSelected
             .withLatestFrom(chatRooms) { indexPath, chatRooms in
@@ -50,11 +56,11 @@ final class ChatRoomListViewModel: ViewModelType {
             }
             .withUnretained(self)
             .subscribe(onNext: { owner, chatRoom in
-                owner.coordinator?.showChatRoomDetailViewController(of: chatRoom)
+                owner.coordinator?.showChatRoomDetailViewController(of: chatRoom)  // 임시
             })
             .disposed(by: disposeBag)
         
-        let reloadedChatRooms = input.leaveChatRoomTrigger
+        input.leaveChatRoomTrigger
             .withLatestFrom(chatRooms) { indexPath, chatRooms in
                 chatRooms[indexPath.row]
             }
@@ -63,19 +69,19 @@ final class ChatRoomListViewModel: ViewModelType {
                 owner.leaveChatRoomUseCase.execute(id: chatRoom.id)
             }
             .withUnretained(self)
-            .flatMap { owner, _ in
+            .flatMap { owner, _ in  // 다시 fetch 해오는게 맞을지 고민
                 owner.fetchChatRooms()
             }
+            .bind(to: chatRooms)
+            .disposed(by: disposeBag)
         
-        return Output(chatRooms: Observable.merge(chatRooms, reloadedChatRooms)
-            .asDriver(onErrorJustReturn: [ChatRoom.onError])
-        )
+        return Output(chatRooms: chatRooms.asDriver(onErrorJustReturn: [ChatRoom.onError]))
     }
 }
 
 extension ChatRoomListViewModel {
     private func fetchChatRooms() -> Observable<[ChatRoom]> {
-        fetchChatRoomsUseCase.execute()
+        return fetchChatRoomsUseCase.execute()
     }
 }
 
