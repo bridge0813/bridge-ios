@@ -75,6 +75,8 @@
 		7CC9F6D72AAF15AF00685EA9 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D62AAF15AF00685EA9 /* ProjectProgressStatusViewController.swift */; };
 		7CC9F6DA2AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D92AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift */; };
 		7CC9F6DC2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6DB2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift */; };
+		7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */; };
+		7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +143,8 @@
 		7CC9F6D62AAF15AF00685EA9 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
 		7CC9F6D92AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6DB2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewController.swift; sourceTree = "<group>"; };
+		7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewModel.swift; sourceTree = "<group>"; };
+		7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewController.swift; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -521,6 +525,7 @@
 				7CC9F6CE2AAF118600685EA9 /* ProjectDatePicker */,
 				7CC9F6D32AAF13C300685EA9 /* ProjectProgressStatus */,
 				7CC9F6D82AAF161600685EA9 /* ProjectOverviewInput */,
+				7CC9F6DD2AAF180900685EA9 /* Completion */,
 			);
 			path = CreateProject;
 			sourceTree = "<group>";
@@ -568,6 +573,15 @@
 				7CC9F6DB2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift */,
 			);
 			path = ProjectOverviewInput;
+			sourceTree = "<group>";
+		};
+		7CC9F6DD2AAF180900685EA9 /* Completion */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */,
+				7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */,
+			);
+			path = Completion;
 			sourceTree = "<group>";
 		};
 		7CF93E012A9C64EB0013EBD6 /* Main */ = {
@@ -743,6 +757,7 @@
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
 				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
 				7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */,
+				7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */,
 				7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */,
 				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,
@@ -766,6 +781,7 @@
 				7CC9F6D52AAF15A700685EA9 /* ProjectProgressStatusViewModel.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
+				7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */,
 				7CC9F6DA2AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
