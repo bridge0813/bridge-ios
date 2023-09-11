@@ -69,6 +69,8 @@
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
 		7CC9F6CB2AAF0EEC00685EA9 /* MemberDetailInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6CA2AAF0EEC00685EA9 /* MemberDetailInputViewModel.swift */; };
 		7CC9F6CD2AAF0EF800685EA9 /* MemberDetailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6CC2AAF0EF800685EA9 /* MemberDetailInputViewController.swift */; };
+		7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6CF2AAF132E00685EA9 /* ProjectDatePickerViewController.swift */; };
+		7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -129,6 +131,8 @@
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
 		7CC9F6CA2AAF0EEC00685EA9 /* MemberDetailInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailInputViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6CC2AAF0EF800685EA9 /* MemberDetailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailInputViewController.swift; sourceTree = "<group>"; };
+		7CC9F6CF2AAF132E00685EA9 /* ProjectDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDatePickerViewController.swift; sourceTree = "<group>"; };
+		7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDatePickerViewModel.swift; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -506,6 +510,8 @@
 			children = (
 				7CC9F6C82AAF087A00685EA9 /* MemberFieldSelection */,
 				7CC9F6C92AAF0E1500685EA9 /* MemberDetailInput */,
+				7CC9F6CE2AAF118600685EA9 /* ProjectDatePicker */,
+				7CC9F6D32AAF13C300685EA9 /* New Group */,
 			);
 			path = CreateProject;
 			sourceTree = "<group>";
@@ -526,6 +532,22 @@
 				7CC9F6CC2AAF0EF800685EA9 /* MemberDetailInputViewController.swift */,
 			);
 			path = MemberDetailInput;
+			sourceTree = "<group>";
+		};
+		7CC9F6CE2AAF118600685EA9 /* ProjectDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */,
+				7CC9F6CF2AAF132E00685EA9 /* ProjectDatePickerViewController.swift */,
+			);
+			path = ProjectDatePicker;
+			sourceTree = "<group>";
+		};
+		7CC9F6D32AAF13C300685EA9 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		7CF93E012A9C64EB0013EBD6 /* Main */ = {
@@ -691,11 +713,13 @@
 				7BA36CCE2A9E185A000DAB02 /* ChatRoomCell.swift in Sources */,
 				7C569D062A9F776B0063D362 /* Date+.swift in Sources */,
 				7CC9F6CB2AAF0EEC00685EA9 /* MemberDetailInputViewModel.swift in Sources */,
+				7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */,
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
+				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
 				7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */,
 				7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */,
 				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
