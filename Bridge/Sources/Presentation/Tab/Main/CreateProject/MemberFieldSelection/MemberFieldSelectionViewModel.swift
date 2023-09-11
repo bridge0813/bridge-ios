@@ -1,5 +1,5 @@
 //
-//  CreateProjectViewModel.swift
+//  MemberFieldSelectionViewModel.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -7,7 +7,7 @@
 
 import RxSwift
 
-final class CreateProjectViewModel: ViewModelType {
+final class MemberFieldSelectionViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         

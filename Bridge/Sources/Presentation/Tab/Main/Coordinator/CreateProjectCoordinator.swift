@@ -32,11 +32,11 @@ final class CreateProjectCoordinator: CreateProjectCoordinatorProtocol {
 
 extension CreateProjectCoordinator {
     func showCreateProjectViewController() {
-        let createProjectViewModel = CreateProjectViewModel(    
+        let memberFieldSelectionViewModel = MemberFieldSelectionViewModel(
             coordinator: self
         )
         
-        let createProjectVC = CreateProjectViewController(viewModel: createProjectViewModel)
+        let createProjectVC = MemberFieldSelectionViewController(viewModel: memberFieldSelectionViewModel)
         navigationController.pushViewController(createProjectVC, animated: true)
     }
 }

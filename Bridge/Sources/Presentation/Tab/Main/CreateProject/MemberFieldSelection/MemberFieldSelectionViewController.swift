@@ -1,5 +1,5 @@
 //
-//  CreateProjectViewController.swift
+//  MemberFieldSelectionViewController.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class CreateProjectViewController: BaseViewController {
+final class MemberFieldSelectionViewController: BaseViewController {
     // MARK: - Properties
     private let rootFlexContainer = UIView()
    
@@ -21,10 +21,10 @@ final class CreateProjectViewController: BaseViewController {
         return button
     }()
 
-    private let viewModel: CreateProjectViewModel
+    private let viewModel: MemberFieldSelectionViewModel
     
     // MARK: - Initializer
-    init(viewModel: CreateProjectViewModel) {
+    init(viewModel: MemberFieldSelectionViewModel) {
         self.viewModel = viewModel
         super.init()
     }
