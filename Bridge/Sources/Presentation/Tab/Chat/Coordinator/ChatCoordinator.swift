@@ -52,3 +52,10 @@ extension ChatCoordinator {
         // ChatRoomDetailCoordinator로 연결...
     }
 }
+
+// MARK: - Auth
+extension ChatCoordinator {
+    func showSignInViewController() {
+        delegate?.showSignInViewController()
+    }
+}
