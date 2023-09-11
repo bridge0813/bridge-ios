@@ -1,5 +1,5 @@
 //
-//  MemberFieldSelectionViewController.swift
+//  MemberDetailInputViewController.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class MemberFieldSelectionViewController: BaseViewController {
+final class MemberDetailInputViewController: BaseViewController {
     // MARK: - Properties
     private let rootFlexContainer = UIView()
    
@@ -21,10 +21,10 @@ final class MemberFieldSelectionViewController: BaseViewController {
         return button
     }()
 
-    private let viewModel: MemberFieldSelectionViewModel
+    private let viewModel: MemberDetailInputViewModel
     
     // MARK: - Initializer
-    init(viewModel: MemberFieldSelectionViewModel) {
+    init(viewModel: MemberDetailInputViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -47,7 +47,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     // MARK: - Methods
     private func configureNavigationUI() {
-        navigationItem.title = "모집글 작성(Step1)"
+        navigationItem.title = "모집글 작성(Step2)"
     }
     
     override func configureLayouts() {
