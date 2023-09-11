@@ -76,6 +76,19 @@ extension MainCoordinator {
     }
     
     func connectToCreateProjectFlow() {
-        print("모집글 작성 뷰 이동")
+        let createProjectCoordinator = CreateProjectCoordinator(navigationController: navigationController)
+        createProjectCoordinator.delegate = self
+        createProjectCoordinator.start()
+        childCoordinators.append(createProjectCoordinator)
+    }
+}
+
+extension MainCoordinator: CoordinatorDelegate {
+    func didFinish(childCoordinator: Coordinator) {
+        navigationController.popToRootViewController(animated: true)
+        
+        if let index = childCoordinators.firstIndex(where: { $0 === childCoordinator }) {
+            childCoordinators.remove(at: index)
+        }
     }
 }
