@@ -44,6 +44,7 @@ extension AppCoordinator {
 extension AppCoordinator: CoordinatorDelegate {
     func didFinish(childCoordinator: Coordinator) {
         navigationController.popToRootViewController(animated: true)
+        // child coordinator가 온보딩이면 제거 후 탭 바 flow 시작
         connectTabBarFlow()
     }
 }
