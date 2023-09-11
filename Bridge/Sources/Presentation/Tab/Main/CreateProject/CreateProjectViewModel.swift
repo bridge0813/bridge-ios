@@ -19,13 +19,14 @@ final class CreateProjectViewModel: ViewModelType {
     
     // MARK: - Properties
     let disposeBag = DisposeBag()
+    private weak var coordinator: CreateProjectCoordinator?
     
     
     // MARK: - Initializer
     init(
-        
+        coordinator: CreateProjectCoordinator
     ) {
-        
+        self.coordinator = coordinator
     }
     
     // MARK: - Methods
