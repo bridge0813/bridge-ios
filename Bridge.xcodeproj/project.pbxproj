@@ -73,6 +73,8 @@
 		7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */; };
 		7CC9F6D52AAF15A700685EA9 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D42AAF15A700685EA9 /* ProjectProgressStatusViewModel.swift */; };
 		7CC9F6D72AAF15AF00685EA9 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D62AAF15AF00685EA9 /* ProjectProgressStatusViewController.swift */; };
+		7CC9F6DA2AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D92AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift */; };
+		7CC9F6DC2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6DB2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -137,6 +139,8 @@
 		7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDatePickerViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6D42AAF15A700685EA9 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6D62AAF15AF00685EA9 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
+		7CC9F6D92AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewModel.swift; sourceTree = "<group>"; };
+		7CC9F6DB2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewController.swift; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -516,6 +520,7 @@
 				7CC9F6C92AAF0E1500685EA9 /* MemberDetailInput */,
 				7CC9F6CE2AAF118600685EA9 /* ProjectDatePicker */,
 				7CC9F6D32AAF13C300685EA9 /* ProjectProgressStatus */,
+				7CC9F6D82AAF161600685EA9 /* ProjectOverviewInput */,
 			);
 			path = CreateProject;
 			sourceTree = "<group>";
@@ -554,6 +559,15 @@
 				7CC9F6D62AAF15AF00685EA9 /* ProjectProgressStatusViewController.swift */,
 			);
 			path = ProjectProgressStatus;
+			sourceTree = "<group>";
+		};
+		7CC9F6D82AAF161600685EA9 /* ProjectOverviewInput */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9F6D92AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift */,
+				7CC9F6DB2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift */,
+			);
+			path = ProjectOverviewInput;
 			sourceTree = "<group>";
 		};
 		7CF93E012A9C64EB0013EBD6 /* Main */ = {
@@ -705,6 +719,7 @@
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
 				7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */,
+				7CC9F6DC2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
@@ -751,6 +766,7 @@
 				7CC9F6D52AAF15A700685EA9 /* ProjectProgressStatusViewModel.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
+				7CC9F6DA2AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
