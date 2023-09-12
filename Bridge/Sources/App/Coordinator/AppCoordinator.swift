@@ -7,12 +7,7 @@
 
 import UIKit
 
-protocol AppCoordinatorProtocol: Coordinator {
-    func connectOnboardingFlow()
-    func connectTabBarFlow()
-}
-
-final class AppCoordinator: AppCoordinatorProtocol {
+final class AppCoordinator: Coordinator {
     
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController

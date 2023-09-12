@@ -7,12 +7,7 @@
 
 import UIKit
 
-protocol AuthCoordinatorProtocol: Coordinator {
-    func showSignInViewController()
-    func connectSignUpFlow(to: UINavigationController)
-}
-
-final class AuthCoordinator: AuthCoordinatorProtocol {
+final class AuthCoordinator: Coordinator {
     
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
@@ -34,9 +29,5 @@ extension AuthCoordinator {
         navigationController.present(signInViewController, animated: true)
     }
     
-    func connectSignUpFlow(to: UINavigationController) {
-        let signUpCoordinator = SignUpCoordinator(navigationController: navigationController)
-        signUpCoordinator.start()
-        childCoordinators.append(signUpCoordinator)
-    }
+    // 회원가입 플로우 추가
 }

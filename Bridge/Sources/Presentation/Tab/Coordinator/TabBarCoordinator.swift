@@ -7,22 +7,7 @@
 
 import UIKit
 
-protocol TabBarCoordinatorProtocol: Coordinator {
-    var tabBarController: UITabBarController { get set }
-    
-    func selectPage(_ page: TabBarPageType)
-    func setSelectedPage(_ index: Int)
-    func currentPage() -> TabBarPageType?
-    
-    func connectMainFlow(to: UINavigationController)
-    func connectManagementFlow(to: UINavigationController)
-    func connectChatFlow(to: UINavigationController)
-    func connectMypageFlow(to: UINavigationController)
-    
-    func showSignInViewController()
-}
-
-final class TabBarCoordinator: TabBarCoordinatorProtocol {
+final class TabBarCoordinator: Coordinator {
     
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
@@ -42,22 +27,22 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
     }
 }
 
-extension TabBarCoordinator {
-    private func configureTabBarController(with viewControllers: [UIViewController]) {
+private extension TabBarCoordinator {
+    func configureTabBarController(with viewControllers: [UIViewController]) {
         tabBarController.viewControllers = viewControllers
         navigationController.setNavigationBarHidden(true, animated: false)
         navigationController.pushViewController(tabBarController, animated: false)
         configureBarAppearance()
     }
     
-    private func createTabNavigationController(of page: TabBarPageType) -> UINavigationController {
+    func createTabNavigationController(of page: TabBarPageType) -> UINavigationController {
         let navigationController = UINavigationController()
         navigationController.tabBarItem = page.tabBarItem
         connectTabCoordinator(of: page, to: navigationController)
         return navigationController
     }
     
-    private func connectTabCoordinator(of page: TabBarPageType, to tabNavigationController: UINavigationController) {
+    func connectTabCoordinator(of page: TabBarPageType, to tabNavigationController: UINavigationController) {
         switch page {
         case .main:
             connectMainFlow(to: tabNavigationController)
