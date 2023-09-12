@@ -38,7 +38,6 @@ final class ChatRoomListViewModel: ViewModelType {
     }
     
     // TODO: apns 들어오면 구조 바꿔야할수도
-    // TODO: 뷰컨에서 채팅방 0개일 때에 대한 플레이스홀더 디자인 필요할듯
     func transform(input: Input) -> Output {
         let chatRooms = BehaviorRelay<[ChatRoom]>(value: [])
         
@@ -57,6 +56,7 @@ final class ChatRoomListViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, chatRoom in
                 owner.coordinator?.showChatRoomDetailViewController(of: chatRoom)  // 임시
+                owner.coordinator?.showSignInViewController()  // 테스트용
             })
             .disposed(by: disposeBag)
         

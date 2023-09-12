@@ -7,12 +7,7 @@
 
 import UIKit
 
-protocol ChatCoordinatorProtocol: Coordinator {
-    func showChatRoomListViewController()
-    func showChatRoomDetailViewController(of: ChatRoom)
-}
-
-final class ChatCoordinator: ChatCoordinatorProtocol {
+final class ChatCoordinator: Coordinator {
     
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
@@ -49,6 +44,13 @@ extension ChatCoordinator {
     }
     
     func showChatRoomDetailViewController(of chatRoom: ChatRoom) {
-        // ChatRoomDetailCoordinator로 연결...
+        // ChatRoomDetail로 연결...
+    }
+}
+
+// MARK: - Auth
+extension ChatCoordinator {
+    func showSignInViewController() {
+        delegate?.showSignInViewController()
     }
 }

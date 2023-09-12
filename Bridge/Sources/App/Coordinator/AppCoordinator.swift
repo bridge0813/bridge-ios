@@ -7,12 +7,7 @@
 
 import UIKit
 
-protocol AppCoordinatorProtocol: Coordinator {
-    func connectOnboardingFlow()
-    func connectTabBarFlow()
-}
-
-final class AppCoordinator: AppCoordinatorProtocol {
+final class AppCoordinator: Coordinator {
     
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
@@ -44,6 +39,7 @@ extension AppCoordinator {
 extension AppCoordinator: CoordinatorDelegate {
     func didFinish(childCoordinator: Coordinator) {
         navigationController.popToRootViewController(animated: true)
+        // child coordinator가 온보딩이면 제거 후 탭 바 flow 시작
         connectTabBarFlow()
     }
 }
