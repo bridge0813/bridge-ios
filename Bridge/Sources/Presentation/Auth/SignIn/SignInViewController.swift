@@ -18,7 +18,7 @@ final class SignInViewController: BaseViewController {
     private let rootFlexViewContainer = UIView()
     private let signInWithAppleButton: UIButton = {
         let button = UIButton()
-        button.setTitle("로그인", for: .normal)
+        button.setTitle("애플 로그인", for: .normal)
         button.setTitleColor(.black, for: .normal)
         return button
     }()
@@ -36,6 +36,10 @@ final class SignInViewController: BaseViewController {
     }
     
     // MARK: - Configurations
+    override func configureAttributes() {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
+    
     override func configureLayouts() {
         view.addSubview(rootFlexViewContainer)
         
