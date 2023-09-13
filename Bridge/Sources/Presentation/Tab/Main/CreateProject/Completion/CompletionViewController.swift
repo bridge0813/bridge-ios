@@ -49,7 +49,6 @@ final class CompletionViewController: BaseViewController {
     
     // MARK: - Methods
     private func configureNavigationUI() {
-        navigationItem.title = "모집글 작성(완료)"
     }
     
     override func configureLayouts() {

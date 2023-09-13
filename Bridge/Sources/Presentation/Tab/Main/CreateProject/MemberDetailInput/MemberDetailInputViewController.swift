@@ -49,7 +49,6 @@ final class MemberDetailInputViewController: BaseViewController {
     
     // MARK: - Methods
     private func configureNavigationUI() {
-        navigationItem.title = "모집글 작성(Step2)"
     }
     
     override func configureLayouts() {
