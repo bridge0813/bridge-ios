@@ -10,7 +10,7 @@ import RxSwift
 final class ProjectProgressStatusViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
-        
+        let nextButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -31,6 +31,13 @@ final class ProjectProgressStatusViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
+        input.nextButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showProjectOverviewInputViewController()
+            })
+            .disposed(by: disposeBag)
+        
         return Output()
     }
 }

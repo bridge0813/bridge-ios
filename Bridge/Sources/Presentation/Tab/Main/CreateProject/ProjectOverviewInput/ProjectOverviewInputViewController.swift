@@ -8,6 +8,8 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxCocoa
+import RxSwift
 
 final class ProjectOverviewInputViewController: BaseViewController {
     // MARK: - Properties
@@ -47,7 +49,7 @@ final class ProjectOverviewInputViewController: BaseViewController {
     
     // MARK: - Methods
     private func configureNavigationUI() {
-        navigationItem.title = "모집글 작성(Step4)"
+        navigationItem.title = "모집글 작성(Step5)"
     }
     
     override func configureLayouts() {
@@ -62,6 +64,9 @@ final class ProjectOverviewInputViewController: BaseViewController {
     }
     
     override func bind() {
-        
+        let input = ProjectOverviewInputViewModel.Input(
+            nextButtonTapped: nextButton.rx.tap.asObservable()
+        )
+        let output = viewModel.transform(input: input)
     }
 }

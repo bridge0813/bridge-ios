@@ -8,6 +8,8 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxCocoa
+import RxSwift
 
 final class ProjectDatePickerViewController: BaseViewController {
     // MARK: - Properties
@@ -62,6 +64,9 @@ final class ProjectDatePickerViewController: BaseViewController {
     }
     
     override func bind() {
-        
+        let input = ProjectDatePickerViewModel.Input(
+            nextButtonTapped: nextButton.rx.tap.asObservable()
+        )
+        let output = viewModel.transform(input: input)
     }
 }

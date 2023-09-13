@@ -8,6 +8,8 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxCocoa
+import RxSwift
 
 final class MemberFieldSelectionViewController: BaseViewController {
     // MARK: - Properties
@@ -62,6 +64,9 @@ final class MemberFieldSelectionViewController: BaseViewController {
     }
     
     override func bind() {
-        
+        let input = MemberFieldSelectionViewModel.Input(
+            nextButtonTapped: nextButton.rx.tap.asObservable()
+        )
+        let output = viewModel.transform(input: input)
     }
 }

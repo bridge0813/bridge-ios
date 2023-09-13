@@ -26,18 +26,63 @@ final class CreateProjectCoordinator: CreateProjectCoordinatorProtocol {
     
     // MARK: - Methods
     func start() {
-        showCreateProjectViewController()
+        showMemberFieldSelectionViewController()
     }
 }
 
 extension CreateProjectCoordinator {
-    func showCreateProjectViewController() {
-        let memberFieldSelectionViewModel = MemberFieldSelectionViewModel(
+    private func showMemberFieldSelectionViewController() {
+        let viewModel = MemberFieldSelectionViewModel(
             coordinator: self
         )
         
-        let createProjectVC = MemberFieldSelectionViewController(viewModel: memberFieldSelectionViewModel)
-        navigationController.pushViewController(createProjectVC, animated: true)
+        let viewController = MemberFieldSelectionViewController(viewModel: viewModel)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func showMemberDetailInputViewController() {
+        let viewModel = MemberDetailInputViewModel(
+            coordinator: self
+        )
+        
+        let viewController = MemberDetailInputViewController(viewModel: viewModel)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func showProjectDatePickerViewController() {
+        let viewModel = ProjectDatePickerViewModel(
+            coordinator: self
+        )
+        
+        let viewController = ProjectDatePickerViewController(viewModel: viewModel)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func showProjectProgressStatusViewController() {
+        let viewModel = ProjectProgressStatusViewModel(
+            coordinator: self
+        )
+        
+        let viewController = ProjectProgressStatusViewController(viewModel: viewModel)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func showProjectOverviewInputViewController() {
+        let viewModel = ProjectOverviewInputViewModel(
+            coordinator: self
+        )
+        
+        let viewController = ProjectOverviewInputViewController(viewModel: viewModel)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func showCompletionViewController() {
+        let viewModel = CompletionViewModel(
+            coordinator: self
+        )
+        
+        let viewController = CompletionViewController(viewModel: viewModel)
+        navigationController.pushViewController(viewController, animated: true)
     }
 }
 

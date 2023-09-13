@@ -8,14 +8,16 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxCocoa
+import RxSwift
 
 final class CompletionViewController: BaseViewController {
     // MARK: - Properties
     private let rootFlexContainer = UIView()
    
-    private let nextButton: UIButton = {
+    private let completionButton: UIButton = {
         let button = UIButton()
-        button.setTitle("다음", for: .normal)
+        button.setTitle("완료", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         
         return button
@@ -53,7 +55,7 @@ final class CompletionViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).padding(5).alignItems(.center).define { flex in
-            flex.addItem(nextButton).marginTop(100).width(50).height(50)
+            flex.addItem(completionButton).marginTop(100).width(50).height(50)
         }
     }
     
@@ -62,6 +64,9 @@ final class CompletionViewController: BaseViewController {
     }
     
     override func bind() {
-        
+        let input = CompletionViewModel.Input(
+            completionButtonTapped: completionButton.rx.tap.asObservable()
+        )
+        let output = viewModel.transform(input: input)
     }
 }

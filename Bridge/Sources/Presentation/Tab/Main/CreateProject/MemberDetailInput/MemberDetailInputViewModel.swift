@@ -10,7 +10,7 @@ import RxSwift
 final class MemberDetailInputViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
-        
+        let nextButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -31,6 +31,13 @@ final class MemberDetailInputViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
+        input.nextButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showProjectDatePickerViewController()
+            })
+            .disposed(by: disposeBag)
+        
         return Output()
     }
 }
