@@ -1,31 +1,29 @@
 //
-//  SignInViewController.swift
+//  SelectFieldViewController.swift
 //  Bridge
 //
-//  Created by 정호윤 on 2023/09/07.
+//  Created by 정호윤 on 2023/09/12.
 //
 
-import AuthenticationServices
 import UIKit
 import PinLayout
 import FlexLayout
 import RxCocoa
 import RxSwift
 
-final class SignInViewController: BaseViewController {
-    
+final class SelectFieldViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexViewContainer = UIView()
-    private let signInWithAppleButton: UIButton = {
+    private let completeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("애플 로그인", for: .normal)
+        button.setTitle("완료", for: .normal)
         button.setTitleColor(.black, for: .normal)
         return button
     }()
-
-    private let viewModel: SignInViewModel
     
-    init(viewModel: SignInViewModel) {
+    private let viewModel: SelectFieldViewModel
+    
+    init(viewModel: SelectFieldViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -36,10 +34,6 @@ final class SignInViewController: BaseViewController {
     }
     
     // MARK: - Configurations
-    override func configureAttributes() {
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-    }
-    
     override func configureLayouts() {
         view.addSubview(rootFlexViewContainer)
         
@@ -48,7 +42,7 @@ final class SignInViewController: BaseViewController {
             .justifyContent(.center)
             .alignItems(.center)
             .define { flex in
-                flex.addItem(signInWithAppleButton).size(100)
+                flex.addItem(completeButton).size(100)
             }
     }
     
@@ -58,8 +52,8 @@ final class SignInViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = SignInViewModel.Input(
-            signInWithAppleButtonTapped: signInWithAppleButton.rx.tap.asObservable()
+        let input = SelectFieldViewModel.Input(
+            completeButtonTapped: completeButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)
