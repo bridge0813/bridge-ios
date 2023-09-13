@@ -9,6 +9,12 @@ import UIKit
 
 protocol CoordinatorDelegate: AnyObject {
     func didFinish(childCoordinator: Coordinator)
+    
+    func showSignInViewController()
+}
+
+extension CoordinatorDelegate {
+    func showSignInViewController() { }
 }
 
 protocol Coordinator: AnyObject {

@@ -7,15 +7,7 @@
 
 import UIKit
 
-protocol TabBarCoordinatorProtocol: Coordinator {
-    var tabBarController: UITabBarController { get set }
-    
-    func selectPage(_ page: TabBarPageType)
-    func setSelectedPage(_ index: Int)
-    func currentPage() -> TabBarPageType?
-}
-
-final class TabBarCoordinator: TabBarCoordinatorProtocol {
+final class TabBarCoordinator: Coordinator {
     
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
@@ -77,6 +69,7 @@ private extension TabBarCoordinator {
     func connectChatFlow(to tabNavigationController: UINavigationController) {
         let chatCoordinator = ChatCoordinator(navigationController: tabNavigationController)
         chatCoordinator.start()
+        chatCoordinator.delegate = self
         childCoordinators.append(chatCoordinator)
     }
     
@@ -120,8 +113,20 @@ private extension TabBarCoordinator {
 
 // MARK: - Coordinator delegate
 extension TabBarCoordinator: CoordinatorDelegate {
+    // AuthCoordinator에 의해 호출됨
     func didFinish(childCoordinator: Coordinator) {
-        navigationController.popToRootViewController(animated: true)
-        finish()
+        navigationController.dismiss(animated: true)
+        
+        if let index = childCoordinators.firstIndex(where: { $0 === childCoordinator }) {
+            childCoordinators.remove(at: index)
+        }
+    }
+    
+    // MARK: - Auth
+    func showSignInViewController() {
+        let authCoordinator = AuthCoordinator(navigationController: navigationController)
+        authCoordinator.start()
+        authCoordinator.delegate = self
+        childCoordinators.append(authCoordinator)
     }
 }
