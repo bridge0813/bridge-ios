@@ -7,12 +7,7 @@
 
 import UIKit
 
-// MARK: - Protocol
-protocol CreateProjectCoordinatorProtocol: Coordinator {
-    
-}
-
-final class CreateProjectCoordinator: CreateProjectCoordinatorProtocol {
+final class CreateProjectCoordinator: Coordinator {
     // MARK: - Properties
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
@@ -93,9 +88,4 @@ extension CreateProjectCoordinator {
         let viewController = CompletionViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
-}
-
-// MARK: - MainCoordinatorProtocol Method
-extension MainCoordinator {
-    
 }
