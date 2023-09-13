@@ -63,7 +63,7 @@ extension Reactive where Base: ASAuthorizationController {
 }
 
 extension Reactive where Base: ASAuthorizationAppleIDProvider {
-    public func signIn() -> Observable<ASAuthorization> {
+    public func requestAuthorizationWithAppleID() -> Observable<ASAuthorization> {
         let appleIDProvider = base
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName]

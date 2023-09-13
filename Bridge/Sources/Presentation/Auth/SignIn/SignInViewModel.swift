@@ -29,7 +29,7 @@ final class SignInViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         input.signInWithAppleButtonTapped
             .flatMap {
-                ASAuthorizationAppleIDProvider().rx.signIn()
+                ASAuthorizationAppleIDProvider().rx.requestAuthorizationWithAppleID()
             }
             .withUnretained(self)
             .subscribe(
