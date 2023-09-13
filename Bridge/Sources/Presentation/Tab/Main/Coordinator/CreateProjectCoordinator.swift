@@ -18,6 +18,8 @@ final class CreateProjectCoordinator: CreateProjectCoordinatorProtocol {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
+    private var createProjectNavigationController: UINavigationController?
+    
     // MARK: - Initializer
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -37,7 +39,14 @@ extension CreateProjectCoordinator {
         )
         
         let viewController = MemberFieldSelectionViewController(viewModel: viewModel)
-        navigationController.pushViewController(viewController, animated: true)
+        createProjectNavigationController = UINavigationController(rootViewController: viewController)
+        createProjectNavigationController?.setNavigationBarHidden(true, animated: false)
+        createProjectNavigationController?.modalPresentationStyle = .overFullScreen
+        
+        navigationController.present(
+            createProjectNavigationController ?? UINavigationController(),
+            animated: true
+        )
     }
     
     func showMemberDetailInputViewController() {
@@ -46,7 +55,7 @@ extension CreateProjectCoordinator {
         )
         
         let viewController = MemberDetailInputViewController(viewModel: viewModel)
-        navigationController.pushViewController(viewController, animated: true)
+        createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
     func showProjectDatePickerViewController() {
@@ -55,7 +64,7 @@ extension CreateProjectCoordinator {
         )
         
         let viewController = ProjectDatePickerViewController(viewModel: viewModel)
-        navigationController.pushViewController(viewController, animated: true)
+        createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
     func showProjectProgressStatusViewController() {
@@ -64,7 +73,7 @@ extension CreateProjectCoordinator {
         )
         
         let viewController = ProjectProgressStatusViewController(viewModel: viewModel)
-        navigationController.pushViewController(viewController, animated: true)
+        createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
     func showProjectOverviewInputViewController() {
@@ -73,7 +82,7 @@ extension CreateProjectCoordinator {
         )
         
         let viewController = ProjectOverviewInputViewController(viewModel: viewModel)
-        navigationController.pushViewController(viewController, animated: true)
+        createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
     func showCompletionViewController() {
@@ -82,7 +91,7 @@ extension CreateProjectCoordinator {
         )
         
         let viewController = CompletionViewController(viewModel: viewModel)
-        navigationController.pushViewController(viewController, animated: true)
+        createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
 }
 
