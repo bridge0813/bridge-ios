@@ -34,7 +34,7 @@ final class ProjectProgressStatusViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showProjectOverviewInputViewController()
+                owner.coordinator?.showProjectDescriptionInputViewController()
             })
             .disposed(by: disposeBag)
         
