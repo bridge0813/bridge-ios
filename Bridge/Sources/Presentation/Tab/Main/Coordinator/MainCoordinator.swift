@@ -85,10 +85,11 @@ extension MainCoordinator {
 
 extension MainCoordinator: CoordinatorDelegate {
     func didFinish(childCoordinator: Coordinator) {
-        navigationController.popToRootViewController(animated: true)
+        navigationController.dismiss(animated: true)
         
         if let index = childCoordinators.firstIndex(where: { $0 === childCoordinator }) {
             childCoordinators.remove(at: index)
         }
+        print("\(childCoordinators)")
     }
 }

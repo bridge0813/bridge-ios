@@ -22,6 +22,16 @@ final class MemberFieldSelectionViewController: BaseViewController {
         
         return button
     }()
+    
+    private let dismissButton: UIButton = {
+        let button = UIButton()
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
+        let buttonImage = UIImage(systemName: "xmark", withConfiguration: imageConfig)
+        button.setImage(buttonImage, for: .normal)
+        button.tintColor = .black
+        
+        return button
+    }()
 
     private let viewModel: MemberFieldSelectionViewModel
     
@@ -53,8 +63,13 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).padding(5).alignItems(.center).define { flex in
-            flex.addItem(nextButton).marginTop(100).width(50).height(50)
+        rootFlexContainer.flex.direction(.column).padding(5).define { flex in
+            flex.addItem(dismissButton).position(.absolute).marginTop(25).marginLeft(17).size(25)
+            
+            flex.addItem().alignItems(.center).define { flex in
+                flex.addItem(nextButton).marginTop(100).width(50).height(50)
+            }
+            
         }
     }
     
