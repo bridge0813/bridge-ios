@@ -66,8 +66,8 @@ final class MemberFieldSelectionViewController: BaseViewController {
         rootFlexContainer.flex.direction(.column).padding(5).define { flex in
             flex.addItem(dismissButton).position(.absolute).marginTop(25).marginLeft(17).size(25)
             
-            flex.addItem().alignItems(.center).define { flex in
-                flex.addItem(nextButton).marginTop(100).width(50).height(50)
+            flex.addItem().alignItems(.center).marginTop(100).define { flex in
+                flex.addItem(nextButton).width(50).height(50)
             }
             
         }
@@ -79,7 +79,8 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     override func bind() {
         let input = MemberFieldSelectionViewModel.Input(
-            nextButtonTapped: nextButton.rx.tap.asObservable()
+            nextButtonTapped: nextButton.rx.tap.asObservable(),
+            dismissButtonTapped: dismissButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
     }

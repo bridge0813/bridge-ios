@@ -11,6 +11,7 @@ final class MemberFieldSelectionViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let nextButtonTapped: Observable<Void>
+        let dismissButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -35,6 +36,13 @@ final class MemberFieldSelectionViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.showMemberDetailInputViewController()
+            })
+            .disposed(by: disposeBag)
+        
+        input.dismissButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.finish()
             })
             .disposed(by: disposeBag)
         
