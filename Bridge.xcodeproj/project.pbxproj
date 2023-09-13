@@ -73,8 +73,8 @@
 		7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */; };
 		7CC9F6D52AAF15A700685EA9 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D42AAF15A700685EA9 /* ProjectProgressStatusViewModel.swift */; };
 		7CC9F6D72AAF15AF00685EA9 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D62AAF15AF00685EA9 /* ProjectProgressStatusViewController.swift */; };
-		7CC9F6DA2AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D92AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift */; };
-		7CC9F6DC2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6DB2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift */; };
+		7CC9F6DA2AAF16EE00685EA9 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D92AAF16EE00685EA9 /* ProjectDescriptionInputViewModel.swift */; };
+		7CC9F6DC2AAF16FD00685EA9 /* ProjectDescriptionInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6DB2AAF16FD00685EA9 /* ProjectDescriptionInputViewController.swift */; };
 		7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */; };
 		7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
@@ -141,8 +141,8 @@
 		7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDatePickerViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6D42AAF15A700685EA9 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6D62AAF15AF00685EA9 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
-		7CC9F6D92AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewModel.swift; sourceTree = "<group>"; };
-		7CC9F6DB2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewController.swift; sourceTree = "<group>"; };
+		7CC9F6D92AAF16EE00685EA9 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
+		7CC9F6DB2AAF16FD00685EA9 /* ProjectDescriptionInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewController.swift; sourceTree = "<group>"; };
 		7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewController.swift; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -569,8 +569,8 @@
 		7CC9F6D82AAF161600685EA9 /* ProjectOverviewInput */ = {
 			isa = PBXGroup;
 			children = (
-				7CC9F6D92AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift */,
-				7CC9F6DB2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift */,
+				7CC9F6D92AAF16EE00685EA9 /* ProjectDescriptionInputViewModel.swift */,
+				7CC9F6DB2AAF16FD00685EA9 /* ProjectDescriptionInputViewController.swift */,
 			);
 			path = ProjectOverviewInput;
 			sourceTree = "<group>";
@@ -733,7 +733,7 @@
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
 				7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */,
-				7CC9F6DC2AAF16FD00685EA9 /* ProjectOverviewInputViewController.swift in Sources */,
+				7CC9F6DC2AAF16FD00685EA9 /* ProjectDescriptionInputViewController.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
@@ -782,7 +782,7 @@
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
 				7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */,
-				7CC9F6DA2AAF16EE00685EA9 /* ProjectOverviewInputViewModel.swift in Sources */,
+				7CC9F6DA2AAF16EE00685EA9 /* ProjectDescriptionInputViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

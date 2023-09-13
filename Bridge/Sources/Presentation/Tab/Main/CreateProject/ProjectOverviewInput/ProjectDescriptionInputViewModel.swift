@@ -7,7 +7,7 @@
 
 import RxSwift
 
-final class ProjectOverviewInputViewModel: ViewModelType {
+final class ProjectDescriptionInputViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let nextButtonTapped: Observable<Void>

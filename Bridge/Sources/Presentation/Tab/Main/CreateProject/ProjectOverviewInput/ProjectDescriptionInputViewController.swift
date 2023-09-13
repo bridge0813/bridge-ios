@@ -11,7 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
-final class ProjectOverviewInputViewController: BaseViewController {
+final class ProjectDescriptionInputViewController: BaseViewController {
     // MARK: - Properties
     private let rootFlexContainer = UIView()
    
@@ -23,10 +23,10 @@ final class ProjectOverviewInputViewController: BaseViewController {
         return button
     }()
 
-    private let viewModel: ProjectOverviewInputViewModel
+    private let viewModel: ProjectDescriptionInputViewModel
     
     // MARK: - Initializer
-    init(viewModel: ProjectOverviewInputViewModel) {
+    init(viewModel: ProjectDescriptionInputViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -63,7 +63,7 @@ final class ProjectOverviewInputViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = ProjectOverviewInputViewModel.Input(
+        let input = ProjectDescriptionInputViewModel.Input(
             nextButtonTapped: nextButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
