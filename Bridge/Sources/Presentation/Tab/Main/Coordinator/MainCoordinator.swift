@@ -90,6 +90,5 @@ extension MainCoordinator: CoordinatorDelegate {
         if let index = childCoordinators.firstIndex(where: { $0 === childCoordinator }) {
             childCoordinators.remove(at: index)
         }
-        print("\(childCoordinators)")
     }
 }
