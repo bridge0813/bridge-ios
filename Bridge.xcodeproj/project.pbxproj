@@ -57,6 +57,8 @@
 		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
 		7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */; };
 		7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */; };
+		7C24002F2AB1FB4A00D9D5F1 /* DIContainerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24002E2AB1FB4A00D9D5F1 /* DIContainerProtocol.swift */; };
+		7C2400312AB1FB7400D9D5F1 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400302AB1FB7400D9D5F1 /* DIContainer.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -132,6 +134,8 @@
 		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
 		7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
 		7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewController.swift; sourceTree = "<group>"; };
+		7C24002E2AB1FB4A00D9D5F1 /* DIContainerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainerProtocol.swift; sourceTree = "<group>"; };
+		7C2400302AB1FB7400D9D5F1 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				7B71E7402A9330C6001B5D2C /* AppDelegate.swift */,
 				7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */,
 				7B2D770B2AAD7DB700E5907B /* Coordinator */,
+				7C24002D2AB1FB1800D9D5F1 /* DI */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -526,6 +531,15 @@
 				7BA36CCD2A9E185A000DAB02 /* ChatRoomCell.swift */,
 			);
 			path = ChatRoomList;
+			sourceTree = "<group>";
+		};
+		7C24002D2AB1FB1800D9D5F1 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				7C24002E2AB1FB4A00D9D5F1 /* DIContainerProtocol.swift */,
+				7C2400302AB1FB7400D9D5F1 /* DIContainer.swift */,
+			);
+			path = DI;
 			sourceTree = "<group>";
 		};
 		7C569CF12A9F67860063D362 /* Main */ = {
@@ -799,6 +813,7 @@
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
+				7C24002F2AB1FB4A00D9D5F1 /* DIContainerProtocol.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberDetailInputViewController.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
 				7BA36CB92A9D9A29000DAB02 /* HTTP.swift in Sources */,
@@ -838,6 +853,7 @@
 				7C569CF32A9F67C60063D362 /* Project.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
+				7C2400312AB1FB7400D9D5F1 /* DIContainer.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
