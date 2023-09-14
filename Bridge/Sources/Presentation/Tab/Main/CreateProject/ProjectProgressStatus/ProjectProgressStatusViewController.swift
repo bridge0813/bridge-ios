@@ -15,6 +15,18 @@ final class ProjectProgressStatusViewController: BaseViewController {
     // MARK: - Properties
     private let rootFlexContainer = UIView()
    
+    private let instructionLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .black,
+            font: .boldSystemFont(ofSize: 18),
+            numberOfLines: 2
+        )
+        label.text = "프로젝트의 진행상태"
+        label.lineBreakMode = .byTruncatingTail
+        return label
+    }()
+    
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
@@ -54,7 +66,8 @@ final class ProjectProgressStatusViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).padding(5).alignItems(.center).define { flex in
-            flex.addItem(nextButton).marginTop(100).width(50).height(50)
+            flex.addItem(instructionLabel).width(200).height(50).marginTop(100)
+            flex.addItem(nextButton).width(50).height(50).marginTop(50)
         }
     }
     

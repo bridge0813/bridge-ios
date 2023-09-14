@@ -15,6 +15,18 @@ final class MemberFieldSelectionViewController: BaseViewController {
     // MARK: - Properties
     private let rootFlexContainer = UIView()
    
+    private let instructionLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .black,
+            font: .boldSystemFont(ofSize: 18),
+            numberOfLines: 2
+        )
+        label.text = "어떤 분야의 팀원을 \n찾고 있나요?"
+        
+        return label
+    }()
+    
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
@@ -66,10 +78,10 @@ final class MemberFieldSelectionViewController: BaseViewController {
         rootFlexContainer.flex.direction(.column).padding(5).define { flex in
             flex.addItem(dismissButton).position(.absolute).marginTop(25).marginLeft(17).size(25)
             
-            flex.addItem().alignItems(.center).marginTop(100).define { flex in
-                flex.addItem(nextButton).width(50).height(50)
+            flex.addItem().alignItems(.center).marginTop(50).define { flex in
+                flex.addItem(instructionLabel).width(200).height(50)
+                flex.addItem(nextButton).width(50).height(50).marginTop(30)
             }
-            
         }
     }
     

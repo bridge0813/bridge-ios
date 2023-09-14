@@ -5,15 +5,11 @@
 //  Created by 엄지호 on 2023/09/13.
 //
 
-import Foundation
 
 final class DIContainer {
     static let shared = DIContainer()
     
     private var services = [String: Any]()
-    
-    private init() { }
-    
 }
 
 extension DIContainer: DIContainerProtocol {
