@@ -53,6 +53,15 @@ extension CreateProjectCoordinator {
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
+    func showApplicantRestrictionViewController() {
+        let viewModel = ApplicantRestrictionViewModel(
+            coordinator: self
+        )
+        
+        let viewController = ApplicantRestrictionViewController(viewModel: viewModel)
+        createProjectNavigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func showProjectDatePickerViewController() {
         let viewModel = ProjectDatePickerViewModel(
             coordinator: self

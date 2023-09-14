@@ -1,13 +1,13 @@
 //
-//  MemberDetailInputViewModel.swift
+//  ApplicantRestrictionViewModel.swift
 //  Bridge
 //
-//  Created by 엄지호 on 2023/09/11.
+//  Created by 엄지호 on 2023/09/14.
 //
 
 import RxSwift
 
-final class MemberDetailInputViewModel: ViewModelType {
+final class ApplicantRestrictionViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let nextButtonTapped: Observable<Void>
@@ -34,7 +34,7 @@ final class MemberDetailInputViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showApplicantRestrictionViewController()
+                owner.coordinator?.showProjectDatePickerViewController()
             })
             .disposed(by: disposeBag)
         
