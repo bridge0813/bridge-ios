@@ -7,16 +7,7 @@
 
 import UIKit
 
-// MARK: - Protocol
-protocol MainCoordinatorProtocol: Coordinator {
-    func connectToNotificationFlow()
-    func connectToProjectFilteringFlow()
-    func connectToProjectSearchFlow(with query: String)
-    func connectToProjectDetailFlow(with id: String)
-    func connectToCreateProjectFlow()
-}
-
-final class MainCoordinator: MainCoordinatorProtocol {
+final class MainCoordinator: Coordinator {
     // MARK: - Properties
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
@@ -37,7 +28,6 @@ final class MainCoordinator: MainCoordinatorProtocol {
         fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
     }
     
-    
     // MARK: - Methods
     func start() {
         showMainViewController()
@@ -45,6 +35,7 @@ final class MainCoordinator: MainCoordinatorProtocol {
 }
 
 extension MainCoordinator {
+    // MARK: - Show
     func showMainViewController() {
         let mainViewModel = MainViewModel(
             coordinator: self,
@@ -55,10 +46,8 @@ extension MainCoordinator {
         let mainVC = MainViewController(viewModel: mainViewModel)
         navigationController.pushViewController(mainVC, animated: true)
     }
-}
-
-// MARK: - MainCoordinatorProtocol Method
-extension MainCoordinator {
+    
+    // MARK: - ConnectCoordinator
     func connectToNotificationFlow() {
         print("알림 뷰 이동")
     }
@@ -83,6 +72,7 @@ extension MainCoordinator {
     }
 }
 
+// MARK: - CoordinatorDelegate
 extension MainCoordinator: CoordinatorDelegate {
     func didFinish(childCoordinator: Coordinator) {
         navigationController.dismiss(animated: true)
