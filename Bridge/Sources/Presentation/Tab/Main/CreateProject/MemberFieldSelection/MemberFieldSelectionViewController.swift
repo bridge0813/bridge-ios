@@ -27,116 +27,14 @@ final class MemberFieldSelectionViewController: BaseViewController {
         return label
     }()
     
-    private let iosButton: UIButton = {
-        let button = UIButton()
-        
-        var configuration = UIButton.Configuration.tinted()
-        configuration.baseBackgroundColor = .lightGray
-
-        button.configuration = configuration
-        button.setTitle("iOS", for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.setTitleColor(.darkGray, for: .highlighted)
-        
-        return button
-    }()
-    
-    private let androidButton: UIButton = {
-        let button = UIButton()
-        
-        var configuration = UIButton.Configuration.tinted()
-        configuration.baseBackgroundColor = .lightGray
-
-        button.configuration = configuration
-        button.setTitle("안드로이드", for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.setTitleColor(.darkGray, for: .highlighted)
-        
-        return button    }()
-    
-    private let frontEndButton: UIButton = {
-        let button = UIButton()
-        
-        var configuration = UIButton.Configuration.tinted()
-        configuration.baseBackgroundColor = .lightGray
-
-        button.configuration = configuration
-        button.setTitle("프론트엔드", for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.setTitleColor(.darkGray, for: .highlighted)
-        
-        return button
-    }()
-    
-    private let backEndButton: UIButton = {
-        let button = UIButton()
-        
-        var configuration = UIButton.Configuration.tinted()
-        configuration.baseBackgroundColor = .lightGray
-
-        button.configuration = configuration
-        button.setTitle("백엔드", for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.setTitleColor(.darkGray, for: .highlighted)
-        
-        return button
-    }()
-    
-    private let uiuxButton: UIButton = {
-        let button = UIButton()
-        
-        var configuration = UIButton.Configuration.tinted()
-        configuration.baseBackgroundColor = .lightGray
-
-        button.configuration = configuration
-        button.setTitle("UI/UX", for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.setTitleColor(.darkGray, for: .highlighted)
-        
-        return button
-    }()
-    
-    private let bibxButton: UIButton = {
-        let button = UIButton()
-        
-        var configuration = UIButton.Configuration.tinted()
-        configuration.baseBackgroundColor = .lightGray
-
-        button.configuration = configuration
-        button.setTitle("BI/BX", for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.setTitleColor(.darkGray, for: .highlighted)
-        
-        return button
-    }()
-    
-    private let videomotionButton: UIButton = {
-        let button = UIButton()
-        
-        var configuration = UIButton.Configuration.tinted()
-        configuration.baseBackgroundColor = .lightGray
-
-        button.configuration = configuration
-        button.setTitle("영상/모션", for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.setTitleColor(.darkGray, for: .highlighted)
-        
-        return button
-    }()
-    
-    private let pmButton: UIButton = {
-        let button = UIButton()
-        
-        var configuration = UIButton.Configuration.tinted()
-        configuration.baseBackgroundColor = .lightGray
-
-        button.configuration = configuration
-        button.setTitle("PM", for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.setTitleColor(.darkGray, for: .highlighted)
-        
-        return button
-    }()
+    private let iosButton = TagButton(title: "iOS")
+    private let androidButton = TagButton(title: "안드로이드")
+    private let frontEndButton = TagButton(title: "프론트엔드")
+    private let backEndButton = TagButton(title: "백엔드")
+    private let uiuxButton = TagButton(title: "UI/UX")
+    private let bibxButton = TagButton(title: "BI/BX")
+    private let videomotionButton = TagButton(title: "영상/모션")
+    private let pmButton = TagButton(title: "PM")
     
     private let nextButton: UIButton = {
         let button = UIButton()

@@ -59,6 +59,7 @@
 		7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */; };
 		7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */; };
 		7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */; };
+		7C24003D2AB34BFA00D9D5F1 /* TagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003C2AB34BFA00D9D5F1 /* TagButton.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -136,6 +137,7 @@
 		7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewController.swift; sourceTree = "<group>"; };
 		7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRestrictionViewModel.swift; sourceTree = "<group>"; };
 		7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRestrictionViewController.swift; sourceTree = "<group>"; };
+		7C24003C2AB34BFA00D9D5F1 /* TagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagButton.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */,
 				7BA36CC82A9E1640000DAB02 /* Reusable.swift */,
 				7BA36CD62A9F7D46000DAB02 /* Views */,
+				7C24003E2AB34BFF00D9D5F1 /* Buttons */,
 				7BA36CC22A9E10FA000DAB02 /* Bases */,
 				7BA36CC52A9E148C000DAB02 /* Extensions */,
 			);
@@ -539,6 +542,14 @@
 				7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */,
 			);
 			path = ApplicantRestriction;
+			sourceTree = "<group>";
+		};
+		7C24003E2AB34BFF00D9D5F1 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				7C24003C2AB34BFA00D9D5F1 /* TagButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		7C569CF12A9F67860063D362 /* Main */ = {
@@ -857,6 +868,7 @@
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
+				7C24003D2AB34BFA00D9D5F1 /* TagButton.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,

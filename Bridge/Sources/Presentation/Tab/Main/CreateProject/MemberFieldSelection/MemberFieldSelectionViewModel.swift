@@ -12,6 +12,7 @@ final class MemberFieldSelectionViewModel: ViewModelType {
     struct Input {
         let nextButtonTapped: Observable<Void>
         let dismissButtonTapped: Observable<Void>
+        
     }
     
     struct Output {
