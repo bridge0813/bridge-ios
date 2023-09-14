@@ -53,6 +53,12 @@
 		7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */; };
 		7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */; };
 		7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */; };
+		7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */; };
+		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
+		7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */; };
+		7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */; };
+		7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */; };
+		7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -70,6 +76,15 @@
 		7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */; };
 		7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D122AA1E7020063D362 /* ProjectSectionHeaderView.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
+		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
+		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
+		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
+		7CC9F6CB2AAF0EEC00685EA9 /* MemberDetailInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6CA2AAF0EEC00685EA9 /* MemberDetailInputViewModel.swift */; };
+		7CC9F6CD2AAF0EF800685EA9 /* MemberDetailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6CC2AAF0EF800685EA9 /* MemberDetailInputViewController.swift */; };
+		7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6CF2AAF132E00685EA9 /* ProjectDatePickerViewController.swift */; };
+		7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */; };
+		7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */; };
+		7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +130,12 @@
 		7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageType.swift; sourceTree = "<group>"; };
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
+		7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
+		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
+		7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
+		7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewController.swift; sourceTree = "<group>"; };
+		7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRestrictionViewModel.swift; sourceTree = "<group>"; };
+		7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRestrictionViewController.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -132,6 +153,15 @@
 		7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		7C569D122AA1E7020063D362 /* ProjectSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSectionHeaderView.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
+		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
+		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
+		7CC9F6CA2AAF0EEC00685EA9 /* MemberDetailInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailInputViewModel.swift; sourceTree = "<group>"; };
+		7CC9F6CC2AAF0EF800685EA9 /* MemberDetailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailInputViewController.swift; sourceTree = "<group>"; };
+		7CC9F6CF2AAF132E00685EA9 /* ProjectDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDatePickerViewController.swift; sourceTree = "<group>"; };
+		7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDatePickerViewModel.swift; sourceTree = "<group>"; };
+		7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewModel.swift; sourceTree = "<group>"; };
+		7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewController.swift; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -502,6 +532,15 @@
 			path = ChatRoomList;
 			sourceTree = "<group>";
 		};
+		7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */ = {
+			isa = PBXGroup;
+			children = (
+				7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */,
+				7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */,
+			);
+			path = ApplicantRestriction;
+			sourceTree = "<group>";
+		};
 		7C569CF12A9F67860063D362 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -551,11 +590,80 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9F6C82AAF087A00685EA9 /* MemberFieldSelection */,
+				7CC9F6C92AAF0E1500685EA9 /* MemberDetailInput */,
+				7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */,
+				7CC9F6CE2AAF118600685EA9 /* ProjectDatePicker */,
+				7CC9F6D32AAF13C300685EA9 /* ProjectProgressStatus */,
+				7CC9F6D82AAF161600685EA9 /* ProjectOverviewInput */,
+				7CC9F6DD2AAF180900685EA9 /* Completion */,
+			);
+			path = CreateProject;
+			sourceTree = "<group>";
+		};
+		7CC9F6C82AAF087A00685EA9 /* MemberFieldSelection */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */,
+				7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */,
+			);
+			path = MemberFieldSelection;
+			sourceTree = "<group>";
+		};
+		7CC9F6C92AAF0E1500685EA9 /* MemberDetailInput */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9F6CA2AAF0EEC00685EA9 /* MemberDetailInputViewModel.swift */,
+				7CC9F6CC2AAF0EF800685EA9 /* MemberDetailInputViewController.swift */,
+			);
+			path = MemberDetailInput;
+			sourceTree = "<group>";
+		};
+		7CC9F6CE2AAF118600685EA9 /* ProjectDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */,
+				7CC9F6CF2AAF132E00685EA9 /* ProjectDatePickerViewController.swift */,
+			);
+			path = ProjectDatePicker;
+			sourceTree = "<group>";
+		};
+		7CC9F6D32AAF13C300685EA9 /* ProjectProgressStatus */ = {
+			isa = PBXGroup;
+			children = (
+				7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */,
+				7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */,
+			);
+			path = ProjectProgressStatus;
+			sourceTree = "<group>";
+		};
+		7CC9F6D82AAF161600685EA9 /* ProjectOverviewInput */ = {
+			isa = PBXGroup;
+			children = (
+				7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */,
+				7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */,
+			);
+			path = ProjectOverviewInput;
+			sourceTree = "<group>";
+		};
+		7CC9F6DD2AAF180900685EA9 /* Completion */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */,
+				7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */,
+			);
+			path = Completion;
+			sourceTree = "<group>";
+		};
 		7CF93E012A9C64EB0013EBD6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				7CF93E022A9C65040013EBD6 /* Coordinator */,
 				7CF93E032A9C650D0013EBD6 /* Main */,
+				7CC9F6C12AAEE9E800685EA9 /* CreateProject */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -564,6 +672,7 @@
 			isa = PBXGroup;
 			children = (
 				7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */,
+				7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -704,22 +813,32 @@
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
+				7CC9F6CD2AAF0EF800685EA9 /* MemberDetailInputViewController.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
 				7BA36CB92A9D9A29000DAB02 /* HTTP.swift in Sources */,
+				7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
+				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,
 				7BA36C9B2A9C5091000DAB02 /* ChatRoom.swift in Sources */,
 				7B14DB232AB04B40009A00EB /* SelectFieldViewController.swift in Sources */,
 				7BA36CCE2A9E185A000DAB02 /* ChatRoomCell.swift in Sources */,
 				7C569D062A9F776B0063D362 /* Date+.swift in Sources */,
+				7CC9F6CB2AAF0EEC00685EA9 /* MemberDetailInputViewModel.swift in Sources */,
+				7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */,
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B2D76EC2AA993C700E5907B /* AuthCoordinator.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
+				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
+				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
 				7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */,
+				7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */,
 				7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */,
+				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,
+				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */,
 				7B2D770A2AAB0FDF00E5907B /* SignInViewModel.swift in Sources */,
@@ -728,9 +847,12 @@
 				7BA36CB52A9D9828000DAB02 /* Endpoint.swift in Sources */,
 				7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
+				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
 				7BA36CDA2AA197F8000DAB02 /* ChatRoomListViewController.swift in Sources */,
 				7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */,
+				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,
 				7C569CF32A9F67C60063D362 /* Project.swift in Sources */,
+				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
@@ -739,8 +861,10 @@
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* ASAuthorizationController+Rx.swift in Sources */,
+				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
+				7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
