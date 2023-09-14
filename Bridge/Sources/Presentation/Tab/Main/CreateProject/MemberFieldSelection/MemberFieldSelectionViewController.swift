@@ -14,7 +14,6 @@ import RxSwift
 final class MemberFieldSelectionViewController: BaseViewController {
     // MARK: - Properties
     private let rootFlexContainer = UIView()
-   
     private let instructionLabel: UILabel = {
         let label = UILabel()
         label.configureLabel(
@@ -136,5 +135,13 @@ final class MemberFieldSelectionViewController: BaseViewController {
             dismissButtonTapped: dismissButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
+        
+        iosButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.iosButton.isSelected.toggle()
+            })
+            .disposed(by: disposeBag)
+        
     }
 }
