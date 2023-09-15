@@ -88,7 +88,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
         rootFlexContainer.flex.direction(.column).padding(5).define { flex in
             flex.addItem(dismissButton).position(.absolute).marginTop(25).marginLeft(10).size(25)
             
-            flex.addItem(instructionLabel).width(200).height(50).marginTop(100).marginLeft(10)
+            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(100)
             
             flex.addItem().direction(.column).marginTop(50).define { flex in
                 flex.addItem().direction(.row).define { flex in
@@ -119,8 +119,8 @@ final class MemberFieldSelectionViewController: BaseViewController {
             
             flex.addItem().grow(1)
             
-            flex.addItem().alignItems(.center).marginBottom(50).define { flex in
-                flex.addItem(nextButton).width(280).height(50).cornerRadius(8)
+            flex.addItem().marginBottom(50).define { flex in
+                flex.addItem(nextButton).marginHorizontal(15).height(50).cornerRadius(8)
             }
         }
     }

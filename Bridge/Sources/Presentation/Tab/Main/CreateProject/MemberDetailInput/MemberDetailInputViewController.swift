@@ -26,11 +26,57 @@ final class MemberDetailInputViewController: BaseViewController {
     
         return label
     }()
+
+    private let selectedFieldLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .orange,
+            font: .boldSystemFont(ofSize: 15),
+            textAlignment: .center
+        )
+        label.text = "iOS"
+        label.layer.borderColor = UIColor.orange.cgColor
+        label.layer.borderWidth = 1
     
+        return label
+    }()
+
+    private let recruitNumberButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = .boldSystemFont(ofSize: 13)
+        button.setTitle("몇 명을 모집할까요?", for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.darkGray.cgColor
+        
+        return button
+    }()
+    private let swiftButton = FieldTagButton(title: "Swift")
+    private let uIkitButton = FieldTagButton(title: "UIKit")
+    private let mvvmButton = FieldTagButton(title: "MVVM")
+    
+    private let textViewContainer: UIView = {
+        let container = UIView()
+        container.layer.borderColor = UIColor.darkGray.cgColor
+        container.layer.borderWidth = 1
+        
+        return container
+    }()
+    private let requirementsTextView: UITextView = {
+        let textView = UITextView()
+        textView.showsVerticalScrollIndicator = false
+        textView.returnKeyType = .next
+        textView.textColor = .black
+        textView.text = "zzzz"
+        
+        return textView
+    }()
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.white, for: .highlighted)
+        button.backgroundColor = .darkGray
         
         return button
     }()
@@ -65,9 +111,28 @@ final class MemberDetailInputViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).padding(5).alignItems(.center).define { flex in
-            flex.addItem(instructionLabel).width(200).height(50).marginTop(100)
-            flex.addItem(nextButton).width(50).height(50).marginTop(50)
+        rootFlexContainer.flex.direction(.column).padding(5).define { flex in
+            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(40)
+            
+            flex.addItem(selectedFieldLabel).width(100).height(40).cornerRadius(8).marginTop(50).marginLeft(10)
+            
+            flex.addItem(recruitNumberButton).width(150).height(40).cornerRadius(8).marginTop(50).marginLeft(10)
+            
+            flex.addItem().direction(.row).marginTop(50).define { flex in
+                flex.addItem(swiftButton).cornerRadius(8).marginLeft(10)
+                flex.addItem(uIkitButton).cornerRadius(8).marginLeft(10)
+                flex.addItem(mvvmButton).cornerRadius(8).marginLeft(10)
+            }
+            
+            flex.addItem(textViewContainer).marginHorizontal(15).height(200).cornerRadius(8).marginTop(50).define { flex in
+                flex.addItem(requirementsTextView).margin(10)
+            }
+            
+            flex.addItem().grow(1)
+            
+            flex.addItem().marginBottom(50).define { flex in
+                flex.addItem(nextButton).marginHorizontal(15).height(50).cornerRadius(8)
+            }
         }
     }
     
