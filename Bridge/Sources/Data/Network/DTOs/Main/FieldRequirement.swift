@@ -8,8 +8,8 @@
 import Foundation
 
 struct FieldRequirement: Codable {
-    let field: String         // 분야
-    let recruitNumber: Int    // 모집 인원 수
-    let techStacks: [String]  // 기술 스택
-    let expectaions: String   // 바라는 점
+    var field: String         // 분야
+    var recruitNumber: Int    // 모집 인원 수
+    var techStacks: [String]  // 기술 스택
+    var expectaions: String   // 바라는 점
 }

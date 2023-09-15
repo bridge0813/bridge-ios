@@ -20,13 +20,15 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     // MARK: - Properties
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
-    
+    private var fieldRequirements: [FieldRequirement]
     
     // MARK: - Initializer
     init(
-        coordinator: CreateProjectCoordinator
+        coordinator: CreateProjectCoordinator,
+        fieldRequirements: [FieldRequirement]
     ) {
         self.coordinator = coordinator
+        self.fieldRequirements = fieldRequirements
     }
     
     // MARK: - Methods

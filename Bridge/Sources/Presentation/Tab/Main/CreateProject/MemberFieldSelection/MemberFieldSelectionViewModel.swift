@@ -39,7 +39,9 @@ final class MemberFieldSelectionViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 let selectedFieldNames = owner.selectedFields.map { $0.rawValue }
-                owner.coordinator?.showMemberDetailInputViewController(for: selectedFieldNames)
+                owner.coordinator?.showMemberDetailInputViewController(
+                    for: selectedFieldNames,
+                    fieldRequirements: [])
             })
             .disposed(by: disposeBag)
         

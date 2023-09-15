@@ -23,27 +23,44 @@ final class MemberDetailInputViewModel: ViewModelType {
     private weak var coordinator: CreateProjectCoordinator?
     
     private var selectedFields: [String]
+    private var fieldRequirements: [FieldRequirement]
+    private var fieldRequirement = FieldRequirement(field: "", recruitNumber: 0, techStacks: [], expectaions: "")
     
     // MARK: - Initializer
     init(
         coordinator: CreateProjectCoordinator,
-        selectedFields: [String]
+        selectedFields: [String],
+        fieldRequirements: [FieldRequirement]
     ) {
         self.coordinator = coordinator
         self.selectedFields = selectedFields
+        self.fieldRequirements = fieldRequirements
     }
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
+        setFieldRequirement()
+        
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                let updateFields = owner.selectedFields.removeFirst()
+                /// 입력한 데이터를 배열에 추가.
+                owner.fieldRequirements.append(owner.fieldRequirement)
                 
+                /// 현재 해당되는 분야를 삭제
+                owner.selectedFields.removeFirst()
+                
+                /// 더 설정할 모집 분야가 없다면 다음 뷰로 이동, 있다면 다시 설정 뷰
                 if owner.selectedFields.isEmpty {
-                    owner.coordinator?.showApplicantRestrictionViewController()
+                    owner.coordinator?.showApplicantRestrictionViewController(
+                        fieldRequirements: owner.fieldRequirements
+                    )
+                    
                 } else {
-                    owner.coordinator?.showMemberDetailInputViewController(for: owner.selectedFields)
+                    owner.coordinator?.showMemberDetailInputViewController(
+                        for: owner.selectedFields,
+                        fieldRequirements: owner.fieldRequirements
+                    )
                 }
             })
             .disposed(by: disposeBag)
@@ -52,5 +69,17 @@ final class MemberDetailInputViewModel: ViewModelType {
         let selectedField = Observable.just(selectedFields.first ?? "").asDriver(onErrorJustReturn: "")
         
         return Output(selectedField: selectedField)
+    }
+}
+
+extension MemberDetailInputViewModel {
+    // 임시
+    private func setFieldRequirement() {
+        fieldRequirement = FieldRequirement(
+            field: selectedFields[0],
+            recruitNumber: 2,
+            techStacks: ["Swift", "UIKit", "MVVM"],
+            expectaions: "성실한 분들"
+        )
     }
 }
