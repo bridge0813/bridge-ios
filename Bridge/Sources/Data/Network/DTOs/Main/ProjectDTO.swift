@@ -16,6 +16,7 @@ struct ProjectDTO: Codable {
     let startDate: Date
     let endDate: Date
     let deadlineDate: Date
+    let fieldRequirements: [FieldRequirement]
 }
 
 extension ProjectDTO {
@@ -43,7 +44,8 @@ extension ProjectDTO {
             techStackTags: ["iOS", "BackEnd", "UI/UX"],
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date()
+            deadlineDate: Date(),
+            fieldRequirements: []
         ),
         ProjectDTO(
             id: "2",
@@ -53,7 +55,8 @@ extension ProjectDTO {
             techStackTags: ["iOS", "BackEnd", "UI/UX"],
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date()
+            deadlineDate: Date(),
+            fieldRequirements: []
         ),
         ProjectDTO(
             id: "3",
@@ -63,7 +66,8 @@ extension ProjectDTO {
             techStackTags: ["iOS", "BackEnd", "UI/UX"],
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date()
+            deadlineDate: Date(),
+            fieldRequirements: []
         ),
         ProjectDTO(
             id: "4",
@@ -73,7 +77,8 @@ extension ProjectDTO {
             techStackTags: ["iOS", "BackEnd", "UI/UX"],
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date()
+            deadlineDate: Date(),
+            fieldRequirements: []
         ),
         ProjectDTO(
             id: "5",
@@ -83,7 +88,8 @@ extension ProjectDTO {
             techStackTags: ["iOS", "BackEnd", "UI/UX"],
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date()
+            deadlineDate: Date(),
+            fieldRequirements: []
         )
     ]
     
@@ -96,7 +102,8 @@ extension ProjectDTO {
             techStackTags: ["iOS", "BackEnd", "UI/UX"],
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date()
+            deadlineDate: Date(),
+            fieldRequirements: []
         ),
         ProjectDTO(
             id: "2Hot",
@@ -106,7 +113,8 @@ extension ProjectDTO {
             techStackTags: ["iOS", "BackEnd", "UI/UX"],
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date()
+            deadlineDate: Date(),
+            fieldRequirements: []
         ),
         ProjectDTO(
             id: "3Hot",
@@ -116,7 +124,8 @@ extension ProjectDTO {
             techStackTags: ["iOS", "BackEnd", "UI/UX"],
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date()
+            deadlineDate: Date(),
+            fieldRequirements: []
         ),
         ProjectDTO(
             id: "4Hot",
@@ -126,7 +135,8 @@ extension ProjectDTO {
             techStackTags: ["iOS", "BackEnd", "UI/UX"],
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date()
+            deadlineDate: Date(),
+            fieldRequirements: []
         ),
         ProjectDTO(
             id: "5Hot",
@@ -136,7 +146,8 @@ extension ProjectDTO {
             techStackTags: ["iOS", "BackEnd", "UI/UX"],
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date()
+            deadlineDate: Date(),
+            fieldRequirements: []
         )
     ]
 }

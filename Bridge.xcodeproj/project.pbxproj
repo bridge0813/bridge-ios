@@ -61,6 +61,7 @@
 		7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */; };
 		7C24003D2AB34BFA00D9D5F1 /* FieldTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */; };
 		7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003F2AB4235800D9D5F1 /* UITextField+.swift */; };
+		7C2400422AB442CD00D9D5F1 /* FieldRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400412AB442CD00D9D5F1 /* FieldRequirement.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -140,6 +141,7 @@
 		7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRestrictionViewController.swift; sourceTree = "<group>"; };
 		7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTagButton.swift; sourceTree = "<group>"; };
 		7C24003F2AB4235800D9D5F1 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		7C2400412AB442CD00D9D5F1 /* FieldRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldRequirement.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 			isa = PBXGroup;
 			children = (
 				7C569D022A9F72320063D362 /* ProjectDTO.swift */,
+				7C2400412AB442CD00D9D5F1 /* FieldRequirement.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -863,6 +866,7 @@
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
 				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
 				7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */,
+				7C2400422AB442CD00D9D5F1 /* FieldRequirement.swift in Sources */,
 				7BA36CDA2AA197F8000DAB02 /* ChatRoomListViewController.swift in Sources */,
 				7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */,
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,

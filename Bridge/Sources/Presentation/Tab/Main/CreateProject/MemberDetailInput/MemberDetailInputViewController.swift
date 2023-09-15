@@ -67,7 +67,7 @@ final class MemberDetailInputViewController: BaseViewController {
         textView.showsVerticalScrollIndicator = false
         textView.returnKeyType = .next
         textView.textColor = .black
-        textView.text = "zzzz"
+        textView.text = "이런 팀원이었으면 좋겠어요."
         
         return textView
     }()
