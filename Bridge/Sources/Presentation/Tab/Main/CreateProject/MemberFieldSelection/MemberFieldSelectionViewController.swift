@@ -132,16 +132,58 @@ final class MemberFieldSelectionViewController: BaseViewController {
     override func bind() {
         let input = MemberFieldSelectionViewModel.Input(
             nextButtonTapped: nextButton.rx.tap.asObservable(),
-            dismissButtonTapped: dismissButton.rx.tap.asObservable()
+            dismissButtonTapped: dismissButton.rx.tap.asObservable(),
+            tagButtonTapped: mergeButtonTap()
         )
         let output = viewModel.transform(input: input)
         
-        iosButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.iosButton.isSelected.toggle()
+        output.selectedTag
+            .drive(onNext: { [weak self] type in
+                self?.selectedButtonToggle(for: type)
             })
             .disposed(by: disposeBag)
-        
     }
+}
+
+extension MemberFieldSelectionViewController {
+    private func mergeButtonTap() -> Observable<MemberFieldSelectionViewModel.TagButtonType> {
+        return Observable.merge(
+            iosButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.iOS },
+            androidButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.android },
+            frontEndButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.frontEnd },
+            backEndButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.backEnd },
+            uiuxButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.uiux },
+            bibxButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.bibx },
+            videomotionButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.videomotion },
+            pmButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.pm }
+        )
+    }
+    
+    private func selectedButtonToggle(for type: MemberFieldSelectionViewModel.TagButtonType) {
+            switch type {
+            case .iOS:
+                iosButton.isSelected.toggle()
+                
+            case .android:
+                androidButton.isSelected.toggle()
+                
+            case .frontEnd:
+                frontEndButton.isSelected.toggle()
+                
+            case .backEnd:
+                backEndButton.isSelected.toggle()
+                
+            case .uiux:
+                uiuxButton.isSelected.toggle()
+                
+            case .bibx:
+                bibxButton.isSelected.toggle()
+                
+            case .videomotion:
+                videomotionButton.isSelected.toggle()
+                
+            case .pm:
+                pmButton.isSelected.toggle()
+            }
+        }
 }
