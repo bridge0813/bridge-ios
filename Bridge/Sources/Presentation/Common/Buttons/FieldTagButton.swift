@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TagButton: UIButton {
+final class FieldTagButton: UIButton {
     override var isSelected: Bool {
         didSet {
             updateButtonStyle()

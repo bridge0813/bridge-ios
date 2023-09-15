@@ -26,14 +26,14 @@ final class MemberFieldSelectionViewController: BaseViewController {
         return label
     }()
     
-    private let iosButton = TagButton(title: "iOS")
-    private let androidButton = TagButton(title: "안드로이드")
-    private let frontEndButton = TagButton(title: "프론트엔드")
-    private let backEndButton = TagButton(title: "백엔드")
-    private let uiuxButton = TagButton(title: "UI/UX")
-    private let bibxButton = TagButton(title: "BI/BX")
-    private let videomotionButton = TagButton(title: "영상/모션")
-    private let pmButton = TagButton(title: "PM")
+    private let iosButton = FieldTagButton(title: "iOS")
+    private let androidButton = FieldTagButton(title: "안드로이드")
+    private let frontEndButton = FieldTagButton(title: "프론트엔드")
+    private let backEndButton = FieldTagButton(title: "백엔드")
+    private let uiuxButton = FieldTagButton(title: "UI/UX")
+    private let bibxButton = FieldTagButton(title: "BI/BX")
+    private let videomotionButton = FieldTagButton(title: "영상/모션")
+    private let pmButton = FieldTagButton(title: "PM")
     
     private let nextButton: UIButton = {
         let button = UIButton()
@@ -133,11 +133,11 @@ final class MemberFieldSelectionViewController: BaseViewController {
         let input = MemberFieldSelectionViewModel.Input(
             nextButtonTapped: nextButton.rx.tap.asObservable(),
             dismissButtonTapped: dismissButton.rx.tap.asObservable(),
-            tagButtonTapped: mergeButtonTap()
+            fieldButtonTapped: mergeFieldButtonTap()
         )
         let output = viewModel.transform(input: input)
         
-        output.selectedTag
+        output.selectedField
             .drive(onNext: { [weak self] type in
                 self?.selectedButtonToggle(for: type)
             })
@@ -146,20 +146,20 @@ final class MemberFieldSelectionViewController: BaseViewController {
 }
 
 extension MemberFieldSelectionViewController {
-    private func mergeButtonTap() -> Observable<MemberFieldSelectionViewModel.TagButtonType> {
+    private func mergeFieldButtonTap() -> Observable<MemberFieldSelectionViewModel.RecruitFieldType> {
         return Observable.merge(
-            iosButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.iOS },
-            androidButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.android },
-            frontEndButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.frontEnd },
-            backEndButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.backEnd },
-            uiuxButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.uiux },
-            bibxButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.bibx },
-            videomotionButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.videomotion },
-            pmButton.rx.tap.map { MemberFieldSelectionViewModel.TagButtonType.pm }
+            iosButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.iOS },
+            androidButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.android },
+            frontEndButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.frontEnd },
+            backEndButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.backEnd },
+            uiuxButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.uiux },
+            bibxButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.bibx },
+            videomotionButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.videomotion },
+            pmButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.pm }
         )
     }
     
-    private func selectedButtonToggle(for type: MemberFieldSelectionViewModel.TagButtonType) {
+    private func selectedButtonToggle(for type: MemberFieldSelectionViewModel.RecruitFieldType) {
             switch type {
             case .iOS:
                 iosButton.isSelected.toggle()

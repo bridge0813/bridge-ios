@@ -13,19 +13,18 @@ final class MemberFieldSelectionViewModel: ViewModelType {
     struct Input {
         let nextButtonTapped: Observable<Void>
         let dismissButtonTapped: Observable<Void>
-        let tagButtonTapped: Observable<TagButtonType>
-        
+        let fieldButtonTapped: Observable<RecruitFieldType>
     }
     
     struct Output {
-        let selectedTag: Driver<TagButtonType>
+        let selectedField: Driver<RecruitFieldType>
     }
     
     // MARK: - Properties
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
-    private var selectedButtonTypes: [TagButtonType] = []
+    private var selectedButtonTypes: [RecruitFieldType] = []
     
     // MARK: - Initializer
     init(
@@ -50,7 +49,7 @@ final class MemberFieldSelectionViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        let selectedTag = input.tagButtonTapped
+        let selectedField = input.fieldButtonTapped
             .withUnretained(self)
             .flatMap { owner, type in
                 if let index = owner.selectedButtonTypes.firstIndex(of: type) {
@@ -61,17 +60,17 @@ final class MemberFieldSelectionViewModel: ViewModelType {
                 
                 return Observable.just(type)
             }
-            .asDriver(onErrorJustReturn: TagButtonType.iOS)
+            .asDriver(onErrorJustReturn: RecruitFieldType.iOS)
         
         return Output(
-            selectedTag: selectedTag
+            selectedField: selectedField
         )
     }
 }
 
 // MARK: - UI DataSource
 extension MemberFieldSelectionViewModel {
-    enum TagButtonType {
+    enum RecruitFieldType {
         case iOS, android, frontEnd, backEnd, uiux, bibx, videomotion, pm
     }
 }
