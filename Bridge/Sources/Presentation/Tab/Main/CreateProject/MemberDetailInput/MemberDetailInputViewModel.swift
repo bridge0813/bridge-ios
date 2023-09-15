@@ -38,7 +38,13 @@ final class MemberDetailInputViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showApplicantRestrictionViewController()
+                let updateFields = owner.selectedFields.removeFirst()
+                
+                if owner.selectedFields.isEmpty {
+                    owner.coordinator?.showApplicantRestrictionViewController()
+                } else {
+                    owner.coordinator?.showMemberDetailInputViewController(for: owner.selectedFields)
+                }
             })
             .disposed(by: disposeBag)
         

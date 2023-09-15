@@ -156,6 +156,5 @@ final class MemberDetailInputViewController: BaseViewController {
                 // 분야에 맞는 기술 스택 주입.
             })
             .disposed(by: disposeBag)
-        
     }
 }
