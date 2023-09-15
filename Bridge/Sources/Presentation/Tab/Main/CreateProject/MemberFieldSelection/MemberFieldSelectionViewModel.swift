@@ -24,7 +24,7 @@ final class MemberFieldSelectionViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
-    private var selectedButtonTypes: [RecruitFieldType] = []
+    private var selectedFields: [RecruitFieldType] = []
     
     // MARK: - Initializer
     init(
@@ -38,7 +38,8 @@ final class MemberFieldSelectionViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showMemberDetailInputViewController()
+                let selectedFieldNames = owner.selectedFields.map { $0.rawValue }
+                owner.coordinator?.showMemberDetailInputViewController(for: selectedFieldNames)
             })
             .disposed(by: disposeBag)
         
@@ -52,10 +53,10 @@ final class MemberFieldSelectionViewModel: ViewModelType {
         let selectedField = input.fieldButtonTapped
             .withUnretained(self)
             .flatMap { owner, type in
-                if let index = owner.selectedButtonTypes.firstIndex(of: type) {
-                    owner.selectedButtonTypes.remove(at: index)
+                if let index = owner.selectedFields.firstIndex(of: type) {
+                    owner.selectedFields.remove(at: index)
                 } else {
-                    owner.selectedButtonTypes.append(type)
+                    owner.selectedFields.append(type)
                 }
                 
                 return Observable.just(type)
@@ -70,7 +71,7 @@ final class MemberFieldSelectionViewModel: ViewModelType {
 
 // MARK: - UI DataSource
 extension MemberFieldSelectionViewModel {
-    enum RecruitFieldType {
+    enum RecruitFieldType: String {
         case iOS, android, frontEnd, backEnd, uiux, bibx, videomotion, pm
     }
 }

@@ -44,11 +44,12 @@ extension CreateProjectCoordinator {
         )
     }
     
-    func showMemberDetailInputViewController() {
+    func showMemberDetailInputViewController(for selectedFields: [String]) {
         let viewModel = MemberDetailInputViewModel(
-            coordinator: self
+            coordinator: self,
+            selectedFields: selectedFields
         )
-        
+        print(selectedFields)
         let viewController = MemberDetailInputViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }

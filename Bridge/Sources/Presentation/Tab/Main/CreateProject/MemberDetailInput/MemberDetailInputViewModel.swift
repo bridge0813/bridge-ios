@@ -21,12 +21,15 @@ final class MemberDetailInputViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
+    private var selectedFields: [String]
     
     // MARK: - Initializer
     init(
-        coordinator: CreateProjectCoordinator
+        coordinator: CreateProjectCoordinator,
+        selectedFields: [String]
     ) {
         self.coordinator = coordinator
+        self.selectedFields = selectedFields
     }
     
     // MARK: - Methods
