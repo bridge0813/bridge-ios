@@ -34,7 +34,6 @@ final class MemberDetailInputViewController: BaseViewController {
             font: .boldSystemFont(ofSize: 15),
             textAlignment: .center
         )
-        label.text = "iOS"
         label.layer.borderColor = UIColor.orange.cgColor
         label.layer.borderWidth = 1
     
@@ -124,9 +123,14 @@ final class MemberDetailInputViewController: BaseViewController {
                 flex.addItem(mvvmButton).cornerRadius(8).marginLeft(10)
             }
             
-            flex.addItem(textViewContainer).marginHorizontal(15).height(200).cornerRadius(8).marginTop(50).define { flex in
+            flex.addItem(textViewContainer)
+                .marginHorizontal(15)
+                .height(200)
+                .cornerRadius(8)
+                .marginTop(50)
+                .define { flex in
                 flex.addItem(requirementsTextView).margin(10)
-            }
+                }
             
             flex.addItem().grow(1)
             
@@ -145,5 +149,13 @@ final class MemberDetailInputViewController: BaseViewController {
             nextButtonTapped: nextButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
+        
+        output.selectedField
+            .drive(onNext: { [weak self] field in
+                self?.selectedFieldLabel.text = field
+                // 분야에 맞는 기술 스택 주입.
+            })
+            .disposed(by: disposeBag)
+        
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import RxCocoa
 
 final class MemberDetailInputViewModel: ViewModelType {
     // MARK: - Nested Types
@@ -14,7 +15,7 @@ final class MemberDetailInputViewModel: ViewModelType {
     }
     
     struct Output {
-        
+        let selectedField: Driver<String>
     }
     
     // MARK: - Properties
@@ -41,6 +42,9 @@ final class MemberDetailInputViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        return Output()
+        /// 선택된 분야들 중 가장 첫 번째만 가져옴.
+        let selectedField = Observable.just(selectedFields.first ?? "").asDriver(onErrorJustReturn: "")
+        
+        return Output(selectedField: selectedField)
     }
 }
