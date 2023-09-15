@@ -7,7 +7,7 @@
 
 import RxSwift
 
-// TODO: 로그인 플로우 처리
+// TODO: 로그인 플로우
 // 1. 로그인 창에서 "애플 로그인" 버튼 누르면 - view model
 // 2. 클라단에서 애플 서버에 요청해서 credential 받아와서 - view model
 // 3. 받아온 credential 중 이름, identity token 등 우리 서버에 보내면서 로그인 시도
