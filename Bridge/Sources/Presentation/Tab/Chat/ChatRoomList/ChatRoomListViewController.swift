@@ -80,7 +80,7 @@ final class ChatRoomListViewController: BaseViewController {
         
         let input = ChatRoomListViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            itemSelected: chatRoomListTableView.rx.itemSelected.map { $0.row }.asObservable(),
+            itemSelected: chatRoomListTableView.rx.itemSelected.map { $0.row },
             leaveChatRoomTrigger: leaveChatRoomTrigger.asObservable()
         )
         let output = viewModel.transform(input: input)
