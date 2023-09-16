@@ -155,7 +155,7 @@ private extension ChatRoomListViewController {
             placeholderView.configurePlaceholderView(description: "로그인 후 이용할 수 있어요.")
             
         case .empty:
-            placeholderView.configurePlaceholderView(description: "프로젝트를 지원하고 채팅을 시작해보세요!")
+            placeholderView.configurePlaceholderView(description: "프로젝트에 지원하고 채팅을 시작해보세요!")
             
         case .error:
             placeholderView.configurePlaceholderView(description: "알 수 없는 오류가 발생했습니다.")

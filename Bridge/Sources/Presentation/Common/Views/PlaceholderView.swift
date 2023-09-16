@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import FlexLayout
-import PinLayout
 
 final class PlaceholderView: BaseView {
     
@@ -26,17 +24,14 @@ final class PlaceholderView: BaseView {
     }
     
     override func configureLayouts() {
-        addSubview(rootFlexContainer)
+        addSubview(descriptionLabel)
         
-        rootFlexContainer.flex.direction(.column).justifyContent(.center).alignItems(.center).define { flex in
-            flex.addItem(descriptionLabel).margin(10)
-        }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        rootFlexContainer.pin.all()
-        rootFlexContainer.flex.layout()
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            descriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
     }
 }
 
