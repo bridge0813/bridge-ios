@@ -20,4 +20,5 @@ protocol NetworkService {
     
     // MARK: - For test (auth)
     func signInWithAppleCredentials(_ credentials: UserCredentials) -> Observable<SignInResult>
+    func checkUserAuthState() -> Observable<UserAuthState>
 }

@@ -50,4 +50,8 @@ extension DefaultNetworkService {
         // 3. response handle
         .just(.needSignUp)
     }
+    
+    func checkUserAuthState() -> Observable<UserAuthState> {
+        .just(.signedIn)
+    }
 }
