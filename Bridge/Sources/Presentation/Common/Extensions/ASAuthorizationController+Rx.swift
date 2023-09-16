@@ -40,7 +40,7 @@ extension ASAuthorizationControllerProxy: ASAuthorizationControllerDelegate {
     func authorizationController(
         controller: ASAuthorizationController,
         didCompleteWithAuthorization authorization: ASAuthorization
-    ) {
+    ) { 
         didComplete.onNext(authorization)
         didComplete.onCompleted()
     }

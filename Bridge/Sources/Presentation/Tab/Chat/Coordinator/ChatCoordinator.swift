@@ -16,6 +16,7 @@ final class ChatCoordinator: Coordinator {
     private let chatRoomRepository: ChatRoomRepository
     private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
+    private let checkUserAuthStateUseCase: CheckUserAuthStateUseCase
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -25,6 +26,7 @@ final class ChatCoordinator: Coordinator {
         chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
         fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
+        checkUserAuthStateUseCase = DefaultCheckUserAuthStateUseCase()
     }
     
     func start() {
@@ -37,7 +39,8 @@ extension ChatCoordinator {
         let chatRoomListViewModel = ChatRoomListViewModel(
             coordinator: self,
             fetchChatRoomsUseCase: fetchChatRoomsUseCase,
-            leaveChatRoomUseCase: leaveChatRoomUseCase
+            leaveChatRoomUseCase: leaveChatRoomUseCase,
+            checkUserAuthStateUseCase: checkUserAuthStateUseCase
         )
         let viewController = ChatRoomListViewController(viewModel: chatRoomListViewModel)
         navigationController.pushViewController(viewController, animated: true)

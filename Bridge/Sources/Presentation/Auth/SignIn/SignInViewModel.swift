@@ -14,16 +14,16 @@ final class SignInViewModel: ViewModelType {
         let signInWithAppleButtonTapped: Observable<Void>
     }
     
-    struct Output {
-        
-    }
+    struct Output { }
     
     let disposeBag = DisposeBag()
     
     weak var coordinator: AuthCoordinator?
+    private let signInUseCase: SignInUseCase
     
-    init(coordinator: AuthCoordinator) {
+    init(coordinator: AuthCoordinator, signInUseCase: SignInUseCase) {
         self.coordinator = coordinator
+        self.signInUseCase = signInUseCase
     }
     
     func transform(input: Input) -> Output {
@@ -32,12 +32,28 @@ final class SignInViewModel: ViewModelType {
                 ASAuthorizationAppleIDProvider().rx.requestAuthorizationWithAppleID()
             }
             .withUnretained(self)
+            .map { owner, authorization in
+                owner.mapToUserCredentials(authorization)
+            }
+            .withUnretained(self)
+            .flatMap { owner, credentials in
+                owner.signInUseCase.signInWithApple(credentials: credentials)
+            }
+            .observe(on: MainScheduler.instance)
             .subscribe(
-                onNext: { owner, authorization in
-                    owner.coordinator?.showSelectFieldViewController()  // 테스트용
-                },
-                onError: { _ in
-                    // error handling
+                with: self,
+                onNext: { owner, result in
+                    switch result {
+                    case .signedIn:
+                        owner.coordinator?.finish()
+                        
+                    case .needSignUp:
+                        owner.coordinator?.showSelectFieldViewController()
+                        
+                    case .failure:
+                        print("fail")
+                        // error handling ...
+                    }
                 }
             )
             .disposed(by: disposeBag)
@@ -46,13 +62,23 @@ final class SignInViewModel: ViewModelType {
     }
 }
 
-extension SignInViewModel {
-//    func foo() {
-//        let userIdentifier = appleIDCredential.user
-//        let userName = appleIDCredential.fullName?.familyName ?? "홍"
-//        let givenName = appleIDCredential.fullName?.givenName ?? "길동"
-//        let fullName = userName + givenName
-//        let authorizationCode = appleIDCredential.authorizationCode
-//        let identityToken = appleIDCredential.identityToken
-//    }
+private extension SignInViewModel {
+    func mapToUserCredentials(_ authorization: ASAuthorization) -> UserCredentials {
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential
+        else { return UserCredentials.onError }
+        
+        let userIdentifier = appleIDCredential.user
+        let userName = appleIDCredential.fullName?.familyName ?? ""
+        let givenName = appleIDCredential.fullName?.givenName ?? ""
+        let fullName = userName + givenName
+        let identityToken = appleIDCredential.identityToken
+        let authorizationCode = appleIDCredential.authorizationCode
+        
+        return UserCredentials(
+            id: userIdentifier,
+            name: fullName,
+            identityToken: identityToken,
+            authorizationCode: authorizationCode
+        )
+    }
 }
