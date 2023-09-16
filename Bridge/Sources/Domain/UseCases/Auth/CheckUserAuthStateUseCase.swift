@@ -37,7 +37,7 @@ final class DefaultCheckUserAuthStateUseCase: CheckUserAuthStateUseCase {
 
 private extension DefaultCheckUserAuthStateUseCase {
     private func checkAppleSignInState() -> Observable<UserAuthState> {
-        .just(.notSignedIn)  // 예시
+        .just(.signedIn)  // 예시
     }
     
     private func checkKakaoSignInState() -> Observable<UserAuthState> {
