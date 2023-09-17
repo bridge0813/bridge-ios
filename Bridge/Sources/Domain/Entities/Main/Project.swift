@@ -16,10 +16,10 @@ struct Project {
     let dueDate: Date
     let startDate: Date?
     let endDate: Date?
-    let recruit: [Recruit]
+    let memberRequirement: [MemberRequirement]
     let tagLimit: [String]
     let meetingWay: String
-    let stage: String
+    let progressStatus: String
     let userEmail: String
 }
 
@@ -33,10 +33,10 @@ extension Project {
             dueDate: Date(),
             startDate: nil,
             endDate: nil,
-            recruit: [],
+            memberRequirement: [],
             tagLimit: [],
             meetingWay: "",
-            stage: "",
+            progressStatus: "",
             userEmail: ""
         )
     }

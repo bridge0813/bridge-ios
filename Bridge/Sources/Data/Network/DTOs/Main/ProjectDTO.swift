@@ -14,7 +14,7 @@ struct ProjectDTO: Codable {
     let dueDate: Date
     let startDate: Date?
     let endDate: Date?
-    let recruit: [Recruit]
+    let recruit: [MemberRequirement]
     let tagLimit: [String]
     let meetingWay: String
     let stage: String
@@ -31,10 +31,10 @@ extension ProjectDTO {
             dueDate: dueDate,
             startDate: startDate,
             endDate: endDate,
-            recruit: recruit,
+            memberRequirement: recruit,
             tagLimit: tagLimit,
             meetingWay: meetingWay,
-            stage: stage,
+            progressStatus: stage,
             userEmail: userEmail
         )
     }

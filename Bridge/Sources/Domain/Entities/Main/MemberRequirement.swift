@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Recruit: Codable {
+struct MemberRequirement: Codable {
     let part: String
     let num: Int
     let skills: [String]
     let requirement: String
 }
 
-extension Recruit: Hashable { }
+extension MemberRequirement: Hashable { }
