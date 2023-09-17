@@ -101,7 +101,12 @@ final class MemberRequirementInputViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         /// 현재 작성하려는 분야에 맞게 뷰 컨트롤러도 변경할 수 있도록.
-        let selectedField = Observable.just(selectedFields.first ?? "").asDriver(onErrorJustReturn: "")
+        let selectedField = input.viewDidLoad
+            .withUnretained(self)
+            .map { owner, _ in
+                return owner.selectedFields.first ?? ""
+            }
+            .asDriver(onErrorJustReturn: "")
         
         return Output(selectedField: selectedField)
     }
