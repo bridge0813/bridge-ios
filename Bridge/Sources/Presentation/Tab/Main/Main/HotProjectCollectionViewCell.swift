@@ -139,6 +139,6 @@ extension HotProjectCollectionViewCell {
     func configureCell(with project: Project) {
         titleLabel.text = project.title
         dDayLabel.text = "D-\(project.dDays)"
-        recruitsLabel.text = "\(project.numberOfRecruits)명 모집"
+        recruitsLabel.text = ""
     }
 }

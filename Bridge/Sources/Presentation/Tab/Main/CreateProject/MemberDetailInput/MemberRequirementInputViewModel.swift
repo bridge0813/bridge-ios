@@ -23,18 +23,18 @@ final class MemberRequirementInputViewModel: ViewModelType {
     private weak var coordinator: CreateProjectCoordinator?
     
     private var selectedFields: [String]
-    private var fieldRequirements: [FieldRequirement]
-    private var fieldRequirement = FieldRequirement(field: "", recruitNumber: 0, techStacks: [], expectaions: "")
+    private var memberRequirements: [MemberRequirement]
+    private var memberRequirement = MemberRequirement(part: "", num: 0, skills: [], requirement: "")
     
     // MARK: - Initializer
     init(
         coordinator: CreateProjectCoordinator,
         selectedFields: [String],
-        fieldRequirements: [FieldRequirement]
+        memberRequirements: [MemberRequirement]
     ) {
         self.coordinator = coordinator
         self.selectedFields = selectedFields
-        self.fieldRequirements = fieldRequirements
+        self.memberRequirements = memberRequirements
     }
     
     // MARK: - Methods
@@ -45,7 +45,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 /// 입력한 데이터를 배열에 추가.
-                owner.fieldRequirements.append(owner.fieldRequirement)
+                owner.memberRequirements.append(owner.memberRequirement)
                 
                 /// 현재 해당되는 분야를 삭제
                 owner.selectedFields.removeFirst()
@@ -53,13 +53,13 @@ final class MemberRequirementInputViewModel: ViewModelType {
                 /// 더 설정할 모집 분야가 없다면 다음 뷰로 이동, 있다면 다시 설정 뷰
                 if owner.selectedFields.isEmpty {
                     owner.coordinator?.showApplicantRestrictionViewController(
-                        fieldRequirements: owner.fieldRequirements
+                        memberRequirements: owner.memberRequirements
                     )
                     
                 } else {
-                    owner.coordinator?.showMemberDetailInputViewController(
+                    owner.coordinator?.showMemberRequirementInputViewController(
                         for: owner.selectedFields,
-                        fieldRequirements: owner.fieldRequirements
+                        memberRequirements: owner.memberRequirements
                     )
                 }
             })
@@ -75,11 +75,11 @@ final class MemberRequirementInputViewModel: ViewModelType {
 extension MemberRequirementInputViewModel {
     // 임시
     private func setFieldRequirement() {
-        fieldRequirement = FieldRequirement(
-            field: selectedFields[0],
-            recruitNumber: 2,
-            techStacks: ["Swift", "UIKit", "MVVM"],
-            expectaions: "성실한 분들"
+        memberRequirement = MemberRequirement(
+            part: selectedFields[0],
+            num: 2,
+            skills: ["Swift", "UIKit", "MVVM"],
+            requirement: "성실한 분들"
         )
     }
 }
