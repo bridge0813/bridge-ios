@@ -43,6 +43,8 @@ final class MemberRequirementInputViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
+        /// 바인딩을 통해 'MemberRequirement' 의 요소를 하나씩 채우고, next 탭에서 완성된 데이터를 배열에 추가.
+        /// 1. 뷰가 시작되면, 현재 작성하려는 팀원 분야를 part에 저장.
         input.viewDidLoad
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
@@ -50,6 +52,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        /// 2. 모집 인원 추가
         input.recruitNumberButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, num in
@@ -57,6 +60,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        /// 3. 기술스택 추가
         input.skillTagButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, skills in
@@ -64,6 +68,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        /// 4. 바라는점 추가
         input.requirementsTextChanged
             .withUnretained(self)
             .subscribe(onNext: { owner, text in
@@ -95,7 +100,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        /// 선택된 분야들 중 가장 첫 번째만 가져옴.
+        /// 현재 작성하려는 분야에 맞게 뷰 컨트롤러도 변경할 수 있도록.
         let selectedField = Observable.just(selectedFields.first ?? "").asDriver(onErrorJustReturn: "")
         
         return Output(selectedField: selectedField)
