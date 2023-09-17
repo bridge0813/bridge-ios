@@ -43,12 +43,14 @@ final class MemberRequirementInputViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        input.viewDidLoad
+        let selectedField = input.viewDidLoad
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.memberRequirement.field = owner.selectedFields[0]
-            })
-            .disposed(by: disposeBag)
+            .map { owner, _ in
+                let field = owner.selectedFields[0]
+                owner.memberRequirement.field = field  // 현재 선택된 분야 할당
+                return field                           // 현재 선택된 분야 반환
+            }
+            .asDriver(onErrorJustReturn: "")
         
         input.recruitNumberButtonTapped
             .withUnretained(self)
@@ -90,13 +92,6 @@ final class MemberRequirementInputViewModel: ViewModelType {
                 }
             })
             .disposed(by: disposeBag)
-        
-        let selectedField = input.viewDidLoad
-            .withUnretained(self)
-            .map { owner, _ in
-                return owner.selectedFields.first ?? ""
-            }
-            .asDriver(onErrorJustReturn: "")
         
         return Output(selectedField: selectedField)
     }
