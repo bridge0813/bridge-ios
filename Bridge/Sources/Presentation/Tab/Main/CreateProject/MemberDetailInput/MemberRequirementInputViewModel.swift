@@ -93,7 +93,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
                     
                 } else {
                     owner.coordinator?.showMemberRequirementInputViewController(
-                        for: owner.selectedFields,
+                        with: owner.selectedFields,
                         memberRequirements: owner.memberRequirements
                     )
                 }

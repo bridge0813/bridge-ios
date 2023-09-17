@@ -40,7 +40,7 @@ final class MemberFieldSelectionViewModel: ViewModelType {
             .subscribe(onNext: { owner, _ in
                 let selectedFieldNames = owner.selectedFields.map { $0.rawValue }
                 owner.coordinator?.showMemberRequirementInputViewController(
-                    for: selectedFieldNames,
+                    with: selectedFieldNames,
                     memberRequirements: []
                 )
             })
