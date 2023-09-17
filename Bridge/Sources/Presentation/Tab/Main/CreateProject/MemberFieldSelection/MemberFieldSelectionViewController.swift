@@ -45,16 +45,16 @@ final class MemberFieldSelectionViewController: BaseViewController {
         return button
     }()
     
-    private let dismissButton: UIButton = {
-        let button = UIButton()
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
-        let buttonImage = UIImage(systemName: "xmark", withConfiguration: imageConfig)
-        button.setImage(buttonImage, for: .normal)
-        button.tintColor = .black
-        
+    private lazy var dismissButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            image: UIImage(systemName: "xmark"),
+            style: .done,
+            target: self,
+            action: nil
+        )
         return button
     }()
-
+    
     private let viewModel: MemberFieldSelectionViewModel
     
     // MARK: - Initializer
@@ -81,13 +81,12 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     // MARK: - Methods
     private func configureNavigationUI() {
+        navigationItem.leftBarButtonItem = dismissButton
     }
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).padding(5).define { flex in
-            flex.addItem(dismissButton).position(.absolute).marginTop(25).marginLeft(10).size(25)
-            
             flex.addItem(instructionLabel).marginHorizontal(10).marginTop(100)
             
             flex.addItem().direction(.column).marginTop(50).define { flex in
