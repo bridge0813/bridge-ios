@@ -97,8 +97,12 @@ final class ApplicantRestrictionViewController: BaseViewController {
     
     override func bind() {
         let input = ApplicantRestrictionViewModel.Input(
-            nextButtonTapped: nextButton.rx.tap.asObservable()
+            nextButtonTapped: nextButton.rx.tap.asObservable(),
+            studentButtonTapped: studentButton.rx.tap.map { "학생" },
+            currentEmployeeButtonTapped: currentEmployeeButton.rx.tap.map { "현직자" },
+            jobSeekerButtonTapped: jobSeekerButton.rx.tap.map { "취준생" }
         )
+        
         let output = viewModel.transform(input: input)
     }
 }

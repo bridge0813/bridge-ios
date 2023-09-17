@@ -9,18 +9,18 @@ import Foundation
 
 // TODO: - 데이터 구조에 따라 수정필요
 struct Project {
-    let id: String
-    let title: String
-    let overview: String
-    let dDays: Int
-    let dueDate: Date
-    let startDate: Date?
-    let endDate: Date?
-    let memberRequirement: [MemberRequirement]
-    let tagLimit: [String]
-    let meetingWay: String
-    let progressStatus: String
-    let userEmail: String
+    var id: String
+    var title: String
+    var overview: String
+    var dDays: Int
+    var dueDate: Date
+    var startDate: Date?
+    var endDate: Date?
+    var memberRequirement: [MemberRequirement]
+    var tagLimit: [String]
+    var meetingWay: String
+    var progressStatus: String
+    var userEmail: String
 }
 
 extension Project {

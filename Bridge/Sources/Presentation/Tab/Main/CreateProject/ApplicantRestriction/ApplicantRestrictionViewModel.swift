@@ -5,12 +5,17 @@
 //  Created by 엄지호 on 2023/09/14.
 //
 
+import Foundation
 import RxSwift
+import RxCocoa
 
 final class ApplicantRestrictionViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let nextButtonTapped: Observable<Void>
+        let studentButtonTapped: Observable<String>
+        let currentEmployeeButtonTapped: Observable<String>
+        let jobSeekerButtonTapped: Observable<String>
     }
     
     struct Output {
@@ -21,6 +26,7 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     private var memberRequirements: [MemberRequirement]
+    private var tagLimit: [String] = []
     
     // MARK: - Initializer
     init(
@@ -37,6 +43,45 @@ final class ApplicantRestrictionViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.showProjectDatePickerViewController()
+            })
+            .disposed(by: disposeBag)
+        
+        input.studentButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, tag in
+                if let index = owner.tagLimit.firstIndex(of: tag) {
+                    owner.tagLimit.remove(at: index)
+                } else {
+                    owner.tagLimit.append(tag)
+                }
+                
+                print(owner.tagLimit)
+            })
+            .disposed(by: disposeBag)
+        
+        input.currentEmployeeButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, tag in
+                if let index = owner.tagLimit.firstIndex(of: tag) {
+                    owner.tagLimit.remove(at: index)
+                } else {
+                    owner.tagLimit.append(tag)
+                }
+                
+                print(owner.tagLimit)
+            })
+            .disposed(by: disposeBag)
+        
+        input.jobSeekerButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, tag in
+                if let index = owner.tagLimit.firstIndex(of: tag) {
+                    owner.tagLimit.remove(at: index)
+                } else {
+                    owner.tagLimit.append(tag)
+                }
+                
+                print(owner.tagLimit)
             })
             .disposed(by: disposeBag)
         
