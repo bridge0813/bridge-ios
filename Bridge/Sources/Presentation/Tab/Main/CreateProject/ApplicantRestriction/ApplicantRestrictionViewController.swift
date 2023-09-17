@@ -98,11 +98,39 @@ final class ApplicantRestrictionViewController: BaseViewController {
     override func bind() {
         let input = ApplicantRestrictionViewModel.Input(
             nextButtonTapped: nextButton.rx.tap.asObservable(),
-            studentButtonTapped: studentButton.rx.tap.map { "학생" },
-            currentEmployeeButtonTapped: currentEmployeeButton.rx.tap.map { "현직자" },
-            jobSeekerButtonTapped: jobSeekerButton.rx.tap.map { "취준생" }
+            restrictionTagButtonTapped: mergeRestrictionButtonTap()
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.restrictionTag
+            .drive(onNext: { [weak self] type in
+                self?.selectedButtonToggle(for: type)
+            })
+            .disposed(by: disposeBag)
+        
+    }
+}
+
+extension ApplicantRestrictionViewController {
+    private func mergeRestrictionButtonTap() -> Observable<ApplicantRestrictionViewModel.RestrictionTagType> {
+        return Observable.merge(
+            studentButton.rx.tap.map { ApplicantRestrictionViewModel.RestrictionTagType.student },
+            currentEmployeeButton.rx.tap.map { ApplicantRestrictionViewModel.RestrictionTagType.currentEmployee },
+            jobSeekerButton.rx.tap.map { ApplicantRestrictionViewModel.RestrictionTagType.jobSeeker }
+        )
+    }
+    
+    private func selectedButtonToggle(for type: ApplicantRestrictionViewModel.RestrictionTagType) {
+        switch type {
+        case .student:
+            studentButton.isSelected.toggle()
+            
+        case .currentEmployee:
+            currentEmployeeButton.isSelected.toggle()
+            
+        case .jobSeeker:
+            jobSeekerButton.isSelected.toggle()
+        }
     }
 }

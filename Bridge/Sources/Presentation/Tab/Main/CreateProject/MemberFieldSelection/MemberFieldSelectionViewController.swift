@@ -160,30 +160,30 @@ extension MemberFieldSelectionViewController {
     }
     
     private func selectedButtonToggle(for type: MemberFieldSelectionViewModel.RecruitFieldType) {
-            switch type {
-            case .iOS:
-                iosButton.isSelected.toggle()
-                
-            case .android:
-                androidButton.isSelected.toggle()
-                
-            case .frontEnd:
-                frontEndButton.isSelected.toggle()
-                
-            case .backEnd:
-                backEndButton.isSelected.toggle()
-                
-            case .uiux:
-                uiuxButton.isSelected.toggle()
-                
-            case .bibx:
-                bibxButton.isSelected.toggle()
-                
-            case .videomotion:
-                videomotionButton.isSelected.toggle()
-                
-            case .pm:
-                pmButton.isSelected.toggle()
-            }
+        switch type {
+        case .iOS:
+            iosButton.isSelected.toggle()
+            
+        case .android:
+            androidButton.isSelected.toggle()
+            
+        case .frontEnd:
+            frontEndButton.isSelected.toggle()
+            
+        case .backEnd:
+            backEndButton.isSelected.toggle()
+            
+        case .uiux:
+            uiuxButton.isSelected.toggle()
+            
+        case .bibx:
+            bibxButton.isSelected.toggle()
+            
+        case .videomotion:
+            videomotionButton.isSelected.toggle()
+            
+        case .pm:
+            pmButton.isSelected.toggle()
         }
+    }
 }

@@ -13,20 +13,18 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let nextButtonTapped: Observable<Void>
-        let studentButtonTapped: Observable<String>
-        let currentEmployeeButtonTapped: Observable<String>
-        let jobSeekerButtonTapped: Observable<String>
+        let restrictionTagButtonTapped: Observable<RestrictionTagType>
     }
     
     struct Output {
-        
+        let restrictionTag: Driver<RestrictionTagType>
     }
     
     // MARK: - Properties
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     private var memberRequirements: [MemberRequirement]
-    private var tagLimit: [String] = []
+    private var tagLimit: [RestrictionTagType] = []
     
     // MARK: - Initializer
     init(
@@ -49,7 +47,7 @@ final class ApplicantRestrictionViewModel: ViewModelType {
                     dDays: 0,
                     dueDate: Date(),
                     memberRequirement: owner.memberRequirements,
-                    tagLimit: owner.tagLimit,
+                    tagLimit: owner.tagLimit.map { $0.rawValue },
                     meetingWay: "",
                     progressStatus: "",
                     userEmail: ""
@@ -63,46 +61,23 @@ final class ApplicantRestrictionViewModel: ViewModelType {
             )
             .disposed(by: disposeBag)
         
-        input.studentButtonTapped
+        let restrictionTag = input.restrictionTagButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, tag in
-                if let index = owner.tagLimit.firstIndex(of: tag) {
+            .flatMap { owner, type in
+                if let index = owner.tagLimit.firstIndex(of: type) {
                     owner.tagLimit.remove(at: index)
                 } else {
-                    owner.tagLimit.append(tag)
+                    owner.tagLimit.append(type)
                 }
                 
-                print(owner.tagLimit)
-            })
-            .disposed(by: disposeBag)
+                return Observable.just(type)
+            }
+            .asDriver(onErrorJustReturn: RestrictionTagType.student)
         
-        input.currentEmployeeButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, tag in
-                if let index = owner.tagLimit.firstIndex(of: tag) {
-                    owner.tagLimit.remove(at: index)
-                } else {
-                    owner.tagLimit.append(tag)
-                }
-                
-                print(owner.tagLimit)
-            })
-            .disposed(by: disposeBag)
         
-        input.jobSeekerButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, tag in
-                if let index = owner.tagLimit.firstIndex(of: tag) {
-                    owner.tagLimit.remove(at: index)
-                } else {
-                    owner.tagLimit.append(tag)
-                }
-                
-                print(owner.tagLimit)
-            })
-            .disposed(by: disposeBag)
-        
-        return Output()
+        return Output(
+            restrictionTag: restrictionTag
+        )
     }
 }
 
