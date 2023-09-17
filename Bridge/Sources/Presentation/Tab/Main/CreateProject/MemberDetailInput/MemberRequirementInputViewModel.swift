@@ -28,7 +28,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
     
     private var selectedFields: [String]
     private var memberRequirements: [MemberRequirement]
-    private var memberRequirement = MemberRequirement(part: "", num: 0, skills: [], requirement: "")
+    private var memberRequirement = MemberRequirement(field: "", recruitNumber: 0, requiredSkills: [], expectation: "")
     
     // MARK: - Initializer
     init(
@@ -48,7 +48,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
         input.viewDidLoad
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.memberRequirement.part = owner.selectedFields[0]
+                owner.memberRequirement.field = owner.selectedFields[0]
             })
             .disposed(by: disposeBag)
         
@@ -56,7 +56,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
         input.recruitNumberButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, num in
-                owner.memberRequirement.num = num
+                owner.memberRequirement.recruitNumber = num
             })
             .disposed(by: disposeBag)
         
@@ -64,7 +64,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
         input.skillTagButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, skills in
-                owner.memberRequirement.skills = skills
+                owner.memberRequirement.requiredSkills = skills
             })
             .disposed(by: disposeBag)
         
@@ -72,7 +72,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
         input.requirementsTextChanged
             .withUnretained(self)
             .subscribe(onNext: { owner, text in
-                owner.memberRequirement.requirement = text
+                owner.memberRequirement.expectation = text
             })
             .disposed(by: disposeBag)
         

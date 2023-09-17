@@ -8,10 +8,10 @@
 import Foundation
 
 struct MemberRequirement: Codable {
-    var part: String
-    var num: Int
-    var skills: [String]
-    var requirement: String
+    var field: String
+    var recruitNumber: Int
+    var requiredSkills: [String]
+    var expectation: String
 }
 
 extension MemberRequirement: Hashable { }
