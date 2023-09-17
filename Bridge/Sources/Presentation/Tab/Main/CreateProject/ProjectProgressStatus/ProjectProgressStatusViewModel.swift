@@ -49,10 +49,10 @@ final class ProjectProgressStatusViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        input.progressMethodButtonTapped
+        input.statusButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, method in
-                owner.project.meetingWay = method.rawValue
+            .subscribe(onNext: { owner, status in
+                owner.project.progressStatus = status.rawValue
             })
             .disposed(by: disposeBag)
         
