@@ -11,6 +11,8 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let nextButtonTapped: Observable<Void>
+        let titleTextChanged: Observable<String>
+        let descriptionTextChanged: Observable<String>
     }
     
     struct Output {
@@ -37,6 +39,20 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.showCompletionViewController()
+            })
+            .disposed(by: disposeBag)
+        
+        input.titleTextChanged
+            .withUnretained(self)
+            .subscribe(onNext: { owner, text in
+                owner.project.title = text
+            })
+            .disposed(by: disposeBag)
+        
+        input.descriptionTextChanged
+            .withUnretained(self)
+            .subscribe(onNext: { owner, text in
+                owner.project.overview = text
             })
             .disposed(by: disposeBag)
         
