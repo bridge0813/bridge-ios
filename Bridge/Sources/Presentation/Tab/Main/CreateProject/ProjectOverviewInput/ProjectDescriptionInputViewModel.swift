@@ -38,6 +38,7 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                // 네트워킹 로직 구현...
                 owner.coordinator?.showCompletionViewController()
             })
             .disposed(by: disposeBag)
