@@ -27,10 +27,16 @@ final class ApplicantRestrictionViewController: BaseViewController {
         return label
     }()
     
+    private let studentButton = FieldTagButton(title: "학생")
+    private let currentEmployeeButton = FieldTagButton(title: "현직자")
+    private let jobSeekerButton = FieldTagButton(title: "취준생")
+    
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.white, for: .highlighted)
+        button.backgroundColor = .darkGray
         
         return button
     }()
@@ -65,9 +71,23 @@ final class ApplicantRestrictionViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).padding(5).alignItems(.center).define { flex in
-            flex.addItem(instructionLabel).width(200).height(50).marginTop(100)
-            flex.addItem(nextButton).width(50).height(50).marginTop(50)
+        rootFlexContainer.flex.direction(.column).padding(5).define { flex in
+            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(100)
+            
+            flex.addItem().direction(.column).marginTop(50).define { flex in
+                flex.addItem(studentButton).size(studentButton.intrinsicContentSize).cornerRadius(8).marginLeft(10)
+                
+                flex.addItem().direction(.row).marginTop(10).define { flex in
+                    flex.addItem(currentEmployeeButton).cornerRadius(8).marginLeft(10)
+                    flex.addItem(jobSeekerButton).cornerRadius(8).marginLeft(10)
+                }
+            }
+            
+            flex.addItem().grow(1)
+            
+            flex.addItem().marginBottom(50).define { flex in
+                flex.addItem(nextButton).marginHorizontal(15).height(50).cornerRadius(8)
+            }
         }
     }
     
