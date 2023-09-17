@@ -86,7 +86,7 @@ final class ProjectProgressStatusViewController: BaseViewController {
         let input = ProjectProgressStatusViewModel.Input(
             nextButtonTapped: nextButton.rx.tap.asObservable(),
             progressMethodButtonTapped: .just(ProjectProgressStatusViewModel.ProgressMethod.offline),
-            statusButtonTapped: .just(ProjectProgressStatusViewModel.ProjectStatus.designing)
+            statusButtonTapped: .just(ProjectProgressStatusViewModel.ProgressStatus.designing)
         )
         let output = viewModel.transform(input: input)
     }

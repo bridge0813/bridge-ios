@@ -12,7 +12,7 @@ final class ProjectProgressStatusViewModel: ViewModelType {
     struct Input {
         let nextButtonTapped: Observable<Void>
         let progressMethodButtonTapped: Observable<ProgressMethod>
-        let statusButtonTapped: Observable<ProjectStatus>
+        let statusButtonTapped: Observable<ProgressStatus>
     }
     
     struct Output {
@@ -67,7 +67,7 @@ extension ProjectProgressStatusViewModel {
         case blended = "블렌디드"
     }
     
-    enum ProjectStatus: String {
+    enum ProgressStatus: String {
         case notStarted = "시작하기 전이에요"
         case planning = "기획 중이에요"
         case planCompleted = "기획이 완료됐어요"
