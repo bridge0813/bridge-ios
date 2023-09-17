@@ -95,7 +95,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).padding(5).define { flex in
-            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(40)
+            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(20)
             
             flex.addItem(titleTextField).marginHorizontal(15).height(50).cornerRadius(8).marginTop(50)
             

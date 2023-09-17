@@ -110,7 +110,7 @@ final class MemberRequirementInputViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).padding(5).define { flex in
-            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(40)
+            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(20)
             
             flex.addItem(selectedFieldLabel).width(100).height(40).cornerRadius(8).marginTop(50).marginLeft(10)
             

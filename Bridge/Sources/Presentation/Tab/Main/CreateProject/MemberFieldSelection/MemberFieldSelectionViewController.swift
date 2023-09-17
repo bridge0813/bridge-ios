@@ -87,7 +87,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).padding(5).define { flex in
-            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(100)
+            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(20)
             
             flex.addItem().direction(.column).marginTop(50).define { flex in
                 flex.addItem().direction(.row).define { flex in
