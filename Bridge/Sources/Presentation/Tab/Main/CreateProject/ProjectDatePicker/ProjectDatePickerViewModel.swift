@@ -40,43 +40,40 @@ final class ProjectDatePickerViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let dueDate = BehaviorRelay<Date>(value: Date())
-        let startDate = BehaviorRelay<Date?>(value: nil)
-        let endDate = BehaviorRelay<Date?>(value: nil)
-        
         input.dueDatePickerChanged
-            .bind(to: dueDate)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, date in
+                owner.project.dueDate = date
+            })
             .disposed(by: disposeBag)
         
         input.startDatePickerChanged
-            .bind(to: startDate)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, date in
+                owner.project.startDate = date
+            })
             .disposed(by: disposeBag)
-       
+        
         input.endDatePickerChanged
-            .bind(to: endDate)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, date in
+                owner.project.endDate = date
+            })
             .disposed(by: disposeBag)
         
         input.nextButtonTapped
-            .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.project.dueDate = dueDate.value
-                owner.project.startDate = startDate.value
-                owner.project.endDate = endDate.value
-                
-                return Observable.just(owner.project)
-            }
             .subscribe(
                 with: self,
-                onNext: { owner, project in
-                    owner.coordinator?.showProjectProgressStatusViewController(with: project)
+                onNext: { owner, _ in
+                    owner.coordinator?.showProjectProgressStatusViewController(with: owner.project)
                 }
             )
             .disposed(by: disposeBag)
         
         return Output(
-            dueDate: dueDate.asDriver(onErrorJustReturn: Date()),
-            startDate: startDate.asDriver(onErrorJustReturn: nil),
-            endDate: endDate.asDriver(onErrorJustReturn: nil)
+            dueDate: input.dueDatePickerChanged.asDriver(onErrorJustReturn: Date()),
+            startDate: input.startDatePickerChanged.asDriver(onErrorJustReturn: nil),
+            endDate: input.endDatePickerChanged.asDriver(onErrorJustReturn: nil)
         )
     }
 }

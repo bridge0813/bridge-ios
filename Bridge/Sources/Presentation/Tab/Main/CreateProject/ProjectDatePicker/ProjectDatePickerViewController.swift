@@ -83,5 +83,23 @@ final class ProjectDatePickerViewController: BaseViewController {
             endDatePickerChanged: .just(nil)
         )
         let output = viewModel.transform(input: input)
+        
+        output.dueDate
+            .drive(onNext: { date in
+                // 선택된 Date에 맞게 화면 업데이트
+            })
+            .disposed(by: disposeBag)
+        
+        output.startDate
+            .drive(onNext: { date in
+                // 선택된 Date에 맞게 화면 업데이트
+            })
+            .disposed(by: disposeBag)
+        
+        output.endDate
+            .drive(onNext: { date in
+                // 선택된 Date에 맞게 화면 업데이트
+            })
+            .disposed(by: disposeBag)
     }
 }
