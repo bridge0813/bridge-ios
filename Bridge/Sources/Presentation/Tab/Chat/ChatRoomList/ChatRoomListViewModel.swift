@@ -24,20 +24,20 @@ final class ChatRoomListViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     
     private weak var coordinator: ChatCoordinator?
+    private let checkUserAuthStateUseCase: CheckUserAuthStateUseCase
     private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
-    private let checkUserAuthStateUseCase: CheckUserAuthStateUseCase
     
     init(
         coordinator: ChatCoordinator,
+        checkUserAuthStateUseCase: CheckUserAuthStateUseCase,
         fetchChatRoomsUseCase: FetchChatRoomsUseCase,
-        leaveChatRoomUseCase: LeaveChatRoomUseCase,
-        checkUserAuthStateUseCase: CheckUserAuthStateUseCase
+        leaveChatRoomUseCase: LeaveChatRoomUseCase
     ) {
         self.coordinator = coordinator
+        self.checkUserAuthStateUseCase = checkUserAuthStateUseCase
         self.fetchChatRoomsUseCase = fetchChatRoomsUseCase
         self.leaveChatRoomUseCase = leaveChatRoomUseCase
-        self.checkUserAuthStateUseCase = checkUserAuthStateUseCase
     }
     
     // TODO: apns 들어오면 구조 바꿔야할수도

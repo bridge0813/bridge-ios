@@ -17,6 +17,7 @@
 		7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB332AB1DBFD009A00EB /* DefaultAuthRepository.swift */; };
 		7B14DB362AB2F203009A00EB /* CheckUserAuthStateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB352AB2F203009A00EB /* CheckUserAuthStateUseCase.swift */; };
 		7B14DB382AB3040F009A00EB /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB372AB3040F009A00EB /* PlaceholderView.swift */; };
+		7B14DB442AB57D29009A00EB /* UserAuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB432AB57D29009A00EB /* UserAuthState.swift */; };
 		7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */; };
 		7B2D76EC2AA993C700E5907B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76EB2AA993C700E5907B /* AuthCoordinator.swift */; };
 		7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76F22AA9941C00E5907B /* SignInViewController.swift */; };
@@ -106,6 +107,7 @@
 		7B14DB332AB1DBFD009A00EB /* DefaultAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthRepository.swift; sourceTree = "<group>"; };
 		7B14DB352AB2F203009A00EB /* CheckUserAuthStateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUserAuthStateUseCase.swift; sourceTree = "<group>"; };
 		7B14DB372AB3040F009A00EB /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		7B14DB432AB57D29009A00EB /* UserAuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthState.swift; sourceTree = "<group>"; };
 		7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		7B2D76EB2AA993C700E5907B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		7B2D76F22AA9941C00E5907B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB2D2AB1DA39009A00EB /* SignInResult.swift */,
+				7B14DB432AB57D29009A00EB /* UserAuthState.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -898,6 +901,7 @@
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
+				7B14DB442AB57D29009A00EB /* UserAuthState.swift in Sources */,
 				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
 				7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */,
 				7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */,

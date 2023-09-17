@@ -19,4 +19,8 @@ final class DefaultAuthRepository: AuthRepository {
     func signInWithApple(credentials: UserCredentials) -> Observable<SignInResult> {
         networkService.signInWithAppleCredentials(credentials)
     }
+    
+    func checkUserAuthState() -> Observable<UserAuthState> {
+        networkService.checkUserAuthState()
+    }
 }

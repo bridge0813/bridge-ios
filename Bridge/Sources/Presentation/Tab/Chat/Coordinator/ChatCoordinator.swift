@@ -13,20 +13,22 @@ final class ChatCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
+    private let authRepository: AuthRepository
     private let chatRoomRepository: ChatRoomRepository
+    private let checkUserAuthStateUseCase: CheckUserAuthStateUseCase
     private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
-    private let checkUserAuthStateUseCase: CheckUserAuthStateUseCase
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []
         
         let networkService = DefaultNetworkService()
+        authRepository = DefaultAuthRepository(networkService: networkService)
         chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
+        checkUserAuthStateUseCase = DefaultCheckUserAuthStateUseCase(authRepository: authRepository)
         fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
-        checkUserAuthStateUseCase = DefaultCheckUserAuthStateUseCase()
     }
     
     func start() {
@@ -38,9 +40,9 @@ extension ChatCoordinator {
     func showChatRoomListViewController() {
         let chatRoomListViewModel = ChatRoomListViewModel(
             coordinator: self,
+            checkUserAuthStateUseCase: checkUserAuthStateUseCase,
             fetchChatRoomsUseCase: fetchChatRoomsUseCase,
-            leaveChatRoomUseCase: leaveChatRoomUseCase,
-            checkUserAuthStateUseCase: checkUserAuthStateUseCase
+            leaveChatRoomUseCase: leaveChatRoomUseCase
         )
         let viewController = ChatRoomListViewController(viewModel: chatRoomListViewModel)
         navigationController.pushViewController(viewController, animated: true)

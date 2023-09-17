@@ -9,4 +9,5 @@ import RxSwift
 
 protocol AuthRepository {
     func signInWithApple(credentials: UserCredentials) -> Observable<SignInResult>
+    func checkUserAuthState() -> Observable<UserAuthState>
 }
