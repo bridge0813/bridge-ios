@@ -35,7 +35,7 @@ extension CreateProjectCoordinator {
         
         let viewController = MemberFieldSelectionViewController(viewModel: viewModel)
         createProjectNavigationController = UINavigationController(rootViewController: viewController)
-        createProjectNavigationController?.modalPresentationStyle = .overFullScreen
+        createProjectNavigationController?.modalPresentationStyle = .fullScreen
         
         navigationController.present(
             createProjectNavigationController ?? UINavigationController(),
