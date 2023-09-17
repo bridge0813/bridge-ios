@@ -41,8 +41,8 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         input.nextButtonTapped
             .withUnretained(self)
-            .flatMap { owner, _ in
-                let project = Project(
+            .map { owner, _ in
+                return Project(
                     id: "",
                     title: "",
                     overview: "",
@@ -54,7 +54,6 @@ final class ApplicantRestrictionViewModel: ViewModelType {
                     progressStatus: "",
                     userEmail: ""
                 )
-                return Observable.just(project)
             }
             .subscribe(
                 with: self,
@@ -104,5 +103,13 @@ final class ApplicantRestrictionViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output()
+    }
+}
+
+extension ApplicantRestrictionViewModel {
+    enum RestrictionTagType: String {
+        case student = "학생"
+        case currentEmployee = "현직자"
+        case jobSeeker = "취준생"
     }
 }
