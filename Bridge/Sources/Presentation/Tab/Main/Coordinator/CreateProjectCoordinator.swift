@@ -61,7 +61,6 @@ extension CreateProjectCoordinator {
             memberRequirements: memberRequirements
         )
         
-        print(memberRequirements)
         let viewController = ApplicantRestrictionViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
@@ -72,7 +71,6 @@ extension CreateProjectCoordinator {
             project: project
         )
         
-        print(project)
         let viewController = ProjectDatePickerViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
@@ -83,7 +81,6 @@ extension CreateProjectCoordinator {
             project: project
         )
         
-        print(project)
         let viewController = ProjectProgressStatusViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
@@ -94,7 +91,6 @@ extension CreateProjectCoordinator {
             project: project
         )
         
-        print(project)
         let viewController = ProjectDescriptionInputViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
