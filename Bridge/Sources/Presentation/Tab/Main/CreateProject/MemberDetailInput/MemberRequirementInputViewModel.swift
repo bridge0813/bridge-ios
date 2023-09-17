@@ -8,7 +8,7 @@
 import RxSwift
 import RxCocoa
 
-final class MemberDetailInputViewModel: ViewModelType {
+final class MemberRequirementInputViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let nextButtonTapped: Observable<Void>
@@ -72,7 +72,7 @@ final class MemberDetailInputViewModel: ViewModelType {
     }
 }
 
-extension MemberDetailInputViewModel {
+extension MemberRequirementInputViewModel {
     // 임시
     private func setFieldRequirement() {
         fieldRequirement = FieldRequirement(

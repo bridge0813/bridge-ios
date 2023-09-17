@@ -11,7 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
-final class MemberDetailInputViewController: BaseViewController {
+final class MemberRequirementInputViewController: BaseViewController {
     // MARK: - Properties
     private let rootFlexContainer = UIView()
    
@@ -80,10 +80,10 @@ final class MemberDetailInputViewController: BaseViewController {
         return button
     }()
 
-    private let viewModel: MemberDetailInputViewModel
+    private let viewModel: MemberRequirementInputViewModel
     
     // MARK: - Initializer
-    init(viewModel: MemberDetailInputViewModel) {
+    init(viewModel: MemberRequirementInputViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -145,7 +145,7 @@ final class MemberDetailInputViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = MemberDetailInputViewModel.Input(
+        let input = MemberRequirementInputViewModel.Input(
             nextButtonTapped: nextButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
