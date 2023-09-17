@@ -11,7 +11,11 @@ import RxCocoa
 final class MemberRequirementInputViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
+        let viewDidLoad: Observable<Void>
         let nextButtonTapped: Observable<Void>
+        let recruitNumberButtonTapped: Observable<Int>
+        let skillTagButtonTapped: Observable<[String]>
+        let requirementsTextChanged: Observable<String>
     }
     
     struct Output {
@@ -39,7 +43,33 @@ final class MemberRequirementInputViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        setFieldRequirement()
+        input.viewDidLoad
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.memberRequirement.part = owner.selectedFields[0]
+            })
+            .disposed(by: disposeBag)
+        
+        input.recruitNumberButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, num in
+                owner.memberRequirement.num = num
+            })
+            .disposed(by: disposeBag)
+        
+        input.skillTagButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, skills in
+                owner.memberRequirement.skills = skills
+            })
+            .disposed(by: disposeBag)
+        
+        input.requirementsTextChanged
+            .withUnretained(self)
+            .subscribe(onNext: { owner, text in
+                owner.memberRequirement.requirement = text
+            })
+            .disposed(by: disposeBag)
         
         input.nextButtonTapped
             .withUnretained(self)
@@ -73,13 +103,5 @@ final class MemberRequirementInputViewModel: ViewModelType {
 }
 
 extension MemberRequirementInputViewModel {
-    // 임시
-    private func setFieldRequirement() {
-        memberRequirement = MemberRequirement(
-            part: selectedFields[0],
-            num: 2,
-            skills: ["Swift", "UIKit", "MVVM"],
-            requirement: "성실한 분들"
-        )
-    }
+    
 }

@@ -66,7 +66,6 @@ final class MemberRequirementInputViewController: BaseViewController {
         textView.showsVerticalScrollIndicator = false
         textView.returnKeyType = .next
         textView.textColor = .black
-        textView.text = "이런 팀원이었으면 좋겠어요."
         
         return textView
     }()
@@ -129,7 +128,7 @@ final class MemberRequirementInputViewController: BaseViewController {
                 .cornerRadius(8)
                 .marginTop(50)
                 .define { flex in
-                flex.addItem(requirementsTextView).margin(10)
+                    flex.addItem(requirementsTextView).margin(10)
                 }
             
             flex.addItem().grow(1)
@@ -146,7 +145,11 @@ final class MemberRequirementInputViewController: BaseViewController {
     
     override func bind() {
         let input = MemberRequirementInputViewModel.Input(
-            nextButtonTapped: nextButton.rx.tap.asObservable()
+            viewDidLoad: .just(()),
+            nextButtonTapped: nextButton.rx.tap.asObservable(),
+            recruitNumberButtonTapped: .just(2),
+            skillTagButtonTapped: .just(["Swift", "UIKit", "MVVM"]),
+            requirementsTextChanged: requirementsTextView.rx.text.orEmpty.asObservable()
         )
         let output = viewModel.transform(input: input)
         
