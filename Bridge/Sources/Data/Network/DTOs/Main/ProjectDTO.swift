@@ -10,13 +10,15 @@ import Foundation
 struct ProjectDTO: Codable {
     let id: String
     let title: String
-    let numberOfRecruits: Int
-    let recruitmentField: [String]
-    let techStackTags: [String]
-    let startDate: Date
-    let endDate: Date
-    let deadlineDate: Date
-    let fieldRequirements: [FieldRequirement]
+    let overview: String
+    let dueDate: Date
+    let startDate: Date?
+    let endDate: Date?
+    let recruit: [Recruit]
+    let tagLimit: [String]
+    let meetingWay: String
+    let stage: String
+    let userEmail: String
 }
 
 extension ProjectDTO {
@@ -24,12 +26,16 @@ extension ProjectDTO {
         Project(
             id: id,
             title: title,
-            numberOfRecruits: numberOfRecruits,
-            recruitmentField: recruitmentField,
-            techStackTags: techStackTags,
-            dDays: Date().calculateDDay(to: deadlineDate),
-            startDate: startDate.toString(),
-            endDate: endDate.toString()
+            overview: overview,
+            dDays: Date().calculateDDay(to: dueDate),
+            dueDate: dueDate,
+            startDate: startDate,
+            endDate: endDate,
+            recruit: recruit,
+            tagLimit: tagLimit,
+            meetingWay: meetingWay,
+            stage: stage,
+            userEmail: userEmail
         )
     }
 }
@@ -39,115 +45,135 @@ extension ProjectDTO {
         ProjectDTO(
             id: "1",
             title: "모임 플랫폼 디자이너 구합니다",
-            numberOfRecruits: 1,
-            recruitmentField: ["개발자", "디자이너"],
-            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            overview: "모임 플랫폼",
+            dueDate: Date(),
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date(),
-            fieldRequirements: []
+            recruit: [],
+            tagLimit: [],
+            meetingWay: "온라인",
+            stage: "기획 중",
+            userEmail: ""
         ),
         ProjectDTO(
             id: "2",
             title: "웹 사이트 디자이너 구해요!!",
-            numberOfRecruits: 1,
-            recruitmentField: ["개발자", "디자이너"],
-            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            overview: "모임 플랫폼",
+            dueDate: Date(),
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date(),
-            fieldRequirements: []
+            recruit: [],
+            tagLimit: [],
+            meetingWay: "온라인",
+            stage: "기획 중",
+            userEmail: ""
         ),
         ProjectDTO(
             id: "3",
-            title: "개발자, 디자이너 구합니다",
-            numberOfRecruits: 6,
-            recruitmentField: ["개발자", "디자이너"],
-            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            title: "웹 사이트 디자이너 구해요!!",
+            overview: "모임 플랫폼",
+            dueDate: Date(),
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date(),
-            fieldRequirements: []
+            recruit: [],
+            tagLimit: [],
+            meetingWay: "온라인",
+            stage: "기획 중",
+            userEmail: ""
         ),
         ProjectDTO(
             id: "4",
-            title: "iOS 개발자 구합니다",
-            numberOfRecruits: 4,
-            recruitmentField: ["개발자", "디자이너"],
-            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            title: "웹 사이트 디자이너 구해요!!",
+            overview: "모임 플랫폼",
+            dueDate: Date(),
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date(),
-            fieldRequirements: []
+            recruit: [],
+            tagLimit: [],
+            meetingWay: "온라인",
+            stage: "기획 중",
+            userEmail: ""
         ),
         ProjectDTO(
             id: "5",
-            title: "모임 플랫폼 디자이너 구합니다",
-            numberOfRecruits: 1,
-            recruitmentField: ["개발자", "디자이너"],
-            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            title: "웹 사이트 디자이너 구해요!!",
+            overview: "모임 플랫폼",
+            dueDate: Date(),
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date(),
-            fieldRequirements: []
+            recruit: [],
+            tagLimit: [],
+            meetingWay: "온라인",
+            stage: "기획 중",
+            userEmail: ""
         )
     ]
     
     static var hotProjectTestArray = [
         ProjectDTO(
             id: "1Hot",
-            title: "모임 플랫폼 디자이너 구합니다",
-            numberOfRecruits: 1,
-            recruitmentField: ["개발자", "디자이너"],
-            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            title: "웹 사이트 디자이너 구해요!!",
+            overview: "모임 플랫폼",
+            dueDate: Date(),
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date(),
-            fieldRequirements: []
+            recruit: [],
+            tagLimit: [],
+            meetingWay: "온라인",
+            stage: "기획 중",
+            userEmail: ""
         ),
         ProjectDTO(
             id: "2Hot",
             title: "웹 사이트 디자이너 구해요!!",
-            numberOfRecruits: 1,
-            recruitmentField: ["개발자", "디자이너"],
-            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            overview: "모임 플랫폼",
+            dueDate: Date(),
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date(),
-            fieldRequirements: []
+            recruit: [],
+            tagLimit: [],
+            meetingWay: "온라인",
+            stage: "기획 중",
+            userEmail: ""
         ),
         ProjectDTO(
             id: "3Hot",
-            title: "개발자, 디자이너 구합니다",
-            numberOfRecruits: 6,
-            recruitmentField: ["개발자", "디자이너"],
-            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            title: "웹 사이트 디자이너 구해요!!",
+            overview: "모임 플랫폼",
+            dueDate: Date(),
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date(),
-            fieldRequirements: []
+            recruit: [],
+            tagLimit: [],
+            meetingWay: "온라인",
+            stage: "기획 중",
+            userEmail: ""
         ),
         ProjectDTO(
             id: "4Hot",
-            title: "iOS 개발자 구합니다",
-            numberOfRecruits: 4,
-            recruitmentField: ["개발자", "디자이너"],
-            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            title: "웹 사이트 디자이너 구해요!!",
+            overview: "모임 플랫폼",
+            dueDate: Date(),
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date(),
-            fieldRequirements: []
+            recruit: [],
+            tagLimit: [],
+            meetingWay: "온라인",
+            stage: "기획 중",
+            userEmail: ""
         ),
         ProjectDTO(
             id: "5Hot",
-            title: "모임 플랫폼 기획자 구합니다",
-            numberOfRecruits: 1,
-            recruitmentField: ["개발자", "디자이너"],
-            techStackTags: ["iOS", "BackEnd", "UI/UX"],
+            title: "웹 사이트 디자이너 구해요!!",
+            overview: "모임 플랫폼",
+            dueDate: Date(),
             startDate: Date(),
             endDate: Date(),
-            deadlineDate: Date(),
-            fieldRequirements: []
+            recruit: [],
+            tagLimit: [],
+            meetingWay: "온라인",
+            stage: "기획 중",
+            userEmail: ""
         )
     ]
 }

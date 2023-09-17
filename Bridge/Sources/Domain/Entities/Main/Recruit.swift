@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Recruit {
+struct Recruit: Codable {
     let part: String
     let num: Int
     let skills: [String]
