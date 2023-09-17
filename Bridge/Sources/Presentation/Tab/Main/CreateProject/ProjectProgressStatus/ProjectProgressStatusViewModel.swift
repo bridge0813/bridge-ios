@@ -20,13 +20,15 @@ final class ProjectProgressStatusViewModel: ViewModelType {
     // MARK: - Properties
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
-    
+    private var project: Project
     
     // MARK: - Initializer
     init(
-        coordinator: CreateProjectCoordinator
+        coordinator: CreateProjectCoordinator,
+        project: Project
     ) {
         self.coordinator = coordinator
+        self.project = project
     }
     
     // MARK: - Methods

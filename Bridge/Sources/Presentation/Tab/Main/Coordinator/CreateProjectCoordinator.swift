@@ -79,7 +79,8 @@ extension CreateProjectCoordinator {
     
     func showProjectProgressStatusViewController(with project: Project) {
         let viewModel = ProjectProgressStatusViewModel(
-            coordinator: self
+            coordinator: self,
+            project: project
         )
         
         print(project)
