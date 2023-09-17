@@ -77,7 +77,9 @@ final class ProjectProgressStatusViewController: BaseViewController {
     
     override func bind() {
         let input = ProjectProgressStatusViewModel.Input(
-            nextButtonTapped: nextButton.rx.tap.asObservable()
+            nextButtonTapped: nextButton.rx.tap.asObservable(),
+            progressMethodButtonTapped: .just(ProjectProgressStatusViewModel.ProgressMethod.offline),
+            statusButtonTapped: .just(ProjectProgressStatusViewModel.ProjectStatus.designing)
         )
         let output = viewModel.transform(input: input)
     }
