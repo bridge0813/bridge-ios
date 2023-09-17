@@ -40,5 +40,18 @@ final class DefaultNetworkService: NetworkService {
     func requestTestHotProjectsData() -> Observable<[ProjectDTO]> {
         Observable.just(ProjectDTO.hotProjectTestArray)
     }
+}
+
+// MARK: - For test (auth)
+extension DefaultNetworkService {
+    func signInWithAppleCredentials(_ credentials: UserCredentials) -> Observable<SignInResult> {
+        // 1. user credentials -map-> DTO
+        // 2. request
+        // 3. response handle
+        .just(.needSignUp)
+    }
     
+    func checkUserAuthState() -> Observable<UserAuthState> {
+        .just(.signedIn)
+    }
 }

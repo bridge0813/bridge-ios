@@ -17,4 +17,8 @@ protocol NetworkService {
     func requestTestChatRooms() -> Observable<[ChatRoomDTO]>
     
     func leaveChatRoom(id: String) -> Single<Void>
+    
+    // MARK: - For test (auth)
+    func signInWithAppleCredentials(_ credentials: UserCredentials) -> Observable<SignInResult>
+    func checkUserAuthState() -> Observable<UserAuthState>
 }

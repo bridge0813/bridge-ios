@@ -12,6 +12,7 @@ import PinLayout
 final class ChatRoomCell: BaseTableViewCell {
     
     // MARK: - UI
+    // rootFlexContainer
     private let chatRoomBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray5
@@ -133,9 +134,9 @@ private extension ChatRoomCell {
         
         init(_ unreadMessageCount: Int, limit: Int = 999) {
             switch unreadMessageCount {
-            case 0:           self = .hidden
-            case 1 ... limit: self = .general(unreadMessageCount)
-            default:          self = .exceededLimit(limit)
+            case 0:             self = .hidden
+            case 1 ... limit:   self = .general(unreadMessageCount)
+            default:            self = .exceededLimit(limit)
             }
         }
         
@@ -149,8 +150,8 @@ private extension ChatRoomCell {
         
         var shouldIncludeInLayout: Bool {
             switch self {
-            case .hidden:                  return false
-            case .general, .exceededLimit: return true
+            case .hidden:                   return false
+            case .general, .exceededLimit:  return true
             }
         }
         

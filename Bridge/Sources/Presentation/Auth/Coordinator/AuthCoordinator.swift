@@ -13,8 +13,15 @@ final class AuthCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     
+    private let authRepository: AuthRepository
+    private let signInUseCase: SignInUseCase
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        
+        let networkService = DefaultNetworkService()
+        authRepository = DefaultAuthRepository(networkService: networkService)
+        signInUseCase = DefaultSignInUseCase(authRepository: authRepository)
     }
     
     func start() {
@@ -24,12 +31,14 @@ final class AuthCoordinator: Coordinator {
 
 extension AuthCoordinator {
     func showSignInViewController() {
-        let signInViewModel = SignInViewModel(coordinator: self)
+        let signInViewModel = SignInViewModel(coordinator: self, signInUseCase: signInUseCase)
         let signInViewController = SignInViewController(viewModel: signInViewModel)
         
         let signInNavigationController = UINavigationController(rootViewController: signInViewController)
         signInNavigationController.setNavigationBarHidden(true, animated: false)
-        signInNavigationController.modalPresentationStyle = .overFullScreen
+        
+        // TODO: 로그인 화면에 x 버튼 추가하지 전까지 주석처리
+//        signInNavigationController.modalPresentationStyle = .overFullScreen
         
         navigationController.present(signInNavigationController, animated: true)
     }
