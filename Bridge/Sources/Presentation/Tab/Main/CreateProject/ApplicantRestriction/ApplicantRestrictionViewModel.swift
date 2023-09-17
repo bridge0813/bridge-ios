@@ -41,9 +41,27 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         input.nextButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showProjectDatePickerViewController()
-            })
+            .flatMap { owner, _ in
+                let project = Project(
+                    id: "",
+                    title: "",
+                    overview: "",
+                    dDays: 0,
+                    dueDate: Date(),
+                    memberRequirement: owner.memberRequirements,
+                    tagLimit: owner.tagLimit,
+                    meetingWay: "",
+                    progressStatus: "",
+                    userEmail: ""
+                )
+                return Observable.just(project)
+            }
+            .subscribe(
+                with: self,
+                onNext: { owner, project in
+                    owner.coordinator?.showProjectDatePickerViewController(with: project)
+                }
+            )
             .disposed(by: disposeBag)
         
         input.studentButtonTapped
