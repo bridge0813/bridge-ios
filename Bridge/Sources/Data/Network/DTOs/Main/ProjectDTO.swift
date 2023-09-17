@@ -26,14 +26,14 @@ extension ProjectDTO {
         Project(
             id: id,
             title: title,
-            overview: overview,
+            description: overview,
             dDays: Date().calculateDDay(to: dueDate),
-            dueDate: dueDate,
+            recruitmentDeadline: dueDate,
             startDate: startDate,
             endDate: endDate,
-            memberRequirement: recruit,
-            tagLimit: tagLimit,
-            meetingWay: meetingWay,
+            memberRequirements: recruit,
+            applicantRestrictions: tagLimit,
+            progressMethod: meetingWay,
             progressStatus: stage,
             userEmail: userEmail
         )

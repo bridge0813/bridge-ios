@@ -43,7 +43,7 @@ final class ProjectDatePickerViewModel: ViewModelType {
         input.dueDatePickerChanged
             .withUnretained(self)
             .subscribe(onNext: { owner, date in
-                owner.project.dueDate = date
+                owner.project.recruitmentDeadline = date
             })
             .disposed(by: disposeBag)
         

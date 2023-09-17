@@ -45,7 +45,7 @@ final class ProjectProgressStatusViewModel: ViewModelType {
         input.progressMethodButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, method in
-                owner.project.meetingWay = method.rawValue
+                owner.project.progressMethod = method.rawValue
             })
             .disposed(by: disposeBag)
         

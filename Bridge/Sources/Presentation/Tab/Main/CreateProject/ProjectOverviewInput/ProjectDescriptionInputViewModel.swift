@@ -53,7 +53,7 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
         input.descriptionTextChanged
             .withUnretained(self)
             .subscribe(onNext: { owner, text in
-                owner.project.overview = text
+                owner.project.description = text
             })
             .disposed(by: disposeBag)
         

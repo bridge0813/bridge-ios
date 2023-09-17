@@ -11,14 +11,14 @@ import Foundation
 struct Project {
     var id: String
     var title: String
-    var overview: String
+    var description: String
     var dDays: Int
-    var dueDate: Date
+    var recruitmentDeadline: Date
     var startDate: Date?
     var endDate: Date?
-    var memberRequirement: [MemberRequirement]
-    var tagLimit: [String]
-    var meetingWay: String
+    var memberRequirements: [MemberRequirement]
+    var applicantRestrictions: [String]
+    var progressMethod: String
     var progressStatus: String
     var userEmail: String
 }
@@ -28,14 +28,14 @@ extension Project {
         Project(
             id: UUID().uuidString,
             title: "",
-            overview: "",
+            description: "",
             dDays: 0,
-            dueDate: Date(),
+            recruitmentDeadline: Date(),
             startDate: nil,
             endDate: nil,
-            memberRequirement: [],
-            tagLimit: [],
-            meetingWay: "",
+            memberRequirements: [],
+            applicantRestrictions: [],
+            progressMethod: "",
             progressStatus: "",
             userEmail: ""
         )

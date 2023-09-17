@@ -43,12 +43,12 @@ final class ApplicantRestrictionViewModel: ViewModelType {
                 return Project(
                     id: "",
                     title: "",
-                    overview: "",
+                    description: "",
                     dDays: 0,
-                    dueDate: Date(),
-                    memberRequirement: owner.memberRequirements,
-                    tagLimit: owner.tagLimit.map { $0.rawValue },
-                    meetingWay: "",
+                    recruitmentDeadline: Date(),
+                    memberRequirements: owner.memberRequirements,
+                    applicantRestrictions: owner.tagLimit.map { $0.rawValue },
+                    progressMethod: "",
                     progressStatus: "",
                     userEmail: ""
                 )
