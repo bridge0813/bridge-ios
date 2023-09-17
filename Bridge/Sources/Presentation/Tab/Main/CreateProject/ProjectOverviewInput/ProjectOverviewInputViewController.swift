@@ -27,10 +27,39 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         return label
     }()
     
+    private let titleTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "글의 제목을 입력해주세요"
+        textField.addLeftPadding()
+        textField.leftViewMode = .always
+        textField.layer.borderColor = UIColor.darkGray.cgColor
+        textField.layer.borderWidth = 1
+        
+        return textField
+    }()
+    
+    private let textViewContainer: UIView = {
+        let container = UIView()
+        container.layer.borderColor = UIColor.darkGray.cgColor
+        container.layer.borderWidth = 1
+        
+        return container
+    }()
+    private let desriptionTextView: UITextView = {
+        let textView = UITextView()
+        textView.showsVerticalScrollIndicator = false
+        textView.returnKeyType = .next
+        textView.textColor = .black
+        
+        return textView
+    }()
+    
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.white, for: .highlighted)
+        button.backgroundColor = .darkGray
         
         return button
     }()
@@ -65,9 +94,25 @@ final class ProjectDescriptionInputViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).padding(5).alignItems(.center).define { flex in
-            flex.addItem(instructionLabel).width(200).height(50).marginTop(100)
-            flex.addItem(nextButton).width(50).height(50).marginTop(50)
+        rootFlexContainer.flex.direction(.column).padding(5).define { flex in
+            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(40)
+            
+            flex.addItem(titleTextField).marginHorizontal(15).height(50).cornerRadius(8).marginTop(50)
+            
+            flex.addItem(textViewContainer)
+                .marginHorizontal(15)
+                .height(150)
+                .cornerRadius(8)
+                .marginTop(50)
+                .define { flex in
+                    flex.addItem(desriptionTextView).grow(1).margin(10)
+                }
+            
+            flex.addItem().grow(1)
+            
+            flex.addItem().marginBottom(50).define { flex in
+                flex.addItem(nextButton).marginHorizontal(15).height(50).cornerRadius(8)
+            }
         }
     }
     
