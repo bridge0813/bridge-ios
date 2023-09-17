@@ -72,15 +72,17 @@ extension CreateProjectCoordinator {
             project: project
         )
         
+        print(project)
         let viewController = ProjectDatePickerViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showProjectProgressStatusViewController() {
+    func showProjectProgressStatusViewController(with project: Project) {
         let viewModel = ProjectProgressStatusViewModel(
             coordinator: self
         )
         
+        print(project)
         let viewController = ProjectProgressStatusViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }

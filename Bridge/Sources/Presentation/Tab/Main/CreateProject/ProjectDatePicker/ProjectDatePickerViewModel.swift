@@ -58,9 +58,19 @@ final class ProjectDatePickerViewModel: ViewModelType {
         
         input.nextButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showProjectProgressStatusViewController()
-            })
+            .flatMap { owner, _ in
+                owner.project.dueDate = dueDate.value
+                owner.project.startDate = startDate.value
+                owner.project.endDate = endDate.value
+                
+                return Observable.just(owner.project)
+            }
+            .subscribe(
+                with: self,
+                onNext: { owner, project in
+                    owner.coordinator?.showProjectProgressStatusViewController(with: project)
+                }
+            )
             .disposed(by: disposeBag)
         
         return Output(
