@@ -62,6 +62,7 @@
 		7C24003D2AB34BFA00D9D5F1 /* FieldTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */; };
 		7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003F2AB4235800D9D5F1 /* UITextField+.swift */; };
 		7C2400422AB442CD00D9D5F1 /* FieldRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400412AB442CD00D9D5F1 /* FieldRequirement.swift */; };
+		7C2400442AB6BB8C00D9D5F1 /* Recruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400432AB6BB8C00D9D5F1 /* Recruit.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -142,6 +143,7 @@
 		7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTagButton.swift; sourceTree = "<group>"; };
 		7C24003F2AB4235800D9D5F1 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		7C2400412AB442CD00D9D5F1 /* FieldRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldRequirement.swift; sourceTree = "<group>"; };
+		7C2400432AB6BB8C00D9D5F1 /* Recruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recruit.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -561,6 +563,7 @@
 			isa = PBXGroup;
 			children = (
 				7C569CF22A9F67C60063D362 /* Project.swift */,
+				7C2400432AB6BB8C00D9D5F1 /* Recruit.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -884,6 +887,7 @@
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
+				7C2400442AB6BB8C00D9D5F1 /* Recruit.swift in Sources */,
 				7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

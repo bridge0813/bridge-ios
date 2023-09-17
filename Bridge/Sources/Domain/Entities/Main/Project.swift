@@ -11,25 +11,33 @@ import Foundation
 struct Project {
     let id: String
     let title: String
-    let numberOfRecruits: Int                   // 총 모집 인원
-    let recruitmentField: [String]              // 모집 분야
-    let techStackTags: [String]                 // 기술 스택 태그
-    let dDays: Int                              // 공고 마감일까지 D-Day
-    let startDate: String                       // 프로젝트 시작일
-    let endDate: String                         // 프로젝트 마감일
+    let overview: String
+    let dDays: Int
+    let dueDate: Date
+    let startDate: Date?
+    let endDate: Date?
+    let recruit: [Recruit]
+    let tagLimit: [String]
+    let meetingWay: String
+    let stage: String
+    let userEmail: String
 }
 
 extension Project {
     static var onError: Self {
         Project(
             id: UUID().uuidString,
-            title: "오류",
-            numberOfRecruits: 0,
-            recruitmentField: [],
-            techStackTags: [],
+            title: "",
+            overview: "",
             dDays: 0,
-            startDate: "",
-            endDate: ""
+            dueDate: Date(),
+            startDate: nil,
+            endDate: nil,
+            recruit: [],
+            tagLimit: [],
+            meetingWay: "",
+            stage: "",
+            userEmail: ""
         )
     }
 }
