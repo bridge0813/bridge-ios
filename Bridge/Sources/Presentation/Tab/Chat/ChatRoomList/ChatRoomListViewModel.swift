@@ -5,7 +5,6 @@
 //  Created by 정호윤 on 2023/08/28.
 //
 
-import Foundation
 import RxCocoa
 import RxSwift
 
@@ -13,8 +12,8 @@ final class ChatRoomListViewModel: ViewModelType {
     
     struct Input {
         let viewWillAppear: Observable<Bool>
-        let itemSelected: Observable<IndexPath>
-        let leaveChatRoomTrigger: PublishRelay<IndexPath>
+        let itemSelected: Observable<Int>
+        let leaveChatRoomTrigger: Observable<Int>
     }
     
     struct Output {
@@ -62,8 +61,8 @@ final class ChatRoomListViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         input.itemSelected
-            .withLatestFrom(chatRooms) { indexPath, chatRooms in
-                chatRooms[indexPath.row]
+            .withLatestFrom(chatRooms) { index, chatRooms in
+                chatRooms[index]
             }
             .withUnretained(self)
             .subscribe(onNext: { owner, chatRoom in
@@ -73,8 +72,8 @@ final class ChatRoomListViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         input.leaveChatRoomTrigger
-            .withLatestFrom(chatRooms) { indexPath, chatRooms in
-                chatRooms[indexPath.row]
+            .withLatestFrom(chatRooms) { index, chatRooms in
+                chatRooms[index]
             }
             .withUnretained(self)
             .flatMap { owner, chatRoom in
