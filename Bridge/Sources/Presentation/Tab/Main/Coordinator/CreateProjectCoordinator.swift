@@ -68,7 +68,8 @@ extension CreateProjectCoordinator {
     
     func showProjectDatePickerViewController(with project: Project) {
         let viewModel = ProjectDatePickerViewModel(
-            coordinator: self
+            coordinator: self,
+            project: project
         )
         
         let viewController = ProjectDatePickerViewController(viewModel: viewModel)

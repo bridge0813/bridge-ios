@@ -77,7 +77,10 @@ final class ProjectDatePickerViewController: BaseViewController {
     
     override func bind() {
         let input = ProjectDatePickerViewModel.Input(
-            nextButtonTapped: nextButton.rx.tap.asObservable()
+            nextButtonTapped: nextButton.rx.tap.asObservable(),
+            dueDatePickerChanged: .just(Date()),
+            startDatePickerChanged: .just(nil),
+            endDatePickerChanged: .just(nil)
         )
         let output = viewModel.transform(input: input)
     }
