@@ -22,7 +22,7 @@ final class ProjectDatePickerViewController: BaseViewController {
             font: .boldSystemFont(ofSize: 18),
             numberOfLines: 2
         )
-        label.text = "당신의 프로젝트에 대한 \n기본 정보를 알려주세요!"
+        label.text = "당신의 프로젝트에 대한 \n기본 정보를 알려주세요!(모집마감일, 시작일, 완료일 설정)"
         
         return label
     }()
@@ -30,7 +30,9 @@ final class ProjectDatePickerViewController: BaseViewController {
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.white, for: .highlighted)
+        button.backgroundColor = .darkGray
         
         return button
     }()
@@ -65,9 +67,14 @@ final class ProjectDatePickerViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).padding(5).alignItems(.center).define { flex in
-            flex.addItem(instructionLabel).width(200).height(50).marginTop(100)
-            flex.addItem(nextButton).width(50).height(50).marginTop(50)
+        rootFlexContainer.flex.direction(.column).padding(5).define { flex in
+            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(100)
+            
+            flex.addItem().grow(1)
+            
+            flex.addItem().marginBottom(50).define { flex in
+                flex.addItem(nextButton).marginHorizontal(15).height(50).cornerRadius(8)
+            }
         }
     }
     
