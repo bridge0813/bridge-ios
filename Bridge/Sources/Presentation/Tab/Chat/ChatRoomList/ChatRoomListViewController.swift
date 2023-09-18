@@ -96,7 +96,6 @@ final class ChatRoomListViewController: BaseViewController {
         
         output.viewState
             .drive { [weak self] viewState in
-                print(viewState)
                 self?.handleViewState(viewState)
             }
             .disposed(by: disposeBag)
