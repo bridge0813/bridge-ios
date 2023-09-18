@@ -18,6 +18,10 @@
 		7B14DB362AB2F203009A00EB /* CheckUserAuthStateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB352AB2F203009A00EB /* CheckUserAuthStateUseCase.swift */; };
 		7B14DB382AB3040F009A00EB /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB372AB3040F009A00EB /* PlaceholderView.swift */; };
 		7B14DB442AB57D29009A00EB /* UserAuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB432AB57D29009A00EB /* UserAuthState.swift */; };
+		7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB462AB86051009A00EB /* TokenStorage.swift */; };
+		7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB4A2AB86099009A00EB /* KeychainError.swift */; };
+		7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB4E2AB8659E009A00EB /* KeychainTokenStroage.swift */; };
+		7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB512AB86982009A00EB /* KeychainAccount.swift */; };
 		7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */; };
 		7B2D76EC2AA993C700E5907B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76EB2AA993C700E5907B /* AuthCoordinator.swift */; };
 		7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76F22AA9941C00E5907B /* SignInViewController.swift */; };
@@ -108,6 +112,10 @@
 		7B14DB352AB2F203009A00EB /* CheckUserAuthStateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUserAuthStateUseCase.swift; sourceTree = "<group>"; };
 		7B14DB372AB3040F009A00EB /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		7B14DB432AB57D29009A00EB /* UserAuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthState.swift; sourceTree = "<group>"; };
+		7B14DB462AB86051009A00EB /* TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
+		7B14DB4A2AB86099009A00EB /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
+		7B14DB4E2AB8659E009A00EB /* KeychainTokenStroage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTokenStroage.swift; sourceTree = "<group>"; };
+		7B14DB512AB86982009A00EB /* KeychainAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccount.swift; sourceTree = "<group>"; };
 		7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		7B2D76EB2AA993C700E5907B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		7B2D76F22AA9941C00E5907B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -240,6 +248,25 @@
 				7B14DB332AB1DBFD009A00EB /* DefaultAuthRepository.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		7B14DB452AB86036009A00EB /* TokenStorage */ = {
+			isa = PBXGroup;
+			children = (
+				7B14DB462AB86051009A00EB /* TokenStorage.swift */,
+				7B14DB502AB86970009A00EB /* Keychain */,
+			);
+			path = TokenStorage;
+			sourceTree = "<group>";
+		};
+		7B14DB502AB86970009A00EB /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				7B14DB512AB86982009A00EB /* KeychainAccount.swift */,
+				7B14DB4E2AB8659E009A00EB /* KeychainTokenStroage.swift */,
+				7B14DB4A2AB86099009A00EB /* KeychainError.swift */,
+			);
+			path = Keychain;
 			sourceTree = "<group>";
 		};
 		7B2D76E92AA993AF00E5907B /* Auth */ = {
@@ -454,6 +481,7 @@
 				7BA36CAE2A9D9476000DAB02 /* DTOs */,
 				7BA36CB32A9D980F000DAB02 /* Endpoint */,
 				7BA36CBA2A9DA179000DAB02 /* NetworkService */,
+				7B14DB452AB86036009A00EB /* TokenStorage */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -871,6 +899,7 @@
 				7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */,
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
+				7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */,
 				7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */,
 				7B14DB212AB04AE9009A00EB /* SelectFieldViewModel.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
@@ -899,6 +928,7 @@
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
+				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
 				7B14DB442AB57D29009A00EB /* UserAuthState.swift in Sources */,
@@ -920,6 +950,7 @@
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
 				7B14DB382AB3040F009A00EB /* PlaceholderView.swift in Sources */,
 				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
+				7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */,
 				7BA36CDA2AA197F8000DAB02 /* ChatRoomListViewController.swift in Sources */,
 				7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */,
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,
@@ -931,6 +962,7 @@
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
+				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* ASAuthorizationController+Rx.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
