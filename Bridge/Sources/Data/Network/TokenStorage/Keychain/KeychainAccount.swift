@@ -10,5 +10,6 @@ import Foundation
 /// Keychain에서 사용할 계정 키를 나타내는 열거형
 enum KeychainAccount: String, TokenKey {
     case userID = "com.bridge.userID"
+    case accessToken = "com.bridge.accessToken"
     case refreshToken = "com.bridge.refreshToken"
 }
