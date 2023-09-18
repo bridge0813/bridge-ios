@@ -38,7 +38,7 @@ extension AuthCoordinator {
         signInNavigationController.setNavigationBarHidden(true, animated: false)
         
         // TODO: 로그인 화면에 x 버튼 추가하지 전까지 주석처리
-//        signInNavigationController.modalPresentationStyle = .overFullScreen
+//        signInNavigationController.modalPresentationStyle = .fullScreen
         
         navigationController.present(signInNavigationController, animated: true)
     }
