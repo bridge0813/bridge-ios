@@ -20,7 +20,8 @@ final class AuthCoordinator: Coordinator {
         self.navigationController = navigationController
         
         let networkService = DefaultNetworkService()
-        authRepository = DefaultAuthRepository(networkService: networkService)
+        let tokenStorage = KeychainTokenStorage()
+        authRepository = DefaultAuthRepository(networkService: networkService, tokenStorage: tokenStorage)
         signInUseCase = DefaultSignInUseCase(authRepository: authRepository)
     }
     

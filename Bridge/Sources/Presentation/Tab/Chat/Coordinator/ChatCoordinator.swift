@@ -24,7 +24,8 @@ final class ChatCoordinator: Coordinator {
         self.childCoordinators = []
         
         let networkService = DefaultNetworkService()
-        authRepository = DefaultAuthRepository(networkService: networkService)
+        let tokenStorage = KeychainTokenStorage()
+        authRepository = DefaultAuthRepository(networkService: networkService, tokenStorage: tokenStorage)
         chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
         checkUserAuthStateUseCase = DefaultCheckUserAuthStateUseCase(authRepository: authRepository)
         fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
