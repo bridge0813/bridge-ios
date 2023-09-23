@@ -128,4 +128,8 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

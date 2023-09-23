@@ -160,4 +160,8 @@ final class MemberRequirementInputViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
