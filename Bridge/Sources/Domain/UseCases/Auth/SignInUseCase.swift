@@ -17,7 +17,7 @@ import RxSwift
 //     5-2. 신규 유저: 토큰들 키체인에 저장 -> 분야 선택 뷰 push
 
 protocol SignInUseCase {
-    func signInWithApple(credentials: UserCredentials) -> Observable<SignInResult>
+    func signInWithApple(credentials: UserCredentials) -> Single<SignInResult>
 }
 
 final class DefaultSignInUseCase: SignInUseCase {
@@ -28,7 +28,7 @@ final class DefaultSignInUseCase: SignInUseCase {
         self.authRepository = authRepository
     }
     
-    func signInWithApple(credentials: UserCredentials) -> Observable<SignInResult> {
+    func signInWithApple(credentials: UserCredentials) -> Single<SignInResult> {
         authRepository.signInWithApple(credentials: credentials)
     }
 }
