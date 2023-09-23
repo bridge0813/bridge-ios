@@ -24,97 +24,56 @@ final class ProjectDataStore {
             progressStatus: "",
             userEmail: ""
         )
-    
-    // 현재 프로젝트 데이터 가져오기
-    private func getCurrentProject() -> Project {
-        return currentProject
-    }
-    
-    // 프로젝트 데이터 업데이트
-    private func updateProject(newProject: Project) {
-        self.currentProject = newProject
-    }
 }
 
 extension ProjectDataStore {
     // MARK: - MemberFieldSelection(모집하려는 팀원의 분야설정)
     func removeAllMemberRequirements() {
-        var project = getCurrentProject()
-        
-        project.memberRequirements.removeAll()
-        updateProject(newProject: project)
+        currentProject.memberRequirements.removeAll()
     }
     
     // MARK: - MemberRequirementInput(분야의 세부 요구사항)
     func updateMemberRequirements(with requirement: MemberRequirement) {
-        var project = getCurrentProject()
-        
-        if let index = project.memberRequirements.firstIndex(where: { $0.field == requirement.field }) {
-            project.memberRequirements[index] = requirement
+        if let index = currentProject.memberRequirements.firstIndex(where: { $0.field == requirement.field }) {
+            currentProject.memberRequirements[index] = requirement
         } else {
-            project.memberRequirements.append(requirement)
+            currentProject.memberRequirements.append(requirement)
         }
-        
-        updateProject(newProject: project)
     }
     
     // MARK: - ApplicantRestriction(지원제한)
     func updateApplicantRestriction(with restrictions: [ApplicantRestrictionViewModel.RestrictionTagType]) {
-        var project = getCurrentProject()
-        project.applicantRestrictions = restrictions.map { $0.rawValue }
-        
-        updateProject(newProject: project)
+        currentProject.applicantRestrictions = restrictions.map { $0.rawValue }
     }
     
     // MARK: - ProjectDatePicker(날짜설정)
     func updateRecruitmentDeadline(with date: Date) {
-        var project = getCurrentProject()
-        project.recruitmentDeadline = date
-        
-        updateProject(newProject: project)
+        currentProject.recruitmentDeadline = date
     }
     
     func updateStartDate(with date: Date?) {
-        var project = getCurrentProject()
-        project.startDate = date
-        
-        updateProject(newProject: project)
+        currentProject.startDate = date
     }
     
     func updateEndDate(with date: Date?) {
-        var project = getCurrentProject()
-        project.endDate = date
-        
-        updateProject(newProject: project)
+        currentProject.endDate = date
     }
     
     // MARK: - ProjectProgressStatus(진행방식 및 현황)
     func updateProgressMethod(with method: String) {
-        var project = getCurrentProject()
-        project.progressMethod = method
-        
-        updateProject(newProject: project)
+        currentProject.progressMethod = method
     }
     
     func updateProgressStatus(with status: String) {
-        var project = getCurrentProject()
-        project.progressStatus = status
-        
-        updateProject(newProject: project)
+        currentProject.progressStatus = status
     }
     
     // MARK: - ProjectDescriptionInput(제목 및 소개)
     func updateTitle(with text: String) {
-        var project = getCurrentProject()
-        project.title = text
-        
-        updateProject(newProject: project)
+        currentProject.title = text
     }
     
     func updateDescription(with text: String) {
-        var project = getCurrentProject()
-        project.description = text
-        
-        updateProject(newProject: project)
+        currentProject.description = text
     }
 }
