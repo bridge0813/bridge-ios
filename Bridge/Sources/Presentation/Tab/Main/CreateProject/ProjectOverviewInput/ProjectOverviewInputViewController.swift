@@ -123,8 +123,12 @@ final class ProjectDescriptionInputViewController: BaseViewController {
     override func bind() {
         let input = ProjectDescriptionInputViewModel.Input(
             nextButtonTapped: nextButton.rx.tap.asObservable(),
-            titleTextChanged: titleTextField.rx.text.orEmpty.asObservable(),
-            descriptionTextChanged: desriptionTextView.rx.text.orEmpty.asObservable()
+            titleTextChanged: titleTextField.rx.controlEvent(.editingDidEnd)
+                .withLatestFrom(titleTextField.rx.text.orEmpty)
+                .distinctUntilChanged(),
+            descriptionTextChanged: desriptionTextView.rx.didEndEditing
+                .withLatestFrom(desriptionTextView.rx.text.orEmpty)
+                .distinctUntilChanged()
         )
         let output = viewModel.transform(input: input)
     }

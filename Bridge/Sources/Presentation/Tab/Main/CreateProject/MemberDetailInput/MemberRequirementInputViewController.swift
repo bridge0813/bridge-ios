@@ -149,7 +149,9 @@ final class MemberRequirementInputViewController: BaseViewController {
             nextButtonTapped: nextButton.rx.tap.asObservable(),
             recruitNumberButtonTapped: .just(2),
             skillTagButtonTapped: .just(["Swift", "UIKit", "MVVM"]),
-            requirementsTextChanged: requirementsTextView.rx.text.orEmpty.asObservable()
+            requirementsTextChanged: requirementsTextView.rx.didEndEditing
+                .withLatestFrom(requirementsTextView.rx.text.orEmpty)
+                .distinctUntilChanged()
         )
         let output = viewModel.transform(input: input)
         
