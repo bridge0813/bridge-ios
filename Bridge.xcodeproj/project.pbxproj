@@ -684,7 +684,6 @@
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
-				7C2400472AB7D45500D9D5F1 /* DataStore */,
 				7CC9F6C82AAF087A00685EA9 /* MemberFieldSelection */,
 				7CC9F6C92AAF0E1500685EA9 /* MemberDetailInput */,
 				7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */,
@@ -753,6 +752,7 @@
 		7CF93E012A9C64EB0013EBD6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				7C2400472AB7D45500D9D5F1 /* DataStore */,
 				7CF93E022A9C65040013EBD6 /* Coordinator */,
 				7CF93E032A9C650D0013EBD6 /* Main */,
 				7CC9F6C12AAEE9E800685EA9 /* CreateProject */,
