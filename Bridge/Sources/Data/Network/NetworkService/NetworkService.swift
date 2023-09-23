@@ -8,17 +8,22 @@
 import Foundation
 import RxSwift
 
-protocol NetworkService {
+typealias NetworkService = BasicNetworkService & AuthNetworkService & ProjectNetworkService & ChatNetworkService
+
+protocol BasicNetworkService {
     func request(_ endpoint: Endpoint) -> Observable<Data>
-    
-    // MARK: - For test
+}
+
+protocol AuthNetworkService {
+    func signInWithApple(_ credentials: UserCredentials, userName: String?) -> Single<SignInResponseDTO>
+}
+
+protocol ProjectNetworkService {
     func requestTestProjectsData() -> Observable<[ProjectDTO]>
     func requestTestHotProjectsData() -> Observable<[ProjectDTO]>
+}
+
+protocol ChatNetworkService {
     func requestTestChatRooms() -> Observable<[ChatRoomDTO]>
-    
     func leaveChatRoom(id: String) -> Single<Void>
-    
-    // MARK: - For test (auth)
-    func signInWithAppleCredentials(_ credentials: UserCredentials) -> Observable<SignInResult>
-    func checkUserAuthState() -> Observable<UserAuthState>
 }
