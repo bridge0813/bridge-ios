@@ -23,57 +23,42 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     // MARK: - Properties
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
-    private var memberRequirements: [MemberRequirement]
-    private var tagLimit: [RestrictionTagType] = []
+    
+    private let dataStore: ProjectDataStore
+    private var restrictions: [RestrictionTagType] = []
     
     // MARK: - Initializer
     init(
         coordinator: CreateProjectCoordinator,
-        memberRequirements: [MemberRequirement]
+        dataStore: ProjectDataStore
     ) {
         self.coordinator = coordinator
-        self.memberRequirements = memberRequirements
+        self.dataStore = dataStore
     }
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
         input.nextButtonTapped
             .withUnretained(self)
-            .map { owner, _ in
-                return Project(
-                    id: "",
-                    title: "",
-                    description: "",
-                    dDays: 0,
-                    recruitmentDeadline: Date(),
-                    memberRequirements: owner.memberRequirements,
-                    applicantRestrictions: owner.tagLimit.map { $0.rawValue },
-                    progressMethod: "",
-                    progressStatus: "",
-                    userEmail: ""
-                )
-            }
-            .subscribe(
-                with: self,
-                onNext: { owner, project in
-                    owner.coordinator?.showProjectDatePickerViewController(with: project)
-                }
-            )
+            .subscribe(onNext: { owner, _ in
+                owner.dataStore.updateApplicantRestriction(with: owner.restrictions)
+                owner.coordinator?.showProjectDatePickerViewController()
+            })
             .disposed(by: disposeBag)
         
         let restrictionTag = input.restrictionTagButtonTapped
             .withUnretained(self)
             .flatMap { owner, type in
-                if let index = owner.tagLimit.firstIndex(of: type) {
-                    owner.tagLimit.remove(at: index)
+                
+                if let index = owner.restrictions.firstIndex(of: type) {
+                    owner.restrictions.remove(at: index)
                 } else {
-                    owner.tagLimit.append(type)
+                    owner.restrictions.append(type)
                 }
                 
                 return Observable.just(type)
             }
             .asDriver(onErrorJustReturn: RestrictionTagType.student)
-        
         
         return Output(
             restrictionTag: restrictionTag

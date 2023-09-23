@@ -22,15 +22,16 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
     // MARK: - Properties
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
-    private var project: Project
+    
+    private let dataStore: ProjectDataStore
     
     // MARK: - Initializer
     init(
         coordinator: CreateProjectCoordinator,
-        project: Project
+        dataStore: ProjectDataStore
     ) {
         self.coordinator = coordinator
-        self.project = project
+        self.dataStore = dataStore
     }
     
     // MARK: - Methods
@@ -46,14 +47,14 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
         input.titleTextChanged
             .withUnretained(self)
             .subscribe(onNext: { owner, text in
-                owner.project.title = text
+                owner.dataStore.updateTitle(with: text)
             })
             .disposed(by: disposeBag)
         
         input.descriptionTextChanged
             .withUnretained(self)
             .subscribe(onNext: { owner, text in
-                owner.project.description = text
+                owner.dataStore.updateDescription(with: text)
             })
             .disposed(by: disposeBag)
         

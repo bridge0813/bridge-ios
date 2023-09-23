@@ -27,18 +27,18 @@ final class MemberRequirementInputViewModel: ViewModelType {
     private weak var coordinator: CreateProjectCoordinator?
     
     private var selectedFields: [String]
-    private var memberRequirements: [MemberRequirement]
     private var memberRequirement = MemberRequirement(field: "", recruitNumber: 0, requiredSkills: [], expectation: "")
+    private let dataStore: ProjectDataStore
     
     // MARK: - Initializer
     init(
         coordinator: CreateProjectCoordinator,
         selectedFields: [String],
-        memberRequirements: [MemberRequirement]
+        dataStore: ProjectDataStore
     ) {
         self.coordinator = coordinator
         self.selectedFields = selectedFields
-        self.memberRequirements = memberRequirements
+        self.dataStore = dataStore
     }
     
     // MARK: - Methods
@@ -47,8 +47,9 @@ final class MemberRequirementInputViewModel: ViewModelType {
             .withUnretained(self)
             .map { owner, _ in
                 let field = owner.selectedFields[0]
-                owner.memberRequirement.field = field  // 현재 선택된 분야 할당
-                return field                           // 현재 선택된 분야 반환
+                owner.selectedFields.removeFirst()     
+                owner.memberRequirement.field = field
+                return field
             }
             .asDriver(onErrorJustReturn: "")
         
@@ -76,18 +77,14 @@ final class MemberRequirementInputViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.memberRequirements.append(owner.memberRequirement)
-                
-                owner.selectedFields.removeFirst()
+                owner.dataStore.updateMemberRequirements(with: owner.memberRequirement)
                 
                 if owner.selectedFields.isEmpty {
-                    owner.coordinator?.showApplicantRestrictionViewController(
-                        with: owner.memberRequirements
-                    )
+                    owner.coordinator?.showApplicantRestrictionViewController()
+                    
                 } else {
                     owner.coordinator?.showMemberRequirementInputViewController(
-                        with: owner.selectedFields,
-                        memberRequirements: owner.memberRequirements
+                        with: owner.selectedFields
                     )
                 }
             })

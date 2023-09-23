@@ -13,6 +13,7 @@ final class CreateProjectCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
+    private let projectDataStore = ProjectDataStore()
     private var createProjectNavigationController: UINavigationController?
     
     // MARK: - Initializer
@@ -30,7 +31,8 @@ final class CreateProjectCoordinator: Coordinator {
 extension CreateProjectCoordinator {
     private func showMemberFieldSelectionViewController() {
         let viewModel = MemberFieldSelectionViewModel(
-            coordinator: self
+            coordinator: self,
+            dataStore: projectDataStore
         )
         
         let viewController = MemberFieldSelectionViewController(viewModel: viewModel)
@@ -44,53 +46,52 @@ extension CreateProjectCoordinator {
     }
     
     func showMemberRequirementInputViewController(
-        with selectedFields: [String],
-        memberRequirements: [MemberRequirement]
+        with selectedFields: [String]
     ) {
         let viewModel = MemberRequirementInputViewModel(
             coordinator: self,
             selectedFields: selectedFields,
-            memberRequirements: memberRequirements
+            dataStore: projectDataStore
         )
 
         let viewController = MemberRequirementInputViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showApplicantRestrictionViewController(with memberRequirements: [MemberRequirement]) {
+    func showApplicantRestrictionViewController() {
         let viewModel = ApplicantRestrictionViewModel(
             coordinator: self,
-            memberRequirements: memberRequirements
+            dataStore: projectDataStore
         )
         
         let viewController = ApplicantRestrictionViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showProjectDatePickerViewController(with project: Project) {
+    func showProjectDatePickerViewController() {
         let viewModel = ProjectDatePickerViewModel(
             coordinator: self,
-            project: project
+            dataStore: projectDataStore
         )
         
         let viewController = ProjectDatePickerViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showProjectProgressStatusViewController(with project: Project) {
+    func showProjectProgressStatusViewController() {
         let viewModel = ProjectProgressStatusViewModel(
             coordinator: self,
-            project: project
+            dataStore: projectDataStore
         )
         
         let viewController = ProjectProgressStatusViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showProjectDescriptionInputViewController(with project: Project) {
+    func showProjectDescriptionInputViewController() {
         let viewModel = ProjectDescriptionInputViewModel(
             coordinator: self,
-            project: project
+            dataStore: projectDataStore
         )
         
         let viewController = ProjectDescriptionInputViewController(viewModel: viewModel)
