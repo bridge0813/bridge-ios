@@ -11,10 +11,12 @@ import RxSwift
 final class DefaultNetworkService: NetworkService {
     func request(_ endpoint: Endpoint) -> Observable<Data> {
         guard let urlRequest = endpoint.toURLRequest() else { return .error(NetworkError.invalidURL) }
-        return URLSession.shared.rx.data(request: urlRequest).asObservable()
+        return URLSession.shared.rx.data(request: urlRequest)
     }
-    
-    // MARK: - For test
+}
+
+// MARK: - For test
+extension DefaultNetworkService {
     func requestTestChatRooms() -> Observable<[ChatRoomDTO]> {
         Observable.just(ChatRoomDTO.testArray)
     }
@@ -42,16 +44,25 @@ final class DefaultNetworkService: NetworkService {
     }
 }
 
-// MARK: - For test (auth)
+// MARK: - Auth
 extension DefaultNetworkService {
-    func signInWithAppleCredentials(_ credentials: UserCredentials) -> Observable<SignInResult> {
-        // 1. user credentials -map-> DTO
-        // 2. request
-        // 3. response handle
-        .just(.needSignUp)
-    }
-    
-    func checkUserAuthState() -> Observable<UserAuthState> {
-        .just(.signedIn)
+    func signInWithApple(_ credentials: UserCredentials, userName: String?) -> Single<SignInResponseDTO> {
+        
+        let signInWithAppleRequestDTO = SignInWithAppleRequestDTO(
+            name: userName ?? "",
+            idToken: String(data: credentials.identityToken ?? Data(), encoding: .utf8) ?? ""
+        )
+        
+        let authEndpoint = AuthEndpoint.signInWithApple(request: signInWithAppleRequestDTO)
+        
+        return request(authEndpoint)
+            .asSingle()
+            .flatMap { data in
+                if let decodedData = try? JSONDecoder().decode(SignInResponseDTO.self, from: data) {
+                    return Single.just(decodedData)
+                } else {
+                    return Single.error(NetworkError.decodingFailed)
+                }
+            }
     }
 }
