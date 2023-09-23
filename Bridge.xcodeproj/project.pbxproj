@@ -623,12 +623,12 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
-		7C2400472AB7D45500D9D5F1 /* DataStore */ = {
+		7C2400472AB7D45500D9D5F1 /* DataStorage */ = {
 			isa = PBXGroup;
 			children = (
 				7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */,
 			);
-			path = DataStore;
+			path = DataStorage;
 			sourceTree = "<group>";
 		};
 		7C569CF12A9F67860063D362 /* Main */ = {
@@ -752,7 +752,7 @@
 		7CF93E012A9C64EB0013EBD6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				7C2400472AB7D45500D9D5F1 /* DataStore */,
+				7C2400472AB7D45500D9D5F1 /* DataStorage */,
 				7CF93E022A9C65040013EBD6 /* Coordinator */,
 				7CF93E032A9C650D0013EBD6 /* Main */,
 				7CC9F6C12AAEE9E800685EA9 /* CreateProject */,
