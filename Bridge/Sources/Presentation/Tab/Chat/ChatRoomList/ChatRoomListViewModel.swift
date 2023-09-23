@@ -24,18 +24,15 @@ final class ChatRoomListViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     
     private weak var coordinator: ChatCoordinator?
-    private let checkUserAuthStateUseCase: CheckUserAuthStateUseCase
     private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
     
     init(
         coordinator: ChatCoordinator,
-        checkUserAuthStateUseCase: CheckUserAuthStateUseCase,
         fetchChatRoomsUseCase: FetchChatRoomsUseCase,
         leaveChatRoomUseCase: LeaveChatRoomUseCase
     ) {
         self.coordinator = coordinator
-        self.checkUserAuthStateUseCase = checkUserAuthStateUseCase
         self.fetchChatRoomsUseCase = fetchChatRoomsUseCase
         self.leaveChatRoomUseCase = leaveChatRoomUseCase
     }
@@ -45,20 +42,14 @@ final class ChatRoomListViewModel: ViewModelType {
         let chatRooms = BehaviorRelay<[ChatRoom]>(value: [])
         let viewState = BehaviorRelay<ViewState>(value: .general)
         
-        let userAuthState = input.viewWillAppear
+        input.viewWillAppear
             .withUnretained(self)
             .flatMapLatest { owner, _ in
-                owner.checkUserAuthStateUseCase.execute()
-            }
-            .distinctUntilChanged()
-        
-        userAuthState
-            .withUnretained(self)
-            .flatMapLatest { owner, userAuthState in
-                owner.fetchChatRoomsBasedOn(userAuthState: userAuthState)
+                owner.fetchChatRooms()
             }
             .bind(to: chatRooms)
             .disposed(by: disposeBag)
+
         
         input.itemSelected
             .withLatestFrom(chatRooms) { index, chatRooms in
@@ -87,12 +78,7 @@ final class ChatRoomListViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         // 뷰 상태 결정
-        Observable.combineLatest(userAuthState, chatRooms)
-            .map { [weak self] userAuthState, chatRooms in
-                self?.configureViewState(userAuthState: userAuthState, chatRooms: chatRooms) ?? .error
-            }
-            .bind(to: viewState)
-            .disposed(by: disposeBag)
+        // tbd
         
         return Output(
             chatRooms: chatRooms.asDriver(),
@@ -102,13 +88,6 @@ final class ChatRoomListViewModel: ViewModelType {
 }
 
 private extension ChatRoomListViewModel {
-    func fetchChatRoomsBasedOn(userAuthState: UserAuthState) -> Observable<[ChatRoom]> {
-        switch userAuthState {
-        case .signedIn: return fetchChatRooms()
-        default:        return .just([])
-        }
-    }
-    
     func fetchChatRooms() -> Observable<[ChatRoom]> {
         fetchChatRoomsUseCase.execute()
     }
