@@ -15,17 +15,19 @@
 		7B14DB2E2AB1DA39009A00EB /* SignInResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB2D2AB1DA39009A00EB /* SignInResult.swift */; };
 		7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB302AB1DACF009A00EB /* AuthRepository.swift */; };
 		7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB332AB1DBFD009A00EB /* DefaultAuthRepository.swift */; };
-		7B14DB362AB2F203009A00EB /* CheckUserAuthStateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB352AB2F203009A00EB /* CheckUserAuthStateUseCase.swift */; };
 		7B14DB382AB3040F009A00EB /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB372AB3040F009A00EB /* PlaceholderView.swift */; };
 		7B14DB442AB57D29009A00EB /* UserAuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB432AB57D29009A00EB /* UserAuthState.swift */; };
 		7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB462AB86051009A00EB /* TokenStorage.swift */; };
 		7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB4A2AB86099009A00EB /* KeychainError.swift */; };
 		7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB4E2AB8659E009A00EB /* KeychainTokenStroage.swift */; };
 		7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB512AB86982009A00EB /* KeychainAccount.swift */; };
+		7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB532AB938E3009A00EB /* AuthEndpoint.swift */; };
 		7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */; };
 		7B2D76EC2AA993C700E5907B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76EB2AA993C700E5907B /* AuthCoordinator.swift */; };
 		7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76F22AA9941C00E5907B /* SignInViewController.swift */; };
 		7B2D770A2AAB0FDF00E5907B /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */; };
+		7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */; };
+		7B61236A2ABF05B6006E72C1 /* SignInResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */; };
 		7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7402A9330C6001B5D2C /* AppDelegate.swift */; };
 		7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */; };
 		7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E7492A9330C7001B5D2C /* Assets.xcassets */; };
@@ -109,18 +111,20 @@
 		7B14DB2D2AB1DA39009A00EB /* SignInResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResult.swift; sourceTree = "<group>"; };
 		7B14DB302AB1DACF009A00EB /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		7B14DB332AB1DBFD009A00EB /* DefaultAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthRepository.swift; sourceTree = "<group>"; };
-		7B14DB352AB2F203009A00EB /* CheckUserAuthStateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUserAuthStateUseCase.swift; sourceTree = "<group>"; };
 		7B14DB372AB3040F009A00EB /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		7B14DB432AB57D29009A00EB /* UserAuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthState.swift; sourceTree = "<group>"; };
 		7B14DB462AB86051009A00EB /* TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		7B14DB4A2AB86099009A00EB /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		7B14DB4E2AB8659E009A00EB /* KeychainTokenStroage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTokenStroage.swift; sourceTree = "<group>"; };
 		7B14DB512AB86982009A00EB /* KeychainAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccount.swift; sourceTree = "<group>"; };
+		7B14DB532AB938E3009A00EB /* AuthEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndpoint.swift; sourceTree = "<group>"; };
 		7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		7B2D76EB2AA993C700E5907B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		7B2D76F22AA9941C00E5907B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		7B2D76F52AA9A85700E5907B /* Bridge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bridge.entitlements; sourceTree = "<group>"; };
 		7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleRequestDTO.swift; sourceTree = "<group>"; };
+		7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResponseDTO.swift; sourceTree = "<group>"; };
 		7B71E73D2A9330C6001B5D2C /* Bridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B71E7402A9330C6001B5D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -212,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB272AB15E7E009A00EB /* SignInUseCase.swift */,
-				7B14DB352AB2F203009A00EB /* CheckUserAuthStateUseCase.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -312,6 +315,15 @@
 				7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		7B61235C2ABD9C9E006E72C1 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */,
+				7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		7B71E7342A9330C6001B5D2C = {
@@ -489,6 +501,7 @@
 		7BA36CAE2A9D9476000DAB02 /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
+				7B61235C2ABD9C9E006E72C1 /* Auth */,
 				7C569D012A9F720B0063D362 /* Main */,
 				7BA36CAF2A9D960E000DAB02 /* Chat */,
 			);
@@ -508,6 +521,7 @@
 			children = (
 				7BA36CB82A9D9A29000DAB02 /* HTTP.swift */,
 				7BA36CB42A9D9828000DAB02 /* Endpoint.swift */,
+				7B14DB532AB938E3009A00EB /* AuthEndpoint.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -895,7 +909,6 @@
 				7BA36C9D2A9C5105000DAB02 /* Message.swift in Sources */,
 				7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */,
 				7BA36CBF2A9DA44F000DAB02 /* NetworkError.swift in Sources */,
-				7B14DB362AB2F203009A00EB /* CheckUserAuthStateUseCase.swift in Sources */,
 				7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */,
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
@@ -904,7 +917,9 @@
 				7B14DB212AB04AE9009A00EB /* SelectFieldViewModel.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
+				7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */,
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
+				7B61236A2ABF05B6006E72C1 /* SignInResponseDTO.swift in Sources */,
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberDetailInputViewController.swift in Sources */,
@@ -940,6 +955,7 @@
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,
 				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
+				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */,
 				7B14DB2E2AB1DA39009A00EB /* SignInResult.swift in Sources */,
 				7B2D770A2AAB0FDF00E5907B /* SignInViewModel.swift in Sources */,
