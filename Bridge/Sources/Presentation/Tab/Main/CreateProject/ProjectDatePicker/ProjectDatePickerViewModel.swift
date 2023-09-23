@@ -28,15 +28,15 @@ final class ProjectDatePickerViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
-    private let dataStore: ProjectDataStore
+    private let dataStorage: ProjectDataStorage
     
     // MARK: - Initializer
     init(
         coordinator: CreateProjectCoordinator,
-        dataStore: ProjectDataStore
+        dataStorage: ProjectDataStorage
     ) {
         self.coordinator = coordinator
-        self.dataStore = dataStore
+        self.dataStorage = dataStorage
     }
     
     // MARK: - Methods
@@ -44,21 +44,21 @@ final class ProjectDatePickerViewModel: ViewModelType {
         input.dueDatePickerChanged
             .withUnretained(self)
             .subscribe(onNext: { owner, date in
-                owner.dataStore.updateRecruitmentDeadline(with: date)
+                owner.dataStorage.updateRecruitmentDeadline(with: date)
             })
             .disposed(by: disposeBag)
         
         input.startDatePickerChanged
             .withUnretained(self)
             .subscribe(onNext: { owner, date in
-                owner.dataStore.updateStartDate(with: date)
+                owner.dataStorage.updateStartDate(with: date)
             })
             .disposed(by: disposeBag)
         
         input.endDatePickerChanged
             .withUnretained(self)
             .subscribe(onNext: { owner, date in
-                owner.dataStore.updateEndDate(with: date)
+                owner.dataStorage.updateEndDate(with: date)
             })
             .disposed(by: disposeBag)
         

@@ -24,16 +24,16 @@ final class MemberFieldSelectionViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
-    private let dataStore: ProjectDataStore
+    private let dataStorage: ProjectDataStorage
     private var selectedFields: [RecruitFieldType] = []
     
     // MARK: - Initializer
     init(
         coordinator: CreateProjectCoordinator,
-        dataStore: ProjectDataStore
+        dataStorage: ProjectDataStorage
     ) {
         self.coordinator = coordinator
-        self.dataStore = dataStore
+        self.dataStorage = dataStorage
     }
     
     // MARK: - Methods
@@ -41,7 +41,7 @@ final class MemberFieldSelectionViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.dataStore.removeAllMemberRequirements()
+                owner.dataStorage.removeAllMemberRequirements()
                 
                 owner.coordinator?.showMemberRequirementInputViewController(
                     with: owner.selectedFields.map { $0.rawValue }

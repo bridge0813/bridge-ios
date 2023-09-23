@@ -28,17 +28,17 @@ final class MemberRequirementInputViewModel: ViewModelType {
     
     private var selectedFields: [String]
     private var memberRequirement = MemberRequirement(field: "", recruitNumber: 0, requiredSkills: [], expectation: "")
-    private let dataStore: ProjectDataStore
+    private let dataStorage: ProjectDataStorage
     
     // MARK: - Initializer
     init(
         coordinator: CreateProjectCoordinator,
         selectedFields: [String],
-        dataStore: ProjectDataStore
+        dataStorage: ProjectDataStorage
     ) {
         self.coordinator = coordinator
         self.selectedFields = selectedFields
-        self.dataStore = dataStore
+        self.dataStorage = dataStorage
     }
     
     // MARK: - Methods
@@ -77,7 +77,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.dataStore.updateMemberRequirements(with: owner.memberRequirement)
+                owner.dataStorage.updateMemberRequirements(with: owner.memberRequirement)
                 
                 if owner.selectedFields.isEmpty {
                     owner.coordinator?.showApplicantRestrictionViewController()

@@ -23,15 +23,15 @@ final class ProjectProgressStatusViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
-    private let dataStore: ProjectDataStore
+    private let dataStorage: ProjectDataStorage
     
     // MARK: - Initializer
     init(
         coordinator: CreateProjectCoordinator,
-        dataStore: ProjectDataStore
+        dataStorage: ProjectDataStorage
     ) {
         self.coordinator = coordinator
-        self.dataStore = dataStore
+        self.dataStorage = dataStorage
     }
     
     // MARK: - Methods
@@ -46,14 +46,14 @@ final class ProjectProgressStatusViewModel: ViewModelType {
         input.progressMethodButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, method in
-                owner.dataStore.updateProgressMethod(with: method.rawValue)
+                owner.dataStorage.updateProgressMethod(with: method.rawValue)
             })
             .disposed(by: disposeBag)
         
         input.statusButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, status in
-                owner.dataStore.updateProgressStatus(with: status.rawValue)
+                owner.dataStorage.updateProgressStatus(with: status.rawValue)
             })
             .disposed(by: disposeBag)
         

@@ -24,16 +24,16 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
-    private let dataStore: ProjectDataStore
+    private let dataStorage: ProjectDataStorage
     private var restrictions: [RestrictionTagType] = []
     
     // MARK: - Initializer
     init(
         coordinator: CreateProjectCoordinator,
-        dataStore: ProjectDataStore
+        dataStorage: ProjectDataStorage
     ) {
         self.coordinator = coordinator
-        self.dataStore = dataStore
+        self.dataStorage = dataStorage
     }
     
     // MARK: - Methods
@@ -41,7 +41,7 @@ final class ApplicantRestrictionViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.dataStore.updateApplicantRestriction(with: owner.restrictions)
+                owner.dataStorage.updateApplicantRestriction(with: owner.restrictions)
                 owner.coordinator?.showProjectDatePickerViewController()
             })
             .disposed(by: disposeBag)

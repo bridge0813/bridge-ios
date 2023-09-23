@@ -13,7 +13,7 @@ final class CreateProjectCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
-    private let projectDataStore = ProjectDataStore()
+    private let projectDataStorage = ProjectDataStorage()
     private var createProjectNavigationController: UINavigationController?
     
     // MARK: - Initializer
@@ -32,7 +32,7 @@ extension CreateProjectCoordinator {
     private func showMemberFieldSelectionViewController() {
         let viewModel = MemberFieldSelectionViewModel(
             coordinator: self,
-            dataStore: projectDataStore
+            dataStorage: projectDataStorage
         )
         
         let viewController = MemberFieldSelectionViewController(viewModel: viewModel)
@@ -51,7 +51,7 @@ extension CreateProjectCoordinator {
         let viewModel = MemberRequirementInputViewModel(
             coordinator: self,
             selectedFields: selectedFields,
-            dataStore: projectDataStore
+            dataStorage: projectDataStorage
         )
 
         let viewController = MemberRequirementInputViewController(viewModel: viewModel)
@@ -61,7 +61,7 @@ extension CreateProjectCoordinator {
     func showApplicantRestrictionViewController() {
         let viewModel = ApplicantRestrictionViewModel(
             coordinator: self,
-            dataStore: projectDataStore
+            dataStorage: projectDataStorage
         )
         
         let viewController = ApplicantRestrictionViewController(viewModel: viewModel)
@@ -71,7 +71,7 @@ extension CreateProjectCoordinator {
     func showProjectDatePickerViewController() {
         let viewModel = ProjectDatePickerViewModel(
             coordinator: self,
-            dataStore: projectDataStore
+            dataStorage: projectDataStorage
         )
         
         let viewController = ProjectDatePickerViewController(viewModel: viewModel)
@@ -81,7 +81,7 @@ extension CreateProjectCoordinator {
     func showProjectProgressStatusViewController() {
         let viewModel = ProjectProgressStatusViewModel(
             coordinator: self,
-            dataStore: projectDataStore
+            dataStorage: projectDataStorage
         )
         
         let viewController = ProjectProgressStatusViewController(viewModel: viewModel)
@@ -91,7 +91,7 @@ extension CreateProjectCoordinator {
     func showProjectDescriptionInputViewController() {
         let viewModel = ProjectDescriptionInputViewModel(
             coordinator: self,
-            dataStore: projectDataStore
+            dataStorage: projectDataStorage
         )
         
         let viewController = ProjectDescriptionInputViewController(viewModel: viewModel)

@@ -1,5 +1,5 @@
 //
-//  ProjectDataStore.swift
+//  ProjectDataStorage.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/18.
@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class ProjectDataStore {
+final class ProjectDataStorage {
     private var currentProject = Project(
             id: "",
             title: "",
@@ -26,7 +26,7 @@ final class ProjectDataStore {
         )
 }
 
-extension ProjectDataStore {
+extension ProjectDataStorage {
     // MARK: - MemberFieldSelection(모집하려는 팀원의 분야설정)
     func removeAllMemberRequirements() {
         currentProject.memberRequirements.removeAll()

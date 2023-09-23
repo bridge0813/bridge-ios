@@ -70,7 +70,7 @@
 		7C24003D2AB34BFA00D9D5F1 /* FieldTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */; };
 		7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003F2AB4235800D9D5F1 /* UITextField+.swift */; };
 		7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */; };
-		7C2400492AB7D46E00D9D5F1 /* ProjectDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400482AB7D46E00D9D5F1 /* ProjectDataStore.swift */; };
+		7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -159,7 +159,7 @@
 		7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTagButton.swift; sourceTree = "<group>"; };
 		7C24003F2AB4235800D9D5F1 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRequirement.swift; sourceTree = "<group>"; };
-		7C2400482AB7D46E00D9D5F1 /* ProjectDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDataStore.swift; sourceTree = "<group>"; };
+		7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDataStorage.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -626,7 +626,7 @@
 		7C2400472AB7D45500D9D5F1 /* DataStore */ = {
 			isa = PBXGroup;
 			children = (
-				7C2400482AB7D46E00D9D5F1 /* ProjectDataStore.swift */,
+				7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */,
 			);
 			path = DataStore;
 			sourceTree = "<group>";
@@ -920,7 +920,7 @@
 				7B14DB232AB04B40009A00EB /* SelectFieldViewController.swift in Sources */,
 				7BA36CCE2A9E185A000DAB02 /* ChatRoomCell.swift in Sources */,
 				7C569D062A9F776B0063D362 /* Date+.swift in Sources */,
-				7C2400492AB7D46E00D9D5F1 /* ProjectDataStore.swift in Sources */,
+				7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */,
 				7CC9F6CB2AAF0EEC00685EA9 /* MemberRequirementInputViewModel.swift in Sources */,
 				7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */,
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
