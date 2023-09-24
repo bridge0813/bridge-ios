@@ -6,28 +6,34 @@
 //
 
 import RxSwift
+import RxCocoa
 
 final class MemberFieldSelectionViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let nextButtonTapped: Observable<Void>
         let dismissButtonTapped: Observable<Void>
+        let fieldButtonTapped: Observable<RecruitFieldType>
     }
     
     struct Output {
-        
+        let selectedField: Driver<RecruitFieldType>
     }
     
     // MARK: - Properties
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
+    private let dataStorage: ProjectDataStorage
+    private var selectedFields: [RecruitFieldType] = []
     
     // MARK: - Initializer
     init(
-        coordinator: CreateProjectCoordinator
+        coordinator: CreateProjectCoordinator,
+        dataStorage: ProjectDataStorage
     ) {
         self.coordinator = coordinator
+        self.dataStorage = dataStorage
     }
     
     // MARK: - Methods
@@ -35,7 +41,11 @@ final class MemberFieldSelectionViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showMemberDetailInputViewController()
+                owner.dataStorage.removeAllMemberRequirements()
+                
+                owner.coordinator?.showMemberRequirementInputViewController(
+                    with: owner.selectedFields.map { $0.rawValue }
+                )
             })
             .disposed(by: disposeBag)
         
@@ -46,6 +56,28 @@ final class MemberFieldSelectionViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        return Output()
+        let selectedField = input.fieldButtonTapped
+            .withUnretained(self)
+            .flatMap { owner, type in
+                if let index = owner.selectedFields.firstIndex(of: type) {
+                    owner.selectedFields.remove(at: index)
+                } else {
+                    owner.selectedFields.append(type)
+                }
+                
+                return Observable.just(type)
+            }
+            .asDriver(onErrorJustReturn: RecruitFieldType.iOS)
+        
+        return Output(
+            selectedField: selectedField
+        )
+    }
+}
+
+// MARK: - UI DataSource
+extension MemberFieldSelectionViewModel {
+    enum RecruitFieldType: String {
+        case iOS, android, frontEnd, backEnd, uiux, bibx, videomotion, pm
     }
 }

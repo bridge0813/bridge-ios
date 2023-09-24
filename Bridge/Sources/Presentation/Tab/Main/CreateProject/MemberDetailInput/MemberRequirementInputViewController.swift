@@ -1,5 +1,5 @@
 //
-//  ProjectOverviewInputViewController.swift
+//  MemberDetailInputViewController.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -11,7 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
-final class ProjectDescriptionInputViewController: BaseViewController {
+final class MemberRequirementInputViewController: BaseViewController {
     // MARK: - Properties
     private let rootFlexContainer = UIView()
    
@@ -22,21 +22,37 @@ final class ProjectDescriptionInputViewController: BaseViewController {
             font: .boldSystemFont(ofSize: 18),
             numberOfLines: 2
         )
-        label.text = "당신의 프로젝트를 \n소개해주세요!"
-        label.lineBreakMode = .byTruncatingTail
+        label.text = "당신이 찾고 있는 팀원의 \n정보를 알려주세요!"
+    
         return label
     }()
+
+    private let selectedFieldLabel: UILabel = {
+        let label = UILabel()
+        label.configureLabel(
+            textColor: .orange,
+            font: .boldSystemFont(ofSize: 15),
+            textAlignment: .center
+        )
+        label.layer.borderColor = UIColor.orange.cgColor
+        label.layer.borderWidth = 1
     
-    private let titleTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "글의 제목을 입력해주세요"
-        textField.addLeftPadding()
-        textField.leftViewMode = .always
-        textField.layer.borderColor = UIColor.darkGray.cgColor
-        textField.layer.borderWidth = 1
-        
-        return textField
+        return label
     }()
+
+    private let recruitNumberButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = .boldSystemFont(ofSize: 13)
+        button.setTitle("몇 명을 모집할까요?", for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.darkGray.cgColor
+        
+        return button
+    }()
+    private let swiftButton = FieldTagButton(title: "Swift")
+    private let uIkitButton = FieldTagButton(title: "UIKit")
+    private let mvvmButton = FieldTagButton(title: "MVVM")
     
     private let textViewContainer: UIView = {
         let container = UIView()
@@ -45,7 +61,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         
         return container
     }()
-    private let desriptionTextView: UITextView = {
+    private let requirementsTextView: UITextView = {
         let textView = UITextView()
         textView.showsVerticalScrollIndicator = false
         textView.returnKeyType = .next
@@ -53,7 +69,6 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         
         return textView
     }()
-    
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
@@ -64,10 +79,10 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         return button
     }()
 
-    private let viewModel: ProjectDescriptionInputViewModel
+    private let viewModel: MemberRequirementInputViewModel
     
     // MARK: - Initializer
-    init(viewModel: ProjectDescriptionInputViewModel) {
+    init(viewModel: MemberRequirementInputViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -97,15 +112,23 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         rootFlexContainer.flex.direction(.column).padding(5).define { flex in
             flex.addItem(instructionLabel).marginHorizontal(10).marginTop(20)
             
-            flex.addItem(titleTextField).marginHorizontal(15).height(50).cornerRadius(8).marginTop(50)
+            flex.addItem(selectedFieldLabel).width(100).height(40).cornerRadius(8).marginTop(50).marginLeft(10)
+            
+            flex.addItem(recruitNumberButton).width(150).height(40).cornerRadius(8).marginTop(50).marginLeft(10)
+            
+            flex.addItem().direction(.row).marginTop(50).define { flex in
+                flex.addItem(swiftButton).cornerRadius(8).marginLeft(10)
+                flex.addItem(uIkitButton).cornerRadius(8).marginLeft(10)
+                flex.addItem(mvvmButton).cornerRadius(8).marginLeft(10)
+            }
             
             flex.addItem(textViewContainer)
                 .marginHorizontal(15)
-                .height(150)
+                .height(200)
                 .cornerRadius(8)
                 .marginTop(50)
                 .define { flex in
-                    flex.addItem(desriptionTextView).grow(1).margin(10)
+                    flex.addItem(requirementsTextView).margin(10)
                 }
             
             flex.addItem().grow(1)
@@ -121,16 +144,23 @@ final class ProjectDescriptionInputViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = ProjectDescriptionInputViewModel.Input(
+        let input = MemberRequirementInputViewModel.Input(
+            viewDidLoad: .just(()),
             nextButtonTapped: nextButton.rx.tap.asObservable(),
-            titleTextChanged: titleTextField.rx.controlEvent(.editingDidEnd)
-                .withLatestFrom(titleTextField.rx.text.orEmpty)
-                .distinctUntilChanged(),
-            descriptionTextChanged: desriptionTextView.rx.didEndEditing
-                .withLatestFrom(desriptionTextView.rx.text.orEmpty)
+            recruitNumberButtonTapped: .just(2),
+            skillTagButtonTapped: .just(["Swift", "UIKit", "MVVM"]),
+            requirementsTextChanged: requirementsTextView.rx.didEndEditing
+                .withLatestFrom(requirementsTextView.rx.text.orEmpty)
                 .distinctUntilChanged()
         )
         let output = viewModel.transform(input: input)
+        
+        output.selectedField
+            .drive(onNext: { [weak self] field in
+                self?.selectedFieldLabel.text = field
+                // 분야에 맞는 기술 스택 주입.
+            })
+            .disposed(by: disposeBag)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

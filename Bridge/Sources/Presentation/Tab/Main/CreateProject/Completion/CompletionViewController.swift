@@ -66,7 +66,7 @@ final class CompletionViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).padding(5).alignItems(.center).define { flex in
-            flex.addItem(instructionLabel).width(200).height(50).marginTop(100)
+            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(20)
             flex.addItem(completionButton).width(50).height(50).marginTop(50)
         }
     }
