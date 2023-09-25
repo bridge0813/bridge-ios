@@ -13,6 +13,7 @@ final class CreateProjectCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
+    private let projectDataStorage = ProjectDataStorage()
     private var createProjectNavigationController: UINavigationController?
     
     // MARK: - Initializer
@@ -30,13 +31,13 @@ final class CreateProjectCoordinator: Coordinator {
 extension CreateProjectCoordinator {
     private func showMemberFieldSelectionViewController() {
         let viewModel = MemberFieldSelectionViewModel(
-            coordinator: self
+            coordinator: self,
+            dataStorage: projectDataStorage
         )
         
         let viewController = MemberFieldSelectionViewController(viewModel: viewModel)
         createProjectNavigationController = UINavigationController(rootViewController: viewController)
-        createProjectNavigationController?.setNavigationBarHidden(true, animated: false)
-        createProjectNavigationController?.modalPresentationStyle = .overFullScreen
+        createProjectNavigationController?.modalPresentationStyle = .fullScreen
         
         navigationController.present(
             createProjectNavigationController ?? UINavigationController(),
@@ -44,18 +45,23 @@ extension CreateProjectCoordinator {
         )
     }
     
-    func showMemberDetailInputViewController() {
-        let viewModel = MemberDetailInputViewModel(
-            coordinator: self
+    func showMemberRequirementInputViewController(
+        with selectedFields: [String]
+    ) {
+        let viewModel = MemberRequirementInputViewModel(
+            coordinator: self,
+            selectedFields: selectedFields,
+            dataStorage: projectDataStorage
         )
-        
-        let viewController = MemberDetailInputViewController(viewModel: viewModel)
+
+        let viewController = MemberRequirementInputViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
     func showApplicantRestrictionViewController() {
         let viewModel = ApplicantRestrictionViewModel(
-            coordinator: self
+            coordinator: self,
+            dataStorage: projectDataStorage
         )
         
         let viewController = ApplicantRestrictionViewController(viewModel: viewModel)
@@ -64,7 +70,8 @@ extension CreateProjectCoordinator {
     
     func showProjectDatePickerViewController() {
         let viewModel = ProjectDatePickerViewModel(
-            coordinator: self
+            coordinator: self,
+            dataStorage: projectDataStorage
         )
         
         let viewController = ProjectDatePickerViewController(viewModel: viewModel)
@@ -73,7 +80,8 @@ extension CreateProjectCoordinator {
     
     func showProjectProgressStatusViewController() {
         let viewModel = ProjectProgressStatusViewModel(
-            coordinator: self
+            coordinator: self,
+            dataStorage: projectDataStorage
         )
         
         let viewController = ProjectProgressStatusViewController(viewModel: viewModel)
@@ -82,7 +90,8 @@ extension CreateProjectCoordinator {
     
     func showProjectDescriptionInputViewController() {
         let viewModel = ProjectDescriptionInputViewModel(
-            coordinator: self
+            coordinator: self,
+            dataStorage: projectDataStorage
         )
         
         let viewController = ProjectDescriptionInputViewController(viewModel: viewModel)

@@ -11,6 +11,8 @@ final class ProjectProgressStatusViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let nextButtonTapped: Observable<Void>
+        let progressMethodButtonTapped: Observable<ProgressMethod>
+        let statusButtonTapped: Observable<ProgressStatus>
     }
     
     struct Output {
@@ -21,12 +23,15 @@ final class ProjectProgressStatusViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
+    private let dataStorage: ProjectDataStorage
     
     // MARK: - Initializer
     init(
-        coordinator: CreateProjectCoordinator
+        coordinator: CreateProjectCoordinator,
+        dataStorage: ProjectDataStorage
     ) {
         self.coordinator = coordinator
+        self.dataStorage = dataStorage
     }
     
     // MARK: - Methods
@@ -38,6 +43,36 @@ final class ProjectProgressStatusViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        input.progressMethodButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, method in
+                owner.dataStorage.updateProgressMethod(with: method.rawValue)
+            })
+            .disposed(by: disposeBag)
+        
+        input.statusButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, status in
+                owner.dataStorage.updateProgressStatus(with: status.rawValue)
+            })
+            .disposed(by: disposeBag)
+        
         return Output()
+    }
+}
+
+extension ProjectProgressStatusViewModel {
+    enum ProgressMethod: String {
+        case online = "온라인"
+        case offline = "오프라인"
+        case blended = "블렌디드"
+    }
+    
+    enum ProgressStatus: String {
+        case notStarted = "시작하기 전이에요"
+        case planning = "기획 중이에요"
+        case planCompleted = "기획이 완료됐어요"
+        case designing = "디자인 중이에요"
+        case designCompleted = "디자인 완료됐어요"
     }
 }
