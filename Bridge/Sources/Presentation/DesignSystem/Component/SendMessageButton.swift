@@ -1,5 +1,5 @@
 //
-//  BookmarkButton.swift
+//  SendMessageButton.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BookmarkButton: UIButton {
+final class SendMessageButton: UIButton {
 
     init() {
         super.init(frame: .zero)
@@ -19,8 +19,8 @@ final class BookmarkButton: UIButton {
     }
     
     private func configureButton() {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 17, weight: .heavy, scale: .default)
-        let buttonImage = UIImage(systemName: "bookmark.fill", withConfiguration: imageConfig)
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 22, weight: .heavy, scale: .default)
+        let buttonImage = UIImage(systemName: "arrowtriangle.right.fill", withConfiguration: imageConfig)
         
         var configuration = UIButton.Configuration.filled()
         configuration.image = buttonImage
@@ -28,10 +28,10 @@ final class BookmarkButton: UIButton {
         configuration.baseBackgroundColor = .lightGray
         
         self.configuration = configuration
-        self.changesSelectionAsPrimaryAction = true
+        self.changesSelectionAsPrimaryAction = true  // For Test
         self.configurationUpdateHandler = { button in
-            let tintColor: UIColor = button.state == .selected ? .orange : .white
-            let backgroundColor: UIColor = button.state == .selected ? .orange.withAlphaComponent(0.1) : .lightGray
+            let tintColor: UIColor = button.state == .selected ? .white : .gray
+            let backgroundColor: UIColor = button.state == .selected ? .orange : .gray.withAlphaComponent(0.1)
 
             var updatedConfiguration = button.configuration
             updatedConfiguration?.baseForegroundColor = tintColor
