@@ -11,14 +11,22 @@ protocol Endpoint {
     var method: HTTPMethod { get }
     var baseURL: URL? { get }
     var path: String { get }
-    var headers: HTTPHeader { get }
+    
+    var headers: HTTPHeaders { get }
     var parameters: HTTPRequestParameter? { get }
     
     func toURLRequest() -> URLRequest?
 }
 
 extension Endpoint {
-    var headers: HTTPHeader { ["Content-Type": "application/json"] }
+    var accessToken: String { "" }
+    
+    var headers: HTTPHeaders {
+        [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(accessToken)"
+        ]
+    }
  
     func toURLRequest() -> URLRequest? {
         guard let url = configureURL() else { return nil }
@@ -49,7 +57,7 @@ extension URLRequest {
         return urlRequest
     }
     
-    func appendingHeaders(_ headers: HTTPHeader) -> URLRequest {
+    func appendingHeaders(_ headers: HTTPHeaders) -> URLRequest {
         var urlRequest = self
         headers.forEach { urlRequest.addValue($1, forHTTPHeaderField: $0) }
         return urlRequest

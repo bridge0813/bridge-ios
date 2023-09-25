@@ -11,7 +11,7 @@ enum HTTPMethod: String {
     case DELETE
 }
 
-typealias HTTPHeader = [String: String]
+typealias HTTPHeaders = [String: String]
 
 enum HTTPRequestParameter {
     case query([String: String])

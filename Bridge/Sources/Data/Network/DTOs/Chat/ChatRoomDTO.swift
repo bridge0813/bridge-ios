@@ -19,7 +19,7 @@ struct ChatRoomDTO: Codable {
 
 // MARK: - For test
 extension ChatRoomDTO {
-    func toDomain() -> ChatRoom {
+    func toEntity() -> ChatRoom {
         ChatRoom(
             id: id,
             profileImageURL: URL(string: profileImage),

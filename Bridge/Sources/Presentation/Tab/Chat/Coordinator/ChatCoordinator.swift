@@ -15,7 +15,6 @@ final class ChatCoordinator: Coordinator {
     
     private let authRepository: AuthRepository
     private let chatRoomRepository: ChatRoomRepository
-    private let checkUserAuthStateUseCase: CheckUserAuthStateUseCase
     private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
     
@@ -24,9 +23,9 @@ final class ChatCoordinator: Coordinator {
         self.childCoordinators = []
         
         let networkService = DefaultNetworkService()
-        authRepository = DefaultAuthRepository(networkService: networkService)
+        let tokenStorage = KeychainTokenStorage()
+        authRepository = DefaultAuthRepository(networkService: networkService, tokenStorage: tokenStorage)
         chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
-        checkUserAuthStateUseCase = DefaultCheckUserAuthStateUseCase(authRepository: authRepository)
         fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
     }
@@ -40,7 +39,6 @@ extension ChatCoordinator {
     func showChatRoomListViewController() {
         let chatRoomListViewModel = ChatRoomListViewModel(
             coordinator: self,
-            checkUserAuthStateUseCase: checkUserAuthStateUseCase,
             fetchChatRoomsUseCase: fetchChatRoomsUseCase,
             leaveChatRoomUseCase: leaveChatRoomUseCase
         )

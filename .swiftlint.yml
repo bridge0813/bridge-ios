@@ -4,6 +4,7 @@ disabled_rules: # Default Rules에서 비활성화 할 규칙
 - vertical_whitespace
 - identifier_name
 - shorthand_operator
+- statement_position
 
 
 opt_in_rules: # 활성화 할 규칙

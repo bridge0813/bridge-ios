@@ -44,8 +44,12 @@ final class SignInViewModel: ViewModelType {
                 with: self,
                 onNext: { owner, result in
                     switch result {
-                    case .signedIn:
+                    case .success:
                         owner.coordinator?.finish()
+                        
+                    case .needRefresh:
+                        // refresh token 넣어서 다시 요청
+                        print("need refresh")
                         
                     case .needSignUp:
                         owner.coordinator?.showSelectFieldViewController()
