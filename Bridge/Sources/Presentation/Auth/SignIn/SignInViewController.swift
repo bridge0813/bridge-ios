@@ -16,6 +16,7 @@ final class SignInViewController: BaseViewController {
     
     // MARK: - UI
     private let rootFlexViewContainer = UIView()
+    
     private let signInWithAppleButton: UIButton = {
         let button = UIButton(configuration: .filled())
         button.setTitle("Apple로 로그인", for: .normal)
