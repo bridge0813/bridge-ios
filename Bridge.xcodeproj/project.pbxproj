@@ -28,7 +28,7 @@
 		7B2D770A2AAB0FDF00E5907B /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */; };
 		7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */; };
 		7B61236A2ABF05B6006E72C1 /* SignInResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */; };
-		7B61236F2AC15905006E72C1 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61236E2AC15905006E72C1 /* Font.swift */; };
+		7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61236E2AC15905006E72C1 /* BridgeFont.swift */; };
 		7B61237A2AC15D2E006E72C1 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123712AC15D2D006E72C1 /* Pretendard-Black.otf */; };
 		7B61237B2AC15D2E006E72C1 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123722AC15D2E006E72C1 /* Pretendard-Regular.otf */; };
 		7B61237C2AC15D2E006E72C1 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123732AC15D2E006E72C1 /* Pretendard-ExtraBold.otf */; };
@@ -38,6 +38,7 @@
 		7B6123802AC15D2E006E72C1 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123772AC15D2E006E72C1 /* Pretendard-Bold.otf */; };
 		7B6123812AC15D2E006E72C1 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123782AC15D2E006E72C1 /* Pretendard-SemiBold.otf */; };
 		7B6123822AC15D2E006E72C1 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123792AC15D2E006E72C1 /* Pretendard-Thin.otf */; };
+		7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123832AC1A65F006E72C1 /* BridgeColor.swift */; };
 		7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7402A9330C6001B5D2C /* AppDelegate.swift */; };
 		7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */; };
 		7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E7492A9330C7001B5D2C /* Assets.xcassets */; };
@@ -139,7 +140,7 @@
 		7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleRequestDTO.swift; sourceTree = "<group>"; };
 		7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResponseDTO.swift; sourceTree = "<group>"; };
-		7B61236E2AC15905006E72C1 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		7B61236E2AC15905006E72C1 /* BridgeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFont.swift; sourceTree = "<group>"; };
 		7B6123712AC15D2D006E72C1 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		7B6123722AC15D2E006E72C1 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		7B6123732AC15D2E006E72C1 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 		7B6123772AC15D2E006E72C1 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		7B6123782AC15D2E006E72C1 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		7B6123792AC15D2E006E72C1 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		7B6123832AC1A65F006E72C1 /* BridgeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeColor.swift; sourceTree = "<group>"; };
 		7B71E73D2A9330C6001B5D2C /* Bridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B71E7402A9330C6001B5D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -365,7 +367,8 @@
 		7B61236C2AC158D3006E72C1 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				7B61236E2AC15905006E72C1 /* Font.swift */,
+				7B61236E2AC15905006E72C1 /* BridgeFont.swift */,
+				7B6123832AC1A65F006E72C1 /* BridgeColor.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1016,7 +1019,7 @@
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
 				7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */,
-				7B61236F2AC15905006E72C1 /* Font.swift in Sources */,
+				7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */,
 				7BA36CB92A9D9A29000DAB02 /* HTTP.swift in Sources */,
 				7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */,
 				7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */,
@@ -1034,6 +1037,7 @@
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B2D76EC2AA993C700E5907B /* AuthCoordinator.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
+				7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
 				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
