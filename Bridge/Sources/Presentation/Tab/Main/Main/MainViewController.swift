@@ -44,6 +44,7 @@ final class MainViewController: BaseViewController {
     private let removeButton = RemoveButton()
     private let fieldTagButton = FieldTagButton(title: "프론트엔드")
     private let confirmButton = ConfirmButton(title: "보러가기")
+    private let cancelButton = CancelButton(title: "그만두기")
     
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -120,6 +121,7 @@ final class MainViewController: BaseViewController {
             
             flex.addItem().height(70).direction(.row).alignItems(.center).marginTop(20).define { flex in
                 flex.addItem(confirmButton).width(150).height(50).cornerRadius(1).marginLeft(20)
+                flex.addItem(cancelButton).width(150).height(50).cornerRadius(1).marginLeft(10)
             }
             
             /// 컬렉션 뷰
