@@ -8,48 +8,49 @@
 import UIKit
 
 final class FieldTagButton: UIButton {
-    override var isSelected: Bool {
-        didSet {
-            updateButtonStyle()
-        }
-    }
     
     init(title: String) {
         super.init(frame: .zero)
         
-        self.setTitle(title, for: .normal)
-        updateButtonStyle()
+        configureButton(title)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func updateButtonStyle() {
-        if isSelected {
-            applySelectedStyle()
-        } else {
-            applyDefaultStyle()
+    private func configureButton(_ title: String) {
+        var configuration = UIButton.Configuration.filled()
+        configuration.baseBackgroundColor = .lightGray.withAlphaComponent(0.1)
+        
+        var titleContainer = AttributeContainer()
+        titleContainer.font = .boldSystemFont(ofSize: 13)
+        titleContainer.foregroundColor = .gray
+        configuration.attributedTitle = AttributedString(title, attributes: titleContainer)
+        
+        self.layer.borderColor = UIColor.orange.cgColor
+        
+        self.configuration = configuration
+        self.changesSelectionAsPrimaryAction = true
+        
+        self.configurationUpdateHandler = { button in
+            let textColor: UIColor = button.state == .selected ? .orange : .gray
+            let backgroundColor: UIColor = button.state == .selected ? .white : .lightGray.withAlphaComponent(0.1)
+            let borderWidth: CGFloat = button.state == .selected ? 1 : 0
+            
+            button.layer.borderWidth = borderWidth
+            
+            let attributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
+                var updatedAttributes = attributes
+                updatedAttributes.foregroundColor = textColor
+                return updatedAttributes
+            }
+            
+            var updatedConfiguration = button.configuration
+            updatedConfiguration?.baseBackgroundColor = backgroundColor
+            updatedConfiguration?.titleTextAttributesTransformer = attributesTransformer
+            
+            button.configuration = updatedConfiguration
         }
-    }
-    
-    private func applyDefaultStyle() {
-        var configuration = UIButton.Configuration.tinted()
-        configuration.baseBackgroundColor = .lightGray
-        self.configuration = configuration
-        
-        setTitleColor(.darkGray, for: .normal)
-        setTitleColor(.darkGray, for: .highlighted)
-        layer.borderWidth = 0
-    }
-    
-    private func applySelectedStyle() {
-        var configuration = UIButton.Configuration.tinted()
-        configuration.baseBackgroundColor = .white
-        self.configuration = configuration
-        
-        setTitleColor(.orange, for: .selected)
-        layer.borderColor = UIColor.orange.cgColor
-        layer.borderWidth = 1
     }
 }
