@@ -39,6 +39,8 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
+    private let testButton = BookmarkButton()
+    
     private let filterButton: UIButton = {
         let button = UIButton()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
@@ -104,10 +106,9 @@ final class MainViewController: BaseViewController {
         view.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.direction(.column).define { flex in
-            /// 상단 메뉴 버튼 및 서치바
-            flex.addItem().height(70).direction(.row).justifyContent(.start).alignItems(.stretch).define { flex in
-                flex.addItem(filterButton).marginLeft(10)
-                flex.addItem(searchBar).shrink(1).marginLeft(5).marginRight(5)
+            // 테스트용
+            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+                flex.addItem(testButton).size(50).cornerRadius(8).marginLeft(40)
             }
             
             /// 컬렉션 뷰
