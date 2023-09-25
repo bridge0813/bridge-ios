@@ -24,9 +24,10 @@ final class SelectFieldViewController: BaseViewController {
     }()
     
     private let completeButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(configuration: .filled())
+        button.configuration?.baseBackgroundColor = BridgeColor.primary1
         button.setTitle("완료", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         return button
     }()
     
@@ -48,7 +49,7 @@ final class SelectFieldViewController: BaseViewController {
         
         rootFlexViewContainer.flex.direction(.column).justifyContent(.center).alignItems(.center).define { flex in
             flex.addItem(label)
-            flex.addItem(completeButton).size(100)
+            flex.addItem(completeButton).width(343).height(52)
         }
     }
     
