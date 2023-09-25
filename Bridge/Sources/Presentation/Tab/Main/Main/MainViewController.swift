@@ -39,7 +39,8 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
-    private let testButton = SendMessageButton()
+    private let bookmarkButton = BookmarkButton()
+    private let sendMessageButton = SendMessageButton()
     
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -108,7 +109,8 @@ final class MainViewController: BaseViewController {
         rootFlexContainer.flex.direction(.column).define { flex in
             // 테스트용
             flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-                flex.addItem(testButton).size(44).cornerRadius(7).marginLeft(40)
+                flex.addItem(bookmarkButton).size(55).cornerRadius(7).marginLeft(20)
+                flex.addItem(sendMessageButton).size(44).cornerRadius(7).marginLeft(15)
             }
             
             /// 컬렉션 뷰
