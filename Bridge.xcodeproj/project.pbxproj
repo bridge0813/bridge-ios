@@ -39,6 +39,7 @@
 		7B6123812AC15D2E006E72C1 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123782AC15D2E006E72C1 /* Pretendard-SemiBold.otf */; };
 		7B6123822AC15D2E006E72C1 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123792AC15D2E006E72C1 /* Pretendard-Thin.otf */; };
 		7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123832AC1A65F006E72C1 /* BridgeColor.swift */; };
+		7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123852AC1B199006E72C1 /* UIImage+.swift */; };
 		7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7402A9330C6001B5D2C /* AppDelegate.swift */; };
 		7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */; };
 		7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E7492A9330C7001B5D2C /* Assets.xcassets */; };
@@ -151,6 +152,7 @@
 		7B6123782AC15D2E006E72C1 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		7B6123792AC15D2E006E72C1 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		7B6123832AC1A65F006E72C1 /* BridgeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeColor.swift; sourceTree = "<group>"; };
+		7B6123852AC1B199006E72C1 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		7B71E73D2A9330C6001B5D2C /* Bridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B71E7402A9330C6001B5D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */,
 				7C42701B2AA394EF009BE6AF /* UILabel+.swift */,
 				7C24003F2AB4235800D9D5F1 /* UITextField+.swift */,
+				7B6123852AC1B199006E72C1 /* UIImage+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1050,6 +1053,7 @@
 				7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */,
 				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,
+				7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */,
 				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
 				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
