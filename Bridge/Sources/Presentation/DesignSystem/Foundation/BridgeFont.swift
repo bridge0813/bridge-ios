@@ -20,20 +20,43 @@ public enum BridgeFont {
     case button1, button2
     case tag1
     
-    public var font: UIFont? {
+    public var font: UIFont {
         switch self {
-        case .headline1, .headline1Long:    UIFont(name: "Pretendard-Bold", size: 20)
-        case .subtitle1:                    UIFont(name: "Pretendard-SemiBold", size: 18)
-        case .subtitle2:                    UIFont(name: "Pretendard-SemiBold", size: 16)
-        case .subtitle3, .subtitle3Long:    UIFont(name: "Pretendard-Medium", size: 16)
-        case .body1:                        UIFont(name: "Pretendard-SemiBold", size: 14)
-        case .body2, .body2Long:            UIFont(name: "Pretendard-Medium", size: 14)
-        case .body3:                        UIFont(name: "Pretendard-Bold", size: 12)
-        case .body4:                        UIFont(name: "Pretendard-SemiBold", size: 24)
-        case .caption1:                     UIFont(name: "Pretendard-Medium", size: 12)
-        case .button1:                      UIFont(name: "Pretendard-SemiBold", size: 16)
-        case .button2:                      UIFont(name: "Pretendard-SemiBold", size: 14)
-        case .tag1:                         UIFont(name: "Pretendard-Medium", size: 14)
+        case .headline1, .headline1Long:
+            UIFont(name: "Pretendard-Bold", size: 20) ?? .systemFont(ofSize: 20, weight: .bold)
+            
+        case .subtitle1:                    
+            UIFont(name: "Pretendard-SemiBold", size: 18) ?? .systemFont(ofSize: 18, weight: .semibold)
+            
+        case .subtitle2:                    
+            UIFont(name: "Pretendard-SemiBold", size: 16) ?? .systemFont(ofSize: 16, weight: .semibold)
+            
+        case .subtitle3, .subtitle3Long:    
+            UIFont(name: "Pretendard-Medium", size: 16) ?? .systemFont(ofSize: 16, weight: .medium)
+            
+        case .body1:
+            UIFont(name: "Pretendard-SemiBold", size: 14) ?? .systemFont(ofSize: 14, weight: .semibold)
+            
+        case .body2, .body2Long:
+            UIFont(name: "Pretendard-Medium", size: 14) ?? .systemFont(ofSize: 14, weight: .medium)
+            
+        case .body3:
+            UIFont(name: "Pretendard-Bold", size: 12) ?? .systemFont(ofSize: 12, weight: .bold)
+            
+        case .body4:
+            UIFont(name: "Pretendard-SemiBold", size: 24) ?? .systemFont(ofSize: 24, weight: .semibold)
+            
+        case .caption1:
+            UIFont(name: "Pretendard-Medium", size: 12) ?? .systemFont(ofSize: 12, weight: .medium)
+            
+        case .button1:
+            UIFont(name: "Pretendard-SemiBold", size: 16) ?? .systemFont(ofSize: 16, weight: .semibold)
+            
+        case .button2:
+            UIFont(name: "Pretendard-SemiBold", size: 14) ?? .systemFont(ofSize: 14, weight: .semibold)
+            
+        case .tag1:
+            UIFont(name: "Pretendard-Medium", size: 14) ?? .systemFont(ofSize: 14, weight: .medium)
         }
     }
     
