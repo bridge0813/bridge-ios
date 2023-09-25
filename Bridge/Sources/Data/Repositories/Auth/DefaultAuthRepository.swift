@@ -22,7 +22,7 @@ final class DefaultAuthRepository: AuthRepository {
         
         let userName = tokenStorage.fetchToken(for: KeychainAccount.userName)
         
-        if credentials.name.isEmpty {  // 이름은 2번째 로그인부터 빈 문자열이 리턴되므로, 빈 문자열 저장하지 않도록 처리
+        if !credentials.name.isEmpty {  // 이름은 2번째 로그인부터 빈 문자열이 리턴되므로, 빈 문자열 저장하지 않도록 처리
             tokenStorage.saveToken(credentials.name, for: KeychainAccount.userID)
         }
         
