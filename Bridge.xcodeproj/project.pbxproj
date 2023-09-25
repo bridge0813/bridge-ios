@@ -28,6 +28,7 @@
 		7B2D770A2AAB0FDF00E5907B /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */; };
 		7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */; };
 		7B61236A2ABF05B6006E72C1 /* SignInResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */; };
+		7B61236F2AC15905006E72C1 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61236E2AC15905006E72C1 /* Typography.swift */; };
 		7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7402A9330C6001B5D2C /* AppDelegate.swift */; };
 		7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */; };
 		7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E7492A9330C7001B5D2C /* Assets.xcassets */; };
@@ -125,6 +126,7 @@
 		7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleRequestDTO.swift; sourceTree = "<group>"; };
 		7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResponseDTO.swift; sourceTree = "<group>"; };
+		7B61236E2AC15905006E72C1 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		7B71E73D2A9330C6001B5D2C /* Bridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B71E7402A9330C6001B5D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -324,6 +326,22 @@
 				7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		7B61236B2AC158B0006E72C1 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				7B61236C2AC158D3006E72C1 /* Foundation */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		7B61236C2AC158D3006E72C1 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				7B61236E2AC15905006E72C1 /* Typography.swift */,
+			);
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		7B71E7342A9330C6001B5D2C = {
@@ -585,6 +603,7 @@
 		7BB2C2432A98540A00AA2328 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				7B61236B2AC158B0006E72C1 /* DesignSystem */,
 				7BA36C8C2A9C4B20000DAB02 /* Common */,
 				7B2D76E92AA993AF00E5907B /* Auth */,
 				7BB2C2452A98546400AA2328 /* Tab */,
@@ -925,6 +944,7 @@
 				7CC9F6CD2AAF0EF800685EA9 /* MemberDetailInputViewController.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
 				7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */,
+				7B61236F2AC15905006E72C1 /* Typography.swift in Sources */,
 				7BA36CB92A9D9A29000DAB02 /* HTTP.swift in Sources */,
 				7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */,
 				7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */,

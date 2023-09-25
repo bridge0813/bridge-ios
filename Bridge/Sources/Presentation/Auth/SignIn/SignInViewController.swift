@@ -17,9 +17,9 @@ final class SignInViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexViewContainer = UIView()
     private let signInWithAppleButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("애플 로그인", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        let button = UIButton(configuration: .filled())
+        button.setTitle("Apple로 로그인", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         return button
     }()
 
@@ -48,7 +48,7 @@ final class SignInViewController: BaseViewController {
             .justifyContent(.center)
             .alignItems(.center)
             .define { flex in
-                flex.addItem(signInWithAppleButton).size(100)
+                flex.addItem(signInWithAppleButton).width(343).height(45)
             }
     }
     
