@@ -41,6 +41,7 @@ final class MainViewController: BaseViewController {
     
     private let bookmarkButton = BookmarkButton()
     private let sendMessageButton = SendMessageButton()
+    private let removeButton = RemoveButton()
     
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -111,6 +112,7 @@ final class MainViewController: BaseViewController {
             flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
                 flex.addItem(bookmarkButton).size(55).cornerRadius(7).marginLeft(20)
                 flex.addItem(sendMessageButton).size(44).cornerRadius(7).marginLeft(15)
+                flex.addItem(removeButton).size(44).cornerRadius(5).marginLeft(15)
             }
             
             /// 컬렉션 뷰
