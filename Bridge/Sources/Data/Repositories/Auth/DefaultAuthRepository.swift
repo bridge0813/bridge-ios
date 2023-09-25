@@ -26,7 +26,7 @@ final class DefaultAuthRepository: AuthRepository {
             tokenStorage.saveToken(credentials.name, for: KeychainAccount.userID)
         }
         
-        return networkService.signInWithApple(credentials, userName: userName)
+        return networkService.signInWithAppleTest(credentials, userName: userName)
             .flatMap { [weak self] signInResponseDTO in
                 // 응답으로 받은 토큰을 토큰 저장소에 저장
                 self?.tokenStorage.saveToken(signInResponseDTO.accessToken, for: KeychainAccount.accessToken)

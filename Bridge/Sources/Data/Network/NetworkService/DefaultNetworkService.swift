@@ -65,4 +65,17 @@ extension DefaultNetworkService {
                 }
             }
     }
+    
+    func signInWithAppleTest(_ credentials: UserCredentials, userName: String?) -> Single<SignInResponseDTO> {
+        Single.just(
+            SignInResponseDTO(
+                grantType: "Bearer",
+                accessToken: "accessToken",
+                refreshToken: "refreshToken",
+                email: "example@me.com",
+                isRegistered: false,
+                userId: 1
+            )
+        )
+    }
 }

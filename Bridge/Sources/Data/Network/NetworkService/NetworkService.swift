@@ -16,6 +16,7 @@ protocol BasicNetworkService {
 
 protocol AuthNetworkService {
     func signInWithApple(_ credentials: UserCredentials, userName: String?) -> Single<SignInResponseDTO>
+    func signInWithAppleTest(_ credentials: UserCredentials, userName: String?) -> Single<SignInResponseDTO>
 }
 
 protocol ProjectNetworkService {
