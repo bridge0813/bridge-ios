@@ -412,7 +412,6 @@
 				7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */,
 				7BA36CC82A9E1640000DAB02 /* Reusable.swift */,
 				7BA36CD62A9F7D46000DAB02 /* Views */,
-				7C24003E2AB34BFF00D9D5F1 /* Buttons */,
 				7BA36CC22A9E10FA000DAB02 /* Bases */,
 				7BA36CC52A9E148C000DAB02 /* Extensions */,
 			);
@@ -692,13 +691,6 @@
 				7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */,
 			);
 			path = ApplicantRestriction;
-			sourceTree = "<group>";
-		};
-		7C24003E2AB34BFF00D9D5F1 /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Buttons;
 			sourceTree = "<group>";
 		};
 		7C2400472AB7D45500D9D5F1 /* DataStorage */ = {
