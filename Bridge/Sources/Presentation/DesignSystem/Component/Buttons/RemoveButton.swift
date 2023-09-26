@@ -9,8 +9,9 @@ import UIKit
 
 final class RemoveButton: BaseButton {
     override func configureAttributes() {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold, scale: .default)
-        let buttonImage = UIImage(systemName: "xmark", withConfiguration: imageConfig)
+        let buttonImage = UIImage(named: "delete")?
+            .resize(to: CGSize(width: 28, height: 28))
+            .withRenderingMode(.alwaysTemplate)
         
         self.setImage(buttonImage, for: .normal)
         self.backgroundColor = .red

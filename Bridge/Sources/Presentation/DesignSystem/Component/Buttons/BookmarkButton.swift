@@ -10,9 +10,7 @@ import UIKit
 final class BookmarkButton: BaseButton {
     override func configureAttributes() {
         let buttonImage = UIImage(named: "bookmark.fill")?
-            .resize(
-                to: CGSize(width: 22, height: 22)
-            )
+            .resize(to: CGSize(width: 22, height: 22))
             .withRenderingMode(.alwaysTemplate)
         
         var configuration = UIButton.Configuration.filled()
