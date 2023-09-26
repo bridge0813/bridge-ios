@@ -30,7 +30,7 @@ final class TipMessageBox: MessageBox {
         
         backgroundView.flex.define { flex in
             flex.addItem(tipLabel).marginRight(12)
-            flex.addItem(messageLabel)
+            flex.addItem(messageLabel).marginRight(13)
         }
     }
     

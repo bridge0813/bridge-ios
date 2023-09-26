@@ -31,7 +31,7 @@ final class WarningMessageBox: MessageBox {
         
         backgroundView.flex.define { flex in
             flex.addItem(warningImageView).size(20).marginRight(8)
-            flex.addItem(messageLabel)
+            flex.addItem(messageLabel).marginRight(13)
         }
     }
     
