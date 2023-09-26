@@ -98,6 +98,7 @@
 		7C40CB6A2AC2B27F000F4C9F /* OutlinedTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CB692AC2B27F000F4C9F /* OutlinedTagButton.swift */; };
 		7C40CB6E2AC2B6AE000F4C9F /* MenuWithIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CB6D2AC2B6AE000F4C9F /* MenuWithIconButton.swift */; };
 		7C40CB722AC2DA4F000F4C9F /* ChatRoomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CB712AC2DA4F000F4C9F /* ChatRoomMenuView.swift */; };
+		7C40CB742AC2ED30000F4C9F /* PlainTextMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CB732AC2ED30000F4C9F /* PlainTextMenuButton.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -215,6 +216,7 @@
 		7C40CB692AC2B27F000F4C9F /* OutlinedTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedTagButton.swift; sourceTree = "<group>"; };
 		7C40CB6D2AC2B6AE000F4C9F /* MenuWithIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuWithIconButton.swift; sourceTree = "<group>"; };
 		7C40CB712AC2DA4F000F4C9F /* ChatRoomMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMenuView.swift; sourceTree = "<group>"; };
+		7C40CB732AC2ED30000F4C9F /* PlainTextMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextMenuButton.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -791,6 +793,7 @@
 			children = (
 				7C40CB6D2AC2B6AE000F4C9F /* MenuWithIconButton.swift */,
 				7C40CB712AC2DA4F000F4C9F /* ChatRoomMenuView.swift */,
+				7C40CB732AC2ED30000F4C9F /* PlainTextMenuButton.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -1134,6 +1137,7 @@
 				7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */,
 				7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
+				7C40CB742AC2ED30000F4C9F /* PlainTextMenuButton.swift in Sources */,
 				7B14DB382AB3040F009A00EB /* PlaceholderView.swift in Sources */,
 				7C40CB6A2AC2B27F000F4C9F /* OutlinedTagButton.swift in Sources */,
 				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
