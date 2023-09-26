@@ -102,6 +102,8 @@
 		7C40CB762AC2EEE4000F4C9F /* PlainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CB752AC2EEE4000F4C9F /* PlainMenuView.swift */; };
 		7C40CB782AC30138000F4C9F /* DropdownMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CB772AC30138000F4C9F /* DropdownMenuButton.swift */; };
 		7C40CB7A2AC304F6000F4C9F /* RestrictionMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CB792AC304F6000F4C9F /* RestrictionMenuView.swift */; };
+		7C40CB7C2AC31058000F4C9F /* RestrictionMenuTriggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CB7B2AC31058000F4C9F /* RestrictionMenuTriggerView.swift */; };
+		7C40CB7E2AC31526000F4C9F /* MenuToggleArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CB7D2AC31526000F4C9F /* MenuToggleArrowButton.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -223,6 +225,8 @@
 		7C40CB752AC2EEE4000F4C9F /* PlainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainMenuView.swift; sourceTree = "<group>"; };
 		7C40CB772AC30138000F4C9F /* DropdownMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuButton.swift; sourceTree = "<group>"; };
 		7C40CB792AC304F6000F4C9F /* RestrictionMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionMenuView.swift; sourceTree = "<group>"; };
+		7C40CB7B2AC31058000F4C9F /* RestrictionMenuTriggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionMenuTriggerView.swift; sourceTree = "<group>"; };
+		7C40CB7D2AC31526000F4C9F /* MenuToggleArrowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuToggleArrowButton.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -792,6 +796,8 @@
 			children = (
 				7C40CB772AC30138000F4C9F /* DropdownMenuButton.swift */,
 				7C40CB792AC304F6000F4C9F /* RestrictionMenuView.swift */,
+				7C40CB7D2AC31526000F4C9F /* MenuToggleArrowButton.swift */,
+				7C40CB7B2AC31058000F4C9F /* RestrictionMenuTriggerView.swift */,
 			);
 			path = Dropdown;
 			sourceTree = "<group>";
@@ -1124,6 +1130,7 @@
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
 				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
+				7C40CB7E2AC31526000F4C9F /* MenuToggleArrowButton.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
 				7B14DB442AB57D29009A00EB /* UserAuthState.swift in Sources */,
@@ -1172,6 +1179,7 @@
 				7B14DB252AB04BC5009A00EB /* ASAuthorizationController+Rx.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
+				7C40CB7C2AC31058000F4C9F /* RestrictionMenuTriggerView.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
 				7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */,
 				7C1366422AC27F9100EB415D /* SendMessageButton.swift in Sources */,

@@ -44,6 +44,7 @@ final class MainViewController: BaseViewController {
     private let chatRoomMenuView = ChatRoomMenuView()
     private let plainMenuView = PlainMenuView()
     private let dropdownMenuView = RestrictionMenuView()
+    private let restrictionMenuTriggerView = RestrictionMenuTriggerView()
     
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -122,12 +123,11 @@ final class MainViewController: BaseViewController {
                 flex.addItem(plainMenuView).width(100).height(80).cornerRadius(3).marginLeft(15)
             }
             
-            flex.addItem().height(140).direction(.row).alignItems(.center).marginTop(10).define { flex in
-                flex.addItem(dropdownMenuView).grow(1).height(135).cornerRadius(7).marginHorizontal(20)
-            }
+            flex.addItem(restrictionMenuTriggerView).height(55).cornerRadius(7).marginTop(20).marginHorizontal(20)
+            flex.addItem(dropdownMenuView).height(135).cornerRadius(7).marginTop(7).marginHorizontal(20)
             
             /// 컬렉션 뷰
-            flex.addItem(projectCollectionView).grow(1).marginTop(10)
+            flex.addItem(projectCollectionView).grow(1).marginTop(20)
             
             flex.addItem(createProjectButton)
                 .cornerRadius(23)
