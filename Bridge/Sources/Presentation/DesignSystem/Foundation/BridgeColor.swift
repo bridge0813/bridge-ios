@@ -30,6 +30,9 @@ enum BridgeColor {
     static let gray9 = UIColor(red: 246 / 255, green: 246 / 255, blue: 246 / 255, alpha: 1)
     static let gray10 = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
     
-    // system
-    // tbd
+    // system (tbd)
+    static let systemRed = UIColor.systemRed
+    static let systemBlue = UIColor.systemBlue
+    static let systemYellow = UIColor.systemYellow
+    static let systemGreen = UIColor.systemGreen
 }
