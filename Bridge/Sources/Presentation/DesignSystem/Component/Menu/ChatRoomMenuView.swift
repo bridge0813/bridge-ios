@@ -1,5 +1,5 @@
 //
-//  MenuView.swift
+//  ChatRoomMenuView.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/26.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class MenuView: BaseView {
+final class ChatRoomMenuView: BaseView {
     private let rootFlexContainer = UIView()
     
     let leaveButton = MenuButton(title: "채팅방 나가기", imageName: "leave")

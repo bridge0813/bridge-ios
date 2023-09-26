@@ -41,7 +41,7 @@ final class MainViewController: BaseViewController {
     
     private let tagButton = FilledTagButton(title: "  Java  ")
     private let outlinedTagButton = OutlinedTagButton(title: "  Swift")
-    private let menuView = MenuView()
+    private let menuView = ChatRoomMenuView()
     
     private let filterButton: UIButton = {
         let button = UIButton()
