@@ -21,7 +21,6 @@ final class SendMessageButton: BaseButton {
         self.configurationUpdateHandler = { button in
             let tintColor: UIColor = button.state == .selected ? .white : .gray
             let backgroundColor: UIColor = button.state == .selected ? .orange : .gray.withAlphaComponent(0.1)
-
             var updatedConfiguration = button.configuration
             updatedConfiguration?.baseForegroundColor = tintColor
             updatedConfiguration?.baseBackgroundColor = backgroundColor
