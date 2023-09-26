@@ -9,18 +9,20 @@ import UIKit
 
 final class SendMessageButton: BaseButton {
     override func configureAttributes() {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 22, weight: .heavy, scale: .default)
-        let buttonImage = UIImage(systemName: "arrowtriangle.right.fill", withConfiguration: imageConfig)
+        let buttonImage = UIImage(named: "send.fill")?
+            .resize(to: CGSize(width: 26, height: 26))
+            .withRenderingMode(.alwaysTemplate)
         
         var configuration = UIButton.Configuration.filled()
         configuration.image = buttonImage
         configuration.baseForegroundColor = .white
-        configuration.baseBackgroundColor = .lightGray
+        configuration.baseBackgroundColor = BridgeColor.gray9
         
         self.configuration = configuration
+        self.changesSelectionAsPrimaryAction = true
         self.configurationUpdateHandler = { button in
-            let tintColor: UIColor = button.state == .selected ? .white : .gray
-            let backgroundColor: UIColor = button.state == .selected ? .orange : .gray.withAlphaComponent(0.1)
+            let tintColor: UIColor = button.state == .selected ? .white : BridgeColor.gray3
+            let backgroundColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray9
             var updatedConfiguration = button.configuration
             updatedConfiguration?.baseForegroundColor = tintColor
             updatedConfiguration?.baseBackgroundColor = backgroundColor
