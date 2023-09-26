@@ -43,7 +43,7 @@ final class MainViewController: BaseViewController {
     private let outlinedTagButton = OutlinedTagButton(title: "  Swift")
     private let chatRoomMenuView = ChatRoomMenuView()
     private let plainMenuView = PlainMenuView()
-    private let dropdownMenuView = DropdownMenuView()
+    private let dropdownMenuView = ApplicantRestrictionDropdownMenuView()
     
     private let filterButton: UIButton = {
         let button = UIButton()
