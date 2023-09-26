@@ -1,5 +1,5 @@
 //
-//  DropdownButton.swift
+//  DropdownMenuButton.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DropdownButton: BaseButton {
+final class DropdownMenuButton: BaseButton {
     override func configureButton(with title: String) {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .white
