@@ -39,6 +39,8 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
+    private let tagButton = FilledTagButton(title: "  Java  ")
+    
     private let filterButton: UIButton = {
         let button = UIButton()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
@@ -102,11 +104,12 @@ final class MainViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
+        view.backgroundColor = .lightGray
         
         rootFlexContainer.flex.direction(.column).define { flex in
             // 테스트용
             flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-                
+                flex.addItem(tagButton).height(35).cornerRadius(5).marginLeft(15)
             }
             
             /// 컬렉션 뷰
