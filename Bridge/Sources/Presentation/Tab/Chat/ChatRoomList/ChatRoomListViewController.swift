@@ -56,10 +56,7 @@ final class ChatRoomListViewController: BaseViewController {
         let navigationTitleView = NavigationTitleView(title: "채팅")
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationTitleView)
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "bell"),
-            style: .plain,
-            target: self,
-            action: nil
+            image: UIImage(named: "bell")?.resize(to: CGSize(width: 24, height: 24))
         )
     }
     
