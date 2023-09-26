@@ -18,7 +18,6 @@ final class SendMessageButton: BaseButton {
         configuration.baseBackgroundColor = .lightGray
         
         self.configuration = configuration
-        self.changesSelectionAsPrimaryAction = true  // For Test
         self.configurationUpdateHandler = { button in
             let tintColor: UIColor = button.state == .selected ? .white : .gray
             let backgroundColor: UIColor = button.state == .selected ? .orange : .gray.withAlphaComponent(0.1)
