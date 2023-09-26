@@ -7,18 +7,8 @@
 
 import UIKit
 
-final class CancelButton: UIButton {
-
-    init(title: String) {
-        super.init(frame: .zero)
-        configureButton(title)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not b een implemented")
-    }
-    
-    private func configureButton(_ title: String) {
+final class CancelButton: BaseButton {
+    override func configureButton(with title: String) {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .lightGray.withAlphaComponent(0.9)
         
