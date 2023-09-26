@@ -15,13 +15,8 @@ final class SelectFieldViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexViewContainer = UIView()
     
-    private let label: UILabel = {
-        let label = UILabel()
-        label.text = "테스트용 레이블"
-        label.font = BridgeFont.headline1.font
-        label.textColor = BridgeFont.headline1.textColor
-        return label
-    }()
+    private let tipMessageBox = TipMessageBox("관심 분야 설정하고 맞춤 홈화면 확인하세요!")
+    private let warningMessageBox = WarningMessageBox("이 프로젝트는 학생, 취준생의 지원이 제한되어 있습니다.")
     
     private let completeButton: UIButton = {
         let button = UIButton(configuration: .filled())
@@ -48,12 +43,16 @@ final class SelectFieldViewController: BaseViewController {
         view.addSubview(rootFlexViewContainer)
         
         rootFlexViewContainer.flex.direction(.column).justifyContent(.center).alignItems(.center).define { flex in
-            flex.addItem(label)
+            flex.addItem(tipMessageBox)
+            flex.addItem().size(40)
+            flex.addItem(warningMessageBox)
+            flex.addItem().size(40)
             flex.addItem(completeButton).width(343).height(52)
         }
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         rootFlexViewContainer.pin.all()
         rootFlexViewContainer.flex.layout()
     }
