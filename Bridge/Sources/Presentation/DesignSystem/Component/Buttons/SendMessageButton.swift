@@ -7,18 +7,8 @@
 
 import UIKit
 
-final class SendMessageButton: UIButton {
-
-    init() {
-        super.init(frame: .zero)
-        configureButton()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureButton() {
+final class SendMessageButton: BaseButton {
+    override func configureAttributes() {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 22, weight: .heavy, scale: .default)
         let buttonImage = UIImage(systemName: "arrowtriangle.right.fill", withConfiguration: imageConfig)
         

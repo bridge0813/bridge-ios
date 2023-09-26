@@ -7,18 +7,8 @@
 
 import UIKit
 
-final class RemoveButton: UIButton {
-
-    init() {
-        super.init(frame: .zero)
-        configureButton()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureButton() {
+final class RemoveButton: BaseButton {
+    override func configureAttributes() {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold, scale: .default)
         let buttonImage = UIImage(systemName: "xmark", withConfiguration: imageConfig)
         

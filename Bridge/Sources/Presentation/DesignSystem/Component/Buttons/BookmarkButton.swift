@@ -7,18 +7,8 @@
 
 import UIKit
 
-final class BookmarkButton: UIButton {
-
-    init() {
-        super.init(frame: .zero)
-        configureButton()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureButton() {
+final class BookmarkButton: BaseButton {
+    override func configureAttributes() {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 17, weight: .heavy, scale: .default)
         let buttonImage = UIImage(systemName: "bookmark.fill", withConfiguration: imageConfig)
         
