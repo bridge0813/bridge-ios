@@ -66,6 +66,7 @@ final class ChatRoomListViewController: BaseViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         chatRoomListTableView.pin.all()
         placeholderView.pin.all()
     }
