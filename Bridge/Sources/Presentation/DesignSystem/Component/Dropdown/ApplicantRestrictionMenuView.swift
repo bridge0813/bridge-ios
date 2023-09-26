@@ -1,5 +1,5 @@
 //
-//  ApplicantRestrictionDropdownMenuView.swift
+//  ApplicantRestrictionMenuView.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/26.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class ApplicantRestrictionDropdownMenuView: BaseView {
+final class ApplicantRestrictionMenuView: BaseView {
     private let rootFlexContainer = UIView()
     
     let studentButton = DropdownMenuButton(title: "  학생")
