@@ -41,6 +41,7 @@ final class MainViewController: BaseViewController {
     
     private let tagButton = FilledTagButton(title: "  Java  ")
     private let outlinedTagButton = OutlinedTagButton(title: "  Swift")
+    private let menuView = MenuView()
     
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -112,6 +113,10 @@ final class MainViewController: BaseViewController {
             flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
                 flex.addItem(tagButton).height(35).cornerRadius(5).marginLeft(15)
                 flex.addItem(outlinedTagButton).height(35).cornerRadius(5).marginLeft(15)
+            }
+            
+            flex.addItem().height(150).direction(.row).define { flex in
+                flex.addItem(menuView).width(160).height(140).cornerRadius(3).marginLeft(15)
             }
             
             /// 컬렉션 뷰
