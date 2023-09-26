@@ -43,6 +43,7 @@ final class MainViewController: BaseViewController {
     private let outlinedTagButton = OutlinedTagButton(title: "  Swift")
     private let chatRoomMenuView = ChatRoomMenuView()
     private let plainMenuView = PlainMenuView()
+    private let dropdownButton = DropdownButton(title: "학생")
     
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -119,6 +120,10 @@ final class MainViewController: BaseViewController {
             flex.addItem().direction(.row).define { flex in
                 flex.addItem(chatRoomMenuView).width(160).cornerRadius(3).marginLeft(15)
                 flex.addItem(plainMenuView).width(100).height(80).cornerRadius(3).marginLeft(15)
+            }
+            
+            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+                flex.addItem(dropdownButton).grow(1).height(50).marginHorizontal(20)
             }
             
             /// 컬렉션 뷰
