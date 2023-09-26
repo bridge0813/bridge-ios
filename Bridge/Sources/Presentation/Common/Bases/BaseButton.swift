@@ -20,6 +20,12 @@ class BaseButton: UIButton {
         bind()
     }
     
+    convenience init(title: String) {
+        self.init(frame: .zero)
+        
+        configureButton(with: title)
+    }
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -37,4 +43,6 @@ class BaseButton: UIButton {
     
     /// 버튼에 대한 Rx 이벤트 바인딩 등을 처리하기 위한 메서드
     func bind() { }
+    
+    func configureButton(with title: String) { }
 }
