@@ -80,10 +80,10 @@
 		7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */; };
 		7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */; };
 		7C1366352AC15ECF00EB415D /* BookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366342AC15ECF00EB415D /* BookmarkButton.swift */; };
-		7C1366372AC164F600EB415D /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366362AC164F500EB415D /* SendMessageButton.swift */; };
 		7C1366392AC16C4D00EB415D /* RemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366382AC16C4D00EB415D /* RemoveButton.swift */; };
 		7C13663B2AC1791800EB415D /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C13663A2AC1791800EB415D /* ConfirmButton.swift */; };
 		7C13663D2AC192D600EB415D /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C13663C2AC192D600EB415D /* CancelButton.swift */; };
+		7C1366422AC27F9100EB415D /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* SendMessageButton.swift */; };
 		7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */; };
 		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
 		7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */; };
@@ -192,10 +192,10 @@
 		7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageType.swift; sourceTree = "<group>"; };
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
 		7C1366342AC15ECF00EB415D /* BookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkButton.swift; sourceTree = "<group>"; };
-		7C1366362AC164F500EB415D /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
 		7C1366382AC16C4D00EB415D /* RemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveButton.swift; sourceTree = "<group>"; };
 		7C13663A2AC1791800EB415D /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
 		7C13663C2AC192D600EB415D /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
+		7C1366412AC27F9100EB415D /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
 		7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
 		7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
@@ -730,11 +730,11 @@
 			isa = PBXGroup;
 			children = (
 				7C1366342AC15ECF00EB415D /* BookmarkButton.swift */,
-				7C1366362AC164F500EB415D /* SendMessageButton.swift */,
 				7C1366382AC16C4D00EB415D /* RemoveButton.swift */,
 				7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */,
 				7C13663A2AC1791800EB415D /* ConfirmButton.swift */,
 				7C13663C2AC192D600EB415D /* CancelButton.swift */,
+				7C1366412AC27F9100EB415D /* SendMessageButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1114,6 +1114,7 @@
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
 				7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */,
+				7C1366422AC27F9100EB415D /* SendMessageButton.swift in Sources */,
 				7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */,
 				7C1366392AC16C4D00EB415D /* RemoveButton.swift in Sources */,
 			);
