@@ -104,8 +104,8 @@ private extension TabBarCoordinator {
         
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
-        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .black
-        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.black]
+        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = BridgeColor.primary1
+        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: BridgeColor.primary1]
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
     }
