@@ -35,4 +35,8 @@ class BaseView: UIView {
     
     /// 뷰 모델과 뷰를 바인딩하기 위한 메서드
     func bind() { }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
 }
