@@ -12,9 +12,9 @@ import PinLayout
 final class ChatRoomMenuView: BaseView {
     private let rootFlexContainer = UIView()
     
-    let leaveButton = MenuButton(title: "채팅방 나가기", imageName: "leave")
-    let reportButton = MenuButton(title: "신고하기", imageName: "warning")
-    let turnOffNotificationButton = MenuButton(title: "알림 끄기", imageName: "bell.crossline")
+    let leaveButton = MenuWithIconButton(title: "채팅방 나가기", imageName: "leave")
+    let reportButton = MenuWithIconButton(title: "신고하기", imageName: "warning")
+    let turnOffNotificationButton = MenuWithIconButton(title: "알림 끄기", imageName: "bell.crossline")
     
     override func configureLayouts() {
         addSubview(rootFlexContainer)

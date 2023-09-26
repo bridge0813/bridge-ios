@@ -1,5 +1,5 @@
 //
-//  MenuButton.swift
+//  MenuWithIconButton.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MenuButton: UIButton {
+final class MenuWithIconButton: UIButton {
     
     init(title: String, imageName: String) {
         super.init(frame: .zero)
