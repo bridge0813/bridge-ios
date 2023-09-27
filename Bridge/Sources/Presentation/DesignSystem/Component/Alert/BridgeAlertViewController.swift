@@ -62,7 +62,7 @@ final class BridgeAlertViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .clear
+        view.backgroundColor = BridgeColor.backgroundBlur
     }
     
     // MARK: - Configuartions
