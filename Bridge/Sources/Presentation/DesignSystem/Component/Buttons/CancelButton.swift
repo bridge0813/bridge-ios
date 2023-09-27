@@ -8,7 +8,14 @@
 import UIKit
 
 final class CancelButton: BaseButton {
-    override func configureButton(with title: String) {
+    
+    init(_ title: String) {
+        super.init(frame: .zero)
+        
+        configureAttributes(with: title)
+    }
+    
+    override func configureAttributes(with title: String) {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .lightGray.withAlphaComponent(0.9)
         
