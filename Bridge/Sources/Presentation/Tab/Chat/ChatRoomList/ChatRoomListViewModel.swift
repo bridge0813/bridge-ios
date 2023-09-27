@@ -58,7 +58,8 @@ final class ChatRoomListViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, chatRoom in
                 owner.coordinator?.showChatRoomDetailViewController(of: chatRoom)  // 임시
-                owner.coordinator?.showSignInViewController()  // 테스트용
+//                owner.coordinator?.showSignInViewController()  // 테스트용
+                owner.coordinator?.showAlert(configuration: .report)
             })
             .disposed(by: disposeBag)
         
