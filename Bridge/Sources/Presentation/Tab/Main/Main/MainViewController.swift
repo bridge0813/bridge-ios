@@ -39,6 +39,9 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
+    private let tagButton = FilledTagButton(title: "Java")
+    private let outlinedTagButton = OutlinedTagButton(title: "Swift")
+
     private let filterButton: UIButton = {
         let button = UIButton()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
@@ -105,6 +108,12 @@ final class MainViewController: BaseViewController {
         view.backgroundColor = .lightGray
         
         rootFlexContainer.flex.direction(.column).define { flex in
+            // 테스트용
+            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+                flex.addItem(tagButton).width(70).height(38).marginLeft(15)
+                flex.addItem(outlinedTagButton).cornerRadius(5).marginLeft(15)
+            }
+            
             /// 컬렉션 뷰
             flex.addItem(projectCollectionView).grow(1).marginTop(20)
             
