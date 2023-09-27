@@ -41,6 +41,13 @@ final class MainViewController: BaseViewController {
     
     private let tagButton = FilledTagButton("Java")
     private let outlinedTagButton = OutlinedTagButton("Swift")
+    
+    private let bookmarkButton = BookmarkButton()
+    private let removeButton = RemoveButton()
+    private let fieldTagButton = FieldTagButton("프론트엔드")
+    private let confirmButton = ConfirmButton("보러가기")
+    private let cancelButton = CancelButton("그만두기")
+    private let sendMessageButton = SendMessageButton()
 
     private let filterButton: UIButton = {
         let button = UIButton()
