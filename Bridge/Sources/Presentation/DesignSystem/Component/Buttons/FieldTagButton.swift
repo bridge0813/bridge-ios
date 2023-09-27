@@ -17,21 +17,23 @@ final class FieldTagButton: BaseButton {
     
     override func configureAttributes(with title: String) {
         var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = .lightGray.withAlphaComponent(0.1)
+        configuration.baseBackgroundColor = BridgeColor.gray9
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
         
         var titleContainer = AttributeContainer()
-        titleContainer.font = .boldSystemFont(ofSize: 13)
-        titleContainer.foregroundColor = .gray
+        titleContainer.font = BridgeFont.tag1.font
+        titleContainer.foregroundColor = BridgeColor.gray3
         configuration.attributedTitle = AttributedString(title, attributes: titleContainer)
         
         self.layer.borderColor = UIColor.orange.cgColor
+        self.layer.cornerRadius = 8
+        self.clipsToBounds = true
         
         self.configuration = configuration
         self.changesSelectionAsPrimaryAction = true
-        
         self.configurationUpdateHandler = { button in
-            let textColor: UIColor = button.state == .selected ? .orange : .gray
-            let backgroundColor: UIColor = button.state == .selected ? .white : .lightGray.withAlphaComponent(0.1)
+            let textColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray3
+            let backgroundColor: UIColor = button.state == .selected ? BridgeColor.gray10 : BridgeColor.gray9
             let borderWidth: CGFloat = button.state == .selected ? 1 : 0
             
             button.layer.borderWidth = borderWidth

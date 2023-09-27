@@ -112,7 +112,6 @@ final class MainViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        view.backgroundColor = .lightGray
         
         rootFlexContainer.flex.direction(.column).define { flex in
             // 테스트용
@@ -124,6 +123,7 @@ final class MainViewController: BaseViewController {
             flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
                 flex.addItem(bookmarkButton).width(54).height(52).marginLeft(15)
                 flex.addItem(removeButton).width(38).height(38).marginLeft(15)
+                flex.addItem(fieldTagButton).width(101).height(37).marginLeft(15)
             }
             
             /// 컬렉션 뷰
