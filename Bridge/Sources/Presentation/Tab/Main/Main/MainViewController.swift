@@ -39,8 +39,8 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
-    private let tagButton = FilledTagButton(title: "Java")
-    private let outlinedTagButton = OutlinedTagButton(title: "Swift")
+    private let tagButton = FilledTagButton("Java")
+    private let outlinedTagButton = OutlinedTagButton("Swift")
 
     private let filterButton: UIButton = {
         let button = UIButton()

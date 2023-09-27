@@ -8,7 +8,14 @@
 import UIKit
 
 final class OutlinedTagButton: BaseButton {
-    override func configureButton(with title: String) {
+    
+    init(_ title: String) {
+        super.init(frame: .zero)
+        
+        configureAttributes(with: title)
+    }
+    
+    override func configureAttributes(with title: String) {
         let buttonImage = UIImage(named: "delete")?
             .resize(to: CGSize(width: 18, height: 18))
             .withRenderingMode(.alwaysTemplate)
