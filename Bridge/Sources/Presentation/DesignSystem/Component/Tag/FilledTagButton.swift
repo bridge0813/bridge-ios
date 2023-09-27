@@ -11,7 +11,7 @@ import UIKit
 // 문제: 수 많은 버튼을 사용할 때, 텍스트 갯수에 따라 width가 다른데 다 일일히 정해줄 순 없음.
 final class FilledTagButton: BaseButton {
     
-    init(_ title: String) {
+    init(with title: String) {
         super.init(frame: .zero)
         
         configureAttributes(with: title)

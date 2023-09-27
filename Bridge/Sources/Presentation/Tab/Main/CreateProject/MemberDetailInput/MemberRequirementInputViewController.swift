@@ -50,9 +50,9 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         return button
     }()
-    private let swiftButton = FieldTagButton("Swift")
-    private let uIkitButton = FieldTagButton("UIKit")
-    private let mvvmButton = FieldTagButton("MVVM")
+    private let swiftButton = FieldTagButton(with: "Swift")
+    private let uIkitButton = FieldTagButton(with: "UIKit")
+    private let mvvmButton = FieldTagButton(with: "MVVM")
     
     private let textViewContainer: UIView = {
         let container = UIView()

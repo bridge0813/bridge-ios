@@ -9,7 +9,7 @@ import UIKit
 
 final class FieldTagButton: BaseButton {
     
-    init(_ title: String) {
+    init(with title: String) {
         super.init(frame: .zero)
         
         configureAttributes(with: title)

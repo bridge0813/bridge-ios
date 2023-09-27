@@ -39,14 +39,14 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
-    private let tagButton = FilledTagButton("Java")
-    private let outlinedTagButton = OutlinedTagButton("Swift")
+    private let tagButton = FilledTagButton(with: "Java")
+    private let outlinedTagButton = OutlinedTagButton(with: "Swift")
     
     private let bookmarkButton = BookmarkButton()
     private let removeButton = RemoveButton()
-    private let fieldTagButton = FieldTagButton("프론트엔드")
-    private let confirmButton = ConfirmButton("보러가기")
-    private let cancelButton = CancelButton("그만두기")
+    private let fieldTagButton = FieldTagButton(with: "프론트엔드")
+    private let confirmButton = ConfirmButton(with: "보러가기")
+    private let cancelButton = CancelButton(with: "그만두기")
     private let sendMessageButton = SendMessageButton()
 
     private let filterButton: UIButton = {
@@ -119,6 +119,10 @@ final class MainViewController: BaseViewController {
             flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
                 flex.addItem(tagButton).width(70).height(38).marginLeft(15)
                 flex.addItem(outlinedTagButton).width(93).height(38).marginLeft(15)
+            }
+            
+            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+                flex.addItem(bookmarkButton).width(54).height(52).marginLeft(15)
             }
             
             /// 컬렉션 뷰
