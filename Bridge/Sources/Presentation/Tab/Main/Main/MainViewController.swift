@@ -111,7 +111,7 @@ final class MainViewController: BaseViewController {
             // 테스트용
             flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
                 flex.addItem(tagButton).width(70).height(38).marginLeft(15)
-                flex.addItem(outlinedTagButton).cornerRadius(5).marginLeft(15)
+                flex.addItem(outlinedTagButton).width(93).height(38).marginLeft(15)
             }
             
             /// 컬렉션 뷰

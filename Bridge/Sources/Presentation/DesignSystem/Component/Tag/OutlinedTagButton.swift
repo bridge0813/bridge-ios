@@ -14,12 +14,13 @@ final class OutlinedTagButton: BaseButton {
             .withRenderingMode(.alwaysTemplate)
         
         var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = .white
+        configuration.baseBackgroundColor = BridgeColor.gray10
         configuration.baseForegroundColor = BridgeColor.primary1
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
         
         configuration.image = buttonImage
         configuration.imagePlacement = .trailing
+        configuration.imagePadding = 2
         
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.tag1.font
@@ -28,6 +29,8 @@ final class OutlinedTagButton: BaseButton {
         
         self.configuration = configuration
         self.layer.borderColor = BridgeColor.primary1.cgColor
-        self.layer.borderWidth = 1
+        self.layer.borderWidth = 1.5
+        self.layer.cornerRadius = 4
+        self.clipsToBounds = true
     }
 }
