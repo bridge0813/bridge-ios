@@ -11,6 +11,7 @@ final class DropdownMenuButton: BaseButton {
     override func configureButton(with title: String) {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .white
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 17, bottom: 0, trailing: 0)
         
         var titleContainer = AttributeContainer()
         titleContainer.font = .boldSystemFont(ofSize: 14)

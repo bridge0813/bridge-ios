@@ -39,8 +39,8 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
-    private let tagButton = FilledTagButton(title: "  Java  ")
-    private let outlinedTagButton = OutlinedTagButton(title: "  Swift")
+    private let tagButton = FilledTagButton(title: "Java")
+    private let outlinedTagButton = OutlinedTagButton(title: "Swift")
     private let chatRoomMenuView = ChatRoomMenuView()
     private let plainMenuView = PlainMenuView()
     private let dropdownMenuView = RestrictionMenuView()
@@ -114,8 +114,8 @@ final class MainViewController: BaseViewController {
         rootFlexContainer.flex.direction(.column).define { flex in
             // 테스트용
             flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-                flex.addItem(tagButton).height(35).cornerRadius(5).marginLeft(15)
-                flex.addItem(outlinedTagButton).height(35).cornerRadius(5).marginLeft(15)
+                flex.addItem(tagButton).cornerRadius(5).marginLeft(15)
+                flex.addItem(outlinedTagButton).cornerRadius(5).marginLeft(15)
             }
             
             flex.addItem().direction(.row).define { flex in

@@ -16,6 +16,7 @@ final class OutlinedTagButton: BaseButton {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .white
         configuration.baseForegroundColor = BridgeColor.primary1
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
         
         configuration.image = buttonImage
         configuration.imagePlacement = .trailing

@@ -12,9 +12,9 @@ import PinLayout
 final class RestrictionMenuView: BaseView {
     private let rootFlexContainer = UIView()
     
-    let studentButton = DropdownMenuButton(title: "  학생")
-    let currentEmployeeButton = DropdownMenuButton(title: "  현직자")
-    let jobSeekerButton = DropdownMenuButton(title: "  취준생")
+    let studentButton = DropdownMenuButton(title: "학생")
+    let currentEmployeeButton = DropdownMenuButton(title: "현직자")
+    let jobSeekerButton = DropdownMenuButton(title: "취준생")
     
     override func configureLayouts() {
         addSubview(rootFlexContainer)
