@@ -45,7 +45,7 @@ final class MainViewController: BaseViewController {
     private let plainMenuView = PlainMenuView()
     private let dropdownMenuView = RestrictionMenuView()
     private let restrictionMenuTriggerView = RestrictionMenuTriggerView()
-    
+
     private let filterButton: UIButton = {
         let button = UIButton()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
