@@ -40,6 +40,9 @@
 		7B6123822AC15D2E006E72C1 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123792AC15D2E006E72C1 /* Pretendard-Thin.otf */; };
 		7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123832AC1A65F006E72C1 /* BridgeColor.swift */; };
 		7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123852AC1B199006E72C1 /* UIImage+.swift */; };
+		7B61238B2AC2D03E006E72C1 /* TipMessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61238A2AC2D03E006E72C1 /* TipMessageBox.swift */; };
+		7B61238D2AC2F320006E72C1 /* WarningMessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61238C2AC2F320006E72C1 /* WarningMessageBox.swift */; };
+		7B61238F2AC2FBD8006E72C1 /* MessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61238E2AC2FBD8006E72C1 /* MessageBox.swift */; };
 		7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7402A9330C6001B5D2C /* AppDelegate.swift */; };
 		7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */; };
 		7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E7492A9330C7001B5D2C /* Assets.xcassets */; };
@@ -169,6 +172,9 @@
 		7B6123792AC15D2E006E72C1 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		7B6123832AC1A65F006E72C1 /* BridgeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeColor.swift; sourceTree = "<group>"; };
 		7B6123852AC1B199006E72C1 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		7B61238A2AC2D03E006E72C1 /* TipMessageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipMessageBox.swift; sourceTree = "<group>"; };
+		7B61238C2AC2F320006E72C1 /* WarningMessageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningMessageBox.swift; sourceTree = "<group>"; };
+		7B61238E2AC2FBD8006E72C1 /* MessageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBox.swift; sourceTree = "<group>"; };
 		7B71E73D2A9330C6001B5D2C /* Bridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B71E7402A9330C6001B5D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -422,6 +428,16 @@
 				7B6123792AC15D2E006E72C1 /* Pretendard-Thin.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		7B6123872AC2D00C006E72C1 /* MessageBox */ = {
+			isa = PBXGroup;
+			children = (
+				7B61238A2AC2D03E006E72C1 /* TipMessageBox.swift */,
+				7B61238C2AC2F320006E72C1 /* WarningMessageBox.swift */,
+				7B61238E2AC2FBD8006E72C1 /* MessageBox.swift */,
+			);
+			path = MessageBox;
 			sourceTree = "<group>";
 		};
 		7B71E7342A9330C6001B5D2C = {
@@ -745,9 +761,7 @@
 			isa = PBXGroup;
 			children = (
 				7C1366402AC2783100EB415D /* Buttons */,
-				7C40CB662AC2ACDD000F4C9F /* Tag */,
-				7C40CB6B2AC2B4FB000F4C9F /* Dropdown */,
-				7C40CB6C2AC2B510000F4C9F /* Menu */,
+				7B6123872AC2D00C006E72C1 /* MessageBox */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1141,6 +1155,7 @@
 				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,
 				7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */,
+				7B61238B2AC2D03E006E72C1 /* TipMessageBox.swift in Sources */,
 				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
 				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
@@ -1173,9 +1188,11 @@
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
 				7C24003D2AB34BFA00D9D5F1 /* FieldTagButton.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
+				7B61238D2AC2F320006E72C1 /* WarningMessageBox.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
+				7B61238F2AC2FBD8006E72C1 /* MessageBox.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* ASAuthorizationController+Rx.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,

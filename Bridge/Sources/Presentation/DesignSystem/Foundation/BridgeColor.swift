@@ -9,14 +9,17 @@ import UIKit
 
 enum BridgeColor {
     // primary
-    static let primary1 = UIColor(red: 255 / 255, green: 145 / 255, blue: 71 / 255, alpha: 1)  // orange
+    /// 주황색
+    static let primary1 = UIColor(red: 255 / 255, green: 145 / 255, blue: 71 / 255, alpha: 1)
     static let primary2 = UIColor(red: 255 / 255, green: 243 / 255, blue: 235 / 255, alpha: 1)
     static let primary3 = UIColor(red: 255 / 255, green: 246 / 255, blue: 240 / 255, alpha: 1)
     
     // secondary
-    static let secondary1 = UIColor(red: 92 / 255, green: 137 / 255, blue: 223 / 255, alpha: 1)  // blue
+    /// 파란색
+    static let secondary1 = UIColor(red: 92 / 255, green: 137 / 255, blue: 223 / 255, alpha: 1)
     static let secondary2 = UIColor(red: 235 / 255, green: 238 / 255, blue: 255 / 255, alpha: 1)
-    static let secondary3 = UIColor(red: 248 / 255, green: 249 / 255, blue: 255 / 255, alpha: 1)
+    static let secondary3 = UIColor(red: 239 / 255, green: 242 / 255, blue: 248 / 255, alpha: 1)
+    static let secondary4 = UIColor(red: 248 / 255, green: 249 / 255, blue: 255 / 255, alpha: 1)
     
     // gray scale
     static let gray1 = UIColor(red: 38 / 255, green: 42 / 255, blue: 52 / 255, alpha: 1)

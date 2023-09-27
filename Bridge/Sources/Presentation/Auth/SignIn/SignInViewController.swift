@@ -56,6 +56,7 @@ final class SignInViewController: BaseViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         rootFlexViewContainer.pin.all()
         rootFlexViewContainer.flex.layout()
     }
