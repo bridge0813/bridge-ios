@@ -17,7 +17,7 @@ extension CoordinatorDelegate {
     func showSignInViewController() { }
 }
 
-protocol Coordinator: AnyObject {
+protocol Coordinator: AnyObject, Alertable {
     var delegate: CoordinatorDelegate? { get set }
     var navigationController: UINavigationController { get set }
     var childCoordinators: [Coordinator] { get set }
@@ -32,5 +32,12 @@ extension Coordinator {
     func finish() {
         childCoordinators.removeAll()
         delegate?.didFinish(childCoordinator: self)
+    }
+}
+
+// MARK: - Alert
+extension Coordinator {
+    func showAlert(configuration: AlertConfiguration) {
+        showAlert(target: navigationController, configuration: configuration)
     }
 }
