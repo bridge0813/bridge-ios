@@ -124,6 +124,7 @@ final class MainViewController: BaseViewController {
                 flex.addItem(bookmarkButton).width(54).height(52).marginLeft(15)
                 flex.addItem(removeButton).width(38).height(38).marginLeft(15)
                 flex.addItem(fieldTagButton).width(101).height(37).marginLeft(15)
+                flex.addItem(sendMessageButton).width(38).height(38).marginLeft(15)
             }
             
             flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
