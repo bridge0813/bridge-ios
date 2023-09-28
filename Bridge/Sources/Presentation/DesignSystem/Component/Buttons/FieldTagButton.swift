@@ -25,7 +25,7 @@ final class FieldTagButton: BaseButton {
         titleContainer.foregroundColor = BridgeColor.gray3
         configuration.attributedTitle = AttributedString(title, attributes: titleContainer)
         
-        self.layer.borderColor = UIColor.orange.cgColor
+        self.layer.borderColor = BridgeColor.primary1.cgColor
         self.layer.cornerRadius = 8
         
         self.configuration = configuration
