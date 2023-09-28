@@ -9,13 +9,13 @@ import UIKit
 
 final class BridgeBlockButton: BaseButton {
 
-    init(with title: String, style: ButtonStyle) {
+    init(with title: String, style: BlockButtonStyle) {
         super.init(frame: .zero)
         
         configureAttributes(with: title, style: style)
     }
     
-    func configureAttributes(with title: String, style: ButtonStyle) {
+    func configureAttributes(with title: String, style: BlockButtonStyle) {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = style.backgroundColor
         
@@ -29,7 +29,7 @@ final class BridgeBlockButton: BaseButton {
     }
 }
 
-enum ButtonStyle {
+enum BlockButtonStyle {
     case confirm
     case cancel
     case apply
