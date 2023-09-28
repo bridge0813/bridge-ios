@@ -84,8 +84,6 @@
 		7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */; };
 		7C1366352AC15ECF00EB415D /* BookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366342AC15ECF00EB415D /* BookmarkButton.swift */; };
 		7C1366392AC16C4D00EB415D /* RemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366382AC16C4D00EB415D /* RemoveButton.swift */; };
-		7C13663B2AC1791800EB415D /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C13663A2AC1791800EB415D /* ConfirmButton.swift */; };
-		7C13663D2AC192D600EB415D /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C13663C2AC192D600EB415D /* CancelButton.swift */; };
 		7C1366422AC27F9100EB415D /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* SendMessageButton.swift */; };
 		7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */; };
 		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
@@ -204,8 +202,6 @@
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
 		7C1366342AC15ECF00EB415D /* BookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkButton.swift; sourceTree = "<group>"; };
 		7C1366382AC16C4D00EB415D /* RemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveButton.swift; sourceTree = "<group>"; };
-		7C13663A2AC1791800EB415D /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
-		7C13663C2AC192D600EB415D /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		7C1366412AC27F9100EB415D /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
 		7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
@@ -762,8 +758,6 @@
 				7C1366342AC15ECF00EB415D /* BookmarkButton.swift */,
 				7C1366382AC16C4D00EB415D /* RemoveButton.swift */,
 				7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */,
-				7C13663A2AC1791800EB415D /* ConfirmButton.swift */,
-				7C13663C2AC192D600EB415D /* CancelButton.swift */,
 				7C1366412AC27F9100EB415D /* SendMessageButton.swift */,
 				7C40CBB42AC54D3E000F4C9F /* NextButton.swift */,
 			);
@@ -1074,7 +1068,6 @@
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
 				7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */,
-				7C13663D2AC192D600EB415D /* CancelButton.swift in Sources */,
 				7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */,
 				7B14DB212AB04AE9009A00EB /* SelectFieldViewModel.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
@@ -1128,7 +1121,6 @@
 				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */,
 				7B14DB2E2AB1DA39009A00EB /* SignInResult.swift in Sources */,
-				7C13663B2AC1791800EB415D /* ConfirmButton.swift in Sources */,
 				7B2D770A2AAB0FDF00E5907B /* SignInViewModel.swift in Sources */,
 				7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */,
 				7C42701C2AA394EF009BE6AF /* UILabel+.swift in Sources */,
