@@ -1,5 +1,5 @@
 //
-//  FilledTagButton.swift
+//  TagButton.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/26.
@@ -9,7 +9,7 @@ import UIKit
 
 // 디자인시스템에서 Tag 영역에 있는 버튼(Fill 버전)
 // 문제: 수 많은 버튼을 사용할 때, 텍스트 갯수에 따라 width가 다른데 다 일일히 정해줄 순 없음.
-final class FilledTagButton: BaseButton {
+final class TagButton: BaseButton {
     
     init(with title: String) {
         super.init(frame: .zero)

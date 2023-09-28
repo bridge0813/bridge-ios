@@ -39,7 +39,7 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
-    private let tagButton = FilledTagButton(with: "Java")
+    private let tagButton = TagButton(with: "Java")
     private let outlinedTagButton = OutlinedTagButton(with: "Swift")
     
     private let bookmarkButton = BookmarkButton()

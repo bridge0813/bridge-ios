@@ -95,7 +95,7 @@
 		7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003F2AB4235800D9D5F1 /* UITextField+.swift */; };
 		7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */; };
 		7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */; };
-		7C40CBA12AC3E595000F4C9F /* FilledTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA02AC3E595000F4C9F /* FilledTagButton.swift */; };
+		7C40CBA12AC3E595000F4C9F /* TagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA02AC3E595000F4C9F /* TagButton.swift */; };
 		7C40CBA32AC3E5A8000F4C9F /* OutlinedTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */; };
 		7C40CBB52AC54D3E000F4C9F /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBB42AC54D3E000F4C9F /* NextButton.swift */; };
 		7C40CBBC2AC557BE000F4C9F /* BridgeBlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */; };
@@ -213,7 +213,7 @@
 		7C24003F2AB4235800D9D5F1 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRequirement.swift; sourceTree = "<group>"; };
 		7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDataStorage.swift; sourceTree = "<group>"; };
-		7C40CBA02AC3E595000F4C9F /* FilledTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledTagButton.swift; sourceTree = "<group>"; };
+		7C40CBA02AC3E595000F4C9F /* TagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagButton.swift; sourceTree = "<group>"; };
 		7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedTagButton.swift; sourceTree = "<group>"; };
 		7C40CBB42AC54D3E000F4C9F /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBlockButton.swift; sourceTree = "<group>"; };
@@ -759,7 +759,7 @@
 				7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */,
 				7C1366412AC27F9100EB415D /* SendMessageButton.swift */,
 				7C40CBB42AC54D3E000F4C9F /* NextButton.swift */,
-				7C40CBA02AC3E595000F4C9F /* FilledTagButton.swift */,
+				7C40CBA02AC3E595000F4C9F /* TagButton.swift */,
 				7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */,
 			);
 			path = Buttons;
@@ -1136,7 +1136,7 @@
 				7C24003D2AB34BFA00D9D5F1 /* FieldTagButton.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
 				7B61238D2AC2F320006E72C1 /* WarningMessageBox.swift in Sources */,
-				7C40CBA12AC3E595000F4C9F /* FilledTagButton.swift in Sources */,
+				7C40CBA12AC3E595000F4C9F /* TagButton.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
