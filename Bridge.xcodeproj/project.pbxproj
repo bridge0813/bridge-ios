@@ -100,7 +100,6 @@
 		7C40CBA12AC3E595000F4C9F /* FilledTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA02AC3E595000F4C9F /* FilledTagButton.swift */; };
 		7C40CBA32AC3E5A8000F4C9F /* OutlinedTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */; };
 		7C40CBB52AC54D3E000F4C9F /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBB42AC54D3E000F4C9F /* NextButton.swift */; };
-		7C40CBB82AC5559E000F4C9F /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBB72AC5559E000F4C9F /* ButtonStyle.swift */; };
 		7C40CBBC2AC557BE000F4C9F /* BridgeBlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
@@ -221,7 +220,6 @@
 		7C40CBA02AC3E595000F4C9F /* FilledTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledTagButton.swift; sourceTree = "<group>"; };
 		7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedTagButton.swift; sourceTree = "<group>"; };
 		7C40CBB42AC54D3E000F4C9F /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
-		7C40CBB72AC5559E000F4C9F /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBlockButton.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -760,7 +758,6 @@
 		7C1366402AC2783100EB415D /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				7C40CBB72AC5559E000F4C9F /* ButtonStyle.swift */,
 				7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */,
 				7C1366342AC15ECF00EB415D /* BookmarkButton.swift */,
 				7C1366382AC16C4D00EB415D /* RemoveButton.swift */,
@@ -1142,7 +1139,6 @@
 				7B14DB382AB3040F009A00EB /* PlaceholderView.swift in Sources */,
 				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
 				7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */,
-				7C40CBB82AC5559E000F4C9F /* ButtonStyle.swift in Sources */,
 				7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */,
 				7BA36CDA2AA197F8000DAB02 /* ChatRoomListViewController.swift in Sources */,
 				7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */,
