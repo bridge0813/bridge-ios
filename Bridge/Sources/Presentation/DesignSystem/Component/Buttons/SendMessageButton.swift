@@ -19,7 +19,6 @@ final class SendMessageButton: BaseButton {
         configuration.baseBackgroundColor = BridgeColor.gray9
         
         self.layer.cornerRadius = 4
-        self.clipsToBounds = true
         self.configuration = configuration
         self.changesSelectionAsPrimaryAction = true
         self.configurationUpdateHandler = { button in

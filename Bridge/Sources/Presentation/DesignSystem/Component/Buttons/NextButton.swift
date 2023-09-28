@@ -18,8 +18,6 @@ final class NextButton: BaseButton {
         configuration.attributedTitle = AttributedString("다음", attributes: titleContainer)
         
         self.layer.cornerRadius = 4
-        self.clipsToBounds = true
-        
         self.configuration = configuration
         self.changesSelectionAsPrimaryAction = true
         self.configurationUpdateHandler = { button in

@@ -17,6 +17,5 @@ final class RemoveButton: BaseButton {
         self.backgroundColor = BridgeColor.systemRed
         self.tintColor = BridgeColor.gray10
         self.layer.cornerRadius = 4
-        self.clipsToBounds = true
     }
 }

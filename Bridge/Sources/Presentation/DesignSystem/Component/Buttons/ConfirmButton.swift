@@ -26,6 +26,5 @@ final class ConfirmButton: BaseButton {
         
         self.configuration = configuration
         self.layer.cornerRadius = 4
-        self.clipsToBounds = true
     }
 }

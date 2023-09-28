@@ -19,7 +19,6 @@ final class BookmarkButton: BaseButton {
         configuration.baseBackgroundColor = BridgeColor.gray4
         
         self.layer.cornerRadius = 4
-        self.clipsToBounds = true
         self.configuration = configuration
         self.changesSelectionAsPrimaryAction = true
         self.configurationUpdateHandler = { button in

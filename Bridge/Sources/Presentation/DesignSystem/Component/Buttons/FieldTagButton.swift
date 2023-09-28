@@ -27,7 +27,6 @@ final class FieldTagButton: BaseButton {
         
         self.layer.borderColor = UIColor.orange.cgColor
         self.layer.cornerRadius = 8
-        self.clipsToBounds = true
         
         self.configuration = configuration
         self.changesSelectionAsPrimaryAction = true

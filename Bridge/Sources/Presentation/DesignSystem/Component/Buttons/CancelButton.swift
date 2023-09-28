@@ -26,6 +26,5 @@ final class CancelButton: BaseButton {
         
         self.configuration = configuration
         self.layer.cornerRadius = 4
-        self.clipsToBounds = true
     }
 }

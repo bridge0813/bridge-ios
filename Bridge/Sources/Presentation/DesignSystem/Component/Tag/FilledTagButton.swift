@@ -31,6 +31,5 @@ final class FilledTagButton: BaseButton {
         
         self.configuration = configuration
         self.layer.cornerRadius = 8
-        self.clipsToBounds = true
     }
 }

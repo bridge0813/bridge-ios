@@ -38,6 +38,5 @@ final class OutlinedTagButton: BaseButton {
         self.layer.borderColor = BridgeColor.primary1.cgColor
         self.layer.borderWidth = 1.5
         self.layer.cornerRadius = 4
-        self.clipsToBounds = true
     }
 }
