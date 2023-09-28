@@ -760,7 +760,8 @@
 		7C1366402AC2783100EB415D /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				7C40CBB62AC55576000F4C9F /* Common */,
+				7C40CBB72AC5559E000F4C9F /* ButtonStyle.swift */,
+				7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */,
 				7C1366342AC15ECF00EB415D /* BookmarkButton.swift */,
 				7C1366382AC16C4D00EB415D /* RemoveButton.swift */,
 				7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */,
@@ -796,15 +797,6 @@
 				7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */,
 			);
 			path = Tag;
-			sourceTree = "<group>";
-		};
-		7C40CBB62AC55576000F4C9F /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				7C40CBB72AC5559E000F4C9F /* ButtonStyle.swift */,
-				7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */,
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		7C569CF12A9F67860063D362 /* Main */ = {
