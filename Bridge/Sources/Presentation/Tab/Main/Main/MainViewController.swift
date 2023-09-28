@@ -48,6 +48,7 @@ final class MainViewController: BaseViewController {
     private let confirmButton = ConfirmButton(with: "보러가기")
     private let cancelButton = CancelButton(with: "그만두기")
     private let sendMessageButton = SendMessageButton()
+    private let nextButton = NextButton()
 
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -130,6 +131,10 @@ final class MainViewController: BaseViewController {
             flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
                 flex.addItem(confirmButton).width(123.5).height(44).marginLeft(15)
                 flex.addItem(cancelButton).width(123.5).height(44).marginLeft(15)
+            }
+            
+            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+                flex.addItem(nextButton).width(343).height(52).marginLeft(10)
             }
             
             /// 컬렉션 뷰
