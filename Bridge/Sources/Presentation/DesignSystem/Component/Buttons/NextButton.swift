@@ -7,6 +7,7 @@
 
 import UIKit
 
+// 모집글 작성에서 다음으로 넘어갈 수 있는 버튼
 final class NextButton: BaseButton {
     override func configureAttributes() {
         var configuration = UIButton.Configuration.filled()

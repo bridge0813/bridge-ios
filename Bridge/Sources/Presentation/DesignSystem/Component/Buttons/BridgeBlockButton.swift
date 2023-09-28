@@ -7,6 +7,7 @@
 
 import UIKit
 
+// 그만두기, 보러가기, 지원하기, 프로젝트 상세 등 기본적으로 사용될 수 있는 버튼
 final class BridgeBlockButton: BaseButton {
 
     init(with title: String, style: BlockButtonStyle) {

@@ -51,7 +51,7 @@ final class MainViewController: BaseViewController {
     private let detailButton = BridgeBlockButton(with: "프로젝트 상세", style: .detail)
     private let sendMessageButton = SendMessageButton()
     private let nextButton = NextButton()
-
+    
     private let filterButton: UIButton = {
         let button = UIButton()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)

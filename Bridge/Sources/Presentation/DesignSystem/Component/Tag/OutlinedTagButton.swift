@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Borderline이 존재하는 Tag 버튼("Swift", "Java" 등 기술스택에 관한 태그를 담당)
 final class OutlinedTagButton: BaseButton {
     
     init(with title: String) {

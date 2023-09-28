@@ -7,6 +7,7 @@
 
 import UIKit
 
+// 팀원의 분야를 선택할 때 사용되는 버튼 ex) iOS, 프론트엔드, UI/UX 등
 final class FieldTagButton: BaseButton {
     
     init(with title: String) {
