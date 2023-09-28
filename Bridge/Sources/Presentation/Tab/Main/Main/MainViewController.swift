@@ -45,8 +45,10 @@ final class MainViewController: BaseViewController {
     private let bookmarkButton = BookmarkButton()
     private let removeButton = RemoveButton()
     private let fieldTagButton = FieldTagButton(with: "프론트엔드")
-    private let confirmButton = ConfirmButton(with: "보러가기")
-    private let cancelButton = CancelButton(with: "그만두기")
+    private let confirmButton = BridgeBlockButton(with: "보러가기", style: .confirm)
+    private let cancelButton = BridgeBlockButton(with: "그만두기", style: .cancel)
+    private let applyButton = BridgeBlockButton(with: "지원하기", style: .apply)
+    private let detailButton = BridgeBlockButton(with: "프로젝트 상세", style: .detail)
     private let sendMessageButton = SendMessageButton()
     private let nextButton = NextButton()
 
@@ -136,6 +138,9 @@ final class MainViewController: BaseViewController {
             flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
                 flex.addItem(nextButton).width(343).height(52).marginLeft(10)
             }
+            
+            flex.addItem(applyButton).width(277).height(52).marginTop(20).marginLeft(10)
+            flex.addItem(detailButton).width(307).height(44).marginTop(20).marginLeft(10)
             
             /// 컬렉션 뷰
             flex.addItem(projectCollectionView).grow(1).marginTop(20)

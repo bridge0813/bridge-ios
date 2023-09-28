@@ -101,6 +101,7 @@
 		7C40CBA32AC3E5A8000F4C9F /* OutlinedTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */; };
 		7C40CBB52AC54D3E000F4C9F /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBB42AC54D3E000F4C9F /* NextButton.swift */; };
 		7C40CBB82AC5559E000F4C9F /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBB72AC5559E000F4C9F /* ButtonStyle.swift */; };
+		7C40CBBC2AC557BE000F4C9F /* BridgeBlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -221,6 +222,7 @@
 		7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedTagButton.swift; sourceTree = "<group>"; };
 		7C40CBB42AC54D3E000F4C9F /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		7C40CBB72AC5559E000F4C9F /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
+		7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBlockButton.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -800,6 +802,7 @@
 			isa = PBXGroup;
 			children = (
 				7C40CBB72AC5559E000F4C9F /* ButtonStyle.swift */,
+				7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1095,6 +1098,7 @@
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
 				7C40CBA32AC3E5A8000F4C9F /* OutlinedTagButton.swift in Sources */,
 				7C40CBB52AC54D3E000F4C9F /* NextButton.swift in Sources */,
+				7C40CBBC2AC557BE000F4C9F /* BridgeBlockButton.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
 				7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */,
 				7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */,
