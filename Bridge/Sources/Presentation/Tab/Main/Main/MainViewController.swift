@@ -52,6 +52,8 @@ final class MainViewController: BaseViewController {
     private let sendMessageButton = SendMessageButton()
     private let nextButton = NextButton()
     
+    private let recruiterDecisionMenuView = RecruiterDecisionMenuView()
+    
     private let filterButton: UIButton = {
         let button = UIButton()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
@@ -142,6 +144,7 @@ final class MainViewController: BaseViewController {
             
             flex.addItem(applyButton).width(277).height(52).marginTop(20).marginLeft(10)
             flex.addItem(detailButton).width(307).height(44).marginTop(20).marginLeft(10)
+            flex.addItem(recruiterDecisionMenuView).width(307).height(48).marginTop(20).marginLeft(10)
             
             /// 컬렉션 뷰
             flex.addItem(projectCollectionView).grow(1).marginTop(20)
