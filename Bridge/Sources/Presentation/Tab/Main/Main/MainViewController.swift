@@ -126,6 +126,11 @@ final class MainViewController: BaseViewController {
                 flex.addItem(fieldTagButton).width(101).height(37).marginLeft(15)
             }
             
+            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+                flex.addItem(confirmButton).width(123.5).height(44).marginLeft(15)
+                flex.addItem(cancelButton).width(123.5).height(44).marginLeft(15)
+            }
+            
             /// 컬렉션 뷰
             flex.addItem(projectCollectionView).grow(1).marginTop(20)
             
