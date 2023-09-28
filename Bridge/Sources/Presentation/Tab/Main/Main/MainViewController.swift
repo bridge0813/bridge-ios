@@ -102,6 +102,7 @@ final class MainViewController: BaseViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         rootFlexContainer.pin.all(view.pin.safeArea).marginTop(10)
         rootFlexContainer.flex.layout()
     }
