@@ -49,8 +49,4 @@ final class RecruiterDecisionMenuView: BaseView {
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
     }
-    
-    private func applyCornerStyles() {
-        
-    }
 }

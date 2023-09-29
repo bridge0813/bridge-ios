@@ -53,6 +53,7 @@ final class MainViewController: BaseViewController {
     private let nextButton = NextButton()
     
     private let recruiterDecisionMenuView = RecruiterDecisionMenuView()
+    private let recruiterMenuView = RecruiterMenuView()
     
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -145,6 +146,7 @@ final class MainViewController: BaseViewController {
             flex.addItem(applyButton).width(277).height(52).marginTop(20).marginLeft(10)
             flex.addItem(detailButton).width(307).height(44).marginTop(20).marginLeft(10)
             flex.addItem(recruiterDecisionMenuView).width(307).height(48).marginTop(20).marginLeft(10)
+            flex.addItem(recruiterMenuView).width(307).height(44).marginTop(20).marginLeft(10)
             
             /// 컬렉션 뷰
             flex.addItem(projectCollectionView).grow(1).marginTop(20)

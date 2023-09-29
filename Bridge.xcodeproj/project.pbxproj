@@ -100,6 +100,7 @@
 		7C40CBB52AC54D3E000F4C9F /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBB42AC54D3E000F4C9F /* NextButton.swift */; };
 		7C40CBBC2AC557BE000F4C9F /* BridgeBlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */; };
 		7C40CBC22AC5C2BF000F4C9F /* RecruiterDecisionMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBC12AC5C2BF000F4C9F /* RecruiterDecisionMenuView.swift */; };
+		7C40CBC82AC69447000F4C9F /* RecruiterMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBC72AC69447000F4C9F /* RecruiterMenuView.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -219,6 +220,7 @@
 		7C40CBB42AC54D3E000F4C9F /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		7C40CBBB2AC557BE000F4C9F /* BridgeBlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBlockButton.swift; sourceTree = "<group>"; };
 		7C40CBC12AC5C2BF000F4C9F /* RecruiterDecisionMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruiterDecisionMenuView.swift; sourceTree = "<group>"; };
+		7C40CBC72AC69447000F4C9F /* RecruiterMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruiterMenuView.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -764,6 +766,7 @@
 				7C40CBA02AC3E595000F4C9F /* TagButton.swift */,
 				7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */,
 				7C40CBC12AC5C2BF000F4C9F /* RecruiterDecisionMenuView.swift */,
+				7C40CBC72AC69447000F4C9F /* RecruiterMenuView.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1099,6 +1102,7 @@
 				7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
+				7C40CBC82AC69447000F4C9F /* RecruiterMenuView.swift in Sources */,
 				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
