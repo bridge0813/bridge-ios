@@ -9,14 +9,18 @@ import UIKit
 
 // 그만두기, 보러가기, 지원하기, 프로젝트 상세 등 기본적으로 사용될 수 있는 버튼
 final class BridgeBlockButton: BaseButton {
+    
+    private var title: String
+    private var style: BlockButtonStyle
 
     init(with title: String, style: BlockButtonStyle) {
-        super.init(frame: .zero)
+        self.title = title
+        self.style = style
         
-        configureAttributes(with: title, style: style)
+        super.init(frame: .zero)
     }
     
-    func configureAttributes(with title: String, style: BlockButtonStyle) {
+    override func configureAttributes() {
         setTitle(title, for: .normal)
         setTitleColor(BridgeColor.gray10, for: .normal)
         titleLabel?.font = style.font

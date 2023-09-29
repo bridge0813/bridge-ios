@@ -10,13 +10,14 @@ import UIKit
 // Borderline이 존재하는 Tag 버튼("Swift", "Java" 등 기술스택에 관한 태그를 담당)
 final class OutlinedTagButton: BaseButton {
     
+    private var title: String
+    
     init(with title: String) {
+        self.title = title
         super.init(frame: .zero)
-        
-        configureAttributes(with: title)
     }
     
-    override func configureAttributes(with title: String) {
+    override func configureAttributes() {
         let buttonImage = UIImage(named: "delete")?
             .resize(to: CGSize(width: 18, height: 18))
             .withRenderingMode(.alwaysTemplate)

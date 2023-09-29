@@ -10,13 +10,14 @@ import UIKit
 // 팀원의 분야를 선택할 때 사용되는 버튼 ex) iOS, 프론트엔드, UI/UX 등
 final class FieldTagButton: BaseButton {
     
+    private var title: String
+    
     init(with title: String) {
+        self.title = title
         super.init(frame: .zero)
-        
-        configureAttributes(with: title)
     }
     
-    override func configureAttributes(with title: String) {
+    override func configureAttributes() {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = BridgeColor.gray9
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)

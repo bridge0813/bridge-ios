@@ -8,16 +8,16 @@
 import UIKit
 
 // 디자인시스템에서 Tag 영역에 있는 버튼(Fill 버전)
-// 문제: 수 많은 버튼을 사용할 때, 텍스트 갯수에 따라 width가 다른데 다 일일히 정해줄 순 없음.
 final class TagButton: BaseButton {
     
+    private var title: String
+    
     init(with title: String) {
+        self.title = title
         super.init(frame: .zero)
-        
-        configureAttributes(with: title)
     }
     
-    override func configureAttributes(with title: String) {
+    override func configureAttributes() {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = BridgeColor.gray10
         
