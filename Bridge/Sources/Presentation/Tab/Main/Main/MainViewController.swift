@@ -72,14 +72,7 @@ final class MainViewController: BaseViewController {
         return searchBar
     }()
     
-    private lazy var createProjectButton: UIButton = {
-        let button = UIButton(configuration: createConfigForBoth())
-        button.tintColor = .white
-        button.backgroundColor = .gray
-        button.clipsToBounds = true
-        
-        return button
-    }()
+    private let createProjectButton = CreateProjectButton()
     
     private let viewModel: MainViewModel
     
@@ -152,12 +145,11 @@ final class MainViewController: BaseViewController {
             flex.addItem(projectCollectionView).grow(1).marginTop(20)
             
             flex.addItem(createProjectButton)
-                .cornerRadius(23)
                 .position(.absolute)
                 .right(15)
                 .bottom(15)
-                .width(110)
-                .height(50)
+                .width(106)
+                .height(48)
         }
     }
     
@@ -340,65 +332,20 @@ extension MainViewController {
     private func animateLayoutChange(to mode: MainViewModel.CreateButtonDisplayState) {
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.updateButtonLayout(for: mode)
-            self?.updateButtonConfig(for: mode)
+            self?.createProjectButton.isSelected.toggle()
         }
     }
     
     // MARK: - Button Layout
     private func updateButtonLayout(for state: MainViewModel.CreateButtonDisplayState) {
-        switch state {
-        case .both:
-            layoutCreateButton(width: 110, height: 50, radius: 23)
-            
-        case .only:
-            layoutCreateButton(width: 60, height: 60, radius: 30)
-        }
-    }
-    
-    private func layoutCreateButton(width: CGFloat, height: CGFloat, radius: CGFloat) {
+        let buttonWidth: CGFloat = state == .both ? 106 : 48
+        
         createProjectButton.flex
             .position(.absolute)
-            .cornerRadius(radius)
-            .width(width)
-            .height(height)
+            .cornerRadius(24)
+            .width(buttonWidth)
+            .height(48)
         
         rootFlexContainer.flex.layout()
-    }
-    
-    // MARK: - Button Configuration
-    private func updateButtonConfig(for state: MainViewModel.CreateButtonDisplayState) {
-        switch state {
-        case .both:
-            createProjectButton.configuration = createConfigForBoth()
-            
-        case .only:
-            createProjectButton.configuration = createConfigForOnly()
-        }
-    }
-
-    private func createConfigForBoth() -> UIButton.Configuration {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
-        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
-    
-        var configuration = UIButton.Configuration.tinted()
-        configuration.image = image
-        configuration.imagePlacement = .leading
-        configuration.imagePadding = 5
-        configuration.title = "글쓰기"
-        configuration.attributedTitle?.font = .boldSystemFont(ofSize: 20)
-        configuration.baseBackgroundColor = .darkGray
-        
-        return configuration
-    }
-    
-    private func createConfigForOnly() -> UIButton.Configuration {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
-        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
-        
-        var configuration = UIButton.Configuration.tinted()
-        configuration.image = image
-        configuration.baseBackgroundColor = .darkGray
-        
-        return configuration
     }
 }

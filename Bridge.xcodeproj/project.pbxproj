@@ -101,6 +101,7 @@
 		7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */; };
 		7C40CBC22AC5C2BF000F4C9F /* RecruiterDecisionMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBC12AC5C2BF000F4C9F /* RecruiterDecisionMenuView.swift */; };
 		7C40CBC82AC69447000F4C9F /* RecruiterMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBC72AC69447000F4C9F /* RecruiterMenuView.swift */; };
+		7C40CBCA2AC6B597000F4C9F /* CreateProjectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBC92AC6B597000F4C9F /* CreateProjectButton.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -221,6 +222,7 @@
 		7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeButton.swift; sourceTree = "<group>"; };
 		7C40CBC12AC5C2BF000F4C9F /* RecruiterDecisionMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruiterDecisionMenuView.swift; sourceTree = "<group>"; };
 		7C40CBC72AC69447000F4C9F /* RecruiterMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruiterMenuView.swift; sourceTree = "<group>"; };
+		7C40CBC92AC6B597000F4C9F /* CreateProjectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectButton.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -767,6 +769,7 @@
 				7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */,
 				7C40CBC12AC5C2BF000F4C9F /* RecruiterDecisionMenuView.swift */,
 				7C40CBC72AC69447000F4C9F /* RecruiterMenuView.swift */,
+				7C40CBC92AC6B597000F4C9F /* CreateProjectButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1140,6 +1143,7 @@
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
+				7C40CBCA2AC6B597000F4C9F /* CreateProjectButton.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
 				7C24003D2AB34BFA00D9D5F1 /* FieldTagButton.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
