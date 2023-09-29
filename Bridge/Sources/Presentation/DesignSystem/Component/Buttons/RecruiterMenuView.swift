@@ -9,6 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
+// 2개의 버튼이 붙어있는 뷰
 final class RecruiterMenuView: BaseView {
     private let rootFlexContainer = UIView()
     
