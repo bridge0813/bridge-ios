@@ -29,19 +29,16 @@ final class RecruiterDecisionMenuView: BaseView {
     }()
     
     override func configureLayouts() {
+        rootFlexContainer.backgroundColor = BridgeColor.primary1
+
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.row).define { flex in
+        rootFlexContainer.flex.direction(.row).cornerRadius(4).define { flex in
             flex.addItem(chatButton).grow(1).height(48)
             flex.addItem(leftDivider).width(0.3).height(28).alignSelf(.center)
-            flex.addItem(acceptButton).grow(1).height(48).cornerRadius(0)
+            flex.addItem(acceptButton).grow(1).height(48)
             flex.addItem(rightDivider).width(0.3).height(28).alignSelf(.center)
             flex.addItem(refuseButton).grow(1).height(48)
         }
-    }
-    
-    override func configureAttributes() {
-        chatButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-        refuseButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
     }
     
     override func layoutSubviews() {
