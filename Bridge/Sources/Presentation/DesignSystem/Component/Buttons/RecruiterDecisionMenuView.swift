@@ -29,8 +29,6 @@ final class RecruiterDecisionMenuView: BaseView {
     }()
     
     override func configureLayouts() {
-        applyCornerStyles()
-        
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.row).define { flex in
             flex.addItem(chatButton).grow(1).height(48)
@@ -41,6 +39,11 @@ final class RecruiterDecisionMenuView: BaseView {
         }
     }
     
+    override func configureAttributes() {
+        chatButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        refuseButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         rootFlexContainer.pin.all()
@@ -48,7 +51,6 @@ final class RecruiterDecisionMenuView: BaseView {
     }
     
     private func applyCornerStyles() {
-        chatButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-        refuseButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+        
     }
 }
