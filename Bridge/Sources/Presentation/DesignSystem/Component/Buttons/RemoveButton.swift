@@ -13,9 +13,9 @@ final class RemoveButton: BaseButton {
             .resize(to: CGSize(width: 24, height: 24))
             .withRenderingMode(.alwaysTemplate)
         
-        self.setImage(buttonImage, for: .normal)
-        self.backgroundColor = BridgeColor.systemRed
-        self.tintColor = BridgeColor.gray10
-        self.layer.cornerRadius = 4
+        setImage(buttonImage, for: .normal)
+        backgroundColor = BridgeColor.systemRed
+        tintColor = BridgeColor.gray10
+        layer.cornerRadius = 4
     }
 }

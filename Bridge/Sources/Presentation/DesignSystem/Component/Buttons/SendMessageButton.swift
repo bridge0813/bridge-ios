@@ -18,10 +18,10 @@ final class SendMessageButton: BaseButton {
         configuration.baseForegroundColor = BridgeColor.gray4
         configuration.baseBackgroundColor = BridgeColor.gray9
         
-        self.layer.cornerRadius = 4
+        layer.cornerRadius = 4
         self.configuration = configuration
-        self.changesSelectionAsPrimaryAction = true
-        self.configurationUpdateHandler = { button in
+        changesSelectionAsPrimaryAction = true
+        configurationUpdateHandler = { button in
             let tintColor: UIColor = button.state == .selected ? BridgeColor.gray10 : BridgeColor.gray4
             let backgroundColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray9
             

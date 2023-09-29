@@ -36,8 +36,8 @@ final class OutlinedTagButton: BaseButton {
         configuration.attributedTitle = AttributedString(title, attributes: titleContainer)
         
         self.configuration = configuration
-        self.layer.borderColor = BridgeColor.primary1.cgColor
-        self.layer.borderWidth = 1.5
-        self.layer.cornerRadius = 4
+        layer.borderColor = BridgeColor.primary1.cgColor
+        layer.borderWidth = 1.5
+        layer.cornerRadius = 4
     }
 }

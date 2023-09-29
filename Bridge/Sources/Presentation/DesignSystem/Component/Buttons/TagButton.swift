@@ -30,6 +30,6 @@ final class TagButton: BaseButton {
         configuration.attributedTitle = AttributedString(title, attributes: titleContainer)
         
         self.configuration = configuration
-        self.layer.cornerRadius = 8
+        layer.cornerRadius = 8
     }
 }

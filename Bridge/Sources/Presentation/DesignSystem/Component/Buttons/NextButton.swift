@@ -18,10 +18,10 @@ final class NextButton: BaseButton {
         titleContainer.foregroundColor = BridgeColor.gray10
         configuration.attributedTitle = AttributedString("다음", attributes: titleContainer)
         
-        self.layer.cornerRadius = 4
+        layer.cornerRadius = 4
         self.configuration = configuration
-        self.changesSelectionAsPrimaryAction = true
-        self.configurationUpdateHandler = { button in
+        changesSelectionAsPrimaryAction = true
+        configurationUpdateHandler = { button in
             let backgroundColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray4
     
             var updatedConfiguration = button.configuration

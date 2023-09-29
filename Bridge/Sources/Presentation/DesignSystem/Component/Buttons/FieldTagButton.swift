@@ -26,12 +26,12 @@ final class FieldTagButton: BaseButton {
         titleContainer.foregroundColor = BridgeColor.gray3
         configuration.attributedTitle = AttributedString(title, attributes: titleContainer)
         
-        self.layer.borderColor = BridgeColor.primary1.cgColor
-        self.layer.cornerRadius = 8
+        layer.borderColor = BridgeColor.primary1.cgColor
+        layer.cornerRadius = 8
         
         self.configuration = configuration
-        self.changesSelectionAsPrimaryAction = true
-        self.configurationUpdateHandler = { button in
+        changesSelectionAsPrimaryAction = true
+        configurationUpdateHandler = { button in
             let textColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray3
             let backgroundColor: UIColor = button.state == .selected ? BridgeColor.gray10 : BridgeColor.gray9
             let borderWidth: CGFloat = button.state == .selected ? 1 : 0

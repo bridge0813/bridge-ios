@@ -18,10 +18,10 @@ final class BookmarkButton: BaseButton {
         configuration.baseForegroundColor = BridgeColor.gray10
         configuration.baseBackgroundColor = BridgeColor.gray4
         
-        self.layer.cornerRadius = 4
+        layer.cornerRadius = 4
         self.configuration = configuration
-        self.changesSelectionAsPrimaryAction = true
-        self.configurationUpdateHandler = { button in
+        changesSelectionAsPrimaryAction = true
+        configurationUpdateHandler = { button in
             let tintColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray10
             let backgroundColor: UIColor = button.state == .selected ? BridgeColor.primary3 : BridgeColor.gray4
 

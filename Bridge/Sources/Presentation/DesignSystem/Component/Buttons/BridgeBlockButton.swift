@@ -17,11 +17,11 @@ final class BridgeBlockButton: BaseButton {
     }
     
     func configureAttributes(with title: String, style: BlockButtonStyle) {
-        self.setTitle(title, for: .normal)
-        self.setTitleColor(BridgeColor.gray10, for: .normal)
-        self.titleLabel?.font = style.font
-        self.backgroundColor = style.backgroundColor
-        self.layer.cornerRadius = 4
+        setTitle(title, for: .normal)
+        setTitleColor(BridgeColor.gray10, for: .normal)
+        titleLabel?.font = style.font
+        backgroundColor = style.backgroundColor
+        layer.cornerRadius = 4
     }
 }
 
