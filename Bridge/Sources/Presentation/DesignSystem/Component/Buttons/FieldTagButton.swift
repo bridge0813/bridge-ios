@@ -20,7 +20,7 @@ final class FieldTagButton: BaseButton {
     override func configureAttributes() {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = BridgeColor.gray9
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
         
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.tag1.font

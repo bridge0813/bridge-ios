@@ -22,7 +22,7 @@ final class TagButton: BaseButton {
         configuration.baseBackgroundColor = BridgeColor.gray10
         
         // Horizontal padding = 20, Vertical padding = 10
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
         
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.tag1.font
