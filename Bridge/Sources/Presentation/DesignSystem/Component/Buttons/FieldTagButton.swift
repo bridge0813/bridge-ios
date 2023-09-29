@@ -12,7 +12,7 @@ final class FieldTagButton: BaseButton {
     
     private var title: String
     
-    init(with title: String) {
+    init(_ title: String) {
         self.title = title
         super.init(frame: .zero)
     }

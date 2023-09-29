@@ -12,9 +12,9 @@ import PinLayout
 final class RecruiterDecisionMenuView: BaseView {
     private let rootFlexContainer = UIView()
     
-    let chatButton = BridgeBlockButton(with: "채팅하기", style: .confirm)
-    let acceptButton = BridgeBlockButton(with: "수락하기", style: .confirm)
-    let refuseButton = BridgeBlockButton(with: "거절하기", style: .confirm)
+    let chatButton = BridgeBlockButton("채팅하기", style: .confirm)
+    let acceptButton = BridgeBlockButton("수락하기", style: .confirm)
+    let refuseButton = BridgeBlockButton("거절하기", style: .confirm)
     
     let leftDivider: UIView = {
         let divider = UIView()

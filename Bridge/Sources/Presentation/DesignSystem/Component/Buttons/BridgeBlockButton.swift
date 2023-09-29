@@ -13,7 +13,7 @@ final class BridgeBlockButton: BaseButton {
     private var title: String
     private var style: BlockButtonStyle
 
-    init(with title: String, style: BlockButtonStyle) {
+    init(_ title: String, style: BlockButtonStyle) {
         self.title = title
         self.style = style
         

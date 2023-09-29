@@ -39,16 +39,16 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
-    private let tagButton = TagButton(with: "Java")
-    private let outlinedTagButton = OutlinedTagButton(with: "Swift")
+    private let tagButton = TagButton("Java")
+    private let outlinedTagButton = OutlinedTagButton("Swift")
     
     private let bookmarkButton = BookmarkButton()
     private let removeButton = RemoveButton()
-    private let fieldTagButton = FieldTagButton(with: "프론트엔드")
-    private let confirmButton = BridgeBlockButton(with: "보러가기", style: .confirm)
-    private let cancelButton = BridgeBlockButton(with: "그만두기", style: .cancel)
-    private let applyButton = BridgeBlockButton(with: "지원하기", style: .apply)
-    private let detailButton = BridgeBlockButton(with: "프로젝트 상세", style: .detail)
+    private let fieldTagButton = FieldTagButton("프론트엔드")
+    private let confirmButton = BridgeBlockButton("보러가기", style: .confirm)
+    private let cancelButton = BridgeBlockButton("그만두기", style: .cancel)
+    private let applyButton = BridgeBlockButton("지원하기", style: .apply)
+    private let detailButton = BridgeBlockButton("프로젝트 상세", style: .detail)
     private let sendMessageButton = SendMessageButton()
     private let nextButton = NextButton()
     
