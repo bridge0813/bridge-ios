@@ -8,12 +8,12 @@
 import UIKit
 
 // 그만두기, 보러가기, 지원하기, 프로젝트 상세 등 기본적으로 사용될 수 있는 버튼
-final class BridgeBlockButton: BaseButton {
+final class BridgeButton: BaseButton {
     
     private var title: String
-    private var style: BlockButtonStyle
+    private var style: BridgeButtonStyle
 
-    init(_ title: String, style: BlockButtonStyle) {
+    init(_ title: String, style: BridgeButtonStyle) {
         self.title = title
         self.style = style
         
@@ -29,7 +29,7 @@ final class BridgeBlockButton: BaseButton {
     }
 }
 
-enum BlockButtonStyle {
+enum BridgeButtonStyle {
     case confirm
     case cancel
     case apply

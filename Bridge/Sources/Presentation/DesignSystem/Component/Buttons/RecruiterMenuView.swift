@@ -13,8 +13,8 @@ import PinLayout
 final class RecruiterMenuView: BaseView {
     private let rootFlexContainer = UIView()
     
-    let applicantListButton = BridgeBlockButton("지원자 목록", style: .confirm)
-    let projectDetailButton = BridgeBlockButton("프로젝트 상세", style: .confirm)
+    let applicantListButton = BridgeButton("지원자 목록", style: .confirm)
+    let projectDetailButton = BridgeButton("프로젝트 상세", style: .confirm)
     
     let dividerView: UIView = {
         let divider = UIView()
