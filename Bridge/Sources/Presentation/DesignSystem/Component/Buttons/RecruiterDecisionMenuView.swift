@@ -16,9 +16,20 @@ final class RecruiterDecisionMenuView: BaseView {
     let acceptButton = BridgeBlockButton(with: "수락하기", style: .confirm)
     let refuseButton = BridgeBlockButton(with: "거절하기", style: .confirm)
     
+    let leftDivider: UIView = {
+        let divider = UIView()
+        divider.backgroundColor = UIColor.white
+        return divider
+    }()
+    
+    let rightDivider: UIView = {
+        let divider = UIView()
+        divider.backgroundColor = UIColor.white
+        return divider
+    }()
+    
     override func configureLayouts() {
-        let leftDivider = createDividerView()
-        let rightDivider = createDividerView()
+        applyCornerStyles()
         
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.row).define { flex in
@@ -28,8 +39,6 @@ final class RecruiterDecisionMenuView: BaseView {
             flex.addItem(rightDivider).width(0.3).height(28).alignSelf(.center)
             flex.addItem(refuseButton).grow(1).height(48)
         }
-        
-        applyCornerStyles()
     }
     
     override func layoutSubviews() {
@@ -41,11 +50,5 @@ final class RecruiterDecisionMenuView: BaseView {
     private func applyCornerStyles() {
         chatButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         refuseButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
-    }
-    
-    private func createDividerView() -> UIView {
-        let divider = UIView()
-        divider.backgroundColor = UIColor.white
-        return divider
     }
 }
