@@ -13,8 +13,8 @@ import PinLayout
 final class RecruiterMenuView: BaseView {
     private let rootFlexContainer = UIView()
     
-    let applicantListButton = BridgeButton("지원자 목록", style: .confirm)
-    let projectDetailButton = BridgeButton("프로젝트 상세", style: .confirm)
+    let leftButton: BridgeButton
+    let rightButton: BridgeButton
     
     let dividerView: UIView = {
         let divider = UIView()
@@ -22,14 +22,21 @@ final class RecruiterMenuView: BaseView {
         return divider
     }()
     
+    init(_ titles: (String, String)) {
+        leftButton = BridgeButton(titles.0, style: .confirm)
+        rightButton = BridgeButton(titles.1, style: .confirm)
+        
+        super.init(frame: .zero)
+    }
+    
     override func configureLayouts() {
         rootFlexContainer.backgroundColor = BridgeColor.primary1
 
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.row).cornerRadius(4).define { flex in
-            flex.addItem(applicantListButton).grow(1)
+            flex.addItem(leftButton).grow(1)
             flex.addItem(dividerView).width(0.4).height(20).alignSelf(.center)
-            flex.addItem(projectDetailButton).grow(1)
+            flex.addItem(rightButton).grow(1)
         }
     }
     

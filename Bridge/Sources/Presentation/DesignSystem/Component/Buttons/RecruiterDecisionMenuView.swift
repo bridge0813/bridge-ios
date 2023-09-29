@@ -13,9 +13,9 @@ import PinLayout
 final class RecruiterDecisionMenuView: BaseView {
     private let rootFlexContainer = UIView()
     
-    let chatButton = BridgeButton("채팅하기", style: .confirm)
-    let acceptButton = BridgeButton("수락하기", style: .confirm)
-    let refuseButton = BridgeButton("거절하기", style: .confirm)
+    let leftButton: BridgeButton
+    let centerButton: BridgeButton
+    let rightButton: BridgeButton
     
     let leftDivider: UIView = {
         let divider = UIView()
@@ -29,16 +29,24 @@ final class RecruiterDecisionMenuView: BaseView {
         return divider
     }()
     
+    init(_ titles: (String, String, String)) {
+        leftButton = BridgeButton(titles.0, style: .confirm)
+        centerButton = BridgeButton(titles.1, style: .confirm)
+        rightButton = BridgeButton(titles.2, style: .confirm)
+        
+        super.init(frame: .zero)
+    }
+    
     override func configureLayouts() {
         rootFlexContainer.backgroundColor = BridgeColor.primary1
 
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.row).cornerRadius(4).define { flex in
-            flex.addItem(chatButton).grow(1).height(48)
+            flex.addItem(leftButton).grow(1).height(48)
             flex.addItem(leftDivider).width(0.3).height(28).alignSelf(.center)
-            flex.addItem(acceptButton).grow(1).height(48)
+            flex.addItem(centerButton).grow(1).height(48)
             flex.addItem(rightDivider).width(0.3).height(28).alignSelf(.center)
-            flex.addItem(refuseButton).grow(1).height(48)
+            flex.addItem(rightButton).grow(1).height(48)
         }
     }
     
