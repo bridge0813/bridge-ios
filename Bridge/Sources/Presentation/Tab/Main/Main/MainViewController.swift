@@ -52,8 +52,8 @@ final class MainViewController: BaseViewController {
     private let sendMessageButton = SendMessageButton()
     private let nextButton = NextButton()
     
-    private let recruiterDecisionMenuView = RecruiterDecisionMenuView(("채팅하기", "수락하기", "거절하기"))
-    private let recruiterMenuView = RecruiterMenuView(("지원자 목록", "프로젝트 상세"))
+    private let recruiterDecisionMenuView = MediumButtonGroup(("채팅하기", "수락하기", "거절하기"))
+    private let recruiterMenuView = SmallButtonGroup(("지원자 목록", "프로젝트 상세"))
     
     private let filterButton: UIButton = {
         let button = UIButton()

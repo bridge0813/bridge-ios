@@ -1,5 +1,5 @@
 //
-//  RecruiterDecisionMenuView.swift
+//  MediumButtonGroup.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/28.
@@ -10,7 +10,7 @@ import FlexLayout
 import PinLayout
 
 // 3개의 버튼이 붙어있는 뷰
-final class RecruiterDecisionMenuView: BaseView {
+final class MediumButtonGroup: BaseView {
     private let rootFlexContainer = UIView()
     
     let leftButton: BridgeButton

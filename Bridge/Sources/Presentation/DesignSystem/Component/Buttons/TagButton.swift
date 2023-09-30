@@ -21,7 +21,6 @@ final class TagButton: BaseButton {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = BridgeColor.gray10
         
-        // Horizontal padding = 20, Vertical padding = 10
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
         
         var titleContainer = AttributeContainer()
