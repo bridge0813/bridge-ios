@@ -39,12 +39,21 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
+    private let tagButton = TagButton("Java")
+    private let outlinedTagButton = OutlinedTagButton("Swift")
+    
     private let bookmarkButton = BookmarkButton()
-    private let sendMessageButton = SendMessageButton()
     private let removeButton = RemoveButton()
-    private let fieldTagButton = FieldTagButton(title: "프론트엔드")
-    private let confirmButton = ConfirmButton(title: "보러가기")
-    private let cancelButton = CancelButton(title: "그만두기")
+    private let fieldTagButton = FieldTagButton("프론트엔드")
+    private let confirmButton = BridgeButton("보러가기", style: .confirm)
+    private let cancelButton = BridgeButton("그만두기", style: .cancel)
+    private let applyButton = BridgeButton("지원하기", style: .apply)
+    private let detailButton = BridgeButton("프로젝트 상세", style: .detail)
+    private let sendMessageButton = SendMessageButton()
+    private let nextButton = NextButton()
+    
+    private let recruiterDecisionMenuView = MediumButtonGroup(("채팅하기", "수락하기", "거절하기"))
+    private let recruiterMenuView = SmallButtonGroup(("지원자 목록", "프로젝트 상세"))
     
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -63,14 +72,7 @@ final class MainViewController: BaseViewController {
         return searchBar
     }()
     
-    private lazy var createProjectButton: UIButton = {
-        let button = UIButton(configuration: createConfigForBoth())
-        button.tintColor = .white
-        button.backgroundColor = .gray
-        button.clipsToBounds = true
-        
-        return button
-    }()
+    private let createProjectButton = CreateProjectButton()
     
     private let viewModel: MainViewModel
     
@@ -96,6 +98,7 @@ final class MainViewController: BaseViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         rootFlexContainer.pin.all(view.pin.safeArea).marginTop(10)
         rootFlexContainer.flex.layout()
     }
@@ -112,28 +115,41 @@ final class MainViewController: BaseViewController {
         
         rootFlexContainer.flex.direction(.column).define { flex in
             // 테스트용
-            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-                flex.addItem(bookmarkButton).size(55).cornerRadius(5).marginLeft(20)
-                flex.addItem(sendMessageButton).size(44).cornerRadius(5).marginLeft(15)
-                flex.addItem(removeButton).size(44).cornerRadius(5).marginLeft(15)
-                flex.addItem(fieldTagButton).height(35).cornerRadius(7).marginLeft(15)
-            }
-            
-            flex.addItem().height(70).direction(.row).alignItems(.center).marginTop(20).define { flex in
-                flex.addItem(confirmButton).width(150).height(50).cornerRadius(1).marginLeft(20)
-                flex.addItem(cancelButton).width(150).height(50).cornerRadius(1).marginLeft(10)
-            }
-            
+//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+//                flex.addItem(tagButton).marginLeft(15)
+//                flex.addItem(outlinedTagButton).marginLeft(15)
+//            }
+//
+//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+//                flex.addItem(bookmarkButton).width(54).height(52).marginLeft(15)
+//                flex.addItem(removeButton).width(38).height(38).marginLeft(15)
+//                flex.addItem(fieldTagButton).marginLeft(15)
+//                flex.addItem(sendMessageButton).width(38).height(38).marginLeft(15)
+//            }
+//
+//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+//                flex.addItem(confirmButton).width(123.5).height(44).marginLeft(15)
+//                flex.addItem(cancelButton).width(123.5).height(44).marginLeft(15)
+//            }
+//
+//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+//                flex.addItem(nextButton).width(343).height(52).marginLeft(10)
+//            }
+//
+//            flex.addItem(applyButton).width(277).height(52).marginTop(20).marginLeft(10)
+//            flex.addItem(detailButton).width(307).height(44).marginTop(20).marginLeft(10)
+//            flex.addItem(recruiterDecisionMenuView).width(307).height(48).marginTop(20).marginLeft(10)
+//            flex.addItem(recruiterMenuView).width(307).height(44).marginTop(20).marginLeft(10)
+//
             /// 컬렉션 뷰
-            flex.addItem(projectCollectionView).grow(1).marginTop(10)
+            flex.addItem(projectCollectionView).grow(1).marginTop(20)
             
             flex.addItem(createProjectButton)
-                .cornerRadius(23)
                 .position(.absolute)
                 .right(15)
                 .bottom(15)
-                .width(110)
-                .height(50)
+                .width(106)
+                .height(48)
         }
     }
     
@@ -310,71 +326,63 @@ extension MainViewController {
     }
 }
 
-// MARK: - ScrollEvent
+// MARK: - CreateProjectButtonAnimation
 extension MainViewController {
-    // MARK: - Button Animation
     private func animateLayoutChange(to mode: MainViewModel.CreateButtonDisplayState) {
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.updateButtonLayout(for: mode)
-            self?.updateButtonConfig(for: mode)
-        }
+        UIView.animate(
+            withDuration: 0.2,
+            animations: { [weak self] in
+                self?.updateButtonConfiguration(for: mode)
+                self?.updateButtonLayout(for: mode)
+            },
+            completion: { [weak self] _ in
+                self?.updateButtonTitle(for: mode)
+                self?.createProjectButton.contentHorizontalAlignment = .center
+            }
+        )
     }
     
     // MARK: - Button Layout
     private func updateButtonLayout(for state: MainViewModel.CreateButtonDisplayState) {
-        switch state {
-        case .both:
-            layoutCreateButton(width: 110, height: 50, radius: 23)
-            
-        case .only:
-            layoutCreateButton(width: 60, height: 60, radius: 30)
-        }
-    }
-    
-    private func layoutCreateButton(width: CGFloat, height: CGFloat, radius: CGFloat) {
+        let buttonWidth: CGFloat = state == .both ? 106 : 48
+        
         createProjectButton.flex
             .position(.absolute)
-            .cornerRadius(radius)
-            .width(width)
-            .height(height)
+            .cornerRadius(24)
+            .width(buttonWidth)
+            .height(48)
         
         rootFlexContainer.flex.layout()
     }
     
     // MARK: - Button Configuration
-    private func updateButtonConfig(for state: MainViewModel.CreateButtonDisplayState) {
+    private func updateButtonConfiguration(for state: MainViewModel.CreateButtonDisplayState) {
         switch state {
         case .both:
-            createProjectButton.configuration = createConfigForBoth()
+            createProjectButton.titleLabel?.alpha = 1
+            updateButtonTitle(for: state)
             
         case .only:
-            createProjectButton.configuration = createConfigForOnly()
+            createProjectButton.titleLabel?.alpha = 0
+            createProjectButton.contentHorizontalAlignment = .left
         }
     }
-
-    private func createConfigForBoth() -> UIButton.Configuration {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
-        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
     
-        var configuration = UIButton.Configuration.tinted()
-        configuration.image = image
-        configuration.imagePlacement = .leading
-        configuration.imagePadding = 5
-        configuration.title = "글쓰기"
-        configuration.attributedTitle?.font = .boldSystemFont(ofSize: 20)
-        configuration.baseBackgroundColor = .darkGray
+    // MARK: - Button Title
+    private func updateButtonTitle(for state: MainViewModel.CreateButtonDisplayState) {
+        var updatedConfiguration = createProjectButton.configuration
         
-        return configuration
-    }
-    
-    private func createConfigForOnly() -> UIButton.Configuration {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .default)
-        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+        switch state {
+        case .both:
+            var titleContainer = AttributeContainer()
+            titleContainer.font = BridgeFont.subtitle1.font
+            titleContainer.foregroundColor = BridgeColor.gray10
+            updatedConfiguration?.attributedTitle = AttributedString("글쓰기", attributes: titleContainer)
+            
+        case .only:
+            updatedConfiguration?.attributedTitle = nil
+        }
         
-        var configuration = UIButton.Configuration.tinted()
-        configuration.image = image
-        configuration.baseBackgroundColor = .darkGray
-        
-        return configuration
+        createProjectButton.configuration = updatedConfiguration
     }
 }

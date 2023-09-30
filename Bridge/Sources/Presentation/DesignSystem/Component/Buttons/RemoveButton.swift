@@ -10,11 +10,12 @@ import UIKit
 final class RemoveButton: BaseButton {
     override func configureAttributes() {
         let buttonImage = UIImage(named: "delete")?
-            .resize(to: CGSize(width: 28, height: 28))
+            .resize(to: CGSize(width: 24, height: 24))
             .withRenderingMode(.alwaysTemplate)
         
-        self.setImage(buttonImage, for: .normal)
-        self.backgroundColor = .red
-        self.tintColor = .white
+        setImage(buttonImage, for: .normal)
+        backgroundColor = BridgeColor.systemRed
+        tintColor = BridgeColor.gray10
+        layer.cornerRadius = 4
     }
 }
