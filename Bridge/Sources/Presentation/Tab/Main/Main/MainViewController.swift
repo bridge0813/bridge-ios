@@ -115,32 +115,32 @@ final class MainViewController: BaseViewController {
         
         rootFlexContainer.flex.direction(.column).define { flex in
             // 테스트용
-            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-                flex.addItem(tagButton).marginLeft(15)
-                flex.addItem(outlinedTagButton).marginLeft(15)
-            }
-            
-            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-                flex.addItem(bookmarkButton).width(54).height(52).marginLeft(15)
-                flex.addItem(removeButton).width(38).height(38).marginLeft(15)
-                flex.addItem(fieldTagButton).marginLeft(15)
-                flex.addItem(sendMessageButton).width(38).height(38).marginLeft(15)
-            }
-            
-            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-                flex.addItem(confirmButton).width(123.5).height(44).marginLeft(15)
-                flex.addItem(cancelButton).width(123.5).height(44).marginLeft(15)
-            }
-            
-            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-                flex.addItem(nextButton).width(343).height(52).marginLeft(10)
-            }
-            
-            flex.addItem(applyButton).width(277).height(52).marginTop(20).marginLeft(10)
-            flex.addItem(detailButton).width(307).height(44).marginTop(20).marginLeft(10)
-            flex.addItem(recruiterDecisionMenuView).width(307).height(48).marginTop(20).marginLeft(10)
-            flex.addItem(recruiterMenuView).width(307).height(44).marginTop(20).marginLeft(10)
-            
+//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+//                flex.addItem(tagButton).marginLeft(15)
+//                flex.addItem(outlinedTagButton).marginLeft(15)
+//            }
+//
+//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+//                flex.addItem(bookmarkButton).width(54).height(52).marginLeft(15)
+//                flex.addItem(removeButton).width(38).height(38).marginLeft(15)
+//                flex.addItem(fieldTagButton).marginLeft(15)
+//                flex.addItem(sendMessageButton).width(38).height(38).marginLeft(15)
+//            }
+//
+//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+//                flex.addItem(confirmButton).width(123.5).height(44).marginLeft(15)
+//                flex.addItem(cancelButton).width(123.5).height(44).marginLeft(15)
+//            }
+//
+//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
+//                flex.addItem(nextButton).width(343).height(52).marginLeft(10)
+//            }
+//
+//            flex.addItem(applyButton).width(277).height(52).marginTop(20).marginLeft(10)
+//            flex.addItem(detailButton).width(307).height(44).marginTop(20).marginLeft(10)
+//            flex.addItem(recruiterDecisionMenuView).width(307).height(48).marginTop(20).marginLeft(10)
+//            flex.addItem(recruiterMenuView).width(307).height(44).marginTop(20).marginLeft(10)
+//
             /// 컬렉션 뷰
             flex.addItem(projectCollectionView).grow(1).marginTop(20)
             
@@ -326,14 +326,20 @@ extension MainViewController {
     }
 }
 
-// MARK: - ScrollEvent
+// MARK: - CreateProjectButtonAnimation
 extension MainViewController {
-    // MARK: - Button Animation
     private func animateLayoutChange(to mode: MainViewModel.CreateButtonDisplayState) {
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.updateButtonLayout(for: mode)
-            self?.createProjectButton.isSelected.toggle()
-        }
+        UIView.animate(
+            withDuration: 0.2,
+            animations: { [weak self] in
+                self?.updateButtonConfiguration(for: mode)
+                self?.updateButtonLayout(for: mode)
+            },
+            completion: { [weak self] _ in
+                self?.updateButtonTitle(for: mode)
+                self?.createProjectButton.contentHorizontalAlignment = .center
+            }
+        )
     }
     
     // MARK: - Button Layout
@@ -347,5 +353,36 @@ extension MainViewController {
             .height(48)
         
         rootFlexContainer.flex.layout()
+    }
+    
+    // MARK: - Button Configuration
+    private func updateButtonConfiguration(for state: MainViewModel.CreateButtonDisplayState) {
+        switch state {
+        case .both:
+            createProjectButton.titleLabel?.alpha = 1
+            updateButtonTitle(for: state)
+            
+        case .only:
+            createProjectButton.titleLabel?.alpha = 0
+            createProjectButton.contentHorizontalAlignment = .left
+        }
+    }
+    
+    // MARK: - Button Title
+    private func updateButtonTitle(for state: MainViewModel.CreateButtonDisplayState) {
+        var updatedConfiguration = createProjectButton.configuration
+        
+        switch state {
+        case .both:
+            var titleContainer = AttributeContainer()
+            titleContainer.font = BridgeFont.subtitle1.font
+            titleContainer.foregroundColor = BridgeColor.gray10
+            updatedConfiguration?.attributedTitle = AttributedString("글쓰기", attributes: titleContainer)
+            
+        case .only:
+            updatedConfiguration?.attributedTitle = nil
+        }
+        
+        createProjectButton.configuration = updatedConfiguration
     }
 }

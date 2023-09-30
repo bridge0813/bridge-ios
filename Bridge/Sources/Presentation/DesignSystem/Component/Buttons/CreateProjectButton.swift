@@ -21,21 +21,11 @@ final class CreateProjectButton: BaseButton {
         configuration.imagePlacement = .leading
         configuration.imagePadding = 5
         
+        var titleContainer = AttributeContainer()
+        titleContainer.font = BridgeFont.subtitle1.font
+        titleContainer.foregroundColor = BridgeColor.gray10
+        configuration.attributedTitle = AttributedString("글쓰기", attributes: titleContainer)
+        
         self.configuration = configuration
-        configurationUpdateHandler = { button in
-            var updatedConfiguration = button.configuration
-            
-            if button.isSelected {
-                var titleContainer = AttributeContainer()
-                titleContainer.font = BridgeFont.subtitle1.font
-                titleContainer.foregroundColor = BridgeColor.gray10
-                updatedConfiguration?.attributedTitle = AttributedString("글쓰기", attributes: titleContainer)
-                
-            } else {
-                updatedConfiguration?.attributedTitle = nil  // 텍스트 제거
-            }
-            
-            button.configuration = updatedConfiguration
-        }
     }
 }
