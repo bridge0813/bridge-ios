@@ -37,7 +37,6 @@ final class ChatRoomListViewModel: ViewModelType {
         self.leaveChatRoomUseCase = leaveChatRoomUseCase
     }
     
-    // TODO: apns 들어오면 구조 바꿔야할수도
     func transform(input: Input) -> Output {
         let chatRooms = BehaviorRelay<[ChatRoom]>(value: [])
         let viewState = BehaviorRelay<ViewState>(value: .general)
@@ -58,7 +57,10 @@ final class ChatRoomListViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, chatRoom in
                 owner.coordinator?.showChatRoomDetailViewController(of: chatRoom)  // 임시
-                owner.coordinator?.showSignInViewController()  // 테스트용
+
+                owner.coordinator?.showAlert(configuration: .signIn) {  // 테스트용
+                    owner.coordinator?.showSignInViewController()
+                }
             })
             .disposed(by: disposeBag)
         
