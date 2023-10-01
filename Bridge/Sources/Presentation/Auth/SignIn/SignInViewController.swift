@@ -17,6 +17,12 @@ final class SignInViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexViewContainer = UIView()
     
+    private let dismissButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "xmark")?.resize(to: CGSize(width: 24, height: 24)), for: .normal)
+        return button
+    }()
+    
     private let signInWithAppleButton: UIButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .black
@@ -44,7 +50,7 @@ final class SignInViewController: BaseViewController {
     
     // MARK: - Configurations
     override func configureAttributes() {
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
     }
     
     override func configureLayouts() {
@@ -63,9 +69,10 @@ final class SignInViewController: BaseViewController {
     
     override func bind() {
         let input = SignInViewModel.Input(
+            dismissButtonTapped: dismissButton.rx.tap.asObservable(),
             signInWithAppleButtonTapped: signInWithAppleButton.rx.tap.asObservable()
         )
         
-        let output = viewModel.transform(input: input)
+        _ = viewModel.transform(input: input)
     }
 }
