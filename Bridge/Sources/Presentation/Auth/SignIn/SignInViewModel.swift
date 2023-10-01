@@ -11,6 +11,7 @@ import RxSwift
 final class SignInViewModel: ViewModelType {
     
     struct Input {
+        let dismissButtonTapped: Observable<Void>
         let signInWithAppleButtonTapped: Observable<Void>
     }
     
@@ -27,6 +28,13 @@ final class SignInViewModel: ViewModelType {
     }
     
     func transform(input: Input) -> Output {
+        input.dismissButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.finish()
+            })
+            .disposed(by: disposeBag)
+        
         input.signInWithAppleButtonTapped
             .flatMap {
                 ASAuthorizationAppleIDProvider().rx.requestAuthorizationWithAppleID()
@@ -52,7 +60,7 @@ final class SignInViewModel: ViewModelType {
                         print("need refresh")
                         
                     case .needSignUp:
-                        owner.coordinator?.showSelectFieldViewController()
+                        owner.coordinator?.showSetFieldViewController()
                         
                     case .failure:
                         print("fail")

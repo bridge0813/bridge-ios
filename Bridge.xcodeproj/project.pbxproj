@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B14DB212AB04AE9009A00EB /* SelectFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB202AB04AE9009A00EB /* SelectFieldViewModel.swift */; };
-		7B14DB232AB04B40009A00EB /* SelectFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB222AB04B40009A00EB /* SelectFieldViewController.swift */; };
+		7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */; };
+		7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */; };
 		7B14DB252AB04BC5009A00EB /* ASAuthorizationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB242AB04BC5009A00EB /* ASAuthorizationController+Rx.swift */; };
 		7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB272AB15E7E009A00EB /* SignInUseCase.swift */; };
 		7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB2A2AB16272009A00EB /* UserCredentials.swift */; };
@@ -135,8 +135,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7B14DB202AB04AE9009A00EB /* SelectFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFieldViewModel.swift; sourceTree = "<group>"; };
-		7B14DB222AB04B40009A00EB /* SelectFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFieldViewController.swift; sourceTree = "<group>"; };
+		7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewModel.swift; sourceTree = "<group>"; };
+		7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewController.swift; sourceTree = "<group>"; };
 		7B14DB242AB04BC5009A00EB /* ASAuthorizationController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASAuthorizationController+Rx.swift"; sourceTree = "<group>"; };
 		7B14DB272AB15E7E009A00EB /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
 		7B14DB2A2AB16272009A00EB /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
@@ -366,8 +366,8 @@
 		7B2D76FE2AAA16EF00E5907B /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				7B14DB202AB04AE9009A00EB /* SelectFieldViewModel.swift */,
-				7B14DB222AB04B40009A00EB /* SelectFieldViewController.swift */,
+				7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */,
+				7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -1093,7 +1093,7 @@
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
 				7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */,
 				7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */,
-				7B14DB212AB04AE9009A00EB /* SelectFieldViewModel.swift in Sources */,
+				7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
 				7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
@@ -1116,7 +1116,7 @@
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
 				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,
 				7BA36C9B2A9C5091000DAB02 /* ChatRoom.swift in Sources */,
-				7B14DB232AB04B40009A00EB /* SelectFieldViewController.swift in Sources */,
+				7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */,
 				7BA36CCE2A9E185A000DAB02 /* ChatRoomCell.swift in Sources */,
 				7C569D062A9F776B0063D362 /* Date+.swift in Sources */,
 				7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */,

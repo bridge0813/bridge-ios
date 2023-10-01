@@ -97,6 +97,11 @@ private extension TabBarCoordinator {
     func configureBarAppearance() {
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.titleTextAttributes = [
+            .font: BridgeFont.subtitle1.font,
+            .foregroundColor: BridgeColor.gray1
+        ]
+        navigationBarAppearance.shadowColor = nil
         UINavigationBar.appearance().tintColor = .black
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
