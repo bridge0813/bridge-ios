@@ -48,8 +48,12 @@ final class BridgeAlertViewController: BaseViewController {
     private lazy var leftButton = CancelButton(title: "")
     private lazy var rightButton = ConfirmButton(title: "")
     
+    private var primaryAction: PrimaryActionClosure?
+    
     // MARK: - Initializer
-    init(configuration: AlertConfiguration) {
+    init(configuration: AlertConfiguration, primaryAction: PrimaryActionClosure?) {
+        self.primaryAction = primaryAction
+        
         super.init()
         
         imageView.image = UIImage(named: configuration.imageName)?.withRenderingMode(.alwaysOriginal)
@@ -63,6 +67,21 @@ final class BridgeAlertViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = BridgeColor.backgroundBlur
+        
+        leftButton.rx.tap.asObservable()
+            .withUnretained(self)
+            .subscribe { owner, _ in
+                owner.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        rightButton.rx.tap.asObservable()
+            .withUnretained(self)
+            .subscribe { owner, _ in
+                owner.dismiss(animated: true)
+                if let primaryAction = owner.primaryAction { primaryAction() }
+            }
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Configuartions
