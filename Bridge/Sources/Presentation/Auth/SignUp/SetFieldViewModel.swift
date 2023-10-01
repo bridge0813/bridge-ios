@@ -1,5 +1,5 @@
 //
-//  SelectFieldViewModel.swift
+//  SetFieldViewModel.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/09/12.
@@ -7,7 +7,7 @@
 
 import RxSwift
 
-final class SelectFieldViewModel: ViewModelType {
+final class SetFieldViewModel: ViewModelType {
     
     struct Input {
         let completeButtonTapped: Observable<Void>

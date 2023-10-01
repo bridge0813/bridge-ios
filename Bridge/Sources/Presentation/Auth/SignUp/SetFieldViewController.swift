@@ -1,5 +1,5 @@
 //
-//  SelectFieldViewController.swift
+//  SetFieldViewController.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/09/12.
@@ -11,24 +11,16 @@ import FlexLayout
 import RxCocoa
 import RxSwift
 
-final class SelectFieldViewController: BaseViewController {
+final class SetFieldViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexViewContainer = UIView()
     
-    private let tipMessageBox = TipMessageBox("관심 분야 설정하고 맞춤 홈화면 확인하세요!")
-    private let warningMessageBox = WarningMessageBox("이 프로젝트는 학생, 취준생의 지원이 제한되어 있습니다.")
+    private let tipMessageBox = TipMessageBox("관심분야 설정하고 맞춤 홈화면 받아보세요!")
+    private let completeButton = NextButton()
     
-    private let completeButton: UIButton = {
-        let button = UIButton(configuration: .filled())
-        button.configuration?.baseBackgroundColor = BridgeColor.primary1
-        button.setTitle("완료", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
+    private let viewModel: SetFieldViewModel
     
-    private let viewModel: SelectFieldViewModel
-    
-    init(viewModel: SelectFieldViewModel) {
+    init(viewModel: SetFieldViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -39,13 +31,17 @@ final class SelectFieldViewController: BaseViewController {
     }
     
     // MARK: - Configurations
+    override func configureAttributes() {
+        navigationItem.title = "관심분야"
+        navigationItem.hidesBackButton = true
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false  // 밀어서 뒤로가기 제한
+    }
+    
     override func configureLayouts() {
         view.addSubview(rootFlexViewContainer)
         
         rootFlexViewContainer.flex.direction(.column).justifyContent(.center).alignItems(.center).define { flex in
             flex.addItem(tipMessageBox)
-            flex.addItem().size(40)
-            flex.addItem(warningMessageBox)
             flex.addItem().size(40)
             flex.addItem(completeButton).width(343).height(52)
         }
@@ -58,7 +54,7 @@ final class SelectFieldViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = SelectFieldViewModel.Input(
+        let input = SetFieldViewModel.Input(
             completeButtonTapped: completeButton.rx.tap.asObservable()
         )
         
