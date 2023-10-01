@@ -44,9 +44,8 @@ final class BridgeAlertViewController: BaseViewController {
         return label
     }()
     
-    // TODO: 디자인시스템 버튼 적용 예정
-    private lazy var leftButton = CancelButton(title: "")
-    private lazy var rightButton = ConfirmButton(title: "")
+    private lazy var leftButton = BridgeButton("", style: .cancel)
+    private lazy var rightButton = BridgeButton("", style: .confirm)
     
     private var primaryAction: PrimaryActionClosure?
     

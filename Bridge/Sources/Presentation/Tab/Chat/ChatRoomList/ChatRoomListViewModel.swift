@@ -37,7 +37,6 @@ final class ChatRoomListViewModel: ViewModelType {
         self.leaveChatRoomUseCase = leaveChatRoomUseCase
     }
     
-    // TODO: apns 들어오면 구조 바꿔야할수도
     func transform(input: Input) -> Output {
         let chatRooms = BehaviorRelay<[ChatRoom]>(value: [])
         let viewState = BehaviorRelay<ViewState>(value: .general)
