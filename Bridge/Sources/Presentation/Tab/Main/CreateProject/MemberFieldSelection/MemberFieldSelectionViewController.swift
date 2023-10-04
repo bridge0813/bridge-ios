@@ -26,14 +26,14 @@ final class MemberFieldSelectionViewController: BaseViewController {
         return label
     }()
     
-    private let iosButton = BrideFieldTagButton("iOS")
-    private let androidButton = BrideFieldTagButton("안드로이드")
-    private let frontEndButton = BrideFieldTagButton("프론트엔드")
-    private let backEndButton = BrideFieldTagButton("백엔드")
-    private let uiuxButton = BrideFieldTagButton("UI/UX")
-    private let bibxButton = BrideFieldTagButton("BI/BX")
-    private let videomotionButton = BrideFieldTagButton("영상/모션")
-    private let pmButton = BrideFieldTagButton("PM")
+    private let iosButton = BridgeFieldTagButton("iOS")
+    private let androidButton = BridgeFieldTagButton("안드로이드")
+    private let frontEndButton = BridgeFieldTagButton("프론트엔드")
+    private let backEndButton = BridgeFieldTagButton("백엔드")
+    private let uiuxButton = BridgeFieldTagButton("UI/UX")
+    private let bibxButton = BridgeFieldTagButton("BI/BX")
+    private let videomotionButton = BridgeFieldTagButton("영상/모션")
+    private let pmButton = BridgeFieldTagButton("PM")
     
     private let nextButton: UIButton = {
         let button = UIButton()

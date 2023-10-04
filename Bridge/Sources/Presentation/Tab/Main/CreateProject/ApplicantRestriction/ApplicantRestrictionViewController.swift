@@ -27,9 +27,9 @@ final class ApplicantRestrictionViewController: BaseViewController {
         return label
     }()
     
-    private let studentButton = BrideFieldTagButton("학생")
-    private let currentEmployeeButton = BrideFieldTagButton("현직자")
-    private let jobSeekerButton = BrideFieldTagButton("취준생")
+    private let studentButton = BridgeFieldTagButton("학생")
+    private let currentEmployeeButton = BridgeFieldTagButton("현직자")
+    private let jobSeekerButton = BridgeFieldTagButton("취준생")
     
     private let nextButton: UIButton = {
         let button = UIButton()
