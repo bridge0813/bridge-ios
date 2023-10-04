@@ -40,9 +40,9 @@
 		7B6123822AC15D2E006E72C1 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123792AC15D2E006E72C1 /* Pretendard-Thin.otf */; };
 		7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123832AC1A65F006E72C1 /* BridgeColor.swift */; };
 		7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123852AC1B199006E72C1 /* UIImage+.swift */; };
-		7B61238B2AC2D03E006E72C1 /* TipMessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61238A2AC2D03E006E72C1 /* TipMessageBox.swift */; };
-		7B61238D2AC2F320006E72C1 /* WarningMessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61238C2AC2F320006E72C1 /* WarningMessageBox.swift */; };
-		7B61238F2AC2FBD8006E72C1 /* MessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61238E2AC2FBD8006E72C1 /* MessageBox.swift */; };
+		7B61238B2AC2D03E006E72C1 /* BridgeTipMessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61238A2AC2D03E006E72C1 /* BridgeTipMessageBox.swift */; };
+		7B61238D2AC2F320006E72C1 /* BridgeWarningMessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61238C2AC2F320006E72C1 /* BridgeWarningMessageBox.swift */; };
+		7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61238E2AC2FBD8006E72C1 /* BridgeMessageBox.swift */; };
 		7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123932AC4345B006E72C1 /* BridgeAlertViewController.swift */; };
 		7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123972AC443EC006E72C1 /* Alertable.swift */; };
 		7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123992AC446D1006E72C1 /* AlertConfiguration.swift */; };
@@ -94,7 +94,7 @@
 		7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */; };
 		7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */; };
 		7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */; };
-		7C24003D2AB34BFA00D9D5F1 /* BrideFieldTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003C2AB34BFA00D9D5F1 /* BrideFieldTagButton.swift */; };
+		7C24003D2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003C2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift */; };
 		7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003F2AB4235800D9D5F1 /* UITextField+.swift */; };
 		7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */; };
 		7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */; };
@@ -169,9 +169,9 @@
 		7B6123792AC15D2E006E72C1 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		7B6123832AC1A65F006E72C1 /* BridgeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeColor.swift; sourceTree = "<group>"; };
 		7B6123852AC1B199006E72C1 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
-		7B61238A2AC2D03E006E72C1 /* TipMessageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipMessageBox.swift; sourceTree = "<group>"; };
-		7B61238C2AC2F320006E72C1 /* WarningMessageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningMessageBox.swift; sourceTree = "<group>"; };
-		7B61238E2AC2FBD8006E72C1 /* MessageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBox.swift; sourceTree = "<group>"; };
+		7B61238A2AC2D03E006E72C1 /* BridgeTipMessageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeTipMessageBox.swift; sourceTree = "<group>"; };
+		7B61238C2AC2F320006E72C1 /* BridgeWarningMessageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeWarningMessageBox.swift; sourceTree = "<group>"; };
+		7B61238E2AC2FBD8006E72C1 /* BridgeMessageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeMessageBox.swift; sourceTree = "<group>"; };
 		7B6123932AC4345B006E72C1 /* BridgeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAlertViewController.swift; sourceTree = "<group>"; };
 		7B6123972AC443EC006E72C1 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		7B6123992AC446D1006E72C1 /* AlertConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertConfiguration.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 		7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewController.swift; sourceTree = "<group>"; };
 		7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRestrictionViewModel.swift; sourceTree = "<group>"; };
 		7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRestrictionViewController.swift; sourceTree = "<group>"; };
-		7C24003C2AB34BFA00D9D5F1 /* BrideFieldTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideFieldTagButton.swift; sourceTree = "<group>"; };
+		7C24003C2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFieldTagButton.swift; sourceTree = "<group>"; };
 		7C24003F2AB4235800D9D5F1 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRequirement.swift; sourceTree = "<group>"; };
 		7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDataStorage.swift; sourceTree = "<group>"; };
@@ -427,9 +427,9 @@
 		7B6123872AC2D00C006E72C1 /* MessageBox */ = {
 			isa = PBXGroup;
 			children = (
-				7B61238A2AC2D03E006E72C1 /* TipMessageBox.swift */,
-				7B61238C2AC2F320006E72C1 /* WarningMessageBox.swift */,
-				7B61238E2AC2FBD8006E72C1 /* MessageBox.swift */,
+				7B61238E2AC2FBD8006E72C1 /* BridgeMessageBox.swift */,
+				7B61238A2AC2D03E006E72C1 /* BridgeTipMessageBox.swift */,
+				7B61238C2AC2F320006E72C1 /* BridgeWarningMessageBox.swift */,
 			);
 			path = MessageBox;
 			sourceTree = "<group>";
@@ -777,7 +777,7 @@
 				7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */,
 				7C1366342AC15ECF00EB415D /* BrideBookmarkButton.swift */,
 				7C1366382AC16C4D00EB415D /* BrideRemoveButton.swift */,
-				7C24003C2AB34BFA00D9D5F1 /* BrideFieldTagButton.swift */,
+				7C24003C2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift */,
 				7C1366412AC27F9100EB415D /* BrideSendMessageButton.swift */,
 				7C40CBA02AC3E595000F4C9F /* BrideTechTagButton.swift */,
 				7C40CBA22AC3E5A8000F4C9F /* BrideOutlinedTechTagButton.swift */,
@@ -1141,7 +1141,7 @@
 				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,
 				7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */,
-				7B61238B2AC2D03E006E72C1 /* TipMessageBox.swift in Sources */,
+				7B61238B2AC2D03E006E72C1 /* BridgeTipMessageBox.swift in Sources */,
 				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
 				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
@@ -1169,14 +1169,14 @@
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
 				7C40CBCA2AC6B597000F4C9F /* BrideCreateProjectButton.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
-				7C24003D2AB34BFA00D9D5F1 /* BrideFieldTagButton.swift in Sources */,
+				7C24003D2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
-				7B61238D2AC2F320006E72C1 /* WarningMessageBox.swift in Sources */,
 				7C40CBA12AC3E595000F4C9F /* BrideTechTagButton.swift in Sources */,
+				7B61238D2AC2F320006E72C1 /* BridgeWarningMessageBox.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
-				7B61238F2AC2FBD8006E72C1 /* MessageBox.swift in Sources */,
+				7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* ASAuthorizationController+Rx.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,

@@ -28,7 +28,7 @@ final class SetFieldViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         input.completeButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, authorization in
+            .subscribe(onNext: { owner, _ in
                 owner.coordinator?.finish()  // 테스트용
             })
             .disposed(by: disposeBag)
