@@ -30,7 +30,7 @@ final class MainViewController: BaseViewController {
     
     private lazy var goToNotificationButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
-            image: UIImage(systemName: "bell"),
+            image: UIImage(systemName: "line.3.horizontal"),
             style: .done,
             target: self,
             action: nil
@@ -38,7 +38,6 @@ final class MainViewController: BaseViewController {
         
         return button
     }()
-    
    
     let restrictionMenuTriggerView = RestrictionMenuTriggerView()
     let dropDown = DropDown()
@@ -83,7 +82,11 @@ final class MainViewController: BaseViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showDropDown))
         restrictionMenuTriggerView.addGestureRecognizer(tapGesture)
-
+        
+        
+        goToNotificationButton.rx.tap.subscribe(onNext: { [weak self] in
+            self?.dropDown.show()
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,16 +102,17 @@ final class MainViewController: BaseViewController {
     
     // MARK: - Methods
     
-    @objc func showDropDown() {
-        
+    @objc
+    func showDropDown() {
         dropDown.show()
     }
     
     private func setDropdown() {
-        dropDown.anchorView = restrictionMenuTriggerView // 이 뷰 아래에 드롭다운을 표시
+        dropDown.anchorView = goToNotificationButton // 이 뷰 아래에 드롭다운을 표시
         dropDown.direction = .bottom
         dropDown.dismissMode = .onTap
-        dropDown.selectionAction = { [weak self] index, text in
+        dropDown.width = 91
+        dropDown.selectionAction = { [weak self] _, text in
             self?.restrictionMenuTriggerView.restrictionTypeLabel.text = text
         }
         
@@ -123,14 +127,14 @@ final class MainViewController: BaseViewController {
             self?.restrictionMenuTriggerView.arrowButton.isSelected = false
         }
         
-        dropDown.dataSource = ["학생", "현직자", "취준생"]
-        dropDown.bottomOffset = CGPoint(x: 0, y: 10)
+        dropDown.dataSource = ["지원취소", "삭제하기"]
+//        dropDown.bottomOffset = CGPoint(x: 30, y: -5)
     }
     
     private func configureNavigationUI() {
-        navigationItem.titleView = NavigationTitleView(title: "Bridge")  // 임의설정
+//        navigationItem.titleView = NavigationTitleView(title: "Bridge")  // 임의설정
         navigationItem.rightBarButtonItem = goToNotificationButton
-        navigationController?.navigationBar.tintColor = .black
+//        navigationController?.navigationBar.tintColor = .black
     }
     
     override func configureLayouts() {
@@ -164,7 +168,7 @@ final class MainViewController: BaseViewController {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             didScroll: projectCollectionView.rx.contentOffset.asObservable(),
-            notificationButtonTapped: goToNotificationButton.rx.tap.asObservable(),
+            notificationButtonTapped: filterButton.rx.tap.asObservable(),
             filterButtonTapped: filterButton.rx.tap.asObservable(),
             searchButtonTapped: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text),
             itemSelected: projectCollectionView.rx.itemSelected.asObservable(),
