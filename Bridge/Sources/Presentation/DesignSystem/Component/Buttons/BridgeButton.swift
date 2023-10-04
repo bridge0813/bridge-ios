@@ -27,6 +27,12 @@ final class BridgeButton: BaseButton {
         backgroundColor = style.backgroundColor
         layer.cornerRadius = 4
     }
+
+    /// 버튼의 활성화/비활성화 상태를 변경하는 메서드
+    func updateButtonState(isActive: Bool) {
+        backgroundColor = isActive ? BridgeColor.primary1 : BridgeColor.gray4
+        isEnabled = isActive
+    }
 }
 
 enum BridgeButtonStyle {
@@ -34,13 +40,14 @@ enum BridgeButtonStyle {
     case cancel
     case apply
     case detail
+    case switchable
     
     var backgroundColor: UIColor {
         switch self {
         case .confirm, .apply, .detail:
             return BridgeColor.primary1
             
-        case .cancel:
+        case .cancel, .switchable:
             return BridgeColor.gray4
         }
     }
@@ -52,6 +59,9 @@ enum BridgeButtonStyle {
             
         case .apply:
             return BridgeFont.subtitle2.font
+            
+        case .switchable:
+            return BridgeFont.button1.font
         }
     }
 }
