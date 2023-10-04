@@ -60,24 +60,10 @@ final class DropDown: UIView {
         case manual
     }
     
-    /// 드롭다운이 어느 방향으로 나타날지를 결정하는 방향을 정의.
-    enum Direction {
-        
-        /// The drop down will show below the anchor view when possible, otherwise above if there is more place than below.
-        case any
-        
-        /// The drop down will show above the anchor view or will not be showed if not enough space.
-        case top
-        
-        /// The drop down will show below or will not be showed if not enough space.
-        case bottom
-    }
-    
     // MARK: - Properties
     /// 현재 화면에 표시되고 있는 Dropdown 인스턴스를 참조하는 프로퍼티로 현재 활성화된 드롭다운을 추적한다.
     static weak var VisibleDropDown: DropDown?
 
-    
     // MARK: - UI
     
     /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능을 제공할 것으로 추정됨.
@@ -92,25 +78,6 @@ final class DropDown: UIView {
     /// 실제 표시하기 전에 셀의 레이아웃 및 크기를 계산하는 데 사용될 것으로 보임.
     var templateCell: UITableViewCell!
     
-    // TODO: - 화살표 이미지는 직접 커스텀이미지를 사용할 예정이라 없어도 될 듯?
-    /// 드롭다운 위에 위치하는 화살표를 표시하는 UIImageView
-    /// 코드에서는 직접 이미지를 그리는 방식으로 화살표 이미지를 생성하고 있음.
-    lazy var arrowIndication: UIImageView = {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 20, height: 10), false, 0)
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: 10))
-        path.addLine(to: CGPoint(x: 20, y: 10))
-        path.addLine(to: CGPoint(x: 10, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: 10))
-        UIColor.black.setFill()
-        path.fill()
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        let tintImg = img?.withRenderingMode(.alwaysTemplate)
-        let imgv = UIImageView(image: tintImg)
-        imgv.frame = CGRect(x: 0, y: -10, width: 15, height: 10)
-        return imgv
-    }()
     
     /// 앞서 설명했던 AnchorView 프로토콜을 채택하는 객체
     /// 드롭다운이 표시될 기준점이 되는 UIView나 UIBarButtonItem을 나타냄.
@@ -118,10 +85,6 @@ final class DropDown: UIView {
     weak var anchorView: AnchorView? {
         didSet { setNeedsUpdateConstraints() }
     }
-
-    /// 드롭다운이 표시될 방향을 결정하는데, 초기값을 .any로 설정 (드롭다운이 가능한 경우 아래로, 그렇지 않은 경우 위로 표시되도록)
-    var direction = Direction.any
-
     
     // MARK: - 드롭다운의 정확한 위치를 결정하는 데 사용되는 프로퍼티
     
@@ -148,21 +111,6 @@ final class DropDown: UIView {
     var width: CGFloat? {
         didSet { setNeedsUpdateConstraints() }
     }
-
-    /// 드롭다운 화살표의 x 위치를 결정한다.
-    /// arrowIndicationX 값이 주어진 경우, 'arrowIndication' 이미지뷰가 'tableViewContainer' 에 추가되며,
-    /// arrowIndication의 x 위치는 arrowIndicationX 값으로 설정된다.
-    var arrowIndicationX: CGFloat? {
-        didSet {
-            if let arrowIndicationX = arrowIndicationX {
-                tableViewContainer.addSubview(arrowIndication)
-                arrowIndication.tintColor = tableViewBackgroundColor
-                arrowIndication.frame.origin.x = arrowIndicationX
-            } else {
-                arrowIndication.removeFromSuperview()
-            }
-        }
-    }
     
     // MARK: - 드롭다운의 위치와 크기를 동적으로 결정하고 조절하는 데 사용
     var heightConstraint: NSLayoutConstraint!  // DropDown의 높이(height)를 결정하는 제약 조건을 참조
@@ -174,15 +122,14 @@ final class DropDown: UIView {
     // MARK: - Appearance
     
     /// 기본값은 'DPDConstant.UI.RowHeight' 이며, 새 값을 지정하면 해당 값으로 설정되며, 새 값이 설정된 후에 드롭다운의 모든 컴포넌트를 다시 로드.
-    @objc dynamic var cellHeight = DropdownConstant.DropdownUI.rowHeight {
+    var cellHeight = DropdownConstant.DropdownUI.rowHeight {
         willSet { tableView.rowHeight = newValue }
         didSet { reloadAllComponents() }
     }
 
-    @objc dynamic var tableViewBackgroundColor = DropdownConstant.DropdownUI.backgroundColor {
+    var tableViewBackgroundColor = DropdownConstant.DropdownUI.backgroundColor {
         willSet {
             tableView.backgroundColor = newValue
-            if arrowIndicationX != nil { arrowIndication.tintColor = newValue }
         }
     }
 
@@ -197,19 +144,17 @@ final class DropDown: UIView {
     }
 
     /// 드롭다운 내에서 선택된 셀의 배경색을 나타낸다.
-    @objc dynamic var selectionBackgroundColor = DropdownConstant.DropdownItem.selectedBackgroundColor
+    var selectionBackgroundColor = DropdownConstant.DropdownItem.selectedBackgroundColor
 
     /// 드롭다운 내의 셀들 사이의 구분선 색상을 나타낸다.
-    @objc dynamic var separatorColor = DropdownConstant.DropdownUI.separatorColor {
+    var separatorColor = DropdownConstant.DropdownUI.separatorColor {
         willSet { tableView.separatorColor = newValue }
         didSet { reloadAllComponents() }
     }
     
-    
     // MARK: - Radius
     /// 드롭다운의 cornerRadius
-    @objc
-    dynamic var cornerRadius = DropdownConstant.DropdownUI.cornerRadius {
+    var cornerRadius = DropdownConstant.DropdownUI.cornerRadius {
         willSet {
             tableViewContainer.layer.cornerRadius = newValue
             tableView.layer.cornerRadius = newValue
@@ -218,16 +163,14 @@ final class DropDown: UIView {
     }
 
     /// cornerRadius 속성 변경 메서드
-    @objc
-    dynamic func setupCornerRadius(_ radius: CGFloat) {
+    func setupCornerRadius(_ radius: CGFloat) {
         tableViewContainer.layer.cornerRadius = radius
         tableView.layer.cornerRadius = radius
         reloadAllComponents()
     }
 
     /// 원하는 모서리만 둥글게 설정하는 메서드
-    @objc
-    dynamic func setupMaskedCorners(_ cornerMask: CACornerMask) {
+    func setupMaskedCorners(_ cornerMask: CACornerMask) {
         tableViewContainer.layer.maskedCorners = cornerMask
         tableView.layer.maskedCorners = cornerMask
         reloadAllComponents()
@@ -235,32 +178,32 @@ final class DropDown: UIView {
     
     // MARK: - 그림자
     /// 드롭다운의 그림자 색상
-    @objc dynamic var shadowColor = DropdownConstant.DropdownUI.shadowColor {
+    var shadowColor = DropdownConstant.DropdownUI.shadowColor {
         willSet { tableViewContainer.layer.shadowColor = newValue.cgColor }
         didSet { reloadAllComponents() }
     }
 
     /// 드롭다운의 그림자가 그려지는 위치의 x와 y 방향의 오프셋을 결정.
-    @objc dynamic var shadowOffset = DropdownConstant.DropdownUI.shadowOffset {
+    var shadowOffset = DropdownConstant.DropdownUI.shadowOffset {
         willSet { tableViewContainer.layer.shadowOffset = newValue }
         didSet { reloadAllComponents() }
     }
 
     /// 그림자의 투명도
-    @objc dynamic var shadowOpacity = DropdownConstant.DropdownUI.shadowOpacity {
+    var shadowOpacity = DropdownConstant.DropdownUI.shadowOpacity {
         willSet { tableViewContainer.layer.shadowOpacity = newValue }
         didSet { reloadAllComponents() }
     }
 
     /// 그림자의 radius. 그림자가 퍼져나가는 정도를 결정
-    @objc dynamic var shadowRadius = DropdownConstant.DropdownUI.shadowRadius {
+    var shadowRadius = DropdownConstant.DropdownUI.shadowRadius {
         willSet { tableViewContainer.layer.shadowRadius = newValue }
         didSet { reloadAllComponents() }
     }
     
     // MARK: - 애니메이션
     /// 드롭다운을 보이거나 숨길 때, 애니메이션의 지속 시간
-    @objc dynamic var animationduration = DropdownConstant.Animation.duration
+    var animationduration = DropdownConstant.Animation.duration
 
     /// 드롭다운이 나타날 때의 애니메이션 옵션 전역 변수
     static var animationEntranceOptions = DropdownConstant.Animation.entranceOptions
@@ -280,17 +223,17 @@ final class DropDown: UIView {
     // MARK: - 텍스트 스타일
     
     /// 드롭다운의 각 셀에 표시되는 텍스트의 색상을 나타낸다.
-    @objc dynamic var textColor = DropdownConstant.DropdownItem.textColor {
+    var textColor = DropdownConstant.DropdownItem.textColor {
         didSet { reloadAllComponents() }
     }
 
     /// 드롭다운의 선택된 셀의 텍스트 색상을 나타낸다.
-    @objc dynamic var selectedTextColor = DropdownConstant.DropdownItem.selectedTextColor {
+    var selectedTextColor = DropdownConstant.DropdownItem.selectedTextColor {
         didSet { reloadAllComponents() }
     }
     
     /// 드롭다운의 각 셀에 표시되는 텍스트의 폰트를 나타낸다.
-    @objc dynamic var textFont = DropdownConstant.DropdownItem.textFont {
+    var textFont = DropdownConstant.DropdownItem.textFont {
         didSet { reloadAllComponents() }
     }
     
@@ -305,9 +248,8 @@ final class DropDown: UIView {
         }
     }
     
-    
     // MARK: - DataSource
-
+    
     /// 드롭다운에 표시될 데이터 항목들을 포함하고 있음.
     var dataSource = [String]() {
         didSet {
@@ -316,17 +258,9 @@ final class DropDown: UIView {
         }
     }
 
-    /// 다국어 지원 버전?
-    var localizationKeysDataSource = [String]() {
-        didSet {
-            dataSource = localizationKeysDataSource.map { NSLocalizedString($0, comment: "") }
-        }
-    }
-    
     /// 만약 드롭다운에서 여러 항목을 선택할 수 있는 경우, 그 선택된 항목들의 인덱스를 추적하기 위해 사용된다.
     var selectedRowIndices = Set<Index>()
 
-    
     // MARK: - 셀의 Configuration
     /// 기본적으로 dataSource의 값을 그대로 사용하지만, 이를 통해 해당 텍스트의 표시 방식을 직접 설정할 수 있음.
     /// 예를들어, dataSource에 ["밥", "피자", "치킨"]이 있으면 ["나는 밥을 좋아해", "나는 피자를 좋아해", "나는 치킨을 좋아해"] 이런식으로 변형할 수 있음.
@@ -377,10 +311,6 @@ final class DropDown: UIView {
 
     
     // MARK: - 초기화 메서드
-    
-    deinit {
-//        stopListeningToNotifications()  // 더 이상 시스템 알림을 수신하지 않도록
-    }
 
     /// show() 메서드를 호출하기 전에 드롭다운이 작동하기 위한 필수 설정사항 dataSource, anchorView, selectionAction을 설정해야 함.
     convenience init() {
@@ -423,11 +353,6 @@ final class DropDown: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    public required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        setup()
-//    }
 }
 
 // MARK: - Setup
@@ -450,10 +375,6 @@ private extension DropDown {
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-//        startListeningToKeyboard()
-        
-//        accessibilityIdentifier = "drop_down"
     }
     
     func setupUI() {
@@ -598,55 +519,20 @@ extension DropDown {
         width: CGFloat,            // 드롭다운의 width
         offscreenHeight: CGFloat,  // 화면 밖으로 나가는 드롭다운의 높이
         visibleHeight: CGFloat,    // 화면에 보일 수 있는 드롭다운의 높이
-        canBeDisplayed: Bool,      // 드롭다운이 현재의 레이아웃에서 보여질 수 있는지의 여부
-        Direction: Direction       // 드롭다운의 표시 위치
+        canBeDisplayed: Bool       // 드롭다운이 현재의 레이아웃에서 보여질 수 있는지의 여부
     ) {
         var layout: ComputeLayoutTuple = (0, 0, 0, 0)  // 기본적인 레이아웃의 값
-        var direction = self.direction
-
+        
         // 현재 화면의 주 윈도우 가져오기.
-        guard let window = UIWindow.visibleWindow() else { return (0, 0, 0, 0, 0, false, direction) }
+        guard let window = UIWindow.visibleWindow() else { return (0, 0, 0, 0, 0, false) }
 
         // 드롭다운이 UIBarButtonItem과 연결된 경우 처리
         if let anchorView = anchorView as? UIBarButtonItem {
             bottomOffset = computeLayoutForBarButtonItem(anchorView: anchorView, window: window)
         }
         
-        // anchorView가 설정되지 않았다면, 기본적으로 드롭다운은 화면 하단에 표시
-        if anchorView == nil {
-            layout = computeLayoutBottomDisplay(window: window)
-            direction = .any
-            
-        } else {
-            // anchorView가 설정되었을 경우
-            switch direction {
-            case .any:
-                layout = computeLayoutBottomDisplay(window: window)  // 아래 방향으로 표시될 드롭다운의 레이아웃을 계산
-                direction = .bottom
+        layout = computeLayoutBottomDisplay(window: window)  // 드롭다운 레이아웃 계산
                 
-                // 드롭다운이 화면 바깥으로 벗어나는지 확인.
-                // 만약 벗어난다면 윗 방향으로 표시될 레이아웃을 계산
-                if layout.offscreenHeight > 0 {
-                    let topLayout = computeLayoutForTopDisplay(window: window)
-                    
-                    // 아래 방향과 윗 방향을 비교하여 어떤 방향이 더 적은 공간을 화면 바깥으로 벗어나게 하는지 체크
-                    if topLayout.offscreenHeight < layout.offscreenHeight {
-                        layout = topLayout
-                        direction = .top
-                    }
-                }
-                
-            case .bottom:
-                print("bottom")
-                layout = computeLayoutBottomDisplay(window: window)
-                direction = .bottom
-                
-            case .top:
-                layout = computeLayoutForTopDisplay(window: window)
-                direction = .top
-            }
-        }
-        
         // 드롭다운의 width가 드롭다운이 차지할 수 있는 최대크기를 계산하여 적절하게 설정.
         constraintWidthToFittingSizeIfNecessary(layout: &layout)
         
@@ -656,7 +542,7 @@ extension DropDown {
         let visibleHeight = tableHeight - layout.offscreenHeight  // 화면에 실제로 보이는 드롭다운의 높이를 계산
         let canBeDisplayed = visibleHeight >= minHeight           // 드롭다운이 화면에 표시될 수 있는지(셀의 rowHeight)
 
-        return (layout.x, layout.y, layout.width, layout.offscreenHeight, visibleHeight, canBeDisplayed, direction)
+        return (layout.x, layout.y, layout.width, layout.offscreenHeight, visibleHeight, canBeDisplayed)
     }
     
     /// anchorView가 UIBarButtonItem일 경우, 드롭다운 레이아웃 계산 메서드(bottomOffset을 지정)
@@ -678,7 +564,7 @@ extension DropDown {
     
     /// 아래 방향으로 표시되는 드롭다운의 x, y, width, offscreenHeight
     func computeLayoutBottomDisplay(window: UIWindow) -> ComputeLayoutTuple {
-        var offscreenHeight: CGFloat = 0  // 드롭다운의 일부가 화면 밖에 나가는 높이
+        let offscreenHeight: CGFloat = 0  // 드롭다운의 일부가 화면 밖에 나가는 높이
         
         // 만약 드롭다운의 width가 설정되어 있다면 그 값을 사용하고,
         // 설정된 값이 없다면 앵커 뷰의 width나 fittingWidth()에서 bottomOffset.x 를 뺀 값이 최종 width
@@ -691,44 +577,6 @@ extension DropDown {
         // 드롭다운의 x,y 좌표 계산
         let x = anchorViewX + bottomOffset.x
         let y = anchorViewY + bottomOffset.y
-        
-        print(x)
-        print(y)
-        print(offscreenHeight)
-//        // 드롭다운의 최대 y좌표 계산
-//        let maxY = y + tableHeight
-//        let windowMaxY = window.bounds.maxY - DPDConstant.UI.HeightPadding - offsetFromWindowBottom
-//
-//        let keyboardListener = KeyboardListener.sharedInstance
-//        let keyboardMinY = keyboardListener.keyboardFrame.minY - DPDConstant.UI.HeightPadding
-//
-//        if keyboardListener.isVisible && maxY > keyboardMinY {
-//            offscreenHeight = abs(maxY - keyboardMinY)
-//        } else if maxY > windowMaxY {
-//            offscreenHeight = abs(maxY - windowMaxY)
-//        }
-        
-        return (x, y, width, offscreenHeight)
-    }
-    
-    /// 위 방향으로 표시되는 드롭다운의 x, y, width, offscreenHeight
-    func computeLayoutForTopDisplay(window: UIWindow) -> ComputeLayoutTuple {
-        var offscreenHeight: CGFloat = 0
-
-        let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? 0
-        let anchorViewMaxY = anchorView?.plainView.windowFrame?.maxY ?? 0
-
-        let x = anchorViewX + topOffset.x
-        var y = (anchorViewMaxY + topOffset.y) - tableHeight
-
-        let windowY = window.bounds.minY + DropdownConstant.DropdownUI.heightPadding
-
-        if y < windowY {
-            offscreenHeight = abs(y - windowY)
-            y = windowY
-        }
-        
-        let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - topOffset.x
         
         return (x, y, width, offscreenHeight)
     }
@@ -794,22 +642,6 @@ extension DropDown {
 
 // MARK: - Actions
 extension DropDown {
-    
-    /// Swift의 튜플은 옵젝씨와 호환되지 않기 때문에, 튜플 대신에 NSDictionary를 반환하도록
-    @objc(show)
-    public func objc_show() -> NSDictionary {
-        let (canBeDisplayed, offScreenHeight) = show()
-        
-        var info = [AnyHashable: Any]()
-        info["canBeDisplayed"] = canBeDisplayed
-        
-        if let offScreenHeight = offScreenHeight {
-            info["offScreenHeight"] = offScreenHeight
-        }
-        
-        return NSDictionary(dictionary: info)
-    }
-    
     /**
     Shows the drop down if enough height.
 
@@ -1046,11 +878,6 @@ extension DropDown: UITableViewDataSource {
     
     func configureCell(_ cell: CustomDropdownCell, at index: Int) {
         
-        // cell의 accessibilityIdentifier 설정으로 UI 테스트를 수행할 때, 해당 셀을 식벽하기 위한 값으로 사용될 수 있음.
-        if index >= 0 && index < localizationKeysDataSource.count {
-            cell.accessibilityIdentifier = localizationKeysDataSource[index]
-        }
-        
 //        cell.titleLabel.textColor = textColor
 //        cell.titleLabel.font = textFont
 //        cell.selectedBackgroundColor = selectionBackgroundColor
@@ -1124,24 +951,8 @@ extension DropDown: UITableViewDelegate {
 
 // MARK: - Auto dismiss
 extension DropDown {
-
-    /// 주어진 포인트에서 터치 이벤트를 처리할 가장 적절한 서브뷰를 반환하는 메서드
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let view = super.hitTest(point, with: event)  // 터치된 위치에 해당하는 뷰를 가져옴
-
-        // 터치된 뷰가 dismissableView이며, dismisMode가 .automatic인지 체크
-        if dismissMode == .automatic && view === dismissableView {
-            cancel()
-            return nil
-            
-        } else {
-            return view
-        }
-    }
-
     @objc
     func dismissableViewTapped() {
         cancel()
     }
-
 }

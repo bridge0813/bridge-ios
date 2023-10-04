@@ -109,9 +109,7 @@ final class MainViewController: BaseViewController {
     
     private func setDropdown() {
         dropDown.anchorView = goToNotificationButton // 이 뷰 아래에 드롭다운을 표시
-        dropDown.direction = .bottom
         dropDown.dismissMode = .onTap
-        dropDown.width = 91
         dropDown.selectionAction = { [weak self] _, text in
             self?.restrictionMenuTriggerView.restrictionTypeLabel.text = text
         }
