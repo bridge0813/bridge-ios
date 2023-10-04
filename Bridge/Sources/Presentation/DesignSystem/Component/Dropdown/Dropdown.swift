@@ -65,10 +65,6 @@ final class DropDown: UIView {
     static weak var VisibleDropDown: DropDown?
 
     // MARK: - UI
-    
-    /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능을 제공할 것으로 추정됨.
-    let dismissableView = UIView()
-    
     /// 테이블뷰를 포함하게 될 컨테이너 뷰
     let tableViewContainer = UIView()
     
@@ -293,10 +289,10 @@ final class DropDown: UIView {
         willSet {
             if newValue == .onTap {
                 let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissableViewTapped))
-                dismissableView.addGestureRecognizer(gestureRecognizer)
+                self.addGestureRecognizer(gestureRecognizer)
                 
-            } else if let gestureRecognizer = dismissableView.gestureRecognizers?.first {
-                dismissableView.removeGestureRecognizer(gestureRecognizer)
+            } else if let gestureRecognizer = self.gestureRecognizers?.first {
+                self.removeGestureRecognizer(gestureRecognizer)
             }
         }
     }
@@ -439,15 +435,9 @@ extension DropDown {
     func setupConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
 
-        // Dismissable view
-        addSubview(dismissableView)
-        dismissableView.translatesAutoresizingMaskIntoConstraints = false
-
-        // dismissableView가 드롭다운 뷰의 양쪽 가장자리에 맞춰지도록
-        addUniversalConstraints(format: "|[dismissableView]|", views: ["dismissableView": dismissableView])
-
         // Table view container
         addSubview(tableViewContainer)
+        tableViewContainer.backgroundColor = BridgeColor.primary1
         tableViewContainer.translatesAutoresizingMaskIntoConstraints = false
 
         xConstraint = NSLayoutConstraint(
