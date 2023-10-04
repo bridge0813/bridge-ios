@@ -7,23 +7,23 @@
 
 import UIKit
 
-public typealias Index = Int
-public typealias Closure = () -> Void
+typealias Index = Int
+typealias Closure = () -> Void
 
 /// 사용자가 드롭다운 항목을 선택했을 때, 호출되는 클로저를 의미. 선택된 항목의 인덱스와 문자열 값을 받음.
-public typealias SelectionClosure = (Index, String) -> Void
+typealias SelectionClosure = (Index, String) -> Void
 
 /// 사용자가 여러 드롭다운 항목을 선택했을 때, 호출되는 클로저를 의미.
-public typealias MultiSelectionClosure = ([Index], [String]) -> Void
+typealias MultiSelectionClosure = ([Index], [String]) -> Void
 
 /// 각 항목을 구성할 때, 사용되는 클로저로, 항목의 인덱스와 기본 문자열을 받아 수정된 문자열을 반환
-public typealias ConfigurationClosure = (Index, String) -> String
+typealias ConfigurationClosure = (Index, String) -> String
 
 /// 드롭다운 항목의 셀을 구성할 때 사용되는 클로저.
-public typealias CellConfigurationClosure = (Index, String, UITableViewCell) -> Void
+typealias CellConfigurationClosure = (Index, String, UITableViewCell) -> Void
 
 /// 화면상에서 드롭다운의 레이아웃을 계산할 때, 사용될 것으로 보이는 튜플. x, y좌표와 넓이, 그리고 화면 바깥 영역의 높이 값을 포함.
-private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
+typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
 
 protocol AnchorView: AnyObject {
@@ -34,14 +34,13 @@ protocol AnchorView: AnyObject {
 extension UIView: AnchorView {
 
     // UIView 인스턴스 자체가 드롭다운의 앵커(고정점)로 사용된다.
-    public var plainView: UIView {
+    var plainView: UIView {
         return self
     }
 }
 
 extension UIBarButtonItem: AnchorView {
-
-    public var plainView: UIView {
+    var plainView: UIView {
         return value(forKey: "view") as? UIView ?? UIView()
     }
 }
@@ -49,7 +48,7 @@ extension UIBarButtonItem: AnchorView {
 final class DropDown: UIView {
     
     /// 드롭다운이 어떻게 닫힐지 결정하는 모드.
-    public enum DismissMode {
+    enum DismissMode {
         
         /// A tap outside the drop down is required to dismiss.
         case onTap
@@ -62,7 +61,7 @@ final class DropDown: UIView {
     }
     
     /// 드롭다운이 어느 방향으로 나타날지를 결정하는 방향을 정의.
-    public enum Direction {
+    enum Direction {
         
         /// The drop down will show below the anchor view when possible, otherwise above if there is more place than below.
         case any
@@ -75,8 +74,6 @@ final class DropDown: UIView {
     }
     
     // MARK: - Properties
-
-    
     /// 현재 화면에 표시되고 있는 Dropdown 인스턴스를 참조하는 프로퍼티로 현재 활성화된 드롭다운을 추적한다.
     static weak var VisibleDropDown: DropDown?
 
@@ -136,29 +133,26 @@ final class DropDown: UIView {
     }
 
     /// 드롭다운이 anchorView 아래에 표시될 때 적용되는 상대적인 오프셋을 나타낸다.
-    public var bottomOffset: CGPoint = .zero {
+    var bottomOffset: CGPoint = .zero {
         didSet { setNeedsUpdateConstraints() }
     }
 
     /// 드롭다운이 anchorView 아래에 표시되고, 키보드가 숨겨져 있을 때, 적용되는 윈도우 하단으로부터의 오프셋을 나타낸다.
-    public var offsetFromWindowBottom = CGFloat(0) {
+    var offsetFromWindowBottom = CGFloat(0) {
         didSet { setNeedsUpdateConstraints() }
     }
-    
-    
-    
     
     /// 드롭다운의 width를 나타낸다.
     /// 기본값은 'anchorView.bounds.width - offset.x' 로 anchorView의 너비에서 x오프셋을 뺀 값.
     /// width의 값이 변경될 때마다 레이아웃의 제약조건을 업데이트하도록 요청한다.
-    public var width: CGFloat? {
+    var width: CGFloat? {
         didSet { setNeedsUpdateConstraints() }
     }
 
     /// 드롭다운 화살표의 x 위치를 결정한다.
     /// arrowIndicationX 값이 주어진 경우, 'arrowIndication' 이미지뷰가 'tableViewContainer' 에 추가되며,
     /// arrowIndication의 x 위치는 arrowIndicationX 값으로 설정된다.
-    public var arrowIndicationX: CGFloat? {
+    var arrowIndicationX: CGFloat? {
         didSet {
             if let arrowIndicationX = arrowIndicationX {
                 tableViewContainer.addSubview(arrowIndication)
@@ -259,7 +253,7 @@ final class DropDown: UIView {
     }
 
     /// 그림자의 radius. 그림자가 퍼져나가는 정도를 결정
-    @objc public dynamic var shadowRadius = DropdownConstant.DropdownUI.shadowRadius {
+    @objc dynamic var shadowRadius = DropdownConstant.DropdownUI.shadowRadius {
         willSet { tableViewContainer.layer.shadowRadius = newValue }
         didSet { reloadAllComponents() }
     }
@@ -366,6 +360,7 @@ final class DropDown: UIView {
             if newValue == .onTap {
                 let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissableViewTapped))
                 dismissableView.addGestureRecognizer(gestureRecognizer)
+                
             } else if let gestureRecognizer = dismissableView.gestureRecognizers?.first {
                 dismissableView.removeGestureRecognizer(gestureRecognizer)
             }
@@ -677,7 +672,7 @@ extension DropDown {
     }
     
     /// 아래 방향으로 표시되는 드롭다운의 x, y, width, offscreenHeight
-    fileprivate func computeLayoutBottomDisplay(window: UIWindow) -> ComputeLayoutTuple {
+    func computeLayoutBottomDisplay(window: UIWindow) -> ComputeLayoutTuple {
         var offscreenHeight: CGFloat = 0  // 드롭다운의 일부가 화면 밖에 나가는 높이
         
         // 만약 드롭다운의 width가 설정되어 있다면 그 값을 사용하고,
@@ -709,7 +704,7 @@ extension DropDown {
     }
     
     /// 위 방향으로 표시되는 드롭다운의 x, y, width, offscreenHeight
-    fileprivate func computeLayoutForTopDisplay(window: UIWindow) -> ComputeLayoutTuple {
+    func computeLayoutForTopDisplay(window: UIWindow) -> ComputeLayoutTuple {
         var offscreenHeight: CGFloat = 0
 
         let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? 0
@@ -759,7 +754,7 @@ extension DropDown {
     }
     
     /// 드롭다운의 width가 화면 밖으로 넘어서지 않도록
-    fileprivate func constraintWidthToBoundsIfNecessary(layout: inout ComputeLayoutTuple, in window: UIWindow) {
+    func constraintWidthToBoundsIfNecessary(layout: inout ComputeLayoutTuple, in window: UIWindow) {
         let windowMaxX = window.bounds.maxX  // 화면의 오른쪽 가장자리의 x좌표 값
         let maxX = layout.x + layout.width   // 드롭다운의 오른쪽 가장자리의 x좌표 값
         
@@ -780,7 +775,7 @@ extension DropDown {
     }
     
     /// 드롭다운의 width가 컨텐츠에 맞게 적합한 width를 가지도록
-    fileprivate func constraintWidthToFittingSizeIfNecessary(layout: inout ComputeLayoutTuple) {
+    func constraintWidthToFittingSizeIfNecessary(layout: inout ComputeLayoutTuple) {
         guard width == nil else { return }  // 이미 width가 설정되어있다면 함수종료
         
         if layout.width < fittingWidth() {
@@ -813,7 +808,7 @@ extension DropDown {
     - returns: Wether it succeed and how much height is needed to display all cells at once.
     */
     @discardableResult
-    public func show(
+    func show(
         onTopOf window: UIWindow? = nil,
         beforeTransform transform: CGAffineTransform? = nil,
         anchorPoint: CGPoint? = nil
@@ -895,7 +890,7 @@ extension DropDown {
     }
     
     /// 드롭다운을 숨길 때 사용되는 메서드
-    public func hide() {
+    func hide() {
         
         // 현재 드롭다운이 화면에 보이는 드롭다운과 동일한지 체크
         // 화면에 보이는 드롭다운이 hide되고, 다른 드롭다운을 표시하려 할 때, 어떤 드롭다운이 화면에 보여져야 하는지 정확하게 체크하기 위해.
@@ -931,18 +926,18 @@ extension DropDown {
     }
     
     /// 드롭다운을 숨기는 hide()와 cancelAction을 호출.
-    fileprivate func cancel() {
+    func cancel() {
         hide()
         cancelAction?()
     }
 
     /// 드롭다운의 alpha값을 0으로 만듬
-    fileprivate func setHiddentState() {
+    func setHiddentState() {
         alpha = 0
     }
 
     /// 드롭다운의 alpha값을 1로 설정하고, tableViewContainer의 transform을 .identity로 원상복귀
-    fileprivate func setShowedState() {
+    func setShowedState() {
         alpha = 1
         tableViewContainer.transform = .identity
     }
@@ -952,7 +947,7 @@ extension DropDown {
 extension DropDown {
 
     /// 모든 셀을 다시 로드하는 메서드로 'dataSource', 'textColor', 'textFont', 'selectionBackgroundColor' and 'cellConfiguration' 에 대한 변경 사항이 있을 때마다 호출된다.
-    public func reloadAllComponents() {
+    func reloadAllComponents() {
         DispatchQueue.executeOnMainThread {
             self.tableView.reloadData()
             self.setNeedsUpdateConstraints()
@@ -961,7 +956,7 @@ extension DropDown {
     
     /// 해당 인덱스에 대해 선택처리 후, selectedRowIndices에 추가한다.
     /// 반면에 선택된 인덱스가 없다면, 선택된 모든 행들에 선택해제 처리 후, 선택된 인덱스 요소 모두 제거
-    public func selectRow(at index: Index?, scrollPosition: UITableView.ScrollPosition = .none) {
+    func selectRow(at index: Index?, scrollPosition: UITableView.ScrollPosition = .none) {
         if let index = index {
             // 해당 인덱스에 있는 Cell을 선택
             tableView.selectRow(
@@ -977,7 +972,7 @@ extension DropDown {
     }
     
     /// 선택된 모든 index에 대해 선택처리
-    public func selectRows(at indices: Set<Index>?) {
+    func selectRows(at indices: Set<Index>?) {
         indices?.forEach {
             selectRow(at: $0)
         }
@@ -989,7 +984,7 @@ extension DropDown {
     }
     
     /// 해당 인덱스에 대해 선택 해제 처리
-    public func deselectRow(at index: Index?) {
+    func deselectRow(at index: Index?) {
         guard let index = index, index >= 0 else { return }
         
         // remove from indices
@@ -1001,26 +996,26 @@ extension DropDown {
     }
     
     /// 전달받은 indices에 저장된 모든 인덱스에 대해 선택해제 처리
-    public func deselectRows(at indices: Set<Index>?) {
+    func deselectRows(at indices: Set<Index>?) {
         indices?.forEach {
             deselectRow(at: $0)
         }
     }
     
     /// 현재 tableView에서 선택된 Cell의 인덱스를 반환
-    public var indexForSelectedRow: Index? {
+    var indexForSelectedRow: Index? {
         return tableView.indexPathForSelectedRow?.row
     }
     
     /// 현재 선택된 항목의 값을 반환
-    public var selectedItem: String? {
+    var selectedItem: String? {
         guard let row = tableView.indexPathForSelectedRow?.row else { return nil }
 
         return dataSource[row]
     }
     
     /// dataSource에 있는 모든 아이템들을 보여주기 위한 TableView의 높이
-    fileprivate var tableHeight: CGFloat {
+    var tableHeight: CGFloat {
         return tableView.rowHeight * CGFloat(dataSource.count)
     }
 }
