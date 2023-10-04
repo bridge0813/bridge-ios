@@ -50,7 +50,6 @@ final class MainViewController: BaseViewController {
     private let applyButton = BridgeButton("지원하기", style: .apply)
     private let detailButton = BridgeButton("프로젝트 상세", style: .detail)
     private let sendMessageButton = BrideSendMessageButton()
-    private let nextButton = NextButton()
     
     private let recruiterDecisionMenuView = BrideMediumButtonGroup(("채팅하기", "수락하기", "거절하기"))
     private let recruiterMenuView = BrideSmallButtonGroup(("지원자 목록", "프로젝트 상세"))

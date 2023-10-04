@@ -100,7 +100,6 @@
 		7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */; };
 		7C40CBA12AC3E595000F4C9F /* BrideTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA02AC3E595000F4C9F /* BrideTechTagButton.swift */; };
 		7C40CBA32AC3E5A8000F4C9F /* BrideOutlinedTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA22AC3E5A8000F4C9F /* BrideOutlinedTechTagButton.swift */; };
-		7C40CBB52AC54D3E000F4C9F /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBB42AC54D3E000F4C9F /* NextButton.swift */; };
 		7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */; };
 		7C40CBC22AC5C2BF000F4C9F /* BrideMediumButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBC12AC5C2BF000F4C9F /* BrideMediumButtonGroup.swift */; };
 		7C40CBC82AC69447000F4C9F /* BrideSmallButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBC72AC69447000F4C9F /* BrideSmallButtonGroup.swift */; };
@@ -224,7 +223,6 @@
 		7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDataStorage.swift; sourceTree = "<group>"; };
 		7C40CBA02AC3E595000F4C9F /* BrideTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideTechTagButton.swift; sourceTree = "<group>"; };
 		7C40CBA22AC3E5A8000F4C9F /* BrideOutlinedTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideOutlinedTechTagButton.swift; sourceTree = "<group>"; };
-		7C40CBB42AC54D3E000F4C9F /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeButton.swift; sourceTree = "<group>"; };
 		7C40CBC12AC5C2BF000F4C9F /* BrideMediumButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideMediumButtonGroup.swift; sourceTree = "<group>"; };
 		7C40CBC72AC69447000F4C9F /* BrideSmallButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideSmallButtonGroup.swift; sourceTree = "<group>"; };
@@ -781,7 +779,6 @@
 				7C1366382AC16C4D00EB415D /* BrideRemoveButton.swift */,
 				7C24003C2AB34BFA00D9D5F1 /* BrideFieldTagButton.swift */,
 				7C1366412AC27F9100EB415D /* BrideSendMessageButton.swift */,
-				7C40CBB42AC54D3E000F4C9F /* NextButton.swift */,
 				7C40CBA02AC3E595000F4C9F /* BrideTechTagButton.swift */,
 				7C40CBA22AC3E5A8000F4C9F /* BrideOutlinedTechTagButton.swift */,
 				7C40CBC92AC6B597000F4C9F /* BrideCreateProjectButton.swift */,
@@ -1107,7 +1104,6 @@
 				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
 				7C40CBA32AC3E5A8000F4C9F /* BrideOutlinedTechTagButton.swift in Sources */,
-				7C40CBB52AC54D3E000F4C9F /* NextButton.swift in Sources */,
 				7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
 				7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */,
