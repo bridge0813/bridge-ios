@@ -16,7 +16,7 @@ final class SetFieldViewController: BaseViewController {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "당신의 관심 프로젝트는\n어떤 분야인가요?"
+        label.configureTextWithLineHeight(text: "당신의 관심 프로젝트는\n어떤 분야인가요?", lineHeight: 30)
         label.font = BridgeFont.headline1Long.font
         label.textColor = BridgeColor.gray1
         label.numberOfLines = 0
@@ -86,7 +86,6 @@ final class SetFieldViewController: BaseViewController {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false  // 밀어서 뒤로가기 제한
     }
     
-    // MARK: - description label line height
     override func configureLayouts() {
         view.addSubview(rootFlexViewContainer)
         
