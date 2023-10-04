@@ -87,21 +87,23 @@ final class BridgeAlertViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
-        rootFlexContainer.flex.direction(.column).justifyContent(.center).alignItems(.center).define { flex in
+        rootFlexContainer.flex.justifyContent(.center).alignItems(.center).define { flex in
+            flex.addItem().grow(1)  // spacer
+            
             flex.addItem(imageView).size(100)
             
             flex.addItem()
-                .direction(.column)
                 .alignItems(.center)
                 .justifyContent(.center)
                 .marginTop(10)
-                .marginBottom(40)
                 .define { flex in
                     flex.addItem(titleLabel).marginBottom(4)
                     flex.addItem(descriptionLabel)
                 }
             
-            flex.addItem().direction(.row).alignItems(.center).define { flex in
+            flex.addItem().grow(1)  // spacer
+            
+            flex.addItem().direction(.row).alignItems(.center).marginBottom(31).define { flex in
                 flex.addItem(leftButton).width(123.5).height(44).marginRight(12)
                 flex.addItem(rightButton).width(123.5).height(44)
             }

@@ -35,7 +35,7 @@ final class SignInViewController: BaseViewController {
         configuration.imagePlacement = .leading
         return UIButton(configuration: configuration)
     }()
-
+    
     private let viewModel: SignInViewModel
     
     init(viewModel: SignInViewModel) {
@@ -56,9 +56,12 @@ final class SignInViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexViewContainer)
         
-        rootFlexViewContainer.flex.direction(.column).justifyContent(.center).alignItems(.center).define { flex in
-            flex.addItem(signInWithAppleButton).width(343).height(45)
-        }
+        rootFlexViewContainer.flex
+            .justifyContent(.center)
+            .paddingHorizontal(16)
+            .define { flex in
+                flex.addItem(signInWithAppleButton).height(45)
+            }
     }
     
     override func viewDidLayoutSubviews() {
