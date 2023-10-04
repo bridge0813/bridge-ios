@@ -39,21 +39,9 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
-    private let tagButton = TagButton("Java")
-    private let outlinedTagButton = OutlinedTagButton("Swift")
-    
-    private let bookmarkButton = BookmarkButton()
-    private let removeButton = RemoveButton()
-    private let fieldTagButton = FieldTagButton("프론트엔드")
-    private let confirmButton = BridgeButton("보러가기", style: .confirm)
-    private let cancelButton = BridgeButton("그만두기", style: .cancel)
-    private let applyButton = BridgeButton("지원하기", style: .apply)
-    private let detailButton = BridgeButton("프로젝트 상세", style: .detail)
-    private let sendMessageButton = SendMessageButton()
-    private let nextButton = NextButton()
-    
-    private let recruiterDecisionMenuView = MediumButtonGroup(("채팅하기", "수락하기", "거절하기"))
-    private let recruiterMenuView = SmallButtonGroup(("지원자 목록", "프로젝트 상세"))
+   
+    let restrictionMenuTriggerView = RestrictionMenuTriggerView()
+    let dropDown = DropDown()
     
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -90,6 +78,12 @@ final class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = BridgeColor.gray3
+        setDropdown()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showDropDown))
+        restrictionMenuTriggerView.addGestureRecognizer(tapGesture)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,6 +98,37 @@ final class MainViewController: BaseViewController {
     }
     
     // MARK: - Methods
+    
+    @objc func showDropDown() {
+        
+        dropDown.show()
+    }
+    
+    private func setDropdown() {
+        dropDown.anchorView = restrictionMenuTriggerView // 이 뷰 아래에 드롭다운을 표시
+        dropDown.direction = .bottom
+        dropDown.dismissMode = .onTap
+        dropDown.cornerRadius = 8
+        dropDown.selectionAction = { [weak self] index, text in
+            self?.restrictionMenuTriggerView.restrictionTypeLabel.text = text
+        }
+        
+        dropDown.willShowAction = { [weak self] in
+            self?.restrictionMenuTriggerView.layer.borderColor = BridgeColor.primary1.cgColor
+            self?.restrictionMenuTriggerView.layer.borderWidth = 1
+            self?.restrictionMenuTriggerView.arrowButton.isSelected = true
+        }
+        
+        dropDown.cancelAction = { [weak self] in
+            self?.restrictionMenuTriggerView.layer.borderWidth = 0
+            self?.restrictionMenuTriggerView.arrowButton.isSelected = false
+        }
+        
+        dropDown.dataSource = ["학생", "현직자", "취준생"]
+        dropDown.cellHeight = 42
+        dropDown.bottomOffset = CGPoint(x: 0, y: 10)
+    }
+    
     private func configureNavigationUI() {
         navigationItem.titleView = NavigationTitleView(title: "Bridge")  // 임의설정
         navigationItem.rightBarButtonItem = goToNotificationButton
@@ -115,32 +140,10 @@ final class MainViewController: BaseViewController {
         
         rootFlexContainer.flex.direction(.column).define { flex in
             // 테스트용
-//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-//                flex.addItem(tagButton).marginLeft(15)
-//                flex.addItem(outlinedTagButton).marginLeft(15)
-//            }
-//
-//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-//                flex.addItem(bookmarkButton).width(54).height(52).marginLeft(15)
-//                flex.addItem(removeButton).width(38).height(38).marginLeft(15)
-//                flex.addItem(fieldTagButton).marginLeft(15)
-//                flex.addItem(sendMessageButton).width(38).height(38).marginLeft(15)
-//            }
-//
-//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-//                flex.addItem(confirmButton).width(123.5).height(44).marginLeft(15)
-//                flex.addItem(cancelButton).width(123.5).height(44).marginLeft(15)
-//            }
-//
-//            flex.addItem().height(70).direction(.row).alignItems(.center).define { flex in
-//                flex.addItem(nextButton).width(343).height(52).marginLeft(10)
-//            }
-//
-//            flex.addItem(applyButton).width(277).height(52).marginTop(20).marginLeft(10)
-//            flex.addItem(detailButton).width(307).height(44).marginTop(20).marginLeft(10)
-//            flex.addItem(recruiterDecisionMenuView).width(307).height(48).marginTop(20).marginLeft(10)
-//            flex.addItem(recruiterMenuView).width(307).height(44).marginTop(20).marginLeft(10)
-//
+            flex.addItem().height(300).direction(.row).alignItems(.center).define { flex in
+                flex.addItem(restrictionMenuTriggerView).width(343).height(52).marginLeft(30)
+            }
+            
             /// 컬렉션 뷰
             flex.addItem(projectCollectionView).grow(1).marginTop(20)
             
