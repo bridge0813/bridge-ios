@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import PinLayout
 import FlexLayout
+import PinLayout
 
 final class BridgeTipMessageBox: BridgeMessageBox {
     
