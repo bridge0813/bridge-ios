@@ -23,8 +23,8 @@ final class BrideSmallButtonGroup: BaseView {
     }()
     
     init(_ titles: (String, String)) {
-        leftButton = BridgeButton(titles.0, style: .confirm)
-        rightButton = BridgeButton(titles.1, style: .confirm)
+        leftButton = BridgeButton(titles.0, titleFont: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
+        rightButton = BridgeButton(titles.1, titleFont: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
         
         super.init(frame: .zero)
     }

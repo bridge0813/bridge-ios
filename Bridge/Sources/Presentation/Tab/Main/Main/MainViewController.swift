@@ -45,10 +45,7 @@ final class MainViewController: BaseViewController {
     private let bookmarkButton = BrideBookmarkButton()
     private let removeButton = BrideRemoveButton()
     private let fieldTagButton = BrideFieldTagButton("프론트엔드")
-    private let confirmButton = BridgeButton("보러가기", style: .confirm)
-    private let cancelButton = BridgeButton("그만두기", style: .cancel)
-    private let applyButton = BridgeButton("지원하기", style: .apply)
-    private let detailButton = BridgeButton("프로젝트 상세", style: .detail)
+    private let confirmButton = BridgeButton("보러가기", titleFont: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
     private let sendMessageButton = BrideSendMessageButton()
     
     private let recruiterDecisionMenuView = BrideMediumButtonGroup(("채팅하기", "수락하기", "거절하기"))

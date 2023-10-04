@@ -44,8 +44,8 @@ final class BridgeAlertViewController: BaseViewController {
         return label
     }()
     
-    private lazy var leftButton = BridgeButton("", style: .cancel)
-    private lazy var rightButton = BridgeButton("", style: .confirm)
+    private lazy var leftButton = BridgeButton("", titleFont: BridgeFont.button2.font, backgroundColor: BridgeColor.gray4)
+    private lazy var rightButton = BridgeButton("", titleFont: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
     
     private var primaryAction: PrimaryActionClosure?
     
