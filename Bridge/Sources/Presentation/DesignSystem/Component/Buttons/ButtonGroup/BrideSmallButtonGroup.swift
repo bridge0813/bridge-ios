@@ -1,5 +1,5 @@
 //
-//  SmallButtonGroup.swift
+//  BrideSmallButtonGroup.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/29.
@@ -10,7 +10,7 @@ import FlexLayout
 import PinLayout
 
 // 2개의 버튼이 붙어있는 뷰
-final class SmallButtonGroup: BaseView {
+final class BrideSmallButtonGroup: BaseView {
     private let rootFlexContainer = UIView()
     
     let leftButton: BridgeButton

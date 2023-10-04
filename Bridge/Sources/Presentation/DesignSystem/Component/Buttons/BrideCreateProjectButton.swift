@@ -1,5 +1,5 @@
 //
-//  CreateProjectButton.swift
+//  BrideCreateProjectButton.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/29.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CreateProjectButton: BaseButton {
+final class BrideCreateProjectButton: BaseButton {
     override func configureAttributes() {
         let buttonImage = UIImage(named: "plus")?
             .resize(to: CGSize(width: 22, height: 22))

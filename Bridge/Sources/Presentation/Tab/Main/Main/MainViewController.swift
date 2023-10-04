@@ -39,21 +39,21 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
-    private let tagButton = TagButton("Java")
-    private let outlinedTagButton = OutlinedTagButton("Swift")
+    private let tagButton = BrideTechTagButton("Java")
+    private let outlinedTagButton = BrideOutlinedTechTagButton("Swift")
     
-    private let bookmarkButton = BookmarkButton()
-    private let removeButton = RemoveButton()
-    private let fieldTagButton = FieldTagButton("프론트엔드")
+    private let bookmarkButton = BrideBookmarkButton()
+    private let removeButton = BrideRemoveButton()
+    private let fieldTagButton = BrideFieldTagButton("프론트엔드")
     private let confirmButton = BridgeButton("보러가기", style: .confirm)
     private let cancelButton = BridgeButton("그만두기", style: .cancel)
     private let applyButton = BridgeButton("지원하기", style: .apply)
     private let detailButton = BridgeButton("프로젝트 상세", style: .detail)
-    private let sendMessageButton = SendMessageButton()
+    private let sendMessageButton = BrideSendMessageButton()
     private let nextButton = NextButton()
     
-    private let recruiterDecisionMenuView = MediumButtonGroup(("채팅하기", "수락하기", "거절하기"))
-    private let recruiterMenuView = SmallButtonGroup(("지원자 목록", "프로젝트 상세"))
+    private let recruiterDecisionMenuView = BrideMediumButtonGroup(("채팅하기", "수락하기", "거절하기"))
+    private let recruiterMenuView = BrideSmallButtonGroup(("지원자 목록", "프로젝트 상세"))
     
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -72,7 +72,7 @@ final class MainViewController: BaseViewController {
         return searchBar
     }()
     
-    private let createProjectButton = CreateProjectButton()
+    private let createProjectButton = BrideCreateProjectButton()
     
     private let viewModel: MainViewModel
     

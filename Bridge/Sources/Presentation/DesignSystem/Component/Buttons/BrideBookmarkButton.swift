@@ -1,5 +1,5 @@
 //
-//  BookmarkButton.swift
+//  BrideBookmarkButton.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BookmarkButton: BaseButton {
+final class BrideBookmarkButton: BaseButton {
     override func configureAttributes() {
         let buttonImage = UIImage(named: "bookmark.fill")?
             .resize(to: CGSize(width: 24, height: 24))

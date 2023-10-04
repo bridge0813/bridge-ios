@@ -1,5 +1,5 @@
 //
-//  TagButton.swift
+//  BrideTechTagButton.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/26.
@@ -8,7 +8,7 @@
 import UIKit
 
 // 디자인시스템에서 Tag 영역에 있는 버튼(Fill 버전)
-final class TagButton: BaseButton {
+final class BrideTechTagButton: BaseButton {
     
     private var title: String
     

@@ -1,5 +1,5 @@
 //
-//  RemoveButton.swift
+//  BrideRemoveButton.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RemoveButton: BaseButton {
+final class BrideRemoveButton: BaseButton {
     override func configureAttributes() {
         let buttonImage = UIImage(named: "delete")?
             .resize(to: CGSize(width: 24, height: 24))
