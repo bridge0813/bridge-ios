@@ -108,7 +108,6 @@ final class MainViewController: BaseViewController {
         dropDown.anchorView = restrictionMenuTriggerView // 이 뷰 아래에 드롭다운을 표시
         dropDown.direction = .bottom
         dropDown.dismissMode = .onTap
-        dropDown.cornerRadius = 8
         dropDown.selectionAction = { [weak self] index, text in
             self?.restrictionMenuTriggerView.restrictionTypeLabel.text = text
         }
@@ -125,7 +124,6 @@ final class MainViewController: BaseViewController {
         }
         
         dropDown.dataSource = ["학생", "현직자", "취준생"]
-        dropDown.cellHeight = 42
         dropDown.bottomOffset = CGPoint(x: 0, y: 10)
     }
     

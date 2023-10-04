@@ -180,12 +180,12 @@ final class DropDown: UIView {
     // MARK: - Appearance
     
     /// 기본값은 'DPDConstant.UI.RowHeight' 이며, 새 값을 지정하면 해당 값으로 설정되며, 새 값이 설정된 후에 드롭다운의 모든 컴포넌트를 다시 로드.
-    @objc dynamic var cellHeight = DPDConstant.UI.RowHeight {
+    @objc dynamic var cellHeight = DropdownConstant.DropdownUI.rowHeight {
         willSet { tableView.rowHeight = newValue }
         didSet { reloadAllComponents() }
     }
 
-    @objc dynamic var tableViewBackgroundColor = DPDConstant.UI.BackgroundColor {
+    @objc dynamic var tableViewBackgroundColor = DropdownConstant.DropdownUI.backgroundColor {
         willSet {
             tableView.backgroundColor = newValue
             if arrowIndicationX != nil { arrowIndication.tintColor = newValue }
@@ -203,10 +203,10 @@ final class DropDown: UIView {
     }
 
     /// 드롭다운 내에서 선택된 셀의 배경색을 나타낸다.
-    @objc dynamic var selectionBackgroundColor = DPDConstant.UI.SelectionBackgroundColor
+    @objc dynamic var selectionBackgroundColor = DropdownConstant.DropdownItem.selectedBackgroundColor
 
     /// 드롭다운 내의 셀들 사이의 구분선 색상을 나타낸다.
-    @objc dynamic var separatorColor = DPDConstant.UI.SeparatorColor {
+    @objc dynamic var separatorColor = DropdownConstant.DropdownUI.separatorColor {
         willSet { tableView.separatorColor = newValue }
         didSet { reloadAllComponents() }
     }
@@ -215,7 +215,7 @@ final class DropDown: UIView {
     // MARK: - Radius
     /// 드롭다운의 cornerRadius
     @objc
-    dynamic var cornerRadius = DPDConstant.UI.CornerRadius {
+    dynamic var cornerRadius = DropdownConstant.DropdownUI.cornerRadius {
         willSet {
             tableViewContainer.layer.cornerRadius = newValue
             tableView.layer.cornerRadius = newValue
@@ -241,62 +241,62 @@ final class DropDown: UIView {
     
     // MARK: - 그림자
     /// 드롭다운의 그림자 색상
-    @objc dynamic var shadowColor = DPDConstant.UI.Shadow.Color {
+    @objc dynamic var shadowColor = DropdownConstant.DropdownUI.shadowColor {
         willSet { tableViewContainer.layer.shadowColor = newValue.cgColor }
         didSet { reloadAllComponents() }
     }
 
     /// 드롭다운의 그림자가 그려지는 위치의 x와 y 방향의 오프셋을 결정.
-    @objc dynamic var shadowOffset = DPDConstant.UI.Shadow.Offset {
+    @objc dynamic var shadowOffset = DropdownConstant.DropdownUI.shadowOffset {
         willSet { tableViewContainer.layer.shadowOffset = newValue }
         didSet { reloadAllComponents() }
     }
 
     /// 그림자의 투명도
-    @objc dynamic var shadowOpacity = DPDConstant.UI.Shadow.Opacity {
+    @objc dynamic var shadowOpacity = DropdownConstant.DropdownUI.shadowOpacity {
         willSet { tableViewContainer.layer.shadowOpacity = newValue }
         didSet { reloadAllComponents() }
     }
 
     /// 그림자의 radius. 그림자가 퍼져나가는 정도를 결정
-    @objc public dynamic var shadowRadius = DPDConstant.UI.Shadow.Radius {
+    @objc public dynamic var shadowRadius = DropdownConstant.DropdownUI.shadowRadius {
         willSet { tableViewContainer.layer.shadowRadius = newValue }
         didSet { reloadAllComponents() }
     }
     
     // MARK: - 애니메이션
     /// 드롭다운을 보이거나 숨길 때, 애니메이션의 지속 시간
-    @objc dynamic var animationduration = DPDConstant.Animation.Duration
+    @objc dynamic var animationduration = DropdownConstant.Animation.duration
 
     /// 드롭다운이 나타날 때의 애니메이션 옵션 전역 변수
-    static var animationEntranceOptions = DPDConstant.Animation.EntranceOptions
+    static var animationEntranceOptions = DropdownConstant.Animation.entranceOptions
     
     /// 드롭다운이 사라질 때의 애니메이션 옵션 전역 변수
-    static var animationExitOptions = DPDConstant.Animation.ExitOptions
+    static var animationExitOptions = DropdownConstant.Animation.exitOptions
     
     var animationEntranceOptions: UIView.AnimationOptions = DropDown.animationEntranceOptions
     var animationExitOptions: UIView.AnimationOptions = DropDown.animationExitOptions
     
     /// 드롭다운이 나타나는 동안 tableViewContainer에 적용되는 변형을 나타낸다.
     /// 예를들어, 드롭다운이 나타나는 동안 테이블 뷰가 원래 크기의 90%로 축소되는 애니메이션 효과를 주고 싶다면 0.9, 0.9가 될 것이다.
-    var downScaleTransform = DPDConstant.Animation.DownScaleTransform {
+    var downScaleTransform = DropdownConstant.Animation.downScaleTransform {
         willSet { tableViewContainer.transform = newValue }
     }
 
     // MARK: - 텍스트 스타일
     
     /// 드롭다운의 각 셀에 표시되는 텍스트의 색상을 나타낸다.
-    @objc dynamic var textColor = DPDConstant.UI.TextColor {
+    @objc dynamic var textColor = DropdownConstant.DropdownItem.textColor {
         didSet { reloadAllComponents() }
     }
 
     /// 드롭다운의 선택된 셀의 텍스트 색상을 나타낸다.
-    @objc dynamic var selectedTextColor = DPDConstant.UI.SelectedTextColor {
+    @objc dynamic var selectedTextColor = DropdownConstant.DropdownItem.selectedTextColor {
         didSet { reloadAllComponents() }
     }
     
     /// 드롭다운의 각 셀에 표시되는 텍스트의 폰트를 나타낸다.
-    @objc dynamic var textFont = DPDConstant.UI.TextFont {
+    @objc dynamic var textFont = DropdownConstant.DropdownItem.textFont {
         didSet { reloadAllComponents() }
     }
     
@@ -304,7 +304,7 @@ final class DropDown: UIView {
     var customCellClass: UITableViewCell.Type? {
         didSet {
             if let cellType = customCellClass {
-                tableView.register(cellType, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
+                tableView.register(cellType, forCellReuseIdentifier: DropdownConstant.ReusableIdentifier.dropDownCell)
                 templateCell = nil
                 reloadAllComponents()
             }
@@ -718,7 +718,7 @@ extension DropDown {
         let x = anchorViewX + topOffset.x
         var y = (anchorViewMaxY + topOffset.y) - tableHeight
 
-        let windowY = window.bounds.minY + DPDConstant.UI.HeightPadding
+        let windowY = window.bounds.minY + DropdownConstant.DropdownUI.heightPadding
 
         if y < windowY {
             offscreenHeight = abs(y - windowY)
