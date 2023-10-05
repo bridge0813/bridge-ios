@@ -82,17 +82,26 @@
 		7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */; };
 		7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */; };
 		7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */; };
+		7C1366352AC15ECF00EB415D /* BookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366342AC15ECF00EB415D /* BookmarkButton.swift */; };
+		7C1366392AC16C4D00EB415D /* RemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366382AC16C4D00EB415D /* RemoveButton.swift */; };
+		7C1366422AC27F9100EB415D /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* SendMessageButton.swift */; };
 		7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */; };
 		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
 		7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */; };
 		7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */; };
 		7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */; };
 		7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */; };
+		7C24003D2AB34BFA00D9D5F1 /* FieldTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */; };
 		7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003F2AB4235800D9D5F1 /* UITextField+.swift */; };
 		7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */; };
 		7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */; };
+		7C40CBA12AC3E595000F4C9F /* TagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA02AC3E595000F4C9F /* TagButton.swift */; };
+		7C40CBA32AC3E5A8000F4C9F /* OutlinedTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */; };
+		7C40CBB52AC54D3E000F4C9F /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBB42AC54D3E000F4C9F /* NextButton.swift */; };
 		7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */; };
 		7C40CBC22AC5C2BF000F4C9F /* MediumButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBC12AC5C2BF000F4C9F /* MediumButtonGroup.swift */; };
+		7C40CBC82AC69447000F4C9F /* SmallButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBC72AC69447000F4C9F /* SmallButtonGroup.swift */; };
+		7C40CBCA2AC6B597000F4C9F /* CreateProjectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBC92AC6B597000F4C9F /* CreateProjectButton.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
 		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
@@ -111,11 +120,15 @@
 		7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D122AA1E7020063D362 /* ProjectSectionHeaderView.swift */; };
 		7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8639582AC28B4F00064588 /* BaseButton.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
+		7C8B822F2AC96CD600F7B889 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B822E2AC96CD600F7B889 /* Dropdown.swift */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
 		7C8B82382ACC2AF500F7B889 /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82372ACC2AF500F7B889 /* DispatchQueue+.swift */; };
+		7C8B823A2ACC480E00F7B889 /* MenuToggleArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82392ACC480E00F7B889 /* MenuToggleArrowButton.swift */; };
+		7C8B823C2ACC483D00F7B889 /* RestrictionMenuTriggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823B2ACC483D00F7B889 /* RestrictionMenuTriggerView.swift */; };
 		7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */; };
 		7C8B82402ACE91C500F7B889 /* ChatRoomMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823F2ACE91C500F7B889 /* ChatRoomMenuCell.swift */; };
+		7C8B82422ACE94FE00F7B889 /* DropdownBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82412ACE94FE00F7B889 /* DropdownBaseCell.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -199,17 +212,26 @@
 		7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageType.swift; sourceTree = "<group>"; };
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
+		7C1366342AC15ECF00EB415D /* BookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkButton.swift; sourceTree = "<group>"; };
+		7C1366382AC16C4D00EB415D /* RemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveButton.swift; sourceTree = "<group>"; };
+		7C1366412AC27F9100EB415D /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
 		7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
 		7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
 		7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewController.swift; sourceTree = "<group>"; };
 		7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRestrictionViewModel.swift; sourceTree = "<group>"; };
 		7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRestrictionViewController.swift; sourceTree = "<group>"; };
+		7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTagButton.swift; sourceTree = "<group>"; };
 		7C24003F2AB4235800D9D5F1 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRequirement.swift; sourceTree = "<group>"; };
 		7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDataStorage.swift; sourceTree = "<group>"; };
+		7C40CBA02AC3E595000F4C9F /* TagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagButton.swift; sourceTree = "<group>"; };
+		7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedTagButton.swift; sourceTree = "<group>"; };
+		7C40CBB42AC54D3E000F4C9F /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeButton.swift; sourceTree = "<group>"; };
 		7C40CBC12AC5C2BF000F4C9F /* MediumButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumButtonGroup.swift; sourceTree = "<group>"; };
+		7C40CBC72AC69447000F4C9F /* SmallButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallButtonGroup.swift; sourceTree = "<group>"; };
+		7C40CBC92AC6B597000F4C9F /* CreateProjectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectButton.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -228,11 +250,15 @@
 		7C569D122AA1E7020063D362 /* ProjectSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSectionHeaderView.swift; sourceTree = "<group>"; };
 		7C8639582AC28B4F00064588 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		7C8B822E2AC96CD600F7B889 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		7C8B82372ACC2AF500F7B889 /* DispatchQueue+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+.swift"; sourceTree = "<group>"; };
+		7C8B82392ACC480E00F7B889 /* MenuToggleArrowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuToggleArrowButton.swift; sourceTree = "<group>"; };
+		7C8B823B2ACC483D00F7B889 /* RestrictionMenuTriggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionMenuTriggerView.swift; sourceTree = "<group>"; };
 		7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorView.swift; sourceTree = "<group>"; };
 		7C8B823F2ACE91C500F7B889 /* ChatRoomMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMenuCell.swift; sourceTree = "<group>"; };
+		7C8B82412ACE94FE00F7B889 /* DropdownBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownBaseCell.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -753,6 +779,16 @@
 			isa = PBXGroup;
 			children = (
 				7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */,
+				7C1366342AC15ECF00EB415D /* BookmarkButton.swift */,
+				7C1366382AC16C4D00EB415D /* RemoveButton.swift */,
+				7C24003C2AB34BFA00D9D5F1 /* FieldTagButton.swift */,
+				7C1366412AC27F9100EB415D /* SendMessageButton.swift */,
+				7C40CBB42AC54D3E000F4C9F /* NextButton.swift */,
+				7C40CBA02AC3E595000F4C9F /* TagButton.swift */,
+				7C40CBA22AC3E5A8000F4C9F /* OutlinedTagButton.swift */,
+				7C40CBC92AC6B597000F4C9F /* CreateProjectButton.swift */,
+				7C8B82392ACC480E00F7B889 /* MenuToggleArrowButton.swift */,
+				7C8B823B2ACC483D00F7B889 /* RestrictionMenuTriggerView.swift */,
 				7C8B822C2AC8498C00F7B889 /* ButtonGroup */,
 			);
 			path = Buttons;
@@ -828,6 +864,7 @@
 		7C8B822C2AC8498C00F7B889 /* ButtonGroup */ = {
 			isa = PBXGroup;
 			children = (
+				7C40CBC72AC69447000F4C9F /* SmallButtonGroup.swift */,
 				7C40CBC12AC5C2BF000F4C9F /* MediumButtonGroup.swift */,
 			);
 			path = ButtonGroup;
@@ -838,6 +875,8 @@
 			children = (
 				7C8B82302AC97EE000F7B889 /* Helpers */,
 				7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */,
+				7C8B822E2AC96CD600F7B889 /* Dropdown.swift */,
+				7C8B82412ACE94FE00F7B889 /* DropdownBaseCell.swift */,
 				7C8B823F2ACE91C500F7B889 /* ChatRoomMenuCell.swift */,
 			);
 			path = Dropdown;
@@ -1071,6 +1110,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C42701A2AA377FE009BE6AF /* ProjectCollectionViewCell.swift in Sources */,
+				7C1366352AC15ECF00EB415D /* BookmarkButton.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* NavigationTitleView.swift in Sources */,
 				7BA36C9D2A9C5105000DAB02 /* Message.swift in Sources */,
@@ -1088,10 +1128,13 @@
 				7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */,
 				7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */,
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
+				7C8B823A2ACC480E00F7B889 /* MenuToggleArrowButton.swift in Sources */,
 				7B61236A2ABF05B6006E72C1 /* SignInResponseDTO.swift in Sources */,
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
+				7C40CBA32AC3E5A8000F4C9F /* OutlinedTagButton.swift in Sources */,
+				7C40CBB52AC54D3E000F4C9F /* NextButton.swift in Sources */,
 				7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
 				7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */,
@@ -1118,6 +1161,8 @@
 				7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
+				7C40CBC82AC69447000F4C9F /* SmallButtonGroup.swift in Sources */,
+				7C8B823C2ACC483D00F7B889 /* RestrictionMenuTriggerView.swift in Sources */,
 				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
@@ -1156,19 +1201,26 @@
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
+				7C40CBCA2AC6B597000F4C9F /* CreateProjectButton.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
+				7C24003D2AB34BFA00D9D5F1 /* FieldTagButton.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
 				7B61238D2AC2F320006E72C1 /* WarningMessageBox.swift in Sources */,
+				7C40CBA12AC3E595000F4C9F /* TagButton.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
+				7C8B822F2AC96CD600F7B889 /* Dropdown.swift in Sources */,
+				7C8B82422ACE94FE00F7B889 /* DropdownBaseCell.swift in Sources */,
 				7B61238F2AC2FBD8006E72C1 /* MessageBox.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* ASAuthorizationController+Rx.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
 				7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */,
+				7C1366422AC27F9100EB415D /* SendMessageButton.swift in Sources */,
 				7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */,
+				7C1366392AC16C4D00EB415D /* RemoveButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
