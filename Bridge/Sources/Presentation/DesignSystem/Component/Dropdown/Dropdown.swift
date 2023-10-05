@@ -703,9 +703,6 @@ extension DropDown {
             }
         )
 
-        accessibilityViewIsModal = true  // VoiceOver 사용자가 드롭다운 외부의 다른 UI요소로 이동하지 못하도록
-        UIAccessibility.post(notification: .screenChanged, argument: self)  // VoiceOver에 화면에 변화가 생겼다는 것을 알림
-
         // deselectRows(at: selectedRowIndices)
         selectRows(at: selectedRowIndices)  // selectedRowIndices에 저장되어있는 선택된 항목들을 선택 상태로 만듬.
 
@@ -722,18 +719,6 @@ extension DropDown {
         self.trailingAnchor.constraint(equalTo: visibleWindow.trailingAnchor).isActive = true
         self.topAnchor.constraint(equalTo: visibleWindow.topAnchor).isActive = true
         self.bottomAnchor.constraint(equalTo: visibleWindow.bottomAnchor).isActive = true
-    }
-    
-    /// VoiceOver 사용자가 두 손가락 "Z" 제스처를 수행했을 때 호출되는 메서드
-    override func accessibilityPerformEscape() -> Bool {
-        switch dismissMode {
-        case .automatic, .onTap:
-            cancel()
-            return true
-            
-        case .manual:  // 메뉴얼 모드일 때는 드롭다운이 수동으로만 닫힐 수 있음
-            return false
-        }
     }
     
     /// 드롭다운을 숨길 때 사용되는 메서드
