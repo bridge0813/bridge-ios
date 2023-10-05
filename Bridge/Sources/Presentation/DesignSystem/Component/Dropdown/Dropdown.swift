@@ -23,19 +23,6 @@ typealias CellConfigurationClosure = (Index, String, UITableViewCell) -> Void
 typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
 final class DropDown: UIView {
-    /// 드롭다운이 어떻게 닫힐지 결정하는 모드.
-    enum DismissMode {
-        
-        /// A tap outside the drop down is required to dismiss.
-        case onTap
-        
-        /// No tap is required to dismiss, it will dimiss when interacting with anything else.
-        case automatic
-        
-        /// Not dismissable by the user.
-        case manual
-    }
-    
     // MARK: - UI
     /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능
     let dismissableView = UIView()
@@ -248,20 +235,6 @@ final class DropDown: UIView {
     var willShowAction: Closure?
     var cancelAction: Closure?
     
-    // MARK: - 드롭다운이 어떻게 dismiss될 지를 결정
-    /// 설정된 dismissMode 값이 .onTap일 경우, 탭 제스처 인식기를 'dismissableView' 에 추가하여 드롭다운 바깥을 탭할 때, dismiss 처리
-    /// .onTap이 아니라면 탭 액션 제스처를 제거
-    var dismissMode = DismissMode.onTap {
-        willSet {
-            if newValue == .onTap {
-                let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissableViewTapped))
-                dismissableView.addGestureRecognizer(gestureRecognizer)
-                
-            } else if let gestureRecognizer = dismissableView.gestureRecognizers?.first {
-                dismissableView.removeGestureRecognizer(gestureRecognizer)
-            }
-        }
-    }
     
     /// 드롭다운에서 표시될 수 있는 셀의 최소 높이를 제공
     var minHeight: CGFloat {
@@ -333,7 +306,8 @@ private extension DropDown {
         alpha = 0
         isHidden = true
         
-        dismissMode = .onTap
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissableViewTapped))
+        dismissableView.addGestureRecognizer(gestureRecognizer)
         
         tableView.delegate = self
         tableView.dataSource = self

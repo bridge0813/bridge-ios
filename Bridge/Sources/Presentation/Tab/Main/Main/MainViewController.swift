@@ -115,7 +115,6 @@ final class MainViewController: BaseViewController {
         print("setRestrictionMenuDropdown")
         restrictionMenuDropdown.anchorView = restrictionMenuTriggerView
         
-        restrictionMenuDropdown.dismissMode = .onTap
         restrictionMenuDropdown.selectionAction = { [weak self] _, text in
             self?.restrictionMenuTriggerView.restrictionTypeLabel.text = text
         }
@@ -144,7 +143,6 @@ final class MainViewController: BaseViewController {
         chatRoomMenuDropdown.cornerRadius = 4
         chatRoomMenuDropdown.textColor = BridgeColor.gray3
         
-        chatRoomMenuDropdown.dismissMode = .onTap
         chatRoomMenuDropdown.selectionAction = { _, text in
             print(text)
         }
