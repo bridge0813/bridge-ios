@@ -13,6 +13,7 @@ protocol Endpoint {
     var path: String { get }
     
     var headers: HTTPHeaders { get }
+    var accessToken: String { get }
     var parameters: HTTPRequestParameter? { get }
     
     func toURLRequest() -> URLRequest?
