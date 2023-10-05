@@ -65,6 +65,10 @@ final class DropDown: UIView {
     static weak var VisibleDropDown: DropDown?
 
     // MARK: - UI
+    
+    /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능을 제공할 것으로 추정됨.
+    let dismissableView = UIView()
+    
     /// 테이블뷰를 포함하게 될 컨테이너 뷰
     let tableViewContainer = UIView()
     
@@ -201,15 +205,6 @@ final class DropDown: UIView {
     /// 드롭다운을 보이거나 숨길 때, 애니메이션의 지속 시간
     var animationduration = DropdownConstant.Animation.duration
 
-    /// 드롭다운이 나타날 때의 애니메이션 옵션 전역 변수
-    static var animationEntranceOptions = DropdownConstant.Animation.entranceOptions
-    
-    /// 드롭다운이 사라질 때의 애니메이션 옵션 전역 변수
-    static var animationExitOptions = DropdownConstant.Animation.exitOptions
-    
-    var animationEntranceOptions: UIView.AnimationOptions = DropDown.animationEntranceOptions
-    var animationExitOptions: UIView.AnimationOptions = DropDown.animationExitOptions
-    
     /// 드롭다운이 나타나는 동안 tableViewContainer에 적용되는 변형을 나타낸다.
     /// 예를들어, 드롭다운이 나타나는 동안 테이블 뷰가 원래 크기의 90%로 축소되는 애니메이션 효과를 주고 싶다면 0.9, 0.9가 될 것이다.
     var downScaleTransform = DropdownConstant.Animation.downScaleTransform {
@@ -289,10 +284,10 @@ final class DropDown: UIView {
         willSet {
             if newValue == .onTap {
                 let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissableViewTapped))
-                self.addGestureRecognizer(gestureRecognizer)
+                dismissableView.addGestureRecognizer(gestureRecognizer)
                 
-            } else if let gestureRecognizer = self.gestureRecognizers?.first {
-                self.removeGestureRecognizer(gestureRecognizer)
+            } else if let gestureRecognizer = dismissableView.gestureRecognizers?.first {
+                dismissableView.removeGestureRecognizer(gestureRecognizer)
             }
         }
     }
@@ -435,9 +430,15 @@ extension DropDown {
     func setupConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
 
+        // Dismissable view
+        addSubview(dismissableView)
+        dismissableView.translatesAutoresizingMaskIntoConstraints = false
+
+        // dismissableView가 드롭다운 뷰의 양쪽 가장자리에 맞춰지도록
+        addUniversalConstraints(format: "|[dismissableView]|", views: ["dismissableView": dismissableView])
+
         // Table view container
         addSubview(tableViewContainer)
-        tableViewContainer.backgroundColor = BridgeColor.primary1
         tableViewContainer.translatesAutoresizingMaskIntoConstraints = false
 
         xConstraint = NSLayoutConstraint(
@@ -691,12 +692,10 @@ extension DropDown {
 
         UIView.animate(
             withDuration: animationduration,
-            delay: 0,
-            options: animationEntranceOptions,
             animations: { [weak self] in
                 self?.setShowedState()
-            },
-            completion: nil)
+            }
+        )
 
         accessibilityViewIsModal = true  // VoiceOver 사용자가 드롭다운 외부의 다른 UI요소로 이동하지 못하도록
         UIAccessibility.post(notification: .screenChanged, argument: self)  // VoiceOver에 화면에 변화가 생겼다는 것을 알림
@@ -740,8 +739,6 @@ extension DropDown {
 
         UIView.animate(
             withDuration: animationduration,
-            delay: 0,
-            options: animationExitOptions,
             animations: { [weak self] in
                 self?.setHiddentState()
             },

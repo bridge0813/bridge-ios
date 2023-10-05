@@ -35,9 +35,7 @@ enum DropdownConstant {
     }
     
     enum Animation {
-        static let duration = 0.2
-        static let entranceOptions: UIView.AnimationOptions = [.allowUserInteraction, .curveEaseOut]
-        static let exitOptions: UIView.AnimationOptions = [.allowUserInteraction, .curveEaseIn]
+        static let duration = 0.8
         static let downScaleTransform = CGAffineTransform(scaleX: 0.9, y: 0.9)
     }
 }
