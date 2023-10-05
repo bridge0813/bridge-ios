@@ -431,14 +431,10 @@ extension DropDown {
     /// 드롭다운의 서브 뷰들에 대한 레이아웃 배치
     func setupConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
-
-        // Dismissable view
-        addSubview(dismissableView)
-        dismissableView.translatesAutoresizingMaskIntoConstraints = false
-
-        // dismissableView가 드롭다운 뷰의 양쪽 가장자리에 맞춰지도록
-        addUniversalConstraints(format: "|[dismissableView]|", views: ["dismissableView": dismissableView])
-
+        print("setupConstraints")
+        
+        setDismissableViewConstraints()
+        
         // Table view container
         addSubview(tableViewContainer)
         tableViewContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -486,12 +482,27 @@ extension DropDown {
             constant: 0
         )
         tableViewContainer.addConstraint(heightConstraint ?? NSLayoutConstraint())
+        setTableViewConstraints()
+    }
+    
+    func setDismissableViewConstraints() {
+        addSubview(dismissableView)
+        dismissableView.translatesAutoresizingMaskIntoConstraints = false
 
-        // Table view
+        dismissableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        dismissableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        dismissableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        dismissableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
+    
+    func setTableViewConstraints() {
         tableViewContainer.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
-        tableViewContainer.addUniversalConstraints(format: "|[tableView]|", views: ["tableView": tableView])
+        tableView.leadingAnchor.constraint(equalTo: tableViewContainer.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: tableViewContainer.trailingAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: tableViewContainer.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: tableViewContainer.bottomAnchor).isActive = true
     }
     
     override func layoutSubviews() {
@@ -640,7 +651,6 @@ extension DropDown {
     */
     @discardableResult
     func show(
-        onTopOf window: UIWindow? = nil,
         beforeTransform transform: CGAffineTransform? = nil,
         anchorPoint: CGPoint? = nil
     ) -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
@@ -662,13 +672,9 @@ extension DropDown {
 
         setNeedsUpdateConstraints()  // 레이아웃 제약조건이 업데이트되도록
 
-        let visibleWindow = window != nil ? window : UIWindow.visibleWindow()
-        visibleWindow?.addSubview(self)
-        visibleWindow?.bringSubviewToFront(self)  // 드롭다운을 윈도우의 최상단으로 이동.
-
-        self.translatesAutoresizingMaskIntoConstraints = false
-        visibleWindow?.addUniversalConstraints(format: "|[dropDown]|", views: ["dropDown": self])
-
+        print("show")
+        setDropdownConstraints()
+        
         let layout = computeLayout()
 
         if !layout.canBeDisplayed {
@@ -704,6 +710,18 @@ extension DropDown {
         selectRows(at: selectedRowIndices)  // selectedRowIndices에 저장되어있는 선택된 항목들을 선택 상태로 만듬.
 
         return (layout.canBeDisplayed, layout.offscreenHeight)
+    }
+    
+    func setDropdownConstraints() {
+        let visibleWindow = UIWindow.visibleWindow() ?? UIWindow()
+        visibleWindow.addSubview(self)
+        visibleWindow.bringSubviewToFront(self)  // 드롭다운을 윈도우의 최상단으로 이동.
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.leadingAnchor.constraint(equalTo: visibleWindow.leadingAnchor).isActive = true
+        self.trailingAnchor.constraint(equalTo: visibleWindow.trailingAnchor).isActive = true
+        self.topAnchor.constraint(equalTo: visibleWindow.topAnchor).isActive = true
+        self.bottomAnchor.constraint(equalTo: visibleWindow.bottomAnchor).isActive = true
     }
     
     /// VoiceOver 사용자가 두 손가락 "Z" 제스처를 수행했을 때 호출되는 메서드
