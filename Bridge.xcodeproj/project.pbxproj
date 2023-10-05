@@ -893,9 +893,9 @@
 				7CE080432ACF155000230C86 /* RestrictionMenu */,
 				7C8B82302AC97EE000F7B889 /* Helpers */,
 				7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */,
+				7CE0803D2ACF143A00230C86 /* Dropdown.swift */,
 				7CE0803B2ACF142400230C86 /* DropdownBaseCell.swift */,
 				7C8B823F2ACE91C500F7B889 /* ChatRoomMenuCell.swift */,
-				7CE0803D2ACF143A00230C86 /* Dropdown.swift */,
 			);
 			path = Dropdown;
 			sourceTree = "<group>";
