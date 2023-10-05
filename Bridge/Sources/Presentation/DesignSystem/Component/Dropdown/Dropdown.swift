@@ -13,9 +13,6 @@ typealias Closure = () -> Void
 /// 사용자가 드롭다운 항목을 선택했을 때, 호출되는 클로저를 의미. 선택된 항목의 인덱스와 문자열 값을 받음.
 typealias SelectionClosure = (Index, String) -> Void
 
-/// 각 항목을 구성할 때, 사용되는 클로저로, 항목의 인덱스와 기본 문자열을 받아 수정된 문자열을 반환
-typealias ConfigurationClosure = (Index, String) -> String
-
 /// 드롭다운 항목의 셀을 구성할 때 사용되는 클로저.
 typealias CellConfigurationClosure = (Index, String, UITableViewCell) -> Void
 
@@ -36,7 +33,6 @@ final class DropDown: UIView {
     /// 드롭다운의 width가 정의되지 않았을 경우, cell 내부 컨텐츠의 크기에 맞게 적절하게 width를 계산
     var templateCell: DropdownBaseCell?
     
-    /// 앞서 설명했던 AnchorView 프로토콜을 채택하는 객체
     /// 드롭다운이 표시될 기준점이 되는 UIView나 UIBarButtonItem을 나타냄.
     /// anchorView의 값이 설정될 때마다 setNeedsUpdateConstraints()을 통해 레이아웃 제약 조건을 업데이트하도록 요청한다.
     weak var anchorView: AnchorView? {
@@ -44,7 +40,6 @@ final class DropDown: UIView {
     }
     
     // MARK: - 드롭다운의 정확한 위치를 결정하는 데 사용되는 프로퍼티
-
     /// 드롭다운이 anchorView 아래에 표시될 때 적용되는 상대적인 오프셋을 나타낸다.
     var bottomOffset: CGPoint = .zero {
         didSet { setNeedsUpdateConstraints() }
@@ -193,12 +188,6 @@ final class DropDown: UIView {
     
 
     // MARK: - 셀의 Configuration
-    /// 기본적으로 dataSource의 값을 그대로 사용하지만, 이를 통해 해당 텍스트의 표시 방식을 직접 설정할 수 있음.
-    /// 예를들어, dataSource에 ["밥", "피자", "치킨"]이 있으면 ["나는 밥을 좋아해", "나는 피자를 좋아해", "나는 치킨을 좋아해"] 이런식으로 변형할 수 있음.
-    var cellConfiguration: ConfigurationClosure? {
-        didSet { reloadAllComponents() }
-    }
-    
     /// 인덱스, String, 그리고 UITableViewCell 객체를 매개변수로 받는데, 이를 통해 셀의 다른 UI 요소들도 구성할 수 있음.
     var customCellConfiguration: CellConfigurationClosure? {
         didSet { reloadAllComponents() }
