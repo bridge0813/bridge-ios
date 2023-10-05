@@ -35,7 +35,7 @@ enum DropdownConstant {
     }
     
     enum Animation {
-        static let duration = 0.8
+        static let duration = 0.2
         static let downScaleTransform = CGAffineTransform(scaleX: 0.9, y: 0.9)
     }
 }
