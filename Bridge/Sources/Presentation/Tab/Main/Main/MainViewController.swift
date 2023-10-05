@@ -43,7 +43,7 @@ final class MainViewController: BaseViewController {
     let restrictionMenuDropdown = DropDown()
     
     let chatRoomMenuDropdown = DropDown()
-    
+
     private let filterButton: UIButton = {
         let button = UIButton()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
@@ -61,7 +61,7 @@ final class MainViewController: BaseViewController {
         return searchBar
     }()
     
-    private let createProjectButton = CreateProjectButton()
+    private let createProjectButton = BrideCreateProjectButton()
     
     private let viewModel: MainViewModel
     
@@ -171,7 +171,6 @@ final class MainViewController: BaseViewController {
     }
     
     private func configureNavigationUI() {
-//        navigationItem.titleView = NavigationTitleView(title: "Bridge")  // 임의설정
         navigationItem.rightBarButtonItem = goToNotificationButton
 //        navigationController?.navigationBar.tintColor = .black
     }

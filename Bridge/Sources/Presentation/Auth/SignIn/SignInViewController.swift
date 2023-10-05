@@ -13,9 +13,14 @@ import RxCocoa
 import RxSwift
 
 final class SignInViewController: BaseViewController {
-    
     // MARK: - UI
-    private let rootFlexViewContainer = UIView()
+    private let rootFlexContainer = UIView()
+    
+    private let dismissButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "xmark")?.resize(to: CGSize(width: 24, height: 24)), for: .normal)
+        return button
+    }()
     
     private let signInWithAppleButton: UIButton = {
         var configuration = UIButton.Configuration.filled()
@@ -29,7 +34,7 @@ final class SignInViewController: BaseViewController {
         configuration.imagePlacement = .leading
         return UIButton(configuration: configuration)
     }()
-
+    
     private let viewModel: SignInViewModel
     
     init(viewModel: SignInViewModel) {
@@ -44,28 +49,32 @@ final class SignInViewController: BaseViewController {
     
     // MARK: - Configurations
     override func configureAttributes() {
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
     }
     
     override func configureLayouts() {
-        view.addSubview(rootFlexViewContainer)
+        view.addSubview(rootFlexContainer)
         
-        rootFlexViewContainer.flex.direction(.column).justifyContent(.center).alignItems(.center).define { flex in
-            flex.addItem(signInWithAppleButton).width(343).height(45)
-        }
+        rootFlexContainer.flex
+            .justifyContent(.center)
+            .paddingHorizontal(16)
+            .define { flex in
+                flex.addItem(signInWithAppleButton).height(45)
+            }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        rootFlexViewContainer.pin.all()
-        rootFlexViewContainer.flex.layout()
+        rootFlexContainer.pin.all()
+        rootFlexContainer.flex.layout()
     }
     
     override func bind() {
         let input = SignInViewModel.Input(
+            dismissButtonTapped: dismissButton.rx.tap.asObservable(),
             signInWithAppleButtonTapped: signInWithAppleButton.rx.tap.asObservable()
         )
         
-        let output = viewModel.transform(input: input)
+        _ = viewModel.transform(input: input)
     }
 }

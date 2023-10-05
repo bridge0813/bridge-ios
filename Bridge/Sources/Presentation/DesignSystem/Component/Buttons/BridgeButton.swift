@@ -1,5 +1,5 @@
 //
-//  BridgeBlockButton.swift
+//  BridgeButton.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/28.
@@ -11,47 +11,26 @@ import UIKit
 final class BridgeButton: BaseButton {
     
     private var title: String
-    private var style: BridgeButtonStyle
+    private var titleFont: UIFont
 
-    init(_ title: String, style: BridgeButtonStyle) {
+    init(_ title: String, titleFont: UIFont, backgroundColor: UIColor) {
         self.title = title
-        self.style = style
+        self.titleFont = titleFont
         
         super.init(frame: .zero)
+        self.backgroundColor = backgroundColor
     }
     
     override func configureAttributes() {
         setTitle(title, for: .normal)
         setTitleColor(BridgeColor.gray10, for: .normal)
-        titleLabel?.font = style.font
-        backgroundColor = style.backgroundColor
+        titleLabel?.font = titleFont
         layer.cornerRadius = 4
     }
-}
 
-enum BridgeButtonStyle {
-    case confirm
-    case cancel
-    case apply
-    case detail
-    
-    var backgroundColor: UIColor {
-        switch self {
-        case .confirm, .apply, .detail:
-            return BridgeColor.primary1
-            
-        case .cancel:
-            return BridgeColor.gray4
-        }
-    }
-    
-    var font: UIFont {
-        switch self {
-        case .confirm, .cancel, .detail:
-            return BridgeFont.button2.font
-            
-        case .apply:
-            return BridgeFont.subtitle2.font
-        }
+    /// 버튼의 활성화/비활성화 상태를 변경하는 메서드
+    func updateButtonState(isActive: Bool) {
+        backgroundColor = isActive ? BridgeColor.primary1 : BridgeColor.gray4
+        isEnabled = isActive
     }
 }

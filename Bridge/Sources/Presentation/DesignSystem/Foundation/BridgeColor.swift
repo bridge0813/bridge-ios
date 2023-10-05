@@ -38,4 +38,7 @@ enum BridgeColor {
     static let systemBlue = UIColor.systemBlue
     static let systemYellow = UIColor.systemYellow
     static let systemGreen = UIColor.systemGreen
+    
+    /// 알림창 나올 때의 배경색
+    static let backgroundBlur = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
 }
