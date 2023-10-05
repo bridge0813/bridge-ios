@@ -651,7 +651,6 @@ extension DropDown {
     */
     @discardableResult
     func show(
-        beforeTransform transform: CGAffineTransform? = nil,
         anchorPoint: CGPoint? = nil
     ) -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
         
@@ -673,7 +672,7 @@ extension DropDown {
         setNeedsUpdateConstraints()  // 레이아웃 제약조건이 업데이트되도록
 
         print("show")
-        setDropdownConstraints()
+        setDropdownConstraints()  // 드롭다운 레이아웃 배치
         
         let layout = computeLayout()
 
@@ -688,12 +687,8 @@ extension DropDown {
             tableViewContainer.layer.anchorPoint = anchor
         }
         
-        if let transformation = transform {
-            tableViewContainer.transform = transformation
-        } else {
-            tableViewContainer.transform = downScaleTransform
-        }
-
+        tableViewContainer.transform = downScaleTransform
+        
         layoutIfNeeded()  // 레이아웃 업데이트
 
         UIView.animate(
@@ -702,9 +697,6 @@ extension DropDown {
                 self?.setShowedState()
             }
         )
-
-        // deselectRows(at: selectedRowIndices)
-        selectRows(at: selectedRowIndices)  // selectedRowIndices에 저장되어있는 선택된 항목들을 선택 상태로 만듬.
 
         return (layout.canBeDisplayed, layout.offscreenHeight)
     }

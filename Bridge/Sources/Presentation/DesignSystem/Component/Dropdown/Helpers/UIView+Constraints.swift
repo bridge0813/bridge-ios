@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Window
 extension UIView {
-    
+
     /// 현재 뷰의 프레임을 윈도우 좌표계로 변환하여 반환한다. 즉, 이 뷰가 전체 화면에서 어디에 위치하는지에 대한 프레임 정보를 가져올 수 있디.
     var windowFrame: CGRect? {
         return superview?.convert(frame, to: nil)
