@@ -190,7 +190,7 @@ final class DropDown: UIView {
     
 
     // MARK: - 셀의 Configuration
-    /// 인덱스, String, 그리고 UITableViewCell 객체를 매개변수로 받는데, 이를 통해 셀의 다른 UI 요소들도 구성할 수 있음.
+    /// 커스텀 셀의 Configuration을 구성할 수 있음.
     var customCellConfiguration: CellConfigurationClosure? {
         didSet { reloadAllComponents() }
     }
@@ -415,7 +415,7 @@ extension DropDown {
         // 드롭다운의 width가 화면의 경계 내에 있도록 설정.(화면을 넘기지 않도록)
         constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
         
-        let visibleHeight = tableHeight - layout.offscreenHeight  // 화면에 실제로 보이는 드롭다운의 높이를 계산
+        let visibleHeight = tableHeight - layout.offscreenHeight  // 화면에 실제로 보일 수 있는 드롭다운의 높이를 계산
         let canBeDisplayed = visibleHeight >= minHeight           // 드롭다운이 화면에 표시될 수 있는지(셀의 rowHeight)
 
         return (layout.x, layout.y, layout.width, layout.offscreenHeight, visibleHeight, canBeDisplayed)
@@ -440,7 +440,7 @@ extension DropDown {
     
     /// 아래 방향으로 표시되는 드롭다운의 x, y, width, offscreenHeight
     func computeLayoutBottomDisplay(window: UIWindow) -> ComputeLayoutTuple {
-        let offscreenHeight: CGFloat = 0  // 드롭다운의 일부가 화면 밖에 나가는 높이
+        var offscreenHeight: CGFloat = 0  // 드롭다운의 일부가 화면 밖에 나가는 높이
         
         // 만약 드롭다운의 width가 설정되어 있다면 그 값을 사용하고,
         // 설정된 값이 없다면 앵커 뷰의 width나 fittingWidth()에서 bottomOffset.x 를 뺀 값이 최종 width
@@ -453,6 +453,14 @@ extension DropDown {
         // 드롭다운의 x,y 좌표 계산
         let x = anchorViewX + bottomOffset.x
         let y = anchorViewY + bottomOffset.y
+        
+        // 화면 밖으로 나가는 높이 계산
+        let maxY = y + tableHeight
+        let windowMaxY = window.bounds.maxY
+
+        if maxY > windowMaxY {
+            offscreenHeight = abs(maxY - windowMaxY)
+        }
         
         return (x, y, width, offscreenHeight)
     }
