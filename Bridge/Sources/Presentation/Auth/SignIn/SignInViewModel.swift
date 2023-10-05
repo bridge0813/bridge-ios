@@ -53,7 +53,7 @@ final class SignInViewModel: ViewModelType {
                 switch result {
                 case .needSignUp:   owner.coordinator?.showSetFieldViewController()
                 case .success:      owner.coordinator?.finish()
-                case .failure:      print("fail")  // need error handling ...
+                case .failure:      owner.coordinator?.showAlert(configuration: .report)  // TODO: 에러 알림
                 }
             })
             .disposed(by: disposeBag)
