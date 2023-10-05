@@ -22,7 +22,6 @@ typealias CellConfigurationClosure = (Index, String, UITableViewCell) -> Void
 /// 화면상에서 드롭다운의 레이아웃을 계산할 때, 사용될 것으로 보이는 튜플. x, y좌표와 넓이, 그리고 화면 바깥 영역의 높이 값을 포함.
 typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
-
 final class DropDown: UIView {
     /// 드롭다운이 어떻게 닫힐지 결정하는 모드.
     enum DismissMode {
@@ -37,10 +36,6 @@ final class DropDown: UIView {
         case manual
     }
     
-    // MARK: - Properties
-    /// 현재 화면에 표시되고 있는 Dropdown 인스턴스를 참조하는 프로퍼티로 현재 활성화된 드롭다운을 추적한다.
-    static weak var VisibleDropDown: DropDown?
-
     // MARK: - UI
     /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능
     let dismissableView = UIView()
@@ -629,20 +624,7 @@ extension DropDown {
         anchorPoint: CGPoint? = nil
     ) -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
         
-        // 현재 드롭다운이 화면에 표시되는 드롭다운과 동일한지, 드롭다운이 hidden 상태는 아닌지 체크한다.
-        if self == DropDown.VisibleDropDown && DropDown.VisibleDropDown?.isHidden == false {
-            // added condition - DropDown.VisibleDropDown?.isHidden == false -> to resolve forever hiding dropdown issue when continuous taping on button - Kartik Patel - 2016-12-29
-            return (true, 0)
-        }
-
-        // 화면에 드롭다운이 이미 표시되고 있다면 해당 드롭다운을 취소
-        if let visibleDropDown = DropDown.VisibleDropDown {
-            visibleDropDown.cancel()
-        }
-
         willShowAction?()  // 드롭다운이 표시되기 전에 호출되어야 하는 클로저
-
-        DropDown.VisibleDropDown = self  // 현재 드롭다운을 현재 화면에 표시되는 드롭다운으로 설정한다.
 
         setNeedsUpdateConstraints()  // 레이아웃 제약조건이 업데이트되도록
 
@@ -690,17 +672,6 @@ extension DropDown {
     /// 드롭다운을 숨길 때 사용되는 메서드
     func hide() {
         
-        // 현재 드롭다운이 화면에 보이는 드롭다운과 동일한지 체크
-        // 화면에 보이는 드롭다운이 hide되고, 다른 드롭다운을 표시하려 할 때, 어떤 드롭다운이 화면에 보여져야 하는지 정확하게 체크하기 위해.
-        if self == DropDown.VisibleDropDown {
-            /*
-            If one drop down is showed and another one is not
-            but we call `hide()` on the hidden one:
-            we don't want it to set the `VisibleDropDown` to nil.
-            */
-            DropDown.VisibleDropDown = nil
-        }
-
         // 현재 드롭다운이 이미 숨겨져 있으면, 메서드 종료
         if isHidden {
             return

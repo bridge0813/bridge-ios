@@ -89,7 +89,8 @@ final class MainViewController: BaseViewController {
         
         goToNotificationButton.rx.tap.subscribe(onNext: { [weak self] in
             self?.chatRoomMenuDropdown.show()
-        }).disposed(by: disposeBag)
+        })
+        .disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
