@@ -7,7 +7,6 @@
 
 import RxSwift
 
-// 여러번 호출되는 문제도 해결해야할듯
 final class DefaultAuthRepository: AuthRepository {
     
     private let networkService: NetworkService
@@ -26,7 +25,7 @@ final class DefaultAuthRepository: AuthRepository {
             tokenStorage.saveToken(credentials.name, for: KeychainAccount.userID)
         }
         
-        return networkService.signInWithAppleTest(credentials, userName: userName)
+        return networkService.signInWithAppleTest(userName: userName, credentials: credentials)
             .flatMap { [weak self] signInResponseDTO in
                 // 응답으로 받은 토큰을 토큰 저장소에 저장
                 self?.tokenStorage.saveToken(signInResponseDTO.accessToken, for: KeychainAccount.accessToken)

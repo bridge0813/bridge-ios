@@ -46,7 +46,7 @@ extension DefaultNetworkService {
 
 // MARK: - Auth
 extension DefaultNetworkService {
-    func signInWithApple(_ credentials: UserCredentials, userName: String?) -> Single<SignInResponseDTO> {
+    func signInWithApple(userName: String?, credentials: UserCredentials) -> Single<SignInResponseDTO> {
         
         let signInWithAppleRequestDTO = SignInWithAppleRequestDTO(
             name: userName ?? "",
@@ -55,8 +55,7 @@ extension DefaultNetworkService {
         
         let authEndpoint = AuthEndpoint.signInWithApple(request: signInWithAppleRequestDTO)
         
-        return request(authEndpoint)
-            .asSingle()
+        return request(authEndpoint).asSingle()
             .flatMap { data in
                 if let decodedData = try? JSONDecoder().decode(SignInResponseDTO.self, from: data) {
                     return Single.just(decodedData)
@@ -66,7 +65,7 @@ extension DefaultNetworkService {
             }
     }
     
-    func signInWithAppleTest(_ credentials: UserCredentials, userName: String?) -> Single<SignInResponseDTO> {
+    func signInWithAppleTest(userName: String?, credentials: UserCredentials) -> Single<SignInResponseDTO> {
         Single.just(
             SignInResponseDTO(
                 grantType: "Bearer",
