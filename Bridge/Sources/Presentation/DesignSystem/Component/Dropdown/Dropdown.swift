@@ -160,10 +160,10 @@ final class DropDown: UIView {
         didSet { reloadAllComponents() }
     }
     
-    /// 셀 설정
-    var customCellClass: UITableViewCell.Type? {
+    /// 커스텀 셀 설정
+    var customCellType: UITableViewCell.Type? {
         didSet {
-            if let cellType = customCellClass {
+            if let cellType = customCellType {
                 tableView.register(cellType, forCellReuseIdentifier: DropdownBaseCell.identifier)
                 templateCell = nil
                 reloadAllComponents()

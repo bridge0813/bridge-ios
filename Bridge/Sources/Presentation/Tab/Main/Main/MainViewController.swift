@@ -160,7 +160,7 @@ final class MainViewController: BaseViewController {
         
         let imageStringArray: [String] = ["leave", "warning", "bell.crossline"]
         chatRoomMenuDropdown.dataSource = ["채팅방 나가기", "신고하기", "알림 끄기"]
-        chatRoomMenuDropdown.customCellClass = ChatRoomMenuCell.self
+        chatRoomMenuDropdown.customCellType = ChatRoomMenuCell.self
         chatRoomMenuDropdown.customCellConfiguration = { index, _, cell in
             guard let cell = cell as? ChatRoomMenuCell else { return }
          
