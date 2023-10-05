@@ -524,9 +524,7 @@ extension DropDown {
     - returns: Wether it succeed and how much height is needed to display all cells at once.
     */
     @discardableResult
-    func show(
-        anchorPoint: CGPoint? = nil
-    ) -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
+    func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
         
         willShowAction?()  // 드롭다운이 표시되기 전에 호출되어야 하는 클로저
 
@@ -539,14 +537,9 @@ extension DropDown {
 
         if !layout.canBeDisplayed {
             hide()
-            return (layout.canBeDisplayed, layout.offscreenHeight)
         }
 
         isHidden = false
-        
-        if let anchor = anchorPoint {
-            tableViewContainer.layer.anchorPoint = anchor
-        }
         
         tableViewContainer.transform = downScaleTransform
         
@@ -575,7 +568,6 @@ extension DropDown {
     
     /// 드롭다운을 숨길 때 사용되는 메서드
     func hide() {
-        
         // 현재 드롭다운이 이미 숨겨져 있으면, 메서드 종료
         if isHidden {
             return
