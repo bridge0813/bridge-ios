@@ -54,8 +54,8 @@ final class DropDown: UIView {
     /// 드롭다운 항목들을 표시하기 위한 UITableView
     let tableView = UITableView()
     
-    /// 실제 표시하기 전에 셀의 레이아웃 및 크기를 계산하는 데 사용될 것으로 보임.
-    var templateCell: UITableViewCell!
+    /// 드롭다운의 width가 정의되지 않았을 경우, cell 내부 컨텐츠의 크기에 맞게 적절하게 width를 계산
+    var templateCell: DropdownBaseCell?
     
     /// 앞서 설명했던 AnchorView 프로토콜을 채택하는 객체
     /// 드롭다운이 표시될 기준점이 되는 UIView나 UIBarButtonItem을 나타냄.
@@ -564,14 +564,14 @@ extension DropDown {
     /// 드롭다운의 항목 중 width가 가장 높은 아이템의 width를 계산하여 반환
     func fittingWidth() -> CGFloat {
         if templateCell == nil {
-            templateCell = tableView.dequeueReusableCell(withIdentifier: DropdownBaseCell.identifier) as? CustomDropdownCell
+            templateCell = tableView.dequeueReusableCell(withIdentifier: DropdownBaseCell.identifier) as? DropdownBaseCell
         }
         
         var maxWidth: CGFloat = 0
         
         for index in 0..<dataSource.count {
             
-            if let customCell = templateCell as? DropdownBaseCell {
+            if let customCell = templateCell {
                 customCell.optionLabel.text = dataSource[index]
                 customCell.bounds.size.height = cellHeight
                 
@@ -582,10 +582,9 @@ extension DropDown {
                     maxWidth = width
                 }
             }else {
-                print("CustomDropdownCell로 캐스팅 불가")
+                print("templateCell 없음")
             }
         }
-        
         return maxWidth
     }
     
@@ -810,7 +809,6 @@ extension DropDown {
 
 // MARK: - UITableViewDataSource
 extension DropDown: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -831,7 +829,6 @@ extension DropDown: UITableViewDataSource {
         
         return cell
     }
-    
 }
 
 // MARK: - UITableViewDelegate
