@@ -101,7 +101,7 @@ final class DropDown: UIView {
         willSet { tableView.rowHeight = newValue }
         didSet { reloadAllComponents() }
     }
-
+    
     var tableViewBackgroundColor = DropdownConstant.DropdownUI.backgroundColor {
         willSet {
             tableView.backgroundColor = newValue
@@ -219,13 +219,19 @@ final class DropDown: UIView {
     /// 드롭다운에 표시될 데이터 항목들을 포함하고 있음.
     var dataSource = [String]() {
         didSet {
-            deselectRows(at: selectedRowIndices)  // 선택 상태 초기화
+            selectedItemIndexRow = nil  // 선택상태 초기화
             reloadAllComponents()
         }
     }
+    
+    /// dataSource에 있는 모든 아이템들을 보여주기 위한 TableView의 높이
+    private var tableHeight: CGFloat {
+        return tableView.rowHeight * CGFloat(dataSource.count)
+    }
 
-    /// 만약 드롭다운에서 여러 항목을 선택할 수 있는 경우, 그 선택된 항목들의 인덱스를 추적하기 위해 사용된다.
-    var selectedRowIndices = Set<Index>()
+    /// 선택된 항목의 인덱스를 추적하기 위해 사용된다.
+    var selectedItemIndexRow: Index? = nil
+    
 
     // MARK: - 셀의 Configuration
     /// 기본적으로 dataSource의 값을 그대로 사용하지만, 이를 통해 해당 텍스트의 표시 방식을 직접 설정할 수 있음.
@@ -733,39 +739,11 @@ extension DropDown {
         }
     }
     
-    /// 해당 인덱스에 대해 선택처리 후, selectedRowIndices에 추가한다.
-    /// 반면에 선택된 인덱스가 없다면, 선택된 모든 행들에 선택해제 처리 후, 선택된 인덱스 요소 모두 제거
-    func selectRow(at index: Index?, scrollPosition: UITableView.ScrollPosition = .none) {
-        if let index = index {
-            // 해당 인덱스에 있는 Cell을 선택
-            tableView.selectRow(
-                at: IndexPath(row: index, section: 0), animated: true, scrollPosition: scrollPosition
-            )
-            
-            selectedRowIndices.insert(index)  // 선택한 행의 인덱스를 추가
-            
-        } else {
-            deselectRows(at: selectedRowIndices)  // 선택된 모든 셀들에 대해 선택해제
-            selectedRowIndices.removeAll()        // 선택된 index 요소 모두 제거
-        }
-    }
-    
     /// 해당 인덱스에 대해 선택 해제 처리
     func deselectRow(at index: Index?) {
-        guard let index = index, index >= 0 else { return }
-        
-        // remove from indices
-        if let selectedRowIndex = selectedRowIndices.firstIndex(where: { $0 == index }) {
-            selectedRowIndices.remove(at: selectedRowIndex)
-        }
-
-        tableView.deselectRow(at: IndexPath(row: index, section: 0), animated: true)
-    }
-    
-    /// 전달받은 indices에 저장된 모든 인덱스에 대해 선택해제 처리
-    func deselectRows(at indices: Set<Index>?) {
-        indices?.forEach {
-            deselectRow(at: $0)
+        if let index {
+            selectedItemIndexRow = nil
+            tableView.deselectRow(at: IndexPath(row: index, section: 0), animated: true)
         }
     }
     
@@ -779,11 +757,6 @@ extension DropDown {
         guard let row = tableView.indexPathForSelectedRow?.row else { return nil }
 
         return dataSource[row]
-    }
-    
-    /// dataSource에 있는 모든 아이템들을 보여주기 위한 TableView의 높이
-    var tableHeight: CGFloat {
-        return tableView.rowHeight * CGFloat(dataSource.count)
     }
 }
 
@@ -804,6 +777,7 @@ extension DropDown: UITableViewDataSource {
         cell.optionLabel.font = textFont
         cell.selectedBackgroundColor = selectionBackgroundColor
         cell.configureCell()
+        cell.selectionStyle = .none
         
         customCellConfiguration?(indexPath.row, dataSource[indexPath.row], cell)
         
@@ -814,20 +788,18 @@ extension DropDown: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension DropDown: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.isSelected = selectedRowIndices.contains(indexPath.row)
+        cell.isSelected = selectedItemIndexRow == indexPath.row
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedRowIndex = indexPath.row
         
-        selectedRowIndices.removeAll()
-        selectedRowIndices.insert(selectedRowIndex)
-        selectionAction?(selectedRowIndex, dataSource[selectedRowIndex])
+        selectedItemIndexRow = indexPath.row
+        selectionAction?(indexPath.row, dataSource[indexPath.row])
         
         // 앵커뷰가 UIBarButton일 때 경우 메뉴처럼 사용되기 때문에 선택된 Cell이 무엇인지 표시 할 필요가 없음.
         if let _ = anchorView as? UIBarButtonItem {
             // DropDown's from UIBarButtonItem are menus so we deselect the selected menu right after selection
-            deselectRow(at: selectedRowIndex)
+            deselectRow(at: indexPath.row)
         }
         
         hide()  // 새로운 항목을 선택했으면 숨기기.

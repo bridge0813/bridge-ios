@@ -114,7 +114,7 @@ final class MainViewController: BaseViewController {
     
     private func setDropdown() {
         print("setDropdown")
-        dropDown.anchorView = goToNotificationButton // 이 뷰 아래에 드롭다운을 표시
+        dropDown.anchorView = restrictionMenuTriggerView // 이 뷰 아래에 드롭다운을 표시
 //        dropDown.width = 147
         dropDown.dismissMode = .onTap
         dropDown.selectionAction = { [weak self] _, text in
@@ -135,7 +135,7 @@ final class MainViewController: BaseViewController {
         let imageStringArray: [String] = ["leave", "warning", "bell.crossline"]
         
         dropDown.dataSource = ["채팅방 나가기", "신고하기", "알림 끄기"]
-        dropDown.selectionBackgroundColor = BridgeColor.primary1
+        dropDown.selectionBackgroundColor = BridgeColor.primary3
         dropDown.customCellClass = ChatRoomMenuCell.self
         dropDown.customCellConfiguration = { index, _, cell in
             guard let cell = cell as? ChatRoomMenuCell else { return }
