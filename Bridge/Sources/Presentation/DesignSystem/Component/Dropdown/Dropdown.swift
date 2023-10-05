@@ -26,25 +26,6 @@ typealias CellConfigurationClosure = (Index, String, UITableViewCell) -> Void
 typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
 
-protocol AnchorView: AnyObject {
-
-    var plainView: UIView { get }  // 드롭다운의 앵커(고정점)로 사용될 UIView 객체를 반환
-}
-
-extension UIView: AnchorView {
-
-    // UIView 인스턴스 자체가 드롭다운의 앵커(고정점)로 사용된다.
-    var plainView: UIView {
-        return self
-    }
-}
-
-extension UIBarButtonItem: AnchorView {
-    var plainView: UIView {
-        return value(forKey: "view") as? UIView ?? UIView()
-    }
-}
-
 final class DropDown: UIView {
     
     /// 드롭다운이 어떻게 닫힐지 결정하는 모드.
