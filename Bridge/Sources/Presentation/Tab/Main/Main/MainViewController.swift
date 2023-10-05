@@ -115,21 +115,30 @@ final class MainViewController: BaseViewController {
         print("setRestrictionMenuDropdown")
         restrictionMenuDropdown.anchorView = restrictionMenuTriggerView
         
-        restrictionMenuDropdown.selectionAction = { [weak self] _, text in
-            self?.restrictionMenuTriggerView.restrictionTypeLabel.text = text
-        }
+        restrictionMenuDropdown.selectedItemSubject
+            .withUnretained(self)
+            .subscribe(onNext: { owner, item in
+                owner.restrictionMenuTriggerView.restrictionTypeLabel.text = item.title
+            })
+            .disposed(by: disposeBag)
         
-        restrictionMenuDropdown.willShowAction = { [weak self] in
-            self?.restrictionMenuTriggerView.layer.borderColor = BridgeColor.primary1.cgColor
-            self?.restrictionMenuTriggerView.layer.borderWidth = 1
-            self?.restrictionMenuTriggerView.arrowButton.isSelected = true
-        }
+        restrictionMenuDropdown.willShowSubject
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.restrictionMenuTriggerView.layer.borderColor = BridgeColor.primary1.cgColor
+                owner.restrictionMenuTriggerView.layer.borderWidth = 1
+                owner.restrictionMenuTriggerView.arrowButton.isSelected = true
+            })
+            .disposed(by: disposeBag)
         
-        restrictionMenuDropdown.cancelAction = { [weak self] in
-            self?.restrictionMenuTriggerView.layer.borderWidth = 0
-            self?.restrictionMenuTriggerView.arrowButton.isSelected = false
-        }
-        
+        restrictionMenuDropdown.hideSubject
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.restrictionMenuTriggerView.layer.borderWidth = 0
+                owner.restrictionMenuTriggerView.arrowButton.isSelected = false
+            })
+            .disposed(by: disposeBag)
+
         restrictionMenuDropdown.dataSource = ["학생", "현직자", "취준생"]
         restrictionMenuDropdown.selectionBackgroundColor = BridgeColor.primary2
         restrictionMenuDropdown.bottomOffset = CGPoint(x: 0, y: 7)
@@ -143,12 +152,13 @@ final class MainViewController: BaseViewController {
         chatRoomMenuDropdown.cornerRadius = 4
         chatRoomMenuDropdown.textColor = BridgeColor.gray3
         
-        chatRoomMenuDropdown.selectionAction = { _, text in
-            print(text)
-        }
+        chatRoomMenuDropdown.selectedItemSubject
+            .subscribe(onNext: { item in
+                print(item.title)
+            })
+            .disposed(by: disposeBag)
         
         let imageStringArray: [String] = ["leave", "warning", "bell.crossline"]
-        
         chatRoomMenuDropdown.dataSource = ["채팅방 나가기", "신고하기", "알림 끄기"]
         chatRoomMenuDropdown.customCellClass = ChatRoomMenuCell.self
         chatRoomMenuDropdown.customCellConfiguration = { index, _, cell in

@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 typealias Index = Int
 typealias Closure = () -> Void
 
-/// 사용자가 드롭다운 항목을 선택했을 때, 호출되는 클로저를 의미. 선택된 항목의 인덱스와 문자열 값을 받음.
-typealias SelectionClosure = (Index, String) -> Void
+/// 드롭다운 선택했을 경우 넘겨주는 데이터
+typealias DropdownItem = (indexRow: Index, title: String)
 
 /// 드롭다운 항목의 셀을 구성할 때 사용되는 클로저.
 typealias CellConfigurationClosure = (Index, String, UITableViewCell) -> Void
@@ -193,13 +195,10 @@ final class DropDown: UIView {
         didSet { reloadAllComponents() }
     }
     
-    // MARK: - 셀의 선택액션
-    /// 사용자가 드롭다운의 특정항목을 선택했을 때, 실행될 액션을 정의하는 클로저
-    var selectionAction: SelectionClosure?
-    
-    // MARK: - 드롭다운이 표시될 때, 숨길 때의 액션
-    var willShowAction: Closure?
-    var cancelAction: Closure?
+    // MARK: - 액션
+    let selectedItemSubject = PublishSubject<DropdownItem>()  // 드롭다운 항목을 선택했을 경우
+    let willShowSubject = PublishSubject<Void>()              // 드롭다운이 보일 때
+    let hideSubject = PublishSubject<Void>()                  // 드롭다운이 사라질 때
     
     /// 드롭다운에서 표시될 수 있는 셀의 최소 높이를 제공
     var minHeight: CGFloat {
@@ -526,7 +525,7 @@ extension DropDown {
     @discardableResult
     func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
         
-        willShowAction?()  // 드롭다운이 표시되기 전에 호출되어야 하는 클로저
+        willShowSubject.onNext(())
 
         setNeedsUpdateConstraints()  // 레이아웃 제약조건이 업데이트되도록
 
@@ -586,12 +585,8 @@ extension DropDown {
                 UIAccessibility.post(notification: .screenChanged, argument: nil)
             }
         )
-    }
-    
-    /// 드롭다운을 숨기는 hide()와 cancelAction을 호출.
-    func cancel() {
-        hide()
-        cancelAction?()
+        
+        hideSubject.onNext(())
     }
 }
 
@@ -640,7 +635,8 @@ extension DropDown: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         selectedItemIndexRow = indexPath.row
-        selectionAction?(indexPath.row, dataSource[indexPath.row])
+        
+        selectedItemSubject.onNext((indexRow: indexPath.row, title: dataSource[indexPath.row]))
         
         // 앵커뷰가 UIBarButton일 때 경우 메뉴처럼 사용되기 때문에 선택된 Cell이 무엇인지 표시 할 필요가 없음.
         if anchorView as? UIBarButtonItem != nil {
@@ -656,6 +652,6 @@ extension DropDown: UITableViewDelegate {
 extension DropDown {
     @objc
     func dismissableViewTapped() {
-        cancel()
+        hide()
     }
 }
