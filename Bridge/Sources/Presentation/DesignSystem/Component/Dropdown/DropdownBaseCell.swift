@@ -30,7 +30,10 @@ class DropdownBaseCell: BaseTableViewCell {
     // MARK: - Layouts
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.row).alignItems(.center).padding(10)
+        
+        rootFlexContainer.flex.direction(.row).alignItems(.center).padding(10).define { flex in
+            flex.addItem(optionLabel).marginLeft(10).marginRight(20)
+        }
     }
     
     override func layoutSubviews() {

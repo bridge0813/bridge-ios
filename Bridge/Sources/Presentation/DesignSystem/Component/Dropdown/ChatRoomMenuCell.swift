@@ -13,7 +13,7 @@ final class ChatRoomMenuCell: DropdownBaseCell {
     // MARK: - UI
     let optionImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.tintColor = .black
+        imageView.tintColor = BridgeColor.gray3
         imageView.image = UIImage(named: "leave")?
             .resize(to: CGSize(width: 14.43, height: 13.33))
             .withRenderingMode(.alwaysTemplate)
@@ -23,9 +23,9 @@ final class ChatRoomMenuCell: DropdownBaseCell {
     
     // MARK: - Layouts
     override func configureLayouts() {
-        super.configureLayouts()
+        addSubview(rootFlexContainer)
         
-        rootFlexContainer.flex.define { flex in
+        rootFlexContainer.flex.direction(.row).alignItems(.center).padding(10).define { flex in
             flex.addItem(optionImageView).size(20).marginRight(8)
             flex.addItem(optionLabel).marginRight(20)
         }

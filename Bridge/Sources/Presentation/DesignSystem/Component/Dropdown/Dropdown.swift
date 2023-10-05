@@ -230,7 +230,7 @@ final class DropDown: UIView {
     }
 
     /// 선택된 항목의 인덱스를 추적하기 위해 사용된다.
-    var selectedItemIndexRow: Index? = nil
+    var selectedItemIndexRow: Index?
     
 
     // MARK: - 셀의 Configuration
