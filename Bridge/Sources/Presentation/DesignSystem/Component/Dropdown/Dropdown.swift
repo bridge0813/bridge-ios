@@ -689,8 +689,6 @@ extension DropDown {
         
         tableViewContainer.transform = downScaleTransform
         
-        layoutIfNeeded()  // 레이아웃 업데이트
-
         UIView.animate(
             withDuration: animationduration,
             animations: { [weak self] in
