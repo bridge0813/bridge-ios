@@ -108,6 +108,7 @@ final class MainViewController: BaseViewController {
     }
     
     private func setDropdown() {
+        print("setDropdown")
         dropDown.anchorView = restrictionMenuTriggerView // 이 뷰 아래에 드롭다운을 표시
         dropDown.dismissMode = .onTap
         dropDown.selectionAction = { [weak self] _, text in

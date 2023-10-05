@@ -348,7 +348,6 @@ final class DropDown: UIView {
 
 // MARK: - Setup
 private extension DropDown {
-    
     func setup() {
         tableView.register(CustomDropdownCell.self)
         
@@ -359,7 +358,7 @@ private extension DropDown {
         }
         
         tableView.rowHeight = cellHeight
-        
+        print("setup")
         alpha = 0
         isHidden = true
         
@@ -370,6 +369,7 @@ private extension DropDown {
     }
     
     func setupUI() {
+        print("setupUI")
         super.backgroundColor = dimmedBackgroundColor
 
         tableViewContainer.layer.masksToBounds = false
@@ -405,8 +405,8 @@ extension DropDown {
         
         // 계산된 레이아웃이 화면에 표시될 수 없는 경우
         if !layout.canBeDisplayed {
-            super.updateConstraints()  // 기본적인 updateConstraints() 메서드 호출
-            hide()                     // 드롭다운 숨기기
+            super.updateConstraints()
+            hide()  // 드롭다운 숨기기
             
             return
         }
@@ -425,7 +425,6 @@ extension DropDown {
             self?.tableView.flashScrollIndicators()
         }
         
-        // 기본 제약 조건 업데이트 동작
         super.updateConstraints()
     }
     
