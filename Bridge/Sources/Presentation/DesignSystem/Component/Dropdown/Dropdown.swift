@@ -391,6 +391,8 @@ extension DropDown {
     
     /// 뷰의 제약조건을 업데이트할 필요가 있을 때 사용되는 메서드.
     override func updateConstraints() {
+        print("updateConstraints")
+        
         // 제약조건이 아직 설정되지 않았다면, 초기 제약 조건을 설정
         if !didSetupConstraints {
             setupConstraints()
@@ -495,10 +497,8 @@ extension DropDown {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        // 방향이 변경되면 layoutSubviews가 호출됩니다
-        // 위치를 업데이트하기 위해 제약 조건을 업데이트합니다
-        setNeedsUpdateConstraints()
-
+        print("layoutSubviews")
+        
         let shadowPath = UIBezierPath(roundedRect: tableViewContainer.bounds, cornerRadius: cornerRadius)
         tableViewContainer.layer.shadowPath = shadowPath.cgPath
     }
