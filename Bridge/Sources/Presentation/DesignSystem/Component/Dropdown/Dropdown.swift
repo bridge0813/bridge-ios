@@ -44,21 +44,9 @@ final class DropDown: UIView {
     }
     
     // MARK: - 드롭다운의 정확한 위치를 결정하는 데 사용되는 프로퍼티
-    
-    /// 드롭다운이 anchorView 위에 표시될 때, 적용되는 상대적인 오프셋을 나타낸다.
-    /// 기본적으로 드롭다운은 anchorView의 왼쪽 상단 모서리에 표시되므로, 기본 오프셋은 (0, 0) 이다.
-    ///  topOffset의 값이 변경될 때마다, 레이아웃 제약조건을 업데이트하도록 요청한다.
-    var topOffset: CGPoint = .zero {
-        didSet { setNeedsUpdateConstraints() }
-    }
 
     /// 드롭다운이 anchorView 아래에 표시될 때 적용되는 상대적인 오프셋을 나타낸다.
     var bottomOffset: CGPoint = .zero {
-        didSet { setNeedsUpdateConstraints() }
-    }
-
-    /// 드롭다운이 anchorView 아래에 표시되고, 키보드가 숨겨져 있을 때, 적용되는 윈도우 하단으로부터의 오프셋을 나타낸다.
-    var offsetFromWindowBottom = CGFloat(0) {
         didSet { setNeedsUpdateConstraints() }
     }
     
@@ -75,9 +63,7 @@ final class DropDown: UIView {
     var xConstraint: NSLayoutConstraint?       // DropDown의 x 위치(수평 위치)를 결정하는 제약 조건을 참조
     var yConstraint: NSLayoutConstraint?       // DropDown의 y 위치(수직 위치)를 결정하는 제약 조건을 참조
 
-    
     // MARK: - Appearance
-    
     /// 기본값은 'DPDConstant.UI.RowHeight' 이며, 새 값을 지정하면 해당 값으로 설정되며, 새 값이 설정된 후에 드롭다운의 모든 컴포넌트를 다시 로드.
     var cellHeight = DropdownConstant.DropdownUI.rowHeight {
         willSet { tableView.rowHeight = newValue }
@@ -117,13 +103,6 @@ final class DropDown: UIView {
             tableView.layer.cornerRadius = newValue
         }
         didSet { reloadAllComponents() }
-    }
-
-    /// cornerRadius 속성 변경 메서드
-    func setupCornerRadius(_ radius: CGFloat) {
-        tableViewContainer.layer.cornerRadius = radius
-        tableView.layer.cornerRadius = radius
-        reloadAllComponents()
     }
 
     /// 원하는 모서리만 둥글게 설정하는 메서드
@@ -169,7 +148,6 @@ final class DropDown: UIView {
     }
 
     // MARK: - 텍스트 스타일
-    
     /// 드롭다운의 각 셀에 표시되는 텍스트의 색상을 나타낸다.
     var textColor = DropdownConstant.DropdownItem.textColor {
         didSet { reloadAllComponents() }
@@ -197,7 +175,6 @@ final class DropDown: UIView {
     }
     
     // MARK: - DataSource
-    
     /// 드롭다운에 표시될 데이터 항목들을 포함하고 있음.
     var dataSource = [String]() {
         didSet {
@@ -235,7 +212,6 @@ final class DropDown: UIView {
     var willShowAction: Closure?
     var cancelAction: Closure?
     
-    
     /// 드롭다운에서 표시될 수 있는 셀의 최소 높이를 제공
     var minHeight: CGFloat {
         return tableView.rowHeight
@@ -244,42 +220,7 @@ final class DropDown: UIView {
     /// 드롭다운 뷰의 제약 조건이 설정되었는지 여부를 나타낸다. 중복적인 제약 조건의 추가를 방지하기 위해 플래그를 사용함(default: false)
     var didSetupConstraints = false
 
-    
-    // MARK: - 초기화 메서드
-
-    /// show() 메서드를 호출하기 전에 드롭다운이 작동하기 위한 필수 설정사항 dataSource, anchorView, selectionAction을 설정해야 함.
-    convenience init() {
-        self.init(frame: .zero)
-    }
-    
-    /// anchorView - 드롭다운이 표시될 기준이 되는 뷰. 드롭다운은 이 뷰의 상단이나 하단에 나타나게 됨.
-    /// selectionAction - 사용자가 드롭다운의 셀을 선택할 때, 실행될 액션.
-    /// dataSource - 드롭다운에 표시될 텍스트 데이터의 배열
-    /// topOffset - anchorView에 상대적인 오프셋으로, 드롭다운이 anchorView의 위쪽에 표시될 때 사용
-    /// bottomOffset - anchorView에 상대적인 오프셋으로, 드롭다운이 anchorView의 아래쪽에 표시될 때 사용
-    /// cellConfiguration - 셀의 텍스트 형식을 정의하는 클로저
-    /// cancelAction - 유저가 드롭다운을 취소하거나 숨길 때, 실행되는 액션
-    convenience init(
-        anchorView: AnchorView,
-        selectionAction: SelectionClosure? = nil,
-        dataSource: [String] = [],
-        topOffset: CGPoint? = nil,
-        bottomOffset: CGPoint? = nil,
-        cellConfiguration: ConfigurationClosure? = nil,
-        cancelAction: Closure? = nil
-    ) {
-        self.init(frame: .zero)
-
-        self.anchorView = anchorView
-        self.selectionAction = selectionAction
-        self.dataSource = dataSource
-        self.topOffset = topOffset ?? .zero
-        self.bottomOffset = bottomOffset ?? .zero
-        self.cellConfiguration = cellConfiguration
-        self.cancelAction = cancelAction
-    }
-    
-    /// 주 초기화 메서드(designated init) setup() 을 통해 드롭다운과 관련된 초기 설정을 수행
+    // MARK: - 초기화
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -373,7 +314,7 @@ extension DropDown {
         super.updateConstraints()
     }
     
-    /// 드롭다운의 서브 뷰들에 대한 레이아웃 배치
+    /// 드롭다운의 서브 뷰들에 대한 레이아웃
     func setupConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
         print("setupConstraints")
@@ -690,18 +631,6 @@ extension DropDown {
             selectedItemIndexRow = nil
             tableView.deselectRow(at: IndexPath(row: index, section: 0), animated: true)
         }
-    }
-    
-    /// 현재 tableView에서 선택된 Cell의 인덱스를 반환
-    var indexForSelectedRow: Index? {
-        return tableView.indexPathForSelectedRow?.row
-    }
-    
-    /// 현재 선택된 항목의 값을 반환
-    var selectedItem: String? {
-        guard let row = tableView.indexPathForSelectedRow?.row else { return nil }
-
-        return dataSource[row]
     }
 }
 
