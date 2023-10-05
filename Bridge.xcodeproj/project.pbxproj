@@ -85,6 +85,7 @@
 		7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */; };
 		7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */; };
 		7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */; };
+		7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */; };
 		7C1366352AC15ECF00EB415D /* BrideBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366342AC15ECF00EB415D /* BrideBookmarkButton.swift */; };
 		7C1366392AC16C4D00EB415D /* BrideRemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366382AC16C4D00EB415D /* BrideRemoveButton.swift */; };
 		7C1366422AC27F9100EB415D /* BrideSendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* BrideSendMessageButton.swift */; };
@@ -208,6 +209,7 @@
 		7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageType.swift; sourceTree = "<group>"; };
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
+		7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSetFieldView.swift; sourceTree = "<group>"; };
 		7C1366342AC15ECF00EB415D /* BrideBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideBookmarkButton.swift; sourceTree = "<group>"; };
 		7C1366382AC16C4D00EB415D /* BrideRemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideRemoveButton.swift; sourceTree = "<group>"; };
 		7C1366412AC27F9100EB415D /* BrideSendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideSendMessageButton.swift; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 				7BA36CD42A9F7D38000DAB02 /* NavigationTitleView.swift */,
 				7C569D122AA1E7020063D362 /* ProjectSectionHeaderView.swift */,
 				7B14DB372AB3040F009A00EB /* PlaceholderView.swift */,
+				7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1081,6 +1084,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C42701A2AA377FE009BE6AF /* ProjectCollectionViewCell.swift in Sources */,
+				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BrideBookmarkButton.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,

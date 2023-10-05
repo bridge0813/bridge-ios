@@ -13,9 +13,8 @@ import RxCocoa
 import RxSwift
 
 final class SignInViewController: BaseViewController {
-    
     // MARK: - UI
-    private let rootFlexViewContainer = UIView()
+    private let rootFlexContainer = UIView()
     
     private let dismissButton: UIButton = {
         let button = UIButton()
@@ -54,9 +53,9 @@ final class SignInViewController: BaseViewController {
     }
     
     override func configureLayouts() {
-        view.addSubview(rootFlexViewContainer)
+        view.addSubview(rootFlexContainer)
         
-        rootFlexViewContainer.flex
+        rootFlexContainer.flex
             .justifyContent(.center)
             .paddingHorizontal(16)
             .define { flex in
@@ -66,8 +65,8 @@ final class SignInViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        rootFlexViewContainer.pin.all()
-        rootFlexViewContainer.flex.layout()
+        rootFlexContainer.pin.all()
+        rootFlexContainer.flex.layout()
     }
     
     override func bind() {

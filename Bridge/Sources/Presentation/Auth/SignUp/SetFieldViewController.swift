@@ -12,7 +12,7 @@ import RxSwift
 
 final class SetFieldViewController: BaseViewController {
     // MARK: - UI
-    private let rootFlexViewContainer = UIView()
+    private let rootFlexContainer = UIView()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
@@ -25,40 +25,7 @@ final class SetFieldViewController: BaseViewController {
     
     private let tipMessageBox = BridgeTipMessageBox("관심분야 설정하고 맞춤 홈화면 받아보세요!")
     
-    private let developerLabel: UILabel = {
-        let label = UILabel()
-        label.text = "개발자"
-        label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
-        return label
-    }()
-    
-    private let iosButton = BridgeFieldTagButton("iOS")
-    private let androidButton = BridgeFieldTagButton("안드로이드")
-    private let frontendButton = BridgeFieldTagButton("프론트엔드")
-    private let backendButton = BridgeFieldTagButton("백엔드")
-    
-    private let designerLabel: UILabel = {
-        let label = UILabel()
-        label.text = "디자이너"
-        label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
-        return label
-    }()
-    
-    private let uiuxButton = BridgeFieldTagButton("UI/UX")
-    private let bibxButton = BridgeFieldTagButton("BI/BX")
-    private let videomotionButton = BridgeFieldTagButton("영상/모션")
-    
-    private let pmLabel: UILabel = {
-        let label = UILabel()
-        label.text = "기획자"
-        label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
-        return label
-    }()
-    
-    private let pmButton = BridgeFieldTagButton("PM")
+    private let setFieldView = BridgeSetFieldView()
     
     private let completeButton = BridgeButton(
         "관심분야 설정하기",
@@ -87,65 +54,14 @@ final class SetFieldViewController: BaseViewController {
     }
     
     override func configureLayouts() {
-        view.addSubview(rootFlexViewContainer)
+        view.addSubview(rootFlexContainer)
         
-        let labelMargin: CGFloat = 14           // 레이블과 다른 컴포넌트 간 마진
-        let sectionMargin: CGFloat = 24         // 섹션 간 마진
-        let containerSize: CGFloat = 200        // 관심분야 버튼 컨테이너 크기
-        let buttonMargin: CGFloat = 12          // 관심분야 버튼 간 간격
-        
-        rootFlexViewContainer.flex.paddingHorizontal(16).define { flex in
-            flex.addItem(descriptionLabel).marginTop(24).marginBottom(labelMargin)
+        rootFlexContainer.flex.paddingHorizontal(16).define { flex in
+            flex.addItem(descriptionLabel).marginTop(24).marginBottom(14)
+            
             flex.addItem(tipMessageBox).marginBottom(40)
             
-            // 개발자 섹션
-            flex.addItem().define { flex in
-                flex.addItem(developerLabel).marginBottom(labelMargin)
-                
-                flex.addItem()
-                    .direction(.row)
-                    .alignItems(.start)
-                    .wrap(.wrap)
-                    .width(containerSize)
-                    .marginBottom(sectionMargin)
-                    .define { flex in
-                        flex.addItem(iosButton).marginRight(buttonMargin).marginBottom(buttonMargin)
-                        flex.addItem(androidButton)
-                        flex.addItem(frontendButton).marginRight(buttonMargin).marginBottom(buttonMargin)
-                        flex.addItem(backendButton)
-                    }
-            }
-            
-            // 디자이너 섹션
-            flex.addItem().define { flex in
-                flex.addItem(designerLabel).marginBottom(labelMargin)
-                
-                flex.addItem()
-                    .direction(.row)
-                    .alignItems(.start)
-                    .wrap(.wrap)
-                    .width(containerSize)
-                    .marginBottom(sectionMargin)
-                    .define { flex in
-                        flex.addItem(uiuxButton).marginRight(buttonMargin).marginBottom(buttonMargin)
-                        flex.addItem(bibxButton)
-                        flex.addItem(videomotionButton)
-                    }
-            }
-            
-            // 기획자 섹션
-            flex.addItem().define { flex in
-                flex.addItem(pmLabel).marginBottom(labelMargin)
-                
-                flex.addItem()
-                    .direction(.row)
-                    .alignItems(.start)
-                    .wrap(.wrap)
-                    .width(containerSize)
-                    .define { flex in
-                        flex.addItem(pmButton)
-                    }
-            }
+            flex.addItem(setFieldView)
             
             flex.addItem().grow(1)  // spacer
             
@@ -155,8 +71,8 @@ final class SetFieldViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        rootFlexViewContainer.pin.all(view.pin.safeArea)
-        rootFlexViewContainer.flex.layout()
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.flex.layout()
     }
     
     override func bind() {
