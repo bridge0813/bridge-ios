@@ -36,5 +36,8 @@ final class DefaultAuthRepository: AuthRepository {
                 
                 return Single.just(result)
             }
+            .catch { _ in
+                Single.just(SignInResult.failure)
+            }
     }
 }
