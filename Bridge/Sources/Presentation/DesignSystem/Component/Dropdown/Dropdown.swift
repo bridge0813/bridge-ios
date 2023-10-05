@@ -359,7 +359,8 @@ private extension DropDown {
         }
         
         tableView.rowHeight = cellHeight
-        setHiddentState()
+        
+        alpha = 0
         isHidden = true
         
         dismissMode = .onTap
@@ -692,7 +693,8 @@ extension DropDown {
         UIView.animate(
             withDuration: animationduration,
             animations: { [weak self] in
-                self?.setShowedState()
+                self?.alpha = 1
+                self?.tableViewContainer.transform = .identity
             }
         )
 
@@ -733,7 +735,7 @@ extension DropDown {
         UIView.animate(
             withDuration: animationduration,
             animations: { [weak self] in
-                self?.setHiddentState()
+                self?.alpha = 0
             },
             completion: { [weak self] _ in
                 guard let self else { return }
@@ -749,17 +751,6 @@ extension DropDown {
     func cancel() {
         hide()
         cancelAction?()
-    }
-
-    /// 드롭다운의 alpha값을 0으로 만듬
-    func setHiddentState() {
-        alpha = 0
-    }
-
-    /// 드롭다운의 alpha값을 1로 설정하고, tableViewContainer의 transform을 .identity로 원상복귀
-    func setShowedState() {
-        alpha = 1
-        tableViewContainer.transform = .identity
     }
 }
 

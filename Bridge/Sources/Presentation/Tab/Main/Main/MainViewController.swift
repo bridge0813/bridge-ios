@@ -126,7 +126,7 @@ final class MainViewController: BaseViewController {
         }
         
         dropDown.dataSource = ["지원취소", "삭제하기"]
-//        dropDown.bottomOffset = CGPoint(x: 30, y: -5)
+        dropDown.bottomOffset = CGPoint(x: 0, y: 5)
     }
     
     private func configureNavigationUI() {
