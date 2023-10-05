@@ -107,9 +107,15 @@ final class MainViewController: BaseViewController {
         dropDown.show()
     }
     
+//    let leaveButton = MenuWithIconButton(title: "채팅방 나가기", imageName: "leave")
+//        let reportButton = MenuWithIconButton(title: "신고하기", imageName: "warning")
+//        let turnOffNotificationButton = MenuWithIconButton(title: "알림 끄기", imageName: "bell.crossline")
+//
+    
     private func setDropdown() {
         print("setDropdown")
-        dropDown.anchorView = restrictionMenuTriggerView // 이 뷰 아래에 드롭다운을 표시
+        dropDown.anchorView = goToNotificationButton // 이 뷰 아래에 드롭다운을 표시
+        dropDown.width = 147
         dropDown.dismissMode = .onTap
         dropDown.selectionAction = { [weak self] _, text in
             self?.restrictionMenuTriggerView.restrictionTypeLabel.text = text
@@ -126,7 +132,19 @@ final class MainViewController: BaseViewController {
             self?.restrictionMenuTriggerView.arrowButton.isSelected = false
         }
         
-        dropDown.dataSource = ["지원취소", "삭제하기"]
+        let imageStringArray: [String] = ["leave", "warning", "bell.crossline"]
+        
+        dropDown.dataSource = ["채팅방 나가기", "신고하기", "알림 끄기"]
+        dropDown.selectionBackgroundColor = BridgeColor.primary1
+        dropDown.customCellClass = ChatRoomMenuCell.self
+        dropDown.customCellConfiguration = { index, _, cell in
+            guard let cell = cell as? ChatRoomMenuCell else { return }
+         
+            cell.optionImageView.image = UIImage(named: imageStringArray[index])?
+                .resize(to: CGSize(width: 14.43, height: 13.33))
+                .withRenderingMode(.alwaysTemplate)
+        }
+
         dropDown.bottomOffset = CGPoint(x: 0, y: 5)
     }
     

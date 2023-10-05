@@ -27,7 +27,6 @@ typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscree
 
 
 final class DropDown: UIView {
-    
     /// 드롭다운이 어떻게 닫힐지 결정하는 모드.
     enum DismissMode {
         
@@ -46,11 +45,10 @@ final class DropDown: UIView {
     static weak var VisibleDropDown: DropDown?
 
     // MARK: - UI
-    
-    /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능을 제공할 것으로 추정됨.
+    /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능
     let dismissableView = UIView()
     
-    /// 테이블뷰를 포함하게 될 컨테이너 뷰
+    /// 테이블뷰를 포함하는 컨테이너 뷰
     let tableViewContainer = UIView()
     
     /// 드롭다운 항목들을 표시하기 위한 UITableView
@@ -58,7 +56,6 @@ final class DropDown: UIView {
     
     /// 실제 표시하기 전에 셀의 레이아웃 및 크기를 계산하는 데 사용될 것으로 보임.
     var templateCell: UITableViewCell!
-    
     
     /// 앞서 설명했던 AnchorView 프로토콜을 채택하는 객체
     /// 드롭다운이 표시될 기준점이 되는 UIView나 UIBarButtonItem을 나타냄.
@@ -213,7 +210,7 @@ final class DropDown: UIView {
     var customCellClass: UITableViewCell.Type? {
         didSet {
             if let cellType = customCellClass {
-                tableView.register(cellType, forCellReuseIdentifier: DropdownConstant.ReusableIdentifier.dropDownCell)
+                tableView.register(cellType, forCellReuseIdentifier: DropdownBaseCell.identifier)
                 templateCell = nil
                 reloadAllComponents()
             }
@@ -330,7 +327,7 @@ final class DropDown: UIView {
 // MARK: - Setup
 private extension DropDown {
     func setup() {
-        tableView.register(CustomDropdownCell.self)
+        tableView.register(DropdownBaseCell.self, forCellReuseIdentifier: DropdownBaseCell.identifier)
         
         DispatchQueue.main.async {
             // HACK: If not done in dispatch_async on main queue `setupUI` will have no effect
@@ -567,19 +564,19 @@ extension DropDown {
     /// 드롭다운의 항목 중 width가 가장 높은 아이템의 width를 계산하여 반환
     func fittingWidth() -> CGFloat {
         if templateCell == nil {
-            templateCell = tableView.dequeueReusableCell(withIdentifier: "CustomDropdownCell") as? CustomDropdownCell
+            templateCell = tableView.dequeueReusableCell(withIdentifier: DropdownBaseCell.identifier) as? CustomDropdownCell
         }
         
         var maxWidth: CGFloat = 0
         
         for index in 0..<dataSource.count {
             
-            if let customCell = templateCell as? CustomDropdownCell {
-                configureCell(customCell, at: index)
-                templateCell.bounds.size.height = cellHeight
+            if let customCell = templateCell as? DropdownBaseCell {
+                customCell.optionLabel.text = dataSource[index]
+                customCell.bounds.size.height = cellHeight
                 
                 // templateCell과 내부 서브뷰들이 제약조건을 만족하면서 차지할 수 있는 최소한의 크기를 계산
-                let width = templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
+                let width = customCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
                 
                 if width > maxWidth {
                     maxWidth = width
@@ -819,30 +816,22 @@ extension DropDown: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(CustomDropdownCell.self, for: indexPath) else {
-            return UITableViewCell()
-        }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: DropdownBaseCell.identifier,
+            for: indexPath
+        ) as? DropdownBaseCell else { return UITableViewCell() }
         
-        configureCell(cell, at: indexPath.row)
+        cell.optionLabel.text = dataSource[indexPath.row]
+        cell.optionLabel.textColor = textColor
+        cell.optionLabel.font = textFont
+        cell.selectedBackgroundColor = selectionBackgroundColor
+        cell.configureCell()
+        
+        customCellConfiguration?(indexPath.row, dataSource[indexPath.row], cell)
+        
         return cell
     }
     
-    func configureCell(_ cell: CustomDropdownCell, at index: Int) {
-        
-//        cell.titleLabel.textColor = textColor
-//        cell.titleLabel.font = textFont
-//        cell.selectedBackgroundColor = selectionBackgroundColor
-//        cell.highlightTextColor = selectedTextColor
-//        cell.normalTextColor = textColor
-//
-        if let cellConfiguration = cellConfiguration {
-            cell.titleLabel.text = cellConfiguration(index, dataSource[index])
-        } else {
-            cell.titleLabel.text = dataSource[index]
-        }
-        
-        customCellConfiguration?(index, dataSource[index], cell)
-    }
 }
 
 // MARK: - UITableViewDelegate
