@@ -1,5 +1,5 @@
 //
-//  MessageBox.swift
+//  BridgeMessageBox.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/09/26.
@@ -9,8 +9,8 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-class MessageBox: BaseView {
-    // MARK: - UI
+class BridgeMessageBox: BaseView {
+    
     let backgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = BridgeColor.secondary4
@@ -26,17 +26,9 @@ class MessageBox: BaseView {
         return label
     }()
     
-    // MARK: - Layout
     override func configureLayouts() {
         addSubview(backgroundView)
-        
-        backgroundView.flex
-            .direction(.row)
-            .justifyContent(.start)
-            .alignItems(.center)
-            .width(343)
-            .height(38)
-            .padding(13)
+        backgroundView.flex.direction(.row).padding(13).height(38)
     }
     
     override func layoutSubviews() {

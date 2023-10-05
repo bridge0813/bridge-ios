@@ -1,15 +1,15 @@
 //
-//  TipMessageBox.swift
+//  BridgeTipMessageBox.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/09/26.
 //
 
 import UIKit
-import PinLayout
 import FlexLayout
+import PinLayout
 
-final class TipMessageBox: MessageBox {
+final class BridgeTipMessageBox: BridgeMessageBox {
     
     private let tipLabel: UILabel = {
         let label = UILabel()
@@ -24,7 +24,6 @@ final class TipMessageBox: MessageBox {
         messageLabel.text = message
     }
     
-    // MARK: - Layouts
     override func configureLayouts() {
         super.configureLayouts()
         

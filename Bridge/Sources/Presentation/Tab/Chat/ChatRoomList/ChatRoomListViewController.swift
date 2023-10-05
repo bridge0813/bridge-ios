@@ -22,7 +22,7 @@ final class ChatRoomListViewController: BaseViewController {
         return tableView
     }()
     
-    private var placeholderView = PlaceholderView()
+    private var placeholderView = BridgePlaceholderView()
     
     private typealias DataSource = UITableViewDiffableDataSource<ChatRoomListViewModel.Section, ChatRoom>
     private typealias Snapshot = NSDiffableDataSourceSnapshot<ChatRoomListViewModel.Section, ChatRoom>
@@ -53,7 +53,7 @@ final class ChatRoomListViewController: BaseViewController {
     }
     
     private func configureNavigationController() {
-        let navigationTitleView = NavigationTitleView(title: "채팅")
+        let navigationTitleView = BridgeNavigationTitleView(title: "채팅")
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationTitleView)
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "bell")?.resize(to: CGSize(width: 24, height: 24))

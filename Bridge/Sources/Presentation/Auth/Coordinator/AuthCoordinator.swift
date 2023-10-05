@@ -34,20 +34,15 @@ extension AuthCoordinator {
     func showSignInViewController() {
         let signInViewModel = SignInViewModel(coordinator: self, signInUseCase: signInUseCase)
         let signInViewController = SignInViewController(viewModel: signInViewModel)
-        
         let signInNavigationController = UINavigationController(rootViewController: signInViewController)
-        signInNavigationController.setNavigationBarHidden(true, animated: false)
-        
-        // TODO: 로그인 화면에 x 버튼 추가하지 전까지 주석처리
-//        signInNavigationController.modalPresentationStyle = .fullScreen
-        
+        signInNavigationController.modalPresentationStyle = .fullScreen
         navigationController.present(signInNavigationController, animated: true)
     }
     
     // 회원가입 플로우
-    func showSelectFieldViewController() {
-        let selectFieldViewModel = SelectFieldViewModel(coordinator: self)
-        let selectFieldViewController = SelectFieldViewController(viewModel: selectFieldViewModel)
+    func showSetFieldViewController() {
+        let selectFieldViewModel = SetFieldViewModel(coordinator: self)
+        let selectFieldViewController = SetFieldViewController(viewModel: selectFieldViewModel)
         
         if let signInNavController = navigationController.presentedViewController as? UINavigationController {
             signInNavController.pushViewController(selectFieldViewController, animated: true)

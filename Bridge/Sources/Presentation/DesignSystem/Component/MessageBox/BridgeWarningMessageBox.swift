@@ -1,15 +1,15 @@
 //
-//  WarningMessageBox.swift
+//  BridgeWarningMessageBox.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/09/26.
 //
 
 import UIKit
-import PinLayout
 import FlexLayout
+import PinLayout
 
-final class WarningMessageBox: MessageBox {
+final class BridgeWarningMessageBox: BridgeMessageBox {
     
     private let warningImageView: UIImageView = {
         let imageView = UIImageView()
@@ -25,7 +25,6 @@ final class WarningMessageBox: MessageBox {
         messageLabel.text = message
     }
     
-    // MARK: - Layouts
     override func configureLayouts() {
         super.configureLayouts()
         

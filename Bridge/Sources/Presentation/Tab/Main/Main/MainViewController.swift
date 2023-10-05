@@ -44,7 +44,7 @@ final class MainViewController: BaseViewController {
     
     private let bookmarkButton = BrideBookmarkButton()
     private let removeButton = BrideRemoveButton()
-    private let fieldTagButton = BrideFieldTagButton("프론트엔드")
+    private let fieldTagButton = BridgeFieldTagButton("프론트엔드")
     private let confirmButton = BridgeButton("보러가기", titleFont: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
     private let sendMessageButton = BrideSendMessageButton()
     
@@ -101,7 +101,7 @@ final class MainViewController: BaseViewController {
     
     // MARK: - Methods
     private func configureNavigationUI() {
-        navigationItem.titleView = NavigationTitleView(title: "Bridge")  // 임의설정
+        navigationItem.titleView = BridgeNavigationTitleView(title: "Bridge")  // 임의설정
         navigationItem.rightBarButtonItem = goToNotificationButton
         navigationController?.navigationBar.tintColor = .black
     }
