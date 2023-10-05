@@ -48,26 +48,14 @@ final class SignInViewModel: ViewModelType {
                 owner.signInUseCase.signInWithApple(credentials: credentials)
             }
             .observe(on: MainScheduler.instance)
-            .subscribe(
-                with: self,
-                onNext: { owner, result in
-                    switch result {
-                    case .success:
-                        owner.coordinator?.finish()
-                        
-                    case .needRefresh:
-                        // refresh token 넣어서 다시 요청
-                        print("need refresh")
-                        
-                    case .needSignUp:
-                        owner.coordinator?.showSetFieldViewController()
-                        
-                    case .failure:
-                        print("fail")
-                        // error handling ...
-                    }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .needSignUp:   owner.coordinator?.showSetFieldViewController()
+                case .success:      owner.coordinator?.finish()
+                case .failure:      print("fail")  // need error handling ...
                 }
-            )
+            })
             .disposed(by: disposeBag)
         
         return Output()

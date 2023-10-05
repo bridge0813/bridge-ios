@@ -6,8 +6,7 @@
 //
 
 enum SignInResult {
-    case success
-    case needRefresh
     case needSignUp
+    case success
     case failure
 }
