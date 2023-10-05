@@ -15,7 +15,7 @@
 		7B14DB2E2AB1DA39009A00EB /* SignInResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB2D2AB1DA39009A00EB /* SignInResult.swift */; };
 		7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB302AB1DACF009A00EB /* AuthRepository.swift */; };
 		7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB332AB1DBFD009A00EB /* DefaultAuthRepository.swift */; };
-		7B14DB382AB3040F009A00EB /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB372AB3040F009A00EB /* PlaceholderView.swift */; };
+		7B14DB382AB3040F009A00EB /* BridgePlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB372AB3040F009A00EB /* BridgePlaceholderView.swift */; };
 		7B14DB442AB57D29009A00EB /* UserAuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB432AB57D29009A00EB /* UserAuthState.swift */; };
 		7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB462AB86051009A00EB /* TokenStorage.swift */; };
 		7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB4A2AB86099009A00EB /* KeychainError.swift */; };
@@ -78,7 +78,7 @@
 		7BA36CCE2A9E185A000DAB02 /* ChatRoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CCD2A9E185A000DAB02 /* ChatRoomCell.swift */; };
 		7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CCF2A9E1888000DAB02 /* BaseTableViewCell.swift */; };
 		7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CD22A9F3F6B000DAB02 /* BaseView.swift */; };
-		7BA36CD52A9F7D38000DAB02 /* NavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CD42A9F7D38000DAB02 /* NavigationTitleView.swift */; };
+		7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CD42A9F7D38000DAB02 /* BridgeNavigationTitleView.swift */; };
 		7BA36CDA2AA197F8000DAB02 /* ChatRoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CD92AA197F8000DAB02 /* ChatRoomListViewController.swift */; };
 		7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */; };
 		7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2402A9851B600AA2328 /* Coordinator.swift */; };
@@ -144,7 +144,7 @@
 		7B14DB2D2AB1DA39009A00EB /* SignInResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResult.swift; sourceTree = "<group>"; };
 		7B14DB302AB1DACF009A00EB /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		7B14DB332AB1DBFD009A00EB /* DefaultAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthRepository.swift; sourceTree = "<group>"; };
-		7B14DB372AB3040F009A00EB /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		7B14DB372AB3040F009A00EB /* BridgePlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgePlaceholderView.swift; sourceTree = "<group>"; };
 		7B14DB432AB57D29009A00EB /* UserAuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthState.swift; sourceTree = "<group>"; };
 		7B14DB462AB86051009A00EB /* TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		7B14DB4A2AB86099009A00EB /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 		7BA36CCD2A9E185A000DAB02 /* ChatRoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomCell.swift; sourceTree = "<group>"; };
 		7BA36CCF2A9E1888000DAB02 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		7BA36CD22A9F3F6B000DAB02 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
-		7BA36CD42A9F7D38000DAB02 /* NavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleView.swift; sourceTree = "<group>"; };
+		7BA36CD42A9F7D38000DAB02 /* BridgeNavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeNavigationTitleView.swift; sourceTree = "<group>"; };
 		7BA36CD92AA197F8000DAB02 /* ChatRoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomListViewController.swift; sourceTree = "<group>"; };
 		7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2402A9851B600AA2328 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -499,7 +499,6 @@
 			children = (
 				7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */,
 				7BA36CC82A9E1640000DAB02 /* Reusable.swift */,
-				7BA36CD62A9F7D46000DAB02 /* Views */,
 				7BA36CC22A9E10FA000DAB02 /* Bases */,
 				7BA36CC52A9E148C000DAB02 /* Extensions */,
 			);
@@ -687,9 +686,9 @@
 		7BA36CD62A9F7D46000DAB02 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7BA36CD42A9F7D38000DAB02 /* NavigationTitleView.swift */,
+				7BA36CD42A9F7D38000DAB02 /* BridgeNavigationTitleView.swift */,
 				7C569D122AA1E7020063D362 /* ProjectSectionHeaderView.swift */,
-				7B14DB372AB3040F009A00EB /* PlaceholderView.swift */,
+				7B14DB372AB3040F009A00EB /* BridgePlaceholderView.swift */,
 				7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */,
 			);
 			path = Views;
@@ -767,6 +766,7 @@
 		7C1366332AC15DEA00EB415D /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				7BA36CD62A9F7D46000DAB02 /* Views */,
 				7B6123902AC4338F006E72C1 /* Alert */,
 				7C1366402AC2783100EB415D /* Buttons */,
 				7B6123872AC2D00C006E72C1 /* MessageBox */,
@@ -1088,7 +1088,7 @@
 				7C1366352AC15ECF00EB415D /* BrideBookmarkButton.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
-				7BA36CD52A9F7D38000DAB02 /* NavigationTitleView.swift in Sources */,
+				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
 				7BA36C9D2A9C5105000DAB02 /* Message.swift in Sources */,
 				7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */,
 				7BA36CBF2A9DA44F000DAB02 /* NetworkError.swift in Sources */,
@@ -1159,7 +1159,7 @@
 				7C40CBC22AC5C2BF000F4C9F /* BrideMediumButtonGroup.swift in Sources */,
 				7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
-				7B14DB382AB3040F009A00EB /* PlaceholderView.swift in Sources */,
+				7B14DB382AB3040F009A00EB /* BridgePlaceholderView.swift in Sources */,
 				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
 				7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */,
 				7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */,

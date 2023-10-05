@@ -1,5 +1,5 @@
 //
-//  PlaceholderView.swift
+//  BridgePlaceholderView.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/09/14.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PlaceholderView: BaseView {
+final class BridgePlaceholderView: BaseView {
     
     private let rootFlexContainer = UIView()
     
@@ -35,7 +35,7 @@ final class PlaceholderView: BaseView {
     }
 }
 
-extension PlaceholderView {
+extension BridgePlaceholderView {
     func configurePlaceholderView(description: String?) {
         descriptionLabel.text = description
     }

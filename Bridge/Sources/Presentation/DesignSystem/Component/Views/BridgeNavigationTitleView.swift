@@ -1,5 +1,5 @@
 //
-//  NavigationTitleView.swift
+//  BridgeNavigationTitleView.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/08/30.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NavigationTitleView: BaseView {
+final class BridgeNavigationTitleView: BaseView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()

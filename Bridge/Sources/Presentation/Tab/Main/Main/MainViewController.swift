@@ -101,7 +101,7 @@ final class MainViewController: BaseViewController {
     
     // MARK: - Methods
     private func configureNavigationUI() {
-        navigationItem.titleView = NavigationTitleView(title: "Bridge")  // 임의설정
+        navigationItem.titleView = BridgeNavigationTitleView(title: "Bridge")  // 임의설정
         navigationItem.rightBarButtonItem = goToNotificationButton
         navigationController?.navigationBar.tintColor = .black
     }
