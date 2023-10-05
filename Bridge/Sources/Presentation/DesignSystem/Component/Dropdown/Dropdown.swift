@@ -13,9 +13,6 @@ typealias Closure = () -> Void
 /// 사용자가 드롭다운 항목을 선택했을 때, 호출되는 클로저를 의미. 선택된 항목의 인덱스와 문자열 값을 받음.
 typealias SelectionClosure = (Index, String) -> Void
 
-/// 사용자가 여러 드롭다운 항목을 선택했을 때, 호출되는 클로저를 의미.
-typealias MultiSelectionClosure = ([Index], [String]) -> Void
-
 /// 각 항목을 구성할 때, 사용되는 클로저로, 항목의 인덱스와 기본 문자열을 받아 수정된 문자열을 반환
 typealias ConfigurationClosure = (Index, String) -> String
 
@@ -246,14 +243,9 @@ final class DropDown: UIView {
     /// 사용자가 드롭다운의 특정항목을 선택했을 때, 실행될 액션을 정의하는 클로저
     var selectionAction: SelectionClosure?
     
-    /// 사용자가 드롭다운의 여러 항목을 동시에 선택했을 때, 실행될 액션을 정의하는 클로저
-    var multiSelectionAction: MultiSelectionClosure?
-
-    
     // MARK: - 드롭다운이 표시될 때, 숨길 때의 액션
     var willShowAction: Closure?
     var cancelAction: Closure?
-
     
     // MARK: - 드롭다운이 어떻게 dismiss될 지를 결정
     /// 설정된 dismissMode 값이 .onTap일 경우, 탭 제스처 인식기를 'dismissableView' 에 추가하여 드롭다운 바깥을 탭할 때, dismiss 처리
@@ -758,18 +750,6 @@ extension DropDown {
         }
     }
     
-    /// 선택된 모든 index에 대해 선택처리
-    func selectRows(at indices: Set<Index>?) {
-        indices?.forEach {
-            selectRow(at: $0)
-        }
-        
-        // if we are in multi selection mode then reload data so that all selections are shown
-        if multiSelectionAction != nil {
-            tableView.reloadData()
-        }
-    }
-    
     /// 해당 인덱스에 대해 선택 해제 처리
     func deselectRow(at index: Index?) {
         guard let index = index, index >= 0 else { return }
@@ -840,38 +820,6 @@ extension DropDown: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRowIndex = indexPath.row
         
-        // 다중 선택모드인지 확인
-        if let multiSelectionCallback = multiSelectionAction {
-            
-            // 이미 선택된 Cell을 중복선택했다면 선택 해제.
-            if selectedRowIndices.first(where: { $0 == selectedRowIndex }) != nil {
-                deselectRow(at: selectedRowIndex)
-
-                // 선택된 모든 행의 인덱스를 포함하는 Set을 배열로 변환
-                let selectedRowIndicesArray = Array(selectedRowIndices)
-                
-                // 선택된 인덱스에 맞는 항목들을 가져와 배열로 저장.
-                let selectedRows = selectedRowIndicesArray.map { dataSource[$0] }
-                
-                // 클로저 호출.
-                multiSelectionCallback(selectedRowIndicesArray, selectedRows)
-                return
-                
-            } else {
-                selectedRowIndices.insert(selectedRowIndex)  // 선택 인덱스 추가
-
-                let selectedRowIndicesArray = Array(selectedRowIndices)
-                let selectedRows = selectedRowIndicesArray.map { dataSource[$0] }
-                
-                selectionAction?(selectedRowIndex, dataSource[selectedRowIndex])
-                multiSelectionCallback(selectedRowIndicesArray, selectedRows)
-                
-                tableView.reloadData()
-                return
-            }
-        }
-        
-        // 멀티 선택이 불가한 경우 처리
         selectedRowIndices.removeAll()
         selectedRowIndices.insert(selectedRowIndex)
         selectionAction?(selectedRowIndex, dataSource[selectedRowIndex])
