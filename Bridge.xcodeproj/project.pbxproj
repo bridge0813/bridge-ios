@@ -122,7 +122,6 @@
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7C8B822F2AC96CD600F7B889 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B822E2AC96CD600F7B889 /* Dropdown.swift */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
-		7C8B82342AC9A05A00F7B889 /* CustomDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82332AC9A05A00F7B889 /* CustomDropdownCell.swift */; };
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
 		7C8B82382ACC2AF500F7B889 /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82372ACC2AF500F7B889 /* DispatchQueue+.swift */; };
 		7C8B823A2ACC480E00F7B889 /* MenuToggleArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82392ACC480E00F7B889 /* MenuToggleArrowButton.swift */; };
@@ -253,7 +252,6 @@
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7C8B822E2AC96CD600F7B889 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
-		7C8B82332AC9A05A00F7B889 /* CustomDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDropdownCell.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		7C8B82372ACC2AF500F7B889 /* DispatchQueue+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+.swift"; sourceTree = "<group>"; };
 		7C8B82392ACC480E00F7B889 /* MenuToggleArrowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuToggleArrowButton.swift; sourceTree = "<group>"; };
@@ -880,7 +878,6 @@
 				7C8B822E2AC96CD600F7B889 /* Dropdown.swift */,
 				7C8B82412ACE94FE00F7B889 /* DropdownBaseCell.swift */,
 				7C8B823F2ACE91C500F7B889 /* ChatRoomMenuCell.swift */,
-				7C8B82332AC9A05A00F7B889 /* CustomDropdownCell.swift */,
 			);
 			path = Dropdown;
 			sourceTree = "<group>";
@@ -1168,7 +1165,6 @@
 				7C8B823C2ACC483D00F7B889 /* RestrictionMenuTriggerView.swift in Sources */,
 				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
-				7C8B82342AC9A05A00F7B889 /* CustomDropdownCell.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
 				7B14DB442AB57D29009A00EB /* UserAuthState.swift in Sources */,
 				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
