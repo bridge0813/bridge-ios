@@ -19,8 +19,9 @@ extension AuthEndpoint: Endpoint {
         }
     }
     
+    // TODO: 배포 후 수정
     var baseURL: URL? {
-        URL(string: "https://base-url.com")  // 백엔드 배포 후 수정
+        URL(string: "https://base-url.com")
     }
     
     var path: String {
