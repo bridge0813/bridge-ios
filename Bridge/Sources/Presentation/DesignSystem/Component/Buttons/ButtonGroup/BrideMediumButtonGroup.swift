@@ -30,9 +30,9 @@ final class BrideMediumButtonGroup: BaseView {
     }()
     
     init(_ titles: (String, String, String)) {
-        leftButton = BridgeButton(titles.0, titleFont: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
-        centerButton = BridgeButton(titles.1, titleFont: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
-        rightButton = BridgeButton(titles.2, titleFont: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
+        leftButton = BridgeButton(title: titles.0, font: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
+        centerButton = BridgeButton(title: titles.1, font: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
+        rightButton = BridgeButton(title: titles.2, font: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
         
         super.init(frame: .zero)
     }
