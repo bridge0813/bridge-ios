@@ -235,7 +235,7 @@ private extension DropDown {
         alpha = 0
         isHidden = true
         
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissableViewTapped))
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hide))
         dismissableView.addGestureRecognizer(gestureRecognizer)
         
         tableView.delegate = self
@@ -574,6 +574,7 @@ extension DropDown {
     }
     
     /// 드롭다운을 숨길 때 사용되는 메서드
+    @objc
     func hide() {
         // 현재 드롭다운이 이미 숨겨져 있으면, 메서드 종료
         if isHidden {
@@ -653,13 +654,5 @@ extension DropDown: UITableViewDelegate {
         }
         
         hide()  // 새로운 항목을 선택했으면 숨기기.
-    }
-}
-
-// MARK: - Auto dismiss
-extension DropDown {
-    @objc
-    func dismissableViewTapped() {
-        hide()
     }
 }
