@@ -605,20 +605,11 @@ extension DropDown {
 
 // MARK: - UITableView
 extension DropDown {
-
     /// 모든 셀을 다시 로드하는 메서드로 'dataSource', 'textColor', 'textFont', 'selectionBackgroundColor' and 'cellConfiguration' 에 대한 변경 사항이 있을 때마다 호출된다.
     func reloadAllComponents() {
         DispatchQueue.executeOnMainThread {
             self.tableView.reloadData()
             self.setNeedsUpdateConstraints()
-        }
-    }
-    
-    /// 해당 인덱스에 대해 선택 해제 처리
-    func deselectRow(at index: Index?) {
-        if let index {
-            selectedItemIndexRow = nil
-            tableView.deselectRow(at: IndexPath(row: index, section: 0), animated: true)
         }
     }
 }
@@ -660,9 +651,9 @@ extension DropDown: UITableViewDelegate {
         selectionAction?(indexPath.row, dataSource[indexPath.row])
         
         // 앵커뷰가 UIBarButton일 때 경우 메뉴처럼 사용되기 때문에 선택된 Cell이 무엇인지 표시 할 필요가 없음.
-        if let _ = anchorView as? UIBarButtonItem {
-            // DropDown's from UIBarButtonItem are menus so we deselect the selected menu right after selection
-            deselectRow(at: indexPath.row)
+        if anchorView as? UIBarButtonItem != nil {
+            selectedItemIndexRow = nil
+            tableView.deselectRow(at: indexPath, animated: true)
         }
         
         hide()  // 새로운 항목을 선택했으면 숨기기.
