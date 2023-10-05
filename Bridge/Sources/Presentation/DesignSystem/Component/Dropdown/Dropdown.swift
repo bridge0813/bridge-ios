@@ -9,6 +9,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+// 출처: https://github.com/AssistoLab/DropDown
+
 typealias Index = Int
 typealias Closure = () -> Void
 
