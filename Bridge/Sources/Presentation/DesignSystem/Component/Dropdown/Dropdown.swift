@@ -113,10 +113,10 @@ final class DropDown: UIView {
     }
     
     // MARK: - 드롭다운의 위치와 크기를 동적으로 결정하고 조절하는 데 사용
-    var heightConstraint: NSLayoutConstraint!  // DropDown의 높이(height)를 결정하는 제약 조건을 참조
-    var widthConstraint: NSLayoutConstraint!   // DropDown의 너비(width)를 결정하는 제약 조건을 참조
-    var xConstraint: NSLayoutConstraint!       // DropDown의 x 위치(수평 위치)를 결정하는 제약 조건을 참조
-    var yConstraint: NSLayoutConstraint!       // DropDown의 y 위치(수직 위치)를 결정하는 제약 조건을 참조
+    var heightConstraint: NSLayoutConstraint?  // DropDown의 높이(height)를 결정하는 제약 조건을 참조
+    var widthConstraint: NSLayoutConstraint?   // DropDown의 너비(width)를 결정하는 제약 조건을 참조
+    var xConstraint: NSLayoutConstraint?       // DropDown의 x 위치(수평 위치)를 결정하는 제약 조건을 참조
+    var yConstraint: NSLayoutConstraint?       // DropDown의 y 위치(수직 위치)를 결정하는 제약 조건을 참조
 
     
     // MARK: - Appearance
@@ -411,10 +411,10 @@ extension DropDown {
         }
         
         // 계산된 레이아웃 정보를 기반으로 각 제약 조건의 constant를 업데이트
-        xConstraint.constant = layout.x
-        yConstraint.constant = layout.y
-        widthConstraint.constant = layout.width
-        heightConstraint.constant = layout.visibleHeight
+        xConstraint?.constant = layout.x
+        yConstraint?.constant = layout.y
+        widthConstraint?.constant = layout.width
+        heightConstraint?.constant = layout.visibleHeight
         
         // 드롭다운이 화면 밖으로 벗어나는 경우 스크롤이 가능하도록 설정
         tableView.isScrollEnabled = layout.offscreenHeight > 0
@@ -452,7 +452,7 @@ extension DropDown {
             multiplier: 1,             // 제약조건의 스케일을 조절
             constant: 0                // 제약조건에 추가될 상수 값
         )
-        addConstraint(xConstraint)  // 드롭다운 뷰에 해당 제약 조건을 추가
+        addConstraint(xConstraint ?? NSLayoutConstraint())  // 드롭다운 뷰에 해당 제약 조건을 추가
 
         yConstraint = NSLayoutConstraint(
             item: tableViewContainer,
@@ -463,7 +463,7 @@ extension DropDown {
             multiplier: 1,
             constant: 0
         )
-        addConstraint(yConstraint)
+        addConstraint(yConstraint ?? NSLayoutConstraint())
 
         widthConstraint = NSLayoutConstraint(
             item: tableViewContainer,
@@ -474,7 +474,7 @@ extension DropDown {
             multiplier: 1,
             constant: 0
         )
-        tableViewContainer.addConstraint(widthConstraint)
+        tableViewContainer.addConstraint(widthConstraint ?? NSLayoutConstraint())
 
         heightConstraint = NSLayoutConstraint(
             item: tableViewContainer,
@@ -485,7 +485,7 @@ extension DropDown {
             multiplier: 1,
             constant: 0
         )
-        tableViewContainer.addConstraint(heightConstraint)
+        tableViewContainer.addConstraint(heightConstraint ?? NSLayoutConstraint())
 
         // Table view
         tableViewContainer.addSubview(tableView)
