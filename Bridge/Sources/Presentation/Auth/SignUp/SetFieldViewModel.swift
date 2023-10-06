@@ -22,9 +22,11 @@ final class SetFieldViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     
     weak var coordinator: AuthCoordinator?
+    private let signUpUseCase: SignUpUseCase
     
-    init(coordinator: AuthCoordinator) {
+    init(coordinator: AuthCoordinator, signUpUseCase: SignUpUseCase) {
         self.coordinator = coordinator
+        self.signUpUseCase = signUpUseCase
     }
     
     func transform(input: Input) -> Output {
@@ -42,8 +44,11 @@ final class SetFieldViewModel: ViewModelType {
         
         input.completeButtonTapped
             .withUnretained(self)
+            .flatMap { owner, result in
+                owner.signUpUseCase.signUp(selectedFields: selectedFields)
+            }
+            .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                // TODO: 데이터 전송
                 owner.coordinator?.finish()
             })
             .disposed(by: disposeBag)
