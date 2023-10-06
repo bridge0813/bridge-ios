@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class ChatRoomMenuCell: DropdownBaseCell {
+final class ChatRoomMenuCell: BaseDropdownCell {
     // MARK: - UI
     let optionImageView: UIImageView = {
         let imageView = UIImageView()

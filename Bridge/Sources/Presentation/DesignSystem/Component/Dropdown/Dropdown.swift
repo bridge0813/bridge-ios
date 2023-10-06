@@ -35,7 +35,7 @@ final class DropDown: UIView {
     let tableView = UITableView()
     
     /// 드롭다운의 width가 정의되지 않았을 경우, cell 내부 컨텐츠의 크기에 맞게 적절하게 width를 계산
-    var templateCell: DropdownBaseCell?
+    var templateCell: BaseDropdownCell?
     
     /// 드롭다운이 표시될 기준점이 되는 UIView나 UIBarButtonItem을 나타냄.
     /// anchorView의 값이 설정될 때마다 setNeedsUpdateConstraints()을 통해 레이아웃 제약 조건을 업데이트하도록 요청한다.
@@ -166,7 +166,7 @@ final class DropDown: UIView {
     var customCellType: UITableViewCell.Type? {
         didSet {
             if let cellType = customCellType {
-                tableView.register(cellType, forCellReuseIdentifier: DropdownBaseCell.identifier)
+                tableView.register(cellType, forCellReuseIdentifier: BaseDropdownCell.identifier)
                 templateCell = nil
                 reloadAllComponents()
             }
@@ -224,7 +224,7 @@ final class DropDown: UIView {
 // MARK: - Setup
 private extension DropDown {
     func setup() {
-        tableView.register(DropdownBaseCell.self, forCellReuseIdentifier: DropdownBaseCell.identifier)
+        tableView.register(BaseDropdownCell.self, forCellReuseIdentifier: BaseDropdownCell.identifier)
         
         DispatchQueue.main.async {
             // HACK: If not done in dispatch_async on main queue `setupUI` will have no effect
@@ -470,7 +470,7 @@ extension DropDown {
     /// 드롭다운의 항목 중 width가 가장 높은 아이템의 width를 계산하여 반환
     func fittingWidth() -> CGFloat {
         if templateCell == nil {
-            templateCell = tableView.dequeueReusableCell(withIdentifier: DropdownBaseCell.identifier) as? DropdownBaseCell
+            templateCell = tableView.dequeueReusableCell(withIdentifier: BaseDropdownCell.identifier) as? BaseDropdownCell
         }
         
         var maxWidth: CGFloat = 0
@@ -620,9 +620,9 @@ extension DropDown: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: DropdownBaseCell.identifier,
+            withIdentifier: BaseDropdownCell.identifier,
             for: indexPath
-        ) as? DropdownBaseCell else { return UITableViewCell() }
+        ) as? BaseDropdownCell else { return UITableViewCell() }
         
         cell.optionLabel.text = dataSource[indexPath.row]
         cell.optionLabel.textColor = textColor

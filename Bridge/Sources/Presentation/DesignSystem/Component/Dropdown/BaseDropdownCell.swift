@@ -1,5 +1,5 @@
 //
-//  DropdownBaseCell.swift
+//  BaseDropdownCell.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/10/05.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-class DropdownBaseCell: BaseTableViewCell {
+class BaseDropdownCell: BaseTableViewCell {
     // MARK: - UI
     static let identifier = "DropDownCell"
     
