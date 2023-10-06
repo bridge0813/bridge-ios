@@ -58,6 +58,8 @@
 		7B71E7612A933C18001B5D2C /* FlexLayoutYoga in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7602A933C18001B5D2C /* FlexLayoutYoga */; };
 		7B71E7632A933C18001B5D2C /* FlexLayoutYogaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7622A933C18001B5D2C /* FlexLayoutYogaKit */; };
 		7B71E7662A933C25001B5D2C /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7652A933C25001B5D2C /* PinLayout */; };
+		7B922CF82AD020CC00F3A336 /* SignUpRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B922CF72AD020CC00F3A336 /* SignUpRequestDTO.swift */; };
+		7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B922CFB2AD02EE400F3A336 /* SignUpUseCase.swift */; };
 		7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */; };
 		7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C8F2A9C4BB3000DAB02 /* ChatRoomListViewModel.swift */; };
 		7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C972A9C503C000DAB02 /* FetchChatRoomsUseCase.swift */; };
@@ -182,6 +184,8 @@
 		7B71E7492A9330C7001B5D2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B71E74C2A9330C7001B5D2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B71E74E2A9330C7001B5D2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B922CF72AD020CC00F3A336 /* SignUpRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestDTO.swift; sourceTree = "<group>"; };
+		7B922CFB2AD02EE400F3A336 /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
 		7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		7BA36C8F2A9C4BB3000DAB02 /* ChatRoomListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomListViewModel.swift; sourceTree = "<group>"; };
 		7BA36C972A9C503C000DAB02 /* FetchChatRoomsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChatRoomsUseCase.swift; sourceTree = "<group>"; };
@@ -282,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB272AB15E7E009A00EB /* SignInUseCase.swift */,
+				7B922CFB2AD02EE400F3A336 /* SignUpUseCase.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -386,8 +391,8 @@
 		7B61235C2ABD9C9E006E72C1 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */,
-				7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */,
+				7B922CF92AD020DD00F3A336 /* SignIn */,
+				7B922CFA2AD020EC00F3A336 /* SignUp */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -492,6 +497,23 @@
 				7B71E74E2A9330C7001B5D2C /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		7B922CF92AD020DD00F3A336 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */,
+				7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		7B922CFA2AD020EC00F3A336 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				7B922CF72AD020CC00F3A336 /* SignUpRequestDTO.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		7BA36C8C2A9C4B20000DAB02 /* Common */ = {
@@ -1096,6 +1118,7 @@
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
 				7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */,
+				7B922CF82AD020CC00F3A336 /* SignUpRequestDTO.swift in Sources */,
 				7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */,
 				7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
@@ -1171,6 +1194,7 @@
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
+				7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */,
 				7C40CBCA2AC6B597000F4C9F /* BrideCreateProjectButton.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
 				7C24003D2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift in Sources */,
