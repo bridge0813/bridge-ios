@@ -39,7 +39,7 @@ final class MainViewController: BaseViewController {
         return button
     }()
    
-    let restrictionMenuTriggerView = RestrictionMenuTriggerView()
+    let restrictionMenuTriggerView = RestrictionDropdownAnchorView()
     let restrictionMenuDropdown = DropDown()
     
     let chatRoomMenuDropdown = DropDown()

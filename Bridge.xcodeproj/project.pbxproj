@@ -139,7 +139,7 @@
 		7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */; };
 		7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */; };
 		7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803D2ACF143A00230C86 /* Dropdown.swift */; };
-		7CE080402ACF147500230C86 /* RestrictionMenuTriggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* RestrictionMenuTriggerView.swift */; };
+		7CE080402ACF147500230C86 /* RestrictionDropdownAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */; };
 		7CE080422ACF14A200230C86 /* MenuToggleArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE080412ACF14A200230C86 /* MenuToggleArrowButton.swift */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
@@ -273,7 +273,7 @@
 		7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewController.swift; sourceTree = "<group>"; };
 		7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDropdownCell.swift; sourceTree = "<group>"; };
 		7CE0803D2ACF143A00230C86 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
-		7CE0803F2ACF147500230C86 /* RestrictionMenuTriggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionMenuTriggerView.swift; sourceTree = "<group>"; };
+		7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionDropdownAnchorView.swift; sourceTree = "<group>"; };
 		7CE080412ACF14A200230C86 /* MenuToggleArrowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuToggleArrowButton.swift; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -890,7 +890,7 @@
 		7C8B822D2AC96CC000F7B889 /* Dropdown */ = {
 			isa = PBXGroup;
 			children = (
-				7CE080432ACF155000230C86 /* RestrictionMenu */,
+				7CE080432ACF155000230C86 /* RestrictionDropdown */,
 				7C8B82302AC97EE000F7B889 /* Helpers */,
 				7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */,
 				7CE0803D2ACF143A00230C86 /* Dropdown.swift */,
@@ -986,13 +986,13 @@
 			path = Completion;
 			sourceTree = "<group>";
 		};
-		7CE080432ACF155000230C86 /* RestrictionMenu */ = {
+		7CE080432ACF155000230C86 /* RestrictionDropdown */ = {
 			isa = PBXGroup;
 			children = (
-				7CE0803F2ACF147500230C86 /* RestrictionMenuTriggerView.swift */,
+				7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */,
 				7CE080412ACF14A200230C86 /* MenuToggleArrowButton.swift */,
 			);
-			path = RestrictionMenu;
+			path = RestrictionDropdown;
 			sourceTree = "<group>";
 		};
 		7CF93E012A9C64EB0013EBD6 /* Main */ = {
@@ -1247,7 +1247,7 @@
 				7C40CBA12AC3E595000F4C9F /* BrideTechTagButton.swift in Sources */,
 				7B61238D2AC2F320006E72C1 /* BridgeWarningMessageBox.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
-				7CE080402ACF147500230C86 /* RestrictionMenuTriggerView.swift in Sources */,
+				7CE080402ACF147500230C86 /* RestrictionDropdownAnchorView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */,

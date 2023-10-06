@@ -1,5 +1,5 @@
 //
-//  RestrictionMenuTriggerView.swift
+//  RestrictionDropdownAnchorView.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/26.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class RestrictionMenuTriggerView: BaseView {
+final class RestrictionDropdownAnchorView: BaseView {
     private let rootFlexContainer = UIView()
     
     let restrictionTypeLabel: UILabel = {
