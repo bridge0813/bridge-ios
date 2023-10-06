@@ -12,13 +12,12 @@ import PinLayout
 final class RestrictionDropdownAnchorView: BaseView {
     private let rootFlexContainer = UIView()
     
-    private let restrictionTypeLabel: UILabel = {
+    // TODO: - 제한 없음에 대한 상태도 추가해야함
+    private let restrictionOptionLabel: UILabel = {
         let label = UILabel()
-        label.configureLabel(
-            textColor: .black,
-            font: .boldSystemFont(ofSize: 14)
-        )
         label.text = "학생"
+        label.textColor = BridgeColor.gray1
+        label.font = BridgeFont.button2.font
         
         return label
     }()
@@ -46,10 +45,10 @@ final class RestrictionDropdownAnchorView: BaseView {
             .direction(.row)
             .justifyContent(.spaceBetween)
             .alignItems(.center)
-            .padding(10)
+            .padding(15)
             .define { flex in
-                flex.addItem(restrictionTypeLabel).width(40).marginLeft(5)
-                flex.addItem(arrowImageView).size(20).cornerRadius(10).marginRight(5)
+                flex.addItem(restrictionOptionLabel).width(37).height(18)
+                flex.addItem(arrowImageView).size(20).cornerRadius(10)
             }
     }
     
@@ -66,7 +65,6 @@ final class RestrictionDropdownAnchorView: BaseView {
         let arrowBackgroundColor: UIColor = isActive ? BridgeColor.primary3 : BridgeColor.gray5
         let arrowTintColor: UIColor = isActive ? BridgeColor.primary1 : .white
         
-        
         UIView.animate(withDuration: 0.2) { [weak self] in
             self?.arrowImageView.transform = CGAffineTransform(rotationAngle: rotationAngle)
             self?.layer.borderWidth = borderWidth
@@ -75,7 +73,7 @@ final class RestrictionDropdownAnchorView: BaseView {
             self?.arrowImageView.tintColor = arrowTintColor
             
             if let text {
-                self?.restrictionTypeLabel.text = text
+                self?.restrictionOptionLabel.text = text
             }
         }
     }
