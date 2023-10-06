@@ -140,7 +140,6 @@
 		7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */; };
 		7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803D2ACF143A00230C86 /* Dropdown.swift */; };
 		7CE080402ACF147500230C86 /* RestrictionDropdownAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */; };
-		7CE080422ACF14A200230C86 /* MenuToggleArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE080412ACF14A200230C86 /* MenuToggleArrowButton.swift */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -274,7 +273,6 @@
 		7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDropdownCell.swift; sourceTree = "<group>"; };
 		7CE0803D2ACF143A00230C86 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionDropdownAnchorView.swift; sourceTree = "<group>"; };
-		7CE080412ACF14A200230C86 /* MenuToggleArrowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuToggleArrowButton.swift; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -990,7 +988,6 @@
 			isa = PBXGroup;
 			children = (
 				7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */,
-				7CE080412ACF14A200230C86 /* MenuToggleArrowButton.swift */,
 			);
 			path = RestrictionDropdown;
 			sourceTree = "<group>";
@@ -1179,7 +1176,6 @@
 				7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */,
 				7C8B82382ACC2AF500F7B889 /* DispatchQueue+.swift in Sources */,
 				7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */,
-				7CE080422ACF14A200230C86 /* MenuToggleArrowButton.swift in Sources */,
 				7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */,
 				7C8B82402ACE91C500F7B889 /* ChatRoomMenuCell.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,

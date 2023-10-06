@@ -39,8 +39,8 @@ final class MainViewController: BaseViewController {
         return button
     }()
    
-    let restrictionMenuTriggerView = RestrictionDropdownAnchorView()
-    let restrictionMenuDropdown = DropDown()
+    let restrictionDropdownAnchorView = RestrictionDropdownAnchorView()
+    let restrictionDropdown = DropDown()
     
     let chatRoomMenuDropdown = DropDown()
 
@@ -84,7 +84,7 @@ final class MainViewController: BaseViewController {
         setChatRoomMenuDropdown()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showDropDown))
-        restrictionMenuTriggerView.addGestureRecognizer(tapGesture)
+        restrictionDropdownAnchorView.addGestureRecognizer(tapGesture)
         
         
         goToNotificationButton.rx.tap.subscribe(onNext: { [weak self] in
@@ -108,40 +108,37 @@ final class MainViewController: BaseViewController {
     
     @objc
     func showDropDown() {
-        restrictionMenuDropdown.show()
+        restrictionDropdown.show()
     }
     
     private func setRestrictionMenuDropdown() {
         print("setRestrictionMenuDropdown")
-        restrictionMenuDropdown.anchorView = restrictionMenuTriggerView
+        restrictionDropdown.anchorView = restrictionDropdownAnchorView
         
-        restrictionMenuDropdown.selectedItemSubject
+        restrictionDropdown.selectedItemSubject
             .withUnretained(self)
             .subscribe(onNext: { owner, item in
-                owner.restrictionMenuTriggerView.restrictionTypeLabel.text = item.title
+                owner.restrictionDropdownAnchorView.updateViewForDropdownState(false, text: item.title)
             })
             .disposed(by: disposeBag)
         
-        restrictionMenuDropdown.willShowSubject
+        restrictionDropdown.willShowSubject
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.restrictionMenuTriggerView.layer.borderColor = BridgeColor.primary1.cgColor
-                owner.restrictionMenuTriggerView.layer.borderWidth = 1
-                owner.restrictionMenuTriggerView.arrowButton.isSelected = true
+                owner.restrictionDropdownAnchorView.updateViewForDropdownState(true)
             })
             .disposed(by: disposeBag)
         
-        restrictionMenuDropdown.hideSubject
+        restrictionDropdown.hideSubject
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.restrictionMenuTriggerView.layer.borderWidth = 0
-                owner.restrictionMenuTriggerView.arrowButton.isSelected = false
+                owner.restrictionDropdownAnchorView.updateViewForDropdownState(false)
             })
             .disposed(by: disposeBag)
 
-        restrictionMenuDropdown.dataSource = ["학생", "현직자", "취준생"]
-        restrictionMenuDropdown.selectionBackgroundColor = BridgeColor.primary2
-        restrictionMenuDropdown.bottomOffset = CGPoint(x: 0, y: 7)
+        restrictionDropdown.dataSource = ["학생", "현직자", "취준생"]
+        restrictionDropdown.selectionBackgroundColor = BridgeColor.primary2
+        restrictionDropdown.bottomOffset = CGPoint(x: 0, y: 7)
     }
     
     private func setChatRoomMenuDropdown() {
@@ -181,7 +178,7 @@ final class MainViewController: BaseViewController {
         rootFlexContainer.flex.direction(.column).define { flex in
             // 테스트용
             flex.addItem().height(300).direction(.row).alignItems(.center).define { flex in
-                flex.addItem(restrictionMenuTriggerView).width(343).height(52).marginLeft(30)
+                flex.addItem(restrictionDropdownAnchorView).width(343).height(52).marginLeft(30)
             }
             
             /// 컬렉션 뷰
