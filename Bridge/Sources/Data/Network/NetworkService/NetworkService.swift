@@ -11,12 +11,14 @@ import RxSwift
 typealias NetworkService = BasicNetworkService & AuthNetworkService & ProjectNetworkService & ChatNetworkService
 
 protocol BasicNetworkService {
-    func request(_ endpoint: Endpoint) -> Observable<Data>
+    func request(_ endpoint: Endpoint) -> Observable<(HTTPURLResponse, Data)>
 }
 
 protocol AuthNetworkService {
     func signInWithApple(userName: String?, credentials: UserCredentials) -> Single<SignInResponseDTO>
     func signInWithAppleTest(userName: String?, credentials: UserCredentials) -> Single<SignInResponseDTO>
+    func signUp(userID: Int?, selectedFields: [String]) -> Single<Void>
+    func signUpTest(userID: Int?, selectedFields: [String]) -> Single<Void>
 }
 
 protocol ProjectNetworkService {

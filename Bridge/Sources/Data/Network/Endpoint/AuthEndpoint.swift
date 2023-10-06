@@ -9,12 +9,13 @@ import Foundation
 
 enum AuthEndpoint {
     case signInWithApple(request: SignInWithAppleRequestDTO)
+    case signUp(request: SignUpRequestDTO)
 }
 
 extension AuthEndpoint: Endpoint {    
     var method: HTTPMethod {
         switch self {
-        case .signInWithApple:
+        case .signInWithApple, .signUp:
             return .POST
         }
     }
@@ -26,14 +27,17 @@ extension AuthEndpoint: Endpoint {
     
     var path: String {
         switch self {
-        case .signInWithApple:
-            return "/login/apple"
+        case .signInWithApple:  return "/login/apple"
+        case .signUp:           return "/signup"
         }
     }
     
     var parameters: HTTPRequestParameter? {
         switch self {
         case .signInWithApple(let request):
+            return .body(request)
+            
+        case .signUp(let request):
             return .body(request)
         }
     }

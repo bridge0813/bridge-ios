@@ -9,9 +9,10 @@ import Foundation
 import RxSwift
 
 final class DefaultNetworkService: NetworkService {
-    func request(_ endpoint: Endpoint) -> Observable<Data> {
+    func request(_ endpoint: Endpoint) -> Observable<(HTTPURLResponse, Data)> {
         guard let urlRequest = endpoint.toURLRequest() else { return .error(NetworkError.invalidURL) }
-        return URLSession.shared.rx.data(request: urlRequest)
+        return URLSession.shared.rx.response(request: urlRequest)
+            .map { ($0.response, $0.data) }
     }
 }
 
@@ -44,10 +45,9 @@ extension DefaultNetworkService {
     }
 }
 
-// MARK: - Auth
+// MARK: - Sign in
 extension DefaultNetworkService {
     func signInWithApple(userName: String?, credentials: UserCredentials) -> Single<SignInResponseDTO> {
-        
         let signInWithAppleRequestDTO = SignInWithAppleRequestDTO(
             name: userName ?? "",
             idToken: String(data: credentials.identityToken ?? Data(), encoding: .utf8) ?? ""
@@ -55,12 +55,13 @@ extension DefaultNetworkService {
         
         let authEndpoint = AuthEndpoint.signInWithApple(request: signInWithAppleRequestDTO)
         
+        // TODO: http code 처리
         return request(authEndpoint).asSingle()
-            .flatMap { data in
+            .flatMap { _, data in
                 if let decodedData = try? JSONDecoder().decode(SignInResponseDTO.self, from: data) {
-                    return Single.just(decodedData)
+                    return .just(decodedData)
                 } else {
-                    return Single.error(NetworkError.decodingFailed)
+                    return .error(NetworkError.decodingFailed)
                 }
             }
     }
@@ -76,5 +77,24 @@ extension DefaultNetworkService {
                 userId: 1
             )
         )
+    }
+}
+
+// MARK: - Sign up
+extension DefaultNetworkService {
+    
+    func signUp(userID: Int?, selectedFields: [String]) -> Single<Void> {
+        let signUpRequestDTO = SignUpRequestDTO(userID: userID, selectedFields: selectedFields)
+        let authEndpoint = AuthEndpoint.signUp(request: signUpRequestDTO)
+        
+        return request(authEndpoint).asSingle()
+            .flatMap { httpResponse, _ in
+                if httpResponse.statusCode == 200 { return .just(()) }
+                else { return .error(NetworkError.statusCode(httpResponse.statusCode))}
+            }
+    }
+    
+    func signUpTest(userID: Int?, selectedFields: [String]) -> Single<Void> {
+        .just(())
     }
 }
