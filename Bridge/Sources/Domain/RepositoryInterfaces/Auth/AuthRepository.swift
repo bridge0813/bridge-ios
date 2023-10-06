@@ -9,4 +9,5 @@ import RxSwift
 
 protocol AuthRepository {
     func signInWithApple(credentials: UserCredentials) -> Single<SignInResult>
+    func signUp(selectedFields: [String]) -> Single<Void>
 }
