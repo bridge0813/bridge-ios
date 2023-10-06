@@ -11,7 +11,7 @@ import RxSwift
 final class SetFieldViewModel: ViewModelType {
     
     struct Input {
-        let fieldTagButtonTapped: Observable<FieldTagButtonType>
+        let fieldTagButtonTapped: Observable<String>
         let completeButtonTapped: Observable<Void>
     }
     
@@ -32,9 +32,7 @@ final class SetFieldViewModel: ViewModelType {
         var selectedFields: Set<String> = []
         
         input.fieldTagButtonTapped
-            .subscribe(onNext: { fieldTagButtonType in
-                let field = fieldTagButtonType.rawValue
-                
+            .subscribe(onNext: { field in
                 if selectedFields.contains(field) { selectedFields.remove(field) }
                 else { selectedFields.insert(field) }
                 

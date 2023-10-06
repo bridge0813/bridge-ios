@@ -116,28 +116,28 @@ final class BridgeSetFieldView: BaseView {
 }
 
 // MARK: - Button tap observalbe
-enum FieldTagButtonType: String {
-    case ios
-    case android
-    case frontend
-    case backend
-    case uiux
-    case bibx
-    case videomotion
-    case pm
-}
-
 extension BridgeSetFieldView {
-    var fieldTagButtonTapped: Observable<FieldTagButtonType> {
+    enum FieldTagButtonType: String {
+        case ios
+        case android
+        case frontend
+        case backend
+        case uiux
+        case bibx
+        case videomotion
+        case pm
+    }
+    
+    var fieldTagButtonTapped: Observable<String> {
         Observable.merge(
-            iosButton.rx.tap.map { .ios },
-            androidButton.rx.tap.map { .android },
-            frontendButton.rx.tap.map { .frontend },
-            backendButton.rx.tap.map { .backend },
-            uiuxButton.rx.tap.map { .uiux },
-            bibxButton.rx.tap.map { .bibx },
-            videomotionButton.rx.tap.map { .videomotion },
-            pmButton.rx.tap.map { .pm }
+            iosButton.rx.tap.map { FieldTagButtonType.ios.rawValue },
+            androidButton.rx.tap.map { FieldTagButtonType.android.rawValue },
+            frontendButton.rx.tap.map { FieldTagButtonType.frontend.rawValue },
+            backendButton.rx.tap.map { FieldTagButtonType.backend.rawValue },
+            uiuxButton.rx.tap.map { FieldTagButtonType.uiux.rawValue },
+            bibxButton.rx.tap.map { FieldTagButtonType.bibx.rawValue },
+            videomotionButton.rx.tap.map { FieldTagButtonType.videomotion.rawValue },
+            pmButton.rx.tap.map { FieldTagButtonType.pm.rawValue }
         )
     }
 }
