@@ -198,9 +198,9 @@ final class DropDown: UIView {
     }
     
     // MARK: - 액션
-    let selectedItemSubject = PublishSubject<DropdownItem>()  // 드롭다운 항목을 선택했을 경우
-    let willShowSubject = PublishSubject<Void>()              // 드롭다운이 보일 때
-    let hideSubject = PublishSubject<Void>()                  // 드롭다운이 사라질 때
+    let itemSelected = PublishSubject<DropdownItem>()  // 드롭다운 항목을 선택했을 경우
+    let willShow = PublishSubject<Void>()              // 드롭다운이 보일 때
+    let willHide = PublishSubject<Void>()              // 드롭다운이 사라질 때
     
     /// 드롭다운에서 표시될 수 있는 셀의 최소 높이를 제공
     var minHeight: CGFloat {
@@ -535,7 +535,7 @@ extension DropDown {
     @discardableResult
     func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
         
-        willShowSubject.onNext(())
+        willShow.onNext(())
 
         setNeedsUpdateConstraints()  // 레이아웃 제약조건이 업데이트되도록
 
@@ -597,7 +597,7 @@ extension DropDown {
             }
         )
         
-        hideSubject.onNext(())
+        willHide.onNext(())
     }
 }
 
@@ -647,7 +647,7 @@ extension DropDown: UITableViewDelegate {
         
         selectedItemIndexRow = indexPath.row
         
-        selectedItemSubject.onNext((indexRow: indexPath.row, title: dataSource[indexPath.row]))
+        itemSelected.onNext((indexRow: indexPath.row, title: dataSource[indexPath.row]))
         
         // 앵커뷰가 UIBarButton일 때 경우 메뉴처럼 사용되기 때문에 선택된 Cell이 무엇인지 표시 할 필요가 없음.
         if anchorView as? UIBarButtonItem != nil {

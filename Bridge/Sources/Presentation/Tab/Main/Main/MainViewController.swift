@@ -115,21 +115,21 @@ final class MainViewController: BaseViewController {
         print("setRestrictionMenuDropdown")
         restrictionDropdown.anchorView = restrictionDropdownAnchorView
         
-        restrictionDropdown.selectedItemSubject
+        restrictionDropdown.itemSelected
             .withUnretained(self)
             .subscribe(onNext: { owner, item in
                 owner.restrictionDropdownAnchorView.updateViewForDropdownState(false, text: item.title)
             })
             .disposed(by: disposeBag)
         
-        restrictionDropdown.willShowSubject
+        restrictionDropdown.willShow
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.restrictionDropdownAnchorView.updateViewForDropdownState(true)
             })
             .disposed(by: disposeBag)
         
-        restrictionDropdown.hideSubject
+        restrictionDropdown.willHide
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.restrictionDropdownAnchorView.updateViewForDropdownState(false)
@@ -149,7 +149,7 @@ final class MainViewController: BaseViewController {
         chatRoomMenuDropdown.cornerRadius = 4
         chatRoomMenuDropdown.textColor = BridgeColor.gray3
         
-        chatRoomMenuDropdown.selectedItemSubject
+        chatRoomMenuDropdown.itemSelected
             .subscribe(onNext: { item in
                 print(item.title)
             })
