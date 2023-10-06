@@ -26,8 +26,8 @@ final class RestrictionMenuTriggerView: BaseView {
     let arrowButton = MenuToggleArrowButton()
     
     override func configureLayouts() {
-        self.layer.cornerRadius = 8
-        self.clipsToBounds = true
+        layer.cornerRadius = 8
+        clipsToBounds = true
         
         addSubview(rootFlexContainer)
         rootFlexContainer.flex

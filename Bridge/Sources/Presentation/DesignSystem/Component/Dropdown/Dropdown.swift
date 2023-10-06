@@ -432,7 +432,7 @@ extension DropDown {
         // 만약 오른쪽 버튼이 아니라면, CGPoint.zero 반환
         guard isRightBarButtonItem else { return CGPoint.zero }
         
-        let width = self.width ?? fittingWidth()                // 드롭다운의 width를 설정하거나 적절한 width를 계산하여 가져옴
+        let width = width ?? fittingWidth()                // 드롭다운의 width를 설정하거나 적절한 width를 계산하여 가져옴
         let anchorViewWidth = anchorView.plainView.frame.width  // anchorView의 width를 가져옴
         
         let x = -(width - anchorViewWidth) - 8
@@ -446,7 +446,7 @@ extension DropDown {
         
         // 만약 드롭다운의 width가 설정되어 있다면 그 값을 사용하고,
         // 설정된 값이 없다면 앵커 뷰의 width나 fittingWidth()에서 bottomOffset.x 를 뺀 값이 최종 width
-        let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
+        let width = width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
         
         // 앵커뷰의 x와 y 좌표
         let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? window.frame.midX - (width / 2)
@@ -568,11 +568,11 @@ extension DropDown {
         visibleWindow.addSubview(self)
         visibleWindow.bringSubviewToFront(self)  // 드롭다운을 윈도우의 최상단으로 이동.
 
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.leadingAnchor.constraint(equalTo: visibleWindow.leadingAnchor).isActive = true
-        self.trailingAnchor.constraint(equalTo: visibleWindow.trailingAnchor).isActive = true
-        self.topAnchor.constraint(equalTo: visibleWindow.topAnchor).isActive = true
-        self.bottomAnchor.constraint(equalTo: visibleWindow.bottomAnchor).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        leadingAnchor.constraint(equalTo: visibleWindow.leadingAnchor).isActive = true
+        trailingAnchor.constraint(equalTo: visibleWindow.trailingAnchor).isActive = true
+        topAnchor.constraint(equalTo: visibleWindow.topAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: visibleWindow.bottomAnchor).isActive = true
     }
     
     /// 드롭다운을 숨길 때 사용되는 메서드

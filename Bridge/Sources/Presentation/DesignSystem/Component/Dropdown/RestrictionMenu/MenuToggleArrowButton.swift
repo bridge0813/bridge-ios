@@ -18,10 +18,11 @@ final class MenuToggleArrowButton: BaseButton {
         configuration.baseForegroundColor = .white
         configuration.baseBackgroundColor = BridgeColor.gray4
         
-        self.clipsToBounds = true
+        clipsToBounds = true
         self.configuration = configuration
-        self.isEnabled = true
-        self.configurationUpdateHandler = { button in
+        isEnabled = true
+        
+        configurationUpdateHandler = { button in
             let tintColor: UIColor = button.state == .selected ? BridgeColor.primary1 : .white
             let backgroundColor: UIColor = button.state == .selected ? BridgeColor.primary3 : BridgeColor.gray5
             let rotationAngle: CGFloat = button.state == .selected ? .pi : 0.0
