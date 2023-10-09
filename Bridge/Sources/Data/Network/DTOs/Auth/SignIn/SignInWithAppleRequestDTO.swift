@@ -6,6 +6,11 @@
 //
 
 struct SignInWithAppleRequestDTO: Encodable {
-    let name: String     // user name
-    let idToken: String  // identity token
+    let userName: String
+    let identityToken: String
+    
+    enum CodingKeys: String, CodingKey {
+        case userName = "name"
+        case identityToken = "idToken"
+    }
 }
