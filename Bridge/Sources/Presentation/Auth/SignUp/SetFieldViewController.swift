@@ -57,7 +57,7 @@ final class SetFieldViewController: BaseViewController {
         view.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.paddingHorizontal(16).define { flex in
-            flex.addItem(descriptionLabel).marginTop(24).marginBottom(14)
+            flex.addItem(descriptionLabel).marginTop(32).marginBottom(16)
             
             flex.addItem(tipMessageBox).marginBottom(40)
             
