@@ -44,12 +44,18 @@ final class SetFieldViewModel: ViewModelType {
         
         input.completeButtonTapped
             .withUnretained(self)
-            .flatMap { owner, result in
-                owner.signUpUseCase.signUp(selectedFields: selectedFields)
+            .flatMap { owner, _ in
+                owner.signUpUseCase.signUp(selectedFields: selectedFields).toResult()
             }
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.finish()
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success:
+                    owner.coordinator?.finish()
+                    
+                case .failure:
+                    owner.coordinator?.showAlert(configuration: .error)
+                }
             })
             .disposed(by: disposeBag)
         
