@@ -47,6 +47,7 @@ final class SetFieldViewModel: ViewModelType {
             .flatMap { owner, _ in
                 owner.signUpUseCase.signUp(selectedFields: selectedFields).toResult()
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 switch result {
