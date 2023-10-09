@@ -71,8 +71,8 @@ private extension SignInViewModel {
         let userName = appleIDCredential.fullName?.familyName ?? ""
         let givenName = appleIDCredential.fullName?.givenName ?? ""
         let fullName = userName + givenName
-        let identityToken = appleIDCredential.identityToken
-        let authorizationCode = appleIDCredential.authorizationCode
+        let identityToken = String(data: appleIDCredential.identityToken ?? Data(), encoding: .utf8)
+        let authorizationCode = String(data: appleIDCredential.authorizationCode ?? Data(), encoding: .utf8)
         
         return UserCredentials(
             id: userIdentifier,
