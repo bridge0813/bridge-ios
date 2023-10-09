@@ -8,19 +8,17 @@
 import Foundation
 import RxSwift
 
-typealias NetworkService = BasicNetworkService & AuthNetworkService & ProjectNetworkService & ChatNetworkService
+typealias NetworkService = BasicNetworkService & ProjectNetworkService & ChatNetworkService
 
 protocol BasicNetworkService {
-    func request(_ endpoint: Endpoint) -> Observable<(HTTPURLResponse, Data)>
+    /// response body에 데이터가 없고, 성공 여부만 반환하는 함수
+    func request(_ endpoint: Endpoint) -> Single<Void>
+    
+    /// response body에 데이터가 있고, 해당 데이터를 디코딩해 반환하는 함수
+    func request<T: Decodable>(_ endpoint: Endpoint) -> Single<T>
 }
 
-protocol AuthNetworkService {
-    func signInWithApple(userName: String?, credentials: UserCredentials) -> Single<SignInResponseDTO>
-    func signInWithAppleTest(userName: String?, credentials: UserCredentials) -> Single<SignInResponseDTO>
-    func signUp(userID: Int?, selectedFields: [String]) -> Single<Void>
-    func signUpTest(userID: Int?, selectedFields: [String]) -> Single<Void>
-}
-
+// TODO: 아래 함수들 제거
 protocol ProjectNetworkService {
     func requestTestProjectsData() -> Observable<[ProjectDTO]>
     func requestTestHotProjectsData() -> Observable<[ProjectDTO]>
