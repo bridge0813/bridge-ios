@@ -8,23 +8,11 @@
 import Foundation
 
 enum AuthEndpoint {
-    case signInWithApple(request: SignInWithAppleRequestDTO)
-    case signUp(request: SignUpRequestDTO)
+    case signInWithApple(requestDTO: SignInWithAppleRequestDTO)
+    case signUp(requestDTO: SignUpRequestDTO)
 }
 
-extension AuthEndpoint: Endpoint {    
-    var method: HTTPMethod {
-        switch self {
-        case .signInWithApple, .signUp:
-            return .POST
-        }
-    }
-    
-    // TODO: 배포 후 수정
-    var baseURL: URL? {
-        URL(string: "https://base-url.com")
-    }
-    
+extension AuthEndpoint: Endpoint {   
     var path: String {
         switch self {
         case .signInWithApple:  return "/login/apple"
@@ -32,13 +20,24 @@ extension AuthEndpoint: Endpoint {
         }
     }
     
-    var parameters: HTTPRequestParameter? {
+    var queryParameters: QueryParameters? {
         switch self {
-        case .signInWithApple(let request):
-            return .body(request)
-            
-        case .signUp(let request):
-            return .body(request)
+        case .signInWithApple:  return nil
+        case .signUp:           return nil
+        }
+    }
+    
+    var method: HTTPMethod {
+        switch self {
+        case .signInWithApple:  return .post
+        case .signUp:           return .post
+        }
+    }
+    
+    var body: Encodable? {
+        switch self {
+        case .signInWithApple(let requestDTO):  return requestDTO
+        case .signUp(let requestDTO):           return requestDTO
         }
     }
 }

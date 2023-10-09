@@ -6,12 +6,15 @@
 //
 
 enum HTTPMethod: String {
-    case GET
-    case POST, PUT, PATCH
-    case DELETE
+    case get = "GET"
+    case patch = "PATCH"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
 }
 
 typealias HTTPHeaders = [String: String]
+typealias QueryParameters = [String: String]
 
 enum HTTPRequestParameter {
     case query([String: String])

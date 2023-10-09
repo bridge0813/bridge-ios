@@ -8,49 +8,67 @@
 import Foundation
 
 protocol Endpoint {
-    var method: HTTPMethod { get }
     var baseURL: URL? { get }
     var path: String { get }
+    var queryParameters: QueryParameters? { get }
     
+    var method: HTTPMethod { get }
     var headers: HTTPHeaders { get }
-    var accessToken: String { get }
-    var parameters: HTTPRequestParameter? { get }
+    var tokenStorage: TokenStorage? { get }
+    
+    var body: Encodable? { get }
     
     func toURLRequest() -> URLRequest?
 }
 
 extension Endpoint {
-    var accessToken: String { "" }
+    // TODO: 배포 후 수정
+    var baseURL: URL? {
+        URL(string: "https://bridge.com")
+    }
     
     var headers: HTTPHeaders {
-        [
-            "Content-Type": "application/json",
-            "Authorization": "Bearer \(accessToken)"
-        ]
+        var defaultHeaders = ["Content-Type": "application/json"]
+        
+        if let accessToken = tokenStorage?.fetchToken(for: .accessToken) {
+            defaultHeaders["Authorization"] = "Bearer \(accessToken)"
+        }
+        
+        return defaultHeaders
+    }
+    
+    var tokenStorage: TokenStorage? {
+        KeychainTokenStorage()
     }
  
     func toURLRequest() -> URLRequest? {
         guard let url = configureURL() else { return nil }
-        return URLRequest(url: url).setMethod(method).appendingHeaders(headers).setBody(using: parameters)
+        
+        return URLRequest(url: url)
+            .setMethod(method)
+            .appendingHeaders(headers)
+            .setBody(body)
     }
     
     private func configureURL() -> URL? {
-        baseURL?.appendingPathComponent(path).appendingQueries(with: parameters)
+        baseURL?
+            .appendingPathComponent(path)
+            .appendingQueries(with: queryParameters)
     }
 }
 
+// MARK: - URL+
 extension URL {
-    func appendingQueries(with parameter: HTTPRequestParameter?) -> URL? {
+    func appendingQueries(with queryParameters: QueryParameters?) -> URL? {
+        guard let queryParameters, !queryParameters.isEmpty else { return self }
+        
         var components = URLComponents(string: self.absoluteString)
-        
-        if case .query(let queries) = parameter {
-            components?.queryItems = queries.map { URLQueryItem(name: $0, value: $1) }
-        }
-        
+        components?.queryItems = queryParameters.map { URLQueryItem(name: $0, value: $1) }
         return components?.url
     }
 }
 
+// MARK: - URLRequest+
 extension URLRequest {
     func setMethod(_ method: HTTPMethod) -> URLRequest {
         var urlRequest = self
@@ -64,10 +82,10 @@ extension URLRequest {
         return urlRequest
     }
     
-    func setBody(using parameter: HTTPRequestParameter?) -> URLRequest {
+    func setBody(_ body: Encodable?) -> URLRequest {
         var urlRequest = self
         
-        if case .body(let body) = parameter {
+        if let body {
             urlRequest.httpBody = try? JSONEncoder().encode(body)
         }
         
