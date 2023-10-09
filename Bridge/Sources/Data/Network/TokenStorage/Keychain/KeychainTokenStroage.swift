@@ -7,11 +7,9 @@
 
 import Foundation
 
-/// 키체인을 이용해 토큰을 조회, 저장, 삭제하는 클래스
-final class KeychainTokenStorage: TokenStorage {
-    
+struct KeychainTokenStorage: TokenStorage {
     // MARK: - Fetch
-    func fetchToken(for key: TokenKey) -> Token? {
+    func fetchToken(for key: KeychainAccount) -> Token? {
         let searchQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key.rawValue,
@@ -34,7 +32,7 @@ final class KeychainTokenStorage: TokenStorage {
     }
     
     // MARK: - Save
-    func saveToken(_ token: Token, for key: TokenKey) -> Bool {
+    func saveToken(_ token: Token, for key: KeychainAccount) -> Bool {
         guard let tokenData = token.data(using: .utf8) else { return false }
         
         let saveQuery: [CFString: Any] = [
@@ -60,7 +58,7 @@ final class KeychainTokenStorage: TokenStorage {
     }
     
     // MARK: - Update
-    private func update(tokenData: Data, for key: TokenKey) -> Result<Void, KeychainError> {
+    private func update(tokenData: Data, for key: KeychainAccount) -> Result<Void, KeychainError> {
         let searchQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key.rawValue
@@ -74,7 +72,7 @@ final class KeychainTokenStorage: TokenStorage {
     }
     
     // MARK: - Delete
-    func deleteToken(for key: TokenKey) -> Bool {
+    func deleteToken(for key: KeychainAccount) -> Bool {
         let deleteQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key.rawValue
