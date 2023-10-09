@@ -15,7 +15,6 @@ final class MockAuthRepository: AuthRepository {
     
     // MARK: - Sign up
     func signUp(selectedFields: [String]) -> Single<Void> {
-        Single.error(NetworkError.unknown)
-//        Single.just(())
+        Single.just(())
     }
 }
