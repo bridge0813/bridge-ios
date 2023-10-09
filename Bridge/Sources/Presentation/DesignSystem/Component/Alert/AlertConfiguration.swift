@@ -5,8 +5,6 @@
 //  Created by 정호윤 on 2023/09/27.
 //
 
-import Foundation
-
 struct AlertConfiguration {
     let imageName: String
     let title: String
@@ -30,6 +28,14 @@ struct AlertConfiguration {
 }
 
 extension AlertConfiguration {
+    // TODO: 디자인 나오면 수정
+    static let error = AlertConfiguration(
+        imageName: "warning",
+        title: "알 수 없는 에러가 발생했어요!",
+        description: "다시 한 번 시도해주세요.",
+        rightButtonTitle: "확인"
+    )
+    
     static let signIn = AlertConfiguration(
         imageName: "graphic_signIn",
         title: "로그인 후 사용 가능해요!",

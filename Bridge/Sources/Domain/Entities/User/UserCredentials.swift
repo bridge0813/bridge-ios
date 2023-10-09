@@ -10,8 +10,8 @@ import Foundation
 struct UserCredentials {
     let id: String
     let name: String
-    let identityToken: Data?
-    let authorizationCode: Data?
+    let identityToken: String?
+    let authorizationCode: String?
 }
 
 extension UserCredentials {
