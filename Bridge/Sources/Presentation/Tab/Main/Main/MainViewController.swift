@@ -43,7 +43,7 @@ final class MainViewController: BaseViewController {
     private lazy var restrictionDropdown = DropDown(
         anchorView: restrictionDropdownAnchorView,
         bottomOffset: CGPoint(x: 0, y: 7),
-        dataSource: ["학생", "현직자", "취준생"],
+        dataSource: ["제한 없음", "학생", "현직자", "취준생"],
         selectedItemBackgroundColor: BridgeColor.primary2
     )
     
