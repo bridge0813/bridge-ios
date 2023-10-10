@@ -12,7 +12,6 @@ import RxSwift
 final class DropDown: BaseView {
     
     typealias IndexRow = Int
-    typealias Closure = () -> Void
     typealias DropdownItem = (indexRow: IndexRow, title: String)
     typealias CellConfigurationClosure = (IndexRow, String, UITableViewCell) -> Void
     typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
