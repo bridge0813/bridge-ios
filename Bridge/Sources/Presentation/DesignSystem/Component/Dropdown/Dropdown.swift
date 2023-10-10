@@ -32,9 +32,6 @@ final class DropDown: BaseView {
     /// 드롭다운 항목들을 표시하기 위한 UITableView
     private let tableView = UITableView()
     
-    /// 드롭다운의 width가 정의되지 않았을 경우, cell 내부 컨텐츠의 크기에 맞게 적절하게 width를 계산
-    private var templateCell: BaseDropdownCell?
-    
     private weak var anchorView: AnchorView?
     private var bottomOffset: CGPoint
     private var dataSource: [String]
@@ -211,7 +208,7 @@ extension DropDown {
     override func updateConstraints() {
         print(#function)
         
-        computeLayout()  // 현재 드롭다운의 레이아웃을 계산(드롭다운의 위치, 크기 등)
+        computeLayout()
         
         // 제약조건이 아직 설정되지 않았다면, 초기 제약 조건을 설정
         if !didSetupConstraints {
@@ -365,28 +362,21 @@ extension DropDown {
     
     /// 드롭다운의 항목 중 width가 가장 높은 아이템의 width를 계산하여 반환
     func fittingWidth() -> CGFloat {
-        if templateCell == nil {
-            templateCell = tableView.dequeueReusableCell(withIdentifier: BaseDropdownCell.identifier) as? BaseDropdownCell
-        }
-        
+        guard let templateCell = tableView.dequeueReusableCell(withIdentifier: BaseDropdownCell.identifier) as? BaseDropdownCell else { return .zero }
+
         var maxWidth: CGFloat = 0
         
         for index in 0..<dataSource.count {
             
-            if let customCell = templateCell {
-                customCell.optionLabel.text = dataSource[index]
-                customCell.bounds.size.height = cellHeight
-                
-                // templateCell과 내부 서브뷰들이 제약조건을 만족하면서 차지할 수 있는 최소한의 크기를 계산
-                let width = customCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
-                
-                if width > maxWidth {
-                    maxWidth = width
-                }
-            }else {
-                print("templateCell 없음")
-            }
+            templateCell.optionLabel.text = dataSource[index]
+            templateCell.bounds.size.height = cellHeight
+            
+            // templateCell과 내부 서브뷰들이 제약조건을 만족하면서 차지할 수 있는 최소한의 크기를 계산
+            let cellFitWidth = templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
+            
+            maxWidth = max(maxWidth, cellFitWidth)
         }
+        
         return maxWidth
     }
     
