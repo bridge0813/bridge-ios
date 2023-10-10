@@ -31,7 +31,7 @@ final class DefaultAuthRepository: AuthRepository {
         
         return networkService.request(authEndpoint)
             .map { [weak self] signInResponseDTO -> SignInResult in
-                self?.storeToken(signInResponseDTO)  // 응답 저장
+                self?.saveToken(signInResponseDTO)  // 응답 저장
                 return signInResponseDTO.isRegistered ? .success : .needSignUp
             }
             .catch { _ in
@@ -39,7 +39,7 @@ final class DefaultAuthRepository: AuthRepository {
             }
     }
     
-    private func storeToken(_ signInResponseDTO: SignInResponseDTO) {
+    private func saveToken(_ signInResponseDTO: SignInResponseDTO) {
         tokenStorage.save(signInResponseDTO.accessToken, for: .accessToken)
         tokenStorage.save(signInResponseDTO.refreshToken, for: .refreshToken)
         tokenStorage.save(String(signInResponseDTO.userId), for: .userID)

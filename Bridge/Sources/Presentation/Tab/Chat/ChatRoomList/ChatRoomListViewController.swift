@@ -12,10 +12,10 @@ import RxSwift
 
 final class ChatRoomListViewController: BaseViewController {
     
-    private lazy var chatRoomListTableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ChatRoomCell.self)
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = BridgeColor.gray9
         tableView.rowHeight = 104
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         tableView.separatorStyle = .none
@@ -41,44 +41,31 @@ final class ChatRoomListViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        configureNavigationController()
-    }
-    
     // MARK: - Configurations
     override func configureAttributes() {
-        dataSource = configureDataSource()
-        configureNavigationController()
-    }
-    
-    private func configureNavigationController() {
-        let navigationTitleView = BridgeNavigationTitleView(title: "채팅")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationTitleView)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "bell")?.resize(to: CGSize(width: 24, height: 24))
-        )
+        navigationItem.title = "채팅"
+        configureDataSource()
     }
     
     override func configureLayouts() {
-        view.addSubview(chatRoomListTableView)
+        view.addSubview(tableView)
         view.addSubview(placeholderView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        chatRoomListTableView.pin.all()
+        tableView.pin.all()
         placeholderView.pin.all()
     }
     
     override func bind() {
-        chatRoomListTableView.rx
+        tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
         
         let input = ChatRoomListViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            itemSelected: chatRoomListTableView.rx.itemSelected.map { $0.row },
+            itemSelected: tableView.rx.itemSelected.map { $0.row },
             leaveChatRoomTrigger: leaveChatRoomTrigger.asObservable()
         )
         let output = viewModel.transform(input: input)
@@ -100,13 +87,12 @@ final class ChatRoomListViewController: BaseViewController {
     }
 }
 
-// MARK: - Diffable data source
-extension ChatRoomListViewController {   
-    private func configureDataSource() -> DataSource {
-        DataSource(tableView: chatRoomListTableView) { tableView, indexPath, item in
-            guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else {
-                return UITableViewCell()
-            }
+// MARK: - Data source
+extension ChatRoomListViewController {
+    private func configureDataSource() {
+        dataSource = DataSource(tableView: tableView) { tableView, indexPath, item in
+            guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else { return UITableViewCell() }
+            cell.backgroundColor = .clear
             cell.selectionStyle = .none
             cell.configureCell(with: item)
             return cell
@@ -140,12 +126,12 @@ extension ChatRoomListViewController: UITableViewDelegate {
 private extension ChatRoomListViewController {
     /// 뷰의 상태에 따라 화면에 표시되는 컴포넌트를 설정하는 함수
     func handleViewState(_ viewState: ChatRoomListViewModel.ViewState) {
-        chatRoomListTableView.isHidden = true
+        tableView.isHidden = true
         placeholderView.isHidden = false
         
         switch viewState {
         case .general:
-            chatRoomListTableView.isHidden = false
+            tableView.isHidden = false
             placeholderView.isHidden = true
             
         case .notSignedIn:
