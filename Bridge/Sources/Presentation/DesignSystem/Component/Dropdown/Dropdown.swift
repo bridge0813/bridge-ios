@@ -170,9 +170,6 @@ final class DropDown: BaseView {
         tableViewContainer.clipsToBounds = true
         tableViewContainer.layer.masksToBounds = false
 
-        alpha = 0
-        isHidden = true
-        
         // dismissableView
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hide))
         dismissableView.addGestureRecognizer(gestureRecognizer)
@@ -396,8 +393,6 @@ extension DropDown {
             tableView.flashScrollIndicators()
         }
         
-        isHidden = false
-        
         tableViewContainer.transform = downScaleTransform
         
         UIView.animate(
@@ -424,21 +419,13 @@ extension DropDown {
     /// 드롭다운을 숨길 때 사용되는 메서드
     @objc
     func hide() {
-        // 현재 드롭다운이 이미 숨겨져 있으면, 메서드 종료
-        if isHidden {
-            return
-        }
-
         UIView.animate(
             withDuration: animationduration,
             animations: { [weak self] in
                 self?.alpha = 0
             },
             completion: { [weak self] _ in
-                guard let self else { return }
-                
-                self.isHidden = true
-                self.removeFromSuperview()
+                self?.removeFromSuperview()
             }
         )
         
