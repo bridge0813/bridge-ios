@@ -288,7 +288,7 @@ extension DropDown {
         let isRightBarButtonItem = anchorViewFrame.minX > window.frame.midX
 
         // 만약 오른쪽 버튼이 아니라면, CGPoint.zero 반환
-        guard isRightBarButtonItem else { return CGPoint.zero }
+        guard isRightBarButtonItem else { return bottomOffset }
 
         let width = width ?? fittingWidth()                     // 드롭다운의 width를 설정하거나 적절한 width를 계산하여 가져옴
         let anchorViewWidth = anchorView.plainView.frame.width  // anchorView의 width를 가져옴
