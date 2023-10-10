@@ -38,6 +38,10 @@ extension Coordinator {
 // MARK: - Alert
 extension Coordinator {
     func showAlert(configuration: AlertConfiguration, primaryAction: PrimaryActionClosure? = nil) {
-        showAlert(target: navigationController, configuration: configuration, primaryAction: primaryAction)
+        if let presentedViewContoller = navigationController.presentedViewController {
+            showAlert(target: presentedViewContoller, configuration: configuration, primaryAction: primaryAction)
+        } else {
+            showAlert(target: navigationController, configuration: configuration, primaryAction: primaryAction)
+        }
     }
 }

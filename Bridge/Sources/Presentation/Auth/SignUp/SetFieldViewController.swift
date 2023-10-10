@@ -28,9 +28,9 @@ final class SetFieldViewController: BaseViewController {
     private let setFieldView = BridgeSetFieldView()
     
     private let completeButton = BridgeButton(
-        "관심분야 설정하기",
-        titleFont: BridgeFont.button1.font,
-        backgroundColor: BridgeColor.primary1
+        title: "관심분야 설정하기",
+        font: BridgeFont.button1.font,
+        backgroundColor: BridgeColor.gray4
     )
     
     // MARK: - Init
@@ -57,7 +57,7 @@ final class SetFieldViewController: BaseViewController {
         view.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.paddingHorizontal(16).define { flex in
-            flex.addItem(descriptionLabel).marginTop(24).marginBottom(14)
+            flex.addItem(descriptionLabel).marginTop(32).marginBottom(16)
             
             flex.addItem(tipMessageBox).marginBottom(40)
             
@@ -77,9 +77,16 @@ final class SetFieldViewController: BaseViewController {
     
     override func bind() {
         let input = SetFieldViewModel.Input(
+            fieldTagButtonTapped: setFieldView.fieldTagButtonTapped,
             completeButtonTapped: completeButton.rx.tap.asObservable()
         )
         
-        _ = viewModel.transform(input: input)
+        let output = viewModel.transform(input: input)
+        
+        output.isCompleteButtonEnabled
+            .drive(onNext: { [weak self] isCompleteButtonEnabled in
+                self?.completeButton.isEnabled = isCompleteButtonEnabled
+            })
+            .disposed(by: disposeBag)
     }
 }

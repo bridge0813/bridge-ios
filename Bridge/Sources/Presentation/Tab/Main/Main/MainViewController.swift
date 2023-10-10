@@ -47,6 +47,7 @@ final class MainViewController: BaseViewController {
         selectedItemBackgroundColor: BridgeColor.primary2
     )
     
+
     private lazy var chatRoomMenuDropdown = DropDown(
         anchorView: goToNotificationButton,
         dataSource: ["채팅방 나가기", "신고하기", "알림 끄기"],
@@ -65,7 +66,6 @@ final class MainViewController: BaseViewController {
                 .withRenderingMode(.alwaysTemplate)
         }
     )
-    
 
     private let filterButton: UIButton = {
         let button = UIButton()

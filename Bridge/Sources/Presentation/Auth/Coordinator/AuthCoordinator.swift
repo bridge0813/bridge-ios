@@ -15,14 +15,17 @@ final class AuthCoordinator: Coordinator {
     
     private let authRepository: AuthRepository
     private let signInUseCase: SignInUseCase
+    private let signUpUseCase: SignUpUseCase
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         
-        let networkService = DefaultNetworkService()
-        let tokenStorage = KeychainTokenStorage()
-        authRepository = DefaultAuthRepository(networkService: networkService, tokenStorage: tokenStorage)
+//        let networkService = DefaultNetworkService()
+//        let tokenStorage = KeychainTokenStorage()
+        authRepository = MockAuthRepository()
+//        authRepository = DefaultAuthRepository(networkService: networkService, tokenStorage: tokenStorage)
         signInUseCase = DefaultSignInUseCase(authRepository: authRepository)
+        signUpUseCase = DefaultSignUpUseCase(authRepository: authRepository)
     }
     
     func start() {
@@ -41,7 +44,7 @@ extension AuthCoordinator {
     
     // 회원가입 플로우
     func showSetFieldViewController() {
-        let selectFieldViewModel = SetFieldViewModel(coordinator: self)
+        let selectFieldViewModel = SetFieldViewModel(coordinator: self, signUpUseCase: signUpUseCase)
         let selectFieldViewController = SetFieldViewController(viewModel: selectFieldViewModel)
         
         if let signInNavController = navigationController.presentedViewController as? UINavigationController {

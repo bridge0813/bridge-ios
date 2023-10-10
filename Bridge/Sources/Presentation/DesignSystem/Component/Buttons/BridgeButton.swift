@@ -10,13 +10,16 @@ import UIKit
 // 그만두기, 보러가기, 지원하기, 프로젝트 상세 등 기본적으로 사용될 수 있는 버튼
 final class BridgeButton: BaseButton {
     
-    private var title: String
-    private var titleFont: UIFont
-
-    init(_ title: String, titleFont: UIFont, backgroundColor: UIColor) {
+    private let title: String
+    private let titleFont: UIFont
+    
+    override var isEnabled: Bool {
+        didSet { updateBackgroundColor() }
+    }
+    
+    init(title: String, font: UIFont, backgroundColor: UIColor) {
         self.title = title
-        self.titleFont = titleFont
-        
+        self.titleFont = font
         super.init(frame: .zero)
         self.backgroundColor = backgroundColor
     }
@@ -28,9 +31,9 @@ final class BridgeButton: BaseButton {
         layer.cornerRadius = 4
     }
 
-    /// 버튼의 활성화/비활성화 상태를 변경하는 메서드
-    func updateButtonState(isActive: Bool) {
-        backgroundColor = isActive ? BridgeColor.primary1 : BridgeColor.gray4
-        isEnabled = isActive
+    private func updateBackgroundColor() {
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            self.backgroundColor = self.isEnabled ? BridgeColor.primary1 : BridgeColor.gray4
+        }
     }
 }

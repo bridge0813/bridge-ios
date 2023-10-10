@@ -48,26 +48,14 @@ final class SignInViewModel: ViewModelType {
                 owner.signInUseCase.signInWithApple(credentials: credentials)
             }
             .observe(on: MainScheduler.instance)
-            .subscribe(
-                with: self,
-                onNext: { owner, result in
-                    switch result {
-                    case .success:
-                        owner.coordinator?.finish()
-                        
-                    case .needRefresh:
-                        // refresh token 넣어서 다시 요청
-                        print("need refresh")
-                        
-                    case .needSignUp:
-                        owner.coordinator?.showSetFieldViewController()
-                        
-                    case .failure:
-                        print("fail")
-                        // error handling ...
-                    }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .needSignUp:   owner.coordinator?.showSetFieldViewController()
+                case .success:      owner.coordinator?.finish()
+                case .failure:      owner.coordinator?.showAlert(configuration: .error)
                 }
-            )
+            })
             .disposed(by: disposeBag)
         
         return Output()
@@ -83,8 +71,8 @@ private extension SignInViewModel {
         let userName = appleIDCredential.fullName?.familyName ?? ""
         let givenName = appleIDCredential.fullName?.givenName ?? ""
         let fullName = userName + givenName
-        let identityToken = appleIDCredential.identityToken
-        let authorizationCode = appleIDCredential.authorizationCode
+        let identityToken = String(data: appleIDCredential.identityToken ?? Data(), encoding: .utf8)
+        let authorizationCode = String(data: appleIDCredential.authorizationCode ?? Data(), encoding: .utf8)
         
         return UserCredentials(
             id: userIdentifier,

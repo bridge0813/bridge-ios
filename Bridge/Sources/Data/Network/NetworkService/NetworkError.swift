@@ -5,27 +5,47 @@
 //  Created by 정호윤 on 2023/08/29.
 //
 
+import Foundation
+
 enum NetworkError: Error {
     case invalidURL
-    case statusCode(Int)
+    
+    /// 기대하지 않은 응답 타입일 때 (e.g. HTTPURLResponse가 아닐 때)
+    case invalidResponseType
+    
     case decodingFailed
+    
+    case statusCode(Int)
+    
+    case underlying(Error)
+    
     case unknown
 }
 
-extension NetworkError {
-    var description: String? {
+extension NetworkError: LocalizedError {
+    static let statusMessages = [
+        401: "Unauthorized",
+    ]
+    
+    var errorDescription: String? {
         switch self {
         case .invalidURL:
-            return "올바르지 않은 URL입니다."
+            return "invalid URL"
             
-        case .statusCode(let statusCode):
-            return "상태코드: \(statusCode)"
+        case .invalidResponseType:
+            return "received invalid response type"
             
         case .decodingFailed:
-            return "디코딩에 실패했습니다."
+            return "failed to decode response"
+            
+        case .statusCode(let statusCode):
+            return NetworkError.statusMessages[statusCode] ?? "undeclared status code: \(statusCode) error"
+            
+        case .underlying(let error):
+            return error.localizedDescription
             
         case .unknown:
-            return "알 수 없는 오류입니다."
+            return "unknown error occured"
         }
     }
 }

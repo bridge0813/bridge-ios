@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 final class BridgeSetFieldView: BaseView {
     // MARK: - UI
@@ -45,12 +46,6 @@ final class BridgeSetFieldView: BaseView {
     }()
     
     private let pmButton = BridgeFieldTagButton("PM")
-    
-    private let completeButton = BridgeButton(
-        "관심분야 설정하기",
-        titleFont: BridgeFont.button1.font,
-        backgroundColor: BridgeColor.primary1
-    )
     
     // MARK: - Configuration
     override func configureLayouts() {
@@ -117,5 +112,32 @@ final class BridgeSetFieldView: BaseView {
         super.layoutSubviews()
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
+    }
+}
+
+// MARK: - Button tap observalbe
+extension BridgeSetFieldView {
+    enum FieldTagButtonType: String {
+        case ios
+        case android
+        case frontend
+        case backend
+        case uiux
+        case bibx
+        case videomotion
+        case pm
+    }
+    
+    var fieldTagButtonTapped: Observable<String> {
+        Observable.merge(
+            iosButton.rx.tap.map { FieldTagButtonType.ios.rawValue },
+            androidButton.rx.tap.map { FieldTagButtonType.android.rawValue },
+            frontendButton.rx.tap.map { FieldTagButtonType.frontend.rawValue },
+            backendButton.rx.tap.map { FieldTagButtonType.backend.rawValue },
+            uiuxButton.rx.tap.map { FieldTagButtonType.uiux.rawValue },
+            bibxButton.rx.tap.map { FieldTagButtonType.bibx.rawValue },
+            videomotionButton.rx.tap.map { FieldTagButtonType.videomotion.rawValue },
+            pmButton.rx.tap.map { FieldTagButtonType.pm.rawValue }
+        )
     }
 }

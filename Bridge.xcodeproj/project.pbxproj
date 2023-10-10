@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B0CFB892AD3CF0000EA9C0D /* ObservableType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0CFB882AD3CF0000EA9C0D /* ObservableType+.swift */; };
+		7B0CFB8C2AD3D1E500EA9C0D /* PrimitiveSequenceType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0CFB8B2AD3D1E500EA9C0D /* PrimitiveSequenceType+.swift */; };
 		7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */; };
 		7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */; };
 		7B14DB252AB04BC5009A00EB /* ASAuthorizationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB242AB04BC5009A00EB /* ASAuthorizationController+Rx.swift */; };
@@ -58,6 +60,8 @@
 		7B71E7612A933C18001B5D2C /* FlexLayoutYoga in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7602A933C18001B5D2C /* FlexLayoutYoga */; };
 		7B71E7632A933C18001B5D2C /* FlexLayoutYogaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7622A933C18001B5D2C /* FlexLayoutYogaKit */; };
 		7B71E7662A933C25001B5D2C /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7652A933C25001B5D2C /* PinLayout */; };
+		7B922CF82AD020CC00F3A336 /* SignUpRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B922CF72AD020CC00F3A336 /* SignUpRequestDTO.swift */; };
+		7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B922CFB2AD02EE400F3A336 /* SignUpUseCase.swift */; };
 		7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */; };
 		7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C8F2A9C4BB3000DAB02 /* ChatRoomListViewModel.swift */; };
 		7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C972A9C503C000DAB02 /* FetchChatRoomsUseCase.swift */; };
@@ -86,6 +90,7 @@
 		7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */; };
 		7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */; };
 		7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */; };
+		7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */; };
 		7C1366352AC15ECF00EB415D /* BrideBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366342AC15ECF00EB415D /* BrideBookmarkButton.swift */; };
 		7C1366392AC16C4D00EB415D /* BrideRemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366382AC16C4D00EB415D /* BrideRemoveButton.swift */; };
 		7C1366422AC27F9100EB415D /* BrideSendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* BrideSendMessageButton.swift */; };
@@ -143,6 +148,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B0CFB882AD3CF0000EA9C0D /* ObservableType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+.swift"; sourceTree = "<group>"; };
+		7B0CFB8B2AD3D1E500EA9C0D /* PrimitiveSequenceType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrimitiveSequenceType+.swift"; sourceTree = "<group>"; };
 		7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewModel.swift; sourceTree = "<group>"; };
 		7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewController.swift; sourceTree = "<group>"; };
 		7B14DB242AB04BC5009A00EB /* ASAuthorizationController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASAuthorizationController+Rx.swift"; sourceTree = "<group>"; };
@@ -189,6 +196,8 @@
 		7B71E7492A9330C7001B5D2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B71E74C2A9330C7001B5D2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B71E74E2A9330C7001B5D2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B922CF72AD020CC00F3A336 /* SignUpRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestDTO.swift; sourceTree = "<group>"; };
+		7B922CFB2AD02EE400F3A336 /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
 		7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		7BA36C8F2A9C4BB3000DAB02 /* ChatRoomListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomListViewModel.swift; sourceTree = "<group>"; };
 		7BA36C972A9C503C000DAB02 /* FetchChatRoomsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChatRoomsUseCase.swift; sourceTree = "<group>"; };
@@ -217,6 +226,7 @@
 		7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageType.swift; sourceTree = "<group>"; };
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
 		7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSetFieldView.swift; sourceTree = "<group>"; };
+		7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthRepository.swift; sourceTree = "<group>"; };
 		7C1366342AC15ECF00EB415D /* BrideBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideBookmarkButton.swift; sourceTree = "<group>"; };
 		7C1366382AC16C4D00EB415D /* BrideRemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideRemoveButton.swift; sourceTree = "<group>"; };
 		7C1366412AC27F9100EB415D /* BrideSendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideSendMessageButton.swift; sourceTree = "<group>"; };
@@ -292,10 +302,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B0CFB8A2AD3D19500EA9C0D /* RxExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				7B0CFB882AD3CF0000EA9C0D /* ObservableType+.swift */,
+				7B0CFB8B2AD3D1E500EA9C0D /* PrimitiveSequenceType+.swift */,
+			);
+			path = RxExtensions;
+			sourceTree = "<group>";
+		};
 		7B14DB262AB15E69009A00EB /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				7B14DB272AB15E7E009A00EB /* SignInUseCase.swift */,
+				7B922CFB2AD02EE400F3A336 /* SignUpUseCase.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -329,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB332AB1DBFD009A00EB /* DefaultAuthRepository.swift */,
+				7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -346,8 +367,8 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB512AB86982009A00EB /* KeychainAccount.swift */,
-				7B14DB4E2AB8659E009A00EB /* KeychainTokenStroage.swift */,
 				7B14DB4A2AB86099009A00EB /* KeychainError.swift */,
+				7B14DB4E2AB8659E009A00EB /* KeychainTokenStroage.swift */,
 			);
 			path = Keychain;
 			sourceTree = "<group>";
@@ -400,8 +421,8 @@
 		7B61235C2ABD9C9E006E72C1 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */,
-				7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */,
+				7B922CF92AD020DD00F3A336 /* SignIn */,
+				7B922CFA2AD020EC00F3A336 /* SignUp */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -508,6 +529,23 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		7B922CF92AD020DD00F3A336 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */,
+				7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		7B922CFA2AD020EC00F3A336 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				7B922CF72AD020CC00F3A336 /* SignUpRequestDTO.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		7BA36C8C2A9C4B20000DAB02 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +553,7 @@
 				7BA36CC82A9E1640000DAB02 /* Reusable.swift */,
 				7BA36CC22A9E10FA000DAB02 /* Bases */,
 				7BA36CC52A9E148C000DAB02 /* Extensions */,
+				7B0CFB8A2AD3D19500EA9C0D /* RxExtensions */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1130,6 +1169,7 @@
 			files = (
 				7C42701A2AA377FE009BE6AF /* ProjectCollectionViewCell.swift in Sources */,
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
+				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BrideBookmarkButton.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
@@ -1142,6 +1182,7 @@
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
 				7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */,
+				7B922CF82AD020CC00F3A336 /* SignUpRequestDTO.swift in Sources */,
 				7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */,
 				7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
@@ -1154,6 +1195,7 @@
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
+				7B0CFB892AD3CF0000EA9C0D /* ObservableType+.swift in Sources */,
 				7C40CBA32AC3E5A8000F4C9F /* BrideOutlinedTechTagButton.swift in Sources */,
 				7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
@@ -1161,6 +1203,7 @@
 				7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */,
 				7BA36CB92A9D9A29000DAB02 /* HTTP.swift in Sources */,
 				7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */,
+				7B0CFB8C2AD3D1E500EA9C0D /* PrimitiveSequenceType+.swift in Sources */,
 				7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */,
 				7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */,
 				7C8B82402ACE91C500F7B889 /* ChatRoomMenuCell.swift in Sources */,
@@ -1222,6 +1265,7 @@
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
+				7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */,
 				7C40CBCA2AC6B597000F4C9F /* BrideCreateProjectButton.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
 				7C24003D2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift in Sources */,

@@ -9,13 +9,82 @@ import Foundation
 import RxSwift
 
 final class DefaultNetworkService: NetworkService {
-    func request(_ endpoint: Endpoint) -> Observable<Data> {
-        guard let urlRequest = endpoint.toURLRequest() else { return .error(NetworkError.invalidURL) }
-        return URLSession.shared.rx.data(request: urlRequest)
+    
+    func request(_ endpoint: Endpoint) -> Single<Void> {
+        Single.create { single in
+            guard let urlRequest = endpoint.toURLRequest() else {
+                single(.failure(NetworkError.invalidURL))
+                return Disposables.create()
+            }
+            
+            let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] _, response, error in
+                guard let result = self?.handleResponse(response, error: error) else { return }
+                
+                switch result {
+                case .success:
+                    single(.success(()))
+                    
+                case .failure(let error):
+                    single(.failure(error))
+                }
+            }
+            
+            task.resume()
+            
+            return Disposables.create { task.cancel() }
+        }
+    }
+    
+    func request<T: Decodable>(_ endpoint: Endpoint) -> Single<T> {
+        Single.create { single in
+            guard let urlRequest = endpoint.toURLRequest() else {
+                single(.failure(NetworkError.invalidURL))
+                return Disposables.create()
+            }
+            
+            let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
+                guard let result = self?.handleResponse(response, error: error) else { return }
+                
+                switch result {
+                case .success:
+                    if let data,
+                       let dto = try? JSONDecoder().decode(T.self, from: data) {
+                        single(.success(dto))
+                    } else {
+                        single(.failure(NetworkError.decodingFailed))
+                    }
+                    
+                case .failure(let error):
+                    single(.failure(error))
+                }
+            }
+            
+            task.resume()
+            
+            return Disposables.create { task.cancel() }
+        }
+    }
+    
+    private func handleResponse(_ response: URLResponse?, error: Error?) -> Result<HTTPURLResponse, NetworkError> {
+        if let error {
+            return .failure(.underlying(error))
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            return .failure(NetworkError.invalidResponseType)
+        }
+        
+        switch httpResponse.statusCode {
+        case 200 ..< 300:   
+            return .success(httpResponse)
+            
+        case let statusCode:
+            return .failure(NetworkError.statusCode(statusCode))
+        }
     }
 }
 
-// MARK: - For test
+// TODO: 아래 함수들 제거
 extension DefaultNetworkService {
     func requestTestChatRooms() -> Observable<[ChatRoomDTO]> {
         Observable.just(ChatRoomDTO.testArray)
@@ -41,41 +110,5 @@ extension DefaultNetworkService {
     
     func requestTestHotProjectsData() -> Observable<[ProjectDTO]> {
         Observable.just(ProjectDTO.hotProjectTestArray)
-    }
-}
-
-// MARK: - Auth
-extension DefaultNetworkService {
-    func signInWithApple(_ credentials: UserCredentials, userName: String?) -> Single<SignInResponseDTO> {
-        
-        let signInWithAppleRequestDTO = SignInWithAppleRequestDTO(
-            name: userName ?? "",
-            idToken: String(data: credentials.identityToken ?? Data(), encoding: .utf8) ?? ""
-        )
-        
-        let authEndpoint = AuthEndpoint.signInWithApple(request: signInWithAppleRequestDTO)
-        
-        return request(authEndpoint)
-            .asSingle()
-            .flatMap { data in
-                if let decodedData = try? JSONDecoder().decode(SignInResponseDTO.self, from: data) {
-                    return Single.just(decodedData)
-                } else {
-                    return Single.error(NetworkError.decodingFailed)
-                }
-            }
-    }
-    
-    func signInWithAppleTest(_ credentials: UserCredentials, userName: String?) -> Single<SignInResponseDTO> {
-        Single.just(
-            SignInResponseDTO(
-                grantType: "Bearer",
-                accessToken: "accessToken",
-                refreshToken: "refreshToken",
-                email: "example@me.com",
-                isRegistered: false,
-                userId: 1
-            )
-        )
     }
 }
