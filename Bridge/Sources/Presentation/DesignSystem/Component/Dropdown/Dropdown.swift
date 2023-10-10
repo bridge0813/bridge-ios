@@ -29,9 +29,6 @@ final class DropDown: BaseView {
     /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능
     private let dismissableView = UIView()
     
-    /// 테이블뷰를 포함하는 컨테이너 뷰
-    private let tableViewContainer = UIView()
-    
     /// 드롭다운 항목들을 표시하기 위한 UITableView
     private let tableView = UITableView()
     
@@ -182,14 +179,12 @@ final class DropDown: BaseView {
         tableView.backgroundColor = tableViewBackgroundColor
         tableView.separatorColor = separatorColor
         tableView.layer.cornerRadius = cornerRadius
+        tableView.layer.shadowColor = shadowColor.cgColor
+        tableView.layer.shadowOffset = shadowOffset
+        tableView.layer.shadowOpacity = shadowOpacity
+        tableView.layer.shadowRadius = shadowRadius
         tableView.clipsToBounds = true
-        
-        tableViewContainer.layer.masksToBounds = false
-        tableViewContainer.layer.cornerRadius = cornerRadius
-        tableViewContainer.layer.shadowColor = shadowColor.cgColor
-        tableViewContainer.layer.shadowOffset = shadowOffset
-        tableViewContainer.layer.shadowOpacity = shadowOpacity
-        tableViewContainer.layer.shadowRadius = shadowRadius
+        tableView.layer.masksToBounds = false
 
         alpha = 0
         isHidden = true
@@ -251,11 +246,11 @@ extension DropDown {
         setDismissableViewConstraints()
         
         // Table view container
-        addSubview(tableViewContainer)
-        tableViewContainer.translatesAutoresizingMaskIntoConstraints = false
-
+        addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         xConstraint = NSLayoutConstraint(
-            item: tableViewContainer,  // tableViewContainer에 제약조건을 적용
+            item: tableView,  // tableViewContainer에 제약조건을 적용
             attribute: .leading,       // tableViewContainer의 leading 부분에 제약조건을 적용
             relatedBy: .equal,         // tableViewContainer의 leading이 드롭다운 뷰의 leading과 동일하도록
             toItem: self,
@@ -266,7 +261,7 @@ extension DropDown {
         addConstraint(xConstraint ?? NSLayoutConstraint())  // 드롭다운 뷰에 해당 제약 조건을 추가
 
         yConstraint = NSLayoutConstraint(
-            item: tableViewContainer,
+            item: tableView,
             attribute: .top,
             relatedBy: .equal,
             toItem: self,
@@ -277,7 +272,7 @@ extension DropDown {
         addConstraint(yConstraint ?? NSLayoutConstraint())
 
         widthConstraint = NSLayoutConstraint(
-            item: tableViewContainer,
+            item: tableView,
             attribute: .width,
             relatedBy: .equal,
             toItem: nil,                 // width를 다른 뷰의 속성과 연관시키지 않음
@@ -285,10 +280,10 @@ extension DropDown {
             multiplier: 1,
             constant: 0
         )
-        tableViewContainer.addConstraint(widthConstraint ?? NSLayoutConstraint())
+        tableView.addConstraint(widthConstraint ?? NSLayoutConstraint())
 
         heightConstraint = NSLayoutConstraint(
-            item: tableViewContainer,
+            item: tableView,
             attribute: .height,
             relatedBy: .equal,
             toItem: nil,                 // height를 다른 뷰의 속성과 연관시키지 않음
@@ -296,8 +291,8 @@ extension DropDown {
             multiplier: 1,
             constant: 0
         )
-        tableViewContainer.addConstraint(heightConstraint ?? NSLayoutConstraint())
-        setTableViewConstraints()
+        tableView.addConstraint(heightConstraint ?? NSLayoutConstraint())
+        
     }
     
     func setDismissableViewConstraints() {
@@ -310,23 +305,13 @@ extension DropDown {
         dismissableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
-    func setTableViewConstraints() {
-        tableViewContainer.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-
-        tableView.leadingAnchor.constraint(equalTo: tableViewContainer.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: tableViewContainer.trailingAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: tableViewContainer.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: tableViewContainer.bottomAnchor).isActive = true
-    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        print("layoutSubviews")
         
-        let shadowPath = UIBezierPath(roundedRect: tableViewContainer.bounds, cornerRadius: cornerRadius)
-        tableViewContainer.layer.shadowPath = shadowPath.cgPath
+        print(#function)
+        
+        let shadowPath = UIBezierPath(roundedRect: tableView.bounds, cornerRadius: cornerRadius)
+        tableView.layer.shadowPath = shadowPath.cgPath
     }
     
     /// 드롭다운의 레이아웃을 계산
@@ -473,12 +458,10 @@ extension DropDown {
     */
     @discardableResult
     func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
+        print(#function)
         
         willShow.onNext(())
 
-        setNeedsUpdateConstraints()  // 레이아웃 제약조건이 업데이트되도록
-
-        print("show")
         setDropdownConstraints()  // 드롭다운 레이아웃 배치
         
         let layout = computeLayout()
@@ -489,13 +472,13 @@ extension DropDown {
 
         isHidden = false
         
-        tableViewContainer.transform = downScaleTransform
+        tableView.transform = downScaleTransform
         
         UIView.animate(
             withDuration: animationduration,
             animations: { [weak self] in
                 self?.alpha = 1
-                self?.tableViewContainer.transform = .identity
+                self?.tableView.transform = .identity
             }
         )
 
