@@ -243,11 +243,11 @@ extension DropDown {
         print(#function)
         
         translatesAutoresizingMaskIntoConstraints = false
+        tableViewContainer.translatesAutoresizingMaskIntoConstraints = false
         
         setDismissableViewConstraints()
         
         addSubview(tableViewContainer)
-        tableViewContainer.translatesAutoresizingMaskIntoConstraints = false
         
         // leading 제약조건
         tableViewContainer.leadingAnchor.constraint(
@@ -448,7 +448,6 @@ extension DropDown {
         willShow.onNext(())
 
         setDropdownConstraints()  // 드롭다운 레이아웃 배치
-        computeLayout()
 
         if !(canBeDisplayed ?? false) {
             hide()
@@ -497,22 +496,10 @@ extension DropDown {
                 
                 self.isHidden = true
                 self.removeFromSuperview()
-                UIAccessibility.post(notification: .screenChanged, argument: nil)
             }
         )
         
         willHide.onNext(())
-    }
-}
-
-// MARK: - UITableView
-extension DropDown {
-    /// 모든 셀을 다시 로드하는 메서드로 'dataSource', 'textColor', 'textFont', 'selectionBackgroundColor' and 'cellConfiguration' 에 대한 변경 사항이 있을 때마다 호출된다.
-    func reloadAllComponents() {
-        DispatchQueue.executeOnMainThread {
-            self.tableView.reloadData()
-            self.setNeedsUpdateConstraints()
-        }
     }
 }
 
