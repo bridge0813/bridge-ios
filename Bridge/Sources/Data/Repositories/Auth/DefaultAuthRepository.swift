@@ -20,11 +20,11 @@ final class DefaultAuthRepository: AuthRepository {
     
     func signInWithApple(credentials: UserCredentials) -> Single<SignInResult> {
         if !credentials.name.isEmpty {  // 이름은 2번째 로그인부터 빈 문자열이 리턴되므로, 빈 문자열 저장하지 않도록 처리
-            tokenStorage.saveToken(credentials.name, for: .userName)
+            tokenStorage.save(credentials.name, for: .userName)
         }
         
         let signInWithAppleRequestDTO = SignInWithAppleRequestDTO(
-            userName: tokenStorage.fetchToken(for: .userName) ?? "",
+            userName: tokenStorage.get(.userName) ?? "",
             identityToken: credentials.identityToken ?? ""
         )
         let authEndpoint = AuthEndpoint.signInWithApple(requestDTO: signInWithAppleRequestDTO)
@@ -40,13 +40,13 @@ final class DefaultAuthRepository: AuthRepository {
     }
     
     private func storeToken(_ signInResponseDTO: SignInResponseDTO) {
-        tokenStorage.saveToken(signInResponseDTO.accessToken, for: .accessToken)
-        tokenStorage.saveToken(signInResponseDTO.refreshToken, for: .refreshToken)
-        tokenStorage.saveToken(String(signInResponseDTO.userId), for: .userID)
+        tokenStorage.save(signInResponseDTO.accessToken, for: .accessToken)
+        tokenStorage.save(signInResponseDTO.refreshToken, for: .refreshToken)
+        tokenStorage.save(String(signInResponseDTO.userId), for: .userID)
     }
     
     func signUp(selectedFields: [String]) -> Single<Void> {
-        let userID = Int(tokenStorage.fetchToken(for: .userID) ?? "")
+        let userID = Int(tokenStorage.get(.userID) ?? "")
         let signUpRequestDTO = SignUpRequestDTO(userID: userID, selectedFields: selectedFields)
         let authEndpoint = AuthEndpoint.signUp(requestDTO: signUpRequestDTO)
 

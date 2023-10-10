@@ -9,7 +9,7 @@ import Foundation
 
 struct KeychainTokenStorage: TokenStorage {
     // MARK: - Fetch
-    func fetchToken(for key: KeychainAccount) -> Token? {
+    func get(_ key: KeychainAccount) -> Token? {
         let searchQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key.rawValue,
@@ -32,7 +32,7 @@ struct KeychainTokenStorage: TokenStorage {
     }
     
     // MARK: - Save
-    func saveToken(_ token: Token, for key: KeychainAccount) -> Bool {
+    func save(_ token: Token, for key: KeychainAccount) -> Bool {
         guard let tokenData = token.data(using: .utf8) else { return false }
         
         let saveQuery: [CFString: Any] = [
@@ -72,7 +72,7 @@ struct KeychainTokenStorage: TokenStorage {
     }
     
     // MARK: - Delete
-    func deleteToken(for key: KeychainAccount) -> Bool {
+    func delete(_ key: KeychainAccount) -> Bool {
         let deleteQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key.rawValue

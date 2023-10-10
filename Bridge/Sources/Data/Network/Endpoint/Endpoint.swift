@@ -30,7 +30,7 @@ extension Endpoint {
     var headers: HTTPHeaders {
         var defaultHeaders = ["Content-Type": "application/json"]
         
-        if let accessToken = tokenStorage?.fetchToken(for: .accessToken) {
+        if let accessToken = tokenStorage?.get(.accessToken) {
             defaultHeaders["Authorization"] = "Bearer \(accessToken)"
         }
         
