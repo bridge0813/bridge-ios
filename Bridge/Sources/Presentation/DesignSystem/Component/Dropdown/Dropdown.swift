@@ -28,6 +28,8 @@ final class DropDown: BaseView {
     /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능
     private let dismissableView = UIView()
     
+    private let tableViewContainer = UIView()
+    
     /// 드롭다운 항목들을 표시하기 위한 UITableView
     private let tableView = UITableView()
     
@@ -179,15 +181,19 @@ final class DropDown: BaseView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = cellHeight
-        tableView.backgroundColor = tableViewBackgroundColor
+        tableView.backgroundColor = .clear
         tableView.separatorColor = separatorColor
         tableView.layer.cornerRadius = cornerRadius
-        tableView.layer.shadowColor = shadowColor.cgColor
-        tableView.layer.shadowOffset = shadowOffset
-        tableView.layer.shadowOpacity = shadowOpacity
-        tableView.layer.shadowRadius = shadowRadius
         tableView.clipsToBounds = true
-        tableView.layer.masksToBounds = false
+        
+        tableViewContainer.backgroundColor = tableViewBackgroundColor
+        tableViewContainer.layer.cornerRadius = cornerRadius
+        tableViewContainer.layer.shadowColor = shadowColor.cgColor
+        tableViewContainer.layer.shadowOffset = shadowOffset
+        tableViewContainer.layer.shadowOpacity = shadowOpacity
+        tableViewContainer.layer.shadowRadius = shadowRadius
+        tableViewContainer.clipsToBounds = true
+        tableViewContainer.layer.masksToBounds = false
 
         alpha = 0
         isHidden = true
@@ -240,30 +246,32 @@ extension DropDown {
         
         setDismissableViewConstraints()
         
-        addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(tableViewContainer)
+        tableViewContainer.translatesAutoresizingMaskIntoConstraints = false
         
         // leading 제약조건
-        tableView.leadingAnchor.constraint(
+        tableViewContainer.leadingAnchor.constraint(
             equalTo: self.leadingAnchor,
             constant: xConstant ?? .zero
         ).isActive = true
 
         // top 제약조건
-        tableView.topAnchor.constraint(
+        tableViewContainer.topAnchor.constraint(
             equalTo: self.topAnchor,
             constant: yConstant ?? .zero
         ).isActive = true
 
         // width 제약조건
-        tableView.widthAnchor.constraint(
+        tableViewContainer.widthAnchor.constraint(
             equalToConstant: widthConstant ?? .zero
         ).isActive = true
 
         // height 제약조건
-        tableView.heightAnchor.constraint(
+        tableViewContainer.heightAnchor.constraint(
             equalToConstant: heightConstant ?? .zero
         ).isActive = true
+        
+        setTableViewConstraints()
     }
     
     func setDismissableViewConstraints() {
@@ -276,13 +284,23 @@ extension DropDown {
         dismissableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
+    func setTableViewConstraints() {
+        tableViewContainer.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        tableView.leadingAnchor.constraint(equalTo: tableViewContainer.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: tableViewContainer.trailingAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: tableViewContainer.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: tableViewContainer.bottomAnchor).isActive = true
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         print(#function)
         
-        let shadowPath = UIBezierPath(roundedRect: tableView.bounds, cornerRadius: cornerRadius)
-        tableView.layer.shadowPath = shadowPath.cgPath
+        let shadowPath = UIBezierPath(roundedRect: tableViewContainer.bounds, cornerRadius: cornerRadius)
+        tableViewContainer.layer.shadowPath = shadowPath.cgPath
     }
     
     /// 드롭다운의 레이아웃을 계산
@@ -438,13 +456,13 @@ extension DropDown {
 
         isHidden = false
         
-        tableView.transform = downScaleTransform
+        tableViewContainer.transform = downScaleTransform
         
         UIView.animate(
             withDuration: animationduration,
             animations: { [weak self] in
                 self?.alpha = 1
-                self?.tableView.transform = .identity
+                self?.tableViewContainer.transform = .identity
             }
         )
     }
