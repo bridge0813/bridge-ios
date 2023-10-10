@@ -149,8 +149,6 @@ final class DropDown: BaseView {
     }
     
     override func configureAttributes() {
-        print(#function)
-        
         DispatchQueue.main.async {
             self.updateConstraintsIfNeeded()
         }
@@ -187,8 +185,6 @@ final class DropDown: BaseView {
 extension DropDown {
     
     override func updateConstraints() {
-        print(#function)
-        
         computeLayout()
         setupConstraints()
         
@@ -196,8 +192,6 @@ extension DropDown {
     }
     
     private func setupConstraints() {
-        print(#function)
-        
         translatesAutoresizingMaskIntoConstraints = false
         tableViewContainer.translatesAutoresizingMaskIntoConstraints = false
         
@@ -248,8 +242,6 @@ extension DropDown {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        print(#function)
         
         let shadowPath = UIBezierPath(roundedRect: tableViewContainer.bounds, cornerRadius: cornerRadius)
         tableViewContainer.layer.shadowPath = shadowPath.cgPath
@@ -388,8 +380,6 @@ extension DropDown {
 extension DropDown {
     
     func show() {
-        print(#function)
-        
         willShow.onNext(())
 
         // 계산된 레이아웃이 화면에 표시될 수 없는 경우

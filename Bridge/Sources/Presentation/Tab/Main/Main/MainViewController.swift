@@ -135,8 +135,6 @@ final class MainViewController: BaseViewController {
     }
     
     private func setRestrictionMenuDropdown() {
-        print(#function)
-        
         restrictionDropdown.itemSelected
             .withUnretained(self)
             .subscribe(onNext: { owner, item in
@@ -160,8 +158,6 @@ final class MainViewController: BaseViewController {
     }
     
     private func setChatRoomMenuDropdown() {
-        print(#function)
-        
         chatRoomMenuDropdown.itemSelected
             .subscribe(onNext: { item in
                 print(item.title)
