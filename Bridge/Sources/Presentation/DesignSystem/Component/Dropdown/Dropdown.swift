@@ -11,14 +11,14 @@ import RxCocoa
 
 // 출처: https://github.com/AssistoLab/DropDown
 
-typealias Index = Int
+typealias IndexRow = Int
 typealias Closure = () -> Void
 
 /// 드롭다운 선택했을 경우 넘겨주는 데이터
-typealias DropdownItem = (indexRow: Index, title: String)
+typealias DropdownItem = (indexRow: IndexRow, title: String)
 
 /// 드롭다운 항목의 셀을 구성할 때 사용되는 클로저.
-typealias CellConfigurationClosure = (Index, String, UITableViewCell) -> Void
+typealias CellConfigurationClosure = (IndexRow, String, UITableViewCell) -> Void
 
 typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
@@ -86,7 +86,7 @@ final class DropDown: BaseView {
     private var canBeDisplayed: Bool?
     
     /// 선택된 항목의 인덱스를 추적하기 위해 사용된다.
-    var selectedItemIndexRow: Index?
+    var selectedItemIndexRow: IndexRow?
     
     /// dataSource에 있는 모든 아이템들을 보여주기 위한 TableView의 높이
     private var tableHeight: CGFloat {
@@ -205,7 +205,7 @@ final class DropDown: BaseView {
     }
 }
 
-// MARK: - UI
+// MARK: - 레이아웃 및 제약조건 설정
 extension DropDown {
     
     /// 뷰의 제약조건을 업데이트 할 필요가 있을 때 사용되는 메서드.
@@ -220,20 +220,6 @@ extension DropDown {
         }
         
         didSetupConstraints = true  // 제약조건을 설정했으므로 true
-        
-        // 계산된 레이아웃이 화면에 표시될 수 없는 경우
-        if !(canBeDisplayed ?? false) {
-            super.updateConstraints()
-            hide()  // 드롭다운 숨기기
-            
-            return
-        }
-        
-        // 드롭다운이 화면 밖으로 벗어나는 경우 스크롤이 가능하도록 설정
-        if let offscreenHeight {
-            tableView.isScrollEnabled = offscreenHeight > 0
-            tableView.flashScrollIndicators()
-        }
         
         super.updateConstraints()
     }
@@ -447,12 +433,21 @@ extension DropDown {
         
         willShow.onNext(())
 
-        setDropdownConstraints()  // 드롭다운 레이아웃 배치
-
+        // 계산된 레이아웃이 화면에 표시될 수 없는 경우
         if !(canBeDisplayed ?? false) {
             hide()
+            return
         }
-
+        
+        // 드롭다운 레이아웃 설정
+        setDropdownConstraints()
+        
+        // 드롭다운이 화면 밖으로 벗어나는 경우 스크롤이 가능하도록 설정
+        if let offscreenHeight {
+            tableView.isScrollEnabled = offscreenHeight > 0
+            tableView.flashScrollIndicators()
+        }
+        
         isHidden = false
         
         tableViewContainer.transform = downScaleTransform
