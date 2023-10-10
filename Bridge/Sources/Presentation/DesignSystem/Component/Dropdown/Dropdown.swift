@@ -324,20 +324,14 @@ extension DropDown {
         guard let templateCell = tableView.dequeueReusableCell(withIdentifier: BaseDropdownCell.identifier)
                 as? BaseDropdownCell else { return .zero }
 
-        var maxWidth: CGFloat = 0
+        let maxWidth = dataSource
+            .map { text -> CGFloat in
+                templateCell.optionLabel.text = text
+                return templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
+            }
+            .max()
         
-        for index in 0..<dataSource.count {
-            
-            templateCell.optionLabel.text = dataSource[index]
-            templateCell.bounds.size.height = cellHeight
-            
-            // templateCell과 내부 서브뷰들이 제약조건을 만족하면서 차지할 수 있는 최소한의 크기를 계산
-            let cellFitWidth = templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
-            
-            maxWidth = max(maxWidth, cellFitWidth)
-        }
-        
-        return maxWidth
+        return maxWidth ?? .zero
     }
     
     /// 드롭다운의 width가 화면 밖으로 넘어가지 않도록 x위치를 조절해주는 메서드
