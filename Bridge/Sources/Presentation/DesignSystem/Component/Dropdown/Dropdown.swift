@@ -23,185 +23,74 @@ typealias CellConfigurationClosure = (Index, String, UITableViewCell) -> Void
 /// 화면상에서 드롭다운의 레이아웃을 계산할 때, 사용될 것으로 보이는 튜플. x, y좌표와 넓이, 그리고 화면 바깥 영역의 높이 값을 포함.
 typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
-final class DropDown: UIView {
-    // MARK: - UI
+final class DropDown: BaseView {
+    
+    // MARK: - 드롭다운 UI 구조
     /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능
-    let dismissableView = UIView()
+    private let dismissableView = UIView()
     
     /// 테이블뷰를 포함하는 컨테이너 뷰
-    let tableViewContainer = UIView()
+    private let tableViewContainer = UIView()
     
     /// 드롭다운 항목들을 표시하기 위한 UITableView
-    let tableView = UITableView()
+    private let tableView = UITableView()
     
     /// 드롭다운의 width가 정의되지 않았을 경우, cell 내부 컨텐츠의 크기에 맞게 적절하게 width를 계산
-    var templateCell: BaseDropdownCell?
+    private var templateCell: BaseDropdownCell?
     
-    /// 드롭다운이 표시될 기준점이 되는 UIView나 UIBarButtonItem을 나타냄.
-    /// anchorView의 값이 설정될 때마다 setNeedsUpdateConstraints()을 통해 레이아웃 제약 조건을 업데이트하도록 요청한다.
-    weak var anchorView: AnchorView? {
-        didSet { setNeedsUpdateConstraints() }
-    }
+    private weak var anchorView: AnchorView?
+    private var bottomOffset: CGPoint
+    private var dataSource: [String]
     
-    // MARK: - 드롭다운의 정확한 위치를 결정하는 데 사용되는 프로퍼티
-    /// 드롭다운이 anchorView 아래에 표시될 때 적용되는 상대적인 오프셋을 나타낸다.
-    var bottomOffset: CGPoint = .zero {
-        didSet { setNeedsUpdateConstraints() }
-    }
+    // MARK: - 드롭다운 Cell 스타일
+    private var cellHeight: CGFloat
+    private var itemTextColor: UIColor
+    private var itemTextFont: UIFont
+    private var selectedItemTextColor: UIColor
+    private var selectedItemBackgroundColor: UIColor
+    private var separatorColor: UIColor
+    private var tableViewBackgroundColor: UIColor
     
-    /// 드롭다운의 width를 나타낸다.
-    /// 기본값은 'anchorView.bounds.width - offset.x' 로 anchorView의 너비에서 x오프셋을 뺀 값.
-    /// width의 값이 변경될 때마다 레이아웃의 제약조건을 업데이트하도록 요청한다.
-    var width: CGFloat? {
-        didSet { setNeedsUpdateConstraints() }
-    }
+    // MARK: - 드롭다운 UI
+    private var width: CGFloat?
+    private var cornerRadius: CGFloat  // 테이블뷰, 컨테이너, 드롭다운 모두 적용
+    private var shadowColor: UIColor
+    private var shadowOffset: CGSize
+    private var shadowOpacity: Float
+    private var shadowRadius: CGFloat
     
-    // MARK: - 드롭다운의 위치와 크기를 동적으로 결정하고 조절하는 데 사용
-    var heightConstraint: NSLayoutConstraint?  // DropDown의 높이(height)를 결정하는 제약 조건을 참조
-    var widthConstraint: NSLayoutConstraint?   // DropDown의 너비(width)를 결정하는 제약 조건을 참조
-    var xConstraint: NSLayoutConstraint?       // DropDown의 x 위치(수평 위치)를 결정하는 제약 조건을 참조
-    var yConstraint: NSLayoutConstraint?       // DropDown의 y 위치(수직 위치)를 결정하는 제약 조건을 참조
-
-    // MARK: - Appearance
-    /// 기본값은 'DPDConstant.UI.RowHeight' 이며, 새 값을 지정하면 해당 값으로 설정되며, 새 값이 설정된 후에 드롭다운의 모든 컴포넌트를 다시 로드.
-    var cellHeight = DropdownConstant.DropdownUI.rowHeight {
-        willSet { tableView.rowHeight = newValue }
-        didSet { reloadAllComponents() }
-    }
+    private var dimmedBackgroundColor: UIColor
     
-    var tableViewBackgroundColor = DropdownConstant.DropdownUI.backgroundColor {
-        willSet {
-            tableView.backgroundColor = newValue
-        }
-    }
-
-    override var backgroundColor: UIColor? {
-        get { return tableViewBackgroundColor }
-        set { tableViewBackgroundColor = newValue ?? BridgeColor.primary1 }
-    }
-
-    /// 드롭다운 뒤의 어둡게 처리된 배경의 색상을 나타낸다.
-    var dimmedBackgroundColor = UIColor.clear {
-        willSet { super.backgroundColor = newValue }
-    }
-
-    /// 드롭다운 내에서 선택된 셀의 배경색을 나타낸다.
-    var selectionBackgroundColor = DropdownConstant.DropdownItem.selectedBackgroundColor
-
-    /// 드롭다운 내의 셀들 사이의 구분선 색상을 나타낸다.
-    var separatorColor = DropdownConstant.DropdownUI.separatorColor {
-        willSet { tableView.separatorColor = newValue }
-        didSet { reloadAllComponents() }
-    }
+    // MARK: - 드롭다운 애니메이션
+    private var animationduration: Double
+    private var downScaleTransform: CGAffineTransform
     
-    // MARK: - Radius
-    /// 드롭다운의 cornerRadius
-    var cornerRadius = DropdownConstant.DropdownUI.cornerRadius {
-        willSet {
-            tableViewContainer.layer.cornerRadius = newValue
-            tableView.layer.cornerRadius = newValue
-        }
-        didSet { reloadAllComponents() }
-    }
-
-    /// 원하는 모서리만 둥글게 설정하는 메서드
-    func setupMaskedCorners(_ cornerMask: CACornerMask) {
-        tableViewContainer.layer.maskedCorners = cornerMask
-        tableView.layer.maskedCorners = cornerMask
-        reloadAllComponents()
-    }
     
-    // MARK: - 그림자
-    /// 드롭다운의 그림자 색상
-    var shadowColor = DropdownConstant.DropdownUI.shadowColor {
-        willSet { tableViewContainer.layer.shadowColor = newValue.cgColor }
-        didSet { reloadAllComponents() }
-    }
-
-    /// 드롭다운의 그림자가 그려지는 위치의 x와 y 방향의 오프셋을 결정.
-    var shadowOffset = DropdownConstant.DropdownUI.shadowOffset {
-        willSet { tableViewContainer.layer.shadowOffset = newValue }
-        didSet { reloadAllComponents() }
-    }
-
-    /// 그림자의 투명도
-    var shadowOpacity = DropdownConstant.DropdownUI.shadowOpacity {
-        willSet { tableViewContainer.layer.shadowOpacity = newValue }
-        didSet { reloadAllComponents() }
-    }
-
-    /// 그림자의 radius. 그림자가 퍼져나가는 정도를 결정
-    var shadowRadius = DropdownConstant.DropdownUI.shadowRadius {
-        willSet { tableViewContainer.layer.shadowRadius = newValue }
-        didSet { reloadAllComponents() }
-    }
+    // MARK: - 드롭다운 커스텀 셀
+    private var customCellType: UITableViewCell.Type
+    private var customCellConfiguration: CellConfigurationClosure?
     
-    // MARK: - 애니메이션
-    /// 드롭다운을 보이거나 숨길 때, 애니메이션의 지속 시간
-    var animationduration = DropdownConstant.Animation.duration
-
-    /// 드롭다운이 나타나는 동안 tableViewContainer에 적용되는 변형을 나타낸다.
-    /// 예를들어, 드롭다운이 나타나는 동안 테이블 뷰가 원래 크기의 90%로 축소되는 애니메이션 효과를 주고 싶다면 0.9, 0.9가 될 것이다.
-    var downScaleTransform = DropdownConstant.Animation.downScaleTransform {
-        willSet { tableViewContainer.transform = newValue }
-    }
-
-    // MARK: - 텍스트 스타일
-    /// 드롭다운의 각 셀에 표시되는 텍스트의 색상을 나타낸다.
-    var textColor = DropdownConstant.DropdownItem.textColor {
-        didSet { reloadAllComponents() }
-    }
-
-    /// 드롭다운의 선택된 셀의 텍스트 색상을 나타낸다.
-    var selectedTextColor = DropdownConstant.DropdownItem.selectedTextColor {
-        didSet { reloadAllComponents() }
-    }
-    
-    /// 드롭다운의 각 셀에 표시되는 텍스트의 폰트를 나타낸다.
-    var textFont = DropdownConstant.DropdownItem.textFont {
-        didSet { reloadAllComponents() }
-    }
-    
-    /// 커스텀 셀 설정
-    var customCellType: UITableViewCell.Type? {
-        didSet {
-            if let cellType = customCellType {
-                tableView.register(cellType, forCellReuseIdentifier: BaseDropdownCell.identifier)
-                templateCell = nil
-                reloadAllComponents()
-            }
-        }
-    }
-    
-    // MARK: - DataSource
-    /// 드롭다운에 표시될 데이터 항목들을 포함하고 있음.
-    var dataSource = [String]() {
-        didSet {
-            selectedItemIndexRow = nil  // 선택상태 초기화
-            reloadAllComponents()
-        }
-    }
-    
-    /// dataSource에 있는 모든 아이템들을 보여주기 위한 TableView의 높이
-    private var tableHeight: CGFloat {
-        return tableView.rowHeight * CGFloat(dataSource.count)
-    }
-
-    /// 선택된 항목의 인덱스를 추적하기 위해 사용된다.
-    var selectedItemIndexRow: Index?
-    
-
-    // MARK: - 셀의 Configuration
-    /// 커스텀 셀의 Configuration을 구성할 수 있음.
-    var customCellConfiguration: CellConfigurationClosure? {
-        didSet { reloadAllComponents() }
-    }
     
     // MARK: - 액션
     let itemSelected = PublishSubject<DropdownItem>()  // 드롭다운 항목을 선택했을 경우
     let willShow = PublishSubject<Void>()              // 드롭다운이 보일 때
     let willHide = PublishSubject<Void>()              // 드롭다운이 사라질 때
     
+    
+    // MARK: - Properties
+    private var heightConstraint: NSLayoutConstraint?  // DropDown의 높이(height)를 결정하는 제약 조건을 참조
+    private var widthConstraint: NSLayoutConstraint?   // DropDown의 너비(width)를 결정하는 제약 조건을 참조
+    private var xConstraint: NSLayoutConstraint?       // DropDown의 x 위치(수평 위치)를 결정하는 제약 조건을 참조
+    private var yConstraint: NSLayoutConstraint?       // DropDown의 y 위치(수직 위치)를 결정하는 제약 조건을 참조
+
+    /// 선택된 항목의 인덱스를 추적하기 위해 사용된다.
+    var selectedItemIndexRow: Index?
+    
+    /// dataSource에 있는 모든 아이템들을 보여주기 위한 TableView의 높이
+    private var tableHeight: CGFloat {
+        return tableView.rowHeight * CGFloat(dataSource.count)
+    }
+
     /// 드롭다운에서 표시될 수 있는 셀의 최소 높이를 제공
     var minHeight: CGFloat {
         return tableView.rowHeight
@@ -210,44 +99,91 @@ final class DropDown: UIView {
     /// 드롭다운 뷰의 제약 조건이 설정되었는지 여부를 나타낸다. 중복적인 제약 조건의 추가를 방지하기 위해 플래그를 사용함(default: false)
     var didSetupConstraints = false
 
+    
     // MARK: - 초기화
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
+    /// 드롭다운의 초기화메서드로 기본적으로 anchorView와 dataSource를 필요로 합니다.
+    /// - Parameters:
+    ///   - anchorView: 드롭다운의 위치를 정하는 기준이되면서, 드롭다운을 트리거하는 역할의 뷰입니다.
+    ///   - bottomOffset: 드롭다운과 anchorView의 간격을 조절하는 offset입니다.
+    ///   - dataSource: 드롭다운 항목의 데이터소스입니다.
+    ///   - cellHeight: 드롭다운 항목의 높이입니다.
+    ///   - itemTextColor: 드롭다운 항목의 텍스트 컬러입니다.
+    ///   - itemTextFont: 드롭다운 항목의 텍스트 폰트입니다.
+    ///   - selectedItemTextColor: 드롭다운 항목이 선택되었을 때, 텍스트 컬러입니다.
+    ///   - selectedItemBackgroundColor: 드롭다운 항목이 선택되었을 때, 배경 컬러입니다.
+    ///   - separatorColor: 드롭다운 항목의 구분선 컬러입니다.
+    ///   - dimmedBackgroundColor: 드롭다운이 등장할 때, 조절할 수 있는 전체화면의 컬러입니다.
+    ///   - width: 드롭다운의 너비로 기본값은 anchorView.bounds.widht - bottomOffset.x 입니다.
+    ///   - animationduration: 드롭다운이 등장하거나 사라질 때, 애니메이션의 지속기간입니다.
+    ///   - downScaleTransform: 드롭다운의 등장효과를 위해 사용됩니다.
+    ///   - customCellType: 드롭다운의 기본 셀을 사용하지 않고, 커스텀 셀을 적용하고 싶을 경우 사용됩니다.
+    ///   - customCellConfiguration: 드롭다운의 커스텀 셀을 적용할 경우, 셀을 정의하기 위해 사용됩니다.
+    init(
+        anchorView: AnchorView,
+        bottomOffset: CGPoint = .zero,
+        dataSource: [String],
+        cellHeight: CGFloat = DropdownConstant.DropdownUI.rowHeight,
+        itemTextColor: UIColor = DropdownConstant.DropdownItem.textColor,
+        itemTextFont: UIFont = DropdownConstant.DropdownItem.textFont,
+        selectedItemTextColor: UIColor = DropdownConstant.DropdownItem.selectedTextColor,
+        selectedItemBackgroundColor: UIColor = DropdownConstant.DropdownItem.selectedBackgroundColor,
+        separatorColor: UIColor = DropdownConstant.DropdownUI.separatorColor,
+        tableViewBackgroundColor: UIColor = .white,
+        dimmedBackgroundColor: UIColor = .clear,
+        width: CGFloat? = nil,
+        backgroundColor: UIColor = DropdownConstant.DropdownUI.backgroundColor,
+        cornerRadius: CGFloat = DropdownConstant.DropdownUI.cornerRadius,
+        shadowColor: UIColor = DropdownConstant.DropdownUI.shadowColor,
+        shadowOffset: CGSize = DropdownConstant.DropdownUI.shadowOffset,
+        shadowOpacity: Float = DropdownConstant.DropdownUI.shadowOpacity,
+        shadowRadius: CGFloat = DropdownConstant.DropdownUI.shadowRadius,
+        animationduration: Double = DropdownConstant.Animation.duration,
+        downScaleTransform: CGAffineTransform = DropdownConstant.Animation.downScaleTransform,
+        customCellType: UITableViewCell.Type = BaseDropdownCell.self,
+        customCellConfiguration: CellConfigurationClosure? = nil
+    ) {
+        self.anchorView = anchorView
+        self.bottomOffset = bottomOffset
+        self.dataSource = dataSource
+        self.cellHeight = cellHeight
+        self.itemTextColor = itemTextColor
+        self.itemTextFont = itemTextFont
+        self.selectedItemTextColor = selectedItemTextColor
+        self.selectedItemBackgroundColor = selectedItemBackgroundColor
+        self.separatorColor = separatorColor
+        self.tableViewBackgroundColor = tableViewBackgroundColor
+        self.dimmedBackgroundColor = dimmedBackgroundColor
+        self.width = width
+        self.cornerRadius = cornerRadius
+        self.shadowColor = shadowColor
+        self.shadowOffset = shadowOffset
+        self.shadowOpacity = shadowOpacity
+        self.shadowRadius = shadowRadius
+        self.animationduration = animationduration
+        self.downScaleTransform = downScaleTransform
+        self.customCellType = customCellType
+        self.customCellConfiguration = customCellConfiguration
+        
+        super.init(frame: .zero)
+        self.backgroundColor = backgroundColor
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-// MARK: - Setup
-private extension DropDown {
-    func setup() {
-        tableView.register(BaseDropdownCell.self, forCellReuseIdentifier: BaseDropdownCell.identifier)
+    override func configureAttributes() {
+        print(#function)
         
         DispatchQueue.main.async {
-            // HACK: If not done in dispatch_async on main queue `setupUI` will have no effect
-            self.updateConstraintsIfNeeded()  // 제약조건이 업데이트되어야 한다면 updateConstraints() 호출
-            self.setupUI()
+            self.updateConstraintsIfNeeded()
         }
         
-        tableView.rowHeight = cellHeight
-        print("setup")
-        alpha = 0
-        isHidden = true
-        
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hide))
-        dismissableView.addGestureRecognizer(gestureRecognizer)
-        
+        tableView.register(customCellType, forCellReuseIdentifier: BaseDropdownCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    func setupUI() {
-        print("setupUI")
-        super.backgroundColor = dimmedBackgroundColor
-
+        tableView.rowHeight = cellHeight
+        tableView.backgroundColor = tableViewBackgroundColor
+        tableView.separatorColor = separatorColor
+        tableView.layer.cornerRadius = cornerRadius
+        tableView.clipsToBounds = true
+        
         tableViewContainer.layer.masksToBounds = false
         tableViewContainer.layer.cornerRadius = cornerRadius
         tableViewContainer.layer.shadowColor = shadowColor.cgColor
@@ -255,20 +191,22 @@ private extension DropDown {
         tableViewContainer.layer.shadowOpacity = shadowOpacity
         tableViewContainer.layer.shadowRadius = shadowRadius
 
-        tableView.backgroundColor = tableViewBackgroundColor
-        tableView.separatorColor = separatorColor
-        tableView.layer.cornerRadius = cornerRadius
-        tableView.layer.masksToBounds = true
+        alpha = 0
+        isHidden = true
+        
+        // dismissableView
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hide))
+        dismissableView.addGestureRecognizer(gestureRecognizer)
+        dismissableView.backgroundColor = dimmedBackgroundColor
     }
-    
 }
 
 // MARK: - UI
 extension DropDown {
     
-    /// 뷰의 제약조건을 업데이트할 필요가 있을 때 사용되는 메서드.
+    /// 뷰의 제약조건을 업데이트 할 필요가 있을 때 사용되는 메서드.
     override func updateConstraints() {
-        print("updateConstraints")
+        print(#function)
         
         // 제약조건이 아직 설정되지 않았다면, 초기 제약 조건을 설정
         if !didSetupConstraints {
@@ -306,8 +244,9 @@ extension DropDown {
     
     /// 드롭다운의 서브 뷰들에 대한 레이아웃
     func setupConstraints() {
+        print(#function)
+        
         translatesAutoresizingMaskIntoConstraints = false
-        print("setupConstraints")
         
         setDismissableViewConstraints()
         
@@ -625,9 +564,9 @@ extension DropDown: UITableViewDataSource {
         ) as? BaseDropdownCell else { return UITableViewCell() }
         
         cell.optionLabel.text = dataSource[indexPath.row]
-        cell.optionLabel.textColor = textColor
-        cell.optionLabel.font = textFont
-        cell.selectedBackgroundColor = selectionBackgroundColor
+        cell.optionLabel.textColor = itemTextColor
+        cell.optionLabel.font = itemTextFont
+        cell.selectedBackgroundColor = selectedItemBackgroundColor
         cell.configureCell()
         cell.selectionStyle = .none
         

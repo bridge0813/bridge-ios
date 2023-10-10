@@ -40,9 +40,33 @@ final class MainViewController: BaseViewController {
     }()
    
     let restrictionDropdownAnchorView = RestrictionDropdownAnchorView()
-    let restrictionDropdown = DropDown()
+    private lazy var restrictionDropdown = DropDown(
+        anchorView: restrictionDropdownAnchorView,
+        bottomOffset: CGPoint(x: 0, y: 7),
+        dataSource: ["학생", "현직자", "취준생"],
+        selectedItemBackgroundColor: BridgeColor.primary2
+    )
     
-    let chatRoomMenuDropdown = DropDown()
+    private lazy var chatRoomMenuDropdown = DropDown(
+        anchorView: goToNotificationButton,
+        bottomOffset: CGPoint(x: 0, y: 7),
+        dataSource: ["채팅방 나가기", "신고하기", "알림 끄기"],
+        cellHeight: 132 / 3,
+        itemTextColor: BridgeColor.gray3,
+        width: 147,
+        cornerRadius: 4,
+        customCellType: ChatRoomMenuCell.self,
+        customCellConfiguration: { index, _, cell in
+            guard let cell = cell as? ChatRoomMenuCell else { return }
+            
+            let imageStringArray: [String] = ["leave", "warning", "bell.crossline"]
+            
+            cell.optionImageView.image = UIImage(named: imageStringArray[index])?
+                .resize(to: CGSize(width: 14.43, height: 13.33))
+                .withRenderingMode(.alwaysTemplate)
+        }
+    )
+    
 
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -112,8 +136,7 @@ final class MainViewController: BaseViewController {
     }
     
     private func setRestrictionMenuDropdown() {
-        print("setRestrictionMenuDropdown")
-        restrictionDropdown.anchorView = restrictionDropdownAnchorView
+        print(#function)
         
         restrictionDropdown.itemSelected
             .withUnretained(self)
@@ -135,36 +158,16 @@ final class MainViewController: BaseViewController {
                 owner.restrictionDropdownAnchorView.updateViewForDropdownState(false)
             })
             .disposed(by: disposeBag)
-
-        restrictionDropdown.dataSource = ["학생", "현직자", "취준생"]
-        restrictionDropdown.selectionBackgroundColor = BridgeColor.primary2
-        restrictionDropdown.bottomOffset = CGPoint(x: 0, y: 7)
     }
     
     private func setChatRoomMenuDropdown() {
-        print("setChatRoomMenuDropdown")
-        chatRoomMenuDropdown.anchorView = goToNotificationButton
-        chatRoomMenuDropdown.width = 147
-        chatRoomMenuDropdown.cellHeight = 132 / 3
-        chatRoomMenuDropdown.cornerRadius = 4
-        chatRoomMenuDropdown.textColor = BridgeColor.gray3
+        print(#function)
         
         chatRoomMenuDropdown.itemSelected
             .subscribe(onNext: { item in
                 print(item.title)
             })
             .disposed(by: disposeBag)
-        
-        let imageStringArray: [String] = ["leave", "warning", "bell.crossline"]
-        chatRoomMenuDropdown.dataSource = ["채팅방 나가기", "신고하기", "알림 끄기"]
-        chatRoomMenuDropdown.customCellType = ChatRoomMenuCell.self
-        chatRoomMenuDropdown.customCellConfiguration = { index, _, cell in
-            guard let cell = cell as? ChatRoomMenuCell else { return }
-         
-            cell.optionImageView.image = UIImage(named: imageStringArray[index])?
-                .resize(to: CGSize(width: 14.43, height: 13.33))
-                .withRenderingMode(.alwaysTemplate)
-        }
     }
     
     private func configureNavigationUI() {
