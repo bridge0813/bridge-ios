@@ -13,7 +13,7 @@ final class ChatRoomListViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>
         let itemSelected: Observable<Int>
-        let leaveChatRoomTrigger: Observable<Int>
+        let leaveChatRoom: Observable<Int>
     }
     
     struct Output {
@@ -64,7 +64,7 @@ final class ChatRoomListViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        input.leaveChatRoomTrigger
+        input.leaveChatRoom
             .withLatestFrom(chatRooms) { index, chatRooms in
                 chatRooms[index]
             }

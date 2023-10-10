@@ -24,7 +24,7 @@ enum NetworkError: Error {
 
 extension NetworkError: LocalizedError {
     static let statusMessages = [
-        401: "Unauthorized",
+        401: "Unauthorized"
     ]
     
     var errorDescription: String? {

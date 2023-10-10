@@ -29,7 +29,7 @@ final class ChatRoomListViewController: BaseViewController {
     private var dataSource: DataSource?
     
     private let viewModel: ChatRoomListViewModel
-    private let leaveChatRoomTrigger = PublishRelay<Int>()
+    private let leaveChatRoom = PublishRelay<Int>()
     
     init(viewModel: ChatRoomListViewModel) {
         self.viewModel = viewModel
@@ -66,7 +66,7 @@ final class ChatRoomListViewController: BaseViewController {
         let input = ChatRoomListViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             itemSelected: tableView.rx.itemSelected.map { $0.row },
-            leaveChatRoomTrigger: leaveChatRoomTrigger.asObservable()
+            leaveChatRoom: leaveChatRoom.asObservable()
         )
         let output = viewModel.transform(input: input)
         
@@ -114,7 +114,7 @@ extension ChatRoomListViewController: UITableViewDelegate {
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "나가기") { [weak self] _, _, completion in
-            self?.leaveChatRoomTrigger.accept(indexPath.row)
+            self?.leaveChatRoom.accept(indexPath.row)
             completion(true)
         }
         

@@ -12,9 +12,6 @@ import PinLayout
 final class ChatRoomCell: BaseTableViewCell {
     
     // MARK: - UI
-    
-    //    private let rootFlexContainer = UIView()
-    
     private let chatRoomBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = BridgeColor.gray10
