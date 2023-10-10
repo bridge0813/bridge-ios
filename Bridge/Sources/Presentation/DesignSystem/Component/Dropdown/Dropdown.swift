@@ -10,19 +10,14 @@ import RxSwift
 import RxCocoa
 
 // 출처: https://github.com/AssistoLab/DropDown
-
-typealias IndexRow = Int
-typealias Closure = () -> Void
-
-/// 드롭다운 선택했을 경우 넘겨주는 데이터
-typealias DropdownItem = (indexRow: IndexRow, title: String)
-
-/// 드롭다운 항목의 셀을 구성할 때 사용되는 클로저.
-typealias CellConfigurationClosure = (IndexRow, String, UITableViewCell) -> Void
-
-typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
-
 final class DropDown: BaseView {
+    
+    typealias IndexRow = Int
+    typealias Closure = () -> Void
+    typealias DropdownItem = (indexRow: IndexRow, title: String)
+    typealias CellConfigurationClosure = (IndexRow, String, UITableViewCell) -> Void
+    typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
+    
     // MARK: - 드롭다운 UI 구조
     /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능
     private let dismissableView = UIView()
