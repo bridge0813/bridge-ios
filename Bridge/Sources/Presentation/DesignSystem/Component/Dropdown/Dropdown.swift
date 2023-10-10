@@ -80,13 +80,6 @@ final class DropDown: BaseView {
         return tableView.rowHeight * CGFloat(dataSource.count)
     }
 
-    var minHeight: CGFloat {
-        return tableView.rowHeight
-    }
-
-    var didSetupConstraints = false
-
-    
     // MARK: - 초기화
     /// 드롭다운의 초기화메서드로 기본적으로 anchorView와 dataSource를 필요로 합니다.
     /// - Parameters:
@@ -197,13 +190,7 @@ extension DropDown {
         print(#function)
         
         computeLayout()
-        
-        
-        if !didSetupConstraints {
-            setupConstraints()
-        }
-        
-        didSetupConstraints = true
+        setupConstraints()
         
         super.updateConstraints()
     }
@@ -290,7 +277,7 @@ extension DropDown {
         constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
         
         let visibleHeight = tableHeight - layout.offscreenHeight  // 화면에 실제로 보일 수 있는 드롭다운의 높이를 계산
-        let canBeDisplayed = visibleHeight >= minHeight           // 드롭다운이 화면에 표시될 수 있는지(셀의 rowHeight)
+        let canBeDisplayed = visibleHeight >= cellHeight          // 드롭다운이 화면에 표시될 수 있는지
 
         // 계산한 값 설정
         xConstant = layout.x
