@@ -256,7 +256,6 @@
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
-		7C8B82392ACC480E00F7B889 /* MenuToggleArrowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuToggleArrowButton.swift; sourceTree = "<group>"; };
 		7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorView.swift; sourceTree = "<group>"; };
 		7C8B823F2ACE91C500F7B889 /* ChatRoomMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMenuCell.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
@@ -468,7 +467,6 @@
 				7B2D76F52AA9A85700E5907B /* Bridge.entitlements */,
 				7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */,
 				7B71E73E2A9330C6001B5D2C /* Products */,
-				7C8B82432ACF12BA00F7B889 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -903,14 +901,6 @@
 				7C8B82352ACB208700F7B889 /* UIWindow+.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		7C8B82432ACF12BA00F7B889 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				7C8B82392ACC480E00F7B889 /* MenuToggleArrowButton.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
