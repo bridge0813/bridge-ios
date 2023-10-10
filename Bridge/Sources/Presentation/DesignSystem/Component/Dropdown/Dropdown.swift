@@ -19,17 +19,12 @@ final class DropDown: BaseView {
     typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
     
     // MARK: - 드롭다운 UI 구조
-    /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능
     private let dismissableView = UIView()
     
     private let tableViewContainer = UIView()
-    
-    /// 드롭다운 항목들을 표시하기 위한 UITableView
     private let tableView = UITableView()
     
     private weak var anchorView: AnchorView?
-    private var bottomOffset: CGPoint
-    private var dataSource: [String]
     
     // MARK: - 드롭다운 Cell 스타일
     private var cellHeight: CGFloat
@@ -42,7 +37,7 @@ final class DropDown: BaseView {
     
     // MARK: - 드롭다운 UI
     private var width: CGFloat?
-    private var cornerRadius: CGFloat  // 테이블뷰, 컨테이너, 드롭다운 모두 적용
+    private var cornerRadius: CGFloat
     private var shadowColor: UIColor
     private var shadowOffset: CGSize
     private var shadowOpacity: Float
@@ -76,20 +71,19 @@ final class DropDown: BaseView {
     private var visibleHeight: CGFloat?
     private var canBeDisplayed: Bool?
     
-    /// 선택된 항목의 인덱스를 추적하기 위해 사용된다.
-    var selectedItemIndexRow: IndexRow?
+    private var bottomOffset: CGPoint
     
-    /// dataSource에 있는 모든 아이템들을 보여주기 위한 TableView의 높이
+    private var dataSource: [String]
+    var selectedItemIndexRow: IndexRow?  // 선택한 항목을 추적
+    
     private var tableHeight: CGFloat {
         return tableView.rowHeight * CGFloat(dataSource.count)
     }
 
-    /// 드롭다운에서 표시될 수 있는 셀의 최소 높이를 제공
     var minHeight: CGFloat {
         return tableView.rowHeight
     }
 
-    /// 드롭다운 뷰의 제약 조건이 설정되었는지 여부를 나타낸다. 중복적인 제약 조건의 추가를 방지하기 위해 플래그를 사용함(default: false)
     var didSetupConstraints = false
 
     
@@ -199,23 +193,21 @@ final class DropDown: BaseView {
 // MARK: - 레이아웃 및 제약조건 설정
 extension DropDown {
     
-    /// 뷰의 제약조건을 업데이트 할 필요가 있을 때 사용되는 메서드.
     override func updateConstraints() {
         print(#function)
         
         computeLayout()
         
-        // 제약조건이 아직 설정되지 않았다면, 초기 제약 조건을 설정
+        
         if !didSetupConstraints {
             setupConstraints()
         }
         
-        didSetupConstraints = true  // 제약조건을 설정했으므로 true
+        didSetupConstraints = true
         
         super.updateConstraints()
     }
     
-    /// 드롭다운의 서브 뷰들에 대한 레이아웃
     func setupConstraints() {
         print(#function)
         
@@ -276,7 +268,7 @@ extension DropDown {
         tableViewContainer.layer.shadowPath = shadowPath.cgPath
     }
     
-    /// 드롭다운의 레이아웃을 계산
+    /// 드롭다운의 위치 및 크기, 드롭다운이 뷰에 표시될 수 있는지 등을 계산해주는 메서드
     func computeLayout() {
         var layout: ComputeLayoutTuple = (0, 0, 0, 0)
         
@@ -311,7 +303,7 @@ extension DropDown {
         self.canBeDisplayed = canBeDisplayed
     }
     
-    /// anchorView가 UIBarButtonItem일 경우, 드롭다운 레이아웃 계산 메서드(bottomOffset을 계산)
+    /// anchorView가 UIBarButtonItem일 경우, bottomOffset을 조절해주는 메서드.
     func computeOffsetForBarButtonItem(anchorView: UIBarButtonItem, window: UIWindow) -> CGPoint {
         // UIBarButton이 right 버튼인지 체크
         let anchorViewFrame = anchorView.plainView.convert(anchorView.plainView.bounds, to: window)
@@ -320,7 +312,7 @@ extension DropDown {
         // 만약 오른쪽 버튼이 아니라면, CGPoint.zero 반환
         guard isRightBarButtonItem else { return CGPoint.zero }
 
-        let width = width ?? fittingWidth()                // 드롭다운의 width를 설정하거나 적절한 width를 계산하여 가져옴
+        let width = width ?? fittingWidth()                     // 드롭다운의 width를 설정하거나 적절한 width를 계산하여 가져옴
         let anchorViewWidth = anchorView.plainView.frame.width  // anchorView의 width를 가져옴
 
         let x = -(width - anchorViewWidth) - 8
@@ -330,10 +322,8 @@ extension DropDown {
     
     /// 아래 방향으로 표시되는 드롭다운의 x, y, width, offscreenHeight
     func computeLayoutBottomDisplay(window: UIWindow) -> ComputeLayoutTuple {
-        var offscreenHeight: CGFloat = 0  // 드롭다운의 일부가 화면 밖에 나가는 높이
         
-        // 만약 드롭다운의 width가 설정되어 있다면 그 값을 사용하고,
-        // 설정된 값이 없다면 앵커 뷰의 width나 fittingWidth()에서 bottomOffset.x 를 뺀 값이 최종 width
+        var offscreenHeight: CGFloat = 0
         let width = width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
         
         // 앵커뷰의 x와 y 좌표
@@ -355,7 +345,7 @@ extension DropDown {
         return (x, y, width, offscreenHeight)
     }
     
-    /// 드롭다운의 항목 중 width가 가장 높은 아이템의 width를 계산하여 반환
+    /// 드롭다운의 항목 중 컨텐츠의 크기가 가장 큰 항목의 width를 계산하여 반환
     func fittingWidth() -> CGFloat {
         guard let templateCell = tableView.dequeueReusableCell(withIdentifier: BaseDropdownCell.identifier)
                 as? BaseDropdownCell else { return .zero }
@@ -376,7 +366,7 @@ extension DropDown {
         return maxWidth
     }
     
-    /// 드롭다운의 width가 화면 밖으로 넘어서지 않도록
+    /// 드롭다운의 width가 화면 밖으로 넘어가지 않도록 x위치를 조절해주는 메서드
     func constraintWidthToBoundsIfNecessary(layout: inout ComputeLayoutTuple, in window: UIWindow) {
         let windowMaxX = window.bounds.maxX         // 화면의 오른쪽 가장자리의 x좌표 값
         let dropdownMaxX = layout.x + layout.width  // 드롭다운의 오른쪽 가장자리의 x좌표 값
@@ -398,7 +388,7 @@ extension DropDown {
         }
     }
     
-    /// 드롭다운의 width가 컨텐츠에 맞게 적합한 width를 가지도록
+    /// 드롭다운의 width가 컨텐츠에 맞게 적합한 width를 가지도록 조절하는 메서드.
     func constraintWidthToFittingSizeIfNecessary(layout: inout ComputeLayoutTuple) {
         guard width == nil else { return }  // 이미 width가 설정되어있다면 함수종료
         
