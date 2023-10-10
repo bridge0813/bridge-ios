@@ -20,7 +20,6 @@ typealias DropdownItem = (indexRow: Index, title: String)
 /// 드롭다운 항목의 셀을 구성할 때 사용되는 클로저.
 typealias CellConfigurationClosure = (Index, String, UITableViewCell) -> Void
 
-/// 화면상에서 드롭다운의 레이아웃을 계산할 때, 사용될 것으로 보이는 튜플. x, y좌표와 넓이, 그리고 화면 바깥 영역의 높이 값을 포함.
 typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
 final class DropDown: BaseView {
@@ -75,11 +74,15 @@ final class DropDown: BaseView {
     
     
     // MARK: - Properties
-    private var heightConstraint: NSLayoutConstraint?  // DropDown의 높이(height)를 결정하는 제약 조건을 참조
-    private var widthConstraint: NSLayoutConstraint?   // DropDown의 너비(width)를 결정하는 제약 조건을 참조
-    private var xConstraint: NSLayoutConstraint?       // DropDown의 x 위치(수평 위치)를 결정하는 제약 조건을 참조
-    private var yConstraint: NSLayoutConstraint?       // DropDown의 y 위치(수직 위치)를 결정하는 제약 조건을 참조
-
+    private var xConstant: CGFloat?
+    private var yConstant: CGFloat?
+    private var widthConstant: CGFloat?
+    private var heightConstant: CGFloat?
+    
+    private var offscreenHeight: CGFloat?
+    private var visibleHeight: CGFloat?
+    private var canBeDisplayed: Bool?
+    
     /// 선택된 항목의 인덱스를 추적하기 위해 사용된다.
     var selectedItemIndexRow: Index?
     
@@ -203,6 +206,8 @@ extension DropDown {
     override func updateConstraints() {
         print(#function)
         
+        computeLayout()  // 현재 드롭다운의 레이아웃을 계산(드롭다운의 위치, 크기 등)
+        
         // 제약조건이 아직 설정되지 않았다면, 초기 제약 조건을 설정
         if !didSetupConstraints {
             setupConstraints()
@@ -210,28 +215,18 @@ extension DropDown {
         
         didSetupConstraints = true  // 제약조건을 설정했으므로 true
         
-        let layout = computeLayout()  // 현재 드롭다운의 레이아웃을 계산(드롭다운의 위치, 크기 등)
-        
         // 계산된 레이아웃이 화면에 표시될 수 없는 경우
-        if !layout.canBeDisplayed {
+        if !(canBeDisplayed ?? false) {
             super.updateConstraints()
             hide()  // 드롭다운 숨기기
             
             return
         }
         
-        // 계산된 레이아웃 정보를 기반으로 각 제약 조건의 constant를 업데이트
-        xConstraint?.constant = layout.x
-        yConstraint?.constant = layout.y
-        widthConstraint?.constant = layout.width
-        heightConstraint?.constant = layout.visibleHeight
-        
         // 드롭다운이 화면 밖으로 벗어나는 경우 스크롤이 가능하도록 설정
-        tableView.isScrollEnabled = layout.offscreenHeight > 0
-        
-        // 스크롤 인디케이터를 잠깐 보여줌으로써 사용자가 스크롤할 수 있음을 알려줌
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.flashScrollIndicators()
+        if let offscreenHeight {
+            tableView.isScrollEnabled = offscreenHeight > 0
+            tableView.flashScrollIndicators()
         }
         
         super.updateConstraints()
@@ -245,54 +240,30 @@ extension DropDown {
         
         setDismissableViewConstraints()
         
-        // Table view container
         addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        xConstraint = NSLayoutConstraint(
-            item: tableView,  // tableViewContainer에 제약조건을 적용
-            attribute: .leading,       // tableViewContainer의 leading 부분에 제약조건을 적용
-            relatedBy: .equal,         // tableViewContainer의 leading이 드롭다운 뷰의 leading과 동일하도록
-            toItem: self,
-            attribute: .leading,       // 드롭다운 뷰의 leading 부분을 참조
-            multiplier: 1,             // 제약조건의 스케일을 조절
-            constant: 0                // 제약조건에 추가될 상수 값
-        )
-        addConstraint(xConstraint ?? NSLayoutConstraint())  // 드롭다운 뷰에 해당 제약 조건을 추가
+        // leading 제약조건
+        tableView.leadingAnchor.constraint(
+            equalTo: self.leadingAnchor,
+            constant: xConstant ?? .zero
+        ).isActive = true
 
-        yConstraint = NSLayoutConstraint(
-            item: tableView,
-            attribute: .top,
-            relatedBy: .equal,
-            toItem: self,
-            attribute: .top,
-            multiplier: 1,
-            constant: 0
-        )
-        addConstraint(yConstraint ?? NSLayoutConstraint())
+        // top 제약조건
+        tableView.topAnchor.constraint(
+            equalTo: self.topAnchor,
+            constant: yConstant ?? .zero
+        ).isActive = true
 
-        widthConstraint = NSLayoutConstraint(
-            item: tableView,
-            attribute: .width,
-            relatedBy: .equal,
-            toItem: nil,                 // width를 다른 뷰의 속성과 연관시키지 않음
-            attribute: .notAnAttribute,  // width를 다른 뷰의 속성과 연관시키지 않음
-            multiplier: 1,
-            constant: 0
-        )
-        tableView.addConstraint(widthConstraint ?? NSLayoutConstraint())
+        // width 제약조건
+        tableView.widthAnchor.constraint(
+            equalToConstant: widthConstant ?? .zero
+        ).isActive = true
 
-        heightConstraint = NSLayoutConstraint(
-            item: tableView,
-            attribute: .height,
-            relatedBy: .equal,
-            toItem: nil,                 // height를 다른 뷰의 속성과 연관시키지 않음
-            attribute: .notAnAttribute,  // height를 다른 뷰의 속성과 연관시키지 않음
-            multiplier: 1,
-            constant: 0
-        )
-        tableView.addConstraint(heightConstraint ?? NSLayoutConstraint())
-        
+        // height 제약조건
+        tableView.heightAnchor.constraint(
+            equalToConstant: heightConstant ?? .zero
+        ).isActive = true
     }
     
     func setDismissableViewConstraints() {
@@ -315,18 +286,11 @@ extension DropDown {
     }
     
     /// 드롭다운의 레이아웃을 계산
-    func computeLayout() -> (
-        x: CGFloat,                // 드롭다운의 시작 x위치
-        y: CGFloat,                // 드롭다운의 시작 y위치
-        width: CGFloat,            // 드롭다운의 width
-        offscreenHeight: CGFloat,  // 화면 밖으로 나가는 드롭다운의 높이
-        visibleHeight: CGFloat,    // 화면에 보일 수 있는 드롭다운의 높이
-        canBeDisplayed: Bool       // 드롭다운이 현재의 레이아웃에서 보여질 수 있는지의 여부
-    ) {
+    func computeLayout() {
         var layout: ComputeLayoutTuple = (0, 0, 0, 0)  // 기본적인 레이아웃의 값
         
         // 현재 화면의 주 윈도우 가져오기.
-        guard let window = UIWindow.visibleWindow() else { return (0, 0, 0, 0, 0, false) }
+        guard let window = UIWindow.visibleWindow() else { return }
 
         // 드롭다운이 UIBarButtonItem과 연결된 경우 처리
         if let anchorView = anchorView as? UIBarButtonItem {
@@ -344,7 +308,15 @@ extension DropDown {
         let visibleHeight = tableHeight - layout.offscreenHeight  // 화면에 실제로 보일 수 있는 드롭다운의 높이를 계산
         let canBeDisplayed = visibleHeight >= minHeight           // 드롭다운이 화면에 표시될 수 있는지(셀의 rowHeight)
 
-        return (layout.x, layout.y, layout.width, layout.offscreenHeight, visibleHeight, canBeDisplayed)
+        // 계산한 값 설정
+        xConstant = layout.x
+        yConstant = layout.y
+        widthConstant = layout.width
+        heightConstant = visibleHeight
+        
+        self.visibleHeight = visibleHeight
+        self.offscreenHeight = layout.offscreenHeight
+        self.canBeDisplayed = canBeDisplayed
     }
     
     /// anchorView가 UIBarButtonItem일 경우, 드롭다운 레이아웃 계산 메서드(bottomOffset을 지정)
@@ -451,22 +423,16 @@ extension DropDown {
 
 // MARK: - Actions
 extension DropDown {
-    /**
-    Shows the drop down if enough height.
-
-    - returns: Wether it succeed and how much height is needed to display all cells at once.
-    */
-    @discardableResult
-    func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
+    
+    func show() {
         print(#function)
         
         willShow.onNext(())
 
         setDropdownConstraints()  // 드롭다운 레이아웃 배치
-        
-        let layout = computeLayout()
+        computeLayout()
 
-        if !layout.canBeDisplayed {
+        if !(canBeDisplayed ?? false) {
             hide()
         }
 
@@ -481,8 +447,6 @@ extension DropDown {
                 self?.tableView.transform = .identity
             }
         )
-
-        return (layout.canBeDisplayed, layout.offscreenHeight)
     }
     
     func setDropdownConstraints() {
