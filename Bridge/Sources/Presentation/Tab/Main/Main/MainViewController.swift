@@ -53,6 +53,7 @@ final class MainViewController: BaseViewController {
         dataSource: ["채팅방 나가기", "신고하기", "알림 끄기"],
         cellHeight: 132 / 3,
         itemTextColor: BridgeColor.gray3,
+        width: 147,
         cornerRadius: 4,
         customCellType: ChatRoomMenuCell.self,
         customCellConfiguration: { index, _, cell in
