@@ -291,8 +291,10 @@
 		7B0CFB8A2AD3D19500EA9C0D /* RxExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */,
 				7B0CFB882AD3CF0000EA9C0D /* ObservableType+.swift */,
 				7B0CFB8B2AD3D1E500EA9C0D /* PrimitiveSequenceType+.swift */,
+				7B14DB242AB04BC5009A00EB /* ASAuthorizationController+Rx.swift */,
 			);
 			path = RxExtensions;
 			sourceTree = "<group>";
@@ -711,8 +713,6 @@
 		7BA36CC52A9E148C000DAB02 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7B14DB242AB04BC5009A00EB /* ASAuthorizationController+Rx.swift */,
-				7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */,
 				7BA36CC62A9E14BD000DAB02 /* UITableView+.swift */,
 				7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */,
 				7C42701B2AA394EF009BE6AF /* UILabel+.swift */,
