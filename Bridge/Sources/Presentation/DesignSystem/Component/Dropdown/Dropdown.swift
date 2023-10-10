@@ -7,7 +7,6 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
 
 // 출처: https://github.com/AssistoLab/DropDown
 final class DropDown: BaseView {
