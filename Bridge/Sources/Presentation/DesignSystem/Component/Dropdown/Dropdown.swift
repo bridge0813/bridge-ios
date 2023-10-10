@@ -23,7 +23,6 @@ typealias CellConfigurationClosure = (IndexRow, String, UITableViewCell) -> Void
 typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
 final class DropDown: BaseView {
-    
     // MARK: - 드롭다운 UI 구조
     /// 드롭다운 외부를 탭할 때, 드롭다운을 닫는 기능
     private let dismissableView = UIView()
@@ -235,24 +234,20 @@ extension DropDown {
         
         addSubview(tableViewContainer)
         
-        // leading 제약조건
         tableViewContainer.leadingAnchor.constraint(
             equalTo: self.leadingAnchor,
             constant: xConstant ?? .zero
         ).isActive = true
 
-        // top 제약조건
         tableViewContainer.topAnchor.constraint(
             equalTo: self.topAnchor,
             constant: yConstant ?? .zero
         ).isActive = true
 
-        // width 제약조건
         tableViewContainer.widthAnchor.constraint(
             equalToConstant: widthConstant ?? .zero
         ).isActive = true
 
-        // height 제약조건
         tableViewContainer.heightAnchor.constraint(
             equalToConstant: heightConstant ?? .zero
         ).isActive = true
@@ -291,17 +286,18 @@ extension DropDown {
     
     /// 드롭다운의 레이아웃을 계산
     func computeLayout() {
-        var layout: ComputeLayoutTuple = (0, 0, 0, 0)  // 기본적인 레이아웃의 값
+        var layout: ComputeLayoutTuple = (0, 0, 0, 0)
         
         // 현재 화면의 주 윈도우 가져오기.
         guard let window = UIWindow.visibleWindow() else { return }
 
-        // 드롭다운이 UIBarButtonItem과 연결된 경우 처리
+        // 드롭다운이 UIBarButtonItem과 연결된 경우 bottomOffset 처리
         if let anchorView = anchorView as? UIBarButtonItem {
             bottomOffset = computeLayoutForBarButtonItem(anchorView: anchorView, window: window)
         }
         
-        layout = computeLayoutBottomDisplay(window: window)  // 드롭다운 레이아웃 계산
+        // 드롭다운 레이아웃 계산
+        layout = computeLayoutBottomDisplay(window: window)
                 
         // 드롭다운의 width가 드롭다운이 차지할 수 있는 최대크기를 계산하여 적절하게 설정.
         constraintWidthToFittingSizeIfNecessary(layout: &layout)
@@ -323,7 +319,7 @@ extension DropDown {
         self.canBeDisplayed = canBeDisplayed
     }
     
-    /// anchorView가 UIBarButtonItem일 경우, 드롭다운 레이아웃 계산 메서드(bottomOffset을 지정)
+    /// anchorView가 UIBarButtonItem일 경우, 드롭다운 레이아웃 계산 메서드(bottomOffset을 계산)
     func computeLayoutForBarButtonItem(anchorView: UIBarButtonItem, window: UIWindow) -> CGPoint {
         // UIBarButton이 right 버튼인지 체크
         let anchorViewFrame = anchorView.plainView.convert(anchorView.plainView.bounds, to: window)
