@@ -362,7 +362,8 @@ extension DropDown {
     
     /// 드롭다운의 항목 중 width가 가장 높은 아이템의 width를 계산하여 반환
     func fittingWidth() -> CGFloat {
-        guard let templateCell = tableView.dequeueReusableCell(withIdentifier: BaseDropdownCell.identifier) as? BaseDropdownCell else { return .zero }
+        guard let templateCell = tableView.dequeueReusableCell(withIdentifier: BaseDropdownCell.identifier)
+                as? BaseDropdownCell else { return .zero }
 
         var maxWidth: CGFloat = 0
         
@@ -382,21 +383,23 @@ extension DropDown {
     
     /// 드롭다운의 width가 화면 밖으로 넘어서지 않도록
     func constraintWidthToBoundsIfNecessary(layout: inout ComputeLayoutTuple, in window: UIWindow) {
-        let windowMaxX = window.bounds.maxX  // 화면의 오른쪽 가장자리의 x좌표 값
-        let maxX = layout.x + layout.width   // 드롭다운의 오른쪽 가장자리의 x좌표 값
+        let windowMaxX = window.bounds.maxX         // 화면의 오른쪽 가장자리의 x좌표 값
+        let dropdownMaxX = layout.x + layout.width  // 드롭다운의 오른쪽 가장자리의 x좌표 값
         
         // 드롭다운이 화면 밖으로 나가는지 확인
-        if maxX > windowMaxX {
-            let delta = maxX - windowMaxX     // 드롭다운이 화면 밖으로 얼마나 나갔는지 계산
-            let newOrigin = layout.x - delta  // 밖으로 나간만큼 드롭다운의 x좌표를 왼쪽으로 이동시킴
+        if dropdownMaxX > windowMaxX {
             
-            if newOrigin > 0 {
-                layout.x = newOrigin
+            let overflowAmount = dropdownMaxX - windowMaxX    // 드롭다운이 화면 밖으로 얼마나 나갔는지 계산
+            let adjustedDropdownX = layout.x - overflowAmount // 밖으로 나간만큼 드롭다운의 x좌표를 왼쪽으로 이동시킴
+            
+            // 조정된 드롭다운의 x좌표가 적절한 위치인지 체크
+            if adjustedDropdownX > 0 {
+                layout.x = adjustedDropdownX
                 
             } else {
                 // 드롭다운의 왼쪽 가장자리가 화면 밖으로 나갔을 때 처리
                 layout.x = 0
-                layout.width += newOrigin  // 화면으로 나가는 만큼 width도 줄여줘야 화면 안에 드롭다운이 완전히 들어오게 된다.
+                layout.width += adjustedDropdownX  // 화면으로 나가는 만큼 width도 줄여줘야 화면 안에 드롭다운이 완전히 들어오게 된다.
             }
         }
     }
@@ -405,9 +408,8 @@ extension DropDown {
     func constraintWidthToFittingSizeIfNecessary(layout: inout ComputeLayoutTuple) {
         guard width == nil else { return }  // 이미 width가 설정되어있다면 함수종료
         
-        if layout.width < fittingWidth() {
-            layout.width = fittingWidth()
-        }
+        let dropdownWidth = layout.width
+        layout.width = max(dropdownWidth, fittingWidth())
     }
 }
 
