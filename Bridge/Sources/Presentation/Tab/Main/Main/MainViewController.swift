@@ -49,7 +49,6 @@ final class MainViewController: BaseViewController {
     
     private lazy var chatRoomMenuDropdown = DropDown(
         anchorView: goToNotificationButton,
-        bottomOffset: CGPoint(x: 0, y: 7),
         dataSource: ["채팅방 나가기", "신고하기", "알림 끄기"],
         cellHeight: 132 / 3,
         itemTextColor: BridgeColor.gray3,

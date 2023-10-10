@@ -290,7 +290,7 @@ extension DropDown {
 
         // 드롭다운이 UIBarButtonItem과 연결된 경우 bottomOffset 처리
         if let anchorView = anchorView as? UIBarButtonItem {
-            bottomOffset = computeLayoutForBarButtonItem(anchorView: anchorView, window: window)
+            bottomOffset = computeOffsetForBarButtonItem(anchorView: anchorView, window: window)
         }
         
         // 드롭다운 레이아웃 계산
@@ -317,17 +317,17 @@ extension DropDown {
     }
     
     /// anchorView가 UIBarButtonItem일 경우, 드롭다운 레이아웃 계산 메서드(bottomOffset을 계산)
-    func computeLayoutForBarButtonItem(anchorView: UIBarButtonItem, window: UIWindow) -> CGPoint {
+    func computeOffsetForBarButtonItem(anchorView: UIBarButtonItem, window: UIWindow) -> CGPoint {
         // UIBarButton이 right 버튼인지 체크
         let anchorViewFrame = anchorView.plainView.convert(anchorView.plainView.bounds, to: window)
         let isRightBarButtonItem = anchorViewFrame.minX > window.frame.midX
-        
+
         // 만약 오른쪽 버튼이 아니라면, CGPoint.zero 반환
         guard isRightBarButtonItem else { return CGPoint.zero }
-        
+
         let width = width ?? fittingWidth()                // 드롭다운의 width를 설정하거나 적절한 width를 계산하여 가져옴
         let anchorViewWidth = anchorView.plainView.frame.width  // anchorView의 width를 가져옴
-        
+
         let x = -(width - anchorViewWidth) - 8
 
         return CGPoint(x: x, y: -5)
@@ -388,7 +388,6 @@ extension DropDown {
         
         // 드롭다운이 화면 밖으로 나가는지 확인
         if dropdownMaxX > windowMaxX {
-            
             let overflowAmount = dropdownMaxX - windowMaxX    // 드롭다운이 화면 밖으로 얼마나 나갔는지 계산
             let adjustedDropdownX = layout.x - overflowAmount // 밖으로 나간만큼 드롭다운의 x좌표를 왼쪽으로 이동시킴
             
