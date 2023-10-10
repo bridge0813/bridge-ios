@@ -24,7 +24,7 @@ final class RestrictionDropdownAnchorView: BaseView {
     private let arrowImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .clear
-        imageView.image = UIImage(named: "dropdownchevron.down")
+        imageView.image = UIImage(named: "dropdown.chevron")
             
         return imageView
     }()
@@ -54,7 +54,7 @@ final class RestrictionDropdownAnchorView: BaseView {
     func updateViewForDropdownState(_ isActive: Bool, text: String? = nil) {
         let borderWidth: CGFloat = isActive ? 1 : 0
         let borderColor: CGColor = isActive ? BridgeColor.primary1.cgColor : UIColor.clear.cgColor
-        let image: UIImage? = isActive ? UIImage(named: "dropdownchevron.up") : UIImage(named: "dropdownchevron.down")
+        let image: UIImage? = isActive ? UIImage(named: "dropup.chevron") : UIImage(named: "dropdown.chevron")
         
         UIView.animate(withDuration: 0.2) { [weak self] in
             self?.layer.borderWidth = borderWidth
