@@ -28,45 +28,6 @@ final class MainViewController: BaseViewController {
         return collectionView
     }()
     
-    private lazy var goToNotificationButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(
-            image: UIImage(systemName: "line.3.horizontal"),
-            style: .done,
-            target: self,
-            action: nil
-        )
-        
-        return button
-    }()
-   
-    let restrictionDropdownAnchorView = RestrictionDropdownAnchorView()
-    private lazy var restrictionDropdown = DropDown(
-        anchorView: restrictionDropdownAnchorView,
-        bottomOffset: CGPoint(x: 0, y: 7),
-        dataSource: ["제한 없음", "학생", "현직자", "취준생"],
-        selectedItemBackgroundColor: BridgeColor.primary2
-    )
-    
-
-    private lazy var chatRoomMenuDropdown = DropDown(
-        anchorView: goToNotificationButton,
-        dataSource: ["채팅방 나가기", "신고하기", "알림 끄기"],
-        cellHeight: 132 / 3,
-        itemTextColor: BridgeColor.gray3,
-        width: 147,
-        cornerRadius: 4,
-        customCellType: ChatRoomMenuCell.self,
-        customCellConfiguration: { index, _, cell in
-            guard let cell = cell as? ChatRoomMenuCell else { return }
-            
-            let imageStringArray: [String] = ["leave", "warning", "bell.crossline"]
-            
-            cell.optionImageView.image = UIImage(named: imageStringArray[index])?
-                .resize(to: CGSize(width: 14.43, height: 13.33))
-                .withRenderingMode(.alwaysTemplate)
-        }
-    )
-
     private let filterButton: UIButton = {
         let button = UIButton()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
@@ -77,13 +38,6 @@ final class MainViewController: BaseViewController {
         return button
     }()
 
-    private let searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.placeholder = "검색해주세요."
-        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)  // 서치바 라인 삭제
-        return searchBar
-    }()
-    
     private let createProjectButton = BrideCreateProjectButton()
     
     private let viewModel: MainViewModel
@@ -103,17 +57,6 @@ final class MainViewController: BaseViewController {
         super.viewDidLoad()
         
         view.backgroundColor = BridgeColor.gray3
-        setRestrictionMenuDropdown()
-        setChatRoomMenuDropdown()
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showDropDown))
-        restrictionDropdownAnchorView.addGestureRecognizer(tapGesture)
-        
-        
-        goToNotificationButton.rx.tap.subscribe(onNext: { [weak self] in
-            self?.chatRoomMenuDropdown.show()
-        })
-        .disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -128,57 +71,14 @@ final class MainViewController: BaseViewController {
     }
     
     // MARK: - Methods
-    
-    @objc
-    func showDropDown() {
-        restrictionDropdown.show()
-    }
-    
-    private func setRestrictionMenuDropdown() {
-        restrictionDropdown.itemSelected
-            .withUnretained(self)
-            .subscribe(onNext: { owner, item in
-                owner.restrictionDropdownAnchorView.updateViewForDropdownState(false, text: item.title)
-            })
-            .disposed(by: disposeBag)
-        
-        restrictionDropdown.willShow
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.restrictionDropdownAnchorView.updateViewForDropdownState(true)
-            })
-            .disposed(by: disposeBag)
-        
-        restrictionDropdown.willHide
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.restrictionDropdownAnchorView.updateViewForDropdownState(false)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func setChatRoomMenuDropdown() {
-        chatRoomMenuDropdown.itemSelected
-            .subscribe(onNext: { item in
-                print(item.title)
-            })
-            .disposed(by: disposeBag)
-    }
-    
     private func configureNavigationUI() {
-        navigationItem.rightBarButtonItem = goToNotificationButton
-//        navigationController?.navigationBar.tintColor = .black
+        
     }
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.direction(.column).define { flex in
-            // 테스트용
-            flex.addItem().height(300).direction(.row).alignItems(.center).define { flex in
-                flex.addItem(restrictionDropdownAnchorView).width(343).height(52).marginLeft(30)
-            }
-            
             /// 컬렉션 뷰
             flex.addItem(projectCollectionView).grow(1).marginTop(20)
             
@@ -201,9 +101,7 @@ final class MainViewController: BaseViewController {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             didScroll: projectCollectionView.rx.contentOffset.asObservable(),
-            notificationButtonTapped: filterButton.rx.tap.asObservable(),
             filterButtonTapped: filterButton.rx.tap.asObservable(),
-            searchButtonTapped: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text),
             itemSelected: projectCollectionView.rx.itemSelected.asObservable(),
             createButtonTapped: createProjectButton.rx.tap.asObservable()
         )

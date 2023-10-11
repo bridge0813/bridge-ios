@@ -14,9 +14,7 @@ final class MainViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
         let didScroll: Observable<CGPoint>
-        let notificationButtonTapped: Observable<Void>
         let filterButtonTapped: Observable<Void>
-        let searchButtonTapped: Observable<String?>
         let itemSelected: Observable<IndexPath>
         let createButtonTapped: Observable<Void>
     }
@@ -86,25 +84,10 @@ final class MainViewModel: ViewModelType {
             .distinctUntilChanged()
         
         // MARK: - Button Actions
-        input.notificationButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.connectToNotificationFlow()
-            })
-            .disposed(by: disposeBag)
-        
         input.filterButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.connectToProjectFilteringFlow()
-            })
-            .disposed(by: disposeBag)
-    
-        input.searchButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, text in
-                guard let text else { return }
-                owner.coordinator?.connectToProjectSearchFlow(with: text)
             })
             .disposed(by: disposeBag)
         
