@@ -61,6 +61,8 @@ final class MainViewController: BaseViewController {
         return button
     }()
 
+    private let mainCategoryHeaderView = MainCategoryHeaderView()
+    
     private let createProjectButton = BrideCreateProjectButton()
     
     // MARK: - Properties
@@ -103,6 +105,8 @@ final class MainViewController: BaseViewController {
                 flex.addItem(filterButton).size(24).marginRight(15)
                 flex.addItem(searchButton).size(24).marginRight(15)
             }
+            
+            flex.addItem(mainCategoryHeaderView).height(68).marginTop(15).marginHorizontal(5)
             
             flex.addItem(projectCollectionView).grow(1).marginTop(20)
             
