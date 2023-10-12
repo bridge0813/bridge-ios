@@ -37,7 +37,6 @@ final class MainCategoryButton: BaseButton {
         configuration.attributedTitle = AttributedString(title, attributes: titleContainer)
         
         self.configuration = configuration
-        changesSelectionAsPrimaryAction = true
         configurationUpdateHandler = { [weak self] button in
             guard let self else { return }
             

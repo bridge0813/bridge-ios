@@ -167,6 +167,12 @@ final class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
             
+        mainCategoryHeaderView.categoryButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, type in
+                owner.mainCategoryHeaderView.updateButtonState(type)
+            })
+            .disposed(by: disposeBag)
     }
 }
 // MARK: - CompositionalLayout
