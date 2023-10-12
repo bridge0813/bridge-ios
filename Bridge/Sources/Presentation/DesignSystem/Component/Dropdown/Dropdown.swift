@@ -103,7 +103,7 @@ final class DropDown: BaseView {
         cellHeight: CGFloat = DropdownConstant.DropdownUI.rowHeight,
         itemTextColor: UIColor = DropdownConstant.DropdownItem.textColor,
         itemTextFont: UIFont = DropdownConstant.DropdownItem.textFont,
-        selectedItemTextColor: UIColor = DropdownConstant.DropdownItem.selectedTextColor,
+        selectedItemTextColor: UIColor? = nil,
         selectedItemBackgroundColor: UIColor = DropdownConstant.DropdownItem.selectedBackgroundColor,
         separatorColor: UIColor = DropdownConstant.DropdownUI.separatorColor,
         tableViewBackgroundColor: UIColor = .white,
@@ -126,7 +126,7 @@ final class DropDown: BaseView {
         self.cellHeight = cellHeight
         self.itemTextColor = itemTextColor
         self.itemTextFont = itemTextFont
-        self.selectedItemTextColor = selectedItemTextColor
+        self.selectedItemTextColor = selectedItemTextColor ?? itemTextColor
         self.selectedItemBackgroundColor = selectedItemBackgroundColor
         self.separatorColor = separatorColor
         self.tableViewBackgroundColor = tableViewBackgroundColor
@@ -443,7 +443,8 @@ extension DropDown: UITableViewDataSource {
         cell.optionLabel.textColor = itemTextColor
         cell.optionLabel.font = itemTextFont
         cell.selectedBackgroundColor = selectedItemBackgroundColor
-        cell.configureCell()
+        cell.selectedTextColor = selectedItemTextColor
+        cell.nomalTextColor = itemTextColor
         cell.selectionStyle = .none
         
         customCellConfiguration?(indexPath.row, dataSource[indexPath.row], cell)

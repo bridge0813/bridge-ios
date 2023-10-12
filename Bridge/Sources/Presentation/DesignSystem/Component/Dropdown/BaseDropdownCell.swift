@@ -24,8 +24,8 @@ class BaseDropdownCell: BaseTableViewCell {
     }()
     
     var selectedBackgroundColor: UIColor?
-    var highlightTextColor: UIColor?
-    var normalTextColor: UIColor?
+    var selectedTextColor: UIColor?
+    var nomalTextColor: UIColor?
     
     // MARK: - Layouts
     override func configureLayouts() {
@@ -44,10 +44,6 @@ class BaseDropdownCell: BaseTableViewCell {
     }
     
     // MARK: - Configuration
-    func configureCell() {
-        
-    }
-    
     override var isSelected: Bool {
         willSet {
             setSelected(newValue, animated: false)
@@ -56,5 +52,6 @@ class BaseDropdownCell: BaseTableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         backgroundColor = selected ? selectedBackgroundColor : .clear
+        optionLabel.textColor = selected ? selectedTextColor : nomalTextColor
     }
 }

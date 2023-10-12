@@ -12,7 +12,6 @@ enum DropdownConstant {
     enum DropdownItem {
         static let textColor = BridgeColor.gray1
         static let textFont = BridgeFont.button2.font
-        static let selectedTextColor = BridgeColor.gray1
         static let selectedBackgroundColor = UIColor.clear
     }
     

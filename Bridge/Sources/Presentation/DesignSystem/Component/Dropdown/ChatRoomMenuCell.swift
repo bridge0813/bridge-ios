@@ -37,8 +37,4 @@ final class ChatRoomMenuCell: BaseDropdownCell {
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
     }
-    
-    override func configureCell() {
-        
-    }
 }
