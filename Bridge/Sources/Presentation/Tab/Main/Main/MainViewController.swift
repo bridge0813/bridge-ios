@@ -28,13 +28,23 @@ final class MainViewController: BaseViewController {
         return collectionView
     }()
     
+    private let mainFieldCategoryAnchorButton = MainFieldCategoryAnchorButton()
+    
     private let filterButton: UIButton = {
+        let buttonImage = UIImage(named: "hamburger")?
+            .resize(to: CGSize(width: 24, height: 24))
+            
         let button = UIButton()
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
-        let buttonImage = UIImage(systemName: "line.3.horizontal", withConfiguration: imageConfig)
         button.setImage(buttonImage, for: .normal)
-        button.tintColor = .black
-        
+        return button
+    }()
+    
+    private let searchButton: UIButton = {
+        let buttonImage = UIImage(named: "magnifyingglass")?
+            .resize(to: CGSize(width: 24, height: 24))
+            
+        let button = UIButton()
+        button.setImage(buttonImage, for: .normal)
         return button
     }()
 
@@ -55,31 +65,30 @@ final class MainViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = BridgeColor.gray3
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        configureNavigationUI()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        rootFlexContainer.pin.all(view.pin.safeArea).marginTop(10)
+        rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
     }
     
     // MARK: - Methods
     private func configureNavigationUI() {
-        
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.direction(.column).define { flex in
-            /// 컬렉션 뷰
+            flex.addItem().direction(.row).alignItems(.center).define { flex in
+                flex.addItem(mainFieldCategoryAnchorButton).marginLeft(5)
+                flex.addItem().grow(1)
+                flex.addItem(filterButton).size(24).marginRight(15)
+                flex.addItem(searchButton).size(24).marginRight(15)
+            }
+            
             flex.addItem(projectCollectionView).grow(1).marginTop(20)
             
             flex.addItem(createProjectButton)

@@ -144,6 +144,7 @@
 		7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */; };
 		7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803D2ACF143A00230C86 /* Dropdown.swift */; };
 		7CE080402ACF147500230C86 /* RestrictionDropdownAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */; };
+		7CE080492AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE080482AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -280,6 +281,7 @@
 		7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDropdownCell.swift; sourceTree = "<group>"; };
 		7CE0803D2ACF143A00230C86 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionDropdownAnchorView.swift; sourceTree = "<group>"; };
+		7CE080482AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFieldCategoryAnchorButton.swift; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1045,6 +1047,7 @@
 				7C4270152AA377C9009BE6AF /* MainViewController.swift */,
 				7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */,
 				7C4270192AA377FE009BE6AF /* ProjectCollectionViewCell.swift */,
+				7CE080482AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1194,6 +1197,7 @@
 				7B61236A2ABF05B6006E72C1 /* SignInResponseDTO.swift in Sources */,
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
+				7CE080492AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
 				7B0CFB892AD3CF0000EA9C0D /* ObservableType+.swift in Sources */,
 				7C40CBA32AC3E5A8000F4C9F /* BrideOutlinedTechTagButton.swift in Sources */,
