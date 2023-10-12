@@ -14,19 +14,6 @@ import RxSwift
 final class MainViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
-    private lazy var projectCollectionView: UICollectionView = {
-        let layout = createCompositionalLayout()
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(HotProjectCollectionViewCell.self)
-        collectionView.register(ProjectCollectionViewCell.self)
-        collectionView.register(
-            ProjectSectionHeaderView.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
-        )
-        
-        return collectionView
-    }()
     
     private let mainFieldCategoryAnchorButton = MainFieldCategoryAnchorButton()
     // TODO: - DataSource 동적으로 변경될 수 있도록 조정
@@ -68,11 +55,6 @@ final class MainViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: MainViewModel
     
-    typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
-    typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Project>
-    private var dataSource: DataSource?
-    
-    
     // MARK: - Initializer
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -108,8 +90,6 @@ final class MainViewController: BaseViewController {
             
             flex.addItem(mainCategoryHeaderView).height(68).marginTop(15).marginHorizontal(5)
             
-            flex.addItem(projectCollectionView).grow(1).marginTop(20)
-            
             flex.addItem(createProjectButton)
                 .position(.absolute)
                 .right(15)
@@ -120,8 +100,6 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureAttributes() {
-        configureCellDataSource()
-        configureHeaderDataSource()
         configureNavigationUI()
     }
     
@@ -135,18 +113,6 @@ final class MainViewController: BaseViewController {
             createButtonTapped: createProjectButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
-        
-        output.hotProjects
-            .drive(onNext: { [weak self] hotProjects in
-                self?.applySectionSnapshot(to: .hot, with: hotProjects)
-            })
-            .disposed(by: disposeBag)
-        
-        output.projects
-            .drive(onNext: { [weak self] projects in
-                self?.applySectionSnapshot(to: .main, with: projects)
-            })
-            .disposed(by: disposeBag)
         
         output.layoutMode
             .drive(onNext: { [weak self] mode in
@@ -177,138 +143,12 @@ final class MainViewController: BaseViewController {
 }
 // MARK: - CompositionalLayout
 extension MainViewController {
-    private func createCompositionalLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
-            let section = MainViewModel.Section.allCases[sectionIndex]
-            
-            switch section {
-            case .hot: return self?.createHotProjectSection()
-            case .main: return self?.createProjectSection()
-            }
-        }
-        return layout
-    }
     
-    private func createHotProjectSection() -> NSCollectionLayoutSection {
-        /// item 설정
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        
-        /// header 설정
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(60)
-        )
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        
-        /// group 설정
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(170),
-            heightDimension: .absolute(170)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        /// section 설정
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header]
-        section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 30, trailing: 10)
-        
-        return section
-    }
-    
-    private func createProjectSection() -> NSCollectionLayoutSection {
-        /// item 설정
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        
-        /// header 설정
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(60)
-        )
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        
-        /// group 설정
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(180)
-        )
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        
-        /// section 설정
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 5, trailing: 10)
-        
-        return section
-    }
 }
 
 // MARK: - Diffable data source
 extension MainViewController {
-    private func configureCellDataSource() {
-        dataSource = DataSource(
-            collectionView: projectCollectionView
-        ) { collectionView, indexPath, item in
-            
-            let section = MainViewModel.Section.allCases[indexPath.section]
-            
-            switch section {
-            case .hot:
-                guard let cell = collectionView.dequeueReusableCell(
-                    HotProjectCollectionViewCell.self,
-                    for: indexPath)
-                else { return UICollectionViewCell() }
-                
-                cell.configureCell(with: item)
-                return cell
-                
-            case .main:
-                guard let cell = collectionView.dequeueReusableCell(
-                    ProjectCollectionViewCell.self,
-                    for: indexPath)
-                else { return UICollectionViewCell() }
-                
-                cell.configureCell(with: item)
-                return cell
-            }
-        }
-    }
     
-    private func configureHeaderDataSource() {
-        dataSource?.supplementaryViewProvider = { collectionview, kind, indexPath in
-            guard kind == UICollectionView.elementKindSectionHeader else {
-                return UICollectionReusableView()
-            }
-                
-            guard let headerView = collectionview.dequeueReusableSupplementaryView(
-                ProjectSectionHeaderView.self,
-                ofKind: kind,
-                for: indexPath
-            ) else {
-                return UICollectionReusableView()
-            }
-                
-            headerView.configureHeader(with: indexPath)
-            
-            return headerView
-        }
-    }
-    
-    private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [Project]) {
-        var snapshot = SectionSnapshot()
-        snapshot.append(projects)
-        dataSource?.apply(snapshot, to: section)
-    }
 }
 
 // MARK: - CreateProjectButtonAnimation
