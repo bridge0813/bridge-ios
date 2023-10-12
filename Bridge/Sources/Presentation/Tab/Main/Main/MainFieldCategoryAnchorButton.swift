@@ -25,5 +25,6 @@ final class MainFieldCategoryAnchorButton: BaseButton {
         configuration.attributedTitle = AttributedString("UI/UX", attributes: titleContainer)
         
         self.configuration = configuration
+        sizeToFit()
     }
 }

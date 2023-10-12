@@ -369,6 +369,7 @@ extension DropDown {
 extension DropDown {
     
     func show() {
+        
         willShow.onNext(())
 
         // 계산된 레이아웃이 화면에 표시될 수 없는 경우

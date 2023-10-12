@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 final class MainViewController: BaseViewController {
-    // MARK: - Properties
+    // MARK: - UI
     private let rootFlexContainer = UIView()
     private lazy var projectCollectionView: UICollectionView = {
         let layout = createCompositionalLayout()
@@ -29,6 +29,8 @@ final class MainViewController: BaseViewController {
     }()
     
     private let mainFieldCategoryAnchorButton = MainFieldCategoryAnchorButton()
+    // TODO: - DataSource 동적으로 변경될 수 있도록 조정
+    private var mainFieldCategoryDropdown: DropDown?
     
     private let filterButton: UIButton = {
         let buttonImage = UIImage(named: "hamburger")?
@@ -50,11 +52,13 @@ final class MainViewController: BaseViewController {
 
     private let createProjectButton = BrideCreateProjectButton()
     
+    // MARK: - Properties
     private let viewModel: MainViewModel
     
     typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
     typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Project>
     private var dataSource: DataSource?
+    
     
     // MARK: - Initializer
     init(viewModel: MainViewModel) {
@@ -65,6 +69,8 @@ final class MainViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureDropdown()
     }
     
     override func viewDidLayoutSubviews() {
@@ -73,7 +79,7 @@ final class MainViewController: BaseViewController {
         rootFlexContainer.flex.layout()
     }
     
-    // MARK: - Methods
+    // MARK: - Configure
     private func configureNavigationUI() {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
@@ -106,6 +112,22 @@ final class MainViewController: BaseViewController {
         configureNavigationUI()
     }
     
+    private func configureDropdown() {
+        mainFieldCategoryDropdown = DropDown(
+            anchorView: mainFieldCategoryAnchorButton,
+            bottomOffset: CGPoint(x: 10, y: 0),
+            dataSource: ["UI/UX", "전체"],
+            cellHeight: 46,
+            itemTextColor: BridgeColor.gray3,
+            itemTextFont: BridgeFont.body2.font,
+            selectedItemTextColor: BridgeColor.gray1,
+            dimmedBackgroundColor: .black.withAlphaComponent(0.3),
+            width: 147,
+            cornerRadius: 4
+        )
+    }
+    
+    // MARK: - Bind
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
@@ -131,6 +153,12 @@ final class MainViewController: BaseViewController {
         output.layoutMode
             .drive(onNext: { [weak self] mode in
                 self?.animateLayoutChange(to: mode)
+            })
+            .disposed(by: disposeBag)
+        
+        mainFieldCategoryAnchorButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] in
+                self?.mainFieldCategoryDropdown?.show()
             })
             .disposed(by: disposeBag)
     }
