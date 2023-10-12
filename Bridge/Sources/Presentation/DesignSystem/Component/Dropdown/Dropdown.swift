@@ -464,7 +464,7 @@ extension DropDown: UITableViewDelegate {
         selectedItemIndexRow = indexPath.row
         
         itemSelected.onNext((indexRow: indexPath.row, title: dataSource[indexPath.row]))
-        
+    
         // 앵커뷰가 UIBarButton일 때 경우 메뉴처럼 사용되기 때문에 선택된 Cell이 무엇인지 표시 할 필요가 없음.
         if anchorView as? UIBarButtonItem != nil {
             selectedItemIndexRow = nil

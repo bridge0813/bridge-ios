@@ -25,6 +25,19 @@ final class MainFieldCategoryAnchorButton: BaseButton {
         configuration.attributedTitle = AttributedString("UI/UX", attributes: titleContainer)
         
         self.configuration = configuration
-        sizeToFit()
+        contentHorizontalAlignment = .leading
+    }
+}
+
+extension MainFieldCategoryAnchorButton {
+    func updateTitle(_ newTitle: String) {
+        var updatedConfiguration = configuration
+        
+        var titleContainer = AttributeContainer()
+        titleContainer.font = BridgeFont.subtitle1.font
+        titleContainer.foregroundColor = BridgeColor.gray1
+        updatedConfiguration?.attributedTitle = AttributedString(newTitle, attributes: titleContainer)
+        
+        configuration = updatedConfiguration
     }
 }
