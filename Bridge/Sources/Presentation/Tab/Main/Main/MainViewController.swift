@@ -15,6 +15,17 @@ final class MainViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
+    private lazy var projectTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(MainProjectCell.self)
+        tableView.backgroundColor = BridgeColor.gray9
+        tableView.rowHeight = 170
+        tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 24.2, left: 0, bottom: 0, right: 0)
+        
+        return tableView
+    }()
+    
     private let mainFieldCategoryAnchorButton = MainFieldCategoryAnchorButton()
     // TODO: - DataSource 동적으로 변경될 수 있도록 조정
     private lazy var mainFieldCategoryDropdown = DropDown(
@@ -55,6 +66,11 @@ final class MainViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: MainViewModel
     
+    private typealias DataSource = UITableViewDiffableDataSource<MainViewModel.Section, Project>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<MainViewModel.Section, Project>
+    private var dataSource: DataSource?
+    
+    
     // MARK: - Initializer
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -90,6 +106,8 @@ final class MainViewController: BaseViewController {
             
             flex.addItem(mainCategoryHeaderView).height(68).marginTop(15).marginHorizontal(5)
             
+            flex.addItem(projectTableView).grow(1)
+            
             flex.addItem(createProjectButton)
                 .position(.absolute)
                 .right(15)
@@ -100,6 +118,7 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureAttributes() {
+        dataSource = configureDataSource()
         configureNavigationUI()
     }
     
@@ -107,12 +126,22 @@ final class MainViewController: BaseViewController {
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            didScroll: projectCollectionView.rx.contentOffset.asObservable(),
+            didScroll: projectTableView.rx.contentOffset.asObservable(),
             filterButtonTapped: filterButton.rx.tap.asObservable(),
-            itemSelected: projectCollectionView.rx.itemSelected.asObservable(),
+            itemSelected: projectTableView.rx.itemSelected.asObservable(),
             createButtonTapped: createProjectButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
+        
+        output.projects
+            .compactMap { [weak self] projects in
+                self?.createCurrentSnapshot(with: projects)
+            }
+            .drive { [weak self] currentSnapshot in
+                self?.dataSource?.apply(currentSnapshot)
+            }
+            .disposed(by: disposeBag)
+        
         
         output.layoutMode
             .drive(onNext: { [weak self] mode in
@@ -139,16 +168,31 @@ final class MainViewController: BaseViewController {
                 owner.mainCategoryHeaderView.updateButtonState(type)
             })
             .disposed(by: disposeBag)
+        
     }
-}
-// MARK: - CompositionalLayout
-extension MainViewController {
-    
 }
 
 // MARK: - Diffable data source
 extension MainViewController {
+    private func configureDataSource() -> DataSource {
+        DataSource(tableView: projectTableView) { tableView, indexPath, item in
+            guard let cell = tableView.dequeueReusableCell(MainProjectCell.self, for: indexPath) else {
+                return UITableViewCell()
+            }
+            
+            cell.selectionStyle = .none
+            cell.contentView.isUserInteractionEnabled = false
+            
+            return cell
+        }
+    }
     
+    private func createCurrentSnapshot(with projects: [Project]) -> Snapshot {
+        var snapshot = Snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(projects)
+        return snapshot
+    }
 }
 
 // MARK: - CreateProjectButtonAnimation
