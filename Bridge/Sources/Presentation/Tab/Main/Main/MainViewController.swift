@@ -104,7 +104,7 @@ final class MainViewController: BaseViewController {
                 flex.addItem(searchButton).size(24).marginRight(15)
             }
             
-            flex.addItem(mainCategoryHeaderView).height(102).marginHorizontal(5)
+            flex.addItem(mainCategoryHeaderView).height(102)
             
             flex.addItem(projectTableView).grow(1)
             

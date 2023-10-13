@@ -48,24 +48,32 @@ final class MainCategoryHeaderView: BaseView {
     // MARK: - Configurations
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-        
-        rootFlexContainer.flex.direction(.row).alignItems(.center).define { flex in
-            flex.addItem(newButton)
+        rootFlexContainer.flex.direction(.column).define { flex in
             flex.addItem().grow(1)
-            flex.addItem(hotButton)
+            flex.addItem().direction(.row).alignItems(.center).marginHorizontal(5).define { flex in
+                flex.addItem(newButton)
+                flex.addItem().grow(1)
+                flex.addItem(hotButton)
+                flex.addItem().grow(1)
+                flex.addItem(deadlineApproachButton)
+                flex.addItem().grow(1)
+                flex.addItem(comingSoonButton)
+                flex.addItem().grow(1)
+                flex.addItem(comingSoonButton2)
+            }
+            
             flex.addItem().grow(1)
-            flex.addItem(deadlineApproachButton)
-            flex.addItem().grow(1)
-            flex.addItem(comingSoonButton)
-            flex.addItem().grow(1)
-            flex.addItem(comingSoonButton2)
+            flex.addItem().height(1).backgroundColor(BridgeColor.gray6)
         }
+        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
+        
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
     }
     
     override func configureAttributes() {
