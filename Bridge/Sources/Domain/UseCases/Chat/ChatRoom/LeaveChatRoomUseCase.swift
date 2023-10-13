@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol LeaveChatRoomUseCase {
-    func execute(id: String) -> Observable<Void>
+    func leaveChatRoom(id: String) -> Observable<Void>
 }
 
 final class DefaultLeaveChatRoomUseCase: LeaveChatRoomUseCase {
@@ -19,7 +19,7 @@ final class DefaultLeaveChatRoomUseCase: LeaveChatRoomUseCase {
         self.chatRoomRepository = chatRoomRepository
     }
     
-    func execute(id: String) -> Observable<Void> {
+    func leaveChatRoom(id: String) -> Observable<Void> {
         chatRoomRepository.leaveChatRoom(id: id).asObservable()
     }
 }

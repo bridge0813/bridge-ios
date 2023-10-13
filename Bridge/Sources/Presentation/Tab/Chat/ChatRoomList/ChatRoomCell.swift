@@ -36,14 +36,14 @@ final class ChatRoomCell: BaseTableViewCell {
         return label
     }()
     
-    private let latestMessageReceivedTimeLabel: UILabel = {
+    private let lastMessageReceivedTimeLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.caption1.font
         label.textColor = BridgeColor.gray4
         return label
     }()
     
-    private let latestMessageContentLabel: UILabel = {
+    private let lastMessageContentLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2Long.font
         label.textColor = BridgeColor.gray2
@@ -65,8 +65,8 @@ final class ChatRoomCell: BaseTableViewCell {
         super.prepareForReuse()
         profileImageView.image = nil
         nameLabel.text = ""
-        latestMessageReceivedTimeLabel.text = ""
-        latestMessageContentLabel.text = ""
+        lastMessageReceivedTimeLabel.text = ""
+        lastMessageContentLabel.text = ""
     }
     
     // MARK: - Layouts
@@ -84,10 +84,10 @@ final class ChatRoomCell: BaseTableViewCell {
                 flex.addItem().width(200).define { flex in
                     flex.addItem().direction(.row).marginBottom(4).define { flex in
                         flex.addItem(nameLabel).shrink(1).marginRight(8)
-                        flex.addItem(latestMessageReceivedTimeLabel).grow(1)
+                        flex.addItem(lastMessageReceivedTimeLabel).grow(1)
                     }
                     
-                    flex.addItem(latestMessageContentLabel)
+                    flex.addItem(lastMessageContentLabel)
                 }
                 
                 flex.addItem().grow(1)  // spacer
@@ -110,8 +110,8 @@ final class ChatRoomCell: BaseTableViewCell {
 extension ChatRoomCell {
     func configureCell(with chatRoom: ChatRoom) {
         nameLabel.text = chatRoom.name
-        latestMessageReceivedTimeLabel.text = chatRoom.latestMessage.receivedTime
-        latestMessageContentLabel.text = chatRoom.latestMessage.content
+        lastMessageReceivedTimeLabel.text = chatRoom.lastMessage.receivedTime
+        lastMessageContentLabel.text = chatRoom.lastMessage.content
         configureUnreadMessageCountLabel(Int(chatRoom.unreadMessageCount) ?? 0)
     }
 }

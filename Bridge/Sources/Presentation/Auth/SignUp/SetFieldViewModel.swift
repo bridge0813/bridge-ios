@@ -45,7 +45,7 @@ final class SetFieldViewModel: ViewModelType {
         input.completeButtonTapped
             .withUnretained(self)
             .flatMap { owner, _ in
-                owner.signUpUseCase.signUp(selectedFields: selectedFields).toResult()
+                owner.signUpUseCase.signUp(selectedFields: selectedFields)
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -55,7 +55,9 @@ final class SetFieldViewModel: ViewModelType {
                     owner.coordinator?.finish()
                     
                 case .failure:
-                    owner.coordinator?.showAlert(configuration: .error)
+                    owner.coordinator?.showAlert(configuration: .error) {
+                        owner.coordinator?.finish()
+                    }
                 }
             })
             .disposed(by: disposeBag)
