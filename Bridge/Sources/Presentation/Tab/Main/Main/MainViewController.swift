@@ -100,11 +100,11 @@ final class MainViewController: BaseViewController {
             flex.addItem().direction(.row).alignItems(.center).define { flex in
                 flex.addItem(mainFieldCategoryAnchorButton).marginLeft(5)
                 flex.addItem().grow(1)
-                flex.addItem(filterButton).size(24).marginRight(15)
+                flex.addItem(filterButton).size(24).marginRight(8)
                 flex.addItem(searchButton).size(24).marginRight(15)
             }
             
-            flex.addItem(mainCategoryHeaderView).height(68).marginTop(15).marginHorizontal(5)
+            flex.addItem(mainCategoryHeaderView).height(102).marginHorizontal(5)
             
             flex.addItem(projectTableView).grow(1)
             

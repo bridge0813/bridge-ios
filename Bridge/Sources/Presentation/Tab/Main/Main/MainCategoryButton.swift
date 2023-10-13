@@ -29,7 +29,7 @@ final class MainCategoryButton: BaseButton {
         
         configuration.image = buttonImage
         configuration.imagePlacement = .top
-        configuration.imagePadding = 8
+        configuration.imagePadding = 7.8
         
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.body3.font

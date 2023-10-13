@@ -47,10 +47,8 @@ final class MainCategoryHeaderView: BaseView {
     
     // MARK: - Configurations
     override func configureLayouts() {
-        clipsToBounds = true
-        layer.cornerRadius = 8
-        
         addSubview(rootFlexContainer)
+        
         rootFlexContainer.flex.direction(.row).alignItems(.center).define { flex in
             flex.addItem(newButton)
             flex.addItem().grow(1)
