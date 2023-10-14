@@ -112,8 +112,6 @@
 		7C40CBCA2AC6B597000F4C9F /* BrideCreateProjectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBC92AC6B597000F4C9F /* BrideCreateProjectButton.swift */; };
 		7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270132AA3779D009BE6AF /* MainViewModel.swift */; };
 		7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270152AA377C9009BE6AF /* MainViewController.swift */; };
-		7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */; };
-		7C42701A2AA377FE009BE6AF /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270192AA377FE009BE6AF /* ProjectCollectionViewCell.swift */; };
 		7C42701C2AA394EF009BE6AF /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C42701B2AA394EF009BE6AF /* UILabel+.swift */; };
 		7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C42701D2AA4540C009BE6AF /* BaseCollectionReusableView.swift */; };
 		7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */; };
@@ -253,8 +251,6 @@
 		7C40CBC92AC6B597000F4C9F /* BrideCreateProjectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideCreateProjectButton.swift; sourceTree = "<group>"; };
 		7C4270132AA3779D009BE6AF /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7C4270152AA377C9009BE6AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCollectionViewCell.swift; sourceTree = "<group>"; };
-		7C4270192AA377FE009BE6AF /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C42701B2AA394EF009BE6AF /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		7C42701D2AA4540C009BE6AF /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHotProjectsUseCase.swift; sourceTree = "<group>"; };
@@ -1055,8 +1051,6 @@
 				7C4270152AA377C9009BE6AF /* MainViewController.swift */,
 				7C55E62C2AD867010018FA5D /* MainProjectCell.swift */,
 				7C55E62E2ADAEBFC0018FA5D /* MainHotProjectCell.swift */,
-				7C4270172AA377E8009BE6AF /* HotProjectCollectionViewCell.swift */,
-				7C4270192AA377FE009BE6AF /* ProjectCollectionViewCell.swift */,
 				7CE080482AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift */,
 				7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */,
 				7C55E62A2AD7F0390018FA5D /* MainCategoryHeaderView.swift */,
@@ -1182,7 +1176,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C42701A2AA377FE009BE6AF /* ProjectCollectionViewCell.swift in Sources */,
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BrideBookmarkButton.swift in Sources */,
@@ -1265,7 +1258,6 @@
 				7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */,
 				7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */,
 				7B2D770A2AAB0FDF00E5907B /* SignInViewModel.swift in Sources */,
-				7C4270182AA377E8009BE6AF /* HotProjectCollectionViewCell.swift in Sources */,
 				7C42701C2AA394EF009BE6AF /* UILabel+.swift in Sources */,
 				7BA36CB52A9D9828000DAB02 /* Endpoint.swift in Sources */,
 				7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */,
