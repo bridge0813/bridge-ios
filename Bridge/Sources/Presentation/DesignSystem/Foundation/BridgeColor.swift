@@ -21,6 +21,10 @@ enum BridgeColor {
     static let secondary3 = UIColor(red: 239 / 255, green: 242 / 255, blue: 248 / 255, alpha: 1)
     static let secondary4 = UIColor(red: 248 / 255, green: 249 / 255, blue: 255 / 255, alpha: 1)
     
+    // Main의 인기 프로젝트에 사용되는 라벨컬러
+    static let hotCellRankingBackgroundColor = UIColor(red: 0.82, green: 0.9, blue: 1, alpha: 1)
+    static let hotCellRankingTextColor = UIColor(red: 0.46, green: 0.68, blue: 1, alpha: 1)
+    
     // gray scale
     static let gray1 = UIColor(red: 38 / 255, green: 42 / 255, blue: 52 / 255, alpha: 1)
     static let gray2 = UIColor(red: 89 / 255, green: 89 / 255, blue: 89 / 255, alpha: 1)

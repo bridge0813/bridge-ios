@@ -17,9 +17,9 @@ final class MainViewController: BaseViewController {
     
     private lazy var projectTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(MainProjectCell.self)
+        tableView.register(MainHotProjectCell.self)
         tableView.backgroundColor = BridgeColor.gray9
-        tableView.rowHeight = 170
+        tableView.rowHeight = 110
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 24.2, left: 0, bottom: 0, right: 0)
         
@@ -176,7 +176,7 @@ final class MainViewController: BaseViewController {
 extension MainViewController {
     private func configureDataSource() -> DataSource {
         DataSource(tableView: projectTableView) { tableView, indexPath, item in
-            guard let cell = tableView.dequeueReusableCell(MainProjectCell.self, for: indexPath) else {
+            guard let cell = tableView.dequeueReusableCell(MainHotProjectCell.self, for: indexPath) else {
                 return UITableViewCell()
             }
             
