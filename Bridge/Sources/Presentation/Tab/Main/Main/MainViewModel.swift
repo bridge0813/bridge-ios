@@ -82,9 +82,9 @@ final class MainViewModel: ViewModelType {
         
         // MARK: - Button State
         let layoutMode = input.didScroll
-            .throttle(.milliseconds(200), scheduler: MainScheduler.instance)
             .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
             .distinctUntilChanged()
+            .observe(on: MainScheduler.asyncInstance)
         
         let headerAlpha = input.didScroll
             .map { offset in
@@ -98,6 +98,7 @@ final class MainViewModel: ViewModelType {
                 
                 return alpha
             }
+            .observe(on: MainScheduler.asyncInstance)
         
         let collectionViewTopMargin = input.didScroll
             .map { offset in
@@ -109,7 +110,8 @@ final class MainViewModel: ViewModelType {
                 
                 return topMargin
             }
-            
+            .observe(on: MainScheduler.asyncInstance)
+        
         // MARK: - Button Actions
         input.filterButtonTapped
             .withUnretained(self)
