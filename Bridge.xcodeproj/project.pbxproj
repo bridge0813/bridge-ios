@@ -11,7 +11,7 @@
 		7B0FD3E92ADBC22700C91045 /* RxCocoaURLError+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */; };
 		7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */; };
 		7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */; };
-		7B14DB252AB04BC5009A00EB /* ASAuthorizationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB242AB04BC5009A00EB /* ASAuthorizationController+Rx.swift */; };
+		7B14DB252AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB242AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift */; };
 		7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB272AB15E7E009A00EB /* SignInUseCase.swift */; };
 		7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB2A2AB16272009A00EB /* UserCredentials.swift */; };
 		7B14DB2E2AB1DA39009A00EB /* SignInResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB2D2AB1DA39009A00EB /* SignInResult.swift */; };
@@ -156,7 +156,7 @@
 		7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxCocoaURLError+.swift"; sourceTree = "<group>"; };
 		7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewModel.swift; sourceTree = "<group>"; };
 		7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewController.swift; sourceTree = "<group>"; };
-		7B14DB242AB04BC5009A00EB /* ASAuthorizationController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASAuthorizationController+Rx.swift"; sourceTree = "<group>"; };
+		7B14DB242AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxASAuthorizationControllerDelegateProxy.swift; sourceTree = "<group>"; };
 		7B14DB272AB15E7E009A00EB /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
 		7B14DB2A2AB16272009A00EB /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
 		7B14DB2D2AB1DA39009A00EB /* SignInResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResult.swift; sourceTree = "<group>"; };
@@ -314,7 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */,
-				7B14DB242AB04BC5009A00EB /* ASAuthorizationController+Rx.swift */,
+				7B14DB242AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift */,
 			);
 			path = RxExtensions;
 			sourceTree = "<group>";
@@ -1317,7 +1317,7 @@
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */,
-				7B14DB252AB04BC5009A00EB /* ASAuthorizationController+Rx.swift in Sources */,
+				7B14DB252AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
