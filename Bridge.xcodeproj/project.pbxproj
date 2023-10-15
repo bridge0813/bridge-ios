@@ -313,10 +313,18 @@
 		7B0CFB8A2AD3D19500EA9C0D /* RxExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				7B0FD3EC2ADBCC9C00C91045 /* Proxies */,
 				7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */,
-				7B14DB242AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift */,
 			);
 			path = RxExtensions;
+			sourceTree = "<group>";
+		};
+		7B0FD3EC2ADBCC9C00C91045 /* Proxies */ = {
+			isa = PBXGroup;
+			children = (
+				7B14DB242AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift */,
+			);
+			path = Proxies;
 			sourceTree = "<group>";
 		};
 		7B14DB262AB15E69009A00EB /* Auth */ = {
