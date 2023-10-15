@@ -148,32 +148,6 @@ extension ProjectDTO {
             meetingWay: "온라인",
             stage: "기획 중",
             userEmail: ""
-        ),
-        ProjectDTO(
-            id: "4Hot",
-            title: "웹 사이트 디자이너 구해요!!",
-            overview: "모임 플랫폼",
-            dueDate: Date(),
-            startDate: Date(),
-            endDate: Date(),
-            recruit: [],
-            tagLimit: [],
-            meetingWay: "온라인",
-            stage: "기획 중",
-            userEmail: ""
-        ),
-        ProjectDTO(
-            id: "5Hot",
-            title: "웹 사이트 디자이너 구해요!!",
-            overview: "모임 플랫폼",
-            dueDate: Date(),
-            startDate: Date(),
-            endDate: Date(),
-            recruit: [],
-            tagLimit: [],
-            meetingWay: "온라인",
-            stage: "기획 중",
-            userEmail: ""
         )
     ]
 }

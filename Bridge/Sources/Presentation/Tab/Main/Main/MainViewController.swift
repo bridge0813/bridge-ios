@@ -15,15 +15,15 @@ final class MainViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
-    private lazy var projectTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(MainHotProjectCell.self)
-        tableView.backgroundColor = BridgeColor.gray9
-        tableView.rowHeight = 110
-        tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsets(top: 24.2, left: 0, bottom: 0, right: 0)
+    private lazy var collectionView: UICollectionView = {
+        let layout = createCompositionalLayout()
         
-        return tableView
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = BridgeColor.gray9
+        collectionView.register(MainProjectCell.self)
+        collectionView.register(MainHotProjectCell.self)
+        
+        return collectionView
     }()
     
     private let mainFieldCategoryAnchorButton = MainFieldCategoryAnchorButton()
@@ -66,8 +66,8 @@ final class MainViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: MainViewModel
     
-    private typealias DataSource = UITableViewDiffableDataSource<MainViewModel.Section, Project>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<MainViewModel.Section, Project>
+    typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
+    typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Project>
     private var dataSource: DataSource?
     
     
@@ -106,7 +106,7 @@ final class MainViewController: BaseViewController {
             
             flex.addItem(mainCategoryHeaderView).height(102)
             
-            flex.addItem(projectTableView).grow(1)
+            flex.addItem(collectionView).grow(1)
             
             flex.addItem(createProjectButton)
                 .position(.absolute)
@@ -118,7 +118,7 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureAttributes() {
-        dataSource = configureDataSource()
+        configureCellDataSource()
         configureNavigationUI()
     }
     
@@ -126,20 +126,23 @@ final class MainViewController: BaseViewController {
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            didScroll: projectTableView.rx.contentOffset.asObservable(),
+            didScroll: collectionView.rx.contentOffset.asObservable(),
             filterButtonTapped: filterButton.rx.tap.asObservable(),
-            itemSelected: projectTableView.rx.itemSelected.asObservable(),
+            itemSelected: collectionView.rx.itemSelected.asObservable(),
             createButtonTapped: createProjectButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
         
+        output.hotProjects
+            .drive(onNext: { [weak self] hotProjects in
+                self?.applySectionSnapshot(to: .hot, with: hotProjects)
+            })
+            .disposed(by: disposeBag)
+        
         output.projects
-            .compactMap { [weak self] projects in
-                self?.createCurrentSnapshot(with: projects)
-            }
-            .drive { [weak self] currentSnapshot in
-                self?.dataSource?.apply(currentSnapshot)
-            }
+            .drive(onNext: { [weak self] projects in
+                self?.applySectionSnapshot(to: .main, with: projects)
+            })
             .disposed(by: disposeBag)
         
         
@@ -171,27 +174,98 @@ final class MainViewController: BaseViewController {
         
     }
 }
+// MARK: - CompositionalLayout
+extension MainViewController {
+    private func createCompositionalLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
+            let section = MainViewModel.Section.allCases[sectionIndex]
+            
+            switch section {
+            case .hot: return self?.createHotSection()
+            case .main: return self?.createMainSection()
+            }
+        }
+        return layout
+    }
+    
+    private func createHotSection() -> NSCollectionLayoutSection {
+        // item 설정
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+            
+        // group 설정
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(110)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        // section 설정
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 30, trailing: 0)
+        
+        return section
+    }
+    
+    private func createMainSection() -> NSCollectionLayoutSection {
+        // item 설정
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        // group 설정
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(160)
+        )
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        // section 설정
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 5, trailing: 0)
+        
+        return section
+    }
+}
 
 // MARK: - Diffable data source
 extension MainViewController {
-    private func configureDataSource() -> DataSource {
-        DataSource(tableView: projectTableView) { tableView, indexPath, item in
-            guard let cell = tableView.dequeueReusableCell(MainHotProjectCell.self, for: indexPath) else {
-                return UITableViewCell()
+    private func configureCellDataSource() {
+        dataSource = DataSource(
+            collectionView: collectionView
+        ) { collectionView, indexPath, item in
+            
+            let section = MainViewModel.Section.allCases[indexPath.section]
+            
+            switch section {
+            case .hot:
+                guard let cell = collectionView.dequeueReusableCell(MainHotProjectCell.self, for: indexPath) else {
+                    return UICollectionViewCell()
+                }
+                
+                return cell
+                
+            case .main:
+                guard let cell = collectionView.dequeueReusableCell(MainProjectCell.self, for: indexPath) else {
+                    return UICollectionViewCell()
+                }
+                
+                return cell
             }
-            
-            cell.selectionStyle = .none
-            cell.contentView.isUserInteractionEnabled = false
-            
-            return cell
         }
     }
     
-    private func createCurrentSnapshot(with projects: [Project]) -> Snapshot {
-        var snapshot = Snapshot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(projects)
-        return snapshot
+    private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [Project]) {
+        var snapshot = SectionSnapshot()
+        snapshot.append(projects)
+        dataSource?.apply(snapshot, to: section)
     }
 }
 

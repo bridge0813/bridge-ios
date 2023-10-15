@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class MainHotProjectCell: BaseTableViewCell {
+final class MainHotProjectCell: BaseCollectionViewCell {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
