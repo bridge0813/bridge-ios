@@ -52,8 +52,13 @@ final class ChatRoomListViewModel: ViewModelType {
                     chatRoomsRelay.accept(chatRooms)
                 },
                 onError: { error in
-                    print(error.localizedDescription)
-                    viewState.accept(.notSignedIn)
+                    switch error as? NetworkError {
+                    case .statusCode(let statusCode):
+                        return statusCode == 401 ? viewState.accept(.notSignedIn) : viewState.accept(.error)
+                        
+                    default:
+                        return viewState.accept(.error)
+                    }
                 }
             )
             .disposed(by: disposeBag)
