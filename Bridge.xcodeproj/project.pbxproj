@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B0FD3CC2AD913D900C91045 /* SignUpResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0FD3CB2AD913D900C91045 /* SignUpResult.swift */; };
+		7B0FD3E92ADBC22700C91045 /* RxCocoaURLError+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */; };
 		7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */; };
 		7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */; };
 		7B14DB252AB04BC5009A00EB /* ASAuthorizationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB242AB04BC5009A00EB /* ASAuthorizationController+Rx.swift */; };
@@ -145,6 +146,7 @@
 
 /* Begin PBXFileReference section */
 		7B0FD3CB2AD913D900C91045 /* SignUpResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResult.swift; sourceTree = "<group>"; };
+		7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxCocoaURLError+.swift"; sourceTree = "<group>"; };
 		7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewModel.swift; sourceTree = "<group>"; };
 		7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewController.swift; sourceTree = "<group>"; };
 		7B14DB242AB04BC5009A00EB /* ASAuthorizationController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASAuthorizationController+Rx.swift"; sourceTree = "<group>"; };
@@ -724,6 +726,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA36CBE2A9DA44F000DAB02 /* NetworkError.swift */,
+				7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */,
 				7BA36CBB2A9DA2D1000DAB02 /* NetworkService.swift */,
 				7BA36CC02A9DE219000DAB02 /* DefaultNetworkService.swift */,
 			);
@@ -1183,6 +1186,7 @@
 				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
 				7C40CBA32AC3E5A8000F4C9F /* BrideOutlinedTechTagButton.swift in Sources */,
+				7B0FD3E92ADBC22700C91045 /* RxCocoaURLError+.swift in Sources */,
 				7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
 				7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */,

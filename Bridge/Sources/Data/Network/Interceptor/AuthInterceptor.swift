@@ -35,18 +35,13 @@ struct AuthInterceptor: Interceptor {
         var request = request
         request.addValue("Bearer \(refreshToken)", forHTTPHeaderField: "Authorization-refresh")
         
-        return URLSession.shared.rx.response(request: request)
-            .flatMap { httpResponse, data in
-                if httpResponse.statusCode == 200 {
-                    let accessToken = String(data: data, encoding: .utf8)
-                    tokenStorage.save(accessToken ?? "", for: .accessToken)
+        return URLSession.shared.rx.data(request: request)
+            .flatMap { data in
+                let accessToken = String(data: data, encoding: .utf8)
+                tokenStorage.save(accessToken ?? "", for: .accessToken)
+                adapt(&request)
                     
-                    adapt(&request)
-                    
-                    return URLSession.shared.rx.data(request: request)
-                } else {
-                    return Observable.error(NetworkError.unauthorized)
-                }
+                return URLSession.shared.rx.data(request: request)
             }
     }
 }

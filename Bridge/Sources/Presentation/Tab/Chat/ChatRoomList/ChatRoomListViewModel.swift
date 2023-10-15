@@ -51,7 +51,8 @@ final class ChatRoomListViewModel: ViewModelType {
                     if chatRooms.isEmpty { viewState.accept(.empty) }
                     chatRoomsRelay.accept(chatRooms)
                 },
-                onError: { _ in
+                onError: { error in
+                    print(error.localizedDescription)
                     viewState.accept(.notSignedIn)
                 }
             )

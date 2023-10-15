@@ -10,39 +10,34 @@ import Foundation
 enum NetworkError: Error {
     case invalidRequest
     case invalidResponse
-    case unauthorized
     case statusCode(Int)
     case underlying(Error)
     case unknown
 }
 
-//extension NetworkError: LocalizedError {
-//    static let statusMessages = [
-//        401: "Unauthorized"
-//    ]
-//
-//    var errorDescription: String? {
-//        switch self {
-//        case .invalidRequest:
-//            return "invalid URLRequest"
-//
-//        case .invalidResponse:
-//            return "received invalid response type"
-//
-//        case .unauthorized:
-//            return "unauthorized user"
-//
-//        case .decodingFailed:
-//            return "failed to decode response"
-//
-//        case .statusCode(let statusCode):
-//            return NetworkError.statusMessages[statusCode] ?? "undeclared status code: \(statusCode) error"
-//
-//        case .underlying(let error):
-//            return error.localizedDescription
-//
-//        case .unknown:
-//            return "unknown error occured"
-//        }
-//    }
-//}
+extension NetworkError: LocalizedError {
+    var statusMessages: [Int: String] {
+        [
+            401: "로그인이 필요합니다."
+        ]
+    }
+
+    var errorDescription: String? {
+        switch self {
+        case .invalidRequest:
+            return "유효하지 않은 요청입니다."
+
+        case .invalidResponse:
+            return "유효하지 않은 응답입니다."
+
+        case .statusCode(let statusCode):
+            return statusMessages[statusCode] ?? "\(statusCode) 오류가 발생했습니다."
+
+        case .underlying(let error):
+            return error.localizedDescription
+
+        case .unknown:
+            return "알 수 없는 오류가 발생했습니다."
+        }
+    }
+}

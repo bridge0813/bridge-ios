@@ -10,7 +10,7 @@ import RxSwift
 final class MockChatRoomRepository: ChatRoomRepository {
     func fetchChatRooms() -> Observable<[ChatRoom]> {
 //        .just(ChatRoomDTO.testArray.map { $0.toEntity() })
-        .error(NetworkError.unauthorized)
+        .error(NetworkError.statusCode(401))
     }
     
     func leaveChatRoom(id: String) -> Observable<Void> {

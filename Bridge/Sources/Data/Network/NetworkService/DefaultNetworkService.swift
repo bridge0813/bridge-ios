@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxCocoa
 import RxSwift
 
 final class DefaultNetworkService: NetworkService {
@@ -18,6 +19,13 @@ final class DefaultNetworkService: NetworkService {
         return URLSession.shared.rx.response(request: request)
             .flatMap { httpResponse, data in
                 interceptor?.shouldRetry(request, httpResponse: httpResponse, data: data) ?? .just(data)
+            }
+            .catch { error in
+                if let rxCocoaError = error as? RxCocoaURLError {
+                    return .error(rxCocoaError.toNetworkError())
+                } else {
+                    return .error(NetworkError.underlying(error))
+                }
             }
     }
 }
