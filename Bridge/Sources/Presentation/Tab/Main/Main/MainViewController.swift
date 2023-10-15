@@ -20,6 +20,7 @@ final class MainViewController: BaseViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = BridgeColor.gray9
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.register(MainProjectCell.self)
         collectionView.register(MainHotProjectCell.self)
         collectionView.register(
@@ -104,16 +105,24 @@ final class MainViewController: BaseViewController {
         view.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.direction(.column).define { flex in
-            flex.addItem().direction(.row).alignItems(.center).define { flex in
+            flex.addItem().direction(.row).alignItems(.center).height(48).define { flex in
                 flex.addItem(mainFieldCategoryAnchorButton).marginLeft(5)
                 flex.addItem().grow(1)
                 flex.addItem(filterButton).size(24).marginRight(8)
                 flex.addItem(searchButton).size(24).marginRight(15)
             }
             
-            flex.addItem(mainCategoryHeaderView).height(102)
+            flex.addItem(collectionView)
+                .position(.absolute)
+                .width(100%)
+                .height(100%)
+                .top(150)
             
-            flex.addItem(collectionView).grow(1)
+            flex.addItem(mainCategoryHeaderView)
+                .position(.absolute)
+                .width(100%)
+                .height(102)
+                .top(48)
             
             flex.addItem(createProjectButton)
                 .position(.absolute)
@@ -141,6 +150,7 @@ final class MainViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
+        // MARK: - Project 데이터
         output.hotProjects
             .drive(onNext: { [weak self] hotProjects in
                 self?.applySectionSnapshot(to: .hot, with: hotProjects)
@@ -153,13 +163,26 @@ final class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        
-        output.layoutMode
+        // MARK: - 스크롤에 따른 레이아웃 처리(버튼, Header 처리)
+        output.buttonDisplayMode
             .drive(onNext: { [weak self] mode in
                 self?.animateLayoutChange(to: mode)
             })
             .disposed(by: disposeBag)
         
+        output.headerAlpha
+            .drive(onNext: { [weak self] alpha in
+                self?.mainCategoryHeaderView.alpha = alpha
+            })
+            .disposed(by: disposeBag)
+        
+        output.collectionViewTopMargin
+            .drive(onNext: { [weak self] topMargin in
+                self?.updateCollectionViewTopMargin(topMargin)
+            })
+            .disposed(by: disposeBag)
+        
+        // TODO: - 바인딩 처리 예정
         mainFieldCategoryAnchorButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] in
                 self?.mainFieldCategoryDropdown.show()
@@ -253,7 +276,7 @@ extension MainViewController {
         // section 설정
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 0, bottom: 80, trailing: 0)
         
         return section
     }
@@ -384,5 +407,18 @@ extension MainViewController {
         }
         
         createProjectButton.configuration = updatedConfiguration
+    }
+}
+
+// MARK: - Sticky Header
+extension MainViewController {
+    func updateCollectionViewTopMargin(_ topMargin: CGFloat) {
+        collectionView.flex
+            .position(.absolute)
+            .width(100%)
+            .height(100%)
+            .top(topMargin)
+    
+        rootFlexContainer.flex.layout()
     }
 }

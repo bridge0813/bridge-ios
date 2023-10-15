@@ -22,7 +22,9 @@ final class MainViewModel: ViewModelType {
     struct Output {
         let hotProjects: Driver<[Project]>
         let projects: Driver<[Project]>
-        let layoutMode: Driver<CreateButtonDisplayState>
+        let buttonDisplayMode: Driver<CreateButtonDisplayState>
+        let headerAlpha: Driver<CGFloat>
+        let collectionViewTopMargin: Driver<CGFloat>
     }
 
     // MARK: - Properties
@@ -80,9 +82,34 @@ final class MainViewModel: ViewModelType {
         
         // MARK: - Button State
         let layoutMode = input.didScroll
+            .throttle(.milliseconds(200), scheduler: MainScheduler.instance)
             .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
             .distinctUntilChanged()
         
+        let headerAlpha = input.didScroll
+            .map { offset in
+                
+                let headerHeight: CGFloat = 102.0
+                
+                // 알파 값의 최소 및 최대 범위 설정
+                let minAlpha: CGFloat = 0.0
+                let maxAlpha: CGFloat = 1.0
+                let alpha = max(minAlpha, maxAlpha - (offset.y / headerHeight))
+                
+                return alpha
+            }
+        
+        let collectionViewTopMargin = input.didScroll
+            .map { offset in
+                let headerHeight: CGFloat = 102.0
+                
+                let maxTop: CGFloat = 150.0
+                let minTop: CGFloat = 48.0
+                let topMargin = min(maxTop, max(minTop, maxTop - (offset.y * (maxTop - minTop) / headerHeight)))
+                
+                return topMargin
+            }
+            
         // MARK: - Button Actions
         input.filterButtonTapped
             .withUnretained(self)
@@ -101,7 +128,9 @@ final class MainViewModel: ViewModelType {
         return Output(
             hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
             projects: projects.asDriver(onErrorJustReturn: [Project.onError]),
-            layoutMode: layoutMode.asDriver(onErrorJustReturn: .both)
+            buttonDisplayMode: layoutMode.asDriver(onErrorJustReturn: .both),
+            headerAlpha: headerAlpha.asDriver(onErrorJustReturn: 1),
+            collectionViewTopMargin: collectionViewTopMargin.asDriver(onErrorJustReturn: 150)
         )
     }
 }
