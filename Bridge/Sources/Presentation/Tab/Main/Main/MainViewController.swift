@@ -22,7 +22,14 @@ final class MainViewController: BaseViewController {
         collectionView.backgroundColor = BridgeColor.gray9
         collectionView.register(MainProjectCell.self)
         collectionView.register(MainHotProjectCell.self)
-        
+        collectionView.register(
+            ProjectCountHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
+        )
+        collectionView.register(
+            SectionDividerHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
+        )
         return collectionView
     }()
     
@@ -119,6 +126,7 @@ final class MainViewController: BaseViewController {
     
     override func configureAttributes() {
         configureCellDataSource()
+        configureHeaderDataSource()
         configureNavigationUI()
     }
     
@@ -197,6 +205,13 @@ extension MainViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             
+        // header 설정
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(38)
+        )
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        
         // group 설정
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
@@ -206,7 +221,8 @@ extension MainViewController {
         
         // section 설정
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 30, trailing: 0)
+        section.boundarySupplementaryItems = [header]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16.2, leading: 0, bottom: 0, trailing: 0)
         
         return section
     }
@@ -220,6 +236,13 @@ extension MainViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         
+        // header 설정
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(40)
+        )
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        
         // group 설정
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
@@ -229,7 +252,8 @@ extension MainViewController {
         
         // section 설정
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 5, trailing: 0)
+        section.boundarySupplementaryItems = [header]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0)
         
         return section
     }
@@ -258,6 +282,39 @@ extension MainViewController {
                 }
                 
                 return cell
+            }
+        }
+    }
+    
+    private func configureHeaderDataSource() {
+        dataSource?.supplementaryViewProvider = { collectionview, kind, indexPath in
+            guard kind == UICollectionView.elementKindSectionHeader else {
+                return UICollectionReusableView()
+            }
+            
+            let section = MainViewModel.Section.allCases[indexPath.section]
+            
+            switch section {
+            case .hot:
+                guard let headerView = collectionview.dequeueReusableSupplementaryView(
+                    ProjectCountHeaderView.self,
+                    ofKind: kind,
+                    for: indexPath
+                ) else { return UICollectionReusableView() }
+                
+                headerView.configureCountLabel(with: "20")
+                
+                return headerView
+        
+            case .main:
+                guard let headerView = collectionview.dequeueReusableSupplementaryView(
+                    SectionDividerHeaderView.self,
+                    ofKind: kind,
+                    for: indexPath
+                ) else { return UICollectionReusableView() }
+                
+                
+                return headerView
             }
         }
     }

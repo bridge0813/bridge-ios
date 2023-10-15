@@ -119,6 +119,8 @@
 		7C55E62B2AD7F0390018FA5D /* MainCategoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62A2AD7F0390018FA5D /* MainCategoryHeaderView.swift */; };
 		7C55E62D2AD867010018FA5D /* MainProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62C2AD867010018FA5D /* MainProjectCell.swift */; };
 		7C55E62F2ADAEBFC0018FA5D /* MainHotProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62E2ADAEBFC0018FA5D /* MainHotProjectCell.swift */; };
+		7C55E6312ADBF6AA0018FA5D /* ProjectCountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6302ADBF6AA0018FA5D /* ProjectCountHeaderView.swift */; };
+		7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */; };
 		7C569CF32A9F67C60063D362 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF22A9F67C60063D362 /* Project.swift */; };
 		7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */; };
 		7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */; };
@@ -258,6 +260,8 @@
 		7C55E62A2AD7F0390018FA5D /* MainCategoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryHeaderView.swift; sourceTree = "<group>"; };
 		7C55E62C2AD867010018FA5D /* MainProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProjectCell.swift; sourceTree = "<group>"; };
 		7C55E62E2ADAEBFC0018FA5D /* MainHotProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHotProjectCell.swift; sourceTree = "<group>"; };
+		7C55E6302ADBF6AA0018FA5D /* ProjectCountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCountHeaderView.swift; sourceTree = "<group>"; };
+		7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDividerHeaderView.swift; sourceTree = "<group>"; };
 		7C569CF22A9F67C60063D362 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
@@ -867,6 +871,24 @@
 			path = DataStorage;
 			sourceTree = "<group>";
 		};
+		7C55E6342ADC06C30018FA5D /* HeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				7C55E6302ADBF6AA0018FA5D /* ProjectCountHeaderView.swift */,
+				7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */,
+			);
+			path = HeaderView;
+			sourceTree = "<group>";
+		};
+		7C55E6352ADC06E20018FA5D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7C55E62C2AD867010018FA5D /* MainProjectCell.swift */,
+				7C55E62E2ADAEBFC0018FA5D /* MainHotProjectCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		7C569CF12A9F67860063D362 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -1049,11 +1071,11 @@
 			children = (
 				7C4270132AA3779D009BE6AF /* MainViewModel.swift */,
 				7C4270152AA377C9009BE6AF /* MainViewController.swift */,
-				7C55E62C2AD867010018FA5D /* MainProjectCell.swift */,
-				7C55E62E2ADAEBFC0018FA5D /* MainHotProjectCell.swift */,
 				7CE080482AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift */,
 				7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */,
 				7C55E62A2AD7F0390018FA5D /* MainCategoryHeaderView.swift */,
+				7C55E6352ADC06E20018FA5D /* Cell */,
+				7C55E6342ADC06C30018FA5D /* HeaderView */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1206,6 +1228,7 @@
 				7C55E6292AD7EFEF0018FA5D /* MainCategoryButton.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
 				7CE080492AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift in Sources */,
+				7C55E6312ADBF6AA0018FA5D /* ProjectCountHeaderView.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
 				7B0CFB892AD3CF0000EA9C0D /* ObservableType+.swift in Sources */,
 				7C40CBA32AC3E5A8000F4C9F /* BrideOutlinedTechTagButton.swift in Sources */,
@@ -1235,6 +1258,7 @@
 				7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
+				7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */,
 				7C40CBC82AC69447000F4C9F /* BrideSmallButtonGroup.swift in Sources */,
 				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
