@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol FetchChatRoomsUseCase {
-    func execute() -> Observable<[ChatRoom]>
+    func fetchChatRooms() -> Observable<[ChatRoom]>
 }
 
 final class DefaultFetchChatRoomsUseCase: FetchChatRoomsUseCase {
@@ -19,7 +19,7 @@ final class DefaultFetchChatRoomsUseCase: FetchChatRoomsUseCase {
         self.chatRoomRepository = chatRoomRepository
     }
     
-    func execute() -> Observable<[ChatRoom]> {
+    func fetchChatRooms() -> Observable<[ChatRoom]> {
         chatRoomRepository.fetchChatRooms()
     }
 }

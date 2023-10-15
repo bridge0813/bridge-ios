@@ -101,7 +101,7 @@ private extension TabBarCoordinator {
             .font: BridgeFont.subtitle1.font,
             .foregroundColor: BridgeColor.gray1
         ]
-        navigationBarAppearance.shadowColor = nil
+        navigationBarAppearance.shadowColor = BridgeColor.gray6
         UINavigationBar.appearance().tintColor = .black
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance

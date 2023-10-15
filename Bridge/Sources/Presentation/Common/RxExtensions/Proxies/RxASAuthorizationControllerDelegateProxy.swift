@@ -1,5 +1,5 @@
 //
-//  ASAuthorizationController+Rx.swift
+//  RxASAuthorizationControllerDelegateProxy.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/09/12.
@@ -10,20 +10,20 @@ import RxCocoa
 import RxSwift
 
 // MARK: - Proxy
-class ASAuthorizationControllerProxy:
+class RxASAuthorizationControllerDelegateProxy:
     DelegateProxy<ASAuthorizationController, ASAuthorizationControllerDelegate>,
     DelegateProxyType {
     
     var didComplete = PublishSubject<ASAuthorization>()
     
     init(controller: ASAuthorizationController) {
-        super.init(parentObject: controller, delegateProxy: ASAuthorizationControllerProxy.self)
+        super.init(parentObject: controller, delegateProxy: RxASAuthorizationControllerDelegateProxy.self)
     }
     
     deinit { didComplete.onCompleted() }
     
     static func registerKnownImplementations() {
-        register { ASAuthorizationControllerProxy(controller: $0) }
+        register { RxASAuthorizationControllerDelegateProxy(controller: $0) }
     }
     
     static func currentDelegate(for object: ASAuthorizationController) -> ASAuthorizationControllerDelegate? {
@@ -36,7 +36,7 @@ class ASAuthorizationControllerProxy:
 }
 
 // MARK: - Delegate
-extension ASAuthorizationControllerProxy: ASAuthorizationControllerDelegate {
+extension RxASAuthorizationControllerDelegateProxy: ASAuthorizationControllerDelegate {
     func authorizationController(
         controller: ASAuthorizationController,
         didCompleteWithAuthorization authorization: ASAuthorization
@@ -58,7 +58,7 @@ extension ASAuthorizationControllerProxy: ASAuthorizationControllerDelegate {
 // MARK: - Reactive
 extension Reactive where Base: ASAuthorizationController {
     public var didComplete: Observable<ASAuthorization> {
-        ASAuthorizationControllerProxy.proxy(for: base).didComplete.asObservable()
+        RxASAuthorizationControllerDelegateProxy.proxy(for: base).didComplete.asObservable()
     }
 }
 

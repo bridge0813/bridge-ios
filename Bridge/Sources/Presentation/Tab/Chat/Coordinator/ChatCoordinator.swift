@@ -24,7 +24,8 @@ final class ChatCoordinator: Coordinator {
         
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
-        chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
+//        chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
+        chatRoomRepository = MockChatRoomRepository()
         fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
     }
