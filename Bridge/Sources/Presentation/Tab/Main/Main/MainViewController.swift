@@ -31,6 +31,10 @@ final class MainViewController: BaseViewController {
             SectionDividerHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
         )
+        collectionView.register(
+            MainPlaceholderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter
+        )
         return collectionView
     }()
     
@@ -255,12 +259,19 @@ extension MainViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         
-        // header 설정
-        let headerSize = NSCollectionLayoutSize(
+//        // header 설정
+//        let headerSize = NSCollectionLayoutSize(
+//            widthDimension: .fractionalWidth(1),
+//            heightDimension: .absolute(40)
+//        )
+//        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+//
+        // footer 설정
+        let footerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(40)
+            heightDimension: .fractionalHeight(1)
         )
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
         
         // group 설정
         let groupSize = NSCollectionLayoutSize(
@@ -271,8 +282,8 @@ extension MainViewController {
         
         // section 설정
         let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 0, bottom: 80, trailing: 0)
+        section.boundarySupplementaryItems = [footer]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 80, trailing: 0)
         
         return section
     }
@@ -306,37 +317,57 @@ extension MainViewController {
     }
     
     private func configureHeaderDataSource() {
-        dataSource?.supplementaryViewProvider = { collectionview, kind, indexPath in
-            guard kind == UICollectionView.elementKindSectionHeader else {
-                return UICollectionReusableView()
-            }
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
             
             let section = MainViewModel.Section.allCases[indexPath.section]
             
-            switch section {
-            case .hot:
-                guard let headerView = collectionview.dequeueReusableSupplementaryView(
-                    ProjectCountHeaderView.self,
-                    ofKind: kind,
-                    for: indexPath
-                ) else { return UICollectionReusableView() }
+            switch kind {
                 
-                headerView.configureCountLabel(with: "20")
+            case UICollectionView.elementKindSectionHeader:
+                switch section {
+                case .hot:
+                    guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                        ProjectCountHeaderView.self,
+                        ofKind: kind,
+                        for: indexPath
+                    ) else { return UICollectionReusableView() }
+                    
+                    headerView.configureCountLabel(with: "20")
+                    
+                    return headerView
+            
+                case .main:
+                    guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                        SectionDividerHeaderView.self,
+                        ofKind: kind,
+                        for: indexPath
+                    ) else { return UICollectionReusableView() }
+                    
+                    return UICollectionReusableView()
+                }
                 
-                return headerView
-        
-            case .main:
-                guard let headerView = collectionview.dequeueReusableSupplementaryView(
-                    SectionDividerHeaderView.self,
-                    ofKind: kind,
-                    for: indexPath
-                ) else { return UICollectionReusableView() }
+            case UICollectionView.elementKindSectionFooter:
+                switch section {
+                case .hot:
+                    return UICollectionReusableView()
+            
+                case .main:
+                    guard let footerView = collectionView.dequeueReusableSupplementaryView(
+                        MainPlaceholderView.self,
+                        ofKind: kind,
+                        for: indexPath
+                    ) else { return UICollectionReusableView() }
+                    
+                    footerView.configureHolderView(.comingSoon)
+                    return footerView
+                }
                 
-                
-                return headerView
+            default:
+                return UICollectionReusableView()
             }
         }
     }
+
     
     private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [Project]) {
         var snapshot = SectionSnapshot()
