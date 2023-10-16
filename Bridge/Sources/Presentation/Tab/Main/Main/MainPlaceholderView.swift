@@ -16,6 +16,7 @@ final class MainPlaceholderView: BaseCollectionReusableView {
     private let holderImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .clear
+        imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
@@ -74,8 +75,7 @@ extension MainPlaceholderView {
             switch self {
             case .comingSoon:
                 return HolderImageViewLayout(
-                    image: UIImage(named: "placeholder.lock")?
-                        .resize(to: CGSize(width: 50, height: 70)),
+                    image: UIImage(named: "placeholder.lock"),
                     width: 50,
                     height: 70,
                     marginBottom: 23.8
@@ -83,8 +83,7 @@ extension MainPlaceholderView {
                 
             case .nothing:
                 return HolderImageViewLayout(
-                    image: UIImage(named: "placeholder.search")?
-                        .resize(to: CGSize(width: 100, height: 100)),
+                    image: UIImage(named: "placeholder.search"),
                     width: 100,
                     height: 100,
                     marginBottom: 3.8
