@@ -28,6 +28,8 @@
 		7B153C0C2AD64E5800618280 /* ChatEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C0B2AD64E5800618280 /* ChatEndpoint.swift */; };
 		7B153C0F2AD6CF0D00618280 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C0E2AD6CF0D00618280 /* Interceptor.swift */; };
 		7B153C112AD6D0E100618280 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C102AD6D0E100618280 /* AuthInterceptor.swift */; };
+		7B1E5ABC2ADCFD790053E9B3 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1E5ABB2ADCFD790053E9B3 /* ChatRoomViewController.swift */; };
+		7B1E5ABE2ADCFD880053E9B3 /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1E5ABD2ADCFD880053E9B3 /* ChatRoomViewModel.swift */; };
 		7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */; };
 		7B2D76EC2AA993C700E5907B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76EB2AA993C700E5907B /* AuthCoordinator.swift */; };
 		7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76F22AA9941C00E5907B /* SignInViewController.swift */; };
@@ -173,6 +175,8 @@
 		7B153C0B2AD64E5800618280 /* ChatEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatEndpoint.swift; sourceTree = "<group>"; };
 		7B153C0E2AD6CF0D00618280 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		7B153C102AD6D0E100618280 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
+		7B1E5ABB2ADCFD790053E9B3 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
+		7B1E5ABD2ADCFD880053E9B3 /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
 		7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		7B2D76EB2AA993C700E5907B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		7B2D76F22AA9941C00E5907B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -413,6 +417,15 @@
 				7B153C102AD6D0E100618280 /* AuthInterceptor.swift */,
 			);
 			path = Interceptor;
+			sourceTree = "<group>";
+		};
+		7B1E5ABA2ADCFD5F0053E9B3 /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				7B1E5ABD2ADCFD880053E9B3 /* ChatRoomViewModel.swift */,
+				7B1E5ABB2ADCFD790053E9B3 /* ChatRoomViewController.swift */,
+			);
+			path = ChatRoom;
 			sourceTree = "<group>";
 		};
 		7B2D76E92AA993AF00E5907B /* Auth */ = {
@@ -838,6 +851,7 @@
 			children = (
 				7BB2C24B2A985A2200AA2328 /* Coordinator */,
 				7BB2C24E2A985AB500AA2328 /* ChatRoomList */,
+				7B1E5ABA2ADCFD5F0053E9B3 /* ChatRoom */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1250,6 +1264,7 @@
 				7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */,
 				7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */,
 				7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */,
+				7B1E5ABE2ADCFD880053E9B3 /* ChatRoomViewModel.swift in Sources */,
 				7C8B82402ACE91C500F7B889 /* ChatRoomMenuCell.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
@@ -1309,6 +1324,7 @@
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,
 				7C569CF32A9F67C60063D362 /* Project.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
+				7B1E5ABC2ADCFD790053E9B3 /* ChatRoomViewController.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,

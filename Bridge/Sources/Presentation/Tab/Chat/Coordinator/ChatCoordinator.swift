@@ -42,12 +42,17 @@ extension ChatCoordinator {
             fetchChatRoomsUseCase: fetchChatRoomsUseCase,
             leaveChatRoomUseCase: leaveChatRoomUseCase
         )
-        let viewController = ChatRoomListViewController(viewModel: chatRoomListViewModel)
-        navigationController.pushViewController(viewController, animated: true)
+        let chatRoomListViewController = ChatRoomListViewController(viewModel: chatRoomListViewModel)
+        navigationController.pushViewController(chatRoomListViewController, animated: true)
     }
     
-    func showChatRoomDetailViewController(of chatRoom: ChatRoom) {
-        // ChatRoomDetail로 연결...
+    func showChatRoomViewController(of chatRoom: ChatRoom) {
+        let chatRoomViewModel = ChatRoomViewModel(
+            coordinator: self,
+            chatRoom: chatRoom
+        )
+        let chatRoomViewController = ChatRoomViewController(viewModel: chatRoomViewModel)
+        navigationController.pushViewController(chatRoomViewController, animated: true)
     }
 }
 
