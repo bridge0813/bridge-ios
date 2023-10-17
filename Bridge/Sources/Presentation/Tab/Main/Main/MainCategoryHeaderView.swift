@@ -11,6 +11,7 @@ import PinLayout
 import RxSwift
 import RxCocoa
 
+/// '신규', '인기', '마감임박', '출시예정' 카테고리를 나타내는 뷰
 final class MainCategoryHeaderView: BaseView {
     // MARK: - Properties
     private let rootFlexContainer = UIView()

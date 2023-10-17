@@ -9,6 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
+/// 모집글의 갯수를 나타내는 헤더뷰
 final class ProjectCountHeaderView: BaseCollectionReusableView {
     // MARK: - UI
     private let rootFlexContainer = UIView()

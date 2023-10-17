@@ -9,6 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
+/// 기본적인 모집글을 나타내는 Cell
 final class MainProjectCell: BaseCollectionViewCell {
     // MARK: - UI
     private let rootFlexContainer: UIView = {

@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// '신규', '인기', '마감임박', '출시예정' 카테고리를 나타내는 버튼
 final class MainCategoryButton: BaseButton {
     
     private var title: String

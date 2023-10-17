@@ -9,6 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
+/// 모집글이 없거나, 카테고리 '출시예정' 에서 사용되는 FooterView
 final class MainPlaceholderView: BaseCollectionReusableView {
     // MARK: - UI
     private let rootFlexContainer = UIView()

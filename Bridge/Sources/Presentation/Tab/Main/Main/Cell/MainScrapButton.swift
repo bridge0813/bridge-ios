@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 모집글을 스크랩할 수 있는 버튼(Cell에서 사용됨)
 final class MainScrapButton: BaseButton {
     override func configureAttributes() {
         var configuration = UIButton.Configuration.filled()
