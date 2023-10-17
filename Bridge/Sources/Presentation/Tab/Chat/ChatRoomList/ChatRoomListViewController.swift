@@ -15,9 +15,7 @@ final class ChatRoomListViewController: BaseViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ChatRoomCell.self)
-        tableView.backgroundColor = BridgeColor.gray9
-        tableView.rowHeight = 104
-        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
+        tableView.rowHeight = 88
         tableView.separatorStyle = .none
         return tableView
     }()

@@ -12,12 +12,7 @@ import PinLayout
 final class ChatRoomCell: BaseTableViewCell {
     
     // MARK: - UI
-    private let chatRoomBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = BridgeColor.gray10
-        view.layer.cornerRadius = 12
-        return view
-    }()
+    private let rootFlexContainer = UIView()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -71,38 +66,40 @@ final class ChatRoomCell: BaseTableViewCell {
     
     // MARK: - Layouts
     override func configureLayouts() {
-        contentView.addSubview(chatRoomBackgroundView)
+        contentView.addSubview(rootFlexContainer)
         
-        chatRoomBackgroundView.flex
-            .direction(.row)
-            .alignItems(.center)
-            .paddingHorizontal(18)
-            .paddingVertical(20)
-            .define { flex in
-                flex.addItem(profileImageView).size(48).marginRight(12)
+        rootFlexContainer.flex.define { flex in
+            flex.addItem().grow(1)  // spacer
+            
+            flex.addItem().direction(.row).alignItems(.center).define { flex in
+                flex.addItem(profileImageView).size(48).marginLeft(16).marginRight(12)
                 
-                flex.addItem().width(200).define { flex in
-                    flex.addItem().direction(.row).marginBottom(4).define { flex in
-                        flex.addItem(nameLabel).shrink(1).marginRight(8)
-                        flex.addItem(lastMessageReceivedTimeLabel).grow(1)
+                flex.addItem().define { flex in
+                    flex.addItem().width(200).define { flex in
+                        flex.addItem().direction(.row).marginBottom(4).define { flex in
+                            flex.addItem(nameLabel).shrink(1).marginRight(8)
+                            flex.addItem(lastMessageReceivedTimeLabel).grow(1)
+                        }
+                        
+                        flex.addItem(lastMessageContentLabel)
                     }
-                    
-                    flex.addItem(lastMessageContentLabel)
                 }
                 
                 flex.addItem().grow(1)  // spacer
                 
-                flex.addItem(unreadMessageCountLabel)
+                flex.addItem(unreadMessageCountLabel).marginRight(16)
             }
+            
+            flex.addItem().grow(1)  // spacer
+            
+            flex.addItem().height(1).backgroundColor(BridgeColor.gray6)  // divider
+        }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        let horizontalMargin: CGFloat = 16
-        let verticalMargin: CGFloat = 8
-        chatRoomBackgroundView.pin.horizontally(horizontalMargin).vertically(verticalMargin)
-        chatRoomBackgroundView.flex.layout()
+        rootFlexContainer.pin.all()
+        rootFlexContainer.flex.layout()
     }
 }
 
