@@ -57,6 +57,7 @@ final class ChatRoomListViewController: BaseViewController {
         placeholderView.pin.all()
     }
     
+    // MARK: - Binding
     override func bind() {
         tableView.rx
             .setDelegate(self)

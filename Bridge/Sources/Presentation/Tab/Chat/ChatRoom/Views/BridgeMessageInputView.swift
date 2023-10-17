@@ -58,7 +58,8 @@ final class BridgeMessageInputView: BaseView {
 
 // MARK: - Observables
 extension BridgeMessageInputView {
-    var sendMessage: Observable<Void> {
-        sendMessageButton.rx.tap.asObservable()
+    var sendMessage: Observable<String> {
+        sendMessageButton.rx.tap
+            .withLatestFrom(messageInputTextField.rx.text.orEmpty)
     }
 }
