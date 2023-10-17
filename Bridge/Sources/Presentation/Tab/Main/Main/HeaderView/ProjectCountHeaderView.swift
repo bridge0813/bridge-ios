@@ -15,7 +15,6 @@ final class ProjectCountHeaderView: BaseCollectionReusableView {
     
     private let projectCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "20개의 프로젝트"
         label.font = BridgeFont.body4.font
         label.textColor = BridgeColor.gray3
         
@@ -26,7 +25,7 @@ final class ProjectCountHeaderView: BaseCollectionReusableView {
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.row).alignItems(.end).define { flex in
-            flex.addItem(projectCountLabel).marginLeft(16).height(14)
+            flex.addItem(projectCountLabel).width(100).height(14).marginLeft(16)
         }
     }
     
