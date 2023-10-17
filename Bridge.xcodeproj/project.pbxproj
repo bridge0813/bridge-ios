@@ -28,12 +28,14 @@
 		7B153C0C2AD64E5800618280 /* ChatEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C0B2AD64E5800618280 /* ChatEndpoint.swift */; };
 		7B153C0F2AD6CF0D00618280 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C0E2AD6CF0D00618280 /* Interceptor.swift */; };
 		7B153C112AD6D0E100618280 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C102AD6D0E100618280 /* AuthInterceptor.swift */; };
+		7B1D9FB52ADE11A9005F42D9 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 7B1D9FB42ADE11A9005F42D9 /* Starscream */; };
 		7B1E5ABC2ADCFD790053E9B3 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1E5ABB2ADCFD790053E9B3 /* ChatRoomViewController.swift */; };
 		7B1E5ABE2ADCFD880053E9B3 /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1E5ABD2ADCFD880053E9B3 /* ChatRoomViewModel.swift */; };
 		7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */; };
 		7B2D76EC2AA993C700E5907B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76EB2AA993C700E5907B /* AuthCoordinator.swift */; };
 		7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76F22AA9941C00E5907B /* SignInViewController.swift */; };
 		7B2D770A2AAB0FDF00E5907B /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */; };
+		7B3289352ADE55DA009DF3C2 /* BridgeMessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3289342ADE55DA009DF3C2 /* BridgeMessageInputView.swift */; };
 		7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */; };
 		7B61236A2ABF05B6006E72C1 /* SignInResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */; };
 		7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61236E2AC15905006E72C1 /* BridgeFont.swift */; };
@@ -99,7 +101,7 @@
 		7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */; };
 		7C1366352AC15ECF00EB415D /* BrideBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366342AC15ECF00EB415D /* BrideBookmarkButton.swift */; };
 		7C1366392AC16C4D00EB415D /* BrideRemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366382AC16C4D00EB415D /* BrideRemoveButton.swift */; };
-		7C1366422AC27F9100EB415D /* BrideSendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* BrideSendMessageButton.swift */; };
+		7C1366422AC27F9100EB415D /* BridgeSendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */; };
 		7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */; };
 		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
 		7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */; };
@@ -182,6 +184,7 @@
 		7B2D76F22AA9941C00E5907B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		7B2D76F52AA9A85700E5907B /* Bridge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bridge.entitlements; sourceTree = "<group>"; };
 		7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		7B3289342ADE55DA009DF3C2 /* BridgeMessageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeMessageInputView.swift; sourceTree = "<group>"; };
 		7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleRequestDTO.swift; sourceTree = "<group>"; };
 		7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResponseDTO.swift; sourceTree = "<group>"; };
 		7B61236E2AC15905006E72C1 /* BridgeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFont.swift; sourceTree = "<group>"; };
@@ -241,7 +244,7 @@
 		7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthRepository.swift; sourceTree = "<group>"; };
 		7C1366342AC15ECF00EB415D /* BrideBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideBookmarkButton.swift; sourceTree = "<group>"; };
 		7C1366382AC16C4D00EB415D /* BrideRemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideRemoveButton.swift; sourceTree = "<group>"; };
-		7C1366412AC27F9100EB415D /* BrideSendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrideSendMessageButton.swift; sourceTree = "<group>"; };
+		7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSendMessageButton.swift; sourceTree = "<group>"; };
 		7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
 		7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
@@ -308,6 +311,7 @@
 				7B71E7562A933BF5001B5D2C /* RxBlocking in Frameworks */,
 				7B71E7662A933C25001B5D2C /* PinLayout in Frameworks */,
 				7B71E7612A933C18001B5D2C /* FlexLayoutYoga in Frameworks */,
+				7B1D9FB52ADE11A9005F42D9 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +428,7 @@
 			children = (
 				7B1E5ABD2ADCFD880053E9B3 /* ChatRoomViewModel.swift */,
 				7B1E5ABB2ADCFD790053E9B3 /* ChatRoomViewController.swift */,
+				7B3289332ADE55B5009DF3C2 /* Views */,
 			);
 			path = ChatRoom;
 			sourceTree = "<group>";
@@ -471,6 +476,14 @@
 				7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		7B3289332ADE55B5009DF3C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7B3289342ADE55DA009DF3C2 /* BridgeMessageInputView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		7B61235C2ABD9C9E006E72C1 /* Auth */ = {
@@ -893,7 +906,7 @@
 				7C1366342AC15ECF00EB415D /* BrideBookmarkButton.swift */,
 				7C1366382AC16C4D00EB415D /* BrideRemoveButton.swift */,
 				7C24003C2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift */,
-				7C1366412AC27F9100EB415D /* BrideSendMessageButton.swift */,
+				7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */,
 				7C40CBA02AC3E595000F4C9F /* BrideTechTagButton.swift */,
 				7C40CBA22AC3E5A8000F4C9F /* BrideOutlinedTechTagButton.swift */,
 				7C40CBC92AC6B597000F4C9F /* BrideCreateProjectButton.swift */,
@@ -1133,6 +1146,7 @@
 				7B71E7602A933C18001B5D2C /* FlexLayoutYoga */,
 				7B71E7622A933C18001B5D2C /* FlexLayoutYogaKit */,
 				7B71E7652A933C25001B5D2C /* PinLayout */,
+				7B1D9FB42ADE11A9005F42D9 /* Starscream */,
 			);
 			productName = Bridge;
 			productReference = 7B71E73D2A9330C6001B5D2C /* Bridge.app */;
@@ -1166,6 +1180,7 @@
 				7B71E7542A933BF5001B5D2C /* XCRemoteSwiftPackageReference "RxSwift" */,
 				7B71E75D2A933C18001B5D2C /* XCRemoteSwiftPackageReference "FlexLayout" */,
 				7B71E7642A933C25001B5D2C /* XCRemoteSwiftPackageReference "PinLayout" */,
+				7B1D9FB32ADE11A9005F42D9 /* XCRemoteSwiftPackageReference "Starscream" */,
 			);
 			productRefGroup = 7B71E73E2A9330C6001B5D2C /* Products */;
 			projectDirPath = "";
@@ -1228,6 +1243,7 @@
 				7C42701A2AA377FE009BE6AF /* ProjectCollectionViewCell.swift in Sources */,
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
+				7B3289352ADE55DA009DF3C2 /* BridgeMessageInputView.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BrideBookmarkButton.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
@@ -1346,7 +1362,7 @@
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
 				7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */,
-				7C1366422AC27F9100EB415D /* BrideSendMessageButton.swift in Sources */,
+				7C1366422AC27F9100EB415D /* BridgeSendMessageButton.swift in Sources */,
 				7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */,
 				7C1366392AC16C4D00EB415D /* BrideRemoveButton.swift in Sources */,
 			);
@@ -1576,6 +1592,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7B1D9FB32ADE11A9005F42D9 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.6;
+			};
+		};
 		7B71E7542A933BF5001B5D2C /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -1603,6 +1627,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7B1D9FB42ADE11A9005F42D9 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B1D9FB32ADE11A9005F42D9 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
 		7B71E7552A933BF5001B5D2C /* RxBlocking */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7B71E7542A933BF5001B5D2C /* XCRemoteSwiftPackageReference "RxSwift" */;
