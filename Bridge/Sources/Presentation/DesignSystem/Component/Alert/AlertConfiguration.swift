@@ -6,9 +6,9 @@
 //
 
 struct AlertConfiguration {
-    let imageName: String
+    let imageName: String?
     let title: String
-    let description: String
+    let description: String?
     let leftButtonTitle: String
     let rightButtonTitle: String
     
@@ -25,14 +25,24 @@ struct AlertConfiguration {
         self.leftButtonTitle = leftButtonTitle
         self.rightButtonTitle = rightButtonTitle
     }
+    
+    init(
+        title: String,
+        description: String? = nil,
+        leftButtonTitle: String = "취소하기",
+        rightButtonTitle: String
+    ) {
+        self.imageName = nil
+        self.title = title
+        self.description = description
+        self.leftButtonTitle = leftButtonTitle
+        self.rightButtonTitle = rightButtonTitle
+    }
 }
 
 extension AlertConfiguration {
-    // TODO: 디자인 나오면 수정
     static let error = AlertConfiguration(
-        imageName: "warning",
         title: "알 수 없는 에러가 발생했어요!",
-        description: "다시 한 번 시도해주세요.",
         rightButtonTitle: "확인"
     )
     
