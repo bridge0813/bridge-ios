@@ -11,11 +11,18 @@ import PinLayout
 
 final class MainProjectCell: BaseCollectionViewCell {
     // MARK: - UI
-    private let rootFlexContainer = UIView()
+    private let rootFlexContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        
+        return view
+    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.configureTextWithLineHeight(text: "실제 상업용 여행사 웹사이트 \n개발할 백엔드 개발자 구합니다.", lineHeight: 24)
+        label.configureTextWithLineHeight(text: "실제 상업용 여행사 웹사이트 개발할 백엔드 개발자 구합니다.", lineHeight: 24)
         label.textColor = BridgeColor.gray1
         label.font = BridgeFont.subtitle3Long.font
         label.numberOfLines = 2
@@ -54,37 +61,30 @@ final class MainProjectCell: BaseCollectionViewCell {
     
     // MARK: - Configure
     override func configureLayouts() {
-        backgroundColor = .clear
-        
         addSubview(rootFlexContainer)
-        rootFlexContainer.backgroundColor = .white
-        rootFlexContainer.layer.cornerRadius = 8
-        rootFlexContainer.clipsToBounds = true
-        
         rootFlexContainer.flex.direction(.column).height(149).define { flex in
             flex.addItem(scrapButton).position(.absolute).size(24).top(19).right(18)
             
-            flex.addItem(dDayLabel).width(29).height(14).marginTop(19).marginLeft(18)
+            flex.addItem(dDayLabel).marginTop(19).marginLeft(18)
             
-            flex.addItem(titleLabel).width(196).height(48).marginTop(6).marginLeft(18)
+            flex.addItem(titleLabel).marginTop(5.8).marginLeft(18).marginBottom(24.2).marginRight(129)
             
             flex.addItem()
                 .height(1)
                 .backgroundColor(BridgeColor.gray8)
                 .marginHorizontal(18)
-                .marginTop(24)
-                .marginBottom(11.1)
+                .marginBottom(11)
             
             flex.addItem().direction(.row).alignItems(.center).define { flex in
-                flex.addItem(recruitNumberLabel).width(40).height(14).marginLeft(18)
-                flex.addItem(deadlineLabel).width(106).height(14).marginLeft(16)
+                flex.addItem(recruitNumberLabel).height(14).marginLeft(18)
+                flex.addItem(deadlineLabel).height(14).marginLeft(16)
             }
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.all().marginTop(7.8).marginHorizontal(16)
+        rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
     }
     

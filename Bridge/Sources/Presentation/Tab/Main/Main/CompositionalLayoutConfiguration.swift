@@ -18,7 +18,10 @@ struct CompositionalLayoutConfiguration {
             heightDimension: .fractionalHeight(1.0)
         )
 
-        return NSCollectionLayoutItem(layoutSize: itemSize)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 7.8, leading: 16, bottom: 0, trailing: 16)
+        
+        return item
     }
     
     private func configureGroupLayout() -> NSCollectionLayoutGroup {

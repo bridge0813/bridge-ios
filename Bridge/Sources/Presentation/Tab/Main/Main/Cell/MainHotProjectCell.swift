@@ -11,7 +11,14 @@ import PinLayout
 
 final class MainHotProjectCell: BaseCollectionViewCell {
     // MARK: - UI
-    private let rootFlexContainer = UIView()
+    private let rootFlexContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        
+        return view
+    }()
     
     private let rankingLabel: UILabel = {
         let label = UILabel()
@@ -47,18 +54,12 @@ final class MainHotProjectCell: BaseCollectionViewCell {
     
     // MARK: - Configure
     override func configureLayouts() {
-        backgroundColor = .clear
-        
         addSubview(rootFlexContainer)
-        rootFlexContainer.backgroundColor = .white
-        rootFlexContainer.layer.cornerRadius = 8
-        rootFlexContainer.clipsToBounds = true
-        
         rootFlexContainer.flex.direction(.row).height(100).alignItems(.center).define { flex in
             flex.addItem(rankingLabel).width(48).height(100).marginRight(18)
             
-            flex.addItem().direction(.column).marginTop(18.8).marginBottom(19.2).define { flex in
-                flex.addItem(dDayLabel).width(29).height(14).marginBottom(6)
+            flex.addItem().direction(.column).marginTop(19).marginBottom(19).define { flex in
+                flex.addItem(dDayLabel).marginBottom(6)
                 flex.addItem(titleLabel).width(206).height(42)
             }
             
@@ -70,7 +71,7 @@ final class MainHotProjectCell: BaseCollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.all().marginTop(7.8).marginHorizontal(16)
+        rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
     }
     
