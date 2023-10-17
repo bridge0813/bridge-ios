@@ -103,12 +103,4 @@ extension DefaultNetworkService {
             return Disposables.create()
         }
     }
-    
-    func requestTestProjectsData() -> Observable<[ProjectDTO]> {
-        Observable.just(ProjectDTO.projectTestArray)
-    }
-    
-    func requestTestHotProjectsData() -> Observable<[ProjectDTO]> {
-        Observable.just(ProjectDTO.hotProjectTestArray)
-    }
 }

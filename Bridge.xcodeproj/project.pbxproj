@@ -123,6 +123,7 @@
 		7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */; };
 		7C55E6372ADCF3CC0018FA5D /* MainPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6362ADCF3CC0018FA5D /* MainPlaceholderView.swift */; };
 		7C55E6392ADE4BB60018FA5D /* CompositionalLayoutConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6382ADE4BB60018FA5D /* CompositionalLayoutConfiguration.swift */; };
+		7C55E63B2ADEA2A40018FA5D /* MockProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E63A2ADEA2A40018FA5D /* MockProjectRepository.swift */; };
 		7C569CF32A9F67C60063D362 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF22A9F67C60063D362 /* Project.swift */; };
 		7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */; };
 		7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */; };
@@ -266,6 +267,7 @@
 		7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDividerHeaderView.swift; sourceTree = "<group>"; };
 		7C55E6362ADCF3CC0018FA5D /* MainPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPlaceholderView.swift; sourceTree = "<group>"; };
 		7C55E6382ADE4BB60018FA5D /* CompositionalLayoutConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutConfiguration.swift; sourceTree = "<group>"; };
+		7C55E63A2ADEA2A40018FA5D /* MockProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProjectRepository.swift; sourceTree = "<group>"; };
 		7C569CF22A9F67C60063D362 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
@@ -939,6 +941,7 @@
 			isa = PBXGroup;
 			children = (
 				7C569D082A9F7E160063D362 /* DefaultProjectRepository.swift */,
+				7C55E63A2ADEA2A40018FA5D /* MockProjectRepository.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1239,6 +1242,7 @@
 				7B0CFB892AD3CF0000EA9C0D /* ObservableType+.swift in Sources */,
 				7C40CBA32AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift in Sources */,
 				7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */,
+				7C55E63B2ADEA2A40018FA5D /* MockProjectRepository.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
 				7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */,
 				7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */,
