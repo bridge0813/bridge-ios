@@ -223,11 +223,11 @@ extension MainViewController {
         UIView.animate(
             withDuration: 0.2,
             animations: { [weak self] in
-                self?.updateButtonConfiguration(for: mode)
+                self?.createProjectButton.updateButtonConfiguration(for: mode)
                 self?.updateButtonLayout(for: mode)
             },
             completion: { [weak self] _ in
-                self?.updateButtonTitle(for: mode)
+                self?.createProjectButton.updateButtonTitle(for: mode)
                 self?.createProjectButton.contentHorizontalAlignment = .center
             }
         )
@@ -244,37 +244,6 @@ extension MainViewController {
             .height(48)
         
         rootFlexContainer.flex.layout()
-    }
-    
-    // MARK: - Button Configuration
-    private func updateButtonConfiguration(for state: MainViewModel.CreateButtonDisplayState) {
-        switch state {
-        case .both:
-            createProjectButton.titleLabel?.alpha = 1
-            updateButtonTitle(for: state)
-            
-        case .only:
-            createProjectButton.titleLabel?.alpha = 0
-            createProjectButton.contentHorizontalAlignment = .left
-        }
-    }
-    
-    // MARK: - Button Title
-    private func updateButtonTitle(for state: MainViewModel.CreateButtonDisplayState) {
-        var updatedConfiguration = createProjectButton.configuration
-        
-        switch state {
-        case .both:
-            var titleContainer = AttributeContainer()
-            titleContainer.font = BridgeFont.subtitle1.font
-            titleContainer.foregroundColor = BridgeColor.gray10
-            updatedConfiguration?.attributedTitle = AttributedString("글쓰기", attributes: titleContainer)
-            
-        case .only:
-            updatedConfiguration?.attributedTitle = nil
-        }
-        
-        createProjectButton.configuration = updatedConfiguration
     }
 }
 

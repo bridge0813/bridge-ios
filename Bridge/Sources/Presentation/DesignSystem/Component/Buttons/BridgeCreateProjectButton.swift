@@ -29,3 +29,36 @@ final class BridgeCreateProjectButton: BaseButton {
         self.configuration = configuration
     }
 }
+
+extension BridgeCreateProjectButton {
+    // MARK: - Button Configuration
+    func updateButtonConfiguration(for state: MainViewModel.CreateButtonDisplayState) {
+        switch state {
+        case .both:
+            titleLabel?.alpha = 1
+            updateButtonTitle(for: state)
+            
+        case .only:
+            titleLabel?.alpha = 0
+            contentHorizontalAlignment = .left
+        }
+    }
+    
+    // MARK: - Button Title
+    func updateButtonTitle(for state: MainViewModel.CreateButtonDisplayState) {
+        var updatedConfiguration = configuration
+        
+        switch state {
+        case .both:
+            var titleContainer = AttributeContainer()
+            titleContainer.font = BridgeFont.subtitle1.font
+            titleContainer.foregroundColor = BridgeColor.gray10
+            updatedConfiguration?.attributedTitle = AttributedString("글쓰기", attributes: titleContainer)
+            
+        case .only:
+            updatedConfiguration?.attributedTitle = nil
+        }
+        
+        configuration = updatedConfiguration
+    }
+}
