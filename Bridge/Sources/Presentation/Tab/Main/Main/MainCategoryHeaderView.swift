@@ -75,33 +75,21 @@ final class MainCategoryHeaderView: BaseView {
         
         layer.shadowPath = UIBezierPath(rect: bounds).cgPath
     }
-    
-    override func configureAttributes() {
-        newButton.isSelected = true
-    }
 }
 
 // MARK: - ButtonAction
 extension MainCategoryHeaderView {
-    enum MainCategoryButtonType: String {
-        case new
-        case hot
-        case deadlineApproach
-        case comingSoon
-        case comingSoon2
-    }
-    
-    var categoryButtonTapped: Observable<MainCategoryButtonType> {
+    var categoryButtonTapped: Observable<MainViewModel.CategoryButtonType> {
         Observable.merge(
-            newButton.rx.tap.map { MainCategoryButtonType.new },
-            hotButton.rx.tap.map { MainCategoryButtonType.hot },
-            deadlineApproachButton.rx.tap.map { MainCategoryButtonType.deadlineApproach },
-            comingSoonButton.rx.tap.map { MainCategoryButtonType.comingSoon },
-            comingSoonButton2.rx.tap.map { MainCategoryButtonType.comingSoon2 }
+            newButton.rx.tap.map { MainViewModel.CategoryButtonType.new },
+            hotButton.rx.tap.map { MainViewModel.CategoryButtonType.hot },
+            deadlineApproachButton.rx.tap.map { MainViewModel.CategoryButtonType.deadlineApproach },
+            comingSoonButton.rx.tap.map { MainViewModel.CategoryButtonType.comingSoon },
+            comingSoonButton2.rx.tap.map { MainViewModel.CategoryButtonType.comingSoon2 }
         )
     }
     
-    func updateButtonState(_ buttonType: MainCategoryButtonType) {
+    func updateButtonState(_ buttonType: MainViewModel.CategoryButtonType) {
         let allButtons = [newButton, hotButton, deadlineApproachButton, comingSoonButton, comingSoonButton2]
         
         // 모든 버튼의 상태를 해제

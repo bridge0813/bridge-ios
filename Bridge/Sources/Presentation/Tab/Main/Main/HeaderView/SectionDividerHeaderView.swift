@@ -16,7 +16,7 @@ final class SectionDividerHeaderView: BaseCollectionReusableView {
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.row).alignItems(.end).define { flex in
+        rootFlexContainer.flex.direction(.row).alignItems(.center).define { flex in
             flex.addItem().grow(1).height(8).backgroundColor(BridgeColor.gray7)
         }
     }

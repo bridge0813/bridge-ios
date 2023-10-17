@@ -17,11 +17,12 @@ final class MainViewModel: ViewModelType {
         let filterButtonTapped: Observable<Void>
         let itemSelected: Observable<IndexPath>
         let createButtonTapped: Observable<Void>
+        let categoryButtonTapped: Observable<CategoryButtonType>
     }
     
     struct Output {
-        let hotProjects: Driver<[Project]>
         let projects: Driver<[Project]>
+        let buttonTypeAndProjects: Driver<(CategoryButtonType, [Project])>
         let buttonDisplayMode: Driver<CreateButtonDisplayState>
         let headerAlpha: Driver<CGFloat>
         let collectionViewTopMargin: Driver<CGFloat>
@@ -46,37 +47,37 @@ final class MainViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let hotProjects = BehaviorRelay<[Project]>(value: [])
-        let projects = BehaviorRelay<[Project]>(value: [])
-        
         // MARK: - Fetch Projects
-        input.viewWillAppear
-            .withUnretained(self)
-            .flatMapLatest { owner, _ -> Observable<[Project]> in
-                return owner.fetchHotProjectsUseCase.execute()
-            }
-            .distinctUntilChanged()
-            .bind(to: hotProjects)
-            .disposed(by: disposeBag)
-
-        input.viewWillAppear
+        let projects = input.viewWillAppear
             .withUnretained(self)
             .flatMapLatest { owner, _ -> Observable<[Project]> in
                 return owner.fetchProjectsUseCase.execute()
             }
             .distinctUntilChanged()
-            .bind(to: projects)
-            .disposed(by: disposeBag)
         
+        let buttonTypeAndProjects = input.categoryButtonTapped
+            .withUnretained(self)
+            .flatMapLatest { owner, type -> Observable<(CategoryButtonType, [Project])> in
+                switch type {
+                case .new:
+                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 신규 데이터
+                    
+                case .hot:
+                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 인기 데이터
+                    
+                case .deadlineApproach:
+                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 마감임박 데이터
+                    
+                case .comingSoon, .comingSoon2:
+                    return .just((type, []))
+                }
+            }
+            
         // MARK: - Item Selected
         input.itemSelected
             .withUnretained(self)
-            .map { owner, indexPath in
-                owner.findProjectByIndex(indexPath, hotProjects: hotProjects.value, projects: projects.value)
-            }
-            .withUnretained(self)
-            .subscribe(onNext: { owner, project in
-                owner.coordinator?.connectToProjectDetailFlow(with: project.id)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.connectToProjectDetailFlow(with: "")
             })
             .disposed(by: disposeBag)
         
@@ -128,8 +129,8 @@ final class MainViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
             projects: projects.asDriver(onErrorJustReturn: [Project.onError]),
+            buttonTypeAndProjects: buttonTypeAndProjects.asDriver(onErrorJustReturn: (.new, [])),
             buttonDisplayMode: layoutMode.asDriver(onErrorJustReturn: .both),
             headerAlpha: headerAlpha.asDriver(onErrorJustReturn: 1),
             collectionViewTopMargin: collectionViewTopMargin.asDriver(onErrorJustReturn: 150)
@@ -153,23 +154,12 @@ extension MainViewModel {
         case both
         case only
     }
-}
-
-// MARK: - UtilityMethods
-extension MainViewModel {
-    private func findProjectByIndex(
-        _ indexPath: IndexPath,
-        hotProjects: [Project],
-        projects: [Project]
-    ) -> Project {
-        let section = Section.allCases[indexPath.section]
     
-        switch section {
-        case .hot:
-            return hotProjects[indexPath.row]
-            
-        case .main:
-            return projects[indexPath.row]
-        }
+    enum CategoryButtonType: String {
+        case new
+        case hot
+        case deadlineApproach
+        case comingSoon
+        case comingSoon2
     }
 }

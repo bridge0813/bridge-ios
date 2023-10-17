@@ -16,9 +16,7 @@ final class MainViewController: BaseViewController {
     private let rootFlexContainer = UIView()
     
     private lazy var collectionView: UICollectionView = {
-        let layout = createCompositionalLayout()
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.backgroundColor = BridgeColor.gray9
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(MainProjectCell.self)
@@ -134,8 +132,6 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureAttributes() {
-        configureCellDataSource()
-        configureHeaderDataSource()
         configureNavigationUI()
     }
     
@@ -146,20 +142,43 @@ final class MainViewController: BaseViewController {
             didScroll: collectionView.rx.contentOffset.asObservable(),
             filterButtonTapped: filterButton.rx.tap.asObservable(),
             itemSelected: collectionView.rx.itemSelected.asObservable(),
-            createButtonTapped: createProjectButton.rx.tap.asObservable()
+            createButtonTapped: createProjectButton.rx.tap.asObservable(),
+            categoryButtonTapped: mainCategoryHeaderView.categoryButtonTapped
         )
         let output = viewModel.transform(input: input)
         
         // MARK: - Project 데이터
-        output.hotProjects
-            .drive(onNext: { [weak self] hotProjects in
-                self?.applySectionSnapshot(to: .hot, with: hotProjects)
+        // viewWillAppear에 의해서 가져온 데이터로 기본값은 신규 데이터.
+        output.projects
+            .drive(onNext: { [weak self] projects in
+                self?.updateCollectionViewForNew(with: projects)
+                self?.mainCategoryHeaderView.updateButtonState(.new)
             })
             .disposed(by: disposeBag)
         
-        output.projects
-            .drive(onNext: { [weak self] projects in
-                self?.applySectionSnapshot(to: .main, with: projects)
+        // MARK: - 카테고리 버튼에 따라 컬렉션뷰(DataSource, Layout) 변경
+        output.buttonTypeAndProjects
+            .drive(onNext: { [weak self] type, projects in
+                switch type {
+                case .new:
+                    self?.updateCollectionViewForNew(with: projects)
+                    
+                case .hot:
+                    self?.updateCollectionViewForHot(with: projects)
+                    // 랭킹 3까지만 인기 섹션으로 이동
+                    self?.applySectionSnapshot(to: .hot, with: Array(projects.prefix(3)))
+                    
+                    // 인기순위 3개를 제외한 나머지 데이터
+                    self?.applySectionSnapshot(to: .main, with: Array(projects.dropFirst(3)))
+                    
+                case .deadlineApproach:
+                    self?.updateCollectionViewForDeadline(with: projects)
+                    
+                case .comingSoon, .comingSoon2:
+                    self?.updateCollectionViewForComingSoon(with: projects)
+                }
+                
+                self?.mainCategoryHeaderView.updateButtonState(type)  // 버튼 상태 변경
             })
             .disposed(by: disposeBag)
         
@@ -195,184 +214,6 @@ final class MainViewController: BaseViewController {
                 owner.mainFieldCategoryAnchorButton.updateTitle(item.title)
             })
             .disposed(by: disposeBag)
-            
-        mainCategoryHeaderView.categoryButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, type in
-                owner.mainCategoryHeaderView.updateButtonState(type)
-            })
-            .disposed(by: disposeBag)
-        
-    }
-}
-// MARK: - CompositionalLayout
-extension MainViewController {
-    private func createCompositionalLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
-            let section = MainViewModel.Section.allCases[sectionIndex]
-            
-            switch section {
-            case .hot: return self?.createHotSection()
-            case .main: return self?.createMainSection()
-            }
-        }
-        return layout
-    }
-    
-    private func createHotSection() -> NSCollectionLayoutSection {
-        // item 설정
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-            
-        // header 설정
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(38)
-        )
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        
-        // group 설정
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(110)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        // section 설정
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16.2, leading: 0, bottom: 0, trailing: 0)
-        
-        return section
-    }
-    
-    private func createMainSection() -> NSCollectionLayoutSection {
-        // item 설정
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        
-//        // header 설정
-//        let headerSize = NSCollectionLayoutSize(
-//            widthDimension: .fractionalWidth(1),
-//            heightDimension: .absolute(40)
-//        )
-//        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-//
-        // footer 설정
-        let footerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(1)
-        )
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
-        
-        // group 설정
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(160)
-        )
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        
-        // section 설정
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [footer]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 80, trailing: 0)
-        
-        return section
-    }
-}
-
-// MARK: - Diffable data source
-extension MainViewController {
-    private func configureCellDataSource() {
-        dataSource = DataSource(
-            collectionView: collectionView
-        ) { collectionView, indexPath, item in
-            
-            let section = MainViewModel.Section.allCases[indexPath.section]
-            
-            switch section {
-            case .hot:
-                guard let cell = collectionView.dequeueReusableCell(MainHotProjectCell.self, for: indexPath) else {
-                    return UICollectionViewCell()
-                }
-                
-                return cell
-                
-            case .main:
-                guard let cell = collectionView.dequeueReusableCell(MainProjectCell.self, for: indexPath) else {
-                    return UICollectionViewCell()
-                }
-                
-                return cell
-            }
-        }
-    }
-    
-    private func configureHeaderDataSource() {
-        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
-            
-            let section = MainViewModel.Section.allCases[indexPath.section]
-            
-            switch kind {
-                
-            case UICollectionView.elementKindSectionHeader:
-                switch section {
-                case .hot:
-                    guard let headerView = collectionView.dequeueReusableSupplementaryView(
-                        ProjectCountHeaderView.self,
-                        ofKind: kind,
-                        for: indexPath
-                    ) else { return UICollectionReusableView() }
-                    
-                    headerView.configureCountLabel(with: "20")
-                    
-                    return headerView
-            
-                case .main:
-                    guard let headerView = collectionView.dequeueReusableSupplementaryView(
-                        SectionDividerHeaderView.self,
-                        ofKind: kind,
-                        for: indexPath
-                    ) else { return UICollectionReusableView() }
-                    
-                    return UICollectionReusableView()
-                }
-                
-            case UICollectionView.elementKindSectionFooter:
-                switch section {
-                case .hot:
-                    return UICollectionReusableView()
-            
-                case .main:
-                    guard let footerView = collectionView.dequeueReusableSupplementaryView(
-                        MainPlaceholderView.self,
-                        ofKind: kind,
-                        for: indexPath
-                    ) else { return UICollectionReusableView() }
-                    
-                    footerView.configureHolderView(.comingSoon)
-                    return footerView
-                }
-                
-            default:
-                return UICollectionReusableView()
-            }
-        }
-    }
-
-    
-    private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [Project]) {
-        var snapshot = SectionSnapshot()
-        snapshot.append(projects)
-        dataSource?.apply(snapshot, to: section)
     }
 }
 
@@ -447,5 +288,244 @@ extension MainViewController {
             .top(topMargin)
     
         rootFlexContainer.flex.layout()
+    }
+}
+
+// MARK: - 카테고리 -> 신규일 경우
+extension MainViewController {
+    private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [Project]) {
+        var snapshot = SectionSnapshot()
+        snapshot.append(projects)
+        dataSource?.apply(snapshot, to: section)
+    }
+    
+    /// 섹션이 하나일 때, 기본적인 DataSource(신규, 마감임박, 출시예정에서 사용됨)
+    private func configureDataSource() {
+        dataSource = DataSource(
+            collectionView: collectionView
+        ) { collectionView, indexPath, _ in
+            guard let cell = collectionView.dequeueReusableCell(MainProjectCell.self, for: indexPath) else {
+                return UICollectionViewCell()
+            }
+            
+            return cell
+        }
+    }
+    
+    private func updateCollectionViewForNew(with projects: [Project]) {
+        configureDataSource()
+        configureSupplementaryViewForNew()
+        collectionView.isScrollEnabled = !projects.isEmpty
+        collectionView.collectionViewLayout = configureCompositionalLayoutForNew(projects.isEmpty)
+        applySectionSnapshot(to: .main, with: projects)
+    }
+    
+    private func configureSupplementaryViewForNew() {
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            guard let footerView = collectionView.dequeueReusableSupplementaryView(
+                MainPlaceholderView.self,
+                ofKind: kind,
+                for: indexPath
+            ) else { return UICollectionReusableView() }
+            
+            footerView.configureHolderView(.nothing)
+            return footerView
+        }
+    }
+    
+    private func configureCompositionalLayoutForNew(_ isFooterNeed: Bool) -> UICollectionViewLayout {
+        let config = CompositionalLayoutConfiguration(
+            groupHeight: 160,
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 24.2, leading: 0, bottom: 80, trailing: 0),
+            boundaryItemKinds: isFooterNeed ? [.footer] : []
+        )
+        
+        return config.configureCompositionalLayout()
+    }
+}
+
+// MARK: - 카테고리 -> 인기일 경우
+extension MainViewController {
+    private func updateCollectionViewForHot(with projects: [Project]) {
+        configureDataSourceForHot()
+        configureSupplementaryViewForHot(projects.count)
+        collectionView.isScrollEnabled = !projects.isEmpty
+        collectionView.collectionViewLayout = configureCompositionalLayoutForHot(projects.isEmpty)
+    }
+    
+    private func configureDataSourceForHot() {
+        dataSource = DataSource(
+            collectionView: collectionView
+        ) { collectionView, indexPath, _ in
+            
+            let section = MainViewModel.Section.allCases[indexPath.section]
+            
+            switch section {
+            case .hot:
+                guard let cell = collectionView.dequeueReusableCell(MainHotProjectCell.self, for: indexPath) else {
+                    return UICollectionViewCell()
+                }
+                
+                return cell
+                
+            case .main:
+                guard let cell = collectionView.dequeueReusableCell(MainProjectCell.self, for: indexPath) else {
+                    return UICollectionViewCell()
+                }
+                
+                return cell
+            }
+        }
+    }
+    
+    private func configureSupplementaryViewForHot(_ count: Int) {
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            
+            let section = MainViewModel.Section.allCases[indexPath.section]
+            
+            switch kind {
+                
+            case UICollectionView.elementKindSectionHeader:
+                switch section {
+                case .hot:
+                    guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                        ProjectCountHeaderView.self,
+                        ofKind: kind,
+                        for: indexPath
+                    ) else { return UICollectionReusableView() }
+                    
+                    headerView.configureCountLabel(with: String(count))
+                    
+                    return headerView
+            
+                case .main:
+                    guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                        SectionDividerHeaderView.self,
+                        ofKind: kind,
+                        for: indexPath
+                    ) else { return UICollectionReusableView() }
+                    
+                    return headerView
+                }
+                
+            case UICollectionView.elementKindSectionFooter:
+                guard let footerView = collectionView.dequeueReusableSupplementaryView(
+                    MainPlaceholderView.self,
+                    ofKind: kind,
+                    for: indexPath
+                ) else { return UICollectionReusableView() }
+                
+                footerView.configureHolderView(.nothing)
+                return footerView
+                
+                
+            default:
+                return UICollectionReusableView()
+            }
+        }
+    }
+    
+    private func configureCompositionalLayoutForHot(_ isFooterNeed: Bool) -> UICollectionViewLayout {
+        let hotSectionConfig = CompositionalLayoutConfiguration(
+            groupHeight: 110,
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 16.2, leading: 0, bottom: 0, trailing: 0),
+            boundaryItemKinds: [.header(height: 38)]
+        )
+        
+        let mainSectionConfig = CompositionalLayoutConfiguration(
+            groupHeight: 160,
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 80, trailing: 0),
+            boundaryItemKinds: isFooterNeed ? [.footer] : [.header(height: 70)]
+        )
+        
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
+            let section = MainViewModel.Section.allCases[sectionIndex]
+            
+            switch section {
+            case .hot:
+                return hotSectionConfig.configureSectionLayout()
+                
+            case .main:
+                return mainSectionConfig.configureSectionLayout()
+            }
+        }
+        
+        return layout
+    }
+}
+
+// MARK: - 카테고리 -> 마감임박일 경우
+extension MainViewController {
+    private func updateCollectionViewForDeadline(with projects: [Project]) {
+        configureDataSource()
+        configureSupplementaryViewForDeadline(projects.count)
+        collectionView.isScrollEnabled = !projects.isEmpty
+        collectionView.collectionViewLayout = configureCompositionalLayoutForDeadline(projects.isEmpty)
+        applySectionSnapshot(to: .main, with: projects)
+    }
+    
+    private func configureSupplementaryViewForDeadline(_ count: Int) {
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            switch kind {
+                
+            case UICollectionView.elementKindSectionHeader:
+                guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                    ProjectCountHeaderView.self,
+                    ofKind: kind,
+                    for: indexPath
+                ) else { return UICollectionReusableView() }
+                
+                headerView.configureCountLabel(with: String(count))
+                
+                return headerView
+                
+            case UICollectionView.elementKindSectionFooter:
+                guard let footerView = collectionView.dequeueReusableSupplementaryView(
+                    MainPlaceholderView.self,
+                    ofKind: kind,
+                    for: indexPath
+                ) else { return UICollectionReusableView() }
+                
+                footerView.configureHolderView(.nothing)
+                return footerView
+                
+            default:
+                return UICollectionReusableView()
+            }
+        }
+    }
+    
+    private func configureCompositionalLayoutForDeadline(_ isFooterNeed: Bool) -> UICollectionViewLayout {
+        let config = CompositionalLayoutConfiguration(
+            groupHeight: 160,
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 16.2, leading: 0, bottom: 80, trailing: 0),
+            boundaryItemKinds: isFooterNeed ? [.footer] : [.header(height: 38)]
+        )
+        
+        return config.configureCompositionalLayout()
+    }
+}
+
+// MARK: - 카테고리 -> 출시예정일 경우
+extension MainViewController {
+    private func updateCollectionViewForComingSoon(with projects: [Project]) {
+        configureDataSource()
+        configureSupplementaryViewForComingSoon()
+        collectionView.isScrollEnabled = false
+        collectionView.collectionViewLayout = configureCompositionalLayoutForNew(projects.isEmpty)
+        applySectionSnapshot(to: .main, with: projects)
+    }
+    
+    private func configureSupplementaryViewForComingSoon() {
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            guard let footerView = collectionView.dequeueReusableSupplementaryView(
+                MainPlaceholderView.self,
+                ofKind: kind,
+                for: indexPath
+            ) else { return UICollectionReusableView() }
+            
+            footerView.configureHolderView(.comingSoon)
+            return footerView
+        }
     }
 }
