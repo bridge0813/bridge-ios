@@ -7,28 +7,34 @@
 
 import UIKit
 
+/// 채팅 메시지 전송 버튼
 final class BridgeSendMessageButton: BaseButton {
+    
+    override var isEnabled: Bool {
+        didSet { updateColors() }
+    }
+    
     override func configureAttributes() {
-        let buttonImage = UIImage(named: "send.fill")?
+        var configuration = UIButton.Configuration.filled()
+        configuration.image = UIImage(named: "send.fill")?
             .resize(to: CGSize(width: 16.21, height: 16.21))
             .withRenderingMode(.alwaysTemplate)
-        
-        var configuration = UIButton.Configuration.filled()
-        configuration.image = buttonImage
         configuration.baseForegroundColor = BridgeColor.gray4
         configuration.baseBackgroundColor = BridgeColor.gray9
+        self.configuration = configuration
         
         layer.cornerRadius = 4
-        self.configuration = configuration
-        changesSelectionAsPrimaryAction = true
-        configurationUpdateHandler = { button in
-            let tintColor: UIColor = button.state == .selected ? BridgeColor.gray10 : BridgeColor.gray4
-            let backgroundColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray9
+    }
+    
+    private func updateColors() {
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            let tintColor: UIColor = self.isEnabled ? BridgeColor.gray10 : BridgeColor.gray4
+            let backgroundColor: UIColor = self.isEnabled ? BridgeColor.primary1 : BridgeColor.gray9
             
-            var updatedConfiguration = button.configuration
+            var updatedConfiguration = self.configuration
             updatedConfiguration?.baseForegroundColor = tintColor
             updatedConfiguration?.baseBackgroundColor = backgroundColor
-            button.configuration = updatedConfiguration
+            self.configuration = updatedConfiguration
         }
     }
 }
