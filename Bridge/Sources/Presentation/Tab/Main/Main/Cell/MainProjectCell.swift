@@ -32,30 +32,7 @@ final class MainProjectCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let bookmarkButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = .clear
-        configuration.baseForegroundColor = BridgeColor.gray6
-        
-        let button = UIButton()
-        button.configuration = configuration
-        button.changesSelectionAsPrimaryAction = true
-        button.configurationUpdateHandler = { button in
-            let tintColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray6
-            let imageName: String = button.state == .selected ? "bookmark.fill" : "bookmark"
-            
-            let buttonImage = UIImage(named: imageName)?
-                .resize(to: CGSize(width: 24, height: 24))
-                .withRenderingMode(.alwaysTemplate)
-            
-            var updatedConfiguration = button.configuration
-            updatedConfiguration?.image = buttonImage
-            updatedConfiguration?.baseForegroundColor = tintColor
-            button.configuration = updatedConfiguration
-        }
-        
-        return button
-    }()
+    private let scrapButton = MainScrapButton()
     
     private let recruitNumberLabel: UILabel = {
         let label = UILabel()
@@ -85,7 +62,7 @@ final class MainProjectCell: BaseCollectionViewCell {
         rootFlexContainer.clipsToBounds = true
         
         rootFlexContainer.flex.direction(.column).height(149).define { flex in
-            flex.addItem(bookmarkButton).position(.absolute).size(24).top(19).right(18)
+            flex.addItem(scrapButton).position(.absolute).size(24).top(19).right(18)
             
             flex.addItem(dDayLabel).width(29).height(14).marginTop(19).marginLeft(18)
             

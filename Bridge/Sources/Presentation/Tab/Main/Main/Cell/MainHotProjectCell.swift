@@ -43,30 +43,7 @@ final class MainHotProjectCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let bookmarkButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = .clear
-        configuration.baseForegroundColor = BridgeColor.gray6
-        
-        let button = UIButton()
-        button.configuration = configuration
-        button.changesSelectionAsPrimaryAction = true
-        button.configurationUpdateHandler = { button in
-            let tintColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray6
-            let imageName: String = button.state == .selected ? "bookmark.fill" : "bookmark"
-            
-            let buttonImage = UIImage(named: imageName)?
-                .resize(to: CGSize(width: 24, height: 24))
-                .withRenderingMode(.alwaysTemplate)
-            
-            var updatedConfiguration = button.configuration
-            updatedConfiguration?.image = buttonImage
-            updatedConfiguration?.baseForegroundColor = tintColor
-            button.configuration = updatedConfiguration
-        }
-        
-        return button
-    }()
+    private let scrapButton = MainScrapButton()
     
     // MARK: - Configure
     override func configureLayouts() {
@@ -87,7 +64,7 @@ final class MainHotProjectCell: BaseCollectionViewCell {
             
             flex.addItem().grow(1)
             
-            flex.addItem(bookmarkButton).size(24).marginRight(14)
+            flex.addItem(scrapButton).size(24).marginRight(14)
         }
     }
     
