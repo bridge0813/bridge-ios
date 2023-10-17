@@ -9,7 +9,9 @@ import RxSwift
 
 final class ChatRoomViewModel: ViewModelType {
     
-    struct Input { }
+    struct Input {
+        let sendMessage: Observable<String>
+    }
     
     struct Output { }
     
@@ -24,6 +26,13 @@ final class ChatRoomViewModel: ViewModelType {
     }
     
     func transform(input: Input) -> Output {
-        Output()
+        input.sendMessage
+            .withUnretained(self)
+            .subscribe(onNext: { _, message in
+                print(message)
+            })
+            .disposed(by: disposeBag)
+        
+        return Output()
     }
 }
