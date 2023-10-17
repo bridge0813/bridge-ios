@@ -1,5 +1,5 @@
 //
-//  BrideSendMessageButton.swift
+//  BridgeSendMessageButton.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BrideSendMessageButton: BaseButton {
+final class BridgeSendMessageButton: BaseButton {
     override func configureAttributes() {
         let buttonImage = UIImage(named: "send.fill")?
             .resize(to: CGSize(width: 16.21, height: 16.21))
