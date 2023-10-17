@@ -71,7 +71,7 @@ final class MainViewController: BaseViewController {
 
     private let mainCategoryHeaderView = MainCategoryHeaderView()
     
-    private let createProjectButton = BrideCreateProjectButton()
+    private let createProjectButton = BridgeCreateProjectButton()
     
     // MARK: - Properties
     private let viewModel: MainViewModel
