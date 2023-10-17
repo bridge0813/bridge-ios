@@ -468,7 +468,7 @@ extension MainViewController {
         let config = CompositionalLayoutConfiguration(
             groupHeight: 160,
             sectionContentInsets: NSDirectionalEdgeInsets(top: 16.2, leading: 0, bottom: 80, trailing: 0),
-            boundaryItemKinds: isFooterNeed ? [.footer] : [.header(height: 38)]
+            boundaryItemKinds: isFooterNeed ? [.header(height: 38), .footer] : [.header(height: 38)]
         )
         
         return config.configureCompositionalLayout()
