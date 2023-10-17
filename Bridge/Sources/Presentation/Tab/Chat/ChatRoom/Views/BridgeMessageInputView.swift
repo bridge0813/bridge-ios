@@ -11,7 +11,7 @@ import FlexLayout
 import RxSwift
 
 final class BridgeMessageInputView: BaseView {
-    
+    // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()
         view.backgroundColor = BridgeColor.primary2
@@ -50,8 +50,17 @@ final class BridgeMessageInputView: BaseView {
     override func bind() {
         messageInputTextField.rx.text
             .orEmpty
+            .distinctUntilChanged()
             .map { !$0.isEmpty }
             .bind(to: sendMessageButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        sendMessageButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.messageInputTextField.text = nil
+                owner.sendMessageButton.isEnabled = false
+            })
             .disposed(by: disposeBag)
     }
 }
@@ -59,7 +68,7 @@ final class BridgeMessageInputView: BaseView {
 // MARK: - Observables
 extension BridgeMessageInputView {
     var sendMessage: Observable<String> {
-        sendMessageButton.rx.tap
-            .withLatestFrom(messageInputTextField.rx.text.orEmpty)
+        messageInputTextField.rx.text.orEmpty
+            .sample(sendMessageButton.rx.tap)
     }
 }

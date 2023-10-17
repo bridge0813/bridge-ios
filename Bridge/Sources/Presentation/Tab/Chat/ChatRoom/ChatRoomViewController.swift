@@ -25,7 +25,7 @@ final class ChatRoomViewController: BaseViewController {
     }()
     
     private let messageInputView = BridgeMessageInputView()
-
+    
     private let viewModel: ChatRoomViewModel
     
     init(viewModel: ChatRoomViewModel) {
@@ -56,7 +56,6 @@ final class ChatRoomViewController: BaseViewController {
         
         rootFlexConatiner.flex.define { flex in
             flex.addItem(messageTextView).height(300).marginHorizontal(margin).marginVertical(20)
-            
             flex.addItem(messageInputView)
         }
     }
@@ -70,6 +69,12 @@ final class ChatRoomViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = ChatRoomViewModel.Input(sendMessage: messageInputView.sendMessage)
-        _ = viewModel.transform(input: input)
+        let output = viewModel.transform(input: input)
+        
+        output.messages
+            .drive { [weak self] message in
+                self?.messageTextView.text += message + "\n"
+            }
+            .disposed(by: disposeBag)
     }
 }
