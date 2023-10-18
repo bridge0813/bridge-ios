@@ -71,7 +71,7 @@ final class DropDown: BaseView {
     
     private var bottomOffset: CGPoint
     
-    private var dataSource: [String]
+    var dataSource: [String]
     private var selectedItemIndexRow: IndexRow?  // 선택한 항목을 추적
     
     private var tableHeight: CGFloat {
@@ -99,7 +99,7 @@ final class DropDown: BaseView {
     init(
         anchorView: AnchorView,
         bottomOffset: CGPoint = .zero,
-        dataSource: [String],
+        dataSource: [String] = [],
         cellHeight: CGFloat = DropdownConstant.DropdownUI.rowHeight,
         itemTextColor: UIColor = DropdownConstant.DropdownItem.textColor,
         itemTextFont: UIFont = DropdownConstant.DropdownItem.textFont,

@@ -43,19 +43,22 @@ final class MainViewController: BaseViewController {
     }()
     
     private let mainFieldCategoryAnchorButton = MainFieldCategoryAnchorButton()
-    // TODO: - DataSource 동적으로 변경될 수 있도록 조정
-    private lazy var mainFieldCategoryDropdown = DropDown(
-        anchorView: mainFieldCategoryAnchorButton,
-        bottomOffset: CGPoint(x: 10, y: 0),
-        dataSource: ["UI/UX", "전체"],
-        cellHeight: 46,
-        itemTextColor: BridgeColor.gray3,
-        itemTextFont: BridgeFont.body2.font,
-        selectedItemTextColor: BridgeColor.gray1,
-        dimmedBackgroundColor: .black.withAlphaComponent(0.3),
-        width: 147,
-        cornerRadius: 4
-    )
+    private lazy var mainFieldCategoryDropdown: DropDown = {
+        let dropdown = DropDown(
+            anchorView: mainFieldCategoryAnchorButton,
+            bottomOffset: CGPoint(x: 10, y: 0),
+            dataSource: ["UI/UX", "전체"],
+            cellHeight: 46,
+            itemTextColor: BridgeColor.gray3,
+            itemTextFont: BridgeFont.body2.font,
+            selectedItemTextColor: BridgeColor.gray1,
+            dimmedBackgroundColor: .black.withAlphaComponent(0.3),
+            width: 147,
+            cornerRadius: 4
+        )
+        
+        return dropdown
+    }()
     
     private let filterButton: UIButton = {
         let buttonImage = UIImage(named: "hamburger")?
