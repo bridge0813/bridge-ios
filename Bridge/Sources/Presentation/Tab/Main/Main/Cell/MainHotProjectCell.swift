@@ -25,8 +25,8 @@ final class MainHotProjectCell: BaseCollectionViewCell {
         let label = UILabel()
         label.text = "1"
         label.textAlignment = .center
-        label.textColor = BridgeColor.hotCellRankingTextColor
-        label.backgroundColor = BridgeColor.hotCellRankingBackgroundColor
+        label.textColor = BridgeColor.secondary2
+        label.backgroundColor = BridgeColor.secondary3
         label.font = BridgeFont.headline1.font
         
         return label

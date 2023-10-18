@@ -13,7 +13,7 @@ class BridgeMessageBox: BaseView {
     
     let backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = BridgeColor.secondary4
+        view.backgroundColor = BridgeColor.secondary6
         view.layer.cornerRadius = 4
         return view
     }()
