@@ -82,10 +82,14 @@ extension CompositionalLayoutConfiguration {
             widthDimension: .fractionalWidth(1),
             heightDimension: .fractionalHeight(1)
         )
-        return NSCollectionLayoutBoundarySupplementaryItem(
+        
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: footerSize,
             elementKind: UICollectionView.elementKindSectionFooter,
             alignment: .bottom
         )
+        footer.contentInsets = NSDirectionalEdgeInsets(top: 52, leading: 0, bottom: 0, trailing: 0)
+        
+        return footer
     }
 }

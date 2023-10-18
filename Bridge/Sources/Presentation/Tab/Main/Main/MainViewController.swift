@@ -25,12 +25,18 @@ final class MainViewController: BaseViewController {
             ProjectCountHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
         )
+        
         collectionView.register(
             SectionDividerHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
         )
         collectionView.register(
-            MainPlaceholderView.self,
+            ComingSoonPlaceholderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter
+        )
+        
+        collectionView.register(
+            EmptyProjectPlaceholderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter
         )
         return collectionView
@@ -292,12 +298,11 @@ extension MainViewController {
     private func configureSupplementaryViewForNew() {
         dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
             guard let footerView = collectionView.dequeueReusableSupplementaryView(
-                MainPlaceholderView.self,
+                EmptyProjectPlaceholderView.self,
                 ofKind: kind,
                 for: indexPath
             ) else { return UICollectionReusableView() }
             
-            footerView.configureHolderView(.nothing)
             return footerView
         }
     }
@@ -379,12 +384,11 @@ extension MainViewController {
                 
             case UICollectionView.elementKindSectionFooter:
                 guard let footerView = collectionView.dequeueReusableSupplementaryView(
-                    MainPlaceholderView.self,
+                    EmptyProjectPlaceholderView.self,
                     ofKind: kind,
                     for: indexPath
                 ) else { return UICollectionReusableView() }
                 
-                footerView.configureHolderView(.nothing)
                 return footerView
                 
                 
@@ -450,12 +454,11 @@ extension MainViewController {
                 
             case UICollectionView.elementKindSectionFooter:
                 guard let footerView = collectionView.dequeueReusableSupplementaryView(
-                    MainPlaceholderView.self,
+                    EmptyProjectPlaceholderView.self,
                     ofKind: kind,
                     for: indexPath
                 ) else { return UICollectionReusableView() }
                 
-                footerView.configureHolderView(.nothing)
                 return footerView
                 
             default:
@@ -488,12 +491,11 @@ extension MainViewController {
     private func configureSupplementaryViewForComingSoon() {
         dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
             guard let footerView = collectionView.dequeueReusableSupplementaryView(
-                MainPlaceholderView.self,
+                ComingSoonPlaceholderView.self,
                 ofKind: kind,
                 for: indexPath
             ) else { return UICollectionReusableView() }
             
-            footerView.configureHolderView(.comingSoon)
             return footerView
         }
     }
