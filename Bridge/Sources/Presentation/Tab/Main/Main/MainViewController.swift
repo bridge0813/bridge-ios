@@ -101,17 +101,25 @@ final class MainViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
     }
     
-    // MARK: - Configure
-    private func configureNavigationUI() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    // MARK: - Configure
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
@@ -138,9 +146,6 @@ final class MainViewController: BaseViewController {
         }
     }
     
-    override func configureAttributes() {
-        configureNavigationUI()
-    }
     
     // MARK: - Bind
     override func bind() {
