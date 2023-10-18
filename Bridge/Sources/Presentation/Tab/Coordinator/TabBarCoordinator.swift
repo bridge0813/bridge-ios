@@ -109,10 +109,17 @@ private extension TabBarCoordinator {
         
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.shadowColor = nil
         tabBarAppearance.stackedLayoutAppearance.selected.iconColor = BridgeColor.primary1
         tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: BridgeColor.primary1]
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        
+        tabBarController.tabBar.layer.masksToBounds = false
+        tabBarController.tabBar.layer.shadowColor = BridgeColor.gray3.cgColor
+        tabBarController.tabBar.layer.shadowOpacity = 0.1
+        tabBarController.tabBar.layer.shadowOffset = CGSize(width: 0, height: -3)
+        tabBarController.tabBar.layer.shadowRadius = 10
     }
 }
 
