@@ -159,7 +159,7 @@ final class MainViewController: BaseViewController {
         output.projects
             .drive(onNext: { [weak self] projects in
                 self?.updateCollectionViewForNew(with: projects)
-                self?.mainCategoryHeaderView.updateButtonState(.new)
+                self?.mainCategoryHeaderView.updateButtonState("new")
             })
             .disposed(by: disposeBag)
         
@@ -167,10 +167,10 @@ final class MainViewController: BaseViewController {
         output.buttonTypeAndProjects
             .drive(onNext: { [weak self] type, projects in
                 switch type {
-                case .new:
+                case "new":
                     self?.updateCollectionViewForNew(with: projects)
                     
-                case .hot:
+                case "hot":
                     self?.updateCollectionViewForHot(with: projects)
                     // 랭킹 3까지만 인기 섹션으로 이동
                     self?.applySectionSnapshot(to: .hot, with: Array(projects.prefix(3)))
@@ -178,11 +178,14 @@ final class MainViewController: BaseViewController {
                     // 인기순위 3개를 제외한 나머지 데이터
                     self?.applySectionSnapshot(to: .main, with: Array(projects.dropFirst(3)))
                     
-                case .deadlineApproach:
+                case "deadlineApproach":
                     self?.updateCollectionViewForDeadline(with: projects)
                     
-                case .comingSoon, .comingSoon2:
+                case "comingSoon", "comingSoon2":
                     self?.updateCollectionViewForComingSoon(with: projects)
+                    
+                default:
+                    print(type)
                 }
                 
                 self?.mainCategoryHeaderView.updateButtonState(type)  // 버튼 상태 변경

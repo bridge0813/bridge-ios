@@ -17,12 +17,12 @@ final class MainViewModel: ViewModelType {
         let filterButtonTapped: Observable<Void>
         let itemSelected: Observable<IndexPath>
         let createButtonTapped: Observable<Void>
-        let categoryButtonTapped: Observable<CategoryButtonType>
+        let categoryButtonTapped: Observable<String>
     }
     
     struct Output {
         let projects: Driver<[Project]>
-        let buttonTypeAndProjects: Driver<(CategoryButtonType, [Project])>
+        let buttonTypeAndProjects: Driver<(String, [Project])>
         let buttonDisplayMode: Driver<CreateButtonDisplayState>
         let headerAlpha: Driver<CGFloat>
         let collectionViewTopMargin: Driver<CGFloat>
@@ -57,18 +57,21 @@ final class MainViewModel: ViewModelType {
         
         let buttonTypeAndProjects = input.categoryButtonTapped
             .withUnretained(self)
-            .flatMapLatest { owner, type -> Observable<(CategoryButtonType, [Project])> in
+            .flatMapLatest { owner, type -> Observable<(String, [Project])> in
                 switch type {
-                case .new:
+                case "new":
                     return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 신규 데이터
                     
-                case .hot:
+                case "hot":
                     return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 인기 데이터
                     
-                case .deadlineApproach:
+                case "deadlineApproach":
                     return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 마감임박 데이터
                     
-                case .comingSoon, .comingSoon2:
+                case "comingSoon", "comingSoon2":
+                    return .just((type, []))
+                    
+                default:
                     return .just((type, []))
                 }
             }
@@ -130,7 +133,7 @@ final class MainViewModel: ViewModelType {
         
         return Output(
             projects: projects.asDriver(onErrorJustReturn: [Project.onError]),
-            buttonTypeAndProjects: buttonTypeAndProjects.asDriver(onErrorJustReturn: (.new, [])),
+            buttonTypeAndProjects: buttonTypeAndProjects.asDriver(onErrorJustReturn: ("new", [])),
             buttonDisplayMode: layoutMode.asDriver(onErrorJustReturn: .both),
             headerAlpha: headerAlpha.asDriver(onErrorJustReturn: 1),
             collectionViewTopMargin: collectionViewTopMargin.asDriver(onErrorJustReturn: 150)
@@ -153,13 +156,5 @@ extension MainViewModel {
     enum CreateButtonDisplayState {
         case both
         case only
-    }
-    
-    enum CategoryButtonType: String {
-        case new
-        case hot
-        case deadlineApproach
-        case comingSoon
-        case comingSoon2
     }
 }

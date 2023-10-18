@@ -13,7 +13,7 @@ import RxCocoa
 
 /// '신규', '인기', '마감임박', '출시예정' 카테고리를 나타내는 뷰
 final class MainCategoryHeaderView: BaseView {
-    // MARK: - Properties
+    // MARK: - UI
     private let rootFlexContainer = UIView()
     
     private let newButton = MainCategoryButton(.new)
@@ -56,37 +56,38 @@ final class MainCategoryHeaderView: BaseView {
 
 // MARK: - ButtonAction
 extension MainCategoryHeaderView {
-    var categoryButtonTapped: Observable<MainViewModel.CategoryButtonType> {
+    var categoryButtonTapped: Observable<String> {
         Observable.merge(
-            newButton.rx.tap.map { MainViewModel.CategoryButtonType.new },
-            hotButton.rx.tap.map { MainViewModel.CategoryButtonType.hot },
-            deadlineApproachButton.rx.tap.map { MainViewModel.CategoryButtonType.deadlineApproach },
-            comingSoonButton.rx.tap.map { MainViewModel.CategoryButtonType.comingSoon },
-            comingSoonButton2.rx.tap.map { MainViewModel.CategoryButtonType.comingSoon2 }
+            newButton.rx.tap.map { "new" },
+            hotButton.rx.tap.map { "hot" },
+            deadlineApproachButton.rx.tap.map { "deadlineApproach" },
+            comingSoonButton.rx.tap.map { "comingSoon" },
+            comingSoonButton2.rx.tap.map { "comingSoon2" }
         )
     }
     
-    func updateButtonState(_ buttonType: MainViewModel.CategoryButtonType) {
+    func updateButtonState(_ type: String) {
         let allButtons = [newButton, hotButton, deadlineApproachButton, comingSoonButton, comingSoonButton2]
-        
-        // 모든 버튼의 상태를 해제
         allButtons.forEach { $0.isSelected = false }
         
-        switch buttonType {
-        case .new:
+        switch type {
+        case "new":
             newButton.isSelected = true
             
-        case .hot:
+        case "hot":
             hotButton.isSelected = true
             
-        case .deadlineApproach:
+        case "deadlineApproach":
             deadlineApproachButton.isSelected = true
             
-        case .comingSoon:
+        case "comingSoon":
             comingSoonButton.isSelected = true
             
-        case .comingSoon2:
+        case "comingSoon2":
             comingSoonButton2.isSelected = true
+            
+        default:
+            print("type")
         }
     }
 }
