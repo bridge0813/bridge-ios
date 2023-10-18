@@ -99,8 +99,6 @@ final class MainViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        configureTabBarShadow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,14 +119,6 @@ final class MainViewController: BaseViewController {
     }
     
     // MARK: - Configure
-    private func configureTabBarShadow() {
-        let tabBar = tabBarController?.tabBar
-        tabBar?.layer.masksToBounds = false
-        tabBar?.layer.shadowColor = UIColor.black.cgColor
-        tabBar?.layer.shadowOpacity = 0.1
-        tabBar?.layer.shadowOffset = CGSize(width: 0, height: -3)
-        tabBar?.layer.shadowRadius = 5
-    }
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
