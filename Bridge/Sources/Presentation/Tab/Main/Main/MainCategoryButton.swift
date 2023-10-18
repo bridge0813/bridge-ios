@@ -10,19 +10,15 @@ import UIKit
 /// '신규', '인기', '마감임박', '출시예정' 카테고리를 나타내는 버튼
 final class MainCategoryButton: BaseButton {
     
-    private var title: String
-    private var normalImageName: String
-    private var selectedImageName: String
+    private let type: CategoryButtonType
     
-    init(title: String, normalImageName: String, selectedImageName: String) {
-        self.title = title
-        self.normalImageName = normalImageName
-        self.selectedImageName = selectedImageName
+    init(_ type: CategoryButtonType) {
+        self.type = type
         super.init(frame: .zero)
     }
     
     override func configureAttributes() {
-        let buttonImage = UIImage(named: normalImageName)?.resize(to: CGSize(width: 46, height: 46))
+        let buttonImage = UIImage(named: type.normalImageName)?.resize(to: CGSize(width: 46, height: 46))
         
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .clear
@@ -35,14 +31,14 @@ final class MainCategoryButton: BaseButton {
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.body3.font
         titleContainer.foregroundColor = BridgeColor.gray3
-        configuration.attributedTitle = AttributedString(title, attributes: titleContainer)
+        configuration.attributedTitle = AttributedString(type.title, attributes: titleContainer)
         
         self.configuration = configuration
         configurationUpdateHandler = { [weak self] button in
             guard let self else { return }
             
             let textColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray3
-            let imageName: String = button.state == .selected ? self.selectedImageName : self.normalImageName
+            let imageName: String = button.state == .selected ? self.type.selectedImageName : self.type.normalImageName
             
             let buttonImage = UIImage(named: imageName)?.resize(to: CGSize(width: 46, height: 46))
             
@@ -56,6 +52,42 @@ final class MainCategoryButton: BaseButton {
             updatedConfiguration?.titleTextAttributesTransformer = attributesTransformer
             updatedConfiguration?.image = buttonImage
             button.configuration = updatedConfiguration
+        }
+    }
+}
+
+extension MainCategoryButton {
+    enum CategoryButtonType {
+        case new
+        case hot
+        case deadlineApproach
+        case comingSoon
+        
+        var title: String {
+            switch self {
+            case .new: return "신규"
+            case .hot: return "인기"
+            case .deadlineApproach: return "마감임박"
+            case .comingSoon: return "출시예정"
+            }
+        }
+        
+        var normalImageName: String {
+            switch self {
+            case .new: return "main.sprouts.off"
+            case .hot: return "main.trophy.off"
+            case .deadlineApproach: return "main.bomb.off"
+            case .comingSoon: return "main.mysterybox.off"
+            }
+        }
+        
+        var selectedImageName: String {
+            switch self {
+            case .new: return "main.sprouts.on"
+            case .hot: return "main.trophy.on"
+            case .deadlineApproach: return "main.bomb.on"
+            case .comingSoon: return "main.mysterybox.on"
+            }
         }
     }
 }

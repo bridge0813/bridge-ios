@@ -16,35 +16,11 @@ final class MainCategoryHeaderView: BaseView {
     // MARK: - Properties
     private let rootFlexContainer = UIView()
     
-    private let newButton = MainCategoryButton(
-        title: "신규",
-        normalImageName: "main.sprouts.off",
-        selectedImageName: "main.sprouts.on"
-    )
-    
-    private let hotButton = MainCategoryButton(
-        title: "인기",
-        normalImageName: "main.trophy.off",
-        selectedImageName: "main.trophy.on"
-    )
-    
-    private let deadlineApproachButton = MainCategoryButton(
-        title: "마감임박",
-        normalImageName: "main.bomb.off",
-        selectedImageName: "main.bomb.on"
-    )
-    
-    private let comingSoonButton = MainCategoryButton(
-        title: "출시예정",
-        normalImageName: "main.mysterybox.off",
-        selectedImageName: "main.mysterybox.on"
-    )
-    
-    private let comingSoonButton2 = MainCategoryButton(
-        title: "출시예정",
-        normalImageName: "main.mysterybox.off",
-        selectedImageName: "main.mysterybox.on"
-    )
+    private let newButton = MainCategoryButton(.new)
+    private let hotButton = MainCategoryButton(.hot)
+    private let deadlineApproachButton = MainCategoryButton(.deadlineApproach)
+    private let comingSoonButton = MainCategoryButton(.comingSoon)
+    private let comingSoonButton2 = MainCategoryButton(.comingSoon)
     
     // MARK: - Configurations
     override func configureLayouts() {
