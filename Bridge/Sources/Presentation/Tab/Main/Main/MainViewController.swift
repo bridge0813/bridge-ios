@@ -122,11 +122,9 @@ final class MainViewController: BaseViewController {
             
             flex.addItem(collectionView)
                 .position(.absolute)
-                .width(100%)
-                .height(100%)
                 .top(150)
             
-            flex.addItem(mainCategoryHeaderView).width(100%).height(102)
+            flex.addItem(mainCategoryHeaderView).height(102)
             
             flex.addItem(createProjectButton)
                 .position(.absolute)
