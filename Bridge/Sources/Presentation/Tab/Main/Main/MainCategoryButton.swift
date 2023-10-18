@@ -53,6 +53,24 @@ final class MainCategoryButton: BaseButton {
             updatedConfiguration?.image = buttonImage
             button.configuration = updatedConfiguration
         }
+        
+        // 터치시 이미지를 살짝 커지게 함
+        let touchDownAction = UIAction { [weak self] _ in
+            self?.clickAnimation(scale: 1.1)
+        }
+        addAction(touchDownAction, for: .touchDown)
+
+        // 터치가 끝나면 이미지를 원래 크기로 되돌림
+        let touchUpAction = UIAction { [weak self] _ in
+            self?.clickAnimation(scale: 1.0)
+        }
+        addAction(touchUpAction, for: .touchUpInside)
+    }
+    
+    private func clickAnimation(scale: CGFloat) {
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.imageView?.transform = CGAffineTransform(scaleX: scale, y: scale)
+        }
     }
 }
 
