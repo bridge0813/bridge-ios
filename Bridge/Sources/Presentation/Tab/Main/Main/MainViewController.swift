@@ -77,6 +77,13 @@ final class MainViewController: BaseViewController {
         button.setImage(buttonImage, for: .normal)
         return button
     }()
+    
+    private let navigationDividerView: UIView = {
+        let divider = UIView()
+        divider.backgroundColor = BridgeColor.gray6
+//        divider.isHidden = true
+        return divider
+    }()
 
     private let mainCategoryHeaderView = MainCategoryHeaderView()
     
@@ -130,6 +137,8 @@ final class MainViewController: BaseViewController {
                 flex.addItem(filterButton).size(24).marginRight(8)
                 flex.addItem(searchButton).size(24).marginRight(15)
             }
+            
+            flex.addItem(navigationDividerView).height(1)
             
             flex.addItem(collectionView)
                 .position(.absolute)
