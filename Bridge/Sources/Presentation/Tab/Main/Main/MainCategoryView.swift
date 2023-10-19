@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// '신규', '인기', '마감임박', '출시예정' 카테고리를 나타내는 뷰
-final class MainCategoryHeaderView: BaseView {
+final class MainCategoryView: BaseView {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
@@ -53,7 +53,7 @@ final class MainCategoryHeaderView: BaseView {
 }
 
 // MARK: - ButtonAction
-extension MainCategoryHeaderView {
+extension MainCategoryView {
     enum CategoryButtonType: String {
         case new
         case hot

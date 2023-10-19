@@ -8,7 +8,7 @@
 import UIKit
 
 /// 유저가 선택한 분야 카테고리를 보여주는 드롭다운의 트리거 버튼
-final class MainFieldCategoryAnchorButton: BaseButton {
+final class FieldCategoryAnchorButton: BaseButton {
     override func configureAttributes() {
         let buttonImage = UIImage(named: "chevron.down")?.resize(to: CGSize(width: 20, height: 20))
 
@@ -30,7 +30,7 @@ final class MainFieldCategoryAnchorButton: BaseButton {
     }
 }
 
-extension MainFieldCategoryAnchorButton {
+extension FieldCategoryAnchorButton {
     func updateTitle(_ newTitle: String) {
         var updatedConfiguration = configuration
         

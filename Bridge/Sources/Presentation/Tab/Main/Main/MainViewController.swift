@@ -21,14 +21,14 @@ final class MainViewController: BaseViewController {
     }()
     
     private let topMenuView = TopMenuView()
-    private let mainCategoryHeaderView = MainCategoryHeaderView()
+    private let categoryView = MainCategoryView()
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.backgroundColor = BridgeColor.gray9
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.register(MainProjectCell.self)
-        collectionView.register(MainHotProjectCell.self)
+        collectionView.register(ProjectCell.self)
+        collectionView.register(HotProjectCell.self)
         collectionView.register(
             ProjectCountHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
@@ -98,7 +98,7 @@ final class MainViewController: BaseViewController {
         rootFlexContainer.flex.direction(.column).define { flex in
             flex.addItem(topMenuView)
             
-            flex.addItem(mainCategoryHeaderView)
+            flex.addItem(categoryView)
                 .position(.absolute)
                 .height(102)
                 .top(150)
@@ -124,7 +124,7 @@ final class MainViewController: BaseViewController {
             filterButtonTapped: topMenuView.filterButton.rx.tap.asObservable(),
             itemSelected: collectionView.rx.itemSelected.asObservable(),
             createButtonTapped: createProjectButton.rx.tap.asObservable(),
-            categoryButtonTapped: mainCategoryHeaderView.categoryButtonTapped
+            categoryButtonTapped: categoryView.categoryButtonTapped
         )
         let output = viewModel.transform(input: input)
         
@@ -133,7 +133,7 @@ final class MainViewController: BaseViewController {
         output.projects
             .drive(onNext: { [weak self] projects in
                 self?.updateCollectionViewForNew(with: projects)
-                self?.mainCategoryHeaderView.updateButtonState("new")
+                self?.categoryView.updateButtonState("new")
             })
             .disposed(by: disposeBag)
         
@@ -159,7 +159,7 @@ final class MainViewController: BaseViewController {
                     print(type)
                 }
                 
-                self?.mainCategoryHeaderView.updateButtonState(type)  // 버튼 상태 변경
+                self?.categoryView.updateButtonState(type)  // 버튼 상태 변경
             })
             .disposed(by: disposeBag)
         
@@ -172,7 +172,7 @@ final class MainViewController: BaseViewController {
         
         output.categoryAlpha
             .drive(onNext: { [weak self] alpha in
-                self?.mainCategoryHeaderView.alpha = alpha
+                self?.categoryView.alpha = alpha
             })
             .disposed(by: disposeBag)
         
@@ -183,17 +183,17 @@ final class MainViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         // TODO: - 바인딩 처리 예정
-        topMenuView.mainFieldCategoryAnchorButton.rx.tap.asDriver()
+        topMenuView.fieldCategoryAnchorButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] in
-                self?.topMenuView.mainFieldCategoryDropdown.show()
+                self?.topMenuView.fieldDropdown.show()
             })
             .disposed(by: disposeBag)
             
         
-        topMenuView.mainFieldCategoryDropdown.itemSelected
+        topMenuView.fieldDropdown.itemSelected
             .withUnretained(self)
             .subscribe(onNext: { owner, item in
-                owner.topMenuView.mainFieldCategoryAnchorButton.updateTitle(item.title)
+                owner.topMenuView.fieldCategoryAnchorButton.updateTitle(item.title)
             })
             .disposed(by: disposeBag)
     }
@@ -234,7 +234,7 @@ extension MainViewController {
     func updateTopMargin(categoryMargin: CGFloat, collectionViewMargin: CGFloat) {
         topMenuView.dividerView.isHidden = categoryMargin == -54.0 ? false : true
         
-        mainCategoryHeaderView.flex
+        categoryView.flex
             .position(.absolute)
             .width(100%)
             .height(102)
@@ -263,7 +263,7 @@ extension MainViewController {
         dataSource = DataSource(
             collectionView: collectionView
         ) { collectionView, indexPath, _ in
-            guard let cell = collectionView.dequeueReusableCell(MainProjectCell.self, for: indexPath) else {
+            guard let cell = collectionView.dequeueReusableCell(ProjectCell.self, for: indexPath) else {
                 return UICollectionViewCell()
             }
             
@@ -320,14 +320,14 @@ extension MainViewController {
             
             switch section {
             case .hot:
-                guard let cell = collectionView.dequeueReusableCell(MainHotProjectCell.self, for: indexPath) else {
+                guard let cell = collectionView.dequeueReusableCell(HotProjectCell.self, for: indexPath) else {
                     return UICollectionViewCell()
                 }
                 
                 return cell
                 
             case .main:
-                guard let cell = collectionView.dequeueReusableCell(MainProjectCell.self, for: indexPath) else {
+                guard let cell = collectionView.dequeueReusableCell(ProjectCell.self, for: indexPath) else {
                     return UICollectionViewCell()
                 }
                 

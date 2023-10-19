@@ -14,10 +14,10 @@ final class TopMenuView: BaseView {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
-    let mainFieldCategoryAnchorButton = MainFieldCategoryAnchorButton()
-    lazy var mainFieldCategoryDropdown: DropDown = {
+    let fieldCategoryAnchorButton = FieldCategoryAnchorButton()
+    lazy var fieldDropdown: DropDown = {
         let dropdown = DropDown(
-            anchorView: mainFieldCategoryAnchorButton,
+            anchorView: fieldCategoryAnchorButton,
             bottomOffset: CGPoint(x: 10, y: 0),
             dataSource: ["UI/UX", "전체"],
             cellHeight: 46,
@@ -63,7 +63,7 @@ final class TopMenuView: BaseView {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).height(48).define { flex in
             flex.addItem().direction(.row).alignItems(.center).define { flex in
-                flex.addItem(mainFieldCategoryAnchorButton).marginLeft(5)
+                flex.addItem(fieldCategoryAnchorButton).marginLeft(5)
                 flex.addItem().grow(1)
                 flex.addItem(filterButton).size(24).marginRight(8)
                 flex.addItem(searchButton).size(24).marginRight(15)

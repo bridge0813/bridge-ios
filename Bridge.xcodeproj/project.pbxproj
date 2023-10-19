@@ -116,9 +116,9 @@
 		7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C42701D2AA4540C009BE6AF /* BaseCollectionReusableView.swift */; };
 		7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */; };
 		7C55E6292AD7EFEF0018FA5D /* MainCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */; };
-		7C55E62B2AD7F0390018FA5D /* MainCategoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62A2AD7F0390018FA5D /* MainCategoryHeaderView.swift */; };
-		7C55E62D2AD867010018FA5D /* MainProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62C2AD867010018FA5D /* MainProjectCell.swift */; };
-		7C55E62F2ADAEBFC0018FA5D /* MainHotProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62E2ADAEBFC0018FA5D /* MainHotProjectCell.swift */; };
+		7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */; };
+		7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62C2AD867010018FA5D /* ProjectCell.swift */; };
+		7C55E62F2ADAEBFC0018FA5D /* HotProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62E2ADAEBFC0018FA5D /* HotProjectCell.swift */; };
 		7C55E6312ADBF6AA0018FA5D /* ProjectCountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6302ADBF6AA0018FA5D /* ProjectCountHeaderView.swift */; };
 		7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */; };
 		7C55E6372ADCF3CC0018FA5D /* ComingSoonPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6362ADCF3CC0018FA5D /* ComingSoonPlaceholderView.swift */; };
@@ -154,7 +154,7 @@
 		7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */; };
 		7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803D2ACF143A00230C86 /* Dropdown.swift */; };
 		7CE080402ACF147500230C86 /* RestrictionDropdownAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */; };
-		7CE080492AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE080482AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift */; };
+		7CE080492AD79ADD00230C86 /* FieldCategoryAnchorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -263,9 +263,9 @@
 		7C42701D2AA4540C009BE6AF /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHotProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryButton.swift; sourceTree = "<group>"; };
-		7C55E62A2AD7F0390018FA5D /* MainCategoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryHeaderView.swift; sourceTree = "<group>"; };
-		7C55E62C2AD867010018FA5D /* MainProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProjectCell.swift; sourceTree = "<group>"; };
-		7C55E62E2ADAEBFC0018FA5D /* MainHotProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHotProjectCell.swift; sourceTree = "<group>"; };
+		7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryView.swift; sourceTree = "<group>"; };
+		7C55E62C2AD867010018FA5D /* ProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
+		7C55E62E2ADAEBFC0018FA5D /* HotProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCell.swift; sourceTree = "<group>"; };
 		7C55E6302ADBF6AA0018FA5D /* ProjectCountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCountHeaderView.swift; sourceTree = "<group>"; };
 		7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDividerHeaderView.swift; sourceTree = "<group>"; };
 		7C55E6362ADCF3CC0018FA5D /* ComingSoonPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComingSoonPlaceholderView.swift; sourceTree = "<group>"; };
@@ -301,7 +301,7 @@
 		7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDropdownCell.swift; sourceTree = "<group>"; };
 		7CE0803D2ACF143A00230C86 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionDropdownAnchorView.swift; sourceTree = "<group>"; };
-		7CE080482AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFieldCategoryAnchorButton.swift; sourceTree = "<group>"; };
+		7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldCategoryAnchorButton.swift; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -895,8 +895,8 @@
 		7C55E6352ADC06E20018FA5D /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				7C55E62C2AD867010018FA5D /* MainProjectCell.swift */,
-				7C55E62E2ADAEBFC0018FA5D /* MainHotProjectCell.swift */,
+				7C55E62C2AD867010018FA5D /* ProjectCell.swift */,
+				7C55E62E2ADAEBFC0018FA5D /* HotProjectCell.swift */,
 				7C55E63C2ADEE1CB0018FA5D /* MainBookmarkButton.swift */,
 			);
 			path = Cell;
@@ -1095,9 +1095,9 @@
 				7C4270132AA3779D009BE6AF /* MainViewModel.swift */,
 				7C4270152AA377C9009BE6AF /* MainViewController.swift */,
 				7C55E6382ADE4BB60018FA5D /* CompositionalLayoutConfiguration.swift */,
-				7CE080482AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift */,
+				7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */,
 				7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */,
-				7C55E62A2AD7F0390018FA5D /* MainCategoryHeaderView.swift */,
+				7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */,
 				7C55E6432AE17B270018FA5D /* TopMenuView.swift */,
 				7C55E6352ADC06E20018FA5D /* Cell */,
 				7C55E6342ADC06C30018FA5D /* HeaderView */,
@@ -1227,7 +1227,7 @@
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */,
-				7C55E62B2AD7F0390018FA5D /* MainCategoryHeaderView.swift in Sources */,
+				7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
@@ -1245,7 +1245,7 @@
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
 				7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
-				7C55E62D2AD867010018FA5D /* MainProjectCell.swift in Sources */,
+				7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */,
 				7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */,
 				7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */,
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
@@ -1253,7 +1253,7 @@
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7C55E6292AD7EFEF0018FA5D /* MainCategoryButton.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
-				7CE080492AD79ADD00230C86 /* MainFieldCategoryAnchorButton.swift in Sources */,
+				7CE080492AD79ADD00230C86 /* FieldCategoryAnchorButton.swift in Sources */,
 				7C55E6312ADBF6AA0018FA5D /* ProjectCountHeaderView.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
 				7C55E6402ADF8DE20018FA5D /* EmptyProjectPlaceholderView.swift in Sources */,
@@ -1336,7 +1336,7 @@
 				7C24003D2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
 				7C40CBA12AC3E595000F4C9F /* BridgeTechTagButton.swift in Sources */,
-				7C55E62F2ADAEBFC0018FA5D /* MainHotProjectCell.swift in Sources */,
+				7C55E62F2ADAEBFC0018FA5D /* HotProjectCell.swift in Sources */,
 				7B61238D2AC2F320006E72C1 /* BridgeWarningMessageBox.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7C55E6442AE17B270018FA5D /* TopMenuView.swift in Sources */,
