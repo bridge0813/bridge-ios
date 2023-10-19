@@ -18,7 +18,7 @@ struct ChatRoom {
     let id: String
     let profileImageURL: URL?
 
-    /// 채팅방 이름 (일반적으로 수신자 이름과 동일)
+    /// 채팅방 이름 (수신자 이름)
     let name: String
     
     /// 가장 최근에 수신된 메시지에 대한 정보
