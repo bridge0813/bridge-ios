@@ -13,7 +13,15 @@ import RxSwift
 
 final class MainViewController: BaseViewController {
     // MARK: - UI
-    private let rootFlexContainer = UIView()
+    private let rootFlexContainer: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        
+        return view
+    }()
+    
+    private let topMenuView = TopMenuView()
+    private let mainCategoryHeaderView = MainCategoryHeaderView()
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -41,51 +49,6 @@ final class MainViewController: BaseViewController {
         )
         return collectionView
     }()
-    
-    private let mainFieldCategoryAnchorButton = MainFieldCategoryAnchorButton()
-    private lazy var mainFieldCategoryDropdown: DropDown = {
-        let dropdown = DropDown(
-            anchorView: mainFieldCategoryAnchorButton,
-            bottomOffset: CGPoint(x: 10, y: 0),
-            dataSource: ["UI/UX", "전체"],
-            cellHeight: 46,
-            itemTextColor: BridgeColor.gray3,
-            itemTextFont: BridgeFont.body2.font,
-            selectedItemTextColor: BridgeColor.gray1,
-            dimmedBackgroundColor: .black.withAlphaComponent(0.3),
-            width: 147,
-            cornerRadius: 4
-        )
-        
-        return dropdown
-    }()
-    
-    private let filterButton: UIButton = {
-        let buttonImage = UIImage(named: "hamburger")?
-            .resize(to: CGSize(width: 24, height: 24))
-            
-        let button = UIButton()
-        button.setImage(buttonImage, for: .normal)
-        return button
-    }()
-    
-    private let searchButton: UIButton = {
-        let buttonImage = UIImage(named: "magnifyingglass")?
-            .resize(to: CGSize(width: 24, height: 24))
-            
-        let button = UIButton()
-        button.setImage(buttonImage, for: .normal)
-        return button
-    }()
-    
-    private let navigationDividerView: UIView = {
-        let divider = UIView()
-        divider.backgroundColor = BridgeColor.gray6
-//        divider.isHidden = true
-        return divider
-    }()
-
-    private let mainCategoryHeaderView = MainCategoryHeaderView()
     
     private let createProjectButton = BridgeCreateProjectButton()
     
@@ -115,36 +78,34 @@ final class MainViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.bringSubviewToFront(topMenuView)
         rootFlexContainer.flex.layout()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     // MARK: - Configure
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        
+    
         rootFlexContainer.flex.direction(.column).define { flex in
-            flex.addItem().direction(.row).alignItems(.center).height(48).define { flex in
-                flex.addItem(mainFieldCategoryAnchorButton).marginLeft(5)
-                flex.addItem().grow(1)
-                flex.addItem(filterButton).size(24).marginRight(8)
-                flex.addItem(searchButton).size(24).marginRight(15)
-            }
+            flex.addItem(topMenuView)
             
-            flex.addItem(navigationDividerView).height(1)
+            flex.addItem(mainCategoryHeaderView)
+                .position(.absolute)
+                .height(102)
+                .top(150)
             
             flex.addItem(collectionView)
                 .position(.absolute)
                 .top(150)
-            
-            flex.addItem(mainCategoryHeaderView).height(102)
             
             flex.addItem(createProjectButton)
                 .position(.absolute)
@@ -155,13 +116,12 @@ final class MainViewController: BaseViewController {
         }
     }
     
-    
     // MARK: - Bind
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             didScroll: collectionView.rx.contentOffset.asObservable(),
-            filterButtonTapped: filterButton.rx.tap.asObservable(),
+            filterButtonTapped: topMenuView.filterButton.rx.tap.asObservable(),
             itemSelected: collectionView.rx.itemSelected.asObservable(),
             createButtonTapped: createProjectButton.rx.tap.asObservable(),
             categoryButtonTapped: mainCategoryHeaderView.categoryButtonTapped
@@ -186,10 +146,7 @@ final class MainViewController: BaseViewController {
                     
                 case "hot":
                     self?.updateCollectionViewForHot(with: projects)
-                    // 랭킹 3까지만 인기 섹션으로 이동
                     self?.applySectionSnapshot(to: .hot, with: Array(projects.prefix(3)))
-                    
-                    // 인기순위 3개를 제외한 나머지 데이터
                     self?.applySectionSnapshot(to: .main, with: Array(projects.dropFirst(3)))
                     
                 case "deadlineApproach":
@@ -213,29 +170,30 @@ final class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        output.headerAlpha
+        output.categoryAlpha
             .drive(onNext: { [weak self] alpha in
                 self?.mainCategoryHeaderView.alpha = alpha
             })
             .disposed(by: disposeBag)
         
-        output.collectionViewTopMargin
-            .drive(onNext: { [weak self] topMargin in
-                self?.updateCollectionViewTopMargin(topMargin)
+        output.topMargins
+            .drive(onNext: { [weak self] categoryMargin, collectionViewMargin in
+                self?.updateTopMargin(categoryMargin: categoryMargin, collectionViewMargin: collectionViewMargin)
             })
             .disposed(by: disposeBag)
         
         // TODO: - 바인딩 처리 예정
-        mainFieldCategoryAnchorButton.rx.tap.asDriver()
+        topMenuView.mainFieldCategoryAnchorButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] in
-                self?.mainFieldCategoryDropdown.show()
+                self?.topMenuView.mainFieldCategoryDropdown.show()
             })
             .disposed(by: disposeBag)
+            
         
-        mainFieldCategoryDropdown.itemSelected
+        topMenuView.mainFieldCategoryDropdown.itemSelected
             .withUnretained(self)
             .subscribe(onNext: { owner, item in
-                owner.mainFieldCategoryAnchorButton.updateTitle(item.title)
+                owner.topMenuView.mainFieldCategoryAnchorButton.updateTitle(item.title)
             })
             .disposed(by: disposeBag)
     }
@@ -271,14 +229,22 @@ extension MainViewController {
     }
 }
 
-// MARK: - Sticky Header
+// MARK: - 컬렉션 뷰의 Scroll 처리
 extension MainViewController {
-    func updateCollectionViewTopMargin(_ topMargin: CGFloat) {
+    func updateTopMargin(categoryMargin: CGFloat, collectionViewMargin: CGFloat) {
+        topMenuView.dividerView.isHidden = categoryMargin == -54.0 ? false : true
+        
+        mainCategoryHeaderView.flex
+            .position(.absolute)
+            .width(100%)
+            .height(102)
+            .top(categoryMargin)
+        
         collectionView.flex
             .position(.absolute)
             .width(100%)
             .height(100%)
-            .top(topMargin)
+            .top(collectionViewMargin)
     
         rootFlexContainer.flex.layout()
     }

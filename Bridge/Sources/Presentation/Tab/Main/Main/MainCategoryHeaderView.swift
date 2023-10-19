@@ -49,8 +49,6 @@ final class MainCategoryHeaderView: BaseView {
         super.layoutSubviews()
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
-        
-        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
     }
 }
 

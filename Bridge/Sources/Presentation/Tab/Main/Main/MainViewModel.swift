@@ -24,8 +24,8 @@ final class MainViewModel: ViewModelType {
         let projects: Driver<[Project]>
         let buttonTypeAndProjects: Driver<(String, [Project])>
         let buttonDisplayMode: Driver<CreateButtonDisplayState>
-        let headerAlpha: Driver<CGFloat>
-        let collectionViewTopMargin: Driver<CGFloat>
+        let categoryAlpha: Driver<CGFloat>  // 카테고리 알파값
+        let topMargins: Driver<(CGFloat, CGFloat)>  // 카테고리, 컬렉션 뷰의 마진
     }
 
     // MARK: - Properties
@@ -90,29 +90,40 @@ final class MainViewModel: ViewModelType {
             .distinctUntilChanged()
             .observe(on: MainScheduler.asyncInstance)
         
-        let headerAlpha = input.didScroll
+        let categoryAlpha = input.didScroll
             .map { offset in
                 
-                let headerHeight: CGFloat = 102.0
+                let categoryHeight: CGFloat = 102.0
                 
                 // 알파 값의 최소 및 최대 범위 설정
                 let minAlpha: CGFloat = 0.0
                 let maxAlpha: CGFloat = 1.0
-                let alpha = max(minAlpha, maxAlpha - (offset.y / headerHeight))
+                let alpha = max(minAlpha, maxAlpha - (offset.y / categoryHeight))
                 
                 return alpha
             }
             .observe(on: MainScheduler.asyncInstance)
         
-        let collectionViewTopMargin = input.didScroll
+        let topMargins = input.didScroll
             .map { offset in
-                let headerHeight: CGFloat = 102.0
-                
-                let maxTop: CGFloat = 150.0
+                let categoryHeight: CGFloat = 102.0
                 let minTop: CGFloat = 48.0
-                let topMargin = min(maxTop, max(minTop, maxTop - (offset.y * (maxTop - minTop) / headerHeight)))
                 
-                return topMargin
+                // 컬렉션뷰 마진계산
+                let maxCollectionViewMargin: CGFloat = 150.0
+                let collectionViewMargin = min(
+                    maxCollectionViewMargin,
+                    max(
+                        minTop,
+                        maxCollectionViewMargin - (offset.y * (maxCollectionViewMargin - minTop) / categoryHeight)
+                    )
+                )
+                
+                // 카테고리 마진계산
+                let minCategoryMargin: CGFloat = minTop - categoryHeight
+                let categoryMargin = min(minTop, max(minCategoryMargin, minTop - offset.y))
+                
+                return (categoryMargin, collectionViewMargin)
             }
             .observe(on: MainScheduler.asyncInstance)
         
@@ -135,8 +146,8 @@ final class MainViewModel: ViewModelType {
             projects: projects.asDriver(onErrorJustReturn: [Project.onError]),
             buttonTypeAndProjects: buttonTypeAndProjects.asDriver(onErrorJustReturn: ("new", [])),
             buttonDisplayMode: layoutMode.asDriver(onErrorJustReturn: .both),
-            headerAlpha: headerAlpha.asDriver(onErrorJustReturn: 1),
-            collectionViewTopMargin: collectionViewTopMargin.asDriver(onErrorJustReturn: 150)
+            categoryAlpha: categoryAlpha.asDriver(onErrorJustReturn: 1),
+            topMargins: topMargins.asDriver(onErrorJustReturn: (48, 150))
         )
     }
 }
