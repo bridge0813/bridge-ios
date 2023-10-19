@@ -54,13 +54,21 @@ final class MainCategoryHeaderView: BaseView {
 
 // MARK: - ButtonAction
 extension MainCategoryHeaderView {
+    enum CategoryButtonType: String {
+        case new
+        case hot
+        case deadlineApproach
+        case comingSoon
+        case comingSoon2
+    }
+    
     var categoryButtonTapped: Observable<String> {
         Observable.merge(
-            newButton.rx.tap.map { "new" },
-            hotButton.rx.tap.map { "hot" },
-            deadlineApproachButton.rx.tap.map { "deadlineApproach" },
-            comingSoonButton.rx.tap.map { "comingSoon" },
-            comingSoonButton2.rx.tap.map { "comingSoon2" }
+            newButton.rx.tap.map { CategoryButtonType.new.rawValue },
+            hotButton.rx.tap.map { CategoryButtonType.hot.rawValue },
+            deadlineApproachButton.rx.tap.map { CategoryButtonType.deadlineApproach.rawValue },
+            comingSoonButton.rx.tap.map { CategoryButtonType.comingSoon.rawValue },
+            comingSoonButton2.rx.tap.map { CategoryButtonType.comingSoon2.rawValue }
         )
     }
     
@@ -68,24 +76,23 @@ extension MainCategoryHeaderView {
         let allButtons = [newButton, hotButton, deadlineApproachButton, comingSoonButton, comingSoonButton2]
         allButtons.forEach { $0.isSelected = false }
         
-        switch type {
-        case "new":
-            newButton.isSelected = true
-            
-        case "hot":
-            hotButton.isSelected = true
-            
-        case "deadlineApproach":
-            deadlineApproachButton.isSelected = true
-            
-        case "comingSoon":
-            comingSoonButton.isSelected = true
-            
-        case "comingSoon2":
-            comingSoonButton2.isSelected = true
-            
-        default:
-            print("type")
+        if let buttonType = CategoryButtonType(rawValue: type) {
+            switch buttonType {
+            case .new:
+                newButton.isSelected = true
+                
+            case .hot:
+                hotButton.isSelected = true
+                
+            case .deadlineApproach:
+                deadlineApproachButton.isSelected = true
+                
+            case .comingSoon:
+                comingSoonButton.isSelected = true
+                
+            case .comingSoon2:
+                comingSoonButton2.isSelected = true
+            }
         }
     }
 }

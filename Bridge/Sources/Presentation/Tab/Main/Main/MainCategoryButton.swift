@@ -10,15 +10,15 @@ import UIKit
 /// '신규', '인기', '마감임박', '출시예정' 카테고리를 나타내는 버튼
 final class MainCategoryButton: BaseButton {
     
-    private let type: CategoryButtonType
+    private let style: ButtonStyle
     
-    init(_ type: CategoryButtonType) {
-        self.type = type
+    init(_ style: ButtonStyle) {
+        self.style = style
         super.init(frame: .zero)
     }
     
     override func configureAttributes() {
-        let buttonImage = UIImage(named: type.normalImageName)?.resize(to: CGSize(width: 46, height: 46))
+        let buttonImage = UIImage(named: style.normalImageName)?.resize(to: CGSize(width: 46, height: 46))
         
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .clear
@@ -31,14 +31,14 @@ final class MainCategoryButton: BaseButton {
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.body3.font
         titleContainer.foregroundColor = BridgeColor.gray3
-        configuration.attributedTitle = AttributedString(type.title, attributes: titleContainer)
+        configuration.attributedTitle = AttributedString(style.title, attributes: titleContainer)
         
         self.configuration = configuration
         configurationUpdateHandler = { [weak self] button in
             guard let self else { return }
             
             let textColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray3
-            let imageName: String = button.state == .selected ? self.type.selectedImageName : self.type.normalImageName
+            let imageName: String = button.state == .selected ? self.style.selectedImageName : self.style.normalImageName
             
             let buttonImage = UIImage(named: imageName)?.resize(to: CGSize(width: 46, height: 46))
             
@@ -75,7 +75,7 @@ final class MainCategoryButton: BaseButton {
 }
 
 extension MainCategoryButton {
-    enum CategoryButtonType {
+    enum ButtonStyle {
         case new
         case hot
         case deadlineApproach
