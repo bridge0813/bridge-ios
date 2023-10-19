@@ -51,7 +51,7 @@ final class MainHotProjectCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let scrapButton = MainScrapButton()
+    private let scrapButton = MainBookmarkButton()
     
     // MARK: - Configure
     override func configureLayouts() {

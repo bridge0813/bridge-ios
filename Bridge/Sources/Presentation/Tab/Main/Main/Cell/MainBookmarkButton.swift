@@ -7,8 +7,8 @@
 
 import UIKit
 
-/// 모집글을 스크랩할 수 있는 버튼(Cell에서 사용됨)
-final class MainScrapButton: BaseButton {
+/// 모집글을 북마크할 수 있는 버튼(Cell에서 사용됨)
+final class MainBookmarkButton: BaseButton {
     override func configureAttributes() {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .clear

@@ -40,7 +40,7 @@ final class MainProjectCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let scrapButton = MainScrapButton()
+    private let scrapButton = MainBookmarkButton()
     
     private let recruitNumberLabel: UILabel = {
         let label = UILabel()
