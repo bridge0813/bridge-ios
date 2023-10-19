@@ -15,8 +15,15 @@ final class ProjectCell: BaseCollectionViewCell {
     private let rootFlexContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .white
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.02
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.layer.shadowRadius = 5
         view.layer.cornerRadius = 8
+        view.layer.borderWidth = 1.0
+        view.layer.borderColor = BridgeColor.gray8.cgColor
         view.clipsToBounds = true
+        view.layer.masksToBounds = false
         
         return view
     }()
@@ -87,6 +94,11 @@ final class ProjectCell: BaseCollectionViewCell {
         super.layoutSubviews()
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
+        
+        rootFlexContainer.layer.shadowPath = UIBezierPath(
+            roundedRect: rootFlexContainer.bounds,
+            cornerRadius: 8
+        ).cgPath
     }
     
     func configureCell() {
