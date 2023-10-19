@@ -1,5 +1,5 @@
 //
-//  BridgeMessageInputView.swift
+//  BridgeMessageInputBar.swift
 //  Bridge
 //
 //  Created by 정호윤 on 10/17/23.
@@ -10,20 +10,15 @@ import PinLayout
 import FlexLayout
 import RxSwift
 
-final class BridgeMessageInputView: BaseView {
+final class BridgeMessageInputBar: BaseView {
     // MARK: - UI
-    private let rootFlexContainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = BridgeColor.primary2
-        return view
-    }()
+    private let rootFlexContainer = UIView()
     
-    private let messageInputTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.font = BridgeFont.body2Long.font
-        textField.textColor = BridgeColor.gray1
-        return textField
+    private let messageInputTextView: UITextView = {
+        let textView = UITextView()
+        textView.font = BridgeFont.body2Long.font
+        textView.textColor = BridgeColor.gray1
+        return textView
     }()
     
     private let sendMessageButton = BridgeSendMessageButton()
@@ -34,9 +29,8 @@ final class BridgeMessageInputView: BaseView {
         
         let height: CGFloat = 38
         
-        rootFlexContainer.flex.direction(.row).alignItems(.center).paddingHorizontal(16).height(60).define { flex in
-            flex.addItem(messageInputTextField).width(250).height(height).marginHorizontal(8)
-            flex.addItem().grow(1)
+        rootFlexContainer.flex.direction(.row).paddingHorizontal(16).paddingVertical(11).height(60).define { flex in
+            flex.addItem(messageInputTextView).marginHorizontal(8).grow(1)
             flex.addItem(sendMessageButton).size(height)
         }
     }
@@ -48,7 +42,7 @@ final class BridgeMessageInputView: BaseView {
     }
     
     override func bind() {
-        messageInputTextField.rx.text
+        messageInputTextView.rx.text
             .orEmpty
             .distinctUntilChanged()
             .map { !$0.isEmpty }
@@ -58,7 +52,7 @@ final class BridgeMessageInputView: BaseView {
         sendMessageButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.messageInputTextField.text = nil
+                owner.messageInputTextView.text = nil
                 owner.sendMessageButton.isEnabled = false
             })
             .disposed(by: disposeBag)
@@ -66,9 +60,9 @@ final class BridgeMessageInputView: BaseView {
 }
 
 // MARK: - Observables
-extension BridgeMessageInputView {
+extension BridgeMessageInputBar {
     var sendMessage: Observable<String> {
-        messageInputTextField.rx.text.orEmpty
+        messageInputTextView.rx.text.orEmpty
             .sample(sendMessageButton.rx.tap)
     }
 }
