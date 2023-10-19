@@ -14,7 +14,11 @@ import Starscream
 
 final class ChatRoomViewController: BaseViewController {
     // MARK: - UI
-    private let rootFlexConatiner = UIView()
+    private let rootFlexConatiner: UIView = {
+        let view = UIView()
+        view.backgroundColor = BridgeColor.gray9
+        return view
+    }()
     
     private let messageTextView: UITextView = {
         let textView = UITextView()
@@ -24,7 +28,7 @@ final class ChatRoomViewController: BaseViewController {
         return textView
     }()
     
-    private let messageInputView = BridgeMessageInputView()
+    private let messageInputBar = BridgeMessageInputBar()
     
     private let viewModel: ChatRoomViewModel
     
@@ -36,16 +40,17 @@ final class ChatRoomViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        enableKeyboardHiding()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         tabBarController?.tabBar.isHidden = false
-    }
-    
-    // MARK: - Configuration
-    override func configureAttributes() {
-        tabBarController?.tabBar.isHidden = true
     }
     
     // MARK: - Layout
@@ -56,7 +61,8 @@ final class ChatRoomViewController: BaseViewController {
         
         rootFlexConatiner.flex.define { flex in
             flex.addItem(messageTextView).height(300).marginHorizontal(margin).marginVertical(20)
-            flex.addItem(messageInputView)
+            flex.addItem().grow(1)
+            flex.addItem(messageInputBar)
         }
     }
     
@@ -68,7 +74,11 @@ final class ChatRoomViewController: BaseViewController {
     
     // MARK: - Binding
     override func bind() {
-        let input = ChatRoomViewModel.Input(sendMessage: messageInputView.sendMessage)
+        messageInputBar.rx.keyboardLayoutChanged
+            .bind(to: messageInputBar.rx.yPosition)
+            .disposed(by: disposeBag)
+        
+        let input = ChatRoomViewModel.Input(sendMessage: messageInputBar.sendMessage)
         let output = viewModel.transform(input: input)
         
         output.messages
