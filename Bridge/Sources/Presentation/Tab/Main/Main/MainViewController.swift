@@ -294,7 +294,7 @@ extension MainViewController {
     private func configureCompositionalLayoutForNew(_ isFooterNeed: Bool) -> UICollectionViewLayout {
         let config = CompositionalLayoutConfiguration(
             groupHeight: 160,
-            sectionContentInsets: NSDirectionalEdgeInsets(top: 24.2, leading: 0, bottom: 80, trailing: 0),
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 24, leading: 0, bottom: 80, trailing: 0),
             boundaryItemKinds: isFooterNeed ? [.footer] : []
         )
         
@@ -391,8 +391,8 @@ extension MainViewController {
         
         let mainSectionConfig = CompositionalLayoutConfiguration(
             groupHeight: 160,
-            sectionContentInsets: NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 80, trailing: 0),
-            boundaryItemKinds: isFooterNeed ? [.footer] : [.header(height: 70)]
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 26.2, leading: 0, bottom: 80, trailing: 0),
+            boundaryItemKinds: isFooterNeed ? [.footer] : [.header(height: 42)]
         )
         
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in

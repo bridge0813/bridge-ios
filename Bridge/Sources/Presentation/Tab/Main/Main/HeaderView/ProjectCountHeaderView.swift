@@ -26,7 +26,7 @@ final class ProjectCountHeaderView: BaseCollectionReusableView {
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.row).alignItems(.end).define { flex in
-            flex.addItem(projectCountLabel).width(100).height(14).marginLeft(16)
+            flex.addItem(projectCountLabel).marginLeft(16)
         }
     }
     
