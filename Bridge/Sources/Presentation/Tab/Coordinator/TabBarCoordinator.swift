@@ -116,10 +116,10 @@ private extension TabBarCoordinator {
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         
         tabBarController.tabBar.layer.masksToBounds = false
-        tabBarController.tabBar.layer.shadowColor = BridgeColor.gray3.cgColor
-        tabBarController.tabBar.layer.shadowOpacity = 0.1
-        tabBarController.tabBar.layer.shadowOffset = CGSize(width: 0, height: -3)
-        tabBarController.tabBar.layer.shadowRadius = 10
+        tabBarController.tabBar.layer.shadowColor = UIColor.black.cgColor
+        tabBarController.tabBar.layer.shadowOpacity = 0.04
+        tabBarController.tabBar.layer.shadowOffset = CGSize(width: 0, height: -6)
+        tabBarController.tabBar.layer.shadowRadius = 10.0
     }
 }
 
