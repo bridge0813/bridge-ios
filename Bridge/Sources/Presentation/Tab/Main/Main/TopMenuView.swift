@@ -61,7 +61,7 @@ final class TopMenuView: BaseView {
     // MARK: - Configurations
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).height(48).define { flex in
+        rootFlexContainer.flex.direction(.column).height(44).define { flex in
             flex.addItem().direction(.row).alignItems(.center).define { flex in
                 flex.addItem(fieldCategoryAnchorButton).marginLeft(5)
                 flex.addItem().grow(1)

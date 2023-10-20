@@ -101,11 +101,11 @@ final class MainViewController: BaseViewController {
             flex.addItem(categoryView)
                 .position(.absolute)
                 .height(102)
-                .top(150)
+                .top(44)
             
             flex.addItem(collectionView)
                 .position(.absolute)
-                .top(150)
+                .top(146)
             
             flex.addItem(createProjectButton)
                 .position(.absolute)
@@ -232,7 +232,7 @@ extension MainViewController {
 // MARK: - 컬렉션 뷰의 Scroll 처리
 extension MainViewController {
     func updateTopMargin(categoryMargin: CGFloat, collectionViewMargin: CGFloat) {
-        topMenuView.dividerView.isHidden = categoryMargin == -54.0 ? false : true
+        topMenuView.dividerView.isHidden = categoryMargin == -58.0 ? false : true
         
         categoryView.flex
             .position(.absolute)
