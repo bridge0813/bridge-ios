@@ -122,15 +122,15 @@
 		7C55E6292AD7EFEF0018FA5D /* MainCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */; };
 		7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */; };
 		7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62C2AD867010018FA5D /* ProjectCell.swift */; };
-		7C55E62F2ADAEBFC0018FA5D /* HotProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62E2ADAEBFC0018FA5D /* HotProjectCell.swift */; };
 		7C55E6312ADBF6AA0018FA5D /* ProjectCountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6302ADBF6AA0018FA5D /* ProjectCountHeaderView.swift */; };
 		7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */; };
 		7C55E6372ADCF3CC0018FA5D /* ComingSoonPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6362ADCF3CC0018FA5D /* ComingSoonPlaceholderView.swift */; };
-		7C55E6392ADE4BB60018FA5D /* CompositionalLayoutConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6382ADE4BB60018FA5D /* CompositionalLayoutConfiguration.swift */; };
 		7C55E63B2ADEA2A40018FA5D /* MockProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E63A2ADEA2A40018FA5D /* MockProjectRepository.swift */; };
 		7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E63C2ADEE1CB0018FA5D /* MainBookmarkButton.swift */; };
-		7C55E6402ADF8DE20018FA5D /* EmptyProjectPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E63F2ADF8DE20018FA5D /* EmptyProjectPlaceholderView.swift */; };
 		7C55E6442AE17B270018FA5D /* TopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6432AE17B270018FA5D /* TopMenuView.swift */; };
+		7C55E64A2AE44B5F0018FA5D /* HotProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6492AE44B5F0018FA5D /* HotProjectCell.swift */; };
+		7C55E64C2AE44BA10018FA5D /* EmptyProjectPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E64B2AE44BA10018FA5D /* EmptyProjectPlaceholderView.swift */; };
+		7C55E64E2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E64D2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift */; };
 		7C569CF32A9F67C60063D362 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF22A9F67C60063D362 /* Project.swift */; };
 		7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */; };
 		7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */; };
@@ -273,15 +273,15 @@
 		7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryButton.swift; sourceTree = "<group>"; };
 		7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryView.swift; sourceTree = "<group>"; };
 		7C55E62C2AD867010018FA5D /* ProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
-		7C55E62E2ADAEBFC0018FA5D /* HotProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCell.swift; sourceTree = "<group>"; };
 		7C55E6302ADBF6AA0018FA5D /* ProjectCountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCountHeaderView.swift; sourceTree = "<group>"; };
 		7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDividerHeaderView.swift; sourceTree = "<group>"; };
 		7C55E6362ADCF3CC0018FA5D /* ComingSoonPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComingSoonPlaceholderView.swift; sourceTree = "<group>"; };
-		7C55E6382ADE4BB60018FA5D /* CompositionalLayoutConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutConfiguration.swift; sourceTree = "<group>"; };
 		7C55E63A2ADEA2A40018FA5D /* MockProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProjectRepository.swift; sourceTree = "<group>"; };
 		7C55E63C2ADEE1CB0018FA5D /* MainBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBookmarkButton.swift; sourceTree = "<group>"; };
-		7C55E63F2ADF8DE20018FA5D /* EmptyProjectPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProjectPlaceholderView.swift; sourceTree = "<group>"; };
 		7C55E6432AE17B270018FA5D /* TopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuView.swift; sourceTree = "<group>"; };
+		7C55E6492AE44B5F0018FA5D /* HotProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCell.swift; sourceTree = "<group>"; };
+		7C55E64B2AE44BA10018FA5D /* EmptyProjectPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProjectPlaceholderView.swift; sourceTree = "<group>"; };
+		7C55E64D2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutConfiguration.swift; sourceTree = "<group>"; };
 		7C569CF22A9F67C60063D362 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
@@ -940,8 +940,8 @@
 			isa = PBXGroup;
 			children = (
 				7C55E62C2AD867010018FA5D /* ProjectCell.swift */,
-				7C55E62E2ADAEBFC0018FA5D /* HotProjectCell.swift */,
 				7C55E63C2ADEE1CB0018FA5D /* MainBookmarkButton.swift */,
+				7C55E6492AE44B5F0018FA5D /* HotProjectCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -950,7 +950,7 @@
 			isa = PBXGroup;
 			children = (
 				7C55E6362ADCF3CC0018FA5D /* ComingSoonPlaceholderView.swift */,
-				7C55E63F2ADF8DE20018FA5D /* EmptyProjectPlaceholderView.swift */,
+				7C55E64B2AE44BA10018FA5D /* EmptyProjectPlaceholderView.swift */,
 			);
 			path = PlaceholderView;
 			sourceTree = "<group>";
@@ -1138,7 +1138,7 @@
 			children = (
 				7C4270132AA3779D009BE6AF /* MainViewModel.swift */,
 				7C4270152AA377C9009BE6AF /* MainViewController.swift */,
-				7C55E6382ADE4BB60018FA5D /* CompositionalLayoutConfiguration.swift */,
+				7C55E64D2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift */,
 				7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */,
 				7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */,
 				7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */,
@@ -1341,6 +1341,8 @@
 				7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */,
 				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
 				7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */,
+				7C55E64E2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift in Sources */,
+				7C55E64A2AE44B5F0018FA5D /* HotProjectCell.swift in Sources */,
 				7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */,
 				7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */,
 				7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */,
@@ -1363,6 +1365,7 @@
 				7C40CBC22AC5C2BF000F4C9F /* BridgeMediumButtonGroup.swift in Sources */,
 				7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
+				7C55E64C2AE44BA10018FA5D /* EmptyProjectPlaceholderView.swift in Sources */,
 				7B14DB382AB3040F009A00EB /* BridgePlaceholderView.swift in Sources */,
 				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
 				7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */,

@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-protocol NetworkService: ProjectNetworkService {
+protocol NetworkService {
     /// Interceptor가 필요 없는 경우 nil을 할당
     func request(_ endpoint: Endpoint, interceptor: Interceptor?) -> Observable<Data>
 }
