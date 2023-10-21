@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol SignUpUseCase {
-    func signUp(selectedFields: Set<String>) -> Single<Void>
+    func signUp(selectedFields: Set<String>) -> Observable<SignUpResult>
 }
 
 final class DefaultSignUpUseCase: SignUpUseCase {
@@ -19,7 +19,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
         self.authRepository = authRepository
     }
     
-    func signUp(selectedFields: Set<String>) -> Single<Void> {
+    func signUp(selectedFields: Set<String>) -> Observable<SignUpResult> {
         authRepository.signUp(selectedFields: selectedFields.map { $0 })
     }
 }

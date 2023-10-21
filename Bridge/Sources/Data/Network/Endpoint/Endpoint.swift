@@ -14,7 +14,6 @@ protocol Endpoint {
     
     var method: HTTPMethod { get }
     var headers: HTTPHeaders { get }
-    var tokenStorage: TokenStorage? { get }
     
     var body: Encodable? { get }
     
@@ -28,17 +27,7 @@ extension Endpoint {
     }
     
     var headers: HTTPHeaders {
-        var defaultHeaders = ["Content-Type": "application/json"]
-        
-        if let accessToken = tokenStorage?.fetchToken(for: .accessToken) {
-            defaultHeaders["Authorization"] = "Bearer \(accessToken)"
-        }
-        
-        return defaultHeaders
-    }
-    
-    var tokenStorage: TokenStorage? {
-        KeychainTokenStorage()
+        ["Content-Type": "application/json"]
     }
  
     func toURLRequest() -> URLRequest? {
@@ -83,12 +72,10 @@ extension URLRequest {
     }
     
     func setBody(_ body: Encodable?) -> URLRequest {
+        guard let body else { return self }
+        
         var urlRequest = self
-        
-        if let body {
-            urlRequest.httpBody = try? JSONEncoder().encode(body)
-        }
-        
+        urlRequest.httpBody = try? JSONEncoder().encode(body)
         return urlRequest
     }
 }

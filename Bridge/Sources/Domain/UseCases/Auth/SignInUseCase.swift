@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol SignInUseCase {
-    func signInWithApple(credentials: UserCredentials) -> Single<SignInResult>
+    func signInWithApple(credentials: UserCredentials) -> Observable<SignInResult>
 }
 
 final class DefaultSignInUseCase: SignInUseCase {
@@ -19,7 +19,7 @@ final class DefaultSignInUseCase: SignInUseCase {
         self.authRepository = authRepository
     }
     
-    func signInWithApple(credentials: UserCredentials) -> Single<SignInResult> {
+    func signInWithApple(credentials: UserCredentials) -> Observable<SignInResult> {
         authRepository.signInWithApple(credentials: credentials)
     }
 }

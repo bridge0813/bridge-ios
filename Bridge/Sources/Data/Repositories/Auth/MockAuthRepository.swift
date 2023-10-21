@@ -9,12 +9,12 @@ import RxSwift
 
 final class MockAuthRepository: AuthRepository {
     // MARK: - Sign in
-    func signInWithApple(credentials: UserCredentials) -> Single<SignInResult> {
-        Single.just(.needSignUp)
+    func signInWithApple(credentials: UserCredentials) -> Observable<SignInResult> {
+        .just(.needSignUp)
     }
     
     // MARK: - Sign up
-    func signUp(selectedFields: [String]) -> Single<Void> {
-        Single.just(())
+    func signUp(selectedFields: [String]) -> Observable<SignUpResult> {
+        .just(.failure)
     }
 }

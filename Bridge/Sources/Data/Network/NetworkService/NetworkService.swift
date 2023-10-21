@@ -8,17 +8,7 @@
 import Foundation
 import RxSwift
 
-typealias NetworkService = BasicNetworkService & ChatNetworkService
-
-protocol BasicNetworkService {
-    /// response body에 데이터가 없고, 성공 여부만 반환하는 함수
-    func request(_ endpoint: Endpoint) -> Single<Void>
-    
-    /// response body에 데이터가 있고, 해당 데이터를 디코딩해 반환하는 함수
-    func request<T: Decodable>(_ endpoint: Endpoint) -> Single<T>
-}
-
-protocol ChatNetworkService {
-    func requestTestChatRooms() -> Observable<[ChatRoomDTO]>
-    func leaveChatRoom(id: String) -> Single<Void>
+protocol NetworkService: ProjectNetworkService {
+    /// Interceptor가 필요 없는 경우 nil을 할당
+    func request(_ endpoint: Endpoint, interceptor: Interceptor?) -> Observable<Data>
 }

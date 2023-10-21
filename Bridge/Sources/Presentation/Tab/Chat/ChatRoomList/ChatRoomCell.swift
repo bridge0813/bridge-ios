@@ -12,18 +12,17 @@ import PinLayout
 final class ChatRoomCell: BaseTableViewCell {
     
     // MARK: - UI
-    // rootFlexContainer
     private let chatRoomBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray5
-        view.layer.cornerRadius = 16
+        view.backgroundColor = BridgeColor.gray10
+        view.layer.cornerRadius = 12
         return view
     }()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemGray4
-        imageView.layer.cornerRadius = 22
+        imageView.backgroundColor = BridgeColor.gray9
+        imageView.layer.cornerRadius = 24
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -31,21 +30,23 @@ final class ChatRoomCell: BaseTableViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 14)
+        label.font = BridgeFont.subtitle2.font
+        label.textColor = BridgeColor.gray1
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
-    private let latestMessageReceivedTimeLabel: UILabel = {
+    private let lastMessageReceivedTimeLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemGray
-        label.font = .systemFont(ofSize: 10)
+        label.font = BridgeFont.caption1.font
+        label.textColor = BridgeColor.gray4
         return label
     }()
     
-    private let latestMessageContentLabel: UILabel = {
+    private let lastMessageContentLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = BridgeFont.body2Long.font
+        label.textColor = BridgeColor.gray2
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
@@ -53,8 +54,8 @@ final class ChatRoomCell: BaseTableViewCell {
     private let unreadMessageCountLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .systemRed
-        label.textColor = .white
-        label.font = .systemFont(ofSize: 12)
+        label.font = BridgeFont.caption1.font
+        label.textColor = BridgeColor.gray9
         label.textAlignment = .center
         label.clipsToBounds = true
         return label
@@ -62,37 +63,38 @@ final class ChatRoomCell: BaseTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         profileImageView.image = nil
         nameLabel.text = ""
-        latestMessageReceivedTimeLabel.text = ""
-        latestMessageContentLabel.text = ""
+        lastMessageReceivedTimeLabel.text = ""
+        lastMessageContentLabel.text = ""
     }
     
     // MARK: - Layouts
     override func configureLayouts() {
         contentView.addSubview(chatRoomBackgroundView)
         
-        let componentOffset: CGFloat = 8
-        let containerOffset: CGFloat = 24
-        
-        chatRoomBackgroundView.flex.direction(.row).alignItems(.center).define { flex in
-            flex.addItem(profileImageView).size(44).marginLeft(containerOffset)
-            
-            flex.addItem().direction(.column).width(192).marginHorizontal(16).define { flex in
-                flex.addItem().direction(.row).marginBottom(componentOffset).define { flex in
-                    flex.addItem(nameLabel).shrink(1)
-                    flex.addItem().size(componentOffset)
-                    flex.addItem(latestMessageReceivedTimeLabel).grow(1)
+        chatRoomBackgroundView.flex
+            .direction(.row)
+            .alignItems(.center)
+            .paddingHorizontal(18)
+            .paddingVertical(20)
+            .define { flex in
+                flex.addItem(profileImageView).size(48).marginRight(12)
+                
+                flex.addItem().width(200).define { flex in
+                    flex.addItem().direction(.row).marginBottom(4).define { flex in
+                        flex.addItem(nameLabel).shrink(1).marginRight(8)
+                        flex.addItem(lastMessageReceivedTimeLabel).grow(1)
+                    }
+                    
+                    flex.addItem(lastMessageContentLabel)
                 }
                 
-                flex.addItem(latestMessageContentLabel)
+                flex.addItem().grow(1)  // spacer
+                
+                flex.addItem(unreadMessageCountLabel)
             }
-            
-            flex.addItem(unreadMessageCountLabel).position(.absolute).right(containerOffset)
-        }
     }
-    
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -108,8 +110,8 @@ final class ChatRoomCell: BaseTableViewCell {
 extension ChatRoomCell {
     func configureCell(with chatRoom: ChatRoom) {
         nameLabel.text = chatRoom.name
-        latestMessageReceivedTimeLabel.text = chatRoom.latestMessage.receivedTime
-        latestMessageContentLabel.text = chatRoom.latestMessage.content
+        lastMessageReceivedTimeLabel.text = chatRoom.lastMessage.receivedTime
+        lastMessageContentLabel.text = chatRoom.lastMessage.content
         configureUnreadMessageCountLabel(Int(chatRoom.unreadMessageCount) ?? 0)
     }
 }

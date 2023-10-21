@@ -13,7 +13,7 @@ final class ChatRoomListViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>
         let itemSelected: Observable<Int>
-        let leaveChatRoomTrigger: Observable<Int>
+        let leaveChatRoom: Observable<Int>
     }
     
     struct Output {
@@ -38,70 +38,66 @@ final class ChatRoomListViewModel: ViewModelType {
     }
     
     func transform(input: Input) -> Output {
-        let chatRooms = BehaviorRelay<[ChatRoom]>(value: [])
+        let chatRoomsRelay = BehaviorRelay<[ChatRoom]>(value: [])
         let viewState = BehaviorRelay<ViewState>(value: .general)
         
         input.viewWillAppear
             .withUnretained(self)
-            .flatMapLatest { owner, _ in
-                owner.fetchChatRooms()
+            .flatMap { owner, _ in
+                owner.fetchChatRoomsUseCase.fetchChatRooms()
             }
-            .bind(to: chatRooms)
+            .subscribe(
+                onNext: { chatRooms in
+                    if chatRooms.isEmpty { viewState.accept(.empty) }
+                    chatRoomsRelay.accept(chatRooms)
+                },
+                onError: { error in
+                    switch error as? NetworkError {
+                    case .statusCode(let statusCode):
+                        return statusCode == 401 ? viewState.accept(.notSignedIn) : viewState.accept(.error)
+                        
+                    default:
+                        return viewState.accept(.error)
+                    }
+                }
+            )
             .disposed(by: disposeBag)
 
         
         input.itemSelected
-            .withLatestFrom(chatRooms) { index, chatRooms in
+            .withLatestFrom(chatRoomsRelay) { index, chatRooms in
                 chatRooms[index]
             }
             .withUnretained(self)
             .subscribe(onNext: { owner, chatRoom in
-                owner.coordinator?.showChatRoomDetailViewController(of: chatRoom)  // 임시
+                owner.coordinator?.showChatRoomDetailViewController(of: chatRoom)
 
-                owner.coordinator?.showAlert(configuration: .signIn) {  // 테스트용
+                owner.coordinator?.showAlert(configuration: .signIn) {  // 알림 테스트용
                     owner.coordinator?.showSignInViewController()
                 }
             })
             .disposed(by: disposeBag)
         
-        input.leaveChatRoomTrigger
-            .withLatestFrom(chatRooms) { index, chatRooms in
+        input.leaveChatRoom
+            .withLatestFrom(chatRoomsRelay) { index, chatRooms in
                 chatRooms[index]
             }
             .withUnretained(self)
             .flatMap { owner, chatRoom in
-                owner.leaveChatRoomUseCase.execute(id: chatRoom.id)
+                owner.leaveChatRoomUseCase.leaveChatRoom(id: chatRoom.id)
             }
             .withUnretained(self)
-            .flatMap { owner, _ in  // 다시 fetch 해오는게 맞을지 고민
-                owner.fetchChatRooms()
+            .flatMap { owner, _ in
+                owner.fetchChatRoomsUseCase.fetchChatRooms()
             }
-            .bind(to: chatRooms)
+            .bind(to: chatRoomsRelay)
             .disposed(by: disposeBag)
         
-        // 뷰 상태 결정
-        // tbd
-        
         return Output(
-            chatRooms: chatRooms.asDriver(),
-            viewState: viewState.asDriver(onErrorJustReturn: .error)
+            chatRooms: chatRoomsRelay.asDriver(),
+            viewState: viewState.asDriver()
         )
     }
-}
-
-private extension ChatRoomListViewModel {
-    func fetchChatRooms() -> Observable<[ChatRoom]> {
-        fetchChatRoomsUseCase.execute()
-    }
-    
-    func configureViewState(userAuthState: UserAuthState, chatRooms: [ChatRoom]) -> ViewState {
-        switch userAuthState {
-        case .signedIn:     return chatRooms.isEmpty ? .empty : .general
-        case .notSignedIn:  return .notSignedIn
-        case .error:        return .error
-        }
-    }
-
 }
 
 // MARK: Data source
