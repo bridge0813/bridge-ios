@@ -47,8 +47,8 @@ final class EmptyProjectPlaceholderView: BaseCollectionReusableView {
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.alignItems(.center).define { flex in
-            flex.addItem(holderImageView).size(100).marginBottom(3.8)
-            flex.addItem(titleLabel).marginBottom(4)
+            flex.addItem(holderImageView).size(100).marginBottom(4)
+            flex.addItem(titleLabel).marginBottom(6)
             flex.addItem(subTitleLabel)
         }
     }

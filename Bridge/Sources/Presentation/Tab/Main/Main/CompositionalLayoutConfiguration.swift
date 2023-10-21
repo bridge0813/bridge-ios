@@ -50,7 +50,7 @@ struct CompositionalLayoutConfiguration {
 extension CompositionalLayoutConfiguration {
     enum BoundaryItemKind {
         case header(height: CGFloat)
-        case footer
+        case footer(topInset: CGFloat)
     }
     
     // 설정된 boundaryItemKinds 를 기반으로 헤더와 푸터를 설정
@@ -58,7 +58,7 @@ extension CompositionalLayoutConfiguration {
         let boundaryItems = boundaryItemKinds.map { kind in
             switch kind {
             case .header(let height): return configureHeaderLayout(height: height)
-            case .footer: return configureFooterLayout()
+            case .footer(let topInset): return configureFooterLayout(topInset: topInset)
             }
         }
         
@@ -77,7 +77,7 @@ extension CompositionalLayoutConfiguration {
         )
     }
     
-    private func configureFooterLayout() -> NSCollectionLayoutBoundarySupplementaryItem {
+    private func configureFooterLayout(topInset: CGFloat) -> NSCollectionLayoutBoundarySupplementaryItem {
         let footerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
             heightDimension: .fractionalHeight(1)
@@ -88,7 +88,7 @@ extension CompositionalLayoutConfiguration {
             elementKind: UICollectionView.elementKindSectionFooter,
             alignment: .bottom
         )
-        footer.contentInsets = NSDirectionalEdgeInsets(top: 52, leading: 0, bottom: 0, trailing: 0)
+        footer.contentInsets = NSDirectionalEdgeInsets(top: topInset, leading: 0, bottom: 0, trailing: 0)
         
         return footer
     }
