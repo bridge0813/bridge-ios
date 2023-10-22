@@ -71,7 +71,7 @@ final class DropDown: BaseView {
     
     private var bottomOffset: CGPoint
     
-    private var dataSource: [String]
+    var dataSource: [String]
     private var selectedItemIndexRow: IndexRow?  // 선택한 항목을 추적
     
     private var tableHeight: CGFloat {
@@ -99,11 +99,11 @@ final class DropDown: BaseView {
     init(
         anchorView: AnchorView,
         bottomOffset: CGPoint = .zero,
-        dataSource: [String],
+        dataSource: [String] = [],
         cellHeight: CGFloat = DropdownConstant.DropdownUI.rowHeight,
         itemTextColor: UIColor = DropdownConstant.DropdownItem.textColor,
         itemTextFont: UIFont = DropdownConstant.DropdownItem.textFont,
-        selectedItemTextColor: UIColor = DropdownConstant.DropdownItem.selectedTextColor,
+        selectedItemTextColor: UIColor? = nil,
         selectedItemBackgroundColor: UIColor = DropdownConstant.DropdownItem.selectedBackgroundColor,
         separatorColor: UIColor = DropdownConstant.DropdownUI.separatorColor,
         tableViewBackgroundColor: UIColor = .white,
@@ -126,7 +126,7 @@ final class DropDown: BaseView {
         self.cellHeight = cellHeight
         self.itemTextColor = itemTextColor
         self.itemTextFont = itemTextFont
-        self.selectedItemTextColor = selectedItemTextColor
+        self.selectedItemTextColor = selectedItemTextColor ?? itemTextColor
         self.selectedItemBackgroundColor = selectedItemBackgroundColor
         self.separatorColor = separatorColor
         self.tableViewBackgroundColor = tableViewBackgroundColor
@@ -369,6 +369,7 @@ extension DropDown {
 extension DropDown {
     
     func show() {
+        
         willShow.onNext(())
 
         // 계산된 레이아웃이 화면에 표시될 수 없는 경우
@@ -442,7 +443,8 @@ extension DropDown: UITableViewDataSource {
         cell.optionLabel.textColor = itemTextColor
         cell.optionLabel.font = itemTextFont
         cell.selectedBackgroundColor = selectedItemBackgroundColor
-        cell.configureCell()
+        cell.selectedTextColor = selectedItemTextColor
+        cell.nomalTextColor = itemTextColor
         cell.selectionStyle = .none
         
         customCellConfiguration?(indexPath.row, dataSource[indexPath.row], cell)
@@ -462,7 +464,7 @@ extension DropDown: UITableViewDelegate {
         selectedItemIndexRow = indexPath.row
         
         itemSelected.onNext((indexRow: indexPath.row, title: dataSource[indexPath.row]))
-        
+    
         // 앵커뷰가 UIBarButton일 때 경우 메뉴처럼 사용되기 때문에 선택된 Cell이 무엇인지 표시 할 필요가 없음.
         if anchorView as? UIBarButtonItem != nil {
             selectedItemIndexRow = nil

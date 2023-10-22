@@ -24,15 +24,15 @@ class BaseDropdownCell: BaseTableViewCell {
     }()
     
     var selectedBackgroundColor: UIColor?
-    var highlightTextColor: UIColor?
-    var normalTextColor: UIColor?
+    var selectedTextColor: UIColor?
+    var nomalTextColor: UIColor?
     
     // MARK: - Layouts
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         
-        rootFlexContainer.flex.direction(.row).alignItems(.center).padding(10).define { flex in
-            flex.addItem(optionLabel).marginLeft(10).marginRight(20)
+        rootFlexContainer.flex.direction(.row).alignItems(.center).define { flex in
+            flex.addItem(optionLabel).marginHorizontal(14)
         }
     }
     
@@ -44,10 +44,6 @@ class BaseDropdownCell: BaseTableViewCell {
     }
     
     // MARK: - Configuration
-    func configureCell() {
-        
-    }
-    
     override var isSelected: Bool {
         willSet {
             setSelected(newValue, animated: false)
@@ -56,5 +52,6 @@ class BaseDropdownCell: BaseTableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         backgroundColor = selected ? selectedBackgroundColor : .clear
+        optionLabel.textColor = selected ? selectedTextColor : nomalTextColor
     }
 }

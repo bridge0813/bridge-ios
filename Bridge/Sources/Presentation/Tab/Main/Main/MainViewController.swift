@@ -12,85 +12,53 @@ import RxCocoa
 import RxSwift
 
 final class MainViewController: BaseViewController {
-    // MARK: - Properties
-    private let rootFlexContainer = UIView()
-    private lazy var projectCollectionView: UICollectionView = {
-        let layout = createCompositionalLayout()
+    // MARK: - UI
+    private let rootFlexContainer: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
         
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(HotProjectCollectionViewCell.self)
-        collectionView.register(ProjectCollectionViewCell.self)
+        return view
+    }()
+    
+    private let placeholderView: PlaceholderView = {
+        let placeholderView = PlaceholderView()
+        placeholderView.backgroundColor = BridgeColor.gray9
+        placeholderView.isHidden = true
+        
+        return placeholderView
+    }()
+    
+    private let topMenuView = TopMenuView()
+    private let categoryView = MainCategoryView()
+    
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = BridgeColor.gray9
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.register(ProjectCell.self)
+        collectionView.register(HotProjectCell.self)
         collectionView.register(
-            ProjectSectionHeaderView.self,
+            ProjectCountHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
         )
         
+        collectionView.register(
+            SectionDividerHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
+        )
+
         return collectionView
     }()
     
-    private lazy var goToNotificationButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(
-            image: UIImage(systemName: "line.3.horizontal"),
-            style: .done,
-            target: self,
-            action: nil
-        )
-        
-        return button
-    }()
-   
-    let restrictionDropdownAnchorView = RestrictionDropdownAnchorView()
-    private lazy var restrictionDropdown = DropDown(
-        anchorView: restrictionDropdownAnchorView,
-        bottomOffset: CGPoint(x: 0, y: 7),
-        dataSource: ["제한 없음", "학생", "현직자", "취준생"],
-        selectedItemBackgroundColor: BridgeColor.primary2
-    )
+    private let createProjectButton = BridgeCreateProjectButton()
     
-
-    private lazy var chatRoomMenuDropdown = DropDown(
-        anchorView: goToNotificationButton,
-        dataSource: ["채팅방 나가기", "신고하기", "알림 끄기"],
-        cellHeight: 132 / 3,
-        itemTextColor: BridgeColor.gray3,
-        width: 147,
-        cornerRadius: 4,
-        customCellType: ChatRoomMenuCell.self,
-        customCellConfiguration: { index, _, cell in
-            guard let cell = cell as? ChatRoomMenuCell else { return }
-            
-            let imageStringArray: [String] = ["leave", "warning", "bell.crossline"]
-            
-            cell.optionImageView.image = UIImage(named: imageStringArray[index])?
-                .resize(to: CGSize(width: 14.43, height: 13.33))
-                .withRenderingMode(.alwaysTemplate)
-        }
-    )
-
-    private let filterButton: UIButton = {
-        let button = UIButton()
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
-        let buttonImage = UIImage(systemName: "line.3.horizontal", withConfiguration: imageConfig)
-        button.setImage(buttonImage, for: .normal)
-        button.tintColor = .black
-        
-        return button
-    }()
-
-    private let searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.placeholder = "검색해주세요."
-        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)  // 서치바 라인 삭제
-        return searchBar
-    }()
-    
-    private let createProjectButton = BrideCreateProjectButton()
-    
+    // MARK: - Properties
     private let viewModel: MainViewModel
     
     typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
     typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Project>
     private var dataSource: DataSource?
+    
     
     // MARK: - Initializer
     init(viewModel: MainViewModel) {
@@ -101,86 +69,47 @@ final class MainViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = BridgeColor.gray3
-        setRestrictionMenuDropdown()
-        setChatRoomMenuDropdown()
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showDropDown))
-        restrictionDropdownAnchorView.addGestureRecognizer(tapGesture)
-        
-        
-        goToNotificationButton.rx.tap.subscribe(onNext: { [weak self] in
-            self?.chatRoomMenuDropdown.show()
-        })
-        .disposed(by: disposeBag)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        configureNavigationUI()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        rootFlexContainer.pin.all(view.pin.safeArea).marginTop(10)
+        
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.bringSubviewToFront(topMenuView)
         rootFlexContainer.flex.layout()
     }
     
-    // MARK: - Methods
-    
-    @objc
-    func showDropDown() {
-        restrictionDropdown.show()
-    }
-    
-    private func setRestrictionMenuDropdown() {
-        restrictionDropdown.itemSelected
-            .withUnretained(self)
-            .subscribe(onNext: { owner, item in
-                owner.restrictionDropdownAnchorView.updateViewForDropdownState(false, text: item.title)
-            })
-            .disposed(by: disposeBag)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        restrictionDropdown.willShow
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.restrictionDropdownAnchorView.updateViewForDropdownState(true)
-            })
-            .disposed(by: disposeBag)
-        
-        restrictionDropdown.willHide
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.restrictionDropdownAnchorView.updateViewForDropdownState(false)
-            })
-            .disposed(by: disposeBag)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    private func setChatRoomMenuDropdown() {
-        chatRoomMenuDropdown.itemSelected
-            .subscribe(onNext: { item in
-                print(item.title)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func configureNavigationUI() {
-        navigationItem.rightBarButtonItem = goToNotificationButton
-//        navigationController?.navigationBar.tintColor = .black
-    }
-    
+    // MARK: - Configure
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        
         rootFlexContainer.flex.direction(.column).define { flex in
-            // 테스트용
-            flex.addItem().height(300).direction(.row).alignItems(.center).define { flex in
-                flex.addItem(restrictionDropdownAnchorView).width(343).height(52).marginLeft(30)
-            }
+            flex.addItem(topMenuView)
             
-            /// 컬렉션 뷰
-            flex.addItem(projectCollectionView).grow(1).marginTop(20)
+            flex.addItem(categoryView)
+                .position(.absolute)
+                .height(102)
+                .top(44)
+            
+            flex.addItem(collectionView)
+                .position(.absolute)
+                .top(146)
+            
+            flex.addItem(placeholderView)
+                .position(.absolute)
+                .width(100%)
+                .height(75%)
+                .top(146)
             
             flex.addItem(createProjectButton)
                 .position(.absolute)
@@ -191,176 +120,86 @@ final class MainViewController: BaseViewController {
         }
     }
     
-    override func configureAttributes() {
-        configureCellDataSource()
-        configureHeaderDataSource()
-        configureNavigationUI()
-    }
-    
+    // MARK: - Bind
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            didScroll: projectCollectionView.rx.contentOffset.asObservable(),
-            notificationButtonTapped: filterButton.rx.tap.asObservable(),
-            filterButtonTapped: filterButton.rx.tap.asObservable(),
-            searchButtonTapped: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text),
-            itemSelected: projectCollectionView.rx.itemSelected.asObservable(),
-            createButtonTapped: createProjectButton.rx.tap.asObservable()
+            didScroll: collectionView.rx.contentOffset.asObservable(),
+            filterButtonTapped: topMenuView.filterButton.rx.tap.asObservable(),
+            itemSelected: collectionView.rx.itemSelected.asObservable(),
+            createButtonTapped: createProjectButton.rx.tap.asObservable(),
+            categoryButtonTapped: categoryView.categoryButtonTapped
         )
         let output = viewModel.transform(input: input)
         
-        output.hotProjects
-            .drive(onNext: { [weak self] hotProjects in
-                self?.applySectionSnapshot(to: .hot, with: hotProjects)
-            })
-            .disposed(by: disposeBag)
-        
+        // MARK: - Project 데이터
+        // viewWillAppear에 의해서 가져온 데이터로 기본값은 신규 데이터.
         output.projects
             .drive(onNext: { [weak self] projects in
-                self?.applySectionSnapshot(to: .main, with: projects)
+                self?.updateCollectionViewForNew(with: projects)
+                self?.categoryView.updateButtonState("new")
             })
             .disposed(by: disposeBag)
         
-        output.layoutMode
+        // MARK: - 카테고리 버튼에 따라 컬렉션뷰(DataSource, Layout) 변경
+        output.buttonTypeAndProjects
+            .drive(onNext: { [weak self] type, projects in
+                switch type {
+                case "new":
+                    self?.updateCollectionViewForNew(with: projects)
+                    
+                case "hot":
+                    self?.updateCollectionViewForHot(with: projects)
+                    self?.applySectionSnapshot(to: .hot, with: Array(projects.prefix(3)))
+                    self?.applySectionSnapshot(to: .main, with: Array(projects.dropFirst(3)))
+                    
+                case "deadlineApproach":
+                    self?.updateCollectionViewForDeadline(with: projects)
+                    
+                case "comingSoon", "comingSoon2":
+                    self?.updateCollectionViewForComingSoon(with: projects)
+                    
+                default:
+                    print(type)
+                }
+                
+                self?.categoryView.updateButtonState(type)  // 버튼 상태 변경
+            })
+            .disposed(by: disposeBag)
+        
+        // MARK: - 스크롤에 따른 레이아웃 처리(버튼, Header 처리)
+        output.buttonDisplayMode
             .drive(onNext: { [weak self] mode in
                 self?.animateLayoutChange(to: mode)
             })
             .disposed(by: disposeBag)
-    }
-}
-// MARK: - CompositionalLayout
-extension MainViewController {
-    private func createCompositionalLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
-            let section = MainViewModel.Section.allCases[sectionIndex]
+        
+        output.categoryAlpha
+            .drive(onNext: { [weak self] alpha in
+                self?.categoryView.alpha = alpha
+            })
+            .disposed(by: disposeBag)
+        
+        output.topMargins
+            .drive(onNext: { [weak self] categoryMargin, collectionViewMargin in
+                self?.updateTopMargin(categoryMargin: categoryMargin, collectionViewMargin: collectionViewMargin)
+            })
+            .disposed(by: disposeBag)
+        
+        // TODO: - 바인딩 처리 예정
+        topMenuView.fieldCategoryAnchorButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] in
+                self?.topMenuView.fieldDropdown.show()
+            })
+            .disposed(by: disposeBag)
             
-            switch section {
-            case .hot: return self?.createHotProjectSection()
-            case .main: return self?.createProjectSection()
-            }
-        }
-        return layout
-    }
-    
-    private func createHotProjectSection() -> NSCollectionLayoutSection {
-        /// item 설정
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         
-        /// header 설정
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(60)
-        )
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        
-        /// group 설정
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(170),
-            heightDimension: .absolute(170)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        /// section 설정
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header]
-        section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 30, trailing: 10)
-        
-        return section
-    }
-    
-    private func createProjectSection() -> NSCollectionLayoutSection {
-        /// item 설정
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        
-        /// header 설정
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(60)
-        )
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        
-        /// group 설정
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(180)
-        )
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        
-        /// section 설정
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 5, trailing: 10)
-        
-        return section
-    }
-}
-
-// MARK: - Diffable data source
-extension MainViewController {
-    private func configureCellDataSource() {
-        dataSource = DataSource(
-            collectionView: projectCollectionView
-        ) { collectionView, indexPath, item in
-            
-            let section = MainViewModel.Section.allCases[indexPath.section]
-            
-            switch section {
-            case .hot:
-                guard let cell = collectionView.dequeueReusableCell(
-                    HotProjectCollectionViewCell.self,
-                    for: indexPath)
-                else { return UICollectionViewCell() }
-                
-                cell.configureCell(with: item)
-                return cell
-                
-            case .main:
-                guard let cell = collectionView.dequeueReusableCell(
-                    ProjectCollectionViewCell.self,
-                    for: indexPath)
-                else { return UICollectionViewCell() }
-                
-                cell.configureCell(with: item)
-                return cell
-            }
-        }
-    }
-    
-    private func configureHeaderDataSource() {
-        dataSource?.supplementaryViewProvider = { collectionview, kind, indexPath in
-            guard kind == UICollectionView.elementKindSectionHeader else {
-                return UICollectionReusableView()
-            }
-                
-            guard let headerView = collectionview.dequeueReusableSupplementaryView(
-                ProjectSectionHeaderView.self,
-                ofKind: kind,
-                for: indexPath
-            ) else {
-                return UICollectionReusableView()
-            }
-                
-            headerView.configureHeader(with: indexPath)
-            
-            return headerView
-        }
-    }
-    
-    private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [Project]) {
-        var snapshot = SectionSnapshot()
-        snapshot.append(projects)
-        dataSource?.apply(snapshot, to: section)
+        topMenuView.fieldDropdown.itemSelected
+            .withUnretained(self)
+            .subscribe(onNext: { owner, item in
+                owner.topMenuView.fieldCategoryAnchorButton.updateTitle(item.title)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -370,11 +209,11 @@ extension MainViewController {
         UIView.animate(
             withDuration: 0.2,
             animations: { [weak self] in
-                self?.updateButtonConfiguration(for: mode)
+                self?.createProjectButton.updateButtonConfiguration(for: mode)
                 self?.updateButtonLayout(for: mode)
             },
             completion: { [weak self] _ in
-                self?.updateButtonTitle(for: mode)
+                self?.createProjectButton.updateButtonTitle(for: mode)
                 self?.createProjectButton.contentHorizontalAlignment = .center
             }
         )
@@ -392,35 +231,208 @@ extension MainViewController {
         
         rootFlexContainer.flex.layout()
     }
+}
+
+// MARK: - 컬렉션 뷰의 Scroll 처리
+extension MainViewController {
+    func updateTopMargin(categoryMargin: CGFloat, collectionViewMargin: CGFloat) {
+        topMenuView.dividerView.isHidden = categoryMargin == -58.0 ? false : true
+        
+        categoryView.flex
+            .position(.absolute)
+            .width(100%)
+            .height(102)
+            .top(categoryMargin)
+        
+        collectionView.flex
+            .position(.absolute)
+            .width(100%)
+            .height(100%)
+            .top(collectionViewMargin)
     
-    // MARK: - Button Configuration
-    private func updateButtonConfiguration(for state: MainViewModel.CreateButtonDisplayState) {
-        switch state {
-        case .both:
-            createProjectButton.titleLabel?.alpha = 1
-            updateButtonTitle(for: state)
+        rootFlexContainer.flex.layout()
+    }
+}
+
+// MARK: - 카테고리 -> 신규일 경우
+extension MainViewController {
+    private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [Project]) {
+        var snapshot = SectionSnapshot()
+        snapshot.append(projects)
+        dataSource?.apply(snapshot, to: section)
+    }
+    
+    /// 섹션이 하나일 때, 기본적인 DataSource(신규, 마감임박, 출시예정에서 사용됨)
+    private func configureDataSource() {
+        dataSource = DataSource(
+            collectionView: collectionView
+        ) { collectionView, indexPath, _ in
+            guard let cell = collectionView.dequeueReusableCell(ProjectCell.self, for: indexPath) else {
+                return UICollectionViewCell()
+            }
             
-        case .only:
-            createProjectButton.titleLabel?.alpha = 0
-            createProjectButton.contentHorizontalAlignment = .left
+            return cell
         }
     }
     
-    // MARK: - Button Title
-    private func updateButtonTitle(for state: MainViewModel.CreateButtonDisplayState) {
-        var updatedConfiguration = createProjectButton.configuration
+    private func updateCollectionViewForNew(with projects: [Project]) {
+        placeholderView.configureHolderView(.emptyProject)
+        placeholderView.projectCountLabel.isHidden = true
+        placeholderView.isHidden = !projects.isEmpty
+        configureDataSource()
+        collectionView.collectionViewLayout = configureCompositionalLayoutForNew()
+        applySectionSnapshot(to: .main, with: projects)
+    }
+    
+    private func configureCompositionalLayoutForNew() -> UICollectionViewLayout {
+        let config = CompositionalLayoutConfiguration(
+            groupHeight: 160,
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 24, leading: 0, bottom: 80, trailing: 0),
+            headerHeight: nil
+        )
         
-        switch state {
-        case .both:
-            var titleContainer = AttributeContainer()
-            titleContainer.font = BridgeFont.subtitle1.font
-            titleContainer.foregroundColor = BridgeColor.gray10
-            updatedConfiguration?.attributedTitle = AttributedString("글쓰기", attributes: titleContainer)
+        return config.configureCompositionalLayout()
+    }
+}
+
+// MARK: - 카테고리 -> 인기일 경우
+extension MainViewController {
+    private func updateCollectionViewForHot(with projects: [Project]) {
+        placeholderView.configureHolderView(.emptyProject)
+        placeholderView.projectCountLabel.isHidden = false
+        placeholderView.isHidden = !projects.isEmpty
+        configureDataSourceForHot()
+        configureSupplementaryViewForHot(projects.count)
+        collectionView.collectionViewLayout = configureCompositionalLayoutForHot()
+    }
+    
+    private func configureDataSourceForHot() {
+        dataSource = DataSource(
+            collectionView: collectionView
+        ) { collectionView, indexPath, _ in
             
-        case .only:
-            updatedConfiguration?.attributedTitle = nil
+            let section = MainViewModel.Section.allCases[indexPath.section]
+            
+            switch section {
+            case .hot:
+                guard let cell = collectionView.dequeueReusableCell(HotProjectCell.self, for: indexPath) else {
+                    return UICollectionViewCell()
+                }
+                
+                return cell
+                
+            case .main:
+                guard let cell = collectionView.dequeueReusableCell(ProjectCell.self, for: indexPath) else {
+                    return UICollectionViewCell()
+                }
+                
+                return cell
+            }
+        }
+    }
+    
+    private func configureSupplementaryViewForHot(_ count: Int) {
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            let section = MainViewModel.Section.allCases[indexPath.section]
+            
+            switch section {
+            case .hot:
+                guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                    ProjectCountHeaderView.self,
+                    ofKind: kind,
+                    for: indexPath
+                ) else { return UICollectionReusableView() }
+                
+                headerView.configureCountLabel(with: String(count))
+                
+                return headerView
+                
+            case .main:
+                guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                    SectionDividerHeaderView.self,
+                    ofKind: kind,
+                    for: indexPath
+                ) else { return UICollectionReusableView() }
+                
+                return headerView
+            }
+        }
+    }
+    
+    private func configureCompositionalLayoutForHot() -> UICollectionViewLayout {
+        let hotSectionConfig = CompositionalLayoutConfiguration(
+            groupHeight: 110,
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 16.2, leading: 0, bottom: 0, trailing: 0),
+            headerHeight: 38
+        )
+        
+        let mainSectionConfig = CompositionalLayoutConfiguration(
+            groupHeight: 160,
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 26.2, leading: 0, bottom: 80, trailing: 0),
+            headerHeight: 42
+        )
+        
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
+            let section = MainViewModel.Section.allCases[sectionIndex]
+            
+            switch section {
+            case .hot:
+                return hotSectionConfig.configureSectionLayout()
+                
+            case .main:
+                return mainSectionConfig.configureSectionLayout()
+            }
         }
         
-        createProjectButton.configuration = updatedConfiguration
+        return layout
+    }
+}
+
+// MARK: - 카테고리 -> 마감임박일 경우
+extension MainViewController {
+    private func updateCollectionViewForDeadline(with projects: [Project]) {
+        placeholderView.configureHolderView(.emptyProject)
+        placeholderView.projectCountLabel.isHidden = false
+        placeholderView.isHidden = !projects.isEmpty
+        configureDataSource()
+        configureSupplementaryViewForDeadline(projects.count)
+        collectionView.collectionViewLayout = configureCompositionalLayoutForDeadline()
+        applySectionSnapshot(to: .main, with: projects)
+    }
+    
+    private func configureSupplementaryViewForDeadline(_ count: Int) {
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                ProjectCountHeaderView.self,
+                ofKind: kind,
+                for: indexPath
+            ) else { return UICollectionReusableView() }
+            
+            headerView.configureCountLabel(with: String(count))
+            
+            return headerView
+        }
+    }
+    
+    private func configureCompositionalLayoutForDeadline() -> UICollectionViewLayout {
+        let config = CompositionalLayoutConfiguration(
+            groupHeight: 160,
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 16.2, leading: 0, bottom: 80, trailing: 0),
+            headerHeight: 38
+        )
+        
+        return config.configureCompositionalLayout()
+    }
+}
+
+// MARK: - 카테고리 -> 출시예정일 경우
+extension MainViewController {
+    private func updateCollectionViewForComingSoon(with projects: [Project]) {
+        placeholderView.configureHolderView(.comingSoon)
+        placeholderView.projectCountLabel.isHidden = true
+        placeholderView.isHidden = false
+        configureDataSource()
+        collectionView.collectionViewLayout = configureCompositionalLayoutForNew()
+        applySectionSnapshot(to: .main, with: projects)
     }
 }

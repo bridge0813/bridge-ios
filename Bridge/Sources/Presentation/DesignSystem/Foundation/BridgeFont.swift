@@ -44,7 +44,7 @@ public enum BridgeFont {
             return UIFont(name: "Pretendard-Bold", size: 12) ?? .systemFont(ofSize: 12, weight: .bold)
             
         case .body4:
-            return UIFont(name: "Pretendard-SemiBold", size: 24) ?? .systemFont(ofSize: 24, weight: .semibold)
+            return UIFont(name: "Pretendard-SemiBold", size: 12) ?? .systemFont(ofSize: 12, weight: .semibold)
             
         case .caption1:
             return UIFont(name: "Pretendard-Medium", size: 12) ?? .systemFont(ofSize: 12, weight: .medium)

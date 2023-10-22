@@ -14,17 +14,18 @@ final class MainViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
         let didScroll: Observable<CGPoint>
-        let notificationButtonTapped: Observable<Void>
         let filterButtonTapped: Observable<Void>
-        let searchButtonTapped: Observable<String?>
         let itemSelected: Observable<IndexPath>
         let createButtonTapped: Observable<Void>
+        let categoryButtonTapped: Observable<String>
     }
     
     struct Output {
-        let hotProjects: Driver<[Project]>
         let projects: Driver<[Project]>
-        let layoutMode: Driver<CreateButtonDisplayState>
+        let buttonTypeAndProjects: Driver<(String, [Project])>
+        let buttonDisplayMode: Driver<CreateButtonDisplayState>
+        let categoryAlpha: Driver<CGFloat>  // 카테고리 알파값
+        let topMargins: Driver<(CGFloat, CGFloat)>  // 카테고리, 컬렉션 뷰의 마진
     }
 
     // MARK: - Properties
@@ -46,37 +47,40 @@ final class MainViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let hotProjects = BehaviorRelay<[Project]>(value: [])
-        let projects = BehaviorRelay<[Project]>(value: [])
-        
         // MARK: - Fetch Projects
-        input.viewWillAppear
-            .withUnretained(self)
-            .flatMapLatest { owner, _ -> Observable<[Project]> in
-                return owner.fetchHotProjectsUseCase.execute()
-            }
-            .distinctUntilChanged()
-            .bind(to: hotProjects)
-            .disposed(by: disposeBag)
-
-        input.viewWillAppear
+        let projects = input.viewWillAppear
             .withUnretained(self)
             .flatMapLatest { owner, _ -> Observable<[Project]> in
                 return owner.fetchProjectsUseCase.execute()
             }
             .distinctUntilChanged()
-            .bind(to: projects)
-            .disposed(by: disposeBag)
         
+        let buttonTypeAndProjects = input.categoryButtonTapped
+            .withUnretained(self)
+            .flatMapLatest { owner, type -> Observable<(String, [Project])> in
+                switch type {
+                case "new":
+                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 신규 데이터
+                    
+                case "hot":
+                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 인기 데이터
+                    
+                case "deadlineApproach":
+                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 마감임박 데이터
+                    
+                case "comingSoon", "comingSoon2":
+                    return .just((type, []))
+                    
+                default:
+                    return .just((type, []))
+                }
+            }
+            
         // MARK: - Item Selected
         input.itemSelected
             .withUnretained(self)
-            .map { owner, indexPath in
-                owner.findProjectByIndex(indexPath, hotProjects: hotProjects.value, projects: projects.value)
-            }
-            .withUnretained(self)
-            .subscribe(onNext: { owner, project in
-                owner.coordinator?.connectToProjectDetailFlow(with: project.id)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.connectToProjectDetailFlow(with: "")
             })
             .disposed(by: disposeBag)
         
@@ -84,27 +88,50 @@ final class MainViewModel: ViewModelType {
         let layoutMode = input.didScroll
             .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
             .distinctUntilChanged()
+            .observe(on: MainScheduler.asyncInstance)
+        
+        let categoryAlpha = input.didScroll
+            .map { offset in
+                
+                let categoryHeight: CGFloat = 102.0
+                
+                // 알파 값의 최소 및 최대 범위 설정
+                let minAlpha: CGFloat = 0.0
+                let maxAlpha: CGFloat = 1.0
+                let alpha = max(minAlpha, maxAlpha - (offset.y / categoryHeight))
+                
+                return alpha
+            }
+            .observe(on: MainScheduler.asyncInstance)
+        
+        let topMargins = input.didScroll
+            .map { offset in
+                let categoryHeight: CGFloat = 102.0
+                let minTop: CGFloat = 44.0
+                
+                // 컬렉션뷰 마진계산
+                let maxCollectionViewMargin: CGFloat = 146.0
+                let collectionViewMargin = min(
+                    maxCollectionViewMargin,
+                    max(
+                        minTop,
+                        maxCollectionViewMargin - (offset.y * (maxCollectionViewMargin - minTop) / categoryHeight)
+                    )
+                )
+                
+                // 카테고리 마진계산
+                let minCategoryMargin: CGFloat = minTop - categoryHeight
+                let categoryMargin = min(minTop, max(minCategoryMargin, minTop - offset.y))
+                
+                return (categoryMargin, collectionViewMargin)
+            }
+            .observe(on: MainScheduler.asyncInstance)
         
         // MARK: - Button Actions
-        input.notificationButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.connectToNotificationFlow()
-            })
-            .disposed(by: disposeBag)
-        
         input.filterButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.connectToProjectFilteringFlow()
-            })
-            .disposed(by: disposeBag)
-    
-        input.searchButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, text in
-                guard let text else { return }
-                owner.coordinator?.connectToProjectSearchFlow(with: text)
             })
             .disposed(by: disposeBag)
         
@@ -116,9 +143,11 @@ final class MainViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            hotProjects: hotProjects.asDriver(onErrorJustReturn: [Project.onError]),
             projects: projects.asDriver(onErrorJustReturn: [Project.onError]),
-            layoutMode: layoutMode.asDriver(onErrorJustReturn: .both)
+            buttonTypeAndProjects: buttonTypeAndProjects.asDriver(onErrorJustReturn: ("new", [])),
+            buttonDisplayMode: layoutMode.asDriver(onErrorJustReturn: .both),
+            categoryAlpha: categoryAlpha.asDriver(onErrorJustReturn: 1),
+            topMargins: topMargins.asDriver(onErrorJustReturn: (48, 150))
         )
     }
 }
@@ -138,24 +167,5 @@ extension MainViewModel {
     enum CreateButtonDisplayState {
         case both
         case only
-    }
-}
-
-// MARK: - UtilityMethods
-extension MainViewModel {
-    private func findProjectByIndex(
-        _ indexPath: IndexPath,
-        hotProjects: [Project],
-        projects: [Project]
-    ) -> Project {
-        let section = Section.allCases[indexPath.section]
-    
-        switch section {
-        case .hot:
-            return hotProjects[indexPath.row]
-            
-        case .main:
-            return projects[indexPath.row]
-        }
     }
 }

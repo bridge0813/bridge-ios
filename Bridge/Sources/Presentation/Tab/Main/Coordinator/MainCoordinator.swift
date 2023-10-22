@@ -22,8 +22,8 @@ final class MainCoordinator: Coordinator {
         self.navigationController = navigationController
         self.childCoordinators = []
 
-        let networkService = DefaultNetworkService()
-        projectRepository = DefaultProjectRepository(networkService: networkService)
+//        let networkService = DefaultNetworkService()
+        projectRepository = MockProjectRepository()
         fetchProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
         fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
     }

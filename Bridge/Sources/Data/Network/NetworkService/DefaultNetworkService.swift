@@ -29,14 +29,3 @@ final class DefaultNetworkService: NetworkService {
             }
     }
 }
-
-// TODO: 아래 함수들 제거
-extension DefaultNetworkService {    
-    func requestTestProjectsData() -> Observable<[ProjectDTO]> {
-        Observable.just(ProjectDTO.projectTestArray)
-    }
-    
-    func requestTestHotProjectsData() -> Observable<[ProjectDTO]> {
-        Observable.just(ProjectDTO.hotProjectTestArray)
-    }
-}
