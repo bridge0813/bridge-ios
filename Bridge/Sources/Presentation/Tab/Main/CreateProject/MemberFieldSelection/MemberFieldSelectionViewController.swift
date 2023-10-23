@@ -12,42 +12,11 @@ import RxCocoa
 import RxSwift
 
 final class MemberFieldSelectionViewController: BaseViewController {
-    // MARK: - Properties
-    private let rootFlexContainer = UIView()
-    private let instructionLabel: UILabel = {
-        let label = UILabel()
-        label.configureLabel(
-            textColor: .black,
-            font: .boldSystemFont(ofSize: 18),
-            numberOfLines: 2
-        )
-        label.text = "어떤 분야의 팀원을 \n찾고 있나요?"
-        
-        return label
-    }()
-    
-    private let iosButton = BridgeFieldTagButton("iOS")
-    private let androidButton = BridgeFieldTagButton("안드로이드")
-    private let frontEndButton = BridgeFieldTagButton("프론트엔드")
-    private let backEndButton = BridgeFieldTagButton("백엔드")
-    private let uiuxButton = BridgeFieldTagButton("UI/UX")
-    private let bibxButton = BridgeFieldTagButton("BI/BX")
-    private let videomotionButton = BridgeFieldTagButton("영상/모션")
-    private let pmButton = BridgeFieldTagButton("PM")
-    
-    private let nextButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("다음", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.white, for: .highlighted)
-        button.backgroundColor = .darkGray
-        
-        return button
-    }()
-    
+    // MARK: - UI
     private lazy var dismissButton: UIBarButtonItem = {
+        let image = UIImage(named: "xmark")?.resize(to: CGSize(width: 24, height: 24))
         let button = UIBarButtonItem(
-            image: UIImage(systemName: "xmark"),
+            image: image,
             style: .done,
             target: self,
             action: nil
@@ -55,6 +24,54 @@ final class MemberFieldSelectionViewController: BaseViewController {
         return button
     }()
     
+    private let rootFlexContainer = UIView()
+    
+    private let progressView: UIProgressView = {
+        let progressView = UIProgressView()
+        progressView.progress = 0.2
+        progressView.progressTintColor = BridgeColor.primary1
+        progressView.backgroundColor = BridgeColor.gray7
+        
+        return progressView
+    }()
+    
+    private let dividerView: UIView = {
+        let divider = UIView()
+        divider.backgroundColor = BridgeColor.gray6
+        divider.isHidden = true
+        
+        return divider
+    }()
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
+        scrollView.showsVerticalScrollIndicator = false
+        
+        return scrollView
+    }()
+    
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.configureTextWithLineHeight(text: "어떤 분야의 팀원을\n찾고 있나요?", lineHeight: 30)
+        label.font = BridgeFont.headline1Long.font
+        label.textColor = BridgeColor.gray1
+        label.numberOfLines = 2
+        
+        return label
+    }()
+    
+    private let tipMessageBox = BridgeTipMessageBox("복수 선택이 가능해요")
+    
+    private let setFieldView = BridgeSetFieldView()
+    
+    private let nextButton = BridgeButton(
+        title: "다음",
+        font: BridgeFont.button1.font,
+        backgroundColor: BridgeColor.gray4
+    )
+    
+    // MARK: - Properties
     private let viewModel: MemberFieldSelectionViewModel
     
     // MARK: - Initializer
@@ -66,61 +83,40 @@ final class MemberFieldSelectionViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        configureNavigationUI()
     }
     
     override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea).marginTop(10)
+        rootFlexContainer.pin.all().marginTop(view.pin.safeArea.top)
         rootFlexContainer.flex.layout()
+        
+        descriptionLabel.pin.width(148).height(60).top(22)
+        tipMessageBox.pin.below(of: descriptionLabel).width(100%).height(38).marginTop(16)
+        setFieldView.pin.below(of: tipMessageBox).width(100%).height(396).marginTop(40)
+        
+        // 130은 스크롤 뷰가 움직일 수 있도록 컨텐츠 사이즈를 키워주는 역할(피그마 스크롤 처리 참고).
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: 548 + 130)
     }
     
     // MARK: - Methods
     private func configureNavigationUI() {
         navigationItem.leftBarButtonItem = dismissButton
+        navigationItem.title = "모집글 작성"
     }
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).padding(5).define { flex in
-            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(20)
+        scrollView.addSubview(descriptionLabel)
+        scrollView.addSubview(tipMessageBox)
+        scrollView.addSubview(setFieldView)
+        
+        rootFlexContainer.flex.direction(.column).define { flex in
+            flex.addItem(progressView).height(6).marginTop(14).marginHorizontal(16)
             
-            flex.addItem().direction(.column).marginTop(50).define { flex in
-                flex.addItem().direction(.row).define { flex in
-                    flex.addItem(iosButton).cornerRadius(8).marginLeft(10)
-                    flex.addItem(androidButton).cornerRadius(8).marginLeft(10)
-                }
-                
-                flex.addItem().direction(.row).marginTop(10).define { flex in
-                    flex.addItem(frontEndButton).cornerRadius(8).marginLeft(10)
-                    flex.addItem(backEndButton).cornerRadius(8).marginLeft(10)
-                }
-            }
+            flex.addItem(dividerView).height(0.8).marginTop(18)
             
-            flex.addItem().direction(.column).marginTop(50).define { flex in
-                flex.addItem().direction(.row).define { flex in
-                    flex.addItem(uiuxButton).cornerRadius(8).marginLeft(10)
-                    flex.addItem(bibxButton).cornerRadius(8).marginLeft(10)
-                }
-                
-                flex.addItem().direction(.row).marginTop(10).define { flex in
-                    flex.addItem(videomotionButton).cornerRadius(8).marginLeft(10)
-                }
-            }
+            flex.addItem(scrollView).grow(1).marginHorizontal(16)
             
-            flex.addItem().direction(.row).marginTop(50).define { flex in
-                flex.addItem(pmButton).cornerRadius(8).marginLeft(10)
-            }
-            
-            flex.addItem().grow(1)
-            
-            flex.addItem().marginBottom(50).define { flex in
-                flex.addItem(nextButton).marginHorizontal(15).height(50).cornerRadius(8)
-            }
+            flex.addItem(nextButton).height(52).marginTop(8).marginBottom(58).marginHorizontal(16)
         }
     }
     
@@ -130,59 +126,24 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     override func bind() {
         let input = MemberFieldSelectionViewModel.Input(
-            nextButtonTapped: nextButton.rx.tap.asObservable(),
             dismissButtonTapped: dismissButton.rx.tap.asObservable(),
-            fieldButtonTapped: mergeFieldButtonTap()
+            fieldTagButtonTapped: setFieldView.fieldTagButtonTapped,
+            nextButtonTapped: nextButton.rx.tap.asObservable()
         )
+        
         let output = viewModel.transform(input: input)
         
-        output.selectedField
-            .drive(onNext: { [weak self] type in
-                self?.selectedButtonToggle(for: type)
+        output.isNextButtonEnabled
+            .drive(onNext: { [weak self] isCompleteButtonEnabled in
+                self?.nextButton.isEnabled = isCompleteButtonEnabled
             })
             .disposed(by: disposeBag)
-    }
-}
-
-extension MemberFieldSelectionViewController {
-    private func mergeFieldButtonTap() -> Observable<MemberFieldSelectionViewModel.RecruitFieldType> {
-        return Observable.merge(
-            iosButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.iOS },
-            androidButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.android },
-            frontEndButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.frontEnd },
-            backEndButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.backEnd },
-            uiuxButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.uiux },
-            bibxButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.bibx },
-            videomotionButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.videomotion },
-            pmButton.rx.tap.map { MemberFieldSelectionViewModel.RecruitFieldType.pm }
-        )
-    }
-    
-    private func selectedButtonToggle(for type: MemberFieldSelectionViewModel.RecruitFieldType) {
-        switch type {
-        case .iOS:
-            iosButton.isSelected.toggle()
-            
-        case .android:
-            androidButton.isSelected.toggle()
-            
-        case .frontEnd:
-            frontEndButton.isSelected.toggle()
-            
-        case .backEnd:
-            backEndButton.isSelected.toggle()
-            
-        case .uiux:
-            uiuxButton.isSelected.toggle()
-            
-        case .bibx:
-            bibxButton.isSelected.toggle()
-            
-        case .videomotion:
-            videomotionButton.isSelected.toggle()
-            
-        case .pm:
-            pmButton.isSelected.toggle()
-        }
+        
+        scrollView.rx.contentOffset.asDriver()
+            .drive(onNext: { [weak self] offSet in
+                let shouldHidden = offSet.y > 0
+                self?.dividerView.isHidden = !shouldHidden
+            })
+            .disposed(by: disposeBag)
     }
 }

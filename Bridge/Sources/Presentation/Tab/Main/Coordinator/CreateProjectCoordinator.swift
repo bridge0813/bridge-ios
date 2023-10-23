@@ -38,6 +38,7 @@ extension CreateProjectCoordinator {
         let viewController = MemberFieldSelectionViewController(viewModel: viewModel)
         createProjectNavigationController = UINavigationController(rootViewController: viewController)
         createProjectNavigationController?.modalPresentationStyle = .fullScreen
+        configureNavigationAppearance()
         
         navigationController.present(
             createProjectNavigationController ?? UINavigationController(),
@@ -105,5 +106,21 @@ extension CreateProjectCoordinator {
         
         let viewController = CompletionViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+// MARK: - Configuration
+extension CreateProjectCoordinator {
+    private func configureNavigationAppearance() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithDefaultBackground()
+        navBarAppearance.backgroundColor = BridgeColor.gray10
+        navBarAppearance.shadowColor = nil
+        navBarAppearance.titleTextAttributes = [
+            .font: BridgeFont.subtitle1.font,
+            .foregroundColor: BridgeColor.gray1
+        ]
+        createProjectNavigationController?.navigationBar.standardAppearance = navBarAppearance
+        createProjectNavigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
 }
