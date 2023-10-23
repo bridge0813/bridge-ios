@@ -15,8 +15,11 @@ final class ChatCoordinator: Coordinator {
     
     private let authRepository: AuthRepository
     private let chatRoomRepository: ChatRoomRepository
+    private let messageRepository: MessageRepository
+    
     private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
+    private let observeMessageUseCase: ObserveMessageUseCase
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -24,10 +27,11 @@ final class ChatCoordinator: Coordinator {
         
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
-//        chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
         chatRoomRepository = MockChatRoomRepository()
+        messageRepository = MockMessageRepository()
         fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
+        observeMessageUseCase = DefaultObserveMessageUseCase(messageRepository: messageRepository)
     }
     
     func start() {
@@ -49,7 +53,8 @@ extension ChatCoordinator {
     func showChatRoomViewController(of chatRoom: ChatRoom) {
         let chatRoomViewModel = ChatRoomViewModel(
             coordinator: self,
-            chatRoom: chatRoom
+            chatRoom: chatRoom,
+            observeMessageUseCase: observeMessageUseCase
         )
         let chatRoomViewController = ChatRoomViewController(viewModel: chatRoomViewModel)
         navigationController.pushViewController(chatRoomViewController, animated: true)
