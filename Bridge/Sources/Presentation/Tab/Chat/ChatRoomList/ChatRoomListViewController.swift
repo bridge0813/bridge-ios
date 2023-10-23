@@ -71,11 +71,8 @@ final class ChatRoomListViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.chatRooms
-            .compactMap { [weak self] chatRooms in
-                self?.createCurrentSnapshot(with: chatRooms)
-            }
-            .drive { [weak self] currentSnapshot in
-                self?.dataSource?.apply(currentSnapshot)
+            .drive { [weak self] chatRooms in
+                self?.applySnapshot(with: chatRooms)
             }
             .disposed(by: disposeBag)
         
@@ -99,11 +96,11 @@ extension ChatRoomListViewController {
         }
     }
     
-    private func createCurrentSnapshot(with chatRoom: [ChatRoom]) -> Snapshot {
+    private func applySnapshot(with chatRooms: [ChatRoom]) {
         var snapshot = Snapshot()
         snapshot.appendSections([.main])
-        snapshot.appendItems(chatRoom)
-        return snapshot
+        snapshot.appendItems(chatRooms)
+        dataSource?.apply(snapshot)
     }
 }
 

@@ -69,16 +69,14 @@ final class ChatRoomCell: BaseTableViewCell {
         contentView.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.define { flex in
-            flex.addItem().grow(1)  // spacer
-            
-            flex.addItem().direction(.row).alignItems(.center).define { flex in
+            flex.addItem().direction(.row).alignItems(.center).marginVertical(20).define { flex in
                 flex.addItem(profileImageView).size(48).marginLeft(16).marginRight(12)
                 
                 flex.addItem().define { flex in
                     flex.addItem().width(200).define { flex in
                         flex.addItem().direction(.row).marginBottom(4).define { flex in
-                            flex.addItem(nameLabel).shrink(1).marginRight(8)
-                            flex.addItem(lastMessageReceivedTimeLabel).grow(1)
+                            flex.addItem(nameLabel).marginRight(8).shrink(1)
+                            flex.addItem(lastMessageReceivedTimeLabel)
                         }
                         
                         flex.addItem(lastMessageContentLabel)
@@ -87,10 +85,8 @@ final class ChatRoomCell: BaseTableViewCell {
                 
                 flex.addItem().grow(1)  // spacer
                 
-                flex.addItem(unreadMessageCountLabel).marginRight(16)
+                flex.addItem(unreadMessageCountLabel).marginHorizontal(16)
             }
-            
-            flex.addItem().grow(1)  // spacer
             
             flex.addItem().height(1).backgroundColor(BridgeColor.gray6)  // divider
         }
