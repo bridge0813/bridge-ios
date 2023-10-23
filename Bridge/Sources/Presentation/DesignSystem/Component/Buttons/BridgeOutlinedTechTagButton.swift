@@ -1,5 +1,5 @@
 //
-//  BrideOutlinedTechTagButton.swift
+//  BridgeOutlinedTechTagButton.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/26.
@@ -8,7 +8,7 @@
 import UIKit
 
 // Borderline이 존재하는 Tag 버튼("Swift", "Java" 등 기술스택에 관한 태그를 담당)
-final class BrideOutlinedTechTagButton: BaseButton {
+final class BridgeOutlinedTechTagButton: BaseButton {
     
     private var title: String
     

@@ -41,7 +41,7 @@ extension ProjectDTO {
 }
 
 extension ProjectDTO {
-    static var projectTestArray = [
+    static var projectTestArray: [ProjectDTO] = [
         ProjectDTO(
             id: "1",
             title: "모임 플랫폼 디자이너 구합니다",
@@ -106,12 +106,9 @@ extension ProjectDTO {
             meetingWay: "온라인",
             stage: "기획 중",
             userEmail: ""
-        )
-    ]
-    
-    static var hotProjectTestArray = [
+        ),
         ProjectDTO(
-            id: "1Hot",
+            id: "6",
             title: "웹 사이트 디자이너 구해요!!",
             overview: "모임 플랫폼",
             dueDate: Date(),
@@ -124,46 +121,7 @@ extension ProjectDTO {
             userEmail: ""
         ),
         ProjectDTO(
-            id: "2Hot",
-            title: "웹 사이트 디자이너 구해요!!",
-            overview: "모임 플랫폼",
-            dueDate: Date(),
-            startDate: Date(),
-            endDate: Date(),
-            recruit: [],
-            tagLimit: [],
-            meetingWay: "온라인",
-            stage: "기획 중",
-            userEmail: ""
-        ),
-        ProjectDTO(
-            id: "3Hot",
-            title: "웹 사이트 디자이너 구해요!!",
-            overview: "모임 플랫폼",
-            dueDate: Date(),
-            startDate: Date(),
-            endDate: Date(),
-            recruit: [],
-            tagLimit: [],
-            meetingWay: "온라인",
-            stage: "기획 중",
-            userEmail: ""
-        ),
-        ProjectDTO(
-            id: "4Hot",
-            title: "웹 사이트 디자이너 구해요!!",
-            overview: "모임 플랫폼",
-            dueDate: Date(),
-            startDate: Date(),
-            endDate: Date(),
-            recruit: [],
-            tagLimit: [],
-            meetingWay: "온라인",
-            stage: "기획 중",
-            userEmail: ""
-        ),
-        ProjectDTO(
-            id: "5Hot",
+            id: "7",
             title: "웹 사이트 디자이너 구해요!!",
             overview: "모임 플랫폼",
             dueDate: Date(),

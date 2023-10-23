@@ -41,4 +41,13 @@ extension BaseViewController {
         configureLayouts()
         bind()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let tabBar = tabBarController?.tabBar {
+            let shadowPath = UIBezierPath(rect: tabBar.bounds)
+            tabBar.layer.shadowPath = shadowPath.cgPath
+        }
+    }
 }

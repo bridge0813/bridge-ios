@@ -1,5 +1,5 @@
 //
-//  BrideMediumButtonGroup.swift
+//  BridgeMediumButtonGroup.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/28.
@@ -10,7 +10,7 @@ import FlexLayout
 import PinLayout
 
 // 3개의 버튼이 붙어있는 뷰
-final class BrideMediumButtonGroup: BaseView {
+final class BridgeMediumButtonGroup: BaseView {
     private let rootFlexContainer = UIView()
     
     let leftButton: BridgeButton
