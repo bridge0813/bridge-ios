@@ -9,7 +9,7 @@ import Foundation
 
 struct ChatRoomDTO: Codable {
     let id: String
-    let profileImage: String
+    let image: String
     let name: String
     let lastMessageReceivedTime: String
     let lastMessageType: String
@@ -18,7 +18,7 @@ struct ChatRoomDTO: Codable {
     
     enum CodingKeys: String, CodingKey {
         case id = "roomId"
-        case profileImage = "image"  // tbd
+        case image
         case name = "roomName"
         case lastMessageReceivedTime = "lastTime"
         case lastMessageType // tbd
@@ -29,14 +29,16 @@ struct ChatRoomDTO: Codable {
 
 // MARK: - For test
 extension ChatRoomDTO {
+    // TODO: 수정 필요 (id충돌 주의)
     func toEntity() -> ChatRoom {
         ChatRoom(
             id: id,
-            profileImageURL: URL(string: profileImage),
+            myID: "",
+            opponentID: "",
+            image: URL(string: image),
             name: name,
             lastMessage: ChatRoom.LastMessage(
                 receivedTime: lastMessageReceivedTime.toTimeString() ?? "오류",
-                type: .text,
                 content: lastMessageContent
             ),
             unreadMessageCount: unreadMessageCount
@@ -64,16 +66,16 @@ extension ChatRoomDTO {
     static var testArray = [
         ChatRoomDTO(
             id: "1",
-            profileImage: "urlString",
+            image: "urlString",
             name: "정호윤",
-            lastMessageReceivedTime: "2023-09-04T09:15:30+00:00",
+            lastMessageReceivedTime: "2023-09-05T09:15:30+00:00",
             lastMessageType: "text",
             lastMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
             unreadMessageCount: "0"
         ),
         ChatRoomDTO(
             id: "2",
-            profileImage: "urlString",
+            image: "urlString",
             name: "채팅방 2",
             lastMessageReceivedTime: "2023-09-04T15:45:10+00:00",
             lastMessageType: "text",
@@ -82,16 +84,16 @@ extension ChatRoomDTO {
         ),
         ChatRoomDTO(
             id: "3",
-            profileImage: "urlString",
+            image: "urlString",
             name: "채팅방 이름이 길어진 경우에 대한 테스트입니다.",
-            lastMessageReceivedTime: "2023-09-04T11:00:00+00:00",
+            lastMessageReceivedTime: "2023-09-06T11:00:00+00:00",
             lastMessageType: "image",
             lastMessageContent: "이미지가 수신된 경우의 미리보기 메시지입니다.",
             unreadMessageCount: "1000"
         ),
         ChatRoomDTO(
             id: "4",
-            profileImage: "urlString",
+            image: "urlString",
             name: "채팅방 4",
             lastMessageReceivedTime: "2023-09-04T19:30:20+00:00",
             lastMessageType: "text",
@@ -100,7 +102,7 @@ extension ChatRoomDTO {
         ),
         ChatRoomDTO(
             id: "5",
-            profileImage: "urlString",
+            image: "urlString",
             name: "채팅방 5",
             lastMessageReceivedTime: "2023-09-04T04:55:55+00:00",
             lastMessageType: "text",
@@ -109,9 +111,9 @@ extension ChatRoomDTO {
         ),
         ChatRoomDTO(
             id: "6",
-            profileImage: "urlString",
+            image: "urlString",
             name: "채팅방 6",
-            lastMessageReceivedTime: "2023-09-04T12:34:56+00:00",
+            lastMessageReceivedTime: "2023-09-02T12:34:56+00:00",
             lastMessageType: "text",
             lastMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
             unreadMessageCount: "7"
