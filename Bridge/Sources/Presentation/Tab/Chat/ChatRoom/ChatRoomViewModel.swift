@@ -11,25 +11,37 @@ import RxSwift
 final class ChatRoomViewModel: ViewModelType {
     
     struct Input {
+        let viewWillAppear: Observable<Bool>
         let sendMessage: Observable<String>
     }
     
     struct Output {
-        let messages: Driver<String>
+        let messages: Driver<[Message]>
     }
     
     let disposeBag = DisposeBag()
     
     private weak var coordinator: ChatCoordinator?
     private let chatRoom: ChatRoom
+    private let observeMessageUseCase: ObserveMessageUseCase
     
-    init(coordinator: ChatCoordinator?, chatRoom: ChatRoom) {
+    init(
+        coordinator: ChatCoordinator?,
+        chatRoom: ChatRoom,
+        observeMessageUseCase: ObserveMessageUseCase
+    ) {
         self.coordinator = coordinator
         self.chatRoom = chatRoom
+        self.observeMessageUseCase = observeMessageUseCase
     }
     
-    // TODO: observe use case, message 타입 사용
     func transform(input: Input) -> Output {
+        let messages = input.viewWillAppear
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.observeMessageUseCase.observe(chatRoomID: owner.chatRoom.id)
+            }
+        
         input.sendMessage
             .withUnretained(self)
             .subscribe(onNext: { _, _ in
@@ -37,8 +49,12 @@ final class ChatRoomViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        let message = input.sendMessage
-        
-        return Output(messages: message.asDriver(onErrorJustReturn: ""))
+        return Output(messages: messages.asDriver(onErrorJustReturn: [.onError]))
+    }
+}
+
+extension ChatRoomViewModel {
+    enum Section {
+        case main
     }
 }
