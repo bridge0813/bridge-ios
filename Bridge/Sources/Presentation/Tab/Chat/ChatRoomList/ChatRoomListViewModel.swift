@@ -62,7 +62,6 @@ final class ChatRoomListViewModel: ViewModelType {
                 }
             )
             .disposed(by: disposeBag)
-
         
         input.itemSelected
             .withLatestFrom(chatRoomsRelay) { index, chatRooms in
