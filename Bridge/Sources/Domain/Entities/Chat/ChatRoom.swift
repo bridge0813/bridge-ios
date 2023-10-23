@@ -11,12 +11,15 @@ struct ChatRoom {
     /// 가장 최근에 수신된 메시지와 관련된 정보를 저장하기 위한 타입
     struct LastMessage {
         let receivedTime: String
-        let type: Message.MessageType
         let content: String
     }
     
     let id: String
-    let profileImageURL: URL?
+    let myID: String
+    let opponentID: String
+    
+    /// 채팅방 썸네일 이미지 (수신자 프로필 이미지)
+    let image: URL?
 
     /// 채팅방 이름 (수신자 이름)
     let name: String
@@ -31,13 +34,11 @@ struct ChatRoom {
 extension ChatRoom {
     static let onError = ChatRoom(
         id: UUID().uuidString,
-        profileImageURL: nil,
+        myID: UUID().uuidString,
+        opponentID: UUID().uuidString,
+        image: nil,
         name: "채팅방 이름을 불러올 수 없습니다.",
-        lastMessage: LastMessage(
-            receivedTime: String(),
-            type: .text,
-            content: "메시지를 불러올 수 없습니다."
-        ),
+        lastMessage: LastMessage(receivedTime: String(), content: "메시지를 불러올 수 없습니다"),
         unreadMessageCount: "0"
     )
 }
