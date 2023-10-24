@@ -78,6 +78,7 @@ final class BridgeAlertViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
         
         leftButton.rx.tap.asObservable()
             .withUnretained(self)
@@ -95,6 +96,14 @@ final class BridgeAlertViewController: BaseViewController {
             .disposed(by: disposeBag)
     }
     
+    @objc private func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: view)
+        
+        if !backgroundView.frame.contains(location) {
+            dismiss(animated: true)
+        }
+    }
+    
     // MARK: - Configuartions
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
@@ -104,22 +113,19 @@ final class BridgeAlertViewController: BaseViewController {
                 
                 flex.addItem().size(40)
                 
-                if !imageView.isHidden {
-                    flex.addItem(imageView).size(100).marginVertical(10)
-                }
+                flex.addItem(imageView).size(100).marginBottom(10).isIncludedInLayout(!imageView.isHidden)
                 
-                flex.addItem().alignItems(.center).justifyContent(.center).marginBottom(40).define { flex in
+                flex.addItem().alignItems(.center).justifyContent(.center).marginBottom(30).define { flex in
                     flex.addItem(titleLabel)
-                    
-                    if descriptionLabel.text?.isEmpty != nil {  // description label 있는 경우
-                        flex.addItem(descriptionLabel).marginTop(4)
-                    }
+                    flex.addItem(descriptionLabel).marginTop(6).isIncludedInLayout(descriptionLabel.text?.isEmpty != nil)
                 }
                 
-                flex.addItem().direction(.row).alignItems(.center).marginBottom(30).define { flex in
+                flex.addItem().direction(.row).define { flex in
                     flex.addItem(leftButton).width(123.5).height(44).marginRight(12)
                     flex.addItem(rightButton).width(123.5).height(44)
                 }
+                
+                flex.addItem().size(30)
             }
         }
     }
