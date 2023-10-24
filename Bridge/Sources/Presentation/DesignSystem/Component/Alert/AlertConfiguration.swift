@@ -6,9 +6,9 @@
 //
 
 struct AlertConfiguration {
-    let imageName: String?
+    var imageName: String?
     let title: String
-    let description: String?
+    var description: String?
     let leftButtonTitle: String
     let rightButtonTitle: String
     
@@ -28,7 +28,7 @@ struct AlertConfiguration {
     
     init(
         title: String,
-        description: String? = nil,
+        description: String?,
         leftButtonTitle: String = "취소하기",
         rightButtonTitle: String
     ) {
@@ -41,11 +41,6 @@ struct AlertConfiguration {
 }
 
 extension AlertConfiguration {
-    static let error = AlertConfiguration(
-        title: "알 수 없는 에러가 발생했어요!",
-        rightButtonTitle: "확인"
-    )
-    
     static let signIn = AlertConfiguration(
         imageName: "graphic_signIn",
         title: "로그인 후 사용 가능해요!",
