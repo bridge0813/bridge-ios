@@ -68,9 +68,7 @@ final class ChatRoomListViewModel: ViewModelType {
                 chatRooms[index]
             }
             .withUnretained(self)
-            .subscribe(onNext: { owner, chatRoom in
-                owner.coordinator?.showErrorAlert(configuration: .unknown)
-                
+            .subscribe(onNext: { owner, chatRoom in               
                 owner.coordinator?.showChatRoomViewController(of: chatRoom)
             })
             .disposed(by: disposeBag)

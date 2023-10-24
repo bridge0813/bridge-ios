@@ -109,6 +109,12 @@ extension ChatRoomViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(messages)
         dataSource?.apply(snapshot)
+        
+        // 가장 아래로 스크롤
+        if let lastItem = snapshot.itemIdentifiers(inSection: .main).last,
+           let lastIndexPath = dataSource?.indexPath(for: lastItem) {
+            collectionView.scrollToItem(at: lastIndexPath, at: .top, animated: false)
+        }
     }
 }
 
