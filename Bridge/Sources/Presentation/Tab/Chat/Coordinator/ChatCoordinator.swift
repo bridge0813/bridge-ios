@@ -51,12 +51,12 @@ extension ChatCoordinator {
     }
     
     func showChatRoomViewController(of chatRoom: ChatRoom) {
-        let chatRoomViewModel = ChatRoomViewModel(
+        let chatRoomViewModel = MessageViewModel(
             coordinator: self,
             chatRoom: chatRoom,
             observeMessageUseCase: observeMessageUseCase
         )
-        let chatRoomViewController = ChatRoomViewController(viewModel: chatRoomViewModel)
+        let chatRoomViewController = MessageViewController(viewModel: chatRoomViewModel)
         navigationController.pushViewController(chatRoomViewController, animated: true)
     }
 }

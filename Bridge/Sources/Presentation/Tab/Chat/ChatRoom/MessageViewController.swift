@@ -1,5 +1,5 @@
 //
-//  ChatRoomViewController.swift
+//  MessageViewController.swift
 //  Bridge
 //
 //  Created by 정호윤 on 10/16/23.
@@ -11,7 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
-final class ChatRoomViewController: BaseViewController {
+final class MessageViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexConatiner = UIView()
     
@@ -24,13 +24,13 @@ final class ChatRoomViewController: BaseViewController {
     
     private let messageInputBar = BridgeMessageInputBar()
     
-    private typealias DataSource = UICollectionViewDiffableDataSource<ChatRoomViewModel.Section, Message>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<ChatRoomViewModel.Section, Message>
+    private typealias DataSource = UICollectionViewDiffableDataSource<MessageViewModel.Section, Message>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<MessageViewModel.Section, Message>
     private var dataSource: DataSource?
     
-    private let viewModel: ChatRoomViewModel
+    private let viewModel: MessageViewModel
     
-    init(viewModel: ChatRoomViewModel) {
+    init(viewModel: MessageViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -77,7 +77,11 @@ final class ChatRoomViewController: BaseViewController {
             .bind(to: messageInputBar.rx.yPosition)
             .disposed(by: disposeBag)
         
-        let input = ChatRoomViewModel.Input(
+        collectionView.rx.keyboardLayoutChanged
+            .bind(to: collectionView.rx.yPosition)
+            .disposed(by: disposeBag)
+        
+        let input = MessageViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             sendMessage: messageInputBar.sendMessage
         )
@@ -92,7 +96,7 @@ final class ChatRoomViewController: BaseViewController {
 }
 
 // MARK: - Data source
-extension ChatRoomViewController {
+extension MessageViewController {
     private func configureDataSource() {
         dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, item in
             guard let cell = collectionView.dequeueReusableCell(MessageCell.self, for: indexPath) else {
@@ -119,7 +123,7 @@ extension ChatRoomViewController {
 }
 
 // MARK: - Layout
-extension ChatRoomViewController {
+extension MessageViewController {
     func createLayout() -> UICollectionViewLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.estimatedItemSize = CGSize(width: view.frame.width, height: 66)

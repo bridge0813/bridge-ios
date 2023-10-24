@@ -1,5 +1,5 @@
 //
-//  ChatRoomViewModel.swift
+//  MessageViewModel.swift
 //  Bridge
 //
 //  Created by 정호윤 on 10/16/23.
@@ -8,7 +8,7 @@
 import RxCocoa
 import RxSwift
 
-final class ChatRoomViewModel: ViewModelType {
+final class MessageViewModel: ViewModelType {
     
     struct Input {
         let viewWillAppear: Observable<Bool>
@@ -53,7 +53,7 @@ final class ChatRoomViewModel: ViewModelType {
     }
 }
 
-extension ChatRoomViewModel {
+extension MessageViewModel {
     enum Section {
         case main
     }

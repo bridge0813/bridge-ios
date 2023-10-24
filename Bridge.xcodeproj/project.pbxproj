@@ -36,8 +36,8 @@
 		7B1922D12AE166E600EBDD2E /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1922D02AE166E600EBDD2E /* UIViewController+Keyboard.swift */; };
 		7B1922D52AE287C900EBDD2E /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1922D42AE287C900EBDD2E /* MessageCell.swift */; };
 		7B1D9FB52ADE11A9005F42D9 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 7B1D9FB42ADE11A9005F42D9 /* Starscream */; };
-		7B1E5ABC2ADCFD790053E9B3 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1E5ABB2ADCFD790053E9B3 /* ChatRoomViewController.swift */; };
-		7B1E5ABE2ADCFD880053E9B3 /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1E5ABD2ADCFD880053E9B3 /* ChatRoomViewModel.swift */; };
+		7B1E5ABC2ADCFD790053E9B3 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1E5ABB2ADCFD790053E9B3 /* MessageViewController.swift */; };
+		7B1E5ABE2ADCFD880053E9B3 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1E5ABD2ADCFD880053E9B3 /* MessageViewModel.swift */; };
 		7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */; };
 		7B2D76EC2AA993C700E5907B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76EB2AA993C700E5907B /* AuthCoordinator.swift */; };
 		7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76F22AA9941C00E5907B /* SignInViewController.swift */; };
@@ -111,6 +111,7 @@
 		7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */; };
 		7BB8C51F2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8C51E2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift */; };
 		7BB8C5212AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8C5202AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift */; };
+		7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8C5222AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift */; };
 		7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */; };
 		7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */; };
 		7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366342AC15ECF00EB415D /* BridgeBookmarkButton.swift */; };
@@ -208,8 +209,8 @@
 		7B1922CB2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RxKeyboard.swift"; sourceTree = "<group>"; };
 		7B1922D02AE166E600EBDD2E /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		7B1922D42AE287C900EBDD2E /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
-		7B1E5ABB2ADCFD790053E9B3 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
-		7B1E5ABD2ADCFD880053E9B3 /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
+		7B1E5ABB2ADCFD790053E9B3 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		7B1E5ABD2ADCFD880053E9B3 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		7B2D76EB2AA993C700E5907B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		7B2D76F22AA9941C00E5907B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -278,6 +279,7 @@
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
 		7BB8C51E2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertConfiguration.swift; sourceTree = "<group>"; };
 		7BB8C5202AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeErrorAlertViewController.swift; sourceTree = "<group>"; };
+		7BB8C5222AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+RxKeyboard.swift"; sourceTree = "<group>"; };
 		7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSetFieldView.swift; sourceTree = "<group>"; };
 		7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthRepository.swift; sourceTree = "<group>"; };
 		7C1366342AC15ECF00EB415D /* BridgeBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBookmarkButton.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				7B0FD3EC2ADBCC9C00C91045 /* Proxies */,
 				7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */,
 				7B1922CB2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift */,
+				7BB8C5222AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift */,
 			);
 			path = RxExtensions;
 			sourceTree = "<group>";
@@ -503,8 +506,8 @@
 		7B1E5ABA2ADCFD5F0053E9B3 /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
-				7B1E5ABD2ADCFD880053E9B3 /* ChatRoomViewModel.swift */,
-				7B1E5ABB2ADCFD790053E9B3 /* ChatRoomViewController.swift */,
+				7B1E5ABD2ADCFD880053E9B3 /* MessageViewModel.swift */,
+				7B1E5ABB2ADCFD790053E9B3 /* MessageViewController.swift */,
 				7B3289332ADE55B5009DF3C2 /* Views */,
 			);
 			path = ChatRoom;
@@ -1390,6 +1393,7 @@
 				7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */,
 				7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
+				7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
 				7BA36C9D2A9C5105000DAB02 /* Message.swift in Sources */,
@@ -1432,7 +1436,7 @@
 				7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */,
 				7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */,
 				7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */,
-				7B1E5ABE2ADCFD880053E9B3 /* ChatRoomViewModel.swift in Sources */,
+				7B1E5ABE2ADCFD880053E9B3 /* MessageViewModel.swift in Sources */,
 				7C8B82402ACE91C500F7B889 /* ChatRoomMenuCell.swift in Sources */,
 				7C55E6502AE50D9E0018FA5D /* PlaceholderView.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,
@@ -1504,7 +1508,7 @@
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,
 				7C569CF32A9F67C60063D362 /* Project.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
-				7B1E5ABC2ADCFD790053E9B3 /* ChatRoomViewController.swift in Sources */,
+				7B1E5ABC2ADCFD790053E9B3 /* MessageViewController.swift in Sources */,
 				7B92B7ED2AE5191200B0E954 /* MessageContainerView.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
