@@ -17,7 +17,7 @@ final class BridgeSendMessageButton: BaseButton {
     override func configureAttributes() {
         var configuration = UIButton.Configuration.filled()
         configuration.image = UIImage(named: "send.fill")?
-            .resize(to: CGSize(width: 16.21, height: 16.21))
+            .resize(to: CGSize(width: 24, height: 24))
             .withRenderingMode(.alwaysTemplate)
         configuration.baseForegroundColor = BridgeColor.gray4
         configuration.baseBackgroundColor = BridgeColor.gray9
