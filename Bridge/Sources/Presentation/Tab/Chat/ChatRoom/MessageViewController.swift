@@ -13,7 +13,11 @@ import RxSwift
 
 final class MessageViewController: BaseViewController {
     // MARK: - UI
-    private let rootFlexConatiner = UIView()
+    private let rootFlexConatiner: UIView = {
+        let view = UIView()
+        view.backgroundColor = BridgeColor.gray9
+        return view
+    }()
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
