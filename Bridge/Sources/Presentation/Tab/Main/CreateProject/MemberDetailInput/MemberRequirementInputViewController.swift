@@ -105,6 +105,7 @@ final class MemberRequirementInputViewController: BaseViewController {
     
     // MARK: - Methods
     private func configureNavigationUI() {
+        navigationItem.title = "모집글 작성"
     }
     
     override func configureLayouts() {

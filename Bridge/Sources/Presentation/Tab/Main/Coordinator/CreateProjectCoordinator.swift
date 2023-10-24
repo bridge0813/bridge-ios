@@ -112,15 +112,30 @@ extension CreateProjectCoordinator {
 // MARK: - Configuration
 extension CreateProjectCoordinator {
     private func configureNavigationAppearance() {
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithDefaultBackground()
-        navBarAppearance.backgroundColor = BridgeColor.gray10
-        navBarAppearance.shadowColor = nil
-        navBarAppearance.titleTextAttributes = [
+        let backButtonImage = UIImage(named: "chevron.left")?.resize(to: CGSize(width: 24, height: 24))
+            
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = BridgeColor.gray10
+        appearance.shadowColor = nil
+        appearance.titleTextAttributes = [
             .font: BridgeFont.subtitle1.font,
             .foregroundColor: BridgeColor.gray1
         ]
-        createProjectNavigationController?.navigationBar.standardAppearance = navBarAppearance
-        createProjectNavigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        appearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
+        appearance.backButtonAppearance = configureBackButtonAppearance()
+        
+        createProjectNavigationController?.navigationBar.standardAppearance = appearance
+        createProjectNavigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func configureBackButtonAppearance() -> UIBarButtonItemAppearance {
+        let backButtonAppearance = UIBarButtonItemAppearance()
+        backButtonAppearance.normal.titleTextAttributes = [
+            .foregroundColor: UIColor.clear,
+            .font: UIFont.systemFont(ofSize: 0)
+        ]
+        
+        return backButtonAppearance
     }
 }
