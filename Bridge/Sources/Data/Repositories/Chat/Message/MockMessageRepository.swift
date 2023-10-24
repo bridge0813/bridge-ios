@@ -24,7 +24,10 @@ final class MockMessageRepository: MessageRepository {
             ),
             Message(id: "6", sender: .me, type: .text("내가 보내는 메시지"), sentTime: "오후 1:00", state: .unread),
             Message(id: "7", sender: .opponent, type: .text("상대방이 보내는 메시지"), sentTime: "오후 1:00", state: .unread),
-            Message(id: "8", sender: .opponent, type: .text("상대방이 보내는 메시지"), sentTime: "오후 1:00", state: .unread)
+            Message(id: "8", sender: .opponent, type: .text("상대방이 보내는 메시지"), sentTime: "오후 1:00", state: .unread),
+            Message(id: "9", sender: .me, type: .text("내가 보내는 메시지"), sentTime: "오후 1:00", state: .unread),
+            Message(id: "10", sender: .opponent, type: .text("상대방이 보내는 메시지22"), sentTime: "오후 1:00", state: .unread),
+            Message(id: "11", sender: .opponent, type: .text("상대방이 보내는 메시지11"), sentTime: "오후 1:00", state: .unread)
         ])
     }
 }

@@ -36,7 +36,6 @@ extension Reactive where Base: UIView {
                     let yPosition = keyboardHeight - (view.superview?.superview?.safeAreaInsets.bottom ?? 34)
                     view.transform = CGAffineTransform(translationX: 0, y: -yPosition)
                 }
-                view.layoutIfNeeded()
             }
         }
     }
