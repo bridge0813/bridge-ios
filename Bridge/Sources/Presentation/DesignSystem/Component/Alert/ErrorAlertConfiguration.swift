@@ -11,5 +11,8 @@ struct ErrorAlertConfiguration {
 }
 
 extension ErrorAlertConfiguration {
-    static let unknown = ErrorAlertConfiguration(title: "알 수 없는 에러가 발생했습니다.")
+    static let networkError = ErrorAlertConfiguration(
+        title: "네트워크 오류",
+        description: "데이터 요청에 실패했습니다.\n현재 사용중인 네트워크 상태를 확인해주세요."
+    )
 }

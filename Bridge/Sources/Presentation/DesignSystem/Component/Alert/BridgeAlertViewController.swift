@@ -16,8 +16,6 @@ final class BridgeAlertViewController: BaseViewController {
     private lazy var rootFlexContainer: UIView = {
         let view = UIView()
         view.backgroundColor = BridgeColor.backgroundBlur
-        view.layer.cornerRadius = 12
-        view.clipsToBounds = true
         return view
     }()
     
