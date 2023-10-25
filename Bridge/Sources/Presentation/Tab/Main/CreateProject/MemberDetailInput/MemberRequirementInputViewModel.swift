@@ -47,9 +47,10 @@ final class MemberRequirementInputViewModel: ViewModelType {
             .withUnretained(self)
             .map { owner, _ in
                 let field = owner.selectedFields[0]
-                owner.selectedFields.removeFirst()     
+                owner.selectedFields.removeFirst()
                 owner.memberRequirement.field = field
-                return field
+                
+                return FieldTagType(from: field).rawValue
             }
             .asDriver(onErrorJustReturn: "")
         
@@ -95,5 +96,29 @@ final class MemberRequirementInputViewModel: ViewModelType {
 }
 
 extension MemberRequirementInputViewModel {
-    
+    /// 유저에게 보이는 문자열로 맵핑처리
+    enum FieldTagType: String {
+        case ios = "iOS"
+        case android = "안드로이드"
+        case frontend = "프론트엔드"
+        case backend = "백엔드"
+        case uiux = "UI/UX"
+        case bibx = "BI/BX"
+        case videomotion = "영상/모션"
+        case pm = "PM"
+        
+        init(from type: String) {
+            switch type {
+            case "ios": self = .ios
+            case "android": self = .android
+            case "frontend": self = .frontend
+            case "backend": self = .backend
+            case "uiux": self = .uiux
+            case "bibx": self = .bibx
+            case "videomotion": self = .videomotion
+            case "pm": self = .pm
+            default: self = .ios
+            }
+        }
+    }
 }
