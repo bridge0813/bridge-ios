@@ -85,7 +85,7 @@ final class BridgeTextView: BaseView {
             })
             .disposed(by: disposeBag)
 
-        // 유저가 입력을 시작하면서 이벤트 발생. 그리고 플레이스 홀더를 제거하면서 이벤트 발생.
+        // 유저가 입력을 시작하면서 이벤트 발생 && 플레이스 홀더를 텍스트로 지정하면서 이벤트 발생.
         // 발생 시 아무런 텍스트를 입력하지 않았지만, 텍스트 뷰가 활성화되기 때문에 이를 방지하기 위해 조건(텍스트 존재)을 추가
         // 입력된 텍스트가 없을 경우 라벨의 컬러는 변경되지 않고, 라벨 텍스트는 0으로 만들어주어야 하기 때문에 조건을 설정.
         textView.rx.text.orEmpty
@@ -101,6 +101,12 @@ final class BridgeTextView: BaseView {
                     
                 } else if text.isEmpty {
                     self.countLabel.text = "0/\(maxCount)"
+                }
+                
+                // 텍스트가 제한된 글자 수를 초과하면 잘라내기.
+                if text.count > self.maxCount {
+                    let index = text.index(text.startIndex, offsetBy: self.maxCount)
+                    self.textView.text = String(text[..<index])
                 }
             })
             .disposed(by: disposeBag)
