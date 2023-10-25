@@ -75,6 +75,9 @@ final class MemberRequirementInputViewController: BaseViewController {
     
     private let addTechStackButton = AddTechStackButton()
     
+    
+    private let bridgeTextView = BridgeTextView(textViewPlaceholder: "팀원들에게 나를 소개해보세요.", maxCount: 100)
+    
     private let nextButton = BridgeButton(
         title: "다음",
         font: BridgeFont.button1.font,
@@ -133,6 +136,7 @@ final class MemberRequirementInputViewController: BaseViewController {
                 flex.addItem(addTechStackButton).marginRight(0)
             }
             
+            flex.addItem(bridgeTextView).height(106).marginTop(20)
         }
     }
     
