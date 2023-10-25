@@ -53,6 +53,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         return button
     }()
     
+    
     private let recruitLabel: UILabel = {
         let label = UILabel()
         label.text = "모집 인원"
@@ -61,8 +62,8 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         return label
     }()
-    
     private let setRecruitNumberButton = BridgeSetDisplayButton("몇 명을 모집할까요?")
+    
     
     private let memberTechStackLabel: UILabel = {
         let label = UILabel()
@@ -72,11 +73,19 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         return label
     }()
-    
     private let addTechStackButton = AddTechStackButton()
+    private let addedTechTagView = AddedTechTagView()
     
     
-    private let bridgeTextView = BridgeTextView(textViewPlaceholder: "팀원들에게 나를 소개해보세요.", maxCount: 100)
+    private let requirementLabel: UILabel = {
+        let label = UILabel()
+        label.text = "바라는 점"
+        label.font = BridgeFont.subtitle2.font
+        label.textColor = BridgeColor.gray1
+        
+        return label
+    }()
+    private let requirementTextView = BridgeTextView(textViewPlaceholder: "팀원들에게 나를 소개해보세요.", maxCount: 100)
     
     private let nextButton = BridgeButton(
         title: "다음",
@@ -99,7 +108,7 @@ final class MemberRequirementInputViewController: BaseViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all().marginTop(view.pin.safeArea.top)
+        rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
         
         contentContainer.pin.all()
@@ -116,17 +125,19 @@ final class MemberRequirementInputViewController: BaseViewController {
         view.addSubview(rootFlexContainer)
         scrollView.addSubview(contentContainer)
         
-        rootFlexContainer.flex.marginHorizontal(16).define { flex in
+        rootFlexContainer.flex.justifyContent(.spaceBetween).marginHorizontal(16).define { flex in
             flex.addItem(progressView).height(6).marginTop(10)
             
-            flex.addItem(scrollView).grow(1).marginTop(10)
+            // grow(1)로 레이아웃을 배치하면, height가 원활하게 잡히지 않고 화면 밖을 벗어나는 문제가 발생.(디바이스)
+            flex.addItem(scrollView).position(.absolute).width(100%).top(26).bottom(98)
             
-            flex.addItem(nextButton).height(52).marginTop(12).marginBottom(58)
+            flex.addItem(nextButton).height(52).marginBottom(24)
         }
         
         contentContainer.flex.define { flex in
             flex.addItem(descriptionLabel).width(187).height(60).marginTop(30)
             flex.addItem(fieldTagButton).alignSelf(.start).marginTop(40)
+            
             flex.addItem(recruitLabel).width(60).height(24).marginTop(20)
             flex.addItem(setRecruitNumberButton).alignSelf(.start).height(52).marginTop(14)
         
@@ -135,8 +146,10 @@ final class MemberRequirementInputViewController: BaseViewController {
                 flex.addItem().grow(1)
                 flex.addItem(addTechStackButton).marginRight(0)
             }
+            flex.addItem(addedTechTagView).marginTop(14)
             
-            flex.addItem(bridgeTextView).height(106).marginTop(20)
+            flex.addItem(requirementLabel).width(60).height(24).marginTop(32)
+            flex.addItem(requirementTextView).height(106).marginTop(14)
         }
     }
     

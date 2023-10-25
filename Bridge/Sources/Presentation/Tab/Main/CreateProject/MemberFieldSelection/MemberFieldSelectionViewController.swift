@@ -51,6 +51,8 @@ final class MemberFieldSelectionViewController: BaseViewController {
         return scrollView
     }()
     
+    private let contentContainer = UIView()
+    
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.configureTextWithLineHeight(text: "어떤 분야의 팀원을\n찾고 있나요?", lineHeight: 30)
@@ -86,15 +88,17 @@ final class MemberFieldSelectionViewController: BaseViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all().marginTop(view.pin.safeArea.top)
+        rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
         
-        descriptionLabel.pin.width(148).height(60).top(22)
-        tipMessageBox.pin.below(of: descriptionLabel).width(100%).height(38).marginTop(16)
-        setFieldView.pin.below(of: tipMessageBox).width(100%).height(396).marginTop(40)
+        contentContainer.pin.all()
+        contentContainer.flex.layout(mode: .adjustHeight)
         
-        // 130은 스크롤 뷰가 움직일 수 있도록 컨텐츠 사이즈를 키워주는 역할(피그마 스크롤 처리 참고).
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: 548 + 130)
+        // 130은 스크롤 뷰의 스크롤이 가장 아래로 내려갔을 때, padding 값(피그마 스크롤 처리 참고).
+        scrollView.contentSize = CGSize(
+            width: scrollView.frame.width,
+            height: contentContainer.frame.height + 130
+        )
     }
     
     // MARK: - Methods
@@ -105,18 +109,25 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        scrollView.addSubview(descriptionLabel)
-        scrollView.addSubview(tipMessageBox)
-        scrollView.addSubview(setFieldView)
+        scrollView.addSubview(contentContainer)
         
-        rootFlexContainer.flex.direction(.column).define { flex in
+        rootFlexContainer.flex.define { flex in
             flex.addItem(progressView).height(6).marginTop(10).marginHorizontal(16)
             
-            flex.addItem(dividerView).height(0.8).marginTop(18)
+            flex.addItem(dividerView).height(1).marginTop(18)
             
-            flex.addItem(scrollView).grow(1).marginHorizontal(16)
+            flex.addItem().grow(1)  // ScrollView의 사이즈만큼 빈 공간.
             
-            flex.addItem(nextButton).height(52).marginTop(8).marginBottom(58).marginHorizontal(16)
+            // grow(1)로 레이아웃을 배치하면, height가 원활하게 잡히지 않고 화면 밖을 벗어나는 문제가 발생.(디바이스)
+            flex.addItem(scrollView).position(.absolute).width(100%).top(35).bottom(84).marginHorizontal(16)
+            
+            flex.addItem(nextButton).height(52).marginBottom(24).marginHorizontal(16)
+        }
+        
+        contentContainer.flex.define { flex in
+            flex.addItem(descriptionLabel).width(148).height(60).marginTop(16)
+            flex.addItem(tipMessageBox).height(38).marginTop(16)
+            flex.addItem(setFieldView).height(396).marginTop(40)
         }
     }
     
