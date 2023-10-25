@@ -15,7 +15,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
         let nextButtonTapped: Observable<Void>
         let recruitNumberButtonTapped: Observable<Int>
         let skillTagButtonTapped: Observable<[String]>
-        let requirementsTextChanged: Observable<String>
+//        let requirementsTextChanged: Observable<String>
     }
     
     struct Output {
@@ -67,13 +67,13 @@ final class MemberRequirementInputViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        input.requirementsTextChanged
-            .withUnretained(self)
-            .subscribe(onNext: { owner, text in
-                owner.memberRequirement.expectation = text
-            })
-            .disposed(by: disposeBag)
-        
+//        input.requirementsTextChanged
+//            .withUnretained(self)
+//            .subscribe(onNext: { owner, text in
+//                owner.memberRequirement.expectation = text
+//            })
+//            .disposed(by: disposeBag)
+//        
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in

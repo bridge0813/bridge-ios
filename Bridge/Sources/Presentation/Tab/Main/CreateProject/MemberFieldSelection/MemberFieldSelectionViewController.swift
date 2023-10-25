@@ -110,7 +110,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
         scrollView.addSubview(setFieldView)
         
         rootFlexContainer.flex.direction(.column).define { flex in
-            flex.addItem(progressView).height(6).marginTop(14).marginHorizontal(16)
+            flex.addItem(progressView).height(6).marginTop(10).marginHorizontal(16)
             
             flex.addItem(dividerView).height(0.8).marginTop(18)
             

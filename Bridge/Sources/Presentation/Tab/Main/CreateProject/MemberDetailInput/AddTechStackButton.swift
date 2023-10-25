@@ -30,10 +30,11 @@ final class AddTechStackButton: BaseButton {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .clear
         configuration.baseForegroundColor = BridgeColor.primary1
-    
+        configuration.contentInsets = .zero
+        
         configuration.image = buttonImage
         configuration.imagePlacement = .leading
-        configuration.imagePadding = 2
+        configuration.imagePadding = 1
         
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.body1.font
@@ -48,6 +49,7 @@ final class AddTechStackButton: BaseButton {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .clear
         configuration.baseForegroundColor = BridgeColor.primary1
+        configuration.contentInsets = .zero
     
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.body1.font

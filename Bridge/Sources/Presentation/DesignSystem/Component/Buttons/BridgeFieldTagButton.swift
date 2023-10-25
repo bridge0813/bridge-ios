@@ -52,4 +52,11 @@ final class BridgeFieldTagButton: BaseButton {
             button.configuration = updatedConfiguration
         }
     }
+    
+    func updateTitle(_ title: String) {
+        var titleContainer = AttributeContainer()
+        titleContainer.font = BridgeFont.tag1.font
+        titleContainer.foregroundColor = BridgeColor.primary1
+        configuration?.attributedTitle = AttributedString(title, attributes: titleContainer)
+    }
 }
