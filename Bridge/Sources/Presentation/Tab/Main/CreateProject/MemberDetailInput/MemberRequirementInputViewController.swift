@@ -62,7 +62,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         return label
     }()
     
-    private let setRecruitNumberButton = SetRecruitNumberButton()
+    private let setRecruitNumberButton = BridgeSetDisplayButton("몇 명을 모집할까요?")
     
     private let memberTechStackLabel: UILabel = {
         let label = UILabel()
@@ -163,11 +163,19 @@ final class MemberRequirementInputViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        // 테스트용
         addTechStackButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
                 self?.addTechStackButton.isAdded.toggle()
                 self?.addTechStackButton.flex.markDirty()
                 self?.view.setNeedsLayout()
+            })
+            .disposed(by: disposeBag)
+        
+        // 테스트용
+        setRecruitNumberButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] _ in
+                self?.setRecruitNumberButton.updateTitle("2명")
             })
             .disposed(by: disposeBag)
     }
