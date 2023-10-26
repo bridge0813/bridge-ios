@@ -71,7 +71,7 @@ private extension MessageCell {
         
         contentView.flex.paddingHorizontal(16).alignItems(alignItems).define { flex in
             flex.addItem(dateLabel).width(100%).marginBottom(24).isIncludedInLayout(!dateLabel.isHidden)
-            flex.addItem(messageContainerView).backgroundColor(.clear).grow(1)
+            flex.addItem(messageContainerView).grow(1)
             flex.addItem(timeLabel).marginTop(8)
         }
         

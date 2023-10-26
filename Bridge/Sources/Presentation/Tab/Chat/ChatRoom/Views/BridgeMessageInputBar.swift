@@ -12,7 +12,11 @@ import RxSwift
 
 final class BridgeMessageInputBar: BaseView {
     // MARK: - UI
-    private let rootFlexContainer = UIView()
+    private let rootFlexContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = BridgeColor.gray10
+        return view
+    }()
     
     private let messageInputTextView: UITextView = {
         let textView = UITextView()
