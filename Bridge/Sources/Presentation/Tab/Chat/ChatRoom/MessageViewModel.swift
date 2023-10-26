@@ -12,6 +12,7 @@ final class MessageViewModel: ViewModelType {
     
     struct Input {
         let viewWillAppear: Observable<Bool>
+        let menuDropdownItemSelected: Observable<String>
         let sendMessage: Observable<String>
     }
     
@@ -41,6 +42,13 @@ final class MessageViewModel: ViewModelType {
             .flatMap { owner, _ in
                 owner.observeMessageUseCase.observe(chatRoomID: owner.chatRoom.id)
             }
+        
+        input.menuDropdownItemSelected
+            .withUnretained(self)
+            .subscribe(onNext: { owner, item in
+                print(item)
+            })
+            .disposed(by: disposeBag)
         
         input.sendMessage
             .withUnretained(self)

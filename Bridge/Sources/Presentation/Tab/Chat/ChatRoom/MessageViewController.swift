@@ -13,6 +13,28 @@ import RxSwift
 
 final class MessageViewController: BaseViewController {
     // MARK: - UI
+    private lazy var menuBarButton = UIBarButtonItem(
+        image: UIImage(named: "hamburger")?.resize(to: CGSize(width: 24, height: 24)).withRenderingMode(.alwaysTemplate),
+        style: .plain,
+        target: self,
+        action: nil
+    )
+    
+    private lazy var menuDropdown = DropDown(
+        anchorView: menuBarButton,
+        bottomOffset: CGPoint(x: 0, y: 30),
+        dataSource: ["채팅방 나가기", "신고하기"],
+        cellHeight: 43,
+        itemTextColor: BridgeColor.gray3,
+        width: 147,
+        cornerRadius: 4,
+        customCellType: ChatRoomDropdownMenuCell.self,
+        customCellConfiguration: { index, _, cell in
+            guard let cell = cell as? ChatRoomDropdownMenuCell else { return }
+            cell.configure(image: UIImage(named: ["leave", "warning"][index]))
+        }
+    )
+    
     private let rootFlexConatiner: UIView = {
         let view = UIView()
         view.backgroundColor = BridgeColor.gray9
@@ -56,7 +78,19 @@ final class MessageViewController: BaseViewController {
     }
     
     override func configureAttributes() {
+        configureNavigationBar()
         configureDataSource()
+    }
+    
+    func configureNavigationBar() {
+        navigationItem.rightBarButtonItem = menuBarButton
+        
+        menuBarButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.menuDropdown.show()
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Layout
@@ -87,6 +121,7 @@ final class MessageViewController: BaseViewController {
         
         let input = MessageViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            menuDropdownItemSelected: menuDropdown.itemSelected.map { $0.title }.asObservable(),
             sendMessage: messageInputBar.sendMessage
         )
         let output = viewModel.transform(input: input)
