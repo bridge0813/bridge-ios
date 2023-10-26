@@ -134,6 +134,10 @@ final class MemberRequirementInputViewController: BaseViewController {
             flex.addItem(nextButton).height(52).marginBottom(24)
         }
         
+        configureContentLayout()
+    }
+    
+    private func configureContentLayout() {
         contentContainer.flex.define { flex in
             flex.addItem(descriptionLabel).width(187).height(60).marginTop(30)
             flex.addItem(fieldTagButton).alignSelf(.start).marginTop(40)
