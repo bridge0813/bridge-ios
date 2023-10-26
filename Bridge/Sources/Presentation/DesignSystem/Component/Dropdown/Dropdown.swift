@@ -180,12 +180,7 @@ final class DropDown: BaseView {
 extension DropDown {
     
     override func updateConstraints() {
-        if let anchorView = anchorView as? UIBarButtonItem {
-            computeLayoutForBarButton()
-        } else {
-            computeLayout()
-        }
-        
+        computeLayout()
         setupConstraints()
         
         super.updateConstraints()
@@ -255,8 +250,12 @@ extension DropDown {
         guard let window = UIWindow.visibleWindow() else { return }
         
         // 드롭다운 레이아웃 계산
-        layout = computeLayoutBottomDisplay(window: window)
-                
+        if anchorView is UIBarButtonItem {
+            layout = computeLayoutBarbuttonDisplay(window: window)
+        } else {
+            layout = computeLayoutBottomDisplay(window: window)
+        }
+        
         // 드롭다운의 width가 드롭다운이 차지할 수 있는 최대크기를 계산하여 적절하게 설정.
         constraintWidthToFittingSizeIfNecessary(layout: &layout)
         
@@ -303,35 +302,6 @@ extension DropDown {
     }
     
     /// anchorView가 BarButton일 경우 드롭다운 좌표 계산
-    private func computeLayoutForBarButton() {
-        var layout: ComputeLayoutTuple = (0, 0, 0, 0)
-        
-        // 현재 화면의 주 윈도우 가져오기.
-        guard let window = UIWindow.visibleWindow() else { return }
-        
-        // 드롭다운 레이아웃 계산
-        layout = computeLayoutBarbuttonDisplay(window: window)
-                
-        // 드롭다운의 width가 드롭다운이 차지할 수 있는 최대크기를 계산하여 적절하게 설정.
-        constraintWidthToFittingSizeIfNecessary(layout: &layout)
-        
-        // 드롭다운의 width가 화면의 경계 내에 있도록 설정.(화면을 넘기지 않도록)
-        constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
-        
-        let visibleHeight = tableHeight - layout.offscreenHeight  // 화면에 실제로 보일 수 있는 드롭다운의 높이를 계산
-        let canBeDisplayed = visibleHeight >= cellHeight          // 드롭다운이 화면에 표시될 수 있는지
-
-        // 계산한 값 설정
-        xConstant = layout.x
-        yConstant = layout.y
-        widthConstant = layout.width
-        heightConstant = visibleHeight
-        
-        self.visibleHeight = visibleHeight
-        self.offscreenHeight = layout.offscreenHeight
-        self.canBeDisplayed = canBeDisplayed
-    }
-    
     private func computeLayoutBarbuttonDisplay(window: UIWindow) -> ComputeLayoutTuple {
         var offscreenHeight: CGFloat = 0
         let width = width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
@@ -340,11 +310,14 @@ extension DropDown {
         let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? window.frame.midX - (width / 2)
         let anchorViewY = anchorView?.plainView.windowFrame?.maxY ?? window.frame.midY - (tableHeight / 2)
         
+        // 앵커뷰의 MaxX 좌표
+        let anchorViewRightX = anchorView?.plainView.windowFrame?.maxX ?? window.frame.midX + (width / 2)
+        
         // 화면 밖으로 나가는 width 계산 후 x좌표 조정
         var x = anchorViewX
         let overflow = x + width - window.bounds.maxX // 드롭다운이 화면 밖으로 얼마나 나가는지 계산
         if overflow > 0 {
-            x -= overflow
+            x -= overflow + (window.bounds.maxX - anchorViewRightX)
         }
         
         // 드롭다운의 x, y좌표 계산

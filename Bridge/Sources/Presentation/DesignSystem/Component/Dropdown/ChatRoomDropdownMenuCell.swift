@@ -1,5 +1,5 @@
 //
-//  ChatRoomMenuCell.swift
+//  ChatRoomDropdownMenuCell.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/10/05.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class ChatRoomMenuCell: BaseDropdownCell {
+final class ChatRoomDropdownMenuCell: BaseDropdownCell {
     // MARK: - UI
     let optionImageView: UIImageView = {
         let imageView = UIImageView()
