@@ -20,7 +20,7 @@ final class MessageViewController: BaseViewController {
         action: nil
     )
     
-    private lazy var menuDropdown = DropDown(
+    private lazy var dropdownMenu = DropDown(
         anchorView: menuBarButton,
         bottomOffset: CGPoint(x: 0, y: 30),
         dataSource: ["채팅방 나가기", "신고하기"],
@@ -84,13 +84,6 @@ final class MessageViewController: BaseViewController {
     
     func configureNavigationBar() {
         navigationItem.rightBarButtonItem = menuBarButton
-        
-        menuBarButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.menuDropdown.show()
-            })
-            .disposed(by: disposeBag)
     }
     
     // MARK: - Layout
@@ -111,6 +104,13 @@ final class MessageViewController: BaseViewController {
     
     // MARK: - Binding
     override func bind() {
+        menuBarButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.dropdownMenu.show()
+            })
+            .disposed(by: disposeBag)
+        
         messageInputBar.rx.keyboardLayoutChanged
             .bind(to: messageInputBar.rx.yPosition)
             .disposed(by: disposeBag)
@@ -121,7 +121,7 @@ final class MessageViewController: BaseViewController {
         
         let input = MessageViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            menuDropdownItemSelected: menuDropdown.itemSelected.map { $0.title }.asObservable(),
+            dropdownMenuItemSelected: dropdownMenu.itemSelected.map { $0.title }.asObservable(),
             sendMessage: messageInputBar.sendMessage
         )
         let output = viewModel.transform(input: input)

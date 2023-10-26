@@ -12,7 +12,7 @@ final class MessageViewModel: ViewModelType {
     
     struct Input {
         let viewWillAppear: Observable<Bool>
-        let menuDropdownItemSelected: Observable<String>
+        let dropdownMenuItemSelected: Observable<String>
         let sendMessage: Observable<String>
     }
     
@@ -43,10 +43,19 @@ final class MessageViewModel: ViewModelType {
                 owner.observeMessageUseCase.observe(chatRoomID: owner.chatRoom.id)
             }
         
-        input.menuDropdownItemSelected
+        input.dropdownMenuItemSelected
             .withUnretained(self)
-            .subscribe(onNext: { owner, item in
-                print(item)
+            .subscribe(onNext: { owner, itemTitle in
+                switch itemTitle {
+                case "채팅방 나가기":
+                    owner.coordinator?.showAlert(configuration: .report) { }  // 임시 알림
+                    
+                case "신고하기":
+                    owner.coordinator?.showAlert(configuration: .report) { }
+                    
+                default:
+                    break
+                }
             })
             .disposed(by: disposeBag)
         
