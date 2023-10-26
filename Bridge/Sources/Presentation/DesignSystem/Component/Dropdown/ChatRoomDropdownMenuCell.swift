@@ -11,7 +11,7 @@ import PinLayout
 
 final class ChatRoomDropdownMenuCell: BaseDropdownCell {
     // MARK: - UI
-    private lazy var optionimageView: UIImageView = {
+    private lazy var optionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = BridgeColor.gray3
         return imageView
@@ -22,7 +22,7 @@ final class ChatRoomDropdownMenuCell: BaseDropdownCell {
         addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.direction(.row).alignItems(.center).padding(10, 16).define { flex in
-            flex.addItem(optionimageView).size(20).marginRight(8)
+            flex.addItem(optionImageView).size(20).marginRight(8)
             flex.addItem(optionLabel)
         }
     }
@@ -37,6 +37,6 @@ final class ChatRoomDropdownMenuCell: BaseDropdownCell {
 // MARK: - Configuration
 extension ChatRoomDropdownMenuCell {
     func configure(image: UIImage?) {
-        optionimageView.image = image?.resize(to: CGSize(width: 20, height: 20)).withRenderingMode(.alwaysTemplate)
+        optionImageView.image = image?.resize(to: CGSize(width: 20, height: 20)).withRenderingMode(.alwaysTemplate)
     }
 }
