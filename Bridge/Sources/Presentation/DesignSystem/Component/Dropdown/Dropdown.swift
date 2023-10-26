@@ -180,7 +180,12 @@ final class DropDown: BaseView {
 extension DropDown {
     
     override func updateConstraints() {
-        computeLayout()
+        if let anchorView = anchorView as? UIBarButtonItem {
+            computeLayoutForBarButton()
+        } else {
+            computeLayout()
+        }
+        
         setupConstraints()
         
         super.updateConstraints()
@@ -248,11 +253,6 @@ extension DropDown {
         
         // 현재 화면의 주 윈도우 가져오기.
         guard let window = UIWindow.visibleWindow() else { return }
-
-        // 드롭다운이 UIBarButtonItem과 연결된 경우 bottomOffset 처리
-        if let anchorView = anchorView as? UIBarButtonItem {
-            bottomOffset = computeOffsetForBarButtonItem(anchorView: anchorView, window: window)
-        }
         
         // 드롭다운 레이아웃 계산
         layout = computeLayoutBottomDisplay(window: window)
@@ -277,24 +277,7 @@ extension DropDown {
         self.canBeDisplayed = canBeDisplayed
     }
     
-    /// anchorView가 UIBarButtonItem일 경우, bottomOffset을 조절해주는 메서드.
-    private func computeOffsetForBarButtonItem(anchorView: UIBarButtonItem, window: UIWindow) -> CGPoint {
-        // UIBarButton이 right 버튼인지 체크
-        let anchorViewFrame = anchorView.plainView.convert(anchorView.plainView.bounds, to: window)
-        let isRightBarButtonItem = anchorViewFrame.minX > window.frame.midX
-
-        // 만약 오른쪽 버튼이 아니라면, CGPoint.zero 반환
-        guard isRightBarButtonItem else { return bottomOffset }
-
-        let width = width ?? fittingWidth()                     // 드롭다운의 width를 설정하거나 적절한 width를 계산하여 가져옴
-        let anchorViewWidth = anchorView.plainView.frame.width  // anchorView의 width를 가져옴
-
-        let x = -(width - anchorViewWidth) - 8
-
-        return CGPoint(x: x, y: -5)
-    }
-    
-    /// 아래 방향으로 표시되는 드롭다운의 x, y, width, offscreenHeight
+    /// 드롭다운의 x, y, width, offscreenHeight
     private func computeLayoutBottomDisplay(window: UIWindow) -> ComputeLayoutTuple {
         
         var offscreenHeight: CGFloat = 0
@@ -319,6 +302,67 @@ extension DropDown {
         return (x, y, width, offscreenHeight)
     }
     
+    /// anchorView가 BarButton일 경우 드롭다운 좌표 계산
+    private func computeLayoutForBarButton() {
+        var layout: ComputeLayoutTuple = (0, 0, 0, 0)
+        
+        // 현재 화면의 주 윈도우 가져오기.
+        guard let window = UIWindow.visibleWindow() else { return }
+        
+        // 드롭다운 레이아웃 계산
+        layout = computeLayoutBarbuttonDisplay(window: window)
+                
+        // 드롭다운의 width가 드롭다운이 차지할 수 있는 최대크기를 계산하여 적절하게 설정.
+        constraintWidthToFittingSizeIfNecessary(layout: &layout)
+        
+        // 드롭다운의 width가 화면의 경계 내에 있도록 설정.(화면을 넘기지 않도록)
+        constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
+        
+        let visibleHeight = tableHeight - layout.offscreenHeight  // 화면에 실제로 보일 수 있는 드롭다운의 높이를 계산
+        let canBeDisplayed = visibleHeight >= cellHeight          // 드롭다운이 화면에 표시될 수 있는지
+
+        // 계산한 값 설정
+        xConstant = layout.x
+        yConstant = layout.y
+        widthConstant = layout.width
+        heightConstant = visibleHeight
+        
+        self.visibleHeight = visibleHeight
+        self.offscreenHeight = layout.offscreenHeight
+        self.canBeDisplayed = canBeDisplayed
+    }
+    
+    private func computeLayoutBarbuttonDisplay(window: UIWindow) -> ComputeLayoutTuple {
+        var offscreenHeight: CGFloat = 0
+        let width = width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
+        
+        // 앵커뷰의 x와 y 좌표
+        let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? window.frame.midX - (width / 2)
+        let anchorViewY = anchorView?.plainView.windowFrame?.maxY ?? window.frame.midY - (tableHeight / 2)
+        
+        // 화면 밖으로 나가는 width 계산 후 x좌표 조정
+        var x = anchorViewX
+        let overflow = x + width - window.bounds.maxX // 드롭다운이 화면 밖으로 얼마나 나가는지 계산
+        if overflow > 0 {
+            x -= overflow
+        }
+        
+        // 드롭다운의 x, y좌표 계산
+        x += bottomOffset.x
+        let y = anchorViewY + bottomOffset.y
+        
+        
+        // 화면 밖으로 나가는 높이 계산
+        let maxY = y + tableHeight
+        let windowMaxY = window.bounds.maxY
+        
+        if maxY > windowMaxY {
+            offscreenHeight = abs(maxY - windowMaxY)
+        }
+        
+        return (x, y, width, offscreenHeight)
+    }
+   
     /// 드롭다운의 항목 중 컨텐츠의 크기가 가장 큰 항목의 width를 계산하여 반환
     private func fittingWidth() -> CGFloat {
         guard let templateCell = tableView.dequeueReusableCell(withIdentifier: BaseDropdownCell.identifier)

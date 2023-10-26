@@ -148,7 +148,7 @@
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
 		7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */; };
-		7C8B82402ACE91C500F7B889 /* ChatRoomMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823F2ACE91C500F7B889 /* ChatRoomMenuCell.swift */; };
+		7C8B82402ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823F2ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -302,7 +302,7 @@
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorView.swift; sourceTree = "<group>"; };
-		7C8B823F2ACE91C500F7B889 /* ChatRoomMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomMenuCell.swift; sourceTree = "<group>"; };
+		7C8B823F2ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDropdownMenuCell.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -1028,7 +1028,7 @@
 				7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */,
 				7CE0803D2ACF143A00230C86 /* Dropdown.swift */,
 				7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */,
-				7C8B823F2ACE91C500F7B889 /* ChatRoomMenuCell.swift */,
+				7C8B823F2ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift */,
 			);
 			path = Dropdown;
 			sourceTree = "<group>";
@@ -1322,7 +1322,7 @@
 				7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */,
 				7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */,
 				7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */,
-				7C8B82402ACE91C500F7B889 /* ChatRoomMenuCell.swift in Sources */,
+				7C8B82402ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift in Sources */,
 				7C55E6502AE50D9E0018FA5D /* PlaceholderView.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
