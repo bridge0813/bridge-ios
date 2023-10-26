@@ -35,7 +35,8 @@ class BaseViewController: UIViewController {
 extension BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = BridgeColor.gray10
+        navigationItem.backButtonTitle = ""
         
         configureAttributes()
         configureLayouts()

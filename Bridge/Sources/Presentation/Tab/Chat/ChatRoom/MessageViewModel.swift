@@ -12,11 +12,13 @@ final class MessageViewModel: ViewModelType {
     
     struct Input {
         let viewWillAppear: Observable<Bool>
+        let profileButtonTapped: Observable<Void>
         let dropdownMenuItemSelected: Observable<String>
         let sendMessage: Observable<String>
     }
     
     struct Output {
+        let chatRoom: Driver<ChatRoom>
         let messages: Driver<[Message]>
     }
     
@@ -43,6 +45,13 @@ final class MessageViewModel: ViewModelType {
                 owner.observeMessageUseCase.observe(chatRoomID: owner.chatRoom.id)
             }
         
+        input.profileButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { _, _ in
+                print("profile button tapped")  // 프로필 뷰 show
+            })
+            .disposed(by: disposeBag)
+        
         input.dropdownMenuItemSelected
             .withUnretained(self)
             .subscribe(onNext: { owner, itemTitle in
@@ -66,7 +75,10 @@ final class MessageViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        return Output(messages: messages.asDriver(onErrorJustReturn: [.onError]))
+        return Output(
+            chatRoom: Driver.just(chatRoom),
+            messages: messages.asDriver(onErrorJustReturn: [.onError])
+        )
     }
 }
 

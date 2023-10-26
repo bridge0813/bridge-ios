@@ -13,13 +13,26 @@ import RxSwift
 
 final class MessageViewController: BaseViewController {
     // MARK: - UI
+    private let profileButton: UIButton = {
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = UIImage(named: "profile")?.resize(to: CGSize(width: 28, height: 28))
+        configuration.imagePadding = 8
+        
+        let button = UIButton(configuration: configuration)
+        button.imageView?.backgroundColor = BridgeColor.gray9
+        button.imageView?.layer.cornerRadius = 14
+        button.imageView?.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
+    private lazy var profileBarButton = UIBarButtonItem(customView: profileButton)
+    
     private lazy var menuBarButton = UIBarButtonItem(
         image: UIImage(named: "hamburger")?.resize(to: CGSize(width: 24, height: 24)).withRenderingMode(.alwaysTemplate),
         style: .plain,
         target: self,
         action: nil
     )
-    
     private lazy var dropdownMenu = DropDown(
         anchorView: menuBarButton,
         bottomOffset: CGPoint(x: 0, y: 30),
@@ -41,7 +54,7 @@ final class MessageViewController: BaseViewController {
         return view
     }()
     
-    private lazy var collectionView: UICollectionView = {
+    private lazy var messageCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(MessageCell.self)
         collectionView.backgroundColor = BridgeColor.gray9
@@ -50,6 +63,7 @@ final class MessageViewController: BaseViewController {
     
     private let messageInputBar = BridgeMessageInputBar()
     
+    // MARK: - Property
     private typealias DataSource = UICollectionViewDiffableDataSource<MessageViewModel.Section, Message>
     private typealias Snapshot = NSDiffableDataSourceSnapshot<MessageViewModel.Section, Message>
     private var dataSource: DataSource?
@@ -82,8 +96,17 @@ final class MessageViewController: BaseViewController {
         configureDataSource()
     }
     
-    func configureNavigationBar() {
+    private func configureNavigationBar() {
+        navigationItem.leftBarButtonItem = profileBarButton
+        navigationItem.leftItemsSupplementBackButton = true
         navigationItem.rightBarButtonItem = menuBarButton
+    }
+    
+    private func configureProfileButton(with chatRoom: ChatRoom) {
+        profileButton.configuration?.attributedTitle = AttributedString(
+            chatRoom.name,
+            attributes: AttributeContainer([.font: BridgeFont.subtitle2.font, .foregroundColor: BridgeColor.gray1])
+        )
     }
     
     // MARK: - Layout
@@ -91,7 +114,7 @@ final class MessageViewController: BaseViewController {
         view.addSubview(rootFlexConatiner)
         
         rootFlexConatiner.flex.define { flex in
-            flex.addItem(collectionView).grow(1)
+            flex.addItem(messageCollectionView).grow(1)
             flex.addItem(messageInputBar)
         }
     }
@@ -115,16 +138,23 @@ final class MessageViewController: BaseViewController {
             .bind(to: messageInputBar.rx.yPosition)
             .disposed(by: disposeBag)
         
-        collectionView.rx.keyboardLayoutChanged
-            .bind(to: collectionView.rx.yPosition)
+        messageCollectionView.rx.keyboardLayoutChanged
+            .bind(to: messageCollectionView.rx.yPosition)
             .disposed(by: disposeBag)
         
         let input = MessageViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            profileButtonTapped: profileButton.rx.tap.asObservable(),
             dropdownMenuItemSelected: dropdownMenu.itemSelected.map { $0.title }.asObservable(),
             sendMessage: messageInputBar.sendMessage
         )
         let output = viewModel.transform(input: input)
+        
+        output.chatRoom
+            .drive { [weak self] chatRoom in
+                self?.configureProfileButton(with: chatRoom)
+            }
+            .disposed(by: disposeBag)
         
         output.messages
             .drive { [weak self] messages in
@@ -137,7 +167,7 @@ final class MessageViewController: BaseViewController {
 // MARK: - Data source
 extension MessageViewController {
     private func configureDataSource() {
-        dataSource = DataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, item in
+        dataSource = DataSource(collectionView: messageCollectionView) { [weak self] collectionView, indexPath, item in
             guard let cell = collectionView.dequeueReusableCell(MessageCell.self, for: indexPath) else {
                 return UICollectionViewCell()
             }
@@ -167,7 +197,7 @@ extension MessageViewController {
         // 가장 아래로 스크롤
         if let lastItem = snapshot.itemIdentifiers(inSection: .main).last,
            let lastIndexPath = dataSource?.indexPath(for: lastItem) {
-            collectionView.scrollToItem(at: lastIndexPath, at: .top, animated: false)
+            messageCollectionView.scrollToItem(at: lastIndexPath, at: .top, animated: false)
         }
     }
 }

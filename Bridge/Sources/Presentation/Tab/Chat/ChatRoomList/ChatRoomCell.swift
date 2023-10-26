@@ -16,7 +16,7 @@ final class ChatRoomCell: BaseTableViewCell {
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = BridgeColor.gray9
+        imageView.image = UIImage(named: "profile")
         imageView.layer.cornerRadius = 24
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill

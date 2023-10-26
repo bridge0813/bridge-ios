@@ -42,7 +42,6 @@ final class ChatRoomListViewController: BaseViewController {
     // MARK: - Configurations
     override func configureAttributes() {
         navigationItem.title = "채팅"
-        navigationItem.backButtonTitle = ""
         configureDataSource()
     }
     
