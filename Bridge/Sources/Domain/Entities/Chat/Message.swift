@@ -11,6 +11,7 @@ struct Message {
     let id: String
     let sender: Sender
     let type: MessageType
+    let sentDate: String
     let sentTime: String
     let state: State
 }
@@ -42,7 +43,8 @@ extension Message {
         id: UUID().uuidString,
         sender: .me,
         type: .text("오류가 발생했습니다."),
-        sentTime: Date().toString(),
+        sentDate: "날짜를 불러올 수 없습니다",
+        sentTime: "시간을 불러올 수 없습니다.",
         state: .read
     )
 }

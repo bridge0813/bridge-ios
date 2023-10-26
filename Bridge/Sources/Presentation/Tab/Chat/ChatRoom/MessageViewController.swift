@@ -102,12 +102,23 @@ final class MessageViewController: BaseViewController {
 // MARK: - Data source
 extension MessageViewController {
     private func configureDataSource() {
-        dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, item in
+        dataSource = DataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, item in
             guard let cell = collectionView.dequeueReusableCell(MessageCell.self, for: indexPath) else {
                 return UICollectionViewCell()
             }
             cell.backgroundColor = .clear
-            cell.configureCell(with: item)
+            
+            let currentMessage = item
+            var shouldShowDate = false
+            
+            if indexPath.row == 0 { shouldShowDate = true }
+            else {
+                if let previousMessage = self?.dataSource?.snapshot().itemIdentifiers(inSection: .main)[indexPath.row - 1],
+                   previousMessage.sentDate != currentMessage.sentDate {
+                    shouldShowDate = true
+                }
+            }
+            cell.configure(with: item, shouldShowDate: shouldShowDate)
             return cell
         }
     }

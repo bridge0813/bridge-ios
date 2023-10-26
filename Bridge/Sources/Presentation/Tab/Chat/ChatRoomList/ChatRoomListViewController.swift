@@ -91,7 +91,7 @@ extension ChatRoomListViewController {
             guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else { return UITableViewCell() }
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
-            cell.configureCell(with: item)
+            cell.configure(with: item)
             return cell
         }
     }

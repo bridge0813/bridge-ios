@@ -101,7 +101,7 @@ final class ChatRoomCell: BaseTableViewCell {
 
 // MARK: - Configuration
 extension ChatRoomCell {
-    func configureCell(with chatRoom: ChatRoom) {
+    func configure(with chatRoom: ChatRoom) {
         nameLabel.text = chatRoom.name
         lastMessageReceivedTimeLabel.text = chatRoom.lastMessage.receivedTime
         lastMessageContentLabel.text = chatRoom.lastMessage.content
