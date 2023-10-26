@@ -184,6 +184,8 @@ final class MemberRequirementInputViewController: BaseViewController {
         addTechStackButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
                 self?.addTechStackButton.isAdded.toggle()
+                self?.addedTechTagView.updateTagButtons(with: ["Javascript", "Spring", "go", "Swift", "UIKit"])
+                self?.addedTechTagView.flex.markDirty()
                 self?.addTechStackButton.flex.markDirty()
                 self?.view.setNeedsLayout()
             })
@@ -192,6 +194,8 @@ final class MemberRequirementInputViewController: BaseViewController {
         // 테스트용
         setRecruitNumberButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
+                self?.addedTechTagView.updateTagButtons(with: [])
+                self?.addedTechTagView.flex.markDirty()
                 self?.setRecruitNumberButton.updateTitle("2명")
             })
             .disposed(by: disposeBag)

@@ -74,8 +74,6 @@ final class AddedTechTagView: BaseView {
             rootFlexContainer.flex.height(calculateContainerHeight())
             rootFlexContainer.backgroundColor = .clear
         }
-        
-        rootFlexContainer.flex.markDirty()
     }
     
     /// button의 갯수를 파악하여, 컨테이너의 크기를 계산.
