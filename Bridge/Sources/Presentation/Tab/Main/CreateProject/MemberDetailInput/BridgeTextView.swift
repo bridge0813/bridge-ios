@@ -76,7 +76,7 @@ final class BridgeTextView: BaseView {
         textView.rx.didBeginEditing
             .asDriver()
             .drive(onNext: { [weak self] in
-                guard let self = self else { return }
+                guard let self else { return }
                 
                 if self.textView.text == self.textViewPlaceholder {
                     self.textView.text = nil
@@ -92,7 +92,7 @@ final class BridgeTextView: BaseView {
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: "Error")
             .drive(onNext: { [weak self] text in
-                guard let self = self else { return }
+                guard let self else { return }
                 
                 // 텍스트가 빈 문자열이지 않고, 텍스트홀더도 아닐 경우 활성화
                 if !text.isEmpty && text != self.textViewPlaceholder {
@@ -115,7 +115,7 @@ final class BridgeTextView: BaseView {
         textView.rx.didEndEditing
             .asDriver()
             .drive(onNext: { [weak self] in
-                guard let self = self else { return }
+                guard let self else { return }
                 
                 if self.textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     self.textView.text = self.textViewPlaceholder
