@@ -1082,8 +1082,8 @@
 				7CC9F6CC2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift */,
 				7C55E6552AE811660018FA5D /* BridgeSetDisplayButton.swift */,
 				7C55E6572AE811A20018FA5D /* AddTechStackButton.swift */,
-				7C55E6592AE8DEC70018FA5D /* BridgeTextView.swift */,
 				7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */,
+				7C55E6592AE8DEC70018FA5D /* BridgeTextView.swift */,
 				7C55E65F2AEAD30E0018FA5D /* Popup */,
 			);
 			path = MemberDetailInput;
