@@ -64,7 +64,6 @@ final class MemberRequirementInputViewController: BaseViewController {
     }()
     private let setRecruitNumberButton = BridgeSetDisplayButton("몇 명을 모집할까요?")
     
-    
     private let memberTechStackLabel: UILabel = {
         let label = UILabel()
         label.text = "팀원 스택"
@@ -92,6 +91,8 @@ final class MemberRequirementInputViewController: BaseViewController {
         font: BridgeFont.button1.font,
         backgroundColor: BridgeColor.gray4
     )
+    
+    private let setRecruitmentNumberView = SetRecruitmentNumberView()
    
     // MARK: - Properties
     private let viewModel: MemberRequirementInputViewModel
@@ -134,10 +135,6 @@ final class MemberRequirementInputViewController: BaseViewController {
             flex.addItem(nextButton).height(52).marginBottom(24)
         }
         
-        configureContentLayout()
-    }
-    
-    private func configureContentLayout() {
         contentContainer.flex.define { flex in
             flex.addItem(descriptionLabel).width(187).height(60).marginTop(30)
             flex.addItem(fieldTagButton).alignSelf(.start).marginTop(40)
@@ -191,12 +188,17 @@ final class MemberRequirementInputViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        // 테스트용
+        // 모집인원 선택 팝업 뷰 보여주기
         setRecruitNumberButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
-                self?.addedTechTagView.updateTagButtons(with: [])
-                self?.addedTechTagView.flex.markDirty()
-                self?.setRecruitNumberButton.updateTitle("2명")
+                self?.setRecruitmentNumberView.show()
+            })
+            .disposed(by: disposeBag)
+        
+        // 모집인원 선택완료 이벤트.
+        setRecruitmentNumberView.selectedNumber.asDriver(onErrorJustReturn: "Error")
+            .drive(onNext: { [weak self] number in
+                self?.setRecruitNumberButton.updateTitle(number)
             })
             .disposed(by: disposeBag)
     }
