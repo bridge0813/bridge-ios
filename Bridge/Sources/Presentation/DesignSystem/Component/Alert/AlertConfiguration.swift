@@ -62,6 +62,12 @@ extension AlertConfiguration {
         rightButtonTitle: "수락하기"
     )
     
+    static let leaveChatRoom = AlertConfiguration(
+        title: "채팅방에서 나갈까요?",
+        description: "채팅 목록 및 대화 내용이 모두 삭제됩니다.",
+        rightButtonTitle: "나가기"
+    )
+    
     static let report = AlertConfiguration(
         imageName: "graphic_siren",
         title: "정말 신고하실 건가요?",

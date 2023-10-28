@@ -57,7 +57,7 @@ final class MessageViewModel: ViewModelType {
             .subscribe(onNext: { owner, itemTitle in
                 switch itemTitle {
                 case "채팅방 나가기":
-                    owner.coordinator?.showAlert(configuration: .report) { }  // 임시 알림
+                    owner.coordinator?.showAlert(configuration: .leaveChatRoom) { }
                     
                 case "신고하기":
                     owner.coordinator?.showAlert(configuration: .report) { }
