@@ -81,7 +81,6 @@
 		7B92B7E52AE503F700B0E954 /* MessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B92B7E42AE503F700B0E954 /* MessageRepository.swift */; };
 		7B92B7E92AE5052000B0E954 /* DefaultMessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B92B7E82AE5052000B0E954 /* DefaultMessageRepository.swift */; };
 		7B92B7EB2AE5052900B0E954 /* MockMessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B92B7EA2AE5052900B0E954 /* MockMessageRepository.swift */; };
-		7B92B7ED2AE5191200B0E954 /* MessageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B92B7EC2AE5191200B0E954 /* MessageContainerView.swift */; };
 		7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */; };
 		7BA36C902A9C4BB3000DAB02 /* ChatRoomListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C8F2A9C4BB3000DAB02 /* ChatRoomListViewModel.swift */; };
 		7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C972A9C503C000DAB02 /* FetchChatRoomsUseCase.swift */; };
@@ -114,6 +113,8 @@
 		7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8C5222AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift */; };
 		7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */; };
 		7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */; };
+		7BFECA222AEBEC0B009B4C7D /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA212AEBEC0B009B4C7D /* ChatCell.swift */; };
+		7BFECA242AECE632009B4C7D /* ApplicationResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */; };
 		7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366342AC15ECF00EB415D /* BridgeBookmarkButton.swift */; };
 		7C1366392AC16C4D00EB415D /* BridgeRemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366382AC16C4D00EB415D /* BridgeRemoveButton.swift */; };
 		7C1366422AC27F9100EB415D /* BridgeSendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */; };
@@ -249,7 +250,6 @@
 		7B92B7E42AE503F700B0E954 /* MessageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRepository.swift; sourceTree = "<group>"; };
 		7B92B7E82AE5052000B0E954 /* DefaultMessageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMessageRepository.swift; sourceTree = "<group>"; };
 		7B92B7EA2AE5052900B0E954 /* MockMessageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMessageRepository.swift; sourceTree = "<group>"; };
-		7B92B7EC2AE5191200B0E954 /* MessageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContainerView.swift; sourceTree = "<group>"; };
 		7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		7BA36C8F2A9C4BB3000DAB02 /* ChatRoomListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomListViewModel.swift; sourceTree = "<group>"; };
 		7BA36C972A9C503C000DAB02 /* FetchChatRoomsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChatRoomsUseCase.swift; sourceTree = "<group>"; };
@@ -282,6 +282,8 @@
 		7BB8C5222AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+RxKeyboard.swift"; sourceTree = "<group>"; };
 		7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSetFieldView.swift; sourceTree = "<group>"; };
 		7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthRepository.swift; sourceTree = "<group>"; };
+		7BFECA212AEBEC0B009B4C7D /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationResultCell.swift; sourceTree = "<group>"; };
 		7C1366342AC15ECF00EB415D /* BridgeBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBookmarkButton.swift; sourceTree = "<group>"; };
 		7C1366382AC16C4D00EB415D /* BridgeRemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeRemoveButton.swift; sourceTree = "<group>"; };
 		7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSendMessageButton.swift; sourceTree = "<group>"; };
@@ -561,9 +563,8 @@
 		7B3289332ADE55B5009DF3C2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7BFECA202AEBEBE4009B4C7D /* Cells */,
 				7B3289342ADE55DA009DF3C2 /* BridgeMessageInputBar.swift */,
-				7B1922D42AE287C900EBDD2E /* MessageCell.swift */,
-				7B92B7EC2AE5191200B0E954 /* MessageContainerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -998,6 +999,16 @@
 				7BA36CCD2A9E185A000DAB02 /* ChatRoomCell.swift */,
 			);
 			path = ChatRoomList;
+			sourceTree = "<group>";
+		};
+		7BFECA202AEBEBE4009B4C7D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7BFECA212AEBEC0B009B4C7D /* ChatCell.swift */,
+				7B1922D42AE287C900EBDD2E /* MessageCell.swift */,
+				7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		7C1366332AC15DEA00EB415D /* Component */ = {
@@ -1439,6 +1450,7 @@
 				7B1E5ABE2ADCFD880053E9B3 /* MessageViewModel.swift in Sources */,
 				7C8B82402ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift in Sources */,
 				7C55E6502AE50D9E0018FA5D /* PlaceholderView.swift in Sources */,
+				7BFECA222AEBEC0B009B4C7D /* ChatCell.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
 				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,
@@ -1509,7 +1521,6 @@
 				7C569CF32A9F67C60063D362 /* Project.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
 				7B1E5ABC2ADCFD790053E9B3 /* MessageViewController.swift in Sources */,
-				7B92B7ED2AE5191200B0E954 /* MessageContainerView.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
@@ -1523,6 +1534,7 @@
 				7B61238D2AC2F320006E72C1 /* BridgeWarningMessageBox.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7C55E6442AE17B270018FA5D /* TopMenuView.swift in Sources */,
+				7BFECA242AECE632009B4C7D /* ApplicationResultCell.swift in Sources */,
 				7CE080402ACF147500230C86 /* RestrictionDropdownAnchorView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7B02A6652ADFFCCD00C8D4A1 /* WebSocketService.swift in Sources */,
