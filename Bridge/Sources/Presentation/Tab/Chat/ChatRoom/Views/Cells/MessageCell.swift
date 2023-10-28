@@ -43,7 +43,7 @@ final class MessageCell: ChatCell {
     override func configure(with message: Message, shouldShowDate: Bool) {
         configureMessageLabel(with: message)
         
-        messageBubble.flex.width(messageLabel.intrinsicContentSize.width + 48).padding(12, 24).define { flex in
+        chatBubble.flex.width(messageLabel.intrinsicContentSize.width + 48).padding(12, 24).define { flex in
             flex.addItem(messageLabel)
         }
         

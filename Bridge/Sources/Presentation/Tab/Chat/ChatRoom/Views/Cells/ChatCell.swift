@@ -20,7 +20,7 @@ class ChatCell: BaseCollectionViewCell {
         return label
     }()
     
-    let messageBubble: UIView = {
+    let chatBubble: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 8
         return view
@@ -71,12 +71,12 @@ private extension ChatCell {
     func configureMessageBubble(by sender: Sender) {
         switch sender {
         case .me:
-            messageBubble.backgroundColor = BridgeColor.primary1
-            messageBubble.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner]
+            chatBubble.backgroundColor = BridgeColor.primary1
+            chatBubble.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner]
             
         case .opponent:
-            messageBubble.backgroundColor = BridgeColor.gray10
-            messageBubble.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+            chatBubble.backgroundColor = BridgeColor.gray10
+            chatBubble.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         }
     }
     
@@ -90,7 +90,7 @@ private extension ChatCell {
         
         contentView.flex.alignItems(alignment).paddingHorizontal(16).define { flex in
             flex.addItem(dateLabel).width(100%).marginBottom(24).isIncludedInLayout(!dateLabel.isHidden)
-            flex.addItem(messageBubble)
+            flex.addItem(chatBubble)
             flex.addItem(timeLabel).marginTop(8)
         }
     }

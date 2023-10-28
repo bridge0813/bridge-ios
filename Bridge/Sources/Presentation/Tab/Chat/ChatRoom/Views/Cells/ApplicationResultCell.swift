@@ -46,7 +46,7 @@ final class ApplicationResultCell: ChatCell {
         configureMessageLabel(with: message)
         configureImageView(by: message.type)
         
-        messageBubble.flex.alignItems(.center).width(messageLabel.intrinsicContentSize.width + 48).padding(24).define { flex in
+        chatBubble.flex.alignItems(.center).width(messageLabel.intrinsicContentSize.width + 48).padding(24).define { flex in
             flex.addItem(messageLabel).marginBottom(6)
             flex.addItem(emojiImageView).size(100)
         }
