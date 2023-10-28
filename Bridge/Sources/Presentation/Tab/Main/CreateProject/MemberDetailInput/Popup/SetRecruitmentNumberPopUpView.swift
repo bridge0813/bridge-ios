@@ -33,18 +33,6 @@ final class SetRecruitmentNumberPopUpView: BaseView {
         return imageView
     }()
     
-    private lazy var dismissButton: UIButton = {
-        let image = UIImage(named: "xmark")?
-            .resize(to: CGSize(width: 24, height: 24))
-            .withRenderingMode(.alwaysTemplate)
-        
-        let button = UIButton()
-        button.setImage(image, for: .normal)
-        button.tintColor = BridgeColor.gray1
-        
-        return button
-    }()
-    
     private let recruitLabel: UILabel = {
         let label = UILabel()
         label.text = "모집 인원"
@@ -89,27 +77,25 @@ final class SetRecruitmentNumberPopUpView: BaseView {
     
     // MARK: - Layout
     override func configureLayouts() {
-        backgroundColor = .darkGray.withAlphaComponent(0.3)
+        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
         addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.define { flex in
             flex.addItem(dragHandleImageView).alignSelf(.center).width(25).height(7).marginTop(10)
             
-            flex.addItem(dismissButton).alignSelf(.end).size(24).marginTop(17).marginRight(16)
-            
-            flex.addItem(recruitLabel).width(67).height(22).marginTop(7).marginLeft(16)
+            flex.addItem(recruitLabel).width(67).height(22).marginTop(30).marginLeft(16)
             
             flex.addItem().backgroundColor(BridgeColor.gray8).height(1).marginTop(7)
             
             flex.addItem(pickerView).height(120).marginTop(56)
             
-            flex.addItem(completeButton).height(52).marginTop(69).marginHorizontal(16).marginBottom(15)
+            flex.addItem(completeButton).height(52).marginTop(69).marginHorizontal(16)
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.below(of: self).width(100%).height(428)
+        rootFlexContainer.pin.below(of: self).width(100%).height(409)
         rootFlexContainer.flex.layout()
     }
     
@@ -124,13 +110,6 @@ final class SetRecruitmentNumberPopUpView: BaseView {
         pickerView.rx.itemSelected.asDriver()
             .drive(onNext: { [weak self] _ in
                 self?.completeButton.isEnabled = true
-            })
-            .disposed(by: disposeBag)
-        
-        
-        dismissButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] in
-                self?.hide()
             })
             .disposed(by: disposeBag)
     }
@@ -169,17 +148,18 @@ extension SetRecruitmentNumberPopUpView: UIPickerViewDataSource, UIPickerViewDel
 
 // MARK: - PanGesture
 extension SetRecruitmentNumberPopUpView {
-    @objc func handlePanGesture(sender: UIPanGestureRecognizer) {
+    @objc
+    private func handlePanGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: rootFlexContainer)
         let velocity = sender.velocity(in: rootFlexContainer)
         
-        let currentTranslationY: CGFloat = -428  // 초기 컨테이너의 오프셋
+        let currentTranslationY: CGFloat = -409  // 초기 컨테이너의 오프셋
         let calculatedTranslationY = currentTranslationY + translation.y  // 초기 오프셋을 고려한 결과값
         
         switch sender.state {
         case .changed:
             // 아래로 드래그하거나 최대 높이 이내에서만 transform을 적용
-            if calculatedTranslationY > -428 && calculatedTranslationY <= 0 {
+            if calculatedTranslationY > currentTranslationY && calculatedTranslationY <= 0 {
                 rootFlexContainer.transform = CGAffineTransform(translationX: 0, y: calculatedTranslationY)
             }
             
@@ -187,12 +167,12 @@ extension SetRecruitmentNumberPopUpView {
             if velocity.y > 1500 {
                 hide()
                 
-            } else if calculatedTranslationY > -214 {  // 뷰 높이의 절반 이상 내려가면 hide
+            } else if calculatedTranslationY > -250 {
                 hide()
                 
             } else {  // 원상복구
                 UIView.animate(withDuration: 0.2) {
-                    self.rootFlexContainer.transform = CGAffineTransform(translationX: 0, y: -428)
+                    self.rootFlexContainer.transform = CGAffineTransform(translationX: 0, y: currentTranslationY)
                 }
             }
             
@@ -209,7 +189,7 @@ extension SetRecruitmentNumberPopUpView {
         
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             guard let self else { return }
-            self.rootFlexContainer.transform = CGAffineTransform(translationX: 0, y: -428)
+            self.rootFlexContainer.transform = CGAffineTransform(translationX: 0, y: -409)
         })
     }
 
