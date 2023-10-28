@@ -37,7 +37,7 @@ final class AddedTechTagView: BaseView {
             .wrap(.wrap)
             .define { flex in
                 tagButtons.forEach { button in
-                    flex.addItem(button).marginRight(14).marginBottom(14)
+                    flex.addItem(button).height(38).marginRight(14).marginBottom(14)
                 }
             }
     }

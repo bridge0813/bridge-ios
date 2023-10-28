@@ -134,7 +134,9 @@
 		7C55E6582AE811A20018FA5D /* AddTechStackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6572AE811A20018FA5D /* AddTechStackButton.swift */; };
 		7C55E65A2AE8DEC70018FA5D /* BridgeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6592AE8DEC70018FA5D /* BridgeTextView.swift */; };
 		7C55E65C2AE961250018FA5D /* AddedTechTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */; };
-		7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberView.swift */; };
+		7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift */; };
+		7C55E6632AEBBCBF0018FA5D /* AddTechTagPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6622AEBBCBF0018FA5D /* AddTechTagPopUpView.swift */; };
+		7C55E6652AEBC81D0018FA5D /* TechTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6642AEBC81D0018FA5D /* TechTagCell.swift */; };
 		7C569CF32A9F67C60063D362 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF22A9F67C60063D362 /* Project.swift */; };
 		7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */; };
 		7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */; };
@@ -289,7 +291,9 @@
 		7C55E6572AE811A20018FA5D /* AddTechStackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTechStackButton.swift; sourceTree = "<group>"; };
 		7C55E6592AE8DEC70018FA5D /* BridgeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeTextView.swift; sourceTree = "<group>"; };
 		7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedTechTagView.swift; sourceTree = "<group>"; };
-		7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRecruitmentNumberView.swift; sourceTree = "<group>"; };
+		7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRecruitmentNumberPopUpView.swift; sourceTree = "<group>"; };
+		7C55E6622AEBBCBF0018FA5D /* AddTechTagPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTechTagPopUpView.swift; sourceTree = "<group>"; };
+		7C55E6642AEBC81D0018FA5D /* TechTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechTagCell.swift; sourceTree = "<group>"; };
 		7C569CF22A9F67C60063D362 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
@@ -965,7 +969,9 @@
 		7C55E65F2AEAD30E0018FA5D /* Popup */ = {
 			isa = PBXGroup;
 			children = (
-				7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberView.swift */,
+				7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift */,
+				7C55E6622AEBBCBF0018FA5D /* AddTechTagPopUpView.swift */,
+				7C55E6642AEBC81D0018FA5D /* TechTagCell.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -1310,7 +1316,7 @@
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
 				7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
-				7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberView.swift in Sources */,
+				7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift in Sources */,
 				7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */,
 				7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */,
 				7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */,
@@ -1336,6 +1342,7 @@
 				7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */,
 				7C8B82402ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift in Sources */,
 				7C55E6502AE50D9E0018FA5D /* PlaceholderView.swift in Sources */,
+				7C55E6652AEBC81D0018FA5D /* TechTagCell.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
 				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,
@@ -1412,6 +1419,7 @@
 				7B0FD3CC2AD913D900C91045 /* SignUpResult.swift in Sources */,
 				7B61238D2AC2F320006E72C1 /* BridgeWarningMessageBox.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
+				7C55E6632AEBBCBF0018FA5D /* AddTechTagPopUpView.swift in Sources */,
 				7C55E6442AE17B270018FA5D /* TopMenuView.swift in Sources */,
 				7CE080402ACF147500230C86 /* RestrictionDropdownAnchorView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,

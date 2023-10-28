@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 모집인원을 선택하는 뷰
-final class SetRecruitmentNumberView: BaseView {
+final class SetRecruitmentNumberPopUpView: BaseView {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()
@@ -137,7 +137,7 @@ final class SetRecruitmentNumberView: BaseView {
 }
 
 // MARK: - PickerDelegate
-extension SetRecruitmentNumberView: UIPickerViewDataSource, UIPickerViewDelegate {
+extension SetRecruitmentNumberPopUpView: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -168,7 +168,7 @@ extension SetRecruitmentNumberView: UIPickerViewDataSource, UIPickerViewDelegate
 }
 
 // MARK: - PanGesture
-extension SetRecruitmentNumberView {
+extension SetRecruitmentNumberPopUpView {
     @objc func handlePanGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: rootFlexContainer)
         let velocity = sender.velocity(in: rootFlexContainer)
@@ -203,7 +203,7 @@ extension SetRecruitmentNumberView {
 }
 
 // MARK: - Show & Hide
-extension SetRecruitmentNumberView {
+extension SetRecruitmentNumberPopUpView {
     func show() {
         self.setLayout()
         

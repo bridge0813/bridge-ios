@@ -63,6 +63,8 @@ final class MemberRequirementInputViewController: BaseViewController {
         return label
     }()
     private let setRecruitNumberButton = BridgeSetDisplayButton("몇 명을 모집할까요?")
+    private let setRecruitmentNumberView = SetRecruitmentNumberPopUpView()
+    
     
     private let memberTechStackLabel: UILabel = {
         let label = UILabel()
@@ -74,7 +76,7 @@ final class MemberRequirementInputViewController: BaseViewController {
     }()
     private let addTechStackButton = AddTechStackButton()
     private let addedTechTagView = AddedTechTagView()
-    
+    private let addTechTagPopUpView = AddTechTagPopUpView()
     
     private let requirementLabel: UILabel = {
         let label = UILabel()
@@ -92,7 +94,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         backgroundColor: BridgeColor.gray4
     )
     
-    private let setRecruitmentNumberView = SetRecruitmentNumberView()
+    
    
     // MARK: - Properties
     private let viewModel: MemberRequirementInputViewModel
@@ -173,18 +175,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         output.selectedField
             .drive(onNext: { [weak self] field in
                 self?.fieldTagButton.updateTitle(field)
-                // 분야에 맞는 기술 스택 주입.
-            })
-            .disposed(by: disposeBag)
-        
-        // 테스트용
-        addTechStackButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] _ in
-                self?.addTechStackButton.isAdded.toggle()
-                self?.addedTechTagView.updateTagButtons(with: ["Javascript", "Spring", "go", "Swift", "UIKit"])
-                self?.addedTechTagView.flex.markDirty()
-                self?.addTechStackButton.flex.markDirty()
-                self?.view.setNeedsLayout()
+                self?.addTechTagPopUpView.field = field  // 기술 태그 선택하는 팝업 뷰에 선택된 분야를 전달
             })
             .disposed(by: disposeBag)
         
@@ -201,6 +192,24 @@ final class MemberRequirementInputViewController: BaseViewController {
                 self?.setRecruitNumberButton.updateTitle(number)
             })
             .disposed(by: disposeBag)
+        
+        // 테스트용
+        addTechStackButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] _ in
+                self?.addTechTagPopUpView.show()
+            })
+            .disposed(by: disposeBag)
+        
+        addTechTagPopUpView.completeButtonTapped.asDriver(onErrorJustReturn: [])
+            .drive(onNext: { [weak self] tagNames in
+                self?.addTechStackButton.isAdded = !tagNames.isEmpty
+                self?.addedTechTagView.updateTagButtons(with: tagNames)
+                self?.addedTechTagView.flex.markDirty()
+                self?.addTechStackButton.flex.markDirty()
+                self?.view.setNeedsLayout()
+            })
+            .disposed(by: disposeBag)
+    
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
