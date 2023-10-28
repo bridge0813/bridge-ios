@@ -17,6 +17,7 @@ final class MessageViewController: BaseViewController {
         var configuration = UIButton.Configuration.plain()
         configuration.image = UIImage(named: "profile")?.resize(to: CGSize(width: 28, height: 28))
         configuration.imagePadding = 8
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -4, bottom: 0, trailing: 0)
         
         let button = UIButton(configuration: configuration)
         button.imageView?.backgroundColor = BridgeColor.gray9
@@ -56,8 +57,10 @@ final class MessageViewController: BaseViewController {
     
     private lazy var messageCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(MessageCell.self)
         collectionView.backgroundColor = BridgeColor.gray9
+        collectionView.register(ChatCell.self)
+        collectionView.register(MessageCell.self)
+        collectionView.register(ApplicationResultCell.self)
         return collectionView
     }()
     
@@ -91,6 +94,7 @@ final class MessageViewController: BaseViewController {
         tabBarController?.tabBar.isHidden = false
     }
     
+    // MARK: - Configuration
     override func configureAttributes() {
         configureNavigationBar()
         configureDataSource()
@@ -168,21 +172,27 @@ final class MessageViewController: BaseViewController {
 extension MessageViewController {
     private func configureDataSource() {
         dataSource = DataSource(collectionView: messageCollectionView) { [weak self] collectionView, indexPath, item in
-            guard let cell = collectionView.dequeueReusableCell(MessageCell.self, for: indexPath) else {
-                return UICollectionViewCell()
-            }
-            cell.backgroundColor = .clear
-            
             let currentMessage = item
-            var shouldShowDate = false
-            
-            if indexPath.row == 0 { shouldShowDate = true }
-            else {
-                if let previousMessage = self?.dataSource?.snapshot().itemIdentifiers(inSection: .main)[indexPath.row - 1],
-                   previousMessage.sentDate != currentMessage.sentDate {
-                    shouldShowDate = true
-                }
+            var shouldShowDate: Bool {
+                if indexPath.row == 0 { return true }
+                
+                guard let previousMessage = self?.dataSource?.item(before: indexPath) else { return false }
+                
+                return previousMessage.sentDate != currentMessage.sentDate
             }
+            
+            let cell: ChatCell
+            switch item.type {
+            case .text:
+                cell = collectionView.dequeueReusableCell(MessageCell.self, for: indexPath) ?? MessageCell()
+                
+            case .accept, .refuse:
+                cell = collectionView.dequeueReusableCell(ApplicationResultCell.self, for: indexPath) ?? ApplicationResultCell()
+                
+            default:
+                cell = ChatCell()
+            }
+            
             cell.configure(with: item, shouldShowDate: shouldShowDate)
             return cell
         }
@@ -203,12 +213,22 @@ extension MessageViewController {
 }
 
 // MARK: - Layout
-extension MessageViewController {
+private extension MessageViewController {
     func createLayout() -> UICollectionViewLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.estimatedItemSize = CGSize(width: view.frame.width, height: 66)
         flowLayout.sectionInset = UIEdgeInsets(top: 24, left: 0, bottom: 16, right: 0)
         flowLayout.minimumLineSpacing = 16
         return flowLayout
+    }
+}
+
+// MARK: - Helper
+private extension UICollectionViewDiffableDataSource {
+    func item(before indexPath: IndexPath) -> ItemIdentifierType? {
+        guard indexPath.row > 0 else { return nil }
+        
+        let previousIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+        return itemIdentifier(for: previousIndexPath)
     }
 }
