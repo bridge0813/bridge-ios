@@ -53,10 +53,10 @@ final class BridgeFieldTagButton: BaseButton {
         }
     }
     
-    func updateTitle(_ title: String) {
+    func updateTitle(with title: String, textColor: UIColor = BridgeColor.gray3) {
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.tag1.font
-        titleContainer.foregroundColor = BridgeColor.primary1
+        titleContainer.foregroundColor = textColor
         configuration?.attributedTitle = AttributedString(title, attributes: titleContainer)
     }
 }

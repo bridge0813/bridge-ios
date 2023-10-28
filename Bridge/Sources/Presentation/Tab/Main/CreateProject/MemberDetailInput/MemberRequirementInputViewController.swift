@@ -174,7 +174,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         output.selectedField
             .drive(onNext: { [weak self] field in
-                self?.fieldTagButton.updateTitle(field)
+                self?.fieldTagButton.updateTitle(with: field, textColor: BridgeColor.primary1)
                 self?.addTechTagPopUpView.field = field  // 기술 태그 선택하는 팝업 뷰에 선택된 분야를 전달
             })
             .disposed(by: disposeBag)

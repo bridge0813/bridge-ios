@@ -80,8 +80,20 @@ final class AddTechTagPopUpView: BaseView {
                     )
                 ) { [weak self] _, tagName, cell in
                     guard let self else { return }
+                    
                     cell.configureCell(with: tagName)
-                    cell.updateCellStyle(with: self.selectedTags.contains(tagName))
+                    cell.tagButtonTapped
+                        .withUnretained(self)
+                        .bind(onNext: { owner, tag in
+                            if let index = owner.selectedTags.firstIndex(of: tag) {
+                                owner.selectedTags.remove(at: index)
+                            } else {
+                                owner.selectedTags.append(tag)
+                            }
+                            
+                            owner.completeButton.isEnabled = !owner.selectedTags.isEmpty
+                        })
+                        .disposed(by: cell.disposeBag)
                 }
                 .disposed(by: disposeBag)
         }
@@ -128,22 +140,6 @@ final class AddTechTagPopUpView: BaseView {
     override func configureAttributes() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
         rootFlexContainer.addGestureRecognizer(panGesture)
-    }
-
-    // MARK: - Bind
-    override func bind() {
-        collectionView.rx.modelSelected(String.self)
-            .withUnretained(self)
-            .subscribe(onNext: { owner, tagName in
-                if let index = owner.selectedTags.firstIndex(of: tagName) {
-                    owner.selectedTags.remove(at: index)
-                } else {
-                    owner.selectedTags.append(tagName)
-                }
-                
-                owner.completeButton.isEnabled = !owner.selectedTags.isEmpty
-            })
-            .disposed(by: disposeBag)
     }
 }
 

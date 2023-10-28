@@ -8,53 +8,43 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
+import RxCocoa
 
 /// 기본적인 모집글을 나타내는 Cell
 final class TechTagCell: BaseCollectionViewCell {
     // MARK: - UI
-    private let tagLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .clear
-        label.textColor = BridgeColor.gray3
-        label.font = BridgeFont.tag1.font
-        label.textAlignment = .center
+    private let tagButton: BridgeFieldTagButton = {
+        let button = BridgeFieldTagButton("")
+        button.layer.cornerRadius = 4
         
-        return label
+        return button
     }()
+    
+    // MARK: - Properties
+    /// 버튼 자체가 Cell 크기와 동일하여 itemSelected 이벤트가 호출될 수 없기 때문에 버튼 이벤트로 대체.
+    var tagButtonTapped: Observable<String> {
+        return tagButton.rx.tap
+            .withUnretained(self)
+            .map { owner, _ in
+                return owner.tagButton.titleLabel?.text ?? String()
+            }
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+        disposeBag = DisposeBag()  // 재사용 셀에 대한 바인딩 초기화.
     }
     
     // MARK: - Configure
-    override func configureAttributes() {
-        contentView.backgroundColor = BridgeColor.gray9
-        contentView.clipsToBounds = true
-        contentView.layer.cornerRadius = 4
-        contentView.layer.borderWidth = .zero
-        contentView.layer.borderColor = BridgeColor.primary1.cgColor
-    }
-    
     func configureCell(with tagName: String) {
-        tagLabel.text = tagName
-    }
-    
-    /// Cell의 선택에 따라 반전(이미 선택된 셀은 원상복구)
-    func updateCellStyle(with isSelected: Bool) {
-        let textColor = isSelected ? BridgeColor.primary1 : BridgeColor.gray3
-        let backgroundColor = isSelected ? BridgeColor.gray10 : BridgeColor.gray9
-        let borderWidth: CGFloat = isSelected ? 1 : 0
-        
-        tagLabel.textColor = textColor
-        contentView.backgroundColor = backgroundColor
-        contentView.layer.borderWidth = borderWidth
+        tagButton.updateTitle(with: tagName)
     }
     
     // MARK: - Layout
     override func configureLayouts() {
-        contentView.flex.padding(10, 20, 10, 20).define { flex in
-            flex.addItem(tagLabel)
+        contentView.flex.define { flex in
+            flex.addItem(tagButton)
         }
     }
     
