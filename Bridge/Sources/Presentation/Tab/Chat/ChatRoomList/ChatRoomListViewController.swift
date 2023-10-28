@@ -12,7 +12,7 @@ import RxSwift
 
 final class ChatRoomListViewController: BaseViewController {
     
-    private lazy var tableView: UITableView = {
+    private lazy var chatRoomListTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ChatRoomCell.self)
         tableView.rowHeight = 88
@@ -46,25 +46,25 @@ final class ChatRoomListViewController: BaseViewController {
     }
     
     override func configureLayouts() {
-        view.addSubview(tableView)
+        view.addSubview(chatRoomListTableView)
         view.addSubview(placeholderView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.pin.all()
+        chatRoomListTableView.pin.all()
         placeholderView.pin.all()
     }
     
     // MARK: - Binding
     override func bind() {
-        tableView.rx
+        chatRoomListTableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
         
         let input = ChatRoomListViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            itemSelected: tableView.rx.itemSelected.map { $0.row },
+            itemSelected: chatRoomListTableView.rx.itemSelected.map { $0.row },
             leaveChatRoom: leaveChatRoom.asObservable()
         )
         let output = viewModel.transform(input: input)
@@ -86,8 +86,8 @@ final class ChatRoomListViewController: BaseViewController {
 // MARK: - Data source
 extension ChatRoomListViewController {
     private func configureDataSource() {
-        dataSource = DataSource(tableView: tableView) { tableView, indexPath, item in
-            guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else { return UITableViewCell() }
+        dataSource = DataSource(tableView: chatRoomListTableView) { tableView, indexPath, item in
+            guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else { return ChatRoomCell() }
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
             cell.configure(with: item)
@@ -122,12 +122,12 @@ extension ChatRoomListViewController: UITableViewDelegate {
 private extension ChatRoomListViewController {
     /// 뷰의 상태에 따라 화면에 표시되는 컴포넌트를 설정하는 함수
     func handleViewState(_ viewState: ChatRoomListViewModel.ViewState) {
-        tableView.isHidden = true
+        chatRoomListTableView.isHidden = true
         placeholderView.isHidden = false
         
         switch viewState {
         case .general:
-            tableView.isHidden = false
+            chatRoomListTableView.isHidden = false
             placeholderView.isHidden = true
             
         case .notSignedIn:
