@@ -918,6 +918,7 @@
 				7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */,
 				7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */,
 				7C40CBC92AC6B597000F4C9F /* BridgeCreateProjectButton.swift */,
+				7C55E6552AE811660018FA5D /* BridgeSetDisplayButton.swift */,
 				7C8B822C2AC8498C00F7B889 /* ButtonGroup */,
 			);
 			path = Buttons;
@@ -1095,7 +1096,6 @@
 			children = (
 				7CC9F6CA2AAF0EEC00685EA9 /* MemberRequirementInputViewModel.swift */,
 				7CC9F6CC2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift */,
-				7C55E6552AE811660018FA5D /* BridgeSetDisplayButton.swift */,
 				7C55E6572AE811A20018FA5D /* AddTechStackButton.swift */,
 				7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */,
 				7C55E65F2AEAD30E0018FA5D /* Popup */,
