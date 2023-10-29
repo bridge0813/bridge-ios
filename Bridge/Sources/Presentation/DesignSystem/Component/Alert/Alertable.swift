@@ -11,20 +11,20 @@ import UIKit
 typealias PrimaryActionClosure = () -> Void
 
 protocol Alertable: AnyObject {
-    func showAlert(
-        target: UIViewController,
-        configuration: AlertConfiguration,
-        primaryAction: PrimaryActionClosure?
-    )
+    func showAlert(target: UIViewController, configuration: AlertConfiguration, primaryAction: PrimaryActionClosure?)
+    func showErrorAlert(target: UIViewController, configuration: ErrorAlertConfiguration)
 }
 
 extension Alertable {
-    func showAlert(
-        target: UIViewController,
-        configuration: AlertConfiguration,
-        primaryAction: PrimaryActionClosure?
-    ) {
+    func showAlert(target: UIViewController, configuration: AlertConfiguration, primaryAction: PrimaryActionClosure?) {
         let alertViewController = BridgeAlertViewController(configuration: configuration, primaryAction: primaryAction)
+        alertViewController.modalPresentationStyle = .overFullScreen
+        alertViewController.modalTransitionStyle = .crossDissolve
+        target.present(alertViewController, animated: true, completion: nil)
+    }
+    
+    func showErrorAlert(target: UIViewController, configuration: ErrorAlertConfiguration) {
+        let alertViewController = BridgeErrorAlertViewController(configuration: configuration)
         alertViewController.modalPresentationStyle = .overFullScreen
         alertViewController.modalTransitionStyle = .crossDissolve
         target.present(alertViewController, animated: true, completion: nil)

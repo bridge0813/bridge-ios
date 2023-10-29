@@ -62,19 +62,14 @@ final class ChatRoomListViewModel: ViewModelType {
                 }
             )
             .disposed(by: disposeBag)
-
         
         input.itemSelected
             .withLatestFrom(chatRoomsRelay) { index, chatRooms in
                 chatRooms[index]
             }
             .withUnretained(self)
-            .subscribe(onNext: { owner, chatRoom in
-                owner.coordinator?.showChatRoomDetailViewController(of: chatRoom)
-
-                owner.coordinator?.showAlert(configuration: .signIn) {  // 알림 테스트용
-                    owner.coordinator?.showSignInViewController()
-                }
+            .subscribe(onNext: { owner, chatRoom in               
+                owner.coordinator?.showChatRoomViewController(of: chatRoom)
             })
             .disposed(by: disposeBag)
         

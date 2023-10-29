@@ -44,4 +44,12 @@ extension Coordinator {
             showAlert(target: navigationController, configuration: configuration, primaryAction: primaryAction)
         }
     }
+    
+    func showErrorAlert(configuration: ErrorAlertConfiguration) {
+        if let presentedViewContoller = navigationController.presentedViewController {
+            showErrorAlert(target: presentedViewContoller, configuration: configuration)
+        } else {
+            showErrorAlert(target: navigationController, configuration: configuration)
+        }
+    }
 }

@@ -15,6 +15,12 @@ final class BridgeAlertViewController: BaseViewController {
     // MARK: - UI
     private lazy var rootFlexContainer: UIView = {
         let view = UIView()
+        view.backgroundColor = BridgeColor.backgroundBlur
+        return view
+    }()
+    
+    private let backgroundView: UIView = {
+        let view = UIView()
         view.backgroundColor = BridgeColor.gray10
         view.layer.cornerRadius = 12
         view.clipsToBounds = true
@@ -55,7 +61,11 @@ final class BridgeAlertViewController: BaseViewController {
         
         super.init()
         
-        imageView.image = UIImage(named: configuration.imageName)?.withRenderingMode(.alwaysOriginal)
+        if let imageName = configuration.imageName {
+            imageView.image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal)
+        } else {
+            imageView.isHidden = true
+        }
         titleLabel.text = configuration.title
         descriptionLabel.text = configuration.description
         leftButton.setTitle(configuration.leftButtonTitle, for: .normal)
@@ -65,7 +75,8 @@ final class BridgeAlertViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = BridgeColor.backgroundBlur
+        view.backgroundColor = .clear
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
         
         leftButton.rx.tap.asObservable()
             .withUnretained(self)
@@ -83,36 +94,43 @@ final class BridgeAlertViewController: BaseViewController {
             .disposed(by: disposeBag)
     }
     
+    @objc private func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: view)
+        
+        if !backgroundView.frame.contains(location) {
+            dismiss(animated: true)
+        }
+    }
+    
     // MARK: - Configuartions
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.justifyContent(.center).alignItems(.center).define { flex in
-            flex.addItem().grow(1)  // spacer
-            
-            flex.addItem(imageView).size(100)
-            
-            flex.addItem()
-                .alignItems(.center)
-                .justifyContent(.center)
-                .marginTop(10)
-                .define { flex in
-                    flex.addItem(titleLabel).marginBottom(4)
-                    flex.addItem(descriptionLabel)
+            flex.addItem(backgroundView).justifyContent(.center).alignItems(.center).width(307).define { flex in
+                
+                flex.addItem().size(40)
+                
+                flex.addItem(imageView).size(100).marginBottom(10).isIncludedInLayout(!imageView.isHidden)
+                
+                flex.addItem().alignItems(.center).justifyContent(.center).marginBottom(30).define { flex in
+                    flex.addItem(titleLabel)
+                    flex.addItem(descriptionLabel).marginTop(6).isIncludedInLayout(descriptionLabel.text?.isEmpty != nil)
                 }
-            
-            flex.addItem().grow(1)  // spacer
-            
-            flex.addItem().direction(.row).alignItems(.center).marginBottom(31).define { flex in
-                flex.addItem(leftButton).width(123.5).height(44).marginRight(12)
-                flex.addItem(rightButton).width(123.5).height(44)
+                
+                flex.addItem().direction(.row).define { flex in
+                    flex.addItem(leftButton).width(123.5).height(44).marginRight(12)
+                    flex.addItem(rightButton).width(123.5).height(44)
+                }
+                
+                flex.addItem().size(30)
             }
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        rootFlexContainer.pin.center().width(307).height(321)
+        rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
     }
 }
