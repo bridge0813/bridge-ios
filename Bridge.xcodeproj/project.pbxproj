@@ -902,6 +902,7 @@
 				7C1366402AC2783100EB415D /* Buttons */,
 				7B6123872AC2D00C006E72C1 /* MessageBox */,
 				7C8B822D2AC96CC000F7B889 /* Dropdown */,
+				7C8CC40F2AEEA1DA0032F237 /* TextView */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1058,6 +1059,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		7C8CC40F2AEEA1DA0032F237 /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				7C55E6592AE8DEC70018FA5D /* BridgeTextView.swift */,
+			);
+			path = TextView;
+			sourceTree = "<group>";
+		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -1089,7 +1098,6 @@
 				7C55E6552AE811660018FA5D /* BridgeSetDisplayButton.swift */,
 				7C55E6572AE811A20018FA5D /* AddTechStackButton.swift */,
 				7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */,
-				7C55E6592AE8DEC70018FA5D /* BridgeTextView.swift */,
 				7C55E65F2AEAD30E0018FA5D /* Popup */,
 			);
 			path = MemberDetailInput;
