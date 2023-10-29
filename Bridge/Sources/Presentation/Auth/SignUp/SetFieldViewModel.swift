@@ -55,9 +55,7 @@ final class SetFieldViewModel: ViewModelType {
                     owner.coordinator?.finish()
                     
                 case .failure:
-                    owner.coordinator?.showAlert(configuration: .error) {
-                        owner.coordinator?.finish()
-                    }
+                    owner.coordinator?.showErrorAlert(configuration: .networkError)
                 }
             })
             .disposed(by: disposeBag)

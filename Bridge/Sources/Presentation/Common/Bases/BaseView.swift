@@ -14,9 +14,6 @@ class BaseView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        backgroundColor = .white
-        
         configureAttributes()
         configureLayouts()
         bind()
@@ -33,7 +30,7 @@ class BaseView: UIView {
     /// UI와 관련된 속성들(뷰 계층, 레이아웃 등)을 설정하기 위한 메서드
     func configureLayouts() { }
     
-    /// 뷰 모델과 뷰를 바인딩하기 위한 메서드
+    /// 바인딩을 위한 메서드
     func bind() { }
     
     override func layoutSubviews() {

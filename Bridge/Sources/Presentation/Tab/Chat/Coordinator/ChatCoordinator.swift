@@ -15,8 +15,11 @@ final class ChatCoordinator: Coordinator {
     
     private let authRepository: AuthRepository
     private let chatRoomRepository: ChatRoomRepository
+    private let messageRepository: MessageRepository
+    
     private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
+    private let observeMessageUseCase: ObserveMessageUseCase
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -24,10 +27,11 @@ final class ChatCoordinator: Coordinator {
         
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
-//        chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
         chatRoomRepository = MockChatRoomRepository()
+        messageRepository = MockMessageRepository()
         fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
+        observeMessageUseCase = DefaultObserveMessageUseCase(messageRepository: messageRepository)
     }
     
     func start() {
@@ -42,12 +46,18 @@ extension ChatCoordinator {
             fetchChatRoomsUseCase: fetchChatRoomsUseCase,
             leaveChatRoomUseCase: leaveChatRoomUseCase
         )
-        let viewController = ChatRoomListViewController(viewModel: chatRoomListViewModel)
-        navigationController.pushViewController(viewController, animated: true)
+        let chatRoomListViewController = ChatRoomListViewController(viewModel: chatRoomListViewModel)
+        navigationController.pushViewController(chatRoomListViewController, animated: true)
     }
     
-    func showChatRoomDetailViewController(of chatRoom: ChatRoom) {
-        // ChatRoomDetail로 연결...
+    func showChatRoomViewController(of chatRoom: ChatRoom) {
+        let chatRoomViewModel = MessageViewModel(
+            coordinator: self,
+            chatRoom: chatRoom,
+            observeMessageUseCase: observeMessageUseCase
+        )
+        let chatRoomViewController = MessageViewController(viewModel: chatRoomViewModel)
+        navigationController.pushViewController(chatRoomViewController, animated: true)
     }
 }
 

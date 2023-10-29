@@ -8,22 +8,52 @@
 import Foundation
 
 struct Message {
-    
-    enum MessageType: String, Codable {
-        case text
-        case image
-        case file
-    }
-    
-    enum Sender {
-        case me
-        case opponent
-    }
-    
-    enum State {
-        case read
-        case unread
-    }
-    
-    let content: String
+    let id: String
+    let sender: Sender
+    let type: MessageType
+    let sentDate: String
+    let sentTime: String
+    let state: State
 }
+
+enum Sender {
+    case me
+    case opponent
+}
+
+enum MessageType {
+    case text(String)
+    case image
+    case file
+    case accept
+    case refuse
+}
+
+enum State {
+    case read
+    case unread
+}
+
+extension Message {
+    static let onError = Message(
+        id: UUID().uuidString,
+        sender: .me,
+        type: .text("메시지 불러올 수 없습니다"),
+        sentDate: "날짜를 불러올 수 없습니다.",
+        sentTime: "시간을 불러올 수 없습니다.",
+        state: .read
+    )
+}
+
+extension MessageType {
+    var content: String? {
+        switch self {
+        case .text(let content):    return content
+        default:                    return nil
+        }
+    }
+}
+
+extension Message: Hashable { }
+extension Sender: Hashable { }
+extension MessageType: Hashable { }

@@ -10,9 +10,14 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var appCoordinator: AppCoordinator?
+    private var appCoordinator: AppCoordinator?
+    private let socket: WebSocketService = DefaultWebSocketService()
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(
+        _ scene: UIScene,
+        willConnectTo session: UISceneSession,
+        options connectionOptions: UIScene.ConnectionOptions
+    ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
@@ -23,6 +28,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         appCoordinator?.start()
+    }
+    
+    func sceneWillEnterForeground(_ scene: UIScene) {
+        let endpoint = DefaultWebSocketEndpoint()
+        socket.connect(endpoint)
+    }
+    
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        socket.disconnect()
     }
 }
 

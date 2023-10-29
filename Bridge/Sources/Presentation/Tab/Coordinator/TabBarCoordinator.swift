@@ -95,8 +95,13 @@ extension TabBarCoordinator {
 // MARK: - Bar appearance
 private extension TabBarCoordinator {
     func configureBarAppearance() {
+        let backButtonImage = UIImage(named: "chevron.left")?
+            .resize(to: CGSize(width: 24, height: 24))
+            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -2, bottom: 2, right: 0))
+        
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
         navigationBarAppearance.titleTextAttributes = [
             .font: BridgeFont.subtitle1.font,
             .foregroundColor: BridgeColor.gray1

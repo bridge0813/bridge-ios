@@ -6,9 +6,9 @@
 //
 
 struct AlertConfiguration {
-    let imageName: String
+    var imageName: String?
     let title: String
-    let description: String
+    var description: String?
     let leftButtonTitle: String
     let rightButtonTitle: String
     
@@ -25,17 +25,22 @@ struct AlertConfiguration {
         self.leftButtonTitle = leftButtonTitle
         self.rightButtonTitle = rightButtonTitle
     }
+    
+    init(
+        title: String,
+        description: String?,
+        leftButtonTitle: String = "취소하기",
+        rightButtonTitle: String
+    ) {
+        self.imageName = nil
+        self.title = title
+        self.description = description
+        self.leftButtonTitle = leftButtonTitle
+        self.rightButtonTitle = rightButtonTitle
+    }
 }
 
 extension AlertConfiguration {
-    // TODO: 디자인 나오면 수정
-    static let error = AlertConfiguration(
-        imageName: "warning",
-        title: "알 수 없는 에러가 발생했어요!",
-        description: "다시 한 번 시도해주세요.",
-        rightButtonTitle: "확인"
-    )
-    
     static let signIn = AlertConfiguration(
         imageName: "graphic_signIn",
         title: "로그인 후 사용 가능해요!",
@@ -55,6 +60,12 @@ extension AlertConfiguration {
         title: "정말 수락하실 건가요?",
         description: "수락하면 되돌릴 수 없습니다.\n신중하게 결정해주세요.",
         rightButtonTitle: "수락하기"
+    )
+    
+    static let leaveChatRoom = AlertConfiguration(
+        title: "채팅방에서 나갈까요?",
+        description: "채팅 목록 및 대화 내용이 모두 삭제됩니다.",
+        rightButtonTitle: "나가기"
     )
     
     static let report = AlertConfiguration(
