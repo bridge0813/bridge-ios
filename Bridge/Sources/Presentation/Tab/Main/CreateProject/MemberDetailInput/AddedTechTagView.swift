@@ -8,89 +8,93 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
+import RxCocoa
 
 /// 팀원에 대한 스택을 추가하면, 추가된 스택에 맞게 tag로 보여주는  뷰
 final class AddedTechTagView: BaseView {
     // MARK: - UI
-    private let rootFlexContainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = BridgeColor.gray9
-        view.layer.cornerRadius = 4
-        view.clipsToBounds = true
+    private let rootFlexContainer = UIView()
+    
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
+        collectionView.backgroundColor = BridgeColor.gray9
+        collectionView.layer.cornerRadius = 4
+        collectionView.clipsToBounds = true
+        collectionView.isScrollEnabled = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.register(TechTagCell.self)
+        collectionView.dataSource = self
         
-        return view
+        return collectionView
     }()
     
-    private var tagButtons: [BridgeFieldTagButton] = []
+    // MARK: - Properties
+    var tagNames: [String] = [] {
+        didSet {
+            collectionView.backgroundColor = .clear
+            collectionView.reloadData()
+            collectionView.layoutIfNeeded()
+            
+            let collectionViewHeight = collectionView.contentSize.height
+            rootFlexContainer.flex.height(collectionViewHeight)
+            rootFlexContainer.flex.markDirty()
+        }
+    }
     
     // MARK: - Layout
     override func configureLayouts() {
-        configureLayout()
-    }
-    
-    private func configureLayout() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex
-            .height(52)
-            .direction(.row)
-            .alignItems(.start)
-            .wrap(.wrap)
-            .define { flex in
-                tagButtons.forEach { button in
-                    flex.addItem(button).height(38).marginRight(14).marginBottom(14)
-                }
-            }
+        rootFlexContainer.flex.height(52).define { flex in
+            flex.addItem(collectionView).grow(1)
+        }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
     }
-    
-    func updateTagButtons(with titles: [String]) {
-        // 기존 버튼 제거
-        tagButtons.forEach { button in
-            button.removeFromSuperview()
-        }
+}
+
+// MARK: - CompositionalLayout
+extension AddedTechTagView {
+    private func configureLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(130),
+            heightDimension: .absolute(38)
+        )
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        // 버튼 생성
-        let buttons = titles.map { title in
-            let button = BridgeFieldTagButton(title)
-            button.changesSelectionAsPrimaryAction = false
-            
-            return button
-        }
-        tagButtons = buttons
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(38)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.interItemSpacing = .fixed(14)
         
-        configureLayout()  // 버튼을 가지고 다시 레이아웃
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 14
         
-        if titles.isEmpty {
-            rootFlexContainer.flex.width(100%).height(52)
-            rootFlexContainer.backgroundColor = BridgeColor.gray9
-            
-        } else {
-            rootFlexContainer.flex.height(calculateContainerHeight())
-            rootFlexContainer.backgroundColor = .clear
-        }
+        return UICollectionViewCompositionalLayout(section: section)
     }
-    
-    /// button의 갯수를 파악하여, 컨테이너의 크기를 계산.
-    private func calculateContainerHeight() -> CGFloat {
-        let buttonHeight: CGFloat = 38
-        let marginBottom: CGFloat = 14
-        let buttonsPerRow = 3  // 한 행에 배치되는 버튼 갯수(임의 설정)
-        
-        // 버튼의 총 개수를 계산
-        let totalButtons = tagButtons.count
-        
-        // 행의 개수를 계산(총 버튼의 개수를 3개씩 나눔)
-        let numberOfRows = ceil(CGFloat(totalButtons) / CGFloat(buttonsPerRow))
-        
-        // 행의 높이와 marginBottom을 통해 총 높이 계산
-        let totalHeight = (buttonHeight * numberOfRows) + (marginBottom * (numberOfRows - 1))
-        
-        return totalHeight
+}
+
+extension AddedTechTagView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        tagNames.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(TechTagCell.self, for: indexPath) else {
+            return UICollectionViewCell()
+        }
+
+        cell.tagButton.updateTitle(with: tagNames[indexPath.row])
+        cell.tagButton.changesSelectionAsPrimaryAction = false
+        cell.configureLayout()
+
+        return cell
     }
 }

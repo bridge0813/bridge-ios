@@ -203,7 +203,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         addTechTagPopUpView.completeButtonTapped.asDriver(onErrorJustReturn: [])
             .drive(onNext: { [weak self] tagNames in
                 self?.addTechStackButton.isAdded = !tagNames.isEmpty
-                self?.addedTechTagView.updateTagButtons(with: tagNames)
+                self?.addedTechTagView.tagNames = tagNames
                 self?.addedTechTagView.flex.markDirty()
                 self?.addTechStackButton.flex.markDirty()
                 self?.view.setNeedsLayout()

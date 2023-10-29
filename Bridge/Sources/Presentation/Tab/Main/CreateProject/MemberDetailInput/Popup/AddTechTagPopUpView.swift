@@ -80,9 +80,13 @@ final class AddTechTagPopUpView: BaseView {
                     )
                 ) { [weak self] _, tagName, cell in
                     guard let self else { return }
+                
+                    cell.tagButton.updateTitle(with: tagName)
+                    cell.tagButton.layer.cornerRadius = 4
+                    cell.configureLayout()
                     
-                    cell.configureCell(with: tagName)
-                    cell.tagButtonTapped
+                    cell.tagButton.rx.tap
+                        .map { cell.tagButton.titleLabel?.text ?? String() }
                         .withUnretained(self)
                         .bind(onNext: { owner, tag in
                             if let index = owner.selectedTags.firstIndex(of: tag) {
