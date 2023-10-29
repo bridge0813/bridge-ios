@@ -37,16 +37,16 @@ final class AddedTechTagView: BaseView {
             collectionView.layoutIfNeeded()
             
             let collectionViewHeight = collectionView.contentSize.height
-            rootFlexContainer.flex.height(collectionViewHeight)
-            rootFlexContainer.flex.markDirty()
+            collectionView.flex.height(collectionViewHeight)
+            collectionView.flex.markDirty()
         }
     }
     
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.height(52).define { flex in
-            flex.addItem(collectionView).grow(1)
+        rootFlexContainer.flex.define { flex in
+            flex.addItem(collectionView).height(52)
         }
     }
     
