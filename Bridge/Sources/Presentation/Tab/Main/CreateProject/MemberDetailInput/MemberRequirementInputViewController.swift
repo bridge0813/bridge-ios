@@ -166,10 +166,10 @@ final class MemberRequirementInputViewController: BaseViewController {
     override func bind() {
         let input = MemberRequirementInputViewModel.Input(
             viewDidLoad: .just(()),
-            nextButtonTapped: nextButton.rx.tap.asObservable(),
             recruitNumber: setRecruitmentNumberView.completeButtonTapped,
             techTags: addTechTagPopUpView.completeButtonTapped,
-            requirementText: requirementTextView.resultText
+            requirementText: requirementTextView.resultText,
+            nextButtonTapped: nextButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
         
