@@ -968,16 +968,6 @@
 			path = PlaceholderView;
 			sourceTree = "<group>";
 		};
-		7C55E65F2AEAD30E0018FA5D /* Popup */ = {
-			isa = PBXGroup;
-			children = (
-				7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift */,
-				7C55E6622AEBBCBF0018FA5D /* AddTechTagPopUpView.swift */,
-				7C55E6642AEBC81D0018FA5D /* TechTagCell.swift */,
-			);
-			path = Popup;
-			sourceTree = "<group>";
-		};
 		7C569CF12A9F67860063D362 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,6 +1058,25 @@
 			path = TextView;
 			sourceTree = "<group>";
 		};
+		7C8CC4102AEEA3810032F237 /* SetRecruitNumber */ = {
+			isa = PBXGroup;
+			children = (
+				7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift */,
+			);
+			path = SetRecruitNumber;
+			sourceTree = "<group>";
+		};
+		7C8CC4112AEEA3A10032F237 /* AddTechTag */ = {
+			isa = PBXGroup;
+			children = (
+				7C55E6572AE811A20018FA5D /* AddTechStackButton.swift */,
+				7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */,
+				7C55E6622AEBBCBF0018FA5D /* AddTechTagPopUpView.swift */,
+				7C55E6642AEBC81D0018FA5D /* TechTagCell.swift */,
+			);
+			path = AddTechTag;
+			sourceTree = "<group>";
+		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -1096,9 +1105,8 @@
 			children = (
 				7CC9F6CA2AAF0EEC00685EA9 /* MemberRequirementInputViewModel.swift */,
 				7CC9F6CC2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift */,
-				7C55E6572AE811A20018FA5D /* AddTechStackButton.swift */,
-				7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */,
-				7C55E65F2AEAD30E0018FA5D /* Popup */,
+				7C8CC4102AEEA3810032F237 /* SetRecruitNumber */,
+				7C8CC4112AEEA3A10032F237 /* AddTechTag */,
 			);
 			path = MemberDetailInput;
 			sourceTree = "<group>";
