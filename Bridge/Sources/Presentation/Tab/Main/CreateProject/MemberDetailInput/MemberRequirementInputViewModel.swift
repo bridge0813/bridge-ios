@@ -12,10 +12,10 @@ final class MemberRequirementInputViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let viewDidLoad: Observable<Void>
-        let nextButtonTapped: Observable<Void>
         let recruitNumber: Observable<String>
         let techTags: Observable<[String]>
         let requirementText: Observable<String>
+        let nextButtonTapped: Observable<Void>
     }
     
     struct Output {
