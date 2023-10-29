@@ -118,7 +118,6 @@ final class AddTechTagPopUpView: BaseView {
     
     // MARK: - Layout
     override func configureLayouts() {
-        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
         addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.define { flex in
@@ -142,6 +141,8 @@ final class AddTechTagPopUpView: BaseView {
     
     // MARK: - configure
     override func configureAttributes() {
+        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
         rootFlexContainer.addGestureRecognizer(panGesture)
     }
