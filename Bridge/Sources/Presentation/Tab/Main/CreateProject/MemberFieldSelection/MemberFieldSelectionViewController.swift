@@ -145,8 +145,8 @@ final class MemberFieldSelectionViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.isNextButtonEnabled
-            .drive(onNext: { [weak self] isCompleteButtonEnabled in
-                self?.nextButton.isEnabled = isCompleteButtonEnabled
+            .drive(onNext: { [weak self] isNextButtonEnabled in
+                self?.nextButton.isEnabled = isNextButtonEnabled
             })
             .disposed(by: disposeBag)
         

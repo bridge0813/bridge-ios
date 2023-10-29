@@ -45,6 +45,12 @@ final class BridgeTextView: BaseView {
     }()
     
     // MARK: - Properties
+    var resultText: Observable<String> {
+        return textView.rx.didEndEditing
+            .withLatestFrom(textView.rx.text.orEmpty)
+            .distinctUntilChanged()
+    }
+    
     private let textViewPlaceholder: String
     private let maxCount: Int
     

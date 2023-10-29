@@ -63,7 +63,7 @@ final class SetRecruitmentNumberPopUpView: BaseView {
     
     // MARK: - Properties
     private let numbers = ["1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명", "9명", "10명"]
-    var selectedNumber: Observable<String> {
+    var completeButtonTapped: Observable<String> {
         return completeButton.rx.tap
             .withUnretained(self)
             .map { owner, _ in

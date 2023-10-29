@@ -88,14 +88,17 @@ final class MemberRequirementInputViewController: BaseViewController {
     }()
     private let requirementTextView = BridgeTextView(textViewPlaceholder: "팀원들에게 나를 소개해보세요.", maxCount: 100)
     
-    private let nextButton = BridgeButton(
-        title: "다음",
-        font: BridgeFont.button1.font,
-        backgroundColor: BridgeColor.gray4
-    )
+    private let nextButton: BridgeButton = {
+        let button = BridgeButton(
+            title: "다음",
+            font: BridgeFont.button1.font,
+            backgroundColor: BridgeColor.gray4
+        )
+        button.isEnabled = false
+        
+        return button
+    }()
     
-    
-   
     // MARK: - Properties
     private let viewModel: MemberRequirementInputViewModel
     
@@ -164,18 +167,41 @@ final class MemberRequirementInputViewController: BaseViewController {
         let input = MemberRequirementInputViewModel.Input(
             viewDidLoad: .just(()),
             nextButtonTapped: nextButton.rx.tap.asObservable(),
-            recruitNumberButtonTapped: .just(2),
-            skillTagButtonTapped: .just(["Swift", "UIKit", "MVVM"])
-//            requirementsTextChanged: requirementsTextView.rx.didEndEditing
-//                .withLatestFrom(requirementsTextView.rx.text.orEmpty)
-//                .distinctUntilChanged()
+            recruitNumber: setRecruitmentNumberView.completeButtonTapped,
+            techTags: addTechTagPopUpView.completeButtonTapped,
+            requirementText: requirementTextView.resultText
         )
         let output = viewModel.transform(input: input)
         
+        // 현재 모집하려는 분야
         output.selectedField
             .drive(onNext: { [weak self] field in
                 self?.fieldTagButton.updateTitle(with: field, textColor: BridgeColor.primary1)
                 self?.addTechTagPopUpView.field = field  // 기술 태그 선택하는 팝업 뷰에 선택된 분야를 전달
+            })
+            .disposed(by: disposeBag)
+        
+        // 모집인원 선택완료 이벤트.
+        output.recruitNumber
+            .drive(onNext: { [weak self] number in
+                self?.setRecruitNumberButton.updateTitle(number)
+            })
+            .disposed(by: disposeBag)
+        
+        // 기술태그 선택완료 이벤트.
+        output.techTags
+            .drive(onNext: { [weak self] tagNames in
+                self?.addTechStackButton.isAdded = !tagNames.isEmpty
+                self?.addedTechTagView.tagNames = tagNames
+                self?.addedTechTagView.flex.markDirty()
+                self?.addTechStackButton.flex.markDirty()
+                self?.view.setNeedsLayout()
+            })
+            .disposed(by: disposeBag)
+        
+        output.isNextButtonEnabled
+            .drive(onNext: { [weak self] isNextButtonEnabled in
+                self?.nextButton.isEnabled = isNextButtonEnabled
             })
             .disposed(by: disposeBag)
         
@@ -186,30 +212,12 @@ final class MemberRequirementInputViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        // 모집인원 선택완료 이벤트.
-        setRecruitmentNumberView.selectedNumber.asDriver(onErrorJustReturn: "Error")
-            .drive(onNext: { [weak self] number in
-                self?.setRecruitNumberButton.updateTitle(number)
-            })
-            .disposed(by: disposeBag)
-        
-        // 테스트용
+        // 기술태그 추가 팝업 뷰 보여주기
         addTechStackButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
                 self?.addTechTagPopUpView.show()
             })
             .disposed(by: disposeBag)
-        
-        addTechTagPopUpView.completeButtonTapped.asDriver(onErrorJustReturn: [])
-            .drive(onNext: { [weak self] tagNames in
-                self?.addTechStackButton.isAdded = !tagNames.isEmpty
-                self?.addedTechTagView.tagNames = tagNames
-                self?.addedTechTagView.flex.markDirty()
-                self?.addTechStackButton.flex.markDirty()
-                self?.view.setNeedsLayout()
-            })
-            .disposed(by: disposeBag)
-    
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -13,13 +13,16 @@ final class MemberRequirementInputViewModel: ViewModelType {
     struct Input {
         let viewDidLoad: Observable<Void>
         let nextButtonTapped: Observable<Void>
-        let recruitNumberButtonTapped: Observable<Int>
-        let skillTagButtonTapped: Observable<[String]>
-//        let requirementsTextChanged: Observable<String>
+        let recruitNumber: Observable<String>
+        let techTags: Observable<[String]>
+        let requirementText: Observable<String>
     }
     
     struct Output {
         let selectedField: Driver<String>
+        let recruitNumber: Driver<String>
+        let techTags: Driver<[String]>
+        let isNextButtonEnabled: Driver<Bool>
     }
     
     // MARK: - Properties
@@ -54,27 +57,26 @@ final class MemberRequirementInputViewModel: ViewModelType {
             }
             .asDriver(onErrorJustReturn: "")
         
-        input.recruitNumberButtonTapped
+        let recruitNumber = input.recruitNumber
+            .do(onNext: { [weak self] number in
+                self?.memberRequirement.recruitNumber = Int(number) ?? 0
+            })
+            .asDriver(onErrorJustReturn: "")
+        
+                
+        let techTags = input.techTags
+            .do(onNext: { [weak self] tags in
+                self?.memberRequirement.requiredSkills = tags
+            })
+            .asDriver(onErrorJustReturn: [])
+                
+        input.requirementText
             .withUnretained(self)
-            .subscribe(onNext: { owner, num in
-                owner.memberRequirement.recruitNumber = num
+            .subscribe(onNext: { owner, text in
+                owner.memberRequirement.expectation = text
             })
             .disposed(by: disposeBag)
-        
-        input.skillTagButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, skills in
-                owner.memberRequirement.requiredSkills = skills
-            })
-            .disposed(by: disposeBag)
-        
-//        input.requirementsTextChanged
-//            .withUnretained(self)
-//            .subscribe(onNext: { owner, text in
-//                owner.memberRequirement.expectation = text
-//            })
-//            .disposed(by: disposeBag)
-//        
+                
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
@@ -91,7 +93,22 @@ final class MemberRequirementInputViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        return Output(selectedField: selectedField)
+        let isNextButtonEnabled = Observable.combineLatest(
+            input.recruitNumber.map { !$0.isEmpty },
+            input.techTags.map { !$0.isEmpty },
+            input.requirementText.map { !$0.isEmpty }
+        )
+        .map { recruitNumberIsValid, tagIsValid, requirementTextIsValid in
+            return recruitNumberIsValid && tagIsValid && requirementTextIsValid
+        }
+        .asDriver(onErrorJustReturn: false)
+                
+        return Output(
+            selectedField: selectedField,
+            recruitNumber: recruitNumber,
+            techTags: techTags,
+            isNextButtonEnabled: isNextButtonEnabled
+        )
     }
 }
 
