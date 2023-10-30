@@ -123,11 +123,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentContainer.frame.height)
     }
     
-    // MARK: - Methods
-    private func configureNavigationUI() {
-        navigationItem.title = "모집글 작성"
-    }
-    
+    // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         scrollView.addSubview(contentContainer)
@@ -162,10 +158,16 @@ final class MemberRequirementInputViewController: BaseViewController {
         }
     }
     
+    // MARK: - Configure
     override func configureAttributes() {
         configureNavigationUI()
     }
     
+    private func configureNavigationUI() {
+        navigationItem.title = "모집글 작성"
+    }
+    
+    // MARK: - Bind
     override func bind() {
         let input = MemberRequirementInputViewModel.Input(
             viewDidLoad: .just(()),

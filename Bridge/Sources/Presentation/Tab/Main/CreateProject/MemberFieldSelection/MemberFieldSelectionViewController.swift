@@ -101,12 +101,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
         )
     }
     
-    // MARK: - Methods
-    private func configureNavigationUI() {
-        navigationItem.leftBarButtonItem = dismissButton
-        navigationItem.title = "모집글 작성"
-    }
-    
+    // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         scrollView.addSubview(contentContainer)
@@ -131,10 +126,17 @@ final class MemberFieldSelectionViewController: BaseViewController {
         }
     }
     
+    // MARK: - Configure
     override func configureAttributes() {
         configureNavigationUI()
     }
     
+    private func configureNavigationUI() {
+        navigationItem.leftBarButtonItem = dismissButton
+        navigationItem.title = "모집글 작성"
+    }
+    
+    // MARK: - Bind
     override func bind() {
         let input = MemberFieldSelectionViewModel.Input(
             dismissButtonTapped: dismissButton.rx.tap.asObservable(),
