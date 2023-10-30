@@ -111,6 +111,7 @@ final class MemberRequirementInputViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        enableKeyboardHiding()
     }
     
     override func viewDidLayoutSubviews() {
@@ -135,7 +136,7 @@ final class MemberRequirementInputViewController: BaseViewController {
             flex.addItem(progressView).height(6).marginTop(10)
             
             // grow(1)로 레이아웃을 배치하면, height가 원활하게 잡히지 않고 화면 밖을 벗어나는 문제가 발생.(디바이스)
-            flex.addItem(scrollView).position(.absolute).width(100%).top(26).bottom(98)
+            flex.addItem(scrollView).position(.absolute).width(100%).top(26).bottom(101)
             
             flex.addItem(nextButton).height(52).marginBottom(24)
         }
@@ -155,7 +156,7 @@ final class MemberRequirementInputViewController: BaseViewController {
             flex.addItem(addedTechTagView).marginTop(14)
             
             flex.addItem(requirementLabel).width(60).height(24).marginTop(32)
-            flex.addItem(requirementTextView).height(106).marginTop(14)
+            flex.addItem(requirementTextView).height(106).marginTop(14).marginBottom(15)
         }
     }
     
@@ -218,9 +219,10 @@ final class MemberRequirementInputViewController: BaseViewController {
                 self?.addTechTagPopUpView.show()
             })
             .disposed(by: disposeBag)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        
+        // 키보드에 맞춰 뷰 이동
+        scrollView.rx.keyboardLayoutChanged
+            .bind(to: scrollView.rx.yPosition)
+            .disposed(by: disposeBag)
     }
 }
