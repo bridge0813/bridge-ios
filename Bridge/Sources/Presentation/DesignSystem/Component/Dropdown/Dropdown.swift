@@ -72,7 +72,7 @@ final class DropDown: BaseView {
     private var bottomOffset: CGPoint
     
     var dataSource: [String]
-    private var selectedItemIndexRow: IndexRow?  // 선택한 항목을 추적
+    var selectedItemIndexRow: IndexRow?  // 선택한 항목을 추적
     
     private var tableHeight: CGFloat {
         return tableView.rowHeight * CGFloat(dataSource.count)

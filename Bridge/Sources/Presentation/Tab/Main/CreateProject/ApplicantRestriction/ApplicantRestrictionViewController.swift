@@ -55,6 +55,8 @@ final class ApplicantRestrictionViewController: BaseViewController {
             selectedItemTextColor: BridgeColor.gray1,
             selectedItemBackgroundColor: BridgeColor.primary3
         )
+        dropdown.selectedItemIndexRow = 0
+        
         return dropdown
     }()
     
@@ -127,7 +129,7 @@ final class ApplicantRestrictionViewController: BaseViewController {
         
         let output = viewModel.transform(input: input)
      
-        restrictionDropdown.willHide.asDriver(onErrorJustReturn: print("Error"))
+        restrictionDropdown.willHide.asDriver(onErrorJustReturn: ())
             .drive(onNext: { [weak self] in
                 self?.restrictionDropdownAnchorView.isActive = false
             })
