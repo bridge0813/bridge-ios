@@ -62,14 +62,13 @@ final class SetRecruitmentNumberPopUpView: BaseView {
     }()
     
     // MARK: - Properties
-    private let numbers = ["1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명", "9명", "10명"]
-    var completeButtonTapped: Observable<String> {
+    var completeButtonTapped: Observable<Int> {
         return completeButton.rx.tap
             .withUnretained(self)
             .map { owner, _ in
                 owner.hide()
                 let selectedRow = owner.pickerView.selectedRow(inComponent: 0)
-                return owner.numbers[selectedRow]
+                return selectedRow + 1
             }
             .distinctUntilChanged()
     }
@@ -123,7 +122,7 @@ extension SetRecruitmentNumberPopUpView: UIPickerViewDataSource, UIPickerViewDel
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return numbers.count
+        return 10
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -134,7 +133,7 @@ extension SetRecruitmentNumberPopUpView: UIPickerViewDataSource, UIPickerViewDel
         
         let label = UILabel()
         
-        label.text = numbers[row]
+        label.text = ["1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명", "9명", "10명"][row]
         label.textColor = BridgeColor.gray1
         label.font = BridgeFont.headline1.font
         label.textAlignment = .center

@@ -184,7 +184,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         // 모집인원 선택완료 이벤트.
         output.recruitNumber
             .drive(onNext: { [weak self] number in
-                self?.setRecruitNumberButton.updateTitle(number)
+                self?.setRecruitNumberButton.updateTitle("\(number)명")
             })
             .disposed(by: disposeBag)
         

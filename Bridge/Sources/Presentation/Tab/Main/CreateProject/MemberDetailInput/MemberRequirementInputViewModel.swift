@@ -12,7 +12,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let viewDidLoad: Observable<Void>
-        let recruitNumber: Observable<String>
+        let recruitNumber: Observable<Int>
         let techTags: Observable<[String]>
         let requirementText: Observable<String>
         let nextButtonTapped: Observable<Void>
@@ -20,7 +20,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
     
     struct Output {
         let selectedField: Driver<String>
-        let recruitNumber: Driver<String>
+        let recruitNumber: Driver<Int>
         let techTags: Driver<[String]>
         let isNextButtonEnabled: Driver<Bool>
     }
@@ -59,9 +59,9 @@ final class MemberRequirementInputViewModel: ViewModelType {
         
         let recruitNumber = input.recruitNumber
             .do(onNext: { [weak self] number in
-                self?.memberRequirement.recruitNumber = Int(number) ?? 0
+                self?.memberRequirement.recruitNumber = number
             })
-            .asDriver(onErrorJustReturn: "")
+            .asDriver(onErrorJustReturn: 0)
         
                 
         let techTags = input.techTags
@@ -94,7 +94,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         let isNextButtonEnabled = Observable.combineLatest(
-            input.recruitNumber.map { !$0.isEmpty },
+            input.recruitNumber.map { $0 > 0 },
             input.techTags.map { !$0.isEmpty },
             input.requirementText.map { !$0.isEmpty }
         )
