@@ -32,7 +32,7 @@ class BaseDropdownCell: BaseTableViewCell {
         addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.direction(.row).alignItems(.center).define { flex in
-            flex.addItem(optionLabel).marginHorizontal(16)
+            flex.addItem(optionLabel).grow(1).marginHorizontal(16)
         }
     }
     

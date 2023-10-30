@@ -72,7 +72,11 @@ final class DropDown: BaseView {
     private var bottomOffset: CGPoint
     
     var dataSource: [String]
-    var selectedItemIndexRow: IndexRow?
+    var selectedItemIndexRow: IndexRow? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     private var tableHeight: CGFloat {
         return tableView.rowHeight * CGFloat(dataSource.count)
