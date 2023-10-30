@@ -124,11 +124,18 @@ final class ApplicantRestrictionViewController: BaseViewController {
     // MARK: - Bind
     override func bind() {
         let input = ApplicantRestrictionViewModel.Input(
+            selectedRestriction: restrictionDropdown.itemSelected.map { $0.title },
             nextButtonTapped: nextButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)
      
+        output.selectedRestriction
+            .drive(onNext: { [weak self] title in
+                self?.restrictionDropdownAnchorView.updateTitle(title)
+            })
+            .disposed(by: disposeBag)
+        
         restrictionDropdown.willHide.asDriver(onErrorJustReturn: ())
             .drive(onNext: { [weak self] in
                 self?.restrictionDropdownAnchorView.isActive = false

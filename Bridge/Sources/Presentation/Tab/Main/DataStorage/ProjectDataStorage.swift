@@ -42,8 +42,8 @@ extension ProjectDataStorage {
     }
     
     // MARK: - ApplicantRestriction(지원제한)
-    func updateApplicantRestriction(with restrictions: [ApplicantRestrictionViewModel.RestrictionTagType]) {
-        currentProject.applicantRestrictions = restrictions.map { $0.rawValue }
+    func updateApplicantRestriction(with restriction: String) {
+        currentProject.applicantRestrictions = [restriction]
     }
     
     // MARK: - ProjectDatePicker(날짜설정)

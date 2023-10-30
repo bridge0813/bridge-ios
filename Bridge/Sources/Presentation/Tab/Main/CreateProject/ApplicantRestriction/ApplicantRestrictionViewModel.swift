@@ -12,12 +12,12 @@ import RxCocoa
 final class ApplicantRestrictionViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
+        let selectedRestriction: Observable<String>
         let nextButtonTapped: Observable<Void>
-//        let restrictionTagButtonTapped: Observable<RestrictionTagType>
     }
     
     struct Output {
-//        let restrictionTag: Driver<RestrictionTagType>
+        let selectedRestriction: Driver<String>
     }
     
     // MARK: - Properties
@@ -25,7 +25,6 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     private weak var coordinator: CreateProjectCoordinator?
     
     private let dataStorage: ProjectDataStorage
-    private var restrictions: [RestrictionTagType] = []
     
     // MARK: - Initializer
     init(
@@ -38,38 +37,21 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
+        let selectedRestriction = BehaviorRelay<String>(value: "제한없음")
+        
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.dataStorage.updateApplicantRestriction(with: owner.restrictions)
+                owner.dataStorage.updateApplicantRestriction(with: selectedRestriction.value)
                 owner.coordinator?.showProjectDatePickerViewController()
             })
             .disposed(by: disposeBag)
         
-//        let restrictionTag = input.restrictionTagButtonTapped
-//            .withUnretained(self)
-//            .flatMap { owner, type in
-//
-//                if let index = owner.restrictions.firstIndex(of: type) {
-//                    owner.restrictions.remove(at: index)
-//                } else {
-//                    owner.restrictions.append(type)
-//                }
-//
-//                return Observable.just(type)
-//            }
-//            .asDriver(onErrorJustReturn: RestrictionTagType.student)
-        
+        input.selectedRestriction
+            .bind(to: selectedRestriction)
+            .disposed(by: disposeBag)
+            
         return Output(
-//            restrictionTag: restrictionTag
-        )
-    }
-}
-
-extension ApplicantRestrictionViewModel {
-    enum RestrictionTagType: String {
-        case student = "학생"
-        case currentEmployee = "현직자"
-        case jobSeeker = "취준생"
+            selectedRestriction: selectedRestriction.asDriver())
     }
 }
