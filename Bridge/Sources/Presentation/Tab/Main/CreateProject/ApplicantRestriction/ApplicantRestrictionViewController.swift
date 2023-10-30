@@ -17,7 +17,7 @@ final class ApplicantRestrictionViewController: BaseViewController {
     
     private let progressView: UIProgressView = {
         let progressView = UIProgressView()
-        progressView.progress = 0.2
+        progressView.progress = 0.5
         progressView.progressTintColor = BridgeColor.primary1
         progressView.backgroundColor = BridgeColor.gray7
         
