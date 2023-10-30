@@ -54,6 +54,7 @@ final class ApplicantRestrictionViewController: BaseViewController {
             itemTextFont: BridgeFont.body2.font,
             selectedItemTextColor: BridgeColor.gray1,
             selectedItemBackgroundColor: BridgeColor.primary3,
+            cornerRadius: 8,
             borderColor: BridgeColor.gray6.cgColor,
             shadowColor: .clear
         )
