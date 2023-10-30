@@ -36,6 +36,8 @@ final class DropDown: BaseView {
     // MARK: - 드롭다운 UI
     private var width: CGFloat?
     private var cornerRadius: CGFloat
+    private var borderWidth: CGFloat
+    private var borderColor: CGColor
     private var shadowColor: UIColor
     private var shadowOffset: CGSize
     private var shadowOpacity: Float
@@ -113,8 +115,9 @@ final class DropDown: BaseView {
         tableViewBackgroundColor: UIColor = .white,
         dimmedBackgroundColor: UIColor = .clear,
         width: CGFloat? = nil,
-        backgroundColor: UIColor = DropdownConstant.DropdownUI.backgroundColor,
         cornerRadius: CGFloat = DropdownConstant.DropdownUI.cornerRadius,
+        borderWidth: CGFloat = DropdownConstant.DropdownUI.borderWidth,
+        borderColor: CGColor = DropdownConstant.DropdownUI.borderColor,
         shadowColor: UIColor = DropdownConstant.DropdownUI.shadowColor,
         shadowOffset: CGSize = DropdownConstant.DropdownUI.shadowOffset,
         shadowOpacity: Float = DropdownConstant.DropdownUI.shadowOpacity,
@@ -137,6 +140,8 @@ final class DropDown: BaseView {
         self.dimmedBackgroundColor = dimmedBackgroundColor
         self.width = width
         self.cornerRadius = cornerRadius
+        self.borderWidth = borderWidth
+        self.borderColor = borderColor
         self.shadowColor = shadowColor
         self.shadowOffset = shadowOffset
         self.shadowOpacity = shadowOpacity
@@ -147,13 +152,14 @@ final class DropDown: BaseView {
         self.customCellConfiguration = customCellConfiguration
         
         super.init(frame: .zero)
-        self.backgroundColor = backgroundColor
     }
     
     override func configureAttributes() {
         DispatchQueue.main.async {
             self.updateConstraintsIfNeeded()
         }
+        
+        backgroundColor = .clear
         
         tableView.register(customCellType, forCellReuseIdentifier: BaseDropdownCell.identifier)
         tableView.delegate = self
@@ -166,6 +172,8 @@ final class DropDown: BaseView {
         
         tableViewContainer.backgroundColor = tableViewBackgroundColor
         tableViewContainer.layer.cornerRadius = cornerRadius
+        tableViewContainer.layer.borderWidth = borderWidth
+        tableViewContainer.layer.borderColor = borderColor
         tableViewContainer.layer.shadowColor = shadowColor.cgColor
         tableViewContainer.layer.shadowOffset = shadowOffset
         tableViewContainer.layer.shadowOpacity = shadowOpacity

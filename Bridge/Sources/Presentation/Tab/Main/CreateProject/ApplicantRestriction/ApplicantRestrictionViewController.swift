@@ -53,7 +53,9 @@ final class ApplicantRestrictionViewController: BaseViewController {
             itemTextColor: BridgeColor.gray3,
             itemTextFont: BridgeFont.body2.font,
             selectedItemTextColor: BridgeColor.gray1,
-            selectedItemBackgroundColor: BridgeColor.primary3
+            selectedItemBackgroundColor: BridgeColor.primary3,
+            borderColor: BridgeColor.gray6.cgColor,
+            shadowColor: .clear
         )
         dropdown.selectedItemIndexRow = 0
         
