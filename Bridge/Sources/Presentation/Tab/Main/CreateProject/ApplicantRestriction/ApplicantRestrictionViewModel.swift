@@ -13,11 +13,11 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
         let nextButtonTapped: Observable<Void>
-        let restrictionTagButtonTapped: Observable<RestrictionTagType>
+//        let restrictionTagButtonTapped: Observable<RestrictionTagType>
     }
     
     struct Output {
-        let restrictionTag: Driver<RestrictionTagType>
+//        let restrictionTag: Driver<RestrictionTagType>
     }
     
     // MARK: - Properties
@@ -46,22 +46,22 @@ final class ApplicantRestrictionViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        let restrictionTag = input.restrictionTagButtonTapped
-            .withUnretained(self)
-            .flatMap { owner, type in
-                
-                if let index = owner.restrictions.firstIndex(of: type) {
-                    owner.restrictions.remove(at: index)
-                } else {
-                    owner.restrictions.append(type)
-                }
-                
-                return Observable.just(type)
-            }
-            .asDriver(onErrorJustReturn: RestrictionTagType.student)
+//        let restrictionTag = input.restrictionTagButtonTapped
+//            .withUnretained(self)
+//            .flatMap { owner, type in
+//
+//                if let index = owner.restrictions.firstIndex(of: type) {
+//                    owner.restrictions.remove(at: index)
+//                } else {
+//                    owner.restrictions.append(type)
+//                }
+//
+//                return Observable.just(type)
+//            }
+//            .asDriver(onErrorJustReturn: RestrictionTagType.student)
         
         return Output(
-            restrictionTag: restrictionTag
+//            restrictionTag: restrictionTag
         )
     }
 }

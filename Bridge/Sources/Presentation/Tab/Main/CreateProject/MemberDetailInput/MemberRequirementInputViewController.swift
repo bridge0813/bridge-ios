@@ -94,7 +94,8 @@ final class MemberRequirementInputViewController: BaseViewController {
             font: BridgeFont.button1.font,
             backgroundColor: BridgeColor.gray4
         )
-        button.isEnabled = false
+        // TODO: - 테스트용 false로 변경해야함.
+        button.isEnabled = true
         
         return button
     }()
