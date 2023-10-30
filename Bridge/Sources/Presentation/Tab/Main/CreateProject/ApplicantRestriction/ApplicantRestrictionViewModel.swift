@@ -17,7 +17,7 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     }
     
     struct Output {
-        let selectedRestriction: Driver<String>
+        let isNextButtonEnabled: Driver<Bool>
     }
     
     // MARK: - Properties
@@ -37,21 +37,26 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let selectedRestriction = BehaviorRelay<String>(value: "제한없음")
+        let nextButtonEnabled = BehaviorSubject<Bool>(value: false)
+        var selectedRestriction: Set<String> = []
         
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.dataStorage.updateApplicantRestriction(with: selectedRestriction.value)
+                owner.dataStorage.updateApplicantRestriction(with: selectedRestriction.map { $0 })
                 owner.coordinator?.showProjectDatePickerViewController()
             })
             .disposed(by: disposeBag)
         
         input.selectedRestriction
-            .bind(to: selectedRestriction)
+            .subscribe(onNext: { restriction in
+                if selectedRestriction.contains(restriction) { selectedRestriction.remove(restriction) }
+                else { selectedRestriction.insert(restriction) }
+                
+                nextButtonEnabled.onNext(!selectedRestriction.isEmpty)
+            })
             .disposed(by: disposeBag)
-            
-        return Output(
-            selectedRestriction: selectedRestriction.asDriver())
+        
+        return Output(isNextButtonEnabled: nextButtonEnabled.asDriver(onErrorJustReturn: true))
     }
 }

@@ -44,35 +44,17 @@ final class ApplicantRestrictionViewController: BaseViewController {
         
         return label
     }()
-    private let restrictionDropdownAnchorView = BridgeDropdownAnchorView("제한 없음")
-    private lazy var restrictionDropdown: DropDown = {
-        let dropdown = DropDown(
-            anchorView: restrictionDropdownAnchorView,
-            bottomOffset: CGPoint(x: 0, y: 8),
-            dataSource: ["제한없음", "학생", "현직자", "취준생"],
-            itemTextColor: BridgeColor.gray3,
-            itemTextFont: BridgeFont.body2.font,
-            selectedItemTextColor: BridgeColor.gray1,
-            selectedItemBackgroundColor: BridgeColor.primary3,
-            cornerRadius: 8,
-            borderColor: BridgeColor.gray6.cgColor,
-            shadowColor: .clear
-        )
-        dropdown.selectedItemIndexRow = 0
-        
-        return dropdown
-    }()
     
-    private let nextButton: BridgeButton = {
-        let button = BridgeButton(
-            title: "다음",
-            font: BridgeFont.button1.font,
-            backgroundColor: BridgeColor.gray4
-        )
-        button.isEnabled = true
-        
-        return button
-    }()
+    private let studentButton = BridgeFieldTagButton("학생")
+    private let currentEmployeeButton = BridgeFieldTagButton("현직자")
+    private let jobSeekerButton = BridgeFieldTagButton("취준생")
+    private let noRestrictionButton = BridgeFieldTagButton("제한없음")
+    
+    private let nextButton = BridgeButton(
+        title: "다음",
+        font: BridgeFont.button1.font,
+        backgroundColor: BridgeColor.gray4
+    )
     
     // MARK: - Properties
     private let viewModel: ApplicantRestrictionViewModel
@@ -102,8 +84,18 @@ final class ApplicantRestrictionViewController: BaseViewController {
             flex.addItem(progressView).height(6).marginTop(10)
             flex.addItem(descriptionLabel).width(150).height(60).marginTop(40)
             flex.addItem(tipMessageBox).height(38).marginTop(16)
+            
             flex.addItem(restrictionLabel).width(60).height(24).marginTop(40)
-            flex.addItem(restrictionDropdownAnchorView).height(52).marginTop(14)
+            
+            flex.addItem().direction(.row).marginTop(14).define { flex in
+                flex.addItem(studentButton).height(38)
+                flex.addItem(currentEmployeeButton).height(38).marginLeft(14)
+            }
+            flex.addItem().direction(.row).marginTop(14).define { flex in
+                flex.addItem(jobSeekerButton).height(38)
+                flex.addItem(noRestrictionButton).height(38).marginLeft(14)
+            }
+            
             flex.addItem().grow(1)
             flex.addItem(nextButton).height(52).marginBottom(24)
         }
@@ -112,37 +104,36 @@ final class ApplicantRestrictionViewController: BaseViewController {
     // MARK: - Configure
     override func configureAttributes() {
         configureNavigationUI()
-        restrictionDropdownAnchorView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(anchorViewTapped)))
     }
     
     private func configureNavigationUI() {
         navigationItem.title = "모집글 작성"
     }
     
-    @objc private func anchorViewTapped(_ sender: UITapGestureRecognizer) {
-        restrictionDropdownAnchorView.isActive = true
-        restrictionDropdown.show()
-    }
-    
     // MARK: - Bind
     override func bind() {
         let input = ApplicantRestrictionViewModel.Input(
-            selectedRestriction: restrictionDropdown.itemSelected.map { $0.title },
+            selectedRestriction: restrictionButtonTapped,
             nextButtonTapped: nextButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)
-     
-        output.selectedRestriction
-            .drive(onNext: { [weak self] title in
-                self?.restrictionDropdownAnchorView.updateTitle(title)
-            })
-            .disposed(by: disposeBag)
         
-        restrictionDropdown.willHide.asDriver(onErrorJustReturn: ())
-            .drive(onNext: { [weak self] in
-                self?.restrictionDropdownAnchorView.isActive = false
+        output.isNextButtonEnabled
+            .drive(onNext: { [weak self] isNextButtonEnabled in
+                self?.nextButton.isEnabled = isNextButtonEnabled
             })
             .disposed(by: disposeBag)
+    }
+}
+
+extension ApplicantRestrictionViewController {
+    var restrictionButtonTapped: Observable<String> {
+        Observable.merge(
+            studentButton.rx.tap.map { "학생" },
+            currentEmployeeButton.rx.tap.map { "현직자" },
+            jobSeekerButton.rx.tap.map { "취준생" },
+            noRestrictionButton.rx.tap.map { "제한없음" }
+        )
     }
 }
