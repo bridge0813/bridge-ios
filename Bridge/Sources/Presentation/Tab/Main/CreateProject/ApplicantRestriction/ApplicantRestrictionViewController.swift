@@ -44,7 +44,7 @@ final class ApplicantRestrictionViewController: BaseViewController {
         
         return label
     }()
-    private let restrictionDropdownAnchorView = RestrictionDropdownAnchorView()
+    private let restrictionDropdownAnchorView = BridgeDropdownAnchorView()
     
     private let nextButton: BridgeButton = {
         let button = BridgeButton(

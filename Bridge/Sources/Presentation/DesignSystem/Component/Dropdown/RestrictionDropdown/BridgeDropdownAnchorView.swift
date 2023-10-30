@@ -1,5 +1,5 @@
 //
-//  RestrictionDropdownAnchorView.swift
+//  BridgeDropdownAnchorView.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/26.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class RestrictionDropdownAnchorView: BaseView {
+final class BridgeDropdownAnchorView: BaseView {
     private let rootFlexContainer = UIView()
     
     private let restrictionOptionLabel: UILabel = {
