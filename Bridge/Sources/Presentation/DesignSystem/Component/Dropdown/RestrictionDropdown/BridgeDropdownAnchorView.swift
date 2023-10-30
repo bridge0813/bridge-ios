@@ -10,13 +10,21 @@ import FlexLayout
 import PinLayout
 
 final class BridgeDropdownAnchorView: BaseView {
-    private let rootFlexContainer = UIView()
+    // MARK: - UI
+    private let rootFlexContainer: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        view.layer.borderWidth = 1
+        view.layer.borderColor = BridgeColor.gray6.cgColor
+        
+        return view
+    }()
     
     private let restrictionOptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "제한 없음"
-        label.textColor = BridgeColor.gray1
-        label.font = BridgeFont.button2.font
+        label.textColor = BridgeColor.gray3
+        label.font = BridgeFont.body2.font
         
         return label
     }()
@@ -29,20 +37,26 @@ final class BridgeDropdownAnchorView: BaseView {
         return imageView
     }()
     
+    // MARK: - Properties
+    var isActive: Bool = false {
+        didSet {
+            updateStyleForDropdownState()
+        }
+    }
+    
+    // MARK: - Initializer
+    init(_ defaultOption: String) {
+        restrictionOptionLabel.text = defaultOption
+        super.init(frame: .zero)
+    }
+    
+    // MARK: - Layout
     override func configureLayouts() {
-        layer.cornerRadius = 8
-        clipsToBounds = true
-        
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex
-            .direction(.row)
-            .justifyContent(.spaceBetween)
-            .alignItems(.center)
-            .padding(15)
-            .define { flex in
-                flex.addItem(restrictionOptionLabel).width(70).height(18)
-                flex.addItem(arrowImageView).size(24).cornerRadius(10)
-            }
+        rootFlexContainer.flex.direction(.row).alignItems(.center).define { flex in
+            flex.addItem(restrictionOptionLabel).grow(1).height(18).marginLeft(16)
+            flex.addItem(arrowImageView).size(24).marginRight(14)
+        }
     }
     
     override func layoutSubviews() {
@@ -51,19 +65,22 @@ final class BridgeDropdownAnchorView: BaseView {
         rootFlexContainer.flex.layout()
     }
     
-    func updateViewForDropdownState(_ isActive: Bool, text: String? = nil) {
-        let borderWidth: CGFloat = isActive ? 1 : 0
-        let borderColor: CGColor = isActive ? BridgeColor.primary1.cgColor : UIColor.clear.cgColor
+    // MARK: - Methods
+    private func updateStyleForDropdownState() {
+        let textColor = isActive ? BridgeColor.gray1 : BridgeColor.gray3
+        let borderColor = isActive ? BridgeColor.primary1.cgColor : BridgeColor.gray6.cgColor
         let image: UIImage? = isActive ? UIImage(named: "dropup.chevron") : UIImage(named: "dropdown.chevron")
         
         UIView.animate(withDuration: 0.2) { [weak self] in
-            self?.layer.borderWidth = borderWidth
-            self?.layer.borderColor = borderColor
-            self?.arrowImageView.image = image
+            guard let self else { return }
             
-            if let text {
-                self?.restrictionOptionLabel.text = text
-            }
+            self.restrictionOptionLabel.textColor = textColor
+            self.rootFlexContainer.layer.borderColor = borderColor
+            self.arrowImageView.image = image
         }
+    }
+    
+    func updateTitle(_ title: String) {
+        restrictionOptionLabel.text = title
     }
 }

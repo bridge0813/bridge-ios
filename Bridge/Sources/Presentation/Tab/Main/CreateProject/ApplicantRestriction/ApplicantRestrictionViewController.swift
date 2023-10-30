@@ -44,7 +44,19 @@ final class ApplicantRestrictionViewController: BaseViewController {
         
         return label
     }()
-    private let restrictionDropdownAnchorView = BridgeDropdownAnchorView()
+    private let restrictionDropdownAnchorView = BridgeDropdownAnchorView("제한 없음")
+    private lazy var restrictionDropdown: DropDown = {
+        let dropdown = DropDown(
+            anchorView: restrictionDropdownAnchorView,
+            bottomOffset: CGPoint(x: 0, y: 8),
+            dataSource: ["제한없음", "학생", "현직자", "취준생"],
+            itemTextColor: BridgeColor.gray3,
+            itemTextFont: BridgeFont.body2.font,
+            selectedItemTextColor: BridgeColor.gray1,
+            selectedItemBackgroundColor: BridgeColor.primary3
+        )
+        return dropdown
+    }()
     
     private let nextButton: BridgeButton = {
         let button = BridgeButton(
@@ -95,10 +107,16 @@ final class ApplicantRestrictionViewController: BaseViewController {
     // MARK: - Configure
     override func configureAttributes() {
         configureNavigationUI()
+        restrictionDropdownAnchorView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(anchorViewTapped)))
     }
     
     private func configureNavigationUI() {
         navigationItem.title = "모집글 작성"
+    }
+    
+    @objc private func anchorViewTapped(_ sender: UITapGestureRecognizer) {
+        restrictionDropdownAnchorView.isActive = true
+        restrictionDropdown.show()
     }
     
     // MARK: - Bind
@@ -108,6 +126,11 @@ final class ApplicantRestrictionViewController: BaseViewController {
         )
         
         let output = viewModel.transform(input: input)
-        
+     
+        restrictionDropdown.willHide.asDriver(onErrorJustReturn: print("Error"))
+            .drive(onNext: { [weak self] in
+                self?.restrictionDropdownAnchorView.isActive = false
+            })
+            .disposed(by: disposeBag)
     }
 }
