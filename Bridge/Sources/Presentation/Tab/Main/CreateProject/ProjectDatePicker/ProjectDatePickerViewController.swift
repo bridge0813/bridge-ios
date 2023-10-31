@@ -160,14 +160,14 @@ final class ProjectDatePickerViewController: BaseViewController {
             .drive(onNext: { [weak self] result in
                 switch result.type {
                 case "deadline":
-                    self?.setDeadlineButton.updateTitle(result.date.convertDateToString(format: "yyyy년 MM월 dd일"))
+                    self?.setDeadlineButton.updateTitle(result.date.toString(format: "yyyy년 MM월 dd일"))
                     self?.nextButton.isEnabled = true
                     
                 case "start":
-                    self?.setStartDateButton.updateTitle(result.date.convertDateToString(format: "yyyy년 MM월 dd일"))
+                    self?.setStartDateButton.updateTitle(result.date.toString(format: "yyyy년 MM월 dd일"))
                     
                 case "end":
-                    self?.setEndDateButton.updateTitle(result.date.convertDateToString(format: "yyyy년 MM월 dd일"))
+                    self?.setEndDateButton.updateTitle(result.date.toString(format: "yyyy년 MM월 dd일"))
                     
                 default: return
                 }
@@ -191,17 +191,11 @@ final class ProjectDatePickerViewController: BaseViewController {
         // 완료일 선택 팝업 뷰 보여주기
         setEndDateButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
-                self?.setDatePopUpView.show(for: .end)
+                // 시작일이 먼저 지정되어야 완료일을 지정할 수 있음.
+                if self?.setStartDateButton.titleLabel?.text != "미정" {
+                    self?.setDatePopUpView.show(for: .end)
+                }
             })
             .disposed(by: disposeBag)
-    }
-}
-
-extension Date {
-    func convertDateToString(format: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        
-        return dateFormatter.string(from: self)
     }
 }

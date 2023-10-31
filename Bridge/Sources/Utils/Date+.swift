@@ -8,11 +8,18 @@
 import Foundation
 
 extension Date {
-    func toString() -> String {
+    func toString(format: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
+        dateFormatter.dateFormat = format
         
         return dateFormatter.string(from: self)
+    }
+    
+    func calculateMaximumDate() -> Date {
+        let calendar = Calendar.current
+        guard let maximumDate = calendar.date(byAdding: .year, value: 1, to: self) else { return Date() }
+
+        return maximumDate
     }
     
     func calculateDDay(to deadline: Date) -> Int {

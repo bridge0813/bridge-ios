@@ -47,8 +47,7 @@ final class SetDatePopUpView: BaseView {
         datePicker.tintColor = BridgeColor.primary1
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
-        datePicker.date = Date()
-        
+
         return datePicker
     }()
     
@@ -62,8 +61,8 @@ final class SetDatePopUpView: BaseView {
     private var type = SetDateType.deadline
     
     private var deadlineDate = Date()
-    private var startDate = Date()
-    private var endDate = Date()
+    private var startDate: Date?
+    private var endDate: Date?
     
     /// 어떤 날짜를 설정하는지, 무슨 날짜로 결정했는지를 전달.
     var completeButtonTapped: Observable<(type: String, date: Date)> {
@@ -74,8 +73,8 @@ final class SetDatePopUpView: BaseView {
                 
                 switch owner.type {
                 case .deadline: return ("deadline", owner.deadlineDate)
-                case .start: return ("start", owner.startDate)
-                case .end: return ("end", owner.endDate)
+                case .start: return ("start", owner.startDate ?? Date())
+                case .end: return ("end", owner.endDate ?? Date())
                 }
             }
     }
@@ -138,19 +137,28 @@ extension SetDatePopUpView {
     
     private func setDatePicker() {
         completeButton.isEnabled = false
+        let maximumDate = Date().calculateMaximumDate()  // 최대 1년까지만 설정이 가능.
         
         switch type {
         case .deadline:
             dateLabel.text = "모집 마감일"
+            datePicker.minimumDate = nil  // 초기화
+            datePicker.maximumDate = maximumDate
             datePicker.date = deadlineDate
+            
             
         case .start:
             dateLabel.text = "시작일"
-            datePicker.date = startDate
+            datePicker.minimumDate = nil
+            datePicker.maximumDate = endDate ?? maximumDate  // endDate가 존재하지 않는다면, 최대 1년으로 설정.
+            datePicker.date = startDate ?? Date()
+            
             
         case .end:
             dateLabel.text = "예상 완료일"
-            datePicker.date = endDate
+            datePicker.minimumDate = startDate
+            datePicker.maximumDate = maximumDate
+            datePicker.date = endDate ?? Date()
         }
     }
 }
