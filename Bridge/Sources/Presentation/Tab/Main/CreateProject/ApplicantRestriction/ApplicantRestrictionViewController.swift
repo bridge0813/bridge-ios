@@ -119,9 +119,24 @@ final class ApplicantRestrictionViewController: BaseViewController {
         
         let output = viewModel.transform(input: input)
         
-        output.isNextButtonEnabled
-            .drive(onNext: { [weak self] isNextButtonEnabled in
-                self?.nextButton.isEnabled = isNextButtonEnabled
+        // 제한없음을 누르면 다른 버튼들은 선택되지 않도록,
+        // 다른 버튼들을 누르면 제한없음 버튼이 선택되지 않도록
+        // 저장된 데이터가 없을 경우 다음버튼 비활성화
+        output.selectedRestrictions
+            .drive(onNext: { [weak self] restrictions in
+                guard let self else { return }
+                let buttons = [self.studentButton, self.currentEmployeeButton, self.jobSeekerButton]
+                
+                if restrictions.contains("제한없음") {
+                    buttons.forEach { $0.isEnabled = false }
+                    self.noRestrictionButton.isEnabled = true
+                    
+                } else {
+                    buttons.forEach { $0.isEnabled = true }
+                    self.noRestrictionButton.isEnabled = restrictions.isEmpty
+                }
+                
+                self.nextButton.isEnabled = !restrictions.isEmpty
             })
             .disposed(by: disposeBag)
     }

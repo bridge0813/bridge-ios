@@ -17,7 +17,7 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     }
     
     struct Output {
-        let isNextButtonEnabled: Driver<Bool>
+        let selectedRestrictions: Driver<Set<String>>
     }
     
     // MARK: - Properties
@@ -37,26 +37,29 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        let nextButtonEnabled = BehaviorSubject<Bool>(value: false)
-        var selectedRestriction: Set<String> = []
+        var selectedRestrictions = BehaviorRelay<Set<String>>(value: [])
+        
+        input.selectedRestriction
+            .subscribe(onNext: { restriction in
+                var restrictions = selectedRestrictions.value
+                
+                if restrictions.contains(restriction) { restrictions.remove(restriction) }
+                else { restrictions.insert(restriction) }
+                
+                selectedRestrictions.accept(restrictions)
+            })
+            .disposed(by: disposeBag)
         
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.dataStorage.updateApplicantRestriction(with: selectedRestriction.map { $0 })
+                owner.dataStorage.updateApplicantRestriction(with: selectedRestrictions.value.map { $0 })
                 owner.coordinator?.showProjectDatePickerViewController()
             })
             .disposed(by: disposeBag)
         
-        input.selectedRestriction
-            .subscribe(onNext: { restriction in
-                if selectedRestriction.contains(restriction) { selectedRestriction.remove(restriction) }
-                else { selectedRestriction.insert(restriction) }
-                
-                nextButtonEnabled.onNext(!selectedRestriction.isEmpty)
-            })
-            .disposed(by: disposeBag)
-        
-        return Output(isNextButtonEnabled: nextButtonEnabled.asDriver(onErrorJustReturn: true))
+        return Output(
+            selectedRestrictions: selectedRestrictions.asDriver(onErrorJustReturn: [])
+        )
     }
 }
