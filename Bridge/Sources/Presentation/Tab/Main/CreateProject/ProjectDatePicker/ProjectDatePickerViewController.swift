@@ -191,10 +191,7 @@ final class ProjectDatePickerViewController: BaseViewController {
         // 완료일 선택 팝업 뷰 보여주기
         setEndDateButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
-                // 시작일이 먼저 지정되어야 완료일을 지정할 수 있음.
-                if self?.setStartDateButton.titleLabel?.text != "미정" {
-                    self?.datePickerPopUpView.show(for: .end)
-                }
+                self?.datePickerPopUpView.show(for: .end)
             })
             .disposed(by: disposeBag)
     }
