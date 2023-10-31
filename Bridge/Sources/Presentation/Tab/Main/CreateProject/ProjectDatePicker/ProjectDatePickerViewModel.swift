@@ -12,16 +12,12 @@ import RxCocoa
 final class ProjectDatePickerViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
+        let date: Observable<(type: String, date: Date)>
         let nextButtonTapped: Observable<Void>
-        let dueDatePickerChanged: Observable<Date>
-        let startDatePickerChanged: Observable<Date?>
-        let endDatePickerChanged: Observable<Date?>
     }
     
     struct Output {
-        let dueDate: Driver<Date>
-        let startDate: Driver<Date?>
-        let endDate: Driver<Date?>
+        let date: Driver<(type: String, date: Date)>
     }
     
     // MARK: - Properties
@@ -41,26 +37,18 @@ final class ProjectDatePickerViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        input.dueDatePickerChanged
-            .withUnretained(self)
-            .subscribe(onNext: { owner, date in
-                owner.dataStorage.updateRecruitmentDeadline(with: date)
+        let date = input.date
+            .do(onNext: { [weak self] result in
+                guard let self else { return }
+                
+                switch result.type {
+                case "deadline": self.dataStorage.updateRecruitmentDeadline(with: result.date)
+                case "start": self.dataStorage.updateStartDate(with: result.date)
+                case "end": self.dataStorage.updateEndDate(with: result.date)
+                default: return
+                }
             })
-            .disposed(by: disposeBag)
-        
-        input.startDatePickerChanged
-            .withUnretained(self)
-            .subscribe(onNext: { owner, date in
-                owner.dataStorage.updateStartDate(with: date)
-            })
-            .disposed(by: disposeBag)
-        
-        input.endDatePickerChanged
-            .withUnretained(self)
-            .subscribe(onNext: { owner, date in
-                owner.dataStorage.updateEndDate(with: date)
-            })
-            .disposed(by: disposeBag)
+            .asDriver(onErrorJustReturn: ("", Date()))
         
         input.nextButtonTapped
             .subscribe(
@@ -72,9 +60,7 @@ final class ProjectDatePickerViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            dueDate: input.dueDatePickerChanged.asDriver(onErrorJustReturn: Date()),
-            startDate: input.startDatePickerChanged.asDriver(onErrorJustReturn: nil),
-            endDate: input.endDatePickerChanged.asDriver(onErrorJustReturn: nil)
+            date: date
         )
     }
 }

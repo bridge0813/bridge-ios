@@ -33,9 +33,8 @@ final class SetDatePopUpView: BaseView {
         return imageView
     }()
     
-    private let deadlineLabel: UILabel = {
+    private let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "모집 마감일"
         label.font = BridgeFont.subtitle1.font
         label.textColor = BridgeColor.gray1
         
@@ -53,28 +52,33 @@ final class SetDatePopUpView: BaseView {
         return datePicker
     }()
     
-    private let completeButton: BridgeButton = {
-        let button = BridgeButton(
-            title: "완료",
-            font: BridgeFont.button1.font,
-            backgroundColor: BridgeColor.gray4
-        )
-        button.isEnabled = false
-        
-        return button
-    }()
+    private let completeButton = BridgeButton(
+        title: "완료",
+        font: BridgeFont.button1.font,
+        backgroundColor: BridgeColor.gray4
+    )
     
     // MARK: - Properties
-    var completeButtonTapped: Observable<Int> {
+    private var type = SetDateType.deadline
+    
+    private var deadlineDate = Date()
+    private var startDate = Date()
+    private var endDate = Date()
+    
+    /// 어떤 날짜를 설정하는지, 무슨 날짜로 결정했는지를 전달.
+    var completeButtonTapped: Observable<(type: String, date: Date)> {
         return completeButton.rx.tap
             .withUnretained(self)
             .map { owner, _ in
                 owner.hide()
-                return 1
+                
+                switch owner.type {
+                case .deadline: return ("deadline", owner.deadlineDate)
+                case .start: return ("start", owner.startDate)
+                case .end: return ("end", owner.endDate)
+                }
             }
-            .distinctUntilChanged()
     }
-    
     
     // MARK: - Layout
     override func configureLayouts() {
@@ -83,7 +87,7 @@ final class SetDatePopUpView: BaseView {
         rootFlexContainer.flex.define { flex in
             flex.addItem(dragHandleImageView).alignSelf(.center).width(25).height(7).marginTop(10)
             
-            flex.addItem(deadlineLabel).width(83).height(22).marginTop(30).marginLeft(16)
+            flex.addItem(dateLabel).width(150).height(22).marginTop(30).marginLeft(16)
             
             flex.addItem().backgroundColor(BridgeColor.gray8).height(1).marginTop(7)
             
@@ -109,7 +113,45 @@ final class SetDatePopUpView: BaseView {
 
     // MARK: - Bind
     override func bind() {
+        datePicker.rx.date.changed
+            .withUnretained(self)
+            .subscribe(onNext: { owner, date in
+                switch owner.type {
+                case .deadline: owner.deadlineDate = date
+                case .start: owner.startDate = date
+                case .end: owner.endDate = date
+                }
+                
+                owner.completeButton.isEnabled = true
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - SetDateType
+extension SetDatePopUpView {
+    enum SetDateType {
+        case deadline
+        case start
+        case end
+    }
+    
+    private func setDatePicker() {
+        completeButton.isEnabled = false
         
+        switch type {
+        case .deadline:
+            dateLabel.text = "모집 마감일"
+            datePicker.date = deadlineDate
+            
+        case .start:
+            dateLabel.text = "시작일"
+            datePicker.date = startDate
+            
+        case .end:
+            dateLabel.text = "예상 완료일"
+            datePicker.date = endDate
+        }
     }
 }
 
@@ -152,8 +194,10 @@ extension SetDatePopUpView {
 
 // MARK: - Show & Hide
 extension SetDatePopUpView {
-    func show() {
+    func show(for type: SetDateType) {
         setLayout()
+        self.type = type
+        setDatePicker()
         
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             guard let self else { return }

@@ -34,6 +34,8 @@ final class ProjectDatePickerViewController: BaseViewController {
         return label
     }()
     
+    private let setDatePopUpView = SetDatePopUpView()
+    
     private let deadlineLabel: UILabel = {
         let label = UILabel()
         label.text = "모집 마감일"
@@ -43,7 +45,6 @@ final class ProjectDatePickerViewController: BaseViewController {
         return label
     }()
     private let setDeadlineButton = BridgeSetDisplayButton("프로젝트 모집 마감일은 언제인가요?")
-    private let setDeadlinePopUpView = SetDatePopUpView()
     
     private let startLabel: UILabel = {
         let label = UILabel()
@@ -125,18 +126,56 @@ final class ProjectDatePickerViewController: BaseViewController {
     // MARK: - Bind
     override func bind() {
         let input = ProjectDatePickerViewModel.Input(
-            nextButtonTapped: nextButton.rx.tap.asObservable(),
-            dueDatePickerChanged: .just(Date()),
-            startDatePickerChanged: .just(nil),
-            endDatePickerChanged: .just(nil)
+            date: setDatePopUpView.completeButtonTapped,
+            nextButtonTapped: nextButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
+        
+        output.date
+            .drive(onNext: { [weak self] result in
+                switch result.type {
+                case "deadline":
+                    self?.setDeadlineButton.updateTitle(result.date.convertDateToString(format: "yyyy년 MM월 dd일"))
+                    
+                case "start":
+                    self?.setStartDateButton.updateTitle(result.date.convertDateToString(format: "yyyy년 MM월 dd일"))
+                    
+                case "end":
+                    self?.setEndDateButton.updateTitle(result.date.convertDateToString(format: "yyyy년 MM월 dd일"))
+                    
+                default: return
+                }
+            })
+            .disposed(by: disposeBag)
         
         // 모집 마감일 선택 팝업 뷰 보여주기
         setDeadlineButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
-                self?.setDeadlinePopUpView.show()
+                self?.setDatePopUpView.show(for: .deadline)
             })
             .disposed(by: disposeBag)
+        
+        // 시작일 선택 팝업 뷰 보여주기
+        setStartDateButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] _ in
+                self?.setDatePopUpView.show(for: .start)
+            })
+            .disposed(by: disposeBag)
+        
+        // 완료일 선택 팝업 뷰 보여주기
+        setEndDateButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] _ in
+                self?.setDatePopUpView.show(for: .end)
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+extension Date {
+    func convertDateToString(format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        
+        return dateFormatter.string(from: self)
     }
 }
