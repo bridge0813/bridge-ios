@@ -88,17 +88,18 @@ final class SetDatePopUpView: BaseView {
             
             flex.addItem(dateLabel).width(150).height(22).marginTop(30).marginLeft(16)
             
-            flex.addItem().backgroundColor(BridgeColor.gray8).height(1).marginTop(7)
+            flex.addItem().backgroundColor(BridgeColor.gray8).height(1).marginTop(8)
             
-            flex.addItem(datePicker).marginTop(32).marginHorizontal(16)
+            flex.addItem(datePicker).marginTop(50).marginHorizontal(16)
            
-            flex.addItem(completeButton).height(52).marginHorizontal(16).marginBottom(16)
+            flex.addItem().grow(1)
+            flex.addItem(completeButton).height(52).marginHorizontal(16).marginBottom(21)
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.below(of: self).width(100%).height(529)
+        rootFlexContainer.pin.below(of: self).width(100%).height(547)
         rootFlexContainer.flex.layout()
     }
     
@@ -171,7 +172,7 @@ extension SetDatePopUpView {
         let translation = sender.translation(in: rootFlexContainer)
         let velocity = sender.velocity(in: rootFlexContainer)
         
-        let currentTranslationY: CGFloat = -529  // 초기 컨테이너의 오프셋
+        let currentTranslationY: CGFloat = -547  // 초기 컨테이너의 오프셋
         let calculatedTranslationY = currentTranslationY + translation.y  // 초기 오프셋을 고려한 결과값
         
         switch sender.state {
@@ -209,7 +210,7 @@ extension SetDatePopUpView {
         
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             guard let self else { return }
-            self.rootFlexContainer.transform = CGAffineTransform(translationX: 0, y: -529)
+            self.rootFlexContainer.transform = CGAffineTransform(translationX: 0, y: -547)
         })
     }
 
