@@ -1,8 +1,8 @@
 //
-//  SetRecruitmentNumberView.swift
+//  SetDeadlinePopUpView.swift
 //  Bridge
 //
-//  Created by 엄지호 on 2023/10/27.
+//  Created by 엄지호 on 2023/10/31.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 모집인원을 선택하는 뷰
-final class SetRecruitmentNumberPopUpView: BaseView {
+final class SetDeadlinePopUpView: BaseView {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()
@@ -33,21 +33,24 @@ final class SetRecruitmentNumberPopUpView: BaseView {
         return imageView
     }()
     
-    private let recruitLabel: UILabel = {
+    private let deadlineLabel: UILabel = {
         let label = UILabel()
-        label.text = "모집 인원"
+        label.text = "모집 마감일"
         label.font = BridgeFont.subtitle1.font
         label.textColor = BridgeColor.gray1
         
         return label
     }()
     
-    private lazy var pickerView: UIPickerView = {
-        let picker = UIPickerView()
-        picker.delegate = self
-        picker.dataSource = self
+    private let datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.locale = Locale(identifier: "ko-KR")
+        datePicker.tintColor = BridgeColor.primary1
+        datePicker.preferredDatePickerStyle = .inline
+        datePicker.datePickerMode = .date
+        datePicker.date = Date()
         
-        return picker
+        return datePicker
     }()
     
     private let completeButton: BridgeButton = {
@@ -67,8 +70,7 @@ final class SetRecruitmentNumberPopUpView: BaseView {
             .withUnretained(self)
             .map { owner, _ in
                 owner.hide()
-                let selectedRow = owner.pickerView.selectedRow(inComponent: 0)
-                return selectedRow + 1
+                return 1
             }
             .distinctUntilChanged()
     }
@@ -81,19 +83,19 @@ final class SetRecruitmentNumberPopUpView: BaseView {
         rootFlexContainer.flex.define { flex in
             flex.addItem(dragHandleImageView).alignSelf(.center).width(25).height(7).marginTop(10)
             
-            flex.addItem(recruitLabel).width(67).height(22).marginTop(30).marginLeft(16)
+            flex.addItem(deadlineLabel).width(83).height(22).marginTop(30).marginLeft(16)
             
             flex.addItem().backgroundColor(BridgeColor.gray8).height(1).marginTop(7)
             
-            flex.addItem(pickerView).height(120).marginTop(56)
-            
-            flex.addItem(completeButton).height(52).marginTop(69).marginHorizontal(16)
+            flex.addItem(datePicker).marginTop(32).marginHorizontal(16)
+           
+            flex.addItem(completeButton).height(52).marginHorizontal(16).marginBottom(16)
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.below(of: self).width(100%).height(409)
+        rootFlexContainer.pin.below(of: self).width(100%).height(529)
         rootFlexContainer.flex.layout()
     }
     
@@ -107,53 +109,19 @@ final class SetRecruitmentNumberPopUpView: BaseView {
 
     // MARK: - Bind
     override func bind() {
-        pickerView.rx.itemSelected.asDriver()
-            .drive(onNext: { [weak self] _ in
-                self?.completeButton.isEnabled = true
-            })
-            .disposed(by: disposeBag)
+        
     }
 }
 
-// MARK: - PickerDelegate
-extension SetRecruitmentNumberPopUpView: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 10
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        // selection indicator 제거
-        pickerView.subviews.forEach { view in
-            view.backgroundColor = .clear
-        }
-        
-        let label = UILabel()
-        
-        label.text = ["1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명", "9명", "10명"][row]
-        label.textColor = BridgeColor.gray1
-        label.font = BridgeFont.headline1.font
-        label.textAlignment = .center
-        
-        return label
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 40
-    }
-}
 
 // MARK: - PanGesture
-extension SetRecruitmentNumberPopUpView {
+extension SetDeadlinePopUpView {
     @objc
     private func handlePanGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: rootFlexContainer)
         let velocity = sender.velocity(in: rootFlexContainer)
         
-        let currentTranslationY: CGFloat = -409  // 초기 컨테이너의 오프셋
+        let currentTranslationY: CGFloat = -529  // 초기 컨테이너의 오프셋
         let calculatedTranslationY = currentTranslationY + translation.y  // 초기 오프셋을 고려한 결과값
         
         switch sender.state {
@@ -167,7 +135,7 @@ extension SetRecruitmentNumberPopUpView {
             if velocity.y > 1500 {
                 hide()
                 
-            } else if calculatedTranslationY > -250 {
+            } else if calculatedTranslationY > -300 {
                 hide()
                 
             } else {  // 원상복구
@@ -183,13 +151,13 @@ extension SetRecruitmentNumberPopUpView {
 }
 
 // MARK: - Show & Hide
-extension SetRecruitmentNumberPopUpView {
+extension SetDeadlinePopUpView {
     func show() {
         self.setLayout()
         
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             guard let self else { return }
-            self.rootFlexContainer.transform = CGAffineTransform(translationX: 0, y: -409)
+            self.rootFlexContainer.transform = CGAffineTransform(translationX: 0, y: -529)
         })
     }
 

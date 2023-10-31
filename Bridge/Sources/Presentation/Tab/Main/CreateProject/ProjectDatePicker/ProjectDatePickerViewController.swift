@@ -43,6 +43,7 @@ final class ProjectDatePickerViewController: BaseViewController {
         return label
     }()
     private let setDeadlineButton = BridgeSetDisplayButton("프로젝트 모집 마감일은 언제인가요?")
+    private let setDeadlinePopUpView = SetDeadlinePopUpView()
     
     private let startEndDateLabel: UILabel = {
         let label = UILabel()
@@ -118,5 +119,11 @@ final class ProjectDatePickerViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
+        // 모집 마감일 선택 팝업 뷰 보여주기
+        setDeadlineButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] _ in
+                self?.setDeadlinePopUpView.show()
+            })
+            .disposed(by: disposeBag)
     }
 }
