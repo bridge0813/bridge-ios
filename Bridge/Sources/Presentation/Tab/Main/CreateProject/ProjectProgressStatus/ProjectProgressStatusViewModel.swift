@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import RxCocoa
 
 final class ProjectProgressStatusViewModel: ViewModelType {
     // MARK: - Nested Types
@@ -16,7 +17,9 @@ final class ProjectProgressStatusViewModel: ViewModelType {
     }
     
     struct Output {
-        
+        let progressMethod: Driver<String>
+        let progressStep: Driver<String>
+        let isNextButtonEnabled: Driver<Bool>
     }
     
     // MARK: - Properties
@@ -43,20 +46,31 @@ final class ProjectProgressStatusViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        input.progressMethodButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, method in
-                owner.dataStorage.updateProgressMethod(with: method)
+        let progressMethod = input.progressMethodButtonTapped
+            .do(onNext: { [weak self] method in
+                self?.dataStorage.updateProgressMethod(with: method)
             })
-            .disposed(by: disposeBag)
+            .asDriver(onErrorJustReturn: "")
         
-        input.progressStep
-            .withUnretained(self)
-            .subscribe(onNext: { owner, step in
-                owner.dataStorage.updateProgressStatus(with: step)
+        let progressStep = input.progressStep
+            .do(onNext: { [weak self] step in
+                self?.dataStorage.updateProgressStatus(with: step)
             })
-            .disposed(by: disposeBag)
-        
-        return Output()
+            .asDriver(onErrorJustReturn: "")
+                
+        let isNextButtonEnabled = Observable.combineLatest(
+            input.progressMethodButtonTapped.map { !$0.isEmpty },
+            input.progressStep.map { !$0.isEmpty }
+        )
+        .map { progressMethodIsValid, progressStepIsValid in
+            return progressMethodIsValid && progressStepIsValid
+        }
+        .asDriver(onErrorJustReturn: false)
+                
+        return Output(
+            progressMethod: progressMethod,
+            progressStep: progressStep,
+            isNextButtonEnabled: isNextButtonEnabled
+        )
     }
 }

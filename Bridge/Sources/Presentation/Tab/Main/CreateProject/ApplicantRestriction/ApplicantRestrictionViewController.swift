@@ -143,7 +143,7 @@ final class ApplicantRestrictionViewController: BaseViewController {
 }
 
 extension ApplicantRestrictionViewController {
-    var restrictionButtonTapped: Observable<String> {
+    private var restrictionButtonTapped: Observable<String> {
         Observable.merge(
             studentButton.rx.tap.map { "학생" },
             currentEmployeeButton.rx.tap.map { "현직자" },

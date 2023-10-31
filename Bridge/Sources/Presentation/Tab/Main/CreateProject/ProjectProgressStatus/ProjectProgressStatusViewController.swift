@@ -43,9 +43,26 @@ final class ProjectProgressStatusViewController: BaseViewController {
         return label
     }()
     
-    private let onlineButton = BridgeFieldTagButton("온라인")
-    private let offlineButton = BridgeFieldTagButton("오프라인")
-    private let blendedButton = BridgeFieldTagButton("블렌디드")
+    private let onlineButton: BridgeFieldTagButton = {
+        let button = BridgeFieldTagButton("온라인")
+        button.changesSelectionAsPrimaryAction = false
+        
+        return button
+    }()
+    
+    private let offlineButton: BridgeFieldTagButton = {
+        let button = BridgeFieldTagButton("오프라인")
+        button.changesSelectionAsPrimaryAction = false
+        
+        return button
+    }()
+    
+    private let blendedButton: BridgeFieldTagButton = {
+        let button = BridgeFieldTagButton("블렌디드")
+        button.changesSelectionAsPrimaryAction = false
+        
+        return button
+    }()
     
     private let progressStepLabel: UILabel = {
         let label = UILabel()
@@ -152,17 +169,60 @@ final class ProjectProgressStatusViewController: BaseViewController {
     // MARK: - Bind
     override func bind() {
         let input = ProjectProgressStatusViewModel.Input(
-            progressMethodButtonTapped: .just(""),
+            progressMethodButtonTapped: progressMethodButtonTapped,
             progressStep: progressStepDropdown.itemSelected.map { $0.title },
             nextButtonTapped: nextButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)
-     
+        
+        output.progressMethod
+            .drive(onNext: { [weak self] method in
+                self?.updateButtonState(for: method)
+            })
+            .disposed(by: disposeBag)
+        
+        output.progressStep
+            .drive(onNext: { [weak self] step in
+                self?.progressStepAnchorView.updateTitle(step)
+            })
+            .disposed(by: disposeBag)
+        
+        output.isNextButtonEnabled
+            .drive(onNext: { [weak self] isNextButtonEnabled in
+                self?.nextButton.isEnabled = isNextButtonEnabled
+            })
+            .disposed(by: disposeBag)
+        
+        // Dropdown이 사라질 때, 버튼의 스타일도 원상복구
         progressStepDropdown.willHide.asDriver(onErrorJustReturn: ())
             .drive(onNext: { [weak self] in
                 self?.progressStepAnchorView.isActive = false
             })
             .disposed(by: disposeBag)
+        
+    }
+}
+
+extension ProjectProgressStatusViewController {
+    private var progressMethodButtonTapped: Observable<String> {
+        Observable.merge(
+            onlineButton.rx.tap.map { "온라인" },
+            offlineButton.rx.tap.map { "오프라인" },
+            blendedButton.rx.tap.map { "블렌디드" }
+        )
+        .distinctUntilChanged()
+    }
+    
+    private func updateButtonState(for type: String) {
+        let allButtons = [onlineButton, offlineButton, blendedButton]
+        allButtons.forEach { $0.isSelected = false }
+        
+        switch type {
+        case "온라인": onlineButton.isSelected = true
+        case "오프라인": offlineButton.isSelected = true
+        case "블렌디드": blendedButton.isSelected = true
+        default: return
+        }
     }
 }
