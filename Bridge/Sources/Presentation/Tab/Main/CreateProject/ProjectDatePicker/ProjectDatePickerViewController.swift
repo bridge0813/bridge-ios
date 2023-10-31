@@ -45,15 +45,25 @@ final class ProjectDatePickerViewController: BaseViewController {
     private let setDeadlineButton = BridgeSetDisplayButton("프로젝트 모집 마감일은 언제인가요?")
     private let setDeadlinePopUpView = SetDeadlinePopUpView()
     
-    private let startEndDateLabel: UILabel = {
+    private let startLabel: UILabel = {
         let label = UILabel()
-        label.text = "시작일과 완료일"
+        label.text = "시작일"
         label.font = BridgeFont.subtitle2.font
         label.textColor = BridgeColor.gray1
         
         return label
     }()
-    private let setStartEndDateButton = BridgeSetDisplayButton("프로젝트 시작일과 예상 완료일은 언제인가요?")
+    private let setStartDateButton = BridgeSetDisplayButton("프로젝트 시작일은 언제인가요?")
+    
+    private let endLabel: UILabel = {
+        let label = UILabel()
+        label.text = "예상 완료일"
+        label.font = BridgeFont.subtitle2.font
+        label.textColor = BridgeColor.gray1
+        
+        return label
+    }()
+    private let setEndDateButton = BridgeSetDisplayButton("프로젝트 예상 완료일은 언제인가요?")
     
     private let nextButton = BridgeButton(
         title: "다음",
@@ -92,8 +102,11 @@ final class ProjectDatePickerViewController: BaseViewController {
             flex.addItem(deadlineLabel).width(73).height(24).marginTop(40)
             flex.addItem(setDeadlineButton).height(52).marginTop(14)
             
-            flex.addItem(startEndDateLabel).width(101).height(24).marginTop(32)
-            flex.addItem(setStartEndDateButton).height(52).marginTop(14)
+            flex.addItem(startLabel).width(42).height(24).marginTop(32)
+            flex.addItem(setStartDateButton).height(52).marginTop(14)
+            
+            flex.addItem(endLabel).width(73).height(24).marginTop(32)
+            flex.addItem(setEndDateButton).height(52).marginTop(14)
             
             flex.addItem().grow(1)
             flex.addItem(nextButton).height(52).marginBottom(24)
