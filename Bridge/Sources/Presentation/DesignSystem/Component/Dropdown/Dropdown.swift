@@ -274,8 +274,9 @@ extension DropDown {
         // 드롭다운의 width가 화면의 경계 내에 있도록 설정.(화면을 넘기지 않도록)
         constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
         
-        let visibleHeight = tableHeight - layout.offscreenHeight  // 화면에 실제로 보일 수 있는 드롭다운의 높이를 계산
-        let canBeDisplayed = visibleHeight >= cellHeight          // 드롭다운이 화면에 표시될 수 있는지
+        // 화면에 실제로 보일 수 있는 드롭다운의 높이를 계산(15는 뷰의 가장자리에 붙지 않고 여유가 있도록)
+        let visibleHeight = tableHeight - (layout.offscreenHeight + 15)
+        let canBeDisplayed = visibleHeight >= cellHeight  // 드롭다운이 화면에 표시될 수 있는지
 
         // 계산한 값 설정
         xConstant = layout.x
