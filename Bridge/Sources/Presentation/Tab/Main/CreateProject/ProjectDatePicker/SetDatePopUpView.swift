@@ -1,5 +1,5 @@
 //
-//  SetDeadlinePopUpView.swift
+//  SetDatePopUpView.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/10/31.
@@ -11,8 +11,8 @@ import PinLayout
 import RxSwift
 import RxCocoa
 
-/// 모집인원을 선택하는 뷰
-final class SetDeadlinePopUpView: BaseView {
+/// 날짜를 설정해주는 뷰
+final class SetDatePopUpView: BaseView {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()
@@ -115,7 +115,7 @@ final class SetDeadlinePopUpView: BaseView {
 
 
 // MARK: - PanGesture
-extension SetDeadlinePopUpView {
+extension SetDatePopUpView {
     @objc
     private func handlePanGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: rootFlexContainer)
@@ -151,7 +151,7 @@ extension SetDeadlinePopUpView {
 }
 
 // MARK: - Show & Hide
-extension SetDeadlinePopUpView {
+extension SetDatePopUpView {
     func show() {
         setLayout()
         

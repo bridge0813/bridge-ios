@@ -43,7 +43,7 @@ final class ProjectDatePickerViewController: BaseViewController {
         return label
     }()
     private let setDeadlineButton = BridgeSetDisplayButton("프로젝트 모집 마감일은 언제인가요?")
-    private let setDeadlinePopUpView = SetDeadlinePopUpView()
+    private let setDeadlinePopUpView = SetDatePopUpView()
     
     private let startLabel: UILabel = {
         let label = UILabel()
