@@ -78,11 +78,17 @@ final class ProjectDatePickerViewController: BaseViewController {
     }()
     private let setEndDateButton = BridgeSetDisplayButton("미정")
     
-    private let nextButton = BridgeButton(
-        title: "다음",
-        font: BridgeFont.button1.font,
-        backgroundColor: BridgeColor.gray4
-    )
+    private let nextButton: BridgeButton = {
+        let button = BridgeButton(
+            title: "다음",
+            font: BridgeFont.button1.font,
+            backgroundColor: BridgeColor.gray4
+        )
+        // TODO: - 테스트용 false로 변경해야함.
+        button.isEnabled = true
+        
+        return button
+    }()
     
     // MARK: - Properties
     private let viewModel: ProjectDatePickerViewModel

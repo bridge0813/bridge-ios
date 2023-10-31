@@ -12,31 +12,83 @@ import RxCocoa
 import RxSwift
 
 final class ProjectProgressStatusViewController: BaseViewController {
-    // MARK: - Properties
+    // MARK: - UI
     private let rootFlexContainer = UIView()
-   
-    private let instructionLabel: UILabel = {
+    
+    private let progressView: UIProgressView = {
+        let progressView = UIProgressView()
+        progressView.progress = 0.8
+        progressView.progressTintColor = BridgeColor.primary1
+        progressView.backgroundColor = BridgeColor.gray7
+        
+        return progressView
+    }()
+    
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.configureLabel(
-            textColor: .black,
-            font: .boldSystemFont(ofSize: 18),
-            numberOfLines: 2
-        )
-        label.text = "당신의 프로젝트에 대한 \n기본 정보를 알려주세요!(진행방식, 진행단계)"
-        label.lineBreakMode = .byTruncatingTail
+        label.configureTextWithLineHeight(text: "당신의 프로젝트에 대한\n기본 정보를 알려주세요!", lineHeight: 30)
+        label.font = BridgeFont.headline1Long.font
+        label.textColor = BridgeColor.gray1
+        label.numberOfLines = 2
+        
         return label
     }()
     
-    private let nextButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("다음", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.white, for: .highlighted)
-        button.backgroundColor = .darkGray
+    private let progressMethodLabel: UILabel = {
+        let label = UILabel()
+        label.text = "진행 방식"
+        label.font = BridgeFont.subtitle2.font
+        label.textColor = BridgeColor.gray1
+        
+        return label
+    }()
+    
+    private let onlineButton = BridgeFieldTagButton("온라인")
+    private let offlineButton = BridgeFieldTagButton("오프라인")
+    private let blendedButton = BridgeFieldTagButton("블렌디드")
+    
+    private let progressStepLabel: UILabel = {
+        let label = UILabel()
+        label.text = "진행 단계"
+        label.font = BridgeFont.subtitle2.font
+        label.textColor = BridgeColor.gray1
+        
+        return label
+    }()
+    
+    private let tipMessageBox = BridgeTipMessageBox("현재 프로젝트가 어느정도 진행이 되었나요?")
+    
+    private let progressStepAnchorView = BridgeDropdownAnchorView("시작하기 전이에요")
+    private lazy var progressStepDropdown: DropDown = {
+        let dropdown = DropDown(
+            anchorView: progressStepAnchorView,
+            bottomOffset: CGPoint(x: 0, y: 8),
+            dataSource: ["시작하기 전이에요", "기획 중이에요", "기획이 완료됐어요", "디자인 중이에요", "디자인 완료됐어요", "개발 중이에요", "개발이 완료됐어요"],
+            itemTextColor: BridgeColor.gray3,
+            itemTextFont: BridgeFont.body2.font,
+            selectedItemTextColor: BridgeColor.gray1,
+            selectedItemBackgroundColor: BridgeColor.primary3,
+            cornerRadius: 8,
+            borderColor: BridgeColor.gray6.cgColor,
+            shadowColor: .clear
+        )
+        dropdown.selectedItemIndexRow = 0
+        
+        return dropdown
+    }()
+    
+    private let nextButton: BridgeButton = {
+        let button = BridgeButton(
+            title: "다음",
+            font: BridgeFont.button1.font,
+            backgroundColor: BridgeColor.gray4
+        )
+        button.isEnabled = false
         
         return button
     }()
-
+    
+    // MARK: - Properties
     private let viewModel: ProjectProgressStatusViewModel
     
     // MARK: - Initializer
@@ -45,49 +97,72 @@ final class ProjectProgressStatusViewController: BaseViewController {
         super.init()
     }
     
+    
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        configureNavigationUI()
     }
     
     override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea).marginTop(10)
+        rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
     }
     
-    // MARK: - Methods
-    private func configureNavigationUI() {
-    }
-    
+    // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).padding(5).define { flex in
-            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(20)
+        
+        rootFlexContainer.flex.paddingHorizontal(16).define { flex in
+            flex.addItem(progressView).height(6).marginTop(10)
+            flex.addItem(descriptionLabel).width(189).height(60).marginTop(40)
+            
+            flex.addItem(progressMethodLabel).width(60).height(24).marginTop(40)
+            flex.addItem().direction(.row).marginTop(14).define { flex in
+                flex.addItem(onlineButton).height(38)
+                flex.addItem(offlineButton).height(38).marginLeft(14)
+                flex.addItem(blendedButton).height(38).marginLeft(14)
+            }
+            
+            flex.addItem(progressStepLabel).width(60).height(24).marginTop(32)
+            flex.addItem(tipMessageBox).height(38).marginTop(10)
+            flex.addItem(progressStepAnchorView).height(52).marginTop(14)
             
             flex.addItem().grow(1)
-            
-            flex.addItem().marginBottom(50).define { flex in
-                flex.addItem(nextButton).marginHorizontal(15).height(50).cornerRadius(8)
-            }
+            flex.addItem(nextButton).height(52).marginBottom(24)
         }
     }
     
+    // MARK: - Configure
     override func configureAttributes() {
         configureNavigationUI()
+        progressStepAnchorView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(anchorViewTapped))
+        )
     }
     
+    private func configureNavigationUI() {
+        navigationItem.title = "모집글 작성"
+    }
+    
+    @objc private func anchorViewTapped(_ sender: UITapGestureRecognizer) {
+        progressStepAnchorView.isActive = true
+        progressStepDropdown.show()
+    }
+    
+    // MARK: - Bind
     override func bind() {
         let input = ProjectProgressStatusViewModel.Input(
-            nextButtonTapped: nextButton.rx.tap.asObservable(),
-            progressMethodButtonTapped: .just(ProjectProgressStatusViewModel.ProgressMethod.offline),
-            statusButtonTapped: .just(ProjectProgressStatusViewModel.ProgressStatus.designing)
+            progressMethodButtonTapped: .just(""),
+            progressStep: progressStepDropdown.itemSelected.map { $0.title },
+            nextButtonTapped: nextButton.rx.tap.asObservable()
         )
+        
         let output = viewModel.transform(input: input)
+     
+        progressStepDropdown.willHide.asDriver(onErrorJustReturn: ())
+            .drive(onNext: { [weak self] in
+                self?.progressStepAnchorView.isActive = false
+            })
+            .disposed(by: disposeBag)
     }
 }
