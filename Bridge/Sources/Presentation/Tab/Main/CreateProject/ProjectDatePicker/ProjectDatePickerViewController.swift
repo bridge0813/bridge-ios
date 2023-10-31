@@ -24,6 +24,16 @@ final class ProjectDatePickerViewController: BaseViewController {
         return progressView
     }()
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
+        scrollView.showsVerticalScrollIndicator = false
+        
+        return scrollView
+    }()
+    
+    private let contentContainer = UIView()
+    
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.configureTextWithLineHeight(text: "당신의 프로젝트에 대한\n기본 정보를 알려주세요!", lineHeight: 30)
@@ -33,6 +43,8 @@ final class ProjectDatePickerViewController: BaseViewController {
         
         return label
     }()
+    
+    private let tipMessageBox = BridgeTipMessageBox("시작일과 예상 완료일은 미선택 시 미정으로 표시됩니다.")
     
     private let setDatePopUpView = SetDatePopUpView()
     
@@ -54,7 +66,7 @@ final class ProjectDatePickerViewController: BaseViewController {
         
         return label
     }()
-    private let setStartDateButton = BridgeSetDisplayButton("프로젝트 시작일은 언제인가요?")
+    private let setStartDateButton = BridgeSetDisplayButton("미정")
     
     private let endLabel: UILabel = {
         let label = UILabel()
@@ -64,7 +76,7 @@ final class ProjectDatePickerViewController: BaseViewController {
         
         return label
     }()
-    private let setEndDateButton = BridgeSetDisplayButton("프로젝트 예상 완료일은 언제인가요?")
+    private let setEndDateButton = BridgeSetDisplayButton("미정")
     
     private let nextButton = BridgeButton(
         title: "다음",
@@ -90,15 +102,31 @@ final class ProjectDatePickerViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
+        
+        contentContainer.pin.all()
+        contentContainer.flex.layout(mode: .adjustHeight)
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentContainer.frame.height)
     }
     
     // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
+        scrollView.addSubview(contentContainer)
         
-        rootFlexContainer.flex.paddingHorizontal(16).define { flex in
+        rootFlexContainer.flex.marginHorizontal(16).define { flex in
             flex.addItem(progressView).height(6).marginTop(10)
-            flex.addItem(descriptionLabel).width(190).height(60).marginTop(40)
+            
+            flex.addItem().grow(1)
+            
+            // grow(1)로 레이아웃을 배치하면, height가 원활하게 잡히지 않고 화면 밖을 벗어나는 문제가 발생.(디바이스)
+            flex.addItem(scrollView).position(.absolute).width(100%).top(36).bottom(91)
+            
+            flex.addItem(nextButton).height(52).marginBottom(24)
+        }
+        
+        contentContainer.flex.define { flex in
+            flex.addItem(descriptionLabel).width(190).height(60).marginTop(20)
+            flex.addItem(tipMessageBox).height(38).marginTop(16)
             
             flex.addItem(deadlineLabel).width(73).height(24).marginTop(40)
             flex.addItem(setDeadlineButton).height(52).marginTop(14)
@@ -107,10 +135,7 @@ final class ProjectDatePickerViewController: BaseViewController {
             flex.addItem(setStartDateButton).height(52).marginTop(14)
             
             flex.addItem(endLabel).width(73).height(24).marginTop(32)
-            flex.addItem(setEndDateButton).height(52).marginTop(14)
-            
-            flex.addItem().grow(1)
-            flex.addItem(nextButton).height(52).marginBottom(24)
+            flex.addItem(setEndDateButton).height(52).marginTop(14).marginBottom(20)
         }
     }
     
@@ -136,6 +161,7 @@ final class ProjectDatePickerViewController: BaseViewController {
                 switch result.type {
                 case "deadline":
                     self?.setDeadlineButton.updateTitle(result.date.convertDateToString(format: "yyyy년 MM월 dd일"))
+                    self?.nextButton.isEnabled = true
                     
                 case "start":
                     self?.setStartDateButton.updateTitle(result.date.convertDateToString(format: "yyyy년 MM월 dd일"))
