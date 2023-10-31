@@ -15,7 +15,7 @@ final class ProjectDataStorage {
             title: "",
             description: "",
             dDays: 0,
-            recruitmentDeadline: Date(),
+            deadline: Date(),
             startDate: nil,
             endDate: nil,
             memberRequirements: [],
@@ -47,8 +47,8 @@ extension ProjectDataStorage {
     }
     
     // MARK: - ProjectDatePicker(날짜설정)
-    func updateRecruitmentDeadline(with date: Date) {
-        currentProject.recruitmentDeadline = date
+    func updateDeadline(with date: Date) {
+        currentProject.deadline = date
     }
     
     func updateStartDate(with date: Date?) {

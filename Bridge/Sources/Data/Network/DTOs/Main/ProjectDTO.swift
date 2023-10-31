@@ -28,7 +28,7 @@ extension ProjectDTO {
             title: title,
             description: overview,
             dDays: Date().calculateDDay(to: dueDate),
-            recruitmentDeadline: dueDate,
+            deadline: dueDate,
             startDate: startDate,
             endDate: endDate,
             memberRequirements: recruit,

@@ -13,7 +13,7 @@ struct Project {
     var title: String
     var description: String
     var dDays: Int
-    var recruitmentDeadline: Date
+    var deadline: Date
     var startDate: Date?
     var endDate: Date?
     var memberRequirements: [MemberRequirement]
@@ -30,7 +30,7 @@ extension Project {
             title: "",
             description: "",
             dDays: 0,
-            recruitmentDeadline: Date(),
+            deadline: Date(),
             startDate: nil,
             endDate: nil,
             memberRequirements: [],

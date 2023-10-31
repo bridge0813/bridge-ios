@@ -42,7 +42,7 @@ final class ProjectDatePickerViewModel: ViewModelType {
                 guard let self else { return }
                 
                 switch result.type {
-                case "deadline": self.dataStorage.updateRecruitmentDeadline(with: result.date)
+                case "deadline": self.dataStorage.updateDeadline(with: result.date)
                 case "start": self.dataStorage.updateStartDate(with: result.date)
                 case "end": self.dataStorage.updateEndDate(with: result.date)
                 default: return
