@@ -37,7 +37,7 @@ final class ApplicantRestrictionViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        var selectedRestrictions = BehaviorRelay<Set<String>>(value: [])
+        let selectedRestrictions = BehaviorRelay<Set<String>>(value: [])
         
         input.selectedRestriction
             .subscribe(onNext: { restriction in
