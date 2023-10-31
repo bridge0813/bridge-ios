@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 날짜를 설정해주는 뷰
-final class SetDatePopUpView: BaseView {
+final class DatePickerPopUpView: BaseView {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()
@@ -129,7 +129,7 @@ final class SetDatePopUpView: BaseView {
 }
 
 // MARK: - SetDateType
-extension SetDatePopUpView {
+extension DatePickerPopUpView {
     enum SetDateType {
         case deadline
         case start
@@ -166,7 +166,7 @@ extension SetDatePopUpView {
 
 
 // MARK: - PanGesture
-extension SetDatePopUpView {
+extension DatePickerPopUpView {
     @objc
     private func handlePanGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: rootFlexContainer)
@@ -202,7 +202,7 @@ extension SetDatePopUpView {
 }
 
 // MARK: - Show & Hide
-extension SetDatePopUpView {
+extension DatePickerPopUpView {
     func show(for type: SetDateType) {
         setLayout()
         self.type = type

@@ -46,7 +46,7 @@ final class ProjectDatePickerViewController: BaseViewController {
     
     private let tipMessageBox = BridgeTipMessageBox("시작일과 예상 완료일은 미선택 시 미정으로 표시됩니다.")
     
-    private let setDatePopUpView = SetDatePopUpView()
+    private let datePickerPopUpView = DatePickerPopUpView()
     
     private let deadlineLabel: UILabel = {
         let label = UILabel()
@@ -151,7 +151,7 @@ final class ProjectDatePickerViewController: BaseViewController {
     // MARK: - Bind
     override func bind() {
         let input = ProjectDatePickerViewModel.Input(
-            date: setDatePopUpView.completeButtonTapped,
+            date: datePickerPopUpView.completeButtonTapped,
             nextButtonTapped: nextButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
@@ -177,14 +177,14 @@ final class ProjectDatePickerViewController: BaseViewController {
         // 모집 마감일 선택 팝업 뷰 보여주기
         setDeadlineButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
-                self?.setDatePopUpView.show(for: .deadline)
+                self?.datePickerPopUpView.show(for: .deadline)
             })
             .disposed(by: disposeBag)
         
         // 시작일 선택 팝업 뷰 보여주기
         setStartDateButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
-                self?.setDatePopUpView.show(for: .start)
+                self?.datePickerPopUpView.show(for: .start)
             })
             .disposed(by: disposeBag)
         
@@ -193,7 +193,7 @@ final class ProjectDatePickerViewController: BaseViewController {
             .drive(onNext: { [weak self] _ in
                 // 시작일이 먼저 지정되어야 완료일을 지정할 수 있음.
                 if self?.setStartDateButton.titleLabel?.text != "미정" {
-                    self?.setDatePopUpView.show(for: .end)
+                    self?.datePickerPopUpView.show(for: .end)
                 }
             })
             .disposed(by: disposeBag)
