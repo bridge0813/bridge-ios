@@ -90,10 +90,10 @@ final class SetDatePopUpView: BaseView {
             
             flex.addItem().backgroundColor(BridgeColor.gray8).height(1).marginTop(8)
             
-            flex.addItem(datePicker).marginTop(50).marginHorizontal(16)
+            flex.addItem(datePicker).marginTop(40).marginHorizontal(16)
            
             flex.addItem().grow(1)
-            flex.addItem(completeButton).height(52).marginHorizontal(16).marginBottom(21)
+            flex.addItem(completeButton).height(52).marginHorizontal(16).marginBottom(34)
         }
     }
     

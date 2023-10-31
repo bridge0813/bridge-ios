@@ -87,7 +87,8 @@ final class SetRecruitmentNumberPopUpView: BaseView {
             
             flex.addItem(pickerView).height(120).marginTop(56)
             
-            flex.addItem(completeButton).height(52).marginTop(69).marginHorizontal(16)
+            flex.addItem().grow(1)
+            flex.addItem(completeButton).height(52).marginHorizontal(16).marginBottom(50)
         }
     }
     

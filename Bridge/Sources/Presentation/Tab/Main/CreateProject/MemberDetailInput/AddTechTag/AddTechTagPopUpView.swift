@@ -129,7 +129,8 @@ final class AddTechTagPopUpView: BaseView {
             
             flex.addItem(collectionView).grow(1).marginTop(30).marginHorizontal(16)
             
-            flex.addItem(completeButton).height(52).marginTop(20).marginHorizontal(16).marginBottom(30)
+            flex.addItem().height(25)
+            flex.addItem(completeButton).height(52).marginHorizontal(16).marginBottom(47)
         }
     }
     
