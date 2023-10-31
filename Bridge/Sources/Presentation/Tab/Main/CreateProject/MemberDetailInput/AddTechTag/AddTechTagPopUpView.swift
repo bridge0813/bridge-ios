@@ -212,7 +212,7 @@ extension AddTechTagPopUpView {
 // MARK: - Show & Hide
 extension AddTechTagPopUpView {
     func show() {
-        self.setLayout()
+        setLayout()
         
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             guard let self else { return }

@@ -153,7 +153,7 @@ extension SetDeadlinePopUpView {
 // MARK: - Show & Hide
 extension SetDeadlinePopUpView {
     func show() {
-        self.setLayout()
+        setLayout()
         
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             guard let self else { return }

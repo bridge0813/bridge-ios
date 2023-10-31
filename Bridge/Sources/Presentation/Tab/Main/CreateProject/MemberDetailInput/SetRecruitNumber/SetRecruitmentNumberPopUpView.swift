@@ -185,7 +185,7 @@ extension SetRecruitmentNumberPopUpView {
 // MARK: - Show & Hide
 extension SetRecruitmentNumberPopUpView {
     func show() {
-        self.setLayout()
+        setLayout()
         
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             guard let self else { return }
