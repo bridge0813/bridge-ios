@@ -149,7 +149,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
                 .padding(16)
                 .marginTop(14)
                 .define { flex in
-                    flex.addItem(introductionTextView)
+                    flex.addItem(introductionTextView).grow(1)
                 }
         }
     }
@@ -178,6 +178,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         
         let output = viewModel.transform(input: input)
         
+        // TextView 플레이스홀더 구현
         introductionTextView.rx.didBeginEditing
             .asDriver()
             .drive(onNext: { [weak self] in
@@ -202,8 +203,29 @@ final class ProjectDescriptionInputViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        // 키보드 반응 구현
         contentContainer.rx.keyboardLayoutChanged
-            .bind(to: contentContainer.rx.yPosition)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, keyboardHeight in
+                UIView.animate(withDuration: 0.3) {
+                    // 키보드가 내려갔을 경우
+                    guard keyboardHeight > 0 else {
+                        owner.contentContainer.transform = .identity
+                        return
+                    }
+                    
+                    // TextView의 반응에만 높이 조절
+                    guard owner.introductionTextView.isFirstResponder else { return }
+                    
+                    let containerMaxY = owner.contentContainer.windowFrame?.maxY ?? 550
+                    let offSet = keyboardHeight - (UIScreen.main.bounds.height - containerMaxY)
+                    
+                    // 키보드가 텍스트 뷰를 가릴 경우에만 contentContainer의 위치 조정
+                    if offSet > 0 {
+                        owner.contentContainer.transform = CGAffineTransform(translationX: 0, y: -offSet)
+                    }
+                }
+            })
             .disposed(by: disposeBag)
     }
 }
