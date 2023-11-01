@@ -34,7 +34,7 @@ extension ProjectDTO {
             memberRequirements: recruit,
             applicantRestrictions: tagLimit,
             progressMethod: meetingWay,
-            progressStatus: stage,
+            progressStep: stage,
             userEmail: userEmail
         )
     }

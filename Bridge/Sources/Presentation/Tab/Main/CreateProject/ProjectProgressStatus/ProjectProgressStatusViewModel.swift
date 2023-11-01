@@ -54,7 +54,7 @@ final class ProjectProgressStatusViewModel: ViewModelType {
         
         let progressStep = input.progressStep
             .do(onNext: { [weak self] step in
-                self?.dataStorage.updateProgressStatus(with: step)
+                self?.dataStorage.updateProgressStep(with: step)
             })
             .asDriver(onErrorJustReturn: "")
                 

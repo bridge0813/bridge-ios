@@ -19,7 +19,7 @@ struct Project {
     var memberRequirements: [MemberRequirement]
     var applicantRestrictions: [String]
     var progressMethod: String
-    var progressStatus: String
+    var progressStep: String
     var userEmail: String
 }
 
@@ -36,7 +36,7 @@ extension Project {
             memberRequirements: [],
             applicantRestrictions: [],
             progressMethod: "",
-            progressStatus: "",
+            progressStep: "",
             userEmail: ""
         )
     }

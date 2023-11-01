@@ -21,7 +21,7 @@ final class ProjectDataStorage {
             memberRequirements: [],
             applicantRestrictions: [],
             progressMethod: "",
-            progressStatus: "",
+            progressStep: "",
             userEmail: ""
         )
 }
@@ -64,8 +64,8 @@ extension ProjectDataStorage {
         currentProject.progressMethod = method
     }
     
-    func updateProgressStatus(with status: String) {
-        currentProject.progressStatus = status
+    func updateProgressStep(with step: String) {
+        currentProject.progressStep = step
     }
     
     // MARK: - ProjectDescriptionInput(제목 및 소개)
