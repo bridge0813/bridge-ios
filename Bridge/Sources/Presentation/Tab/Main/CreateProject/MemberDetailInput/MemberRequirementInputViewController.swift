@@ -112,7 +112,6 @@ final class MemberRequirementInputViewController: BaseViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        enableKeyboardHiding()
     }
     
     override func viewDidLayoutSubviews() {
@@ -162,6 +161,7 @@ final class MemberRequirementInputViewController: BaseViewController {
     // MARK: - Configure
     override func configureAttributes() {
         configureNavigationUI()
+        enableKeyboardHiding()
     }
     
     private func configureNavigationUI() {
