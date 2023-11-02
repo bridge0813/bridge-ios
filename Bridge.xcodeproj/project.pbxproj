@@ -146,7 +146,6 @@
 		7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */; };
 		7C55E63B2ADEA2A40018FA5D /* MockProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E63A2ADEA2A40018FA5D /* MockProjectRepository.swift */; };
 		7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E63C2ADEE1CB0018FA5D /* MainBookmarkButton.swift */; };
-		7C55E6442AE17B270018FA5D /* TopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6432AE17B270018FA5D /* TopMenuView.swift */; };
 		7C55E64A2AE44B5F0018FA5D /* HotProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6492AE44B5F0018FA5D /* HotProjectCell.swift */; };
 		7C55E64E2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E64D2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift */; };
 		7C55E6502AE50D9E0018FA5D /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E64F2AE50D9E0018FA5D /* PlaceholderView.swift */; };
@@ -323,7 +322,6 @@
 		7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDividerHeaderView.swift; sourceTree = "<group>"; };
 		7C55E63A2ADEA2A40018FA5D /* MockProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProjectRepository.swift; sourceTree = "<group>"; };
 		7C55E63C2ADEE1CB0018FA5D /* MainBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBookmarkButton.swift; sourceTree = "<group>"; };
-		7C55E6432AE17B270018FA5D /* TopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuView.swift; sourceTree = "<group>"; };
 		7C55E6492AE44B5F0018FA5D /* HotProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCell.swift; sourceTree = "<group>"; };
 		7C55E64D2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutConfiguration.swift; sourceTree = "<group>"; };
 		7C55E64F2AE50D9E0018FA5D /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
@@ -1318,7 +1316,6 @@
 				7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */,
 				7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */,
 				7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */,
-				7C55E6432AE17B270018FA5D /* TopMenuView.swift */,
 				7C55E6352ADC06E20018FA5D /* Cell */,
 				7C55E6342ADC06C30018FA5D /* HeaderView */,
 				7C55E63E2ADF8C370018FA5D /* PlaceholderView */,
@@ -1588,7 +1585,6 @@
 				7B61238D2AC2F320006E72C1 /* BridgeWarningMessageBox.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7C55E6632AEBBCBF0018FA5D /* AddTechTagPopUpView.swift in Sources */,
-				7C55E6442AE17B270018FA5D /* TopMenuView.swift in Sources */,
 				7BFECA242AECE632009B4C7D /* ApplicationResultCell.swift in Sources */,
 				7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
