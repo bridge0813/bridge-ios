@@ -10,7 +10,7 @@ import RxSwift
 final class CompletionViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
-        let completionButtonTapped: Observable<Void>
+        let completeButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -31,7 +31,7 @@ final class CompletionViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
-        input.completionButtonTapped
+        input.completeButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.finish()
