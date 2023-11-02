@@ -11,6 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
+/// 날짜(모집 마감일, 시작일, 완료일)를 설정하는 VC
 final class ProjectDatePickerViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()

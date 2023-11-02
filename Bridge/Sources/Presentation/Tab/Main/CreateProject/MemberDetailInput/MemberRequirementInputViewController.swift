@@ -11,7 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
-/// 선택한 분야에서 모집하는 팀원의 요구사항을 기입하는 컨트롤러
+/// 선택한 분야에서 모집하는 팀원의 요구사항(모집인원, 기술스택, 바라는 점)을 기입하는 VC
 final class MemberRequirementInputViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()

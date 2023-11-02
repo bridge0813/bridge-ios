@@ -11,6 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
+/// 지원을 제한하는 VC
 final class ApplicantRestrictionViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()

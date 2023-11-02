@@ -11,6 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
+/// 프로젝트의 제목과 소개를 기입하는 VC
 final class ProjectDescriptionInputViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()

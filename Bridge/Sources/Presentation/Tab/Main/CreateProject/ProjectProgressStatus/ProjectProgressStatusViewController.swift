@@ -11,6 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
+/// 프로젝트의 진행상황(진행방식, 진행단계)을 기입하는 VC
 final class ProjectProgressStatusViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()

@@ -11,6 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
+/// 모집하려는 팀원의 분야를 선택하는 VC
 final class MemberFieldSelectionViewController: BaseViewController {
     // MARK: - UI
     private lazy var dismissButton: UIBarButtonItem = {
