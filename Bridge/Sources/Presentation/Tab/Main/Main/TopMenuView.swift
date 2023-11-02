@@ -18,7 +18,7 @@ final class TopMenuView: BaseView {
     lazy var fieldDropdown: DropDown = {
         let dropdown = DropDown(
             anchorView: fieldCategoryAnchorButton,
-            bottomOffset: CGPoint(x: 10, y: 0),
+            bottomOffset: CGPoint(x: 0, y: 10),
             dataSource: ["UI/UX", "전체"],
             cellHeight: 46,
             itemTextColor: BridgeColor.gray3,
@@ -63,7 +63,7 @@ final class TopMenuView: BaseView {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).height(44).define { flex in
             flex.addItem().direction(.row).alignItems(.center).define { flex in
-                flex.addItem(fieldCategoryAnchorButton).marginLeft(5)
+                flex.addItem(fieldCategoryAnchorButton).width(200).marginLeft(16)
                 flex.addItem().grow(1)
                 flex.addItem(filterButton).size(24).marginRight(8)
                 flex.addItem(searchButton).size(24).marginRight(15)
