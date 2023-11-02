@@ -34,7 +34,9 @@ final class CompletionViewModel: ViewModelType {
         input.completeButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showAlert(configuration: .checkProject)
+                owner.coordinator?.showAlert(configuration: .checkProject, cancelAction: {
+                    owner.coordinator?.finish()
+                })
             })
             .disposed(by: disposeBag)
         

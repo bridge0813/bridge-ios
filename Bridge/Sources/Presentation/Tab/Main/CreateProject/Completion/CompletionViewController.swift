@@ -104,6 +104,6 @@ final class CompletionViewController: BaseViewController {
         let input = CompletionViewModel.Input(
             completeButtonTapped: completeButton.rx.tap.asObservable()
         )
-        let output = viewModel.transform(input: input)
+        let _ = viewModel.transform(input: input)
     }
 }

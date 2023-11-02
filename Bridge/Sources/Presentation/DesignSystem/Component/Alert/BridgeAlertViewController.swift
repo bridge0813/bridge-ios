@@ -54,10 +54,16 @@ final class BridgeAlertViewController: BaseViewController {
     private lazy var rightButton = BridgeButton(title: "", font: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
     
     private var primaryAction: PrimaryActionClosure?
+    private var cancelAction: CancelActionClosure?
     
     // MARK: - Initializer
-    init(configuration: AlertConfiguration, primaryAction: PrimaryActionClosure?) {
+    init(
+        configuration: AlertConfiguration,
+        primaryAction: PrimaryActionClosure?,
+        cancelAction: CancelActionClosure?
+    ) {
         self.primaryAction = primaryAction
+        self.cancelAction = cancelAction
         
         super.init()
         
@@ -82,6 +88,7 @@ final class BridgeAlertViewController: BaseViewController {
             .withUnretained(self)
             .subscribe { owner, _ in
                 owner.dismiss(animated: true)
+                if let cancelAction = owner.cancelAction { cancelAction() }
             }
             .disposed(by: disposeBag)
         
