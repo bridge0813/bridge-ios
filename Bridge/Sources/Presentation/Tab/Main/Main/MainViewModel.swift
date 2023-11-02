@@ -107,15 +107,14 @@ final class MainViewModel: ViewModelType {
         let topMargins = input.didScroll
             .map { offset in
                 let categoryHeight: CGFloat = 102.0
-                let minTop: CGFloat = 44.0
+                let minTop: CGFloat = 0
                 
                 // 컬렉션뷰 마진계산
-                let maxCollectionViewMargin: CGFloat = 146.0
                 let collectionViewMargin = min(
-                    maxCollectionViewMargin,
+                    categoryHeight,
                     max(
                         minTop,
-                        maxCollectionViewMargin - (offset.y * (maxCollectionViewMargin - minTop) / categoryHeight)
+                        categoryHeight - (offset.y * (categoryHeight - minTop) / categoryHeight)
                     )
                 )
                 
