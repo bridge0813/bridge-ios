@@ -27,14 +27,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     private let rootFlexContainer = UIView()
     
-    private let progressView: UIProgressView = {
-        let progressView = UIProgressView()
-        progressView.progress = 0.2
-        progressView.progressTintColor = BridgeColor.primary1
-        progressView.backgroundColor = BridgeColor.gray7
-        
-        return progressView
-    }()
+    private let progressView = BridgeProgressView(0.2)
     
     private let dividerView: UIView = {
         let divider = UIView()

@@ -16,14 +16,7 @@ final class ProjectDatePickerViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
-    private let progressView: UIProgressView = {
-        let progressView = UIProgressView()
-        progressView.progress = 0.6
-        progressView.progressTintColor = BridgeColor.primary1
-        progressView.backgroundColor = BridgeColor.gray7
-        
-        return progressView
-    }()
+    private let progressView = BridgeProgressView(0.6)
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()

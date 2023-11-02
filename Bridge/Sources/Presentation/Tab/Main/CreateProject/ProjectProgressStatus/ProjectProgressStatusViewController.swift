@@ -16,14 +16,7 @@ final class ProjectProgressStatusViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
-    private let progressView: UIProgressView = {
-        let progressView = UIProgressView()
-        progressView.progress = 0.8
-        progressView.progressTintColor = BridgeColor.primary1
-        progressView.backgroundColor = BridgeColor.gray7
-        
-        return progressView
-    }()
+    private let progressView = BridgeProgressView(0.8)
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()

@@ -16,14 +16,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
-    private let progressView: UIProgressView = {
-        let progressView = UIProgressView()
-        progressView.progress = 1
-        progressView.progressTintColor = BridgeColor.primary1
-        progressView.backgroundColor = BridgeColor.gray7
-        
-        return progressView
-    }()
+    private let progressView = BridgeProgressView(1)
     
     private let contentContainer = UIView()  // 키보드에 반응하여 컨텐츠들을 위로 올려주는 역할의 뷰
     
