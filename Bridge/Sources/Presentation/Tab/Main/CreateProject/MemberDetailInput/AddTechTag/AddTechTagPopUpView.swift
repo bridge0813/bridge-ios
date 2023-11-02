@@ -192,10 +192,7 @@ extension AddTechTagPopUpView {
             }
             
         case .ended:
-            if velocity.y > 1500 {
-                hide()
-                
-            } else if calculatedTranslationY > -300 { 
+            if velocity.y > 1500 || calculatedTranslationY > -300 {
                 hide()
                 
             } else {  // 원상복구

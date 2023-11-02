@@ -29,7 +29,7 @@ final class TechTagCell: BaseCollectionViewCell {
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        contentView.bounds.size.width = size.width
+        contentView.frame.size.width = size.width
         contentView.flex.layout(mode: .adjustWidth)
 
         return contentView.frame.size

@@ -165,10 +165,7 @@ extension SetRecruitmentNumberPopUpView {
             }
             
         case .ended:
-            if velocity.y > 1500 {
-                hide()
-                
-            } else if calculatedTranslationY > -250 {
+            if velocity.y > 1500 || calculatedTranslationY > -250 {
                 hide()
                 
             } else {  // 원상복구
