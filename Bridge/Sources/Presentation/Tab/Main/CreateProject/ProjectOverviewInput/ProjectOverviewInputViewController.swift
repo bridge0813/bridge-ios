@@ -53,6 +53,11 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         )
         textField.font = BridgeFont.body2.font
         textField.textColor = BridgeColor.gray1
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = BridgeColor.gray6.cgColor
+        textField.layer.cornerRadius = 8
+        textField.clipsToBounds = true
+        textField.addLeftPadding(with: 16)
         
         return textField
     }()
@@ -71,7 +76,11 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         textView.text = "프로젝트에 대해 소개해 주세요."  // Placeholder
         textView.font = BridgeFont.body2.font
         textView.textColor = BridgeColor.gray4
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
+        textView.textContainerInset = UIEdgeInsets(top: 16, left: 12, bottom: 16, right: 12)
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = BridgeColor.gray6.cgColor
+        textView.layer.cornerRadius = 8
+        textView.clipsToBounds = true
         
         return textView
     }()
@@ -131,26 +140,10 @@ final class ProjectDescriptionInputViewController: BaseViewController {
             flex.addItem(descriptionLabel).width(143).height(60).marginTop(40)
             
             flex.addItem(titleLabel).width(28).height(24).marginTop(40)
-            flex.addItem()
-                .border(1, BridgeColor.gray6)
-                .cornerRadius(8)
-                .height(52)
-                .padding(17, 16, 17, 16)
-                .marginTop(14)
-                .define { flex in
-                    flex.addItem(titleTextField)
-                }
+            flex.addItem(titleTextField).height(52).marginTop(14)
             
             flex.addItem(introductionLabel).width(28).height(24).marginTop(32)
-            flex.addItem()
-                .border(1, BridgeColor.gray6)
-                .cornerRadius(8)
-                .height(155)
-                .padding(16)
-                .marginTop(14)
-                .define { flex in
-                    flex.addItem(introductionTextView).grow(1)
-                }
+            flex.addItem(introductionTextView).height(155).marginTop(14)
         }
     }
     

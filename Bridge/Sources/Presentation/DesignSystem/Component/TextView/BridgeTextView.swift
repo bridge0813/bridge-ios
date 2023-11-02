@@ -28,7 +28,7 @@ final class BridgeTextView: BaseView {
         textView.text = textViewPlaceholder
         textView.font = BridgeFont.body2.font
         textView.textColor = BridgeColor.gray4
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: -6, bottom: 0, right: 0)
+        textView.textContainerInset = UIEdgeInsets(top: 16, left: 10, bottom: 0, right: 10)
         
         return textView
     }()
@@ -65,7 +65,7 @@ final class BridgeTextView: BaseView {
         addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.define { flex in
-            flex.addItem(textView).grow(1).marginTop(16).marginLeft(16).marginRight(16)
+            flex.addItem(textView).grow(1)
             flex.addItem(countLabel).alignSelf(.end).width(100).marginTop(5).marginRight(12).marginBottom(12)
         }
     }
