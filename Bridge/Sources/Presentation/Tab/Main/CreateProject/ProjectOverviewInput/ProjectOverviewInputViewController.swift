@@ -62,7 +62,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         return textField
     }()
     
-    private let introductionLabel: UILabel = {
+    private let descriptionTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "소개"
         label.font = BridgeFont.subtitle2.font
@@ -71,7 +71,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         return label
     }()
     
-    private let introductionTextView: UITextView = {
+    private let descriptionTextView: UITextView = {
         let textView = UITextView()
         textView.text = "프로젝트에 대해 소개해 주세요."  // Placeholder
         textView.font = BridgeFont.body2.font
@@ -142,8 +142,8 @@ final class ProjectDescriptionInputViewController: BaseViewController {
             flex.addItem(titleLabel).width(28).height(24).marginTop(40)
             flex.addItem(titleTextField).height(52).marginTop(14)
             
-            flex.addItem(introductionLabel).width(28).height(24).marginTop(32)
-            flex.addItem(introductionTextView).height(155).marginTop(14)
+            flex.addItem(descriptionTitleLabel).width(28).height(24).marginTop(32)
+            flex.addItem(descriptionTextView).height(155).marginTop(14)
         }
     }
     
@@ -160,38 +160,44 @@ final class ProjectDescriptionInputViewController: BaseViewController {
     // MARK: - Bind
     override func bind() {
         let input = ProjectDescriptionInputViewModel.Input(
-            nextButtonTapped: nextButton.rx.tap.asObservable(),
             titleTextChanged: titleTextField.rx.controlEvent(.editingDidEnd)
                 .withLatestFrom(titleTextField.rx.text.orEmpty)
                 .distinctUntilChanged(),
-            descriptionTextChanged: introductionTextView.rx.didEndEditing
-                .withLatestFrom(introductionTextView.rx.text.orEmpty)
-                .distinctUntilChanged()
+            descriptionTextChanged: descriptionTextView.rx.didEndEditing
+                .withLatestFrom(descriptionTextView.rx.text.orEmpty)
+                .distinctUntilChanged(),
+            nextButtonTapped: nextButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)
         
+        output.isNextButtonEnabled
+            .drive(onNext: { [weak self] isNextButtonEnabled in
+                self?.nextButton.isEnabled = isNextButtonEnabled
+            })
+            .disposed(by: disposeBag)
+        
         // TextView 플레이스홀더 구현
-        introductionTextView.rx.didBeginEditing
+        descriptionTextView.rx.didBeginEditing
             .asDriver()
             .drive(onNext: { [weak self] in
                 guard let self else { return }
                 
-                if self.introductionTextView.text == "프로젝트에 대해 소개해 주세요." {
-                    self.introductionTextView.text = nil
-                    self.introductionTextView.textColor = BridgeColor.gray1
+                if self.descriptionTextView.text == "프로젝트에 대해 소개해 주세요." {
+                    self.descriptionTextView.text = nil
+                    self.descriptionTextView.textColor = BridgeColor.gray1
                 }
             })
             .disposed(by: disposeBag)
         
-        introductionTextView.rx.didEndEditing
+        descriptionTextView.rx.didEndEditing
             .asDriver()
             .drive(onNext: { [weak self] in
                 guard let self else { return }
                 
-                if self.introductionTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    self.introductionTextView.text = "프로젝트에 대해 소개해 주세요."
-                    self.introductionTextView.textColor = BridgeColor.gray4
+                if self.descriptionTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    self.descriptionTextView.text = "프로젝트에 대해 소개해 주세요."
+                    self.descriptionTextView.textColor = BridgeColor.gray4
                 }
             })
             .disposed(by: disposeBag)
@@ -208,7 +214,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
                     }
                     
                     // TextView의 반응에만 높이 조절
-                    guard owner.introductionTextView.isFirstResponder else { return }
+                    guard owner.descriptionTextView.isFirstResponder else { return }
                     
                     let containerMaxY = owner.contentContainer.windowFrame?.maxY ?? 550
                     let offSet = keyboardHeight - (UIScreen.main.bounds.height - containerMaxY)

@@ -6,17 +6,18 @@
 //
 
 import RxSwift
+import RxCocoa
 
 final class ProjectDescriptionInputViewModel: ViewModelType {
     // MARK: - Nested Types
     struct Input {
-        let nextButtonTapped: Observable<Void>
         let titleTextChanged: Observable<String>
         let descriptionTextChanged: Observable<String>
+        let nextButtonTapped: Observable<Void>
     }
     
     struct Output {
-        
+        let isNextButtonEnabled: Driver<Bool>
     }
     
     // MARK: - Properties
@@ -58,6 +59,15 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        return Output()
+        let isNextButtonEnabled = Observable.combineLatest(
+            input.titleTextChanged.map { !$0.isEmpty },
+            input.descriptionTextChanged.map { !$0.isEmpty }
+        )
+        .map { titleIsValid, descriptionIsValid in
+            return titleIsValid && descriptionIsValid
+        }
+        .asDriver(onErrorJustReturn: false)
+        
+        return Output(isNextButtonEnabled: isNextButtonEnabled)
     }
 }
