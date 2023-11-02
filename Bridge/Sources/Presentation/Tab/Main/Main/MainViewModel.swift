@@ -138,7 +138,9 @@ final class MainViewModel: ViewModelType {
         input.createButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.connectToCreateProjectFlow()
+                owner.coordinator?.showAlert(configuration: .createProject) {
+                    owner.coordinator?.connectToCreateProjectFlow()
+                }
             })
             .disposed(by: disposeBag)
         
