@@ -66,8 +66,7 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
         .map { titleIsValid, descriptionIsValid in
             return titleIsValid && descriptionIsValid
         }
-        .asDriver(onErrorJustReturn: false)
         
-        return Output(isNextButtonEnabled: isNextButtonEnabled)
+        return Output(isNextButtonEnabled: isNextButtonEnabled.asDriver(onErrorJustReturn: false))
     }
 }

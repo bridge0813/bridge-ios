@@ -191,8 +191,6 @@ final class MemberRequirementInputViewController: BaseViewController {
             .drive(onNext: { [weak self] tagNames in
                 self?.addTechStackButton.isAdded = !tagNames.isEmpty
                 self?.addedTechTagView.tagNames = tagNames
-                self?.addedTechTagView.flex.markDirty()
-                self?.addTechStackButton.flex.markDirty()
                 self?.view.setNeedsLayout()
             })
             .disposed(by: disposeBag)

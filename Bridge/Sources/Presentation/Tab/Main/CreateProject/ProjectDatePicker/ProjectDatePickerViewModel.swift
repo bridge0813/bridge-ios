@@ -48,7 +48,6 @@ final class ProjectDatePickerViewModel: ViewModelType {
                 default: return
                 }
             })
-            .asDriver(onErrorJustReturn: ("", Date()))
         
         input.nextButtonTapped
             .subscribe(
@@ -60,7 +59,7 @@ final class ProjectDatePickerViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            date: date
+            date: date.asDriver(onErrorJustReturn: ("", Date()))
         )
     }
 }

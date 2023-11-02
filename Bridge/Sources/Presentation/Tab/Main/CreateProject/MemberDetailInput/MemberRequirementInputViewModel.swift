@@ -55,21 +55,17 @@ final class MemberRequirementInputViewModel: ViewModelType {
                 
                 return FieldTagType(from: field).rawValue
             }
-            .asDriver(onErrorJustReturn: "")
         
         let recruitNumber = input.recruitNumber
             .do(onNext: { [weak self] number in
                 self?.memberRequirement.recruitNumber = number
             })
-            .asDriver(onErrorJustReturn: 0)
-        
-                
+            
         let techTags = input.techTags
             .do(onNext: { [weak self] tags in
                 self?.memberRequirement.requiredSkills = tags
             })
-            .asDriver(onErrorJustReturn: [])
-                
+            
         input.requirementText
             .withUnretained(self)
             .subscribe(onNext: { owner, text in
@@ -101,13 +97,12 @@ final class MemberRequirementInputViewModel: ViewModelType {
         .map { recruitNumberIsValid, tagIsValid, requirementTextIsValid in
             return recruitNumberIsValid && tagIsValid && requirementTextIsValid
         }
-        .asDriver(onErrorJustReturn: false)
                 
         return Output(
-            selectedField: selectedField,
-            recruitNumber: recruitNumber,
-            techTags: techTags,
-            isNextButtonEnabled: isNextButtonEnabled
+            selectedField: selectedField.asDriver(onErrorJustReturn: ""),
+            recruitNumber: recruitNumber.asDriver(onErrorJustReturn: 0),
+            techTags: techTags.asDriver(onErrorJustReturn: []),
+            isNextButtonEnabled: isNextButtonEnabled.asDriver(onErrorJustReturn: false)
         )
     }
 }

@@ -50,13 +50,11 @@ final class ProjectProgressStatusViewModel: ViewModelType {
             .do(onNext: { [weak self] method in
                 self?.dataStorage.updateProgressMethod(with: method)
             })
-            .asDriver(onErrorJustReturn: "")
         
         let progressStep = input.progressStep
             .do(onNext: { [weak self] step in
                 self?.dataStorage.updateProgressStep(with: step)
             })
-            .asDriver(onErrorJustReturn: "")
                 
         let isNextButtonEnabled = Observable.combineLatest(
             input.progressMethodButtonTapped.map { !$0.isEmpty },
@@ -65,12 +63,12 @@ final class ProjectProgressStatusViewModel: ViewModelType {
         .map { progressMethodIsValid, progressStepIsValid in
             return progressMethodIsValid && progressStepIsValid
         }
-        .asDriver(onErrorJustReturn: false)
+        
                 
         return Output(
-            progressMethod: progressMethod,
-            progressStep: progressStep,
-            isNextButtonEnabled: isNextButtonEnabled
+            progressMethod: progressMethod.asDriver(onErrorJustReturn: ""),
+            progressStep: progressStep.asDriver(onErrorJustReturn: ""),
+            isNextButtonEnabled: isNextButtonEnabled.asDriver(onErrorJustReturn: false)
         )
     }
 }

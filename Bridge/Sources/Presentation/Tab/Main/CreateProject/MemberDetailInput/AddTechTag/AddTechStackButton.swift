@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FlexLayout
 
 /// 팀원의 기술스택을 추가하는 버튼(스택이 추가되면, 타이틀이 수정으로 변경됨)
 final class AddTechStackButton: BaseButton {
@@ -14,6 +15,7 @@ final class AddTechStackButton: BaseButton {
         willSet {
             if newValue { updateConfigurationForEdit() }
             else { updateConfigurationForAdd() }
+            flex.markDirty()
         }
     }
     
