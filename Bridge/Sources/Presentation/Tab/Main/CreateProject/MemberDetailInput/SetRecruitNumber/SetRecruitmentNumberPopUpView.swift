@@ -108,9 +108,11 @@ final class SetRecruitmentNumberPopUpView: BaseView {
 
     // MARK: - Bind
     override func bind() {
-        pickerView.rx.itemSelected.asDriver()
-            .drive(onNext: { [weak self] _ in
-                self?.completeButton.isEnabled = true
+        pickerView.rx.itemSelected
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.completeButton.isEnabled = true
             })
             .disposed(by: disposeBag)
     }

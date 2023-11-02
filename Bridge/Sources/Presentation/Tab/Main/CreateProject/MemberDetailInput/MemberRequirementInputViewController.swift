@@ -204,21 +204,26 @@ final class MemberRequirementInputViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         // 모집인원 선택 팝업 뷰 보여주기
-        setRecruitNumberButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] _ in
-                self?.setRecruitmentNumberView.show()
+        setRecruitNumberButton.rx.tap
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.setRecruitmentNumberView.show()
             })
             .disposed(by: disposeBag)
         
         // 기술태그 추가 팝업 뷰 보여주기
-        addTechStackButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] _ in
-                self?.addTechTagPopUpView.show()
+        addTechStackButton.rx.tap
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.addTechTagPopUpView.show()
             })
             .disposed(by: disposeBag)
         
         // 키보드에 맞춰 뷰 이동
         scrollView.rx.keyboardLayoutChanged
+            .observe(on: MainScheduler.instance)
             .bind(to: scrollView.rx.yPosition)
             .disposed(by: disposeBag)
     }

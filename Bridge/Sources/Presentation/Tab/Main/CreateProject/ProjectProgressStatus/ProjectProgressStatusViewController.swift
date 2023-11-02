@@ -189,12 +189,13 @@ final class ProjectProgressStatusViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         // Dropdown이 사라질 때, 버튼의 스타일도 원상복구
-        progressStepDropdown.willHide.asDriver(onErrorJustReturn: ())
-            .drive(onNext: { [weak self] in
-                self?.progressStepAnchorView.isActive = false
+        progressStepDropdown.willHide
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.progressStepAnchorView.isActive = false
             })
             .disposed(by: disposeBag)
-        
     }
 }
 

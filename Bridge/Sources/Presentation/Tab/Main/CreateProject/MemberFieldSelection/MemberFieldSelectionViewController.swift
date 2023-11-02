@@ -146,10 +146,12 @@ final class MemberFieldSelectionViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        scrollView.rx.contentOffset.asDriver()
-            .drive(onNext: { [weak self] offSet in
+        scrollView.rx.contentOffset
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, offSet in
                 let shouldHidden = offSet.y > 0
-                self?.dividerView.isHidden = !shouldHidden
+                owner.dividerView.isHidden = !shouldHidden
             })
             .disposed(by: disposeBag)
     }

@@ -174,23 +174,29 @@ final class ProjectDatePickerViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         // 모집 마감일 선택 팝업 뷰 보여주기
-        setDeadlineButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] _ in
-                self?.datePickerPopUpView.show(for: .deadline)
+        setDeadlineButton.rx.tap
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.datePickerPopUpView.show(for: .deadline)
             })
             .disposed(by: disposeBag)
         
         // 시작일 선택 팝업 뷰 보여주기
-        setStartDateButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] _ in
-                self?.datePickerPopUpView.show(for: .start)
+        setStartDateButton.rx.tap
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.datePickerPopUpView.show(for: .start)
             })
             .disposed(by: disposeBag)
         
         // 완료일 선택 팝업 뷰 보여주기
-        setEndDateButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] _ in
-                self?.datePickerPopUpView.show(for: .end)
+        setEndDateButton.rx.tap
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.datePickerPopUpView.show(for: .end)
             })
             .disposed(by: disposeBag)
     }

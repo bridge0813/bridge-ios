@@ -173,31 +173,31 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         
         // TextView 플레이스홀더 구현
         descriptionTextView.rx.didBeginEditing
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                guard let self else { return }
-                
-                if self.descriptionTextView.text == "프로젝트에 대해 소개해 주세요." {
-                    self.descriptionTextView.text = nil
-                    self.descriptionTextView.textColor = BridgeColor.gray1
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                if owner.descriptionTextView.text == "프로젝트에 대해 소개해 주세요." {
+                    owner.descriptionTextView.text = nil
+                    owner.descriptionTextView.textColor = BridgeColor.gray1
                 }
             })
             .disposed(by: disposeBag)
         
+        
         descriptionTextView.rx.didEndEditing
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                guard let self else { return }
-                
-                if self.descriptionTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    self.descriptionTextView.text = "프로젝트에 대해 소개해 주세요."
-                    self.descriptionTextView.textColor = BridgeColor.gray4
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                if owner.descriptionTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    owner.descriptionTextView.text = "프로젝트에 대해 소개해 주세요."
+                    owner.descriptionTextView.textColor = BridgeColor.gray4
                 }
             })
             .disposed(by: disposeBag)
         
         // 키보드 반응 구현
         contentContainer.rx.keyboardLayoutChanged
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, keyboardHeight in
                 UIView.animate(withDuration: 0.3) {
