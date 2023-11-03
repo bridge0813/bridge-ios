@@ -56,7 +56,7 @@ final class DatePickerPopUpView: BasePopUpView {
     
     // MARK: - Layout
     override func configureLayouts() {
-        addSubview(rootFlexContainer)
+        super.configureLayouts()
         
         rootFlexContainer.flex.define { flex in
             flex.addItem(dragHandleBar).alignSelf(.center).width(27).height(5).marginTop(10)
@@ -74,8 +74,6 @@ final class DatePickerPopUpView: BasePopUpView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.below(of: self).width(100%).height(547)
-        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Bind
