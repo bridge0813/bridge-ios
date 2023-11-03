@@ -78,6 +78,7 @@ final class AddTechTagPopUpView: BasePopUpView {
                 return owner.selectedTags
             }
             .distinctUntilChanged()
+            .share()
     }
     
     // MARK: - Layout

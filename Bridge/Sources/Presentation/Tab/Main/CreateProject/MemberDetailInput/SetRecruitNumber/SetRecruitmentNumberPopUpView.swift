@@ -35,6 +35,7 @@ final class SetRecruitmentNumberPopUpView: BasePopUpView {
                 return selectedRow + 1
             }
             .distinctUntilChanged()
+            .share()
     }
     
     // MARK: - Layout
