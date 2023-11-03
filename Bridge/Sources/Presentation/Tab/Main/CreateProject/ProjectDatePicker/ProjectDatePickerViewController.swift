@@ -178,7 +178,7 @@ final class ProjectDatePickerViewController: BaseViewController {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.datePickerPopUpView.show(for: .deadline)
+                owner.datePickerPopUpView.setDateType = .deadline
             })
             .disposed(by: disposeBag)
         
@@ -187,7 +187,7 @@ final class ProjectDatePickerViewController: BaseViewController {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.datePickerPopUpView.show(for: .start)
+                owner.datePickerPopUpView.setDateType = .start
             })
             .disposed(by: disposeBag)
         
@@ -196,7 +196,7 @@ final class ProjectDatePickerViewController: BaseViewController {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.datePickerPopUpView.show(for: .end)
+                owner.datePickerPopUpView.setDateType = .end
             })
             .disposed(by: disposeBag)
     }
