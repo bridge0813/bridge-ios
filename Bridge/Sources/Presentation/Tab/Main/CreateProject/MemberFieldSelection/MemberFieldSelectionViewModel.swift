@@ -63,11 +63,8 @@ final class MemberFieldSelectionViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.dataStorage.removeAllMemberRequirements()
-                
-                owner.coordinator?.showMemberRequirementInputViewController(
-                    with: selectedFields
-                )
+                owner.dataStorage.removeAllMemberRequirements()  // 기존에 저장되었던 데이터 제거.
+                owner.coordinator?.showMemberRequirementInputViewController(with: selectedFields)
             })
             .disposed(by: disposeBag)
         

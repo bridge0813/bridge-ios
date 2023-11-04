@@ -30,7 +30,6 @@ final class MemberRequirementInputViewModel: ViewModelType {
     private weak var coordinator: CreateProjectCoordinator?
     
     private var selectedFields: [String]
-    private var memberRequirement = MemberRequirement(field: "", recruitNumber: 0, requiredSkills: [], expectation: "")
     private let dataStorage: ProjectDataStorage
     
     // MARK: - Initializer
@@ -46,37 +45,38 @@ final class MemberRequirementInputViewModel: ViewModelType {
     
     // MARK: - Methods
     func transform(input: Input) -> Output {
+        var requirement = MemberRequirement(field: "", recruitNumber: 0, requiredSkills: [], expectation: "")
+        
         let selectedField = input.viewDidLoad
             .withUnretained(self)
             .map { owner, _ in
-                let field = owner.selectedFields[0]
-                owner.selectedFields.removeFirst()
-                owner.memberRequirement.field = field
+                let field = owner.selectedFields[0]  // 선택된 분야 가져오기
+                owner.selectedFields.removeFirst()   // 선택한 분야는 저장소에서 제거
+                requirement.field = field
                 
                 return FieldTagType(from: field).rawValue
             }
         
         let recruitNumber = input.recruitNumber
-            .do(onNext: { [weak self] number in
-                self?.memberRequirement.recruitNumber = number
+            .do(onNext: { number in
+                requirement.recruitNumber = number
             })
             
         let techTags = input.techTags
-            .do(onNext: { [weak self] tags in
-                self?.memberRequirement.requiredSkills = tags
+            .do(onNext: { tags in
+                requirement.requiredSkills = tags
             })
             
         input.requirementText
-            .withUnretained(self)
-            .subscribe(onNext: { owner, text in
-                owner.memberRequirement.expectation = text
+            .subscribe(onNext: { text in
+                requirement.expectation = text
             })
             .disposed(by: disposeBag)
                 
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.dataStorage.updateMemberRequirements(with: owner.memberRequirement)
+                owner.dataStorage.updateMemberRequirements(with: requirement)
                 
                 if owner.selectedFields.isEmpty {
                     owner.coordinator?.showApplicantRestrictionViewController()
