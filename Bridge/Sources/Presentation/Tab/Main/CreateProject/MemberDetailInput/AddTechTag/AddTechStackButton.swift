@@ -12,19 +12,13 @@ import FlexLayout
 final class AddTechStackButton: BaseButton {
     
     var isAdded: Bool = false {
-        willSet {
-            if newValue { updateConfigurationForEdit() }
-            else { updateConfigurationForAdd() }
+        didSet {
+            updateConfigurationForEdit()
             flex.markDirty()
         }
     }
     
     override func configureAttributes() {
-        updateConfigurationForAdd()
-    }
-    
-    // 추가된 스택이 없을 경우
-    private func updateConfigurationForAdd() {
         let buttonImage = UIImage(named: "plus")?
             .resize(to: CGSize(width: 14, height: 14))
             .withRenderingMode(.alwaysTemplate)
@@ -48,16 +42,10 @@ final class AddTechStackButton: BaseButton {
     
     // 추가된 스택이 있을 경우
     private func updateConfigurationForEdit() {
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = .clear
-        configuration.baseForegroundColor = BridgeColor.primary1
-        configuration.contentInsets = .zero
-    
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.body1.font
         titleContainer.foregroundColor = BridgeColor.primary1
-        configuration.attributedTitle = AttributedString("수정", attributes: titleContainer)
-        
-        self.configuration = configuration
+        configuration?.attributedTitle = AttributedString("수정", attributes: titleContainer)
+        configuration?.image = nil
     }
 }

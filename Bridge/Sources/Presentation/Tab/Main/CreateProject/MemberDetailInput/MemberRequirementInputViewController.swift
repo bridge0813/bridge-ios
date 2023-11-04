@@ -198,7 +198,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         // 기술태그 선택완료 이벤트.
         output.techTags
             .drive(onNext: { [weak self] tagNames in
-                self?.addTechStackButton.isAdded = !tagNames.isEmpty
+                self?.addTechStackButton.isAdded = true
                 self?.addedTechTagView.tagNames = tagNames
                 self?.view.setNeedsLayout()
             })
