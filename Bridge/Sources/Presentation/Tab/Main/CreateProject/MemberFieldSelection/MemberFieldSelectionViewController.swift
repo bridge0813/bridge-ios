@@ -146,11 +146,13 @@ final class MemberFieldSelectionViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        // 구분선 등장
         scrollView.rx.contentOffset
+            .map { $0.y > 0 }
+            .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { owner, offSet in
-                let shouldHidden = offSet.y > 0
+            .subscribe(onNext: { owner, shouldHidden in
                 owner.dividerView.isHidden = !shouldHidden
             })
             .disposed(by: disposeBag)

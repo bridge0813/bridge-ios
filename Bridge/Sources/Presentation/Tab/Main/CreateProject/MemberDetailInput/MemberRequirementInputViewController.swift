@@ -18,6 +18,14 @@ final class MemberRequirementInputViewController: BaseViewController {
    
     private let progressView = BridgeProgressView(0.4)
     
+    private let dividerView: UIView = {
+        let divider = UIView()
+        divider.backgroundColor = BridgeColor.gray6
+        divider.isHidden = true
+        
+        return divider
+    }()
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .clear
@@ -120,19 +128,20 @@ final class MemberRequirementInputViewController: BaseViewController {
         view.addSubview(rootFlexContainer)
         scrollView.addSubview(contentContainer)
         
-        rootFlexContainer.flex.justifyContent(.spaceBetween).marginHorizontal(16).define { flex in
+        rootFlexContainer.flex.justifyContent(.spaceBetween).define { flex in
             // grow(1)로 레이아웃을 배치하면, height가 원활하게 잡히지 않고 화면 밖을 벗어나는 문제가 발생.(디바이스)
-            flex.addItem(scrollView).position(.absolute).width(100%).top(26).bottom(101)
+            flex.addItem(scrollView).position(.absolute).width(100%).top(35).bottom(101)
             
-            flex.addItem().backgroundColor(BridgeColor.gray10).height(16).justifyContent(.end).define { flex in
-                flex.addItem(progressView).height(6)
+            flex.addItem().backgroundColor(BridgeColor.gray10).height(35).define { flex in
+                flex.addItem(progressView).height(6).marginTop(10).marginHorizontal(16)
+                flex.addItem(dividerView).height(1).marginTop(18)
             }
             
-            flex.addItem(nextButton).height(52).marginBottom(24)
+            flex.addItem(nextButton).height(52).marginBottom(24).marginHorizontal(16)
         }
         
-        contentContainer.flex.define { flex in
-            flex.addItem(descriptionLabel).width(187).height(60).marginTop(30)
+        contentContainer.flex.paddingHorizontal(16).define { flex in
+            flex.addItem(descriptionLabel).width(187).height(60).marginTop(21)
             flex.addItem(fieldTagButton).alignSelf(.start).marginTop(40)
             
             flex.addItem(recruitLabel).width(60).height(24).marginTop(20)
@@ -223,6 +232,17 @@ final class MemberRequirementInputViewController: BaseViewController {
         scrollView.rx.keyboardLayoutChanged
             .observe(on: MainScheduler.instance)
             .bind(to: scrollView.rx.yPosition)
+            .disposed(by: disposeBag)
+        
+        // 구분선 등장
+        scrollView.rx.contentOffset
+            .map { $0.y > 0 }
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, shouldHidden in
+                owner.dividerView.isHidden = !shouldHidden
+            })
             .disposed(by: disposeBag)
     }
 }

@@ -18,6 +18,14 @@ final class ProjectDatePickerViewController: BaseViewController {
     
     private let progressView = BridgeProgressView(0.6)
     
+    private let dividerView: UIView = {
+        let divider = UIView()
+        divider.backgroundColor = BridgeColor.gray6
+        divider.isHidden = true
+        
+        return divider
+    }()
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .clear
@@ -111,20 +119,21 @@ final class ProjectDatePickerViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         scrollView.addSubview(contentContainer)
-        
-        rootFlexContainer.flex.marginHorizontal(16).define { flex in
-            flex.addItem(progressView).height(6).marginTop(10)
+       
+        rootFlexContainer.flex.define { flex in
+            flex.addItem(progressView).height(6).marginTop(10).marginHorizontal(16)
+            flex.addItem(dividerView).height(1).marginTop(18)
             
             flex.addItem().grow(1)
             
             // grow(1)로 레이아웃을 배치하면, height가 원활하게 잡히지 않고 화면 밖을 벗어나는 문제가 발생.(디바이스)
-            flex.addItem(scrollView).position(.absolute).width(100%).top(36).bottom(91)
+            flex.addItem(scrollView).position(.absolute).width(100%).top(35).bottom(91)
             
-            flex.addItem(nextButton).height(52).marginBottom(24)
+            flex.addItem(nextButton).height(52).marginBottom(24).marginHorizontal(16)
         }
         
-        contentContainer.flex.define { flex in
-            flex.addItem(descriptionLabel).width(190).height(60).marginTop(20)
+        contentContainer.flex.paddingHorizontal(16).define { flex in
+            flex.addItem(descriptionLabel).width(190).height(60).marginTop(21)
             flex.addItem(tipMessageBox).height(38).marginTop(16)
             
             flex.addItem(deadlineLabel).width(73).height(24).marginTop(40)
@@ -197,6 +206,17 @@ final class ProjectDatePickerViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.datePickerPopUpView.setDateType = .end
+            })
+            .disposed(by: disposeBag)
+        
+        // 구분선 등장
+        scrollView.rx.contentOffset
+            .map { $0.y > 0 }
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, shouldHidden in
+                owner.dividerView.isHidden = !shouldHidden
             })
             .disposed(by: disposeBag)
     }
