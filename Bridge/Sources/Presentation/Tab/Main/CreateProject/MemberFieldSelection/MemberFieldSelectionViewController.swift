@@ -16,6 +16,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
     // MARK: - UI
     private lazy var dismissButton: UIBarButtonItem = {
         let image = UIImage(named: "xmark")?.resize(to: CGSize(width: 24, height: 24))
+            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0))
         let button = UIBarButtonItem(
             image: image,
             style: .done,
