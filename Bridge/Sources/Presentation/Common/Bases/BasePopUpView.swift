@@ -131,7 +131,6 @@ class BasePopUpView: BaseView {
             animations: { [weak self] in
                 guard let self else { return }
                 self.rootFlexContainer.transform = .identity
-                print(#function)
                 
             }, completion: { [weak self] _ in
                 guard let self else { return }

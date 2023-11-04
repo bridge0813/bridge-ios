@@ -31,12 +31,8 @@ final class AddTechTagPopUpView: BasePopUpView {
     /// willSet - 데이터소스를 결정 할 타입을 저장
     /// didSet - 데이터소스를 바인딩하여 CollectionView Cell을 구현(CollectionViewDataSource 역할)
     var field = String() {
-        willSet {
-            fieldType = FieldTagType(rawValue: newValue) ?? .ios
-        }
-        
         didSet {
-            Observable.of(fieldType.dataSource)
+            Observable.of(TechStack(rawValue: field)?.techStacks ?? [])
                 .bind(
                     to: collectionView.rx.items(
                         cellIdentifier: TechTagCell.reuseIdentifier,
@@ -67,7 +63,6 @@ final class AddTechTagPopUpView: BasePopUpView {
         }
     }
     
-    private var fieldType: FieldTagType = .ios  // 선택된 분야에 맞게 데이터소스를 결정
     private var selectedTags: [String] = []     // 선택한 기술태그를 저장
     
     var completeButtonTapped: Observable<[String]> {
@@ -135,36 +130,34 @@ extension AddTechTagPopUpView {
 }
 
 // MARK: - Data
-extension AddTechTagPopUpView {
-    /// 선택한 분야를 입력받으면, 맵핑하여 데이터소스를 사용하기 위함.
-    enum FieldTagType: String {
-        case ios = "iOS"
-        case android = "안드로이드"
-        case frontend = "프론트엔드"
-        case backend = "백엔드"
-        case uiux = "UI/UX"
-        case bibx = "BI/BX"
-        case videomotion = "영상/모션"
-        case pm = "PM"
-        
-        var dataSource: [String] {
-            switch self {
-            case .ios: return ["Swift", "Objective-C", "UIKit", "SwiftUI", "RxSwift", "Combine", "XCTest", "Tuist", "React Native", "Flutter"]
-                
-            case .android: return ["Kotlin", "Java", "Compose", "RxJava", "Coroutine", "Flutter", "React Native"]
-                
-            case .frontend: return ["Javascript", "TypeScript", "HTML", "CSS", "React", "React Native", "Vue", "Angular", "Svelte", "Jquery", "Backbone", "Pinia"]
-                
-            case .backend: return ["Java", "Javascript", "Python", "TypeScript", "C", "C++", "Kotlin", "Spring", "Springboot", "Nodejs", "Django", "Hibernate", "WebRTC", "MongoDB", "MySQL", "PostgreSQL", "Redis", "Maria DB", "H2"]
-                
-            case .uiux: return ["photoshop", "illustrator", "indesign", "adobe XD", "Figma", "Sketch", "Adobe flash"]
-                
-            case .bibx: return ["photoshop", "illustrator", "indesign", "adobe XD", "Figma", "Sketch", "Adobe flash"]
-                
-            case .videomotion: return ["photoshop", "illustrator", "indesign", "adobe XD", "Figma", "Sketch", "Adobe flash"]
-                
-            case .pm: return ["Notion", "Jira", "Slack"]
-            }
+/// 선택한 분야에 맞는 기술스택을 return
+enum TechStack: String {
+    case ios = "iOS"
+    case android = "안드로이드"
+    case frontend = "프론트엔드"
+    case backend = "백엔드"
+    case uiux = "UI/UX"
+    case bibx = "BI/BX"
+    case videomotion = "영상/모션"
+    case pm = "PM"
+    
+    var techStacks: [String] {
+        switch self {
+        case .ios: return ["Swift", "Objective-C", "UIKit", "SwiftUI", "RxSwift", "Combine", "XCTest", "Tuist", "React Native", "Flutter"]
+            
+        case .android: return ["Kotlin", "Java", "Compose", "RxJava", "Coroutine", "Flutter", "React Native"]
+            
+        case .frontend: return ["Javascript", "TypeScript", "HTML", "CSS", "React", "React Native", "Vue", "Angular", "Svelte", "Jquery", "Backbone", "Pinia"]
+            
+        case .backend: return ["Java", "Javascript", "Python", "TypeScript", "C", "C++", "Kotlin", "Spring", "Springboot", "Nodejs", "Django", "Hibernate", "WebRTC", "MongoDB", "MySQL", "PostgreSQL", "Redis", "Maria DB", "H2"]
+            
+        case .uiux, .bibx, .videomotion: return designTechStacks
+            
+        case .pm: return ["Notion", "Jira", "Slack"]
         }
+    }
+    
+    private var designTechStacks: [String] {
+        return ["photoshop", "illustrator", "indesign", "adobe XD", "Figma", "Sketch", "Adobe flash"]
     }
 }
