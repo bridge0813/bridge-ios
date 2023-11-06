@@ -16,10 +16,10 @@ extension ChatEndpoint: Endpoint {
     var path: String {
         switch self {
         case .chatRooms(let userID):    
-            return "/chatRooms/\(userID)"
+            return "/chat/\(userID)"
             
         case .leaveChatRoom(chatRoomID: let chatRoomID):
-            return "/chatRooms/\(chatRoomID)"
+            return "/chat/\(chatRoomID)"
         }
     }
     

@@ -22,7 +22,7 @@ protocol Endpoint {
 
 extension Endpoint {
     var baseURL: URL? {
-        URL(string: " http://54.180.195.17:8080/")
+        URL(string: "http://54.180.195.17:8080")
     }
     
     var headers: HTTPHeaders {
