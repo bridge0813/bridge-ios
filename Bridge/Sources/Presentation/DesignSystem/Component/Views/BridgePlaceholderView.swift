@@ -11,7 +11,11 @@ import PinLayout
 
 final class BridgePlaceholderView: BaseView {
     
-    private let rootFlexContainer = UIView()
+    private let rootFlexContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = BridgeColor.gray09
+        return view
+    }()
     
     private let emojiImageView: UIImageView = {
         let imageView = UIImageView()
