@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 모집인원을 선택하는 뷰
-final class SetRecruitmentNumberPopUpView: BasePopUpView {
+final class SetRecruitmentNumberPopUpView: BridgeBasePopUpView {
     // MARK: - UI
     private lazy var pickerView: UIPickerView = {
         let picker = UIPickerView()

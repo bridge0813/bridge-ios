@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 기술스택을 추가하는 뷰
-final class AddTechTagPopUpView: BasePopUpView {
+final class AddTechTagPopUpView: BridgeBasePopUpView {
     // MARK: - UI
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())

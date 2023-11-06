@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 날짜를 설정해주는 뷰
-final class DatePickerPopUpView: BasePopUpView {
+final class DatePickerPopUpView: BridgeBasePopUpView {
     // MARK: - UI
     private let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()

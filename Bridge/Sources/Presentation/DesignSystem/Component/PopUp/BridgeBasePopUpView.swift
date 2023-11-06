@@ -1,5 +1,5 @@
 //
-//  BasePopUpView.swift
+//  BridgeBasePopUpView.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/11/03.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-class BasePopUpView: BaseView {
+class BridgeBasePopUpView: BaseView {
     // MARK: - UI
     let rootFlexContainer: UIView = {
         let view = UIView()
