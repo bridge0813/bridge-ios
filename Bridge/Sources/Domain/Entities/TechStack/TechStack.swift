@@ -28,13 +28,13 @@ enum TechStack: String {
             
         case .backend: return ["Java", "Javascript", "Python", "TypeScript", "C", "C++", "Kotlin", "Spring", "Springboot", "Nodejs", "Django", "Hibernate", "WebRTC", "MongoDB", "MySQL", "PostgreSQL", "Redis", "Maria DB", "H2"]
             
-        case .uiux, .bibx, .videomotion: return designTechStacks
+        case .uiux: return ["photoshop", "illustrator", "indesign", "adobe XD", "Figma", "Sketch", "Adobe flash"]
+            
+        case .bibx: return ["photoshop", "illustrator", "indesign", "adobe XD", "Figma", "Sketch", "Adobe flash"]
+            
+        case .videomotion: return ["photoshop", "illustrator", "indesign", "adobe XD", "Figma", "Sketch", "Adobe flash"]
             
         case .pm: return ["Notion", "Jira", "Slack"]
         }
-    }
-    
-    private var designTechStacks: [String] {
-        return ["photoshop", "illustrator", "indesign", "adobe XD", "Figma", "Sketch", "Adobe flash"]
     }
 }
