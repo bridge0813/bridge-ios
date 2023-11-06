@@ -230,7 +230,6 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         // 키보드에 맞춰 뷰 이동
         scrollView.rx.keyboardLayoutChanged
-            .observe(on: MainScheduler.instance)
             .bind(to: scrollView.rx.yPosition)
             .disposed(by: disposeBag)
         
