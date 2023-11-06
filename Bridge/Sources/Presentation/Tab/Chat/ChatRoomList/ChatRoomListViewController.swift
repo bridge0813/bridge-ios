@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 final class ChatRoomListViewController: BaseViewController {
-    
+    // MARK: - UI
     private let rootFlexContainer = UIView()
     
     private lazy var chatRoomListTableView: UITableView = {
@@ -25,6 +25,7 @@ final class ChatRoomListViewController: BaseViewController {
     
     private var placeholderView = BridgePlaceholderView()
     
+    // MARK: - Property
     private typealias DataSource = UITableViewDiffableDataSource<ChatRoomListViewModel.Section, ChatRoom>
     private typealias Snapshot = NSDiffableDataSourceSnapshot<ChatRoomListViewModel.Section, ChatRoom>
     private var dataSource: DataSource?
@@ -32,17 +33,18 @@ final class ChatRoomListViewController: BaseViewController {
     private let viewModel: ChatRoomListViewModel
     private let leaveChatRoom = PublishRelay<Int>()
     
+    // MARK: - Init
     init(viewModel: ChatRoomListViewModel) {
         self.viewModel = viewModel
         super.init()
     }
     
-    // MARK: - Lifecycles
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    // MARK: - Configurations
+    // MARK: - Configuration
     override func configureAttributes() {
         navigationItem.title = "채팅"
         configureDataSource()
