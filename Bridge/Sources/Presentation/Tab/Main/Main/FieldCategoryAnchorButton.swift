@@ -22,7 +22,7 @@ final class FieldCategoryAnchorButton: BaseButton {
         
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.subtitle1.font
-        titleContainer.foregroundColor = BridgeColor.gray1
+        titleContainer.foregroundColor = BridgeColor.gray01
         configuration.attributedTitle = AttributedString("UI/UX", attributes: titleContainer)
         
         self.configuration = configuration
@@ -36,7 +36,7 @@ extension FieldCategoryAnchorButton {
         
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.subtitle1.font
-        titleContainer.foregroundColor = BridgeColor.gray1
+        titleContainer.foregroundColor = BridgeColor.gray01
         updatedConfiguration?.attributedTitle = AttributedString(newTitle, attributes: titleContainer)
         
         configuration = updatedConfiguration

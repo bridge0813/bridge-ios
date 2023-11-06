@@ -15,7 +15,7 @@ final class RestrictionDropdownAnchorView: BaseView {
     private let restrictionOptionLabel: UILabel = {
         let label = UILabel()
         label.text = "제한 없음"
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.font = BridgeFont.button2.font
         
         return label

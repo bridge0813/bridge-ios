@@ -17,7 +17,7 @@ final class ProjectCountHeaderView: BaseCollectionReusableView {
     private let projectCountLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body4.font
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         
         return label
     }()

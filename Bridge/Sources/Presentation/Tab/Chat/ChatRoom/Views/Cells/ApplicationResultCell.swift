@@ -59,7 +59,7 @@ private extension ApplicationResultCell {
     func configureMessageLabel(with message: Message) {
         switch message.sender {
         case .me:       messageLabel.textColor = BridgeColor.gray10
-        case .opponent: messageLabel.textColor = BridgeColor.gray1
+        case .opponent: messageLabel.textColor = BridgeColor.gray01
         }
         
         switch message.type {

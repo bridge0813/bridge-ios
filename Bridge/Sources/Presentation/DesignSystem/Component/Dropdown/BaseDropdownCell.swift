@@ -17,7 +17,7 @@ class BaseDropdownCell: BaseTableViewCell {
     
     let optionLabel: UILabel = {
         let label = UILabel()
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.font = BridgeFont.button2.font
         
         return label

@@ -25,7 +25,7 @@ final class BridgeTechTagButton: BaseButton {
         
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.tag1.font
-        titleContainer.foregroundColor = BridgeColor.gray2
+        titleContainer.foregroundColor = BridgeColor.gray02
         configuration.attributedTitle = AttributedString(title, attributes: titleContainer)
         
         self.configuration = configuration

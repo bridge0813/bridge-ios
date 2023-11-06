@@ -26,7 +26,7 @@ final class ChatRoomCell: BaseTableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
@@ -34,14 +34,14 @@ final class ChatRoomCell: BaseTableViewCell {
     private let lastMessageReceivedTimeLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.caption1.font
-        label.textColor = BridgeColor.gray4
+        label.textColor = BridgeColor.gray04
         return label
     }()
     
     private let lastMessageContentLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2Long.font
-        label.textColor = BridgeColor.gray2
+        label.textColor = BridgeColor.gray02
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
@@ -50,7 +50,7 @@ final class ChatRoomCell: BaseTableViewCell {
         let label = UILabel()
         label.backgroundColor = .systemRed
         label.font = BridgeFont.caption1.font
-        label.textColor = BridgeColor.gray9
+        label.textColor = BridgeColor.gray09
         label.textAlignment = .center
         label.clipsToBounds = true
         return label
@@ -88,7 +88,7 @@ final class ChatRoomCell: BaseTableViewCell {
                 flex.addItem(unreadMessageCountLabel).marginHorizontal(16)
             }
             
-            flex.addItem().height(1).backgroundColor(BridgeColor.gray6)  // divider
+            flex.addItem().height(1).backgroundColor(BridgeColor.gray06)  // divider
         }
     }
     

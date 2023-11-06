@@ -22,7 +22,7 @@ final class MainViewController: BaseViewController {
     
     private let placeholderView: PlaceholderView = {
         let placeholderView = PlaceholderView()
-        placeholderView.backgroundColor = BridgeColor.gray9
+        placeholderView.backgroundColor = BridgeColor.gray09
         placeholderView.isHidden = true
         
         return placeholderView
@@ -33,7 +33,7 @@ final class MainViewController: BaseViewController {
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = BridgeColor.gray9
+        collectionView.backgroundColor = BridgeColor.gray09
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ProjectCell.self)
         collectionView.register(HotProjectCell.self)

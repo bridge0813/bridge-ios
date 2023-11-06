@@ -57,7 +57,7 @@ private extension MessageCell {
         
         switch message.sender {
         case .me:       messageLabel.textColor = BridgeColor.gray10
-        case .opponent: messageLabel.textColor = BridgeColor.gray1
+        case .opponent: messageLabel.textColor = BridgeColor.gray01
         }
     }
 }

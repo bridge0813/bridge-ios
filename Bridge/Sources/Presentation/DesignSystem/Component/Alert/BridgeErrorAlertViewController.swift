@@ -30,14 +30,14 @@ final class BridgeErrorAlertViewController: BaseViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         return label
     }()
     
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2Long.font
-        label.textColor = BridgeColor.gray2
+        label.textColor = BridgeColor.gray02
         label.numberOfLines = 0
         return label
     }()

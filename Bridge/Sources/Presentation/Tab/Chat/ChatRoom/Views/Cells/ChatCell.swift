@@ -16,7 +16,7 @@ class ChatCell: BaseCollectionViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.font = BridgeFont.caption1.font
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         return label
     }()
     
@@ -29,7 +29,7 @@ class ChatCell: BaseCollectionViewCell {
     private let timeLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.caption1.font
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         return label
     }()
     

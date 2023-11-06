@@ -16,7 +16,7 @@ final class BridgeSetFieldView: BaseView {
         let label = UILabel()
         label.text = "개발자"
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         return label
     }()
     
@@ -29,7 +29,7 @@ final class BridgeSetFieldView: BaseView {
         let label = UILabel()
         label.text = "디자이너"
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         return label
     }()
     
@@ -41,7 +41,7 @@ final class BridgeSetFieldView: BaseView {
         let label = UILabel()
         label.text = "기획자"
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         return label
     }()
     

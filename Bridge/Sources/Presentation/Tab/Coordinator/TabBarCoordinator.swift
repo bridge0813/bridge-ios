@@ -104,9 +104,9 @@ private extension TabBarCoordinator {
         navigationBarAppearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
         navigationBarAppearance.titleTextAttributes = [
             .font: BridgeFont.subtitle1.font,
-            .foregroundColor: BridgeColor.gray1
+            .foregroundColor: BridgeColor.gray01
         ]
-        navigationBarAppearance.shadowColor = BridgeColor.gray6
+        navigationBarAppearance.shadowColor = BridgeColor.gray06
         UINavigationBar.appearance().tintColor = .black
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance

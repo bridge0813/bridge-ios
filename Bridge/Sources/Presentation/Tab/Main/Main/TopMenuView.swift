@@ -21,9 +21,9 @@ final class TopMenuView: BaseView {
             bottomOffset: CGPoint(x: 10, y: 0),
             dataSource: ["UI/UX", "전체"],
             cellHeight: 46,
-            itemTextColor: BridgeColor.gray3,
+            itemTextColor: BridgeColor.gray03,
             itemTextFont: BridgeFont.body2.font,
-            selectedItemTextColor: BridgeColor.gray1,
+            selectedItemTextColor: BridgeColor.gray01,
             dimmedBackgroundColor: .black.withAlphaComponent(0.3),
             width: 147,
             cornerRadius: 4
@@ -52,7 +52,7 @@ final class TopMenuView: BaseView {
 
     let dividerView: UIView = {
         let divider = UIView()
-        divider.backgroundColor = BridgeColor.gray6
+        divider.backgroundColor = BridgeColor.gray06
         divider.isHidden = true
         
         return divider

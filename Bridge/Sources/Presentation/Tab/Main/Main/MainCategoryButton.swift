@@ -30,14 +30,14 @@ final class MainCategoryButton: BaseButton {
         
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.body3.font
-        titleContainer.foregroundColor = BridgeColor.gray3
+        titleContainer.foregroundColor = BridgeColor.gray03
         configuration.attributedTitle = AttributedString(style.title, attributes: titleContainer)
         
         self.configuration = configuration
         configurationUpdateHandler = { [weak self] button in
             guard let self else { return }
             
-            let textColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray3
+            let textColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray03
             let imageName: String = button.state == .selected ? self.style.selectedImageName : self.style.normalImageName
             
             let buttonImage = UIImage(named: imageName)?.resize(to: CGSize(width: 46, height: 46))

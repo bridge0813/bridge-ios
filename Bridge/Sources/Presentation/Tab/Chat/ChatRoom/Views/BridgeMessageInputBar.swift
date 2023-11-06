@@ -21,7 +21,7 @@ final class BridgeMessageInputBar: BaseView {
     private let messageInputTextView: UITextView = {
         let textView = UITextView()
         textView.font = BridgeFont.body2Long.font
-        textView.textColor = BridgeColor.gray1
+        textView.textColor = BridgeColor.gray01
         return textView
     }()
     

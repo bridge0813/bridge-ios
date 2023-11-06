@@ -21,7 +21,7 @@ class BridgeMessageBox: BaseView {
     let messageLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.caption1.font
-        label.textColor = BridgeColor.gray2
+        label.textColor = BridgeColor.gray02
         label.textAlignment = .left
         return label
     }()

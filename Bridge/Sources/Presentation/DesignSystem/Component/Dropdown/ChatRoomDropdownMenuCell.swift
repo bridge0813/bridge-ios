@@ -13,7 +13,7 @@ final class ChatRoomDropdownMenuCell: BaseDropdownCell {
     // MARK: - UI
     private lazy var optionImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.tintColor = BridgeColor.gray3
+        imageView.tintColor = BridgeColor.gray03
         return imageView
     }()
     

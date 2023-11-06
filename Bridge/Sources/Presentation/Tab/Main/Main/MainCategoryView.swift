@@ -40,7 +40,7 @@ final class MainCategoryView: BaseView {
             }
             
             flex.addItem().grow(1)
-            flex.addItem().height(1).backgroundColor(BridgeColor.gray6)
+            flex.addItem().height(1).backgroundColor(BridgeColor.gray06)
         }
         
     }

@@ -18,7 +18,7 @@ final class SetFieldViewController: BaseViewController {
         let label = UILabel()
         label.configureTextWithLineHeight(text: "당신의 관심 프로젝트는\n어떤 분야인가요?", lineHeight: 30)
         label.font = BridgeFont.headline1Long.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.numberOfLines = 0
         return label
     }()
@@ -30,7 +30,7 @@ final class SetFieldViewController: BaseViewController {
     private let completeButton = BridgeButton(
         title: "관심분야 설정하기",
         font: BridgeFont.button1.font,
-        backgroundColor: BridgeColor.gray4
+        backgroundColor: BridgeColor.gray04
     )
     
     // MARK: - Init
