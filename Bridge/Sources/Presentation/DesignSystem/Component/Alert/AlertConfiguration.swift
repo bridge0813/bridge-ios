@@ -42,7 +42,7 @@ struct AlertConfiguration {
 
 extension AlertConfiguration {
     static let signIn = AlertConfiguration(
-        imageName: "graphic_signIn",
+        imageName: "graphic_sign_in",
         title: "로그인 후 사용 가능해요!",
         description: "로그인해야 사용할 수 있는 기능입니다.",
         rightButtonTitle: "로그인하기"

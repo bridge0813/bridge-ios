@@ -64,15 +64,20 @@ final class BridgePlaceholderView: BaseView {
 extension BridgePlaceholderView {
      enum PlaceholderType {
         case needSignIn
-         case error
+        case error
         case emptyChatRoom
     }
     
-    func configurePlaceholderView(for type: PlaceholderType) {
+    struct PlaceholderConfiguration {
+        let title: String
+        let description: String
+    }
+    
+    func configurePlaceholderView(for type: PlaceholderType, configuration: PlaceholderConfiguration? = nil) {
         switch type {
         case .needSignIn:
-            emojiImageView.image = UIImage(named: "graphic_signIn")
-            titleLabel.text = "로그인 후 사용가능해요!"
+            emojiImageView.image = UIImage(named: "graphic_sign_in")
+            titleLabel.text = "로그인 후 사용 가능해요!"
             descriptionLabel.text = "로그인 후 사용 가능한 기능입니다."
             
         case .error:
@@ -84,6 +89,11 @@ extension BridgePlaceholderView {
             emojiImageView.image = UIImage(named: "graphic_chat")
             titleLabel.text = "현재 채팅이 없어요!"
             descriptionLabel.text = "예비 팀원과 새로운 채팅을 시작해보세요."
+        }
+        
+        if let configuration {
+            titleLabel.text = configuration.title
+            descriptionLabel.text = configuration.description
         }
 
         emojiImageView.flex.markDirty()
