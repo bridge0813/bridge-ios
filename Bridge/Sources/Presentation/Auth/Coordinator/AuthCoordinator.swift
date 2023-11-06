@@ -20,10 +20,10 @@ final class AuthCoordinator: Coordinator {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         
-//        let networkService = DefaultNetworkService()
-//        let tokenStorage = KeychainTokenStorage()
-        authRepository = MockAuthRepository()
-//        authRepository = DefaultAuthRepository(networkService: networkService, tokenStorage: tokenStorage)
+        let networkService = DefaultNetworkService()
+        let tokenStorage = KeychainTokenStorage()
+//        authRepository = MockAuthRepository()
+        authRepository = DefaultAuthRepository(networkService: networkService, tokenStorage: tokenStorage)
         signInUseCase = DefaultSignInUseCase(authRepository: authRepository)
         signUpUseCase = DefaultSignUpUseCase(authRepository: authRepository)
     }

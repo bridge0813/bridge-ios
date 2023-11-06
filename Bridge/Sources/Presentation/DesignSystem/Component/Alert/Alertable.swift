@@ -11,8 +11,17 @@ import UIKit
 typealias PrimaryActionClosure = () -> Void
 
 protocol Alertable: AnyObject {
-    func showAlert(target: UIViewController, configuration: AlertConfiguration, primaryAction: PrimaryActionClosure?)
-    func showErrorAlert(target: UIViewController, configuration: ErrorAlertConfiguration)
+    func showAlert(
+        target: UIViewController,
+        configuration: AlertConfiguration,
+        primaryAction: PrimaryActionClosure?
+    )
+    
+    func showErrorAlert(
+        target: UIViewController,
+        configuration: ErrorAlertConfiguration,
+        primaryAction: PrimaryActionClosure?
+    )
 }
 
 extension Alertable {
@@ -23,8 +32,8 @@ extension Alertable {
         target.present(alertViewController, animated: true, completion: nil)
     }
     
-    func showErrorAlert(target: UIViewController, configuration: ErrorAlertConfiguration) {
-        let alertViewController = BridgeErrorAlertViewController(configuration: configuration)
+    func showErrorAlert(target: UIViewController, configuration: ErrorAlertConfiguration, primaryAction: PrimaryActionClosure?) {
+        let alertViewController = BridgeErrorAlertViewController(configuration: configuration, primaryAction: primaryAction)
         alertViewController.modalPresentationStyle = .overFullScreen
         alertViewController.modalTransitionStyle = .crossDissolve
         target.present(alertViewController, animated: true, completion: nil)

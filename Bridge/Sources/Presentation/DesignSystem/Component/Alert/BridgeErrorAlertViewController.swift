@@ -42,9 +42,14 @@ final class BridgeErrorAlertViewController: BaseViewController {
         return label
     }()
     
+    private var primaryAction: PrimaryActionClosure?
+    
     // MARK: - Initializer
-    init(configuration: ErrorAlertConfiguration) {
+    init(configuration: ErrorAlertConfiguration, primaryAction: PrimaryActionClosure?) {
+        self.primaryAction = primaryAction
+        
         super.init()
+        
         titleLabel.text = configuration.title
         descriptionLabel.text = configuration.description
     }
@@ -60,6 +65,10 @@ final class BridgeErrorAlertViewController: BaseViewController {
         super.viewDidAppear(animated)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
+            if let primaryAction = self?.primaryAction {
+                primaryAction()
+            }
+            
             self?.dismiss(animated: true)
         }
     }
@@ -68,6 +77,10 @@ final class BridgeErrorAlertViewController: BaseViewController {
         let location = sender.location(in: view)
         
         if backgroundView.frame.contains(location) {
+            if let primaryAction {
+                primaryAction()
+            }
+            
             dismiss(animated: true)
         }
     }
