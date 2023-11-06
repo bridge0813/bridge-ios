@@ -22,6 +22,13 @@ final class SignInViewController: BaseViewController {
         return button
     }()
     
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "logo_for_sign_in")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
     private let signInWithAppleButton: UIButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .black
@@ -30,13 +37,17 @@ final class SignInViewController: BaseViewController {
             attributes: AttributeContainer([.font: BridgeFont.button1.font, .foregroundColor: UIColor.white])
         )
         configuration.image = UIImage(systemName: "apple.logo")
-        configuration.imagePadding = 8
+        configuration.imagePadding = 12
         configuration.imagePlacement = .leading
-        return UIButton(configuration: configuration)
+        
+        let button = UIButton(configuration: configuration)
+        button.layer.cornerRadius = 6
+        return button
     }()
     
     private let viewModel: SignInViewModel
     
+    // MARK: - Init
     init(viewModel: SignInViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -47,20 +58,24 @@ final class SignInViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        configureDefaultNavigationBarAppearance()
+    }
+    
     // MARK: - Configurations
     override func configureAttributes() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
+        configureNoShadowNavigationBarAppearance()
     }
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
-        rootFlexContainer.flex
-            .justifyContent(.center)
-            .paddingHorizontal(16)
-            .define { flex in
-                flex.addItem(signInWithAppleButton).height(45)
-            }
+        rootFlexContainer.flex.justifyContent(.center).paddingHorizontal(16).define { flex in
+            flex.addItem(logoImageView).width(147).height(30).alignSelf(.center)
+            flex.addItem(signInWithAppleButton).height(45).marginTop(296)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -69,12 +84,12 @@ final class SignInViewController: BaseViewController {
         rootFlexContainer.flex.layout()
     }
     
+    // MARK: - Binding
     override func bind() {
         let input = SignInViewModel.Input(
             dismissButtonTapped: dismissButton.rx.tap.asObservable(),
             signInWithAppleButtonTapped: signInWithAppleButton.rx.tap.asObservable()
         )
-        
         _ = viewModel.transform(input: input)
     }
 }
