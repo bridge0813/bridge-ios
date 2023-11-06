@@ -6,10 +6,19 @@
 //
 
 struct SignInResponseDTO: Decodable {
-    let grantType: String       // access token type
+    let grantType: String       // access token type (Bearer)
     let accessToken: String     // 유효시간 30분
     let refreshToken: String
-    let email: String
+    var email: String?
+    let platformID: String      // 유저 고유 ID
     let isRegistered: Bool
-    let userId: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case grantType
+        case accessToken
+        case refreshToken
+        case email
+        case platformID = "platformId"
+        case isRegistered = "registered"
+    }
 }
