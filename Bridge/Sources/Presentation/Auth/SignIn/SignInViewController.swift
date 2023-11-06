@@ -73,15 +73,16 @@ final class SignInViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
-        rootFlexContainer.flex.justifyContent(.center).paddingHorizontal(16).define { flex in
-            flex.addItem(logoImageView).width(147).height(30).alignSelf(.center)
-            flex.addItem(signInWithAppleButton).height(45).marginTop(296)
+        rootFlexContainer.flex.paddingHorizontal(16).define { flex in
+            flex.addItem(logoImageView).width(147).height(30).alignSelf(.center).marginTop(224)
+            flex.addItem().grow(1)
+            flex.addItem(signInWithAppleButton).height(45).marginBottom(64)
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        rootFlexContainer.pin.all()
+        rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
     }
     
