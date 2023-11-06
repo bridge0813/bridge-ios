@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FlexLayout
+import PinLayout
 
 final class BridgePlaceholderView: BaseView {
     
@@ -13,7 +15,8 @@ final class BridgePlaceholderView: BaseView {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16)
+        label.font = BridgeFont.body2.font
+        label.textColor = BridgeColor.gray04
         label.textAlignment = .center
         return label
     }()
@@ -24,19 +27,24 @@ final class BridgePlaceholderView: BaseView {
     }
     
     override func configureLayouts() {
-        addSubview(descriptionLabel)
+        addSubview(rootFlexContainer)
         
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            descriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
+        rootFlexContainer.flex.justifyContent(.center).alignItems(.center).define { flex in
+            flex.addItem(descriptionLabel)
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        rootFlexContainer.pin.all(pin.safeArea)
+        rootFlexContainer.flex.layout()
     }
 }
 
 extension BridgePlaceholderView {
     func configurePlaceholderView(description: String?) {
         descriptionLabel.text = description
+        descriptionLabel.flex.markDirty()
+        rootFlexContainer.flex.layout()
     }
 }
