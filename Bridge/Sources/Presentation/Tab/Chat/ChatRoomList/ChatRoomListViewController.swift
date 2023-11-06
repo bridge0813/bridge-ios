@@ -137,14 +137,14 @@ private extension ChatRoomListViewController {
             chatRoomListTableView.isHidden = false
             placeholderView.isHidden = true
             
-        case .notSignedIn:
-            placeholderView.configurePlaceholderView(description: "로그인 후 사용가능해요!")
+        case .needSignIn:
+            placeholderView.configurePlaceholderView(for: .needSignIn)
             
         case .empty:
-            placeholderView.configurePlaceholderView(description: "현재 채팅이 없어요!")
+            placeholderView.configurePlaceholderView(for: .emptyChatRoom)
             
         case .error:
-            placeholderView.configurePlaceholderView(description: "알 수 없는 오류가 발생했습니다.")
+            placeholderView.configurePlaceholderView(for: .error)
         }
         
         configureLayouts()

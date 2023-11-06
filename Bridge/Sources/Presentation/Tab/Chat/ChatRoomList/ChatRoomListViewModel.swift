@@ -54,7 +54,7 @@ final class ChatRoomListViewModel: ViewModelType {
                 onError: { error in
                     switch error as? NetworkError {
                     case .statusCode(let statusCode):
-                        return statusCode == 401 ? viewState.accept(.notSignedIn) : viewState.accept(.error)
+                        return statusCode == 401 ? viewState.accept(.needSignIn) : viewState.accept(.error)
                         
                     default:
                         return viewState.accept(.error)
@@ -105,7 +105,7 @@ extension ChatRoomListViewModel {
     enum ViewState {
         case general
         case empty
-        case notSignedIn
+        case needSignIn
         case error
     }
 }
