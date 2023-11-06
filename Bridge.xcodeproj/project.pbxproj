@@ -924,7 +924,6 @@
 				7C42701D2AA4540C009BE6AF /* BaseCollectionReusableView.swift */,
 				7C8639582AC28B4F00064588 /* BaseButton.swift */,
 				7C8CC4192AF40A100032F237 /* BaseProgressView.swift */,
-				7C8CC41B2AF522A10032F237 /* BasePopUpView.swift */,
 			);
 			path = Bases;
 			sourceTree = "<group>";
@@ -1043,6 +1042,7 @@
 				7C8B822D2AC96CC000F7B889 /* Dropdown */,
 				7C8CC40F2AEEA1DA0032F237 /* TextView */,
 				7C8CC4162AF408ED0032F237 /* ProgressView */,
+				7CA04F0C2AF8F740007B9191 /* PopUp */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1223,6 +1223,14 @@
 				7C8CC4172AF4091D0032F237 /* BridgeProgressView.swift */,
 			);
 			path = ProgressView;
+			sourceTree = "<group>";
+		};
+		7CA04F0C2AF8F740007B9191 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				7C8CC41B2AF522A10032F237 /* BasePopUpView.swift */,
+			);
+			path = PopUp;
 			sourceTree = "<group>";
 		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
