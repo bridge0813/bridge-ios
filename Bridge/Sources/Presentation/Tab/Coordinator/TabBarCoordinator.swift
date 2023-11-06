@@ -54,7 +54,7 @@ private extension TabBarCoordinator {
             connectChatFlow(to: tabNavigationController)
             
         case .my:
-            return
+            connectMypageFlow(to: tabNavigationController)
         }
     }
     
@@ -73,7 +73,12 @@ private extension TabBarCoordinator {
         childCoordinators.append(chatCoordinator)
     }
     
-    func connectMypageFlow(to tabNavigationController: UINavigationController) { }
+    func connectMypageFlow(to tabNavigationController: UINavigationController) {
+        let myPageCoordinator = MyPageCoordinator(navigationController: tabNavigationController)
+        myPageCoordinator.start()
+        myPageCoordinator.delegate = self
+        childCoordinators.append(myPageCoordinator)
+    }
 }
 
 // MARK: - Tab bar coordinator protocol

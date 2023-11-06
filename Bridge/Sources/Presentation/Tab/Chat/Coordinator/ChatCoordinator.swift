@@ -25,8 +25,6 @@ final class ChatCoordinator: Coordinator {
         self.navigationController = navigationController
         self.childCoordinators = []
         
-        
-        
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
         
@@ -50,7 +48,7 @@ final class ChatCoordinator: Coordinator {
 }
 
 extension ChatCoordinator {
-    func showChatRoomListViewController() {
+    private func showChatRoomListViewController() {
         let chatRoomListViewModel = ChatRoomListViewModel(
             coordinator: self,
             fetchChatRoomsUseCase: fetchChatRoomsUseCase,

@@ -63,6 +63,9 @@
 		7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123932AC4345B006E72C1 /* BridgeAlertViewController.swift */; };
 		7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123972AC443EC006E72C1 /* Alertable.swift */; };
 		7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123992AC446D1006E72C1 /* AlertConfiguration.swift */; };
+		7B6C20452AF886BD005689F5 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C20442AF886BD005689F5 /* MyPageViewController.swift */; };
+		7B6C20482AF88707005689F5 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C20472AF88707005689F5 /* MyPageCoordinator.swift */; };
+		7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C20492AF887E0005689F5 /* MyPageViewModel.swift */; };
 		7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7402A9330C6001B5D2C /* AppDelegate.swift */; };
 		7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */; };
 		7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E7492A9330C7001B5D2C /* Assets.xcassets */; };
@@ -238,6 +241,9 @@
 		7B6123932AC4345B006E72C1 /* BridgeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAlertViewController.swift; sourceTree = "<group>"; };
 		7B6123972AC443EC006E72C1 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		7B6123992AC446D1006E72C1 /* AlertConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertConfiguration.swift; sourceTree = "<group>"; };
+		7B6C20442AF886BD005689F5 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		7B6C20472AF88707005689F5 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
+		7B6C20492AF887E0005689F5 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7B71E73D2A9330C6001B5D2C /* Bridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B71E7402A9330C6001B5D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -634,6 +640,24 @@
 			path = Alert;
 			sourceTree = "<group>";
 		};
+		7B6C20432AF8869C005689F5 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				7B6C20462AF886EF005689F5 /* Coordinator */,
+				7B6C20492AF887E0005689F5 /* MyPageViewModel.swift */,
+				7B6C20442AF886BD005689F5 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		7B6C20462AF886EF005689F5 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7B6C20472AF88707005689F5 /* MyPageCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		7B71E7342A9330C6001B5D2C = {
 			isa = PBXGroup;
 			children = (
@@ -979,6 +1003,7 @@
 				7BB2C24B2A985A2200AA2328 /* Coordinator */,
 				7BB2C24E2A985AB500AA2328 /* ChatRoomList */,
 				7B1E5ABA2ADCFD5F0053E9B3 /* ChatRoom */,
+				7B6C20432AF8869C005689F5 /* MyPage */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1402,6 +1427,7 @@
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
 				7B3289352ADE55DA009DF3C2 /* BridgeMessageInputBar.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */,
+				7B6C20482AF88707005689F5 /* MyPageCoordinator.swift in Sources */,
 				7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */,
@@ -1456,6 +1482,7 @@
 				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,
 				7BA36C9B2A9C5091000DAB02 /* ChatRoom.swift in Sources */,
 				7B92B7E52AE503F700B0E954 /* MessageRepository.swift in Sources */,
+				7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */,
 				7B92B7E32AE501CD00B0E954 /* ObserveMessageUseCase.swift in Sources */,
 				7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */,
 				7BA36CCE2A9E185A000DAB02 /* ChatRoomCell.swift in Sources */,
@@ -1493,6 +1520,7 @@
 				7B1922D52AE287C900EBDD2E /* MessageCell.swift in Sources */,
 				7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */,
 				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
+				7B6C20452AF886BD005689F5 /* MyPageViewController.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
 				7B1922D12AE166E600EBDD2E /* UIViewController+Keyboard.swift in Sources */,
 				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
