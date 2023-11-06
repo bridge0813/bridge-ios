@@ -30,7 +30,7 @@ struct AuthInterceptor: Interceptor {
     }
     
     private func retry(_ request: URLRequest, data: Data) -> Observable<Data> {
-        guard let refreshToken = tokenStorage.get(.refreshToken) else { return .just(data) }
+        let refreshToken = tokenStorage.get(.refreshToken) ?? invalidToken
         
         var request = request
         request.addValue("Bearer \(refreshToken)", forHTTPHeaderField: "Authorization-refresh")
@@ -38,9 +38,8 @@ struct AuthInterceptor: Interceptor {
         return URLSession.shared.rx.data(request: request)
             .flatMap { data in
                 let accessToken = String(data: data, encoding: .utf8)
-                tokenStorage.save(accessToken ?? "", for: .accessToken)
+                tokenStorage.save(accessToken ?? invalidToken, for: .accessToken)
                 adapt(&request)
-                    
                 return URLSession.shared.rx.data(request: request)
             }
     }

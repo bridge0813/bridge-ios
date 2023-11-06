@@ -24,8 +24,8 @@ final class DefaultAuthRepository: AuthRepository {
         }
         
         let signInWithAppleRequestDTO = SignInWithAppleRequestDTO(
-            userName: tokenStorage.get(.userName) ?? "",
-            identityToken: credentials.identityToken ?? ""
+            userName: tokenStorage.get(.userName) ?? invalidToken,
+            identityToken: credentials.identityToken ?? invalidToken
         )
         let authEndpoint = AuthEndpoint.signInWithApple(requestDTO: signInWithAppleRequestDTO)
         
@@ -35,7 +35,6 @@ final class DefaultAuthRepository: AuthRepository {
                 // 응답 저장
                 self?.tokenStorage.save(signInResponseDTO.accessToken, for: .accessToken)
                 self?.tokenStorage.save(signInResponseDTO.refreshToken, for: .refreshToken)
-                self?.tokenStorage.save(String(signInResponseDTO.userId), for: .userID)
                 
                 return signInResponseDTO.isRegistered ? .success : .needSignUp
             }
@@ -43,7 +42,7 @@ final class DefaultAuthRepository: AuthRepository {
     }
     
     func signUp(selectedFields: [String]) -> Observable<SignUpResult> {
-        let userID = Int(tokenStorage.get(.userID) ?? "")
+        let userID = Int(tokenStorage.get(.userID) ?? invalidToken)
         let signUpRequestDTO = SignUpRequestDTO(userID: userID, selectedFields: selectedFields)
         let authEndpoint = AuthEndpoint.signUp(requestDTO: signUpRequestDTO)
 
