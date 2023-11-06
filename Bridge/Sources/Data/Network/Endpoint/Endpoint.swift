@@ -21,9 +21,8 @@ protocol Endpoint {
 }
 
 extension Endpoint {
-    // TODO: 배포 후 수정
     var baseURL: URL? {
-        URL(string: "https://bridge.com")
+        URL(string: " http://54.180.195.17:8080/")
     }
     
     var headers: HTTPHeaders {

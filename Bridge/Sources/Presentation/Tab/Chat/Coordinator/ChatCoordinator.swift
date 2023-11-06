@@ -25,10 +25,20 @@ final class ChatCoordinator: Coordinator {
         self.navigationController = navigationController
         self.childCoordinators = []
         
+        
+        
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
-        chatRoomRepository = MockChatRoomRepository()
+        
+#if DEBUG
+//        chatRoomRepository = MockChatRoomRepository()
+        chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
         messageRepository = MockMessageRepository()
+#else
+        chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
+        messageRepository = MockMessageRepository()
+#endif
+        
         fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
         observeMessageUseCase = DefaultObserveMessageUseCase(messageRepository: messageRepository)
