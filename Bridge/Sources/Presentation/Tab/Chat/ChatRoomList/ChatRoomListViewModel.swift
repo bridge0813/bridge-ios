@@ -9,7 +9,7 @@ import RxCocoa
 import RxSwift
 
 final class ChatRoomListViewModel: ViewModelType {
-    
+    // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
         let itemSelected: Observable<Int>
@@ -21,12 +21,13 @@ final class ChatRoomListViewModel: ViewModelType {
         let viewState: Driver<ViewState>
     }
     
+    // MARK: - Property
     let disposeBag = DisposeBag()
-    
     private weak var coordinator: ChatCoordinator?
     private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
     
+    // MARK: - Init
     init(
         coordinator: ChatCoordinator,
         fetchChatRoomsUseCase: FetchChatRoomsUseCase,
@@ -37,6 +38,7 @@ final class ChatRoomListViewModel: ViewModelType {
         self.leaveChatRoomUseCase = leaveChatRoomUseCase
     }
     
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         let chatRoomsRelay = BehaviorRelay<[ChatRoom]>(value: [])
         let viewState = BehaviorRelay<ViewState>(value: .general)
@@ -95,13 +97,13 @@ final class ChatRoomListViewModel: ViewModelType {
     }
 }
 
-// MARK: Data source
+// MARK: - Data source
 extension ChatRoomListViewModel {
     enum Section: CaseIterable {
         case main
     }
     
-    /// ChatRoomListTableView에서 보여줘야 하는 화면을 결정
+    /// ChatRoomListViewController에서 보여줘야 하는 화면의 종류
     enum ViewState {
         case general
         case empty

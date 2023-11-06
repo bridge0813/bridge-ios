@@ -45,6 +45,7 @@ final class SignInViewController: BaseViewController {
         return button
     }()
     
+    // MARK: - Property
     private let viewModel: SignInViewModel
     
     // MARK: - Init
@@ -53,7 +54,7 @@ final class SignInViewController: BaseViewController {
         super.init()
     }
     
-    // MARK: - Lifecycles
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -63,7 +64,7 @@ final class SignInViewController: BaseViewController {
         configureDefaultNavigationBarAppearance()
     }
     
-    // MARK: - Configurations
+    // MARK: - Configuration
     override func configureAttributes() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
         configureNoShadowNavigationBarAppearance()

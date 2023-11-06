@@ -10,7 +10,6 @@ import FlexLayout
 import PinLayout
 
 final class ChatRoomCell: BaseTableViewCell {
-    
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
@@ -56,6 +55,7 @@ final class ChatRoomCell: BaseTableViewCell {
         return label
     }()
     
+    // MARK: - Preparation
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImageView.image = nil
@@ -64,7 +64,7 @@ final class ChatRoomCell: BaseTableViewCell {
         lastMessageContentLabel.text = ""
     }
     
-    // MARK: - Layouts
+    // MARK: - Layout
     override func configureLayouts() {
         contentView.addSubview(rootFlexContainer)
         

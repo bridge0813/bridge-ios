@@ -33,9 +33,10 @@ final class SetFieldViewController: BaseViewController {
         backgroundColor: BridgeColor.gray04
     )
     
-    // MARK: - Init
+    // MARK: - Property
     private let viewModel: SetFieldViewModel
     
+    // MARK: - Init
     init(viewModel: SetFieldViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -75,6 +76,7 @@ final class SetFieldViewController: BaseViewController {
         rootFlexContainer.flex.layout()
     }
     
+    // MARK: - Binding
     override func bind() {
         let input = SetFieldViewModel.Input(
             fieldTagButtonTapped: setFieldView.fieldTagButtonTapped,

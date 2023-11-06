@@ -9,7 +9,7 @@ import RxCocoa
 import RxSwift
 
 final class MessageViewModel: ViewModelType {
-    
+    // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
         let profileButtonTapped: Observable<Void>
@@ -22,12 +22,13 @@ final class MessageViewModel: ViewModelType {
         let messages: Driver<[Message]>
     }
     
+    // MARK: - Property
     let disposeBag = DisposeBag()
-    
     private weak var coordinator: ChatCoordinator?
     private let chatRoom: ChatRoom
     private let observeMessageUseCase: ObserveMessageUseCase
     
+    // MARK: - Init
     init(
         coordinator: ChatCoordinator?,
         chatRoom: ChatRoom,
@@ -38,6 +39,7 @@ final class MessageViewModel: ViewModelType {
         self.observeMessageUseCase = observeMessageUseCase
     }
     
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         let messages = input.viewWillAppear
             .withUnretained(self)
@@ -82,6 +84,7 @@ final class MessageViewModel: ViewModelType {
     }
 }
 
+// MARK: - Data source
 extension MessageViewModel {
     enum Section {
         case main

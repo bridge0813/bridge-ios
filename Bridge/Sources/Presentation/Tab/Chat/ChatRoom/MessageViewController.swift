@@ -73,6 +73,7 @@ final class MessageViewController: BaseViewController {
     
     private let viewModel: MessageViewModel
     
+    // MARK: - Init
     init(viewModel: MessageViewModel) {
         self.viewModel = viewModel
         super.init()

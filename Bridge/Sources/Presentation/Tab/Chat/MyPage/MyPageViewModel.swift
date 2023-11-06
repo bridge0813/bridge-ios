@@ -9,8 +9,8 @@ import Foundation
 import RxSwift
 
 final class MyPageViewModel: ViewModelType {
-
-    struct Input { 
+    // MARK: - Input & Output
+    struct Input {
         let signIn: Observable<Void>
     }
     
@@ -18,14 +18,16 @@ final class MyPageViewModel: ViewModelType {
         
     }
     
+    // MARK: - Property
     let disposeBag = DisposeBag()
-    
     private weak var coordinator: MyPageCoordinator?
     
+    // MARK: - Init
     init(coordinator: MyPageCoordinator) {
         self.coordinator = coordinator
     }
     
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         input.signIn
             .withUnretained(self)

@@ -27,7 +27,7 @@ final class BridgeMessageInputBar: BaseView {
     
     private let sendMessageButton = BridgeSendMessageButton()
     
-    // MARK: - Layouts
+    // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         
@@ -45,6 +45,7 @@ final class BridgeMessageInputBar: BaseView {
         rootFlexContainer.flex.layout()
     }
     
+    // MARK: - Binding
     override func bind() {
         messageInputTextView.rx.text
             .orEmpty
@@ -63,7 +64,7 @@ final class BridgeMessageInputBar: BaseView {
     }
 }
 
-// MARK: - Observables
+// MARK: - Observable
 extension BridgeMessageInputBar {
     var sendMessage: Observable<String> {
         messageInputTextView.rx.text.orEmpty

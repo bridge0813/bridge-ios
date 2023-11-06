@@ -8,13 +8,14 @@
 import UIKit
 
 final class MyPageCoordinator: Coordinator {
-    
+    // MARK: - Property
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
     private let authRepository: AuthRepository
     
+    // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []
@@ -23,11 +24,13 @@ final class MyPageCoordinator: Coordinator {
         authRepository = DefaultAuthRepository(networkService: networkService)
     }
     
+    // MARK: - Start
     func start() {
         showMyPageViewController()
     }
 }
 
+// MARK: - My page
 extension MyPageCoordinator {
     private func showMyPageViewController() {
         let myPageViewModel = MyPageViewModel(coordinator: self)

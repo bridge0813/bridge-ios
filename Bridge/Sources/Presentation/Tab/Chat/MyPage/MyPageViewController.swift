@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 final class MyPageViewController: BaseViewController {
-    
+    // MARK: - UI
     private let rootFlexContainer = UIView()
     
     private let signInButton = BridgeButton(
@@ -21,8 +21,10 @@ final class MyPageViewController: BaseViewController {
         backgroundColor: BridgeColor.primary1
     )
     
+    // MARK: - Property
     private let viewModel: MyPageViewModel
     
+    // MARK: - Init
     init(viewModel: MyPageViewModel) {
         self.viewModel = viewModel
         super.init()

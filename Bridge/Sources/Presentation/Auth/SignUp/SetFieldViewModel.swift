@@ -9,7 +9,7 @@ import RxCocoa
 import RxSwift
 
 final class SetFieldViewModel: ViewModelType {
-    
+    // MARK: - Input & Output
     struct Input {
         let fieldTagButtonTapped: Observable<String>
         let completeButtonTapped: Observable<Void>
@@ -19,16 +19,18 @@ final class SetFieldViewModel: ViewModelType {
         let isCompleteButtonEnabled: Driver<Bool>
     }
     
+    // MARK: - Property
     let disposeBag = DisposeBag()
-    
     weak var coordinator: AuthCoordinator?
     private let signUpUseCase: SignUpUseCase
     
+    // MARK: - Init
     init(coordinator: AuthCoordinator, signUpUseCase: SignUpUseCase) {
         self.coordinator = coordinator
         self.signUpUseCase = signUpUseCase
     }
     
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         let completeButtonEnabled = BehaviorSubject<Bool>(value: false)
         var selectedFields: Set<String> = []
