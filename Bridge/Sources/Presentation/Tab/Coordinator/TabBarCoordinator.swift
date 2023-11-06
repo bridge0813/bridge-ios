@@ -100,30 +100,8 @@ extension TabBarCoordinator {
 // MARK: - Bar appearance
 private extension TabBarCoordinator {
     func configureBarAppearance() {
-        let backButtonImage = UIImage(named: "chevron.left")?
-            .resize(to: CGSize(width: 24, height: 24))
-            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -2, bottom: 2, right: 0))
-        
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
-        navigationBarAppearance.titleTextAttributes = [
-            .font: BridgeFont.subtitle1.font,
-            .foregroundColor: BridgeColor.gray01
-        ]
-        navigationBarAppearance.shadowColor = BridgeColor.gray06
-        UINavigationBar.appearance().tintColor = .black
-        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-        
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.configureWithOpaqueBackground()
-        tabBarAppearance.shadowColor = nil
-        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = BridgeColor.primary1
-        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: BridgeColor.primary1]
-        UITabBar.appearance().standardAppearance = tabBarAppearance
-        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        configureDefaultNavigationBarAppearance()
+        configureDefaultTabBarAppearance()
         
         tabBarController.tabBar.layer.masksToBounds = false
         tabBarController.tabBar.layer.shadowColor = UIColor.black.cgColor

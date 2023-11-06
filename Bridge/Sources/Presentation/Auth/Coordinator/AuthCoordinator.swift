@@ -11,7 +11,7 @@ final class AuthCoordinator: Coordinator {
     
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
-    var childCoordinators: [Coordinator] = []
+    var childCoordinators: [Coordinator]
     
     private let authRepository: AuthRepository
     private let signInUseCase: SignInUseCase
@@ -19,6 +19,7 @@ final class AuthCoordinator: Coordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        childCoordinators = []
         
         let networkService = DefaultNetworkService()
         let tokenStorage = KeychainTokenStorage()
