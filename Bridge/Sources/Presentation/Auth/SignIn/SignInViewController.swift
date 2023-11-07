@@ -34,7 +34,7 @@ final class SignInViewController: BaseViewController {
         configuration.baseBackgroundColor = .black
         configuration.attributedTitle = AttributedString(
             "Apple로 로그인",
-            attributes: AttributeContainer([.font: BridgeFont.button1.font, .foregroundColor: UIColor.white])
+            attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.white])
         )
         configuration.image = UIImage(systemName: "apple.logo")
         configuration.imagePadding = 12
