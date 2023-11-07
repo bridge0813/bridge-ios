@@ -20,6 +20,6 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     }
     
     func signUp(selectedFields: Set<String>) -> Observable<SignUpResult> {
-        authRepository.signUp(selectedFields: selectedFields.map { $0 })
+        authRepository.signUp(selectedFields: selectedFields.map { $0.uppercased() })
     }
 }

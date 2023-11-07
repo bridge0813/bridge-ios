@@ -30,13 +30,13 @@ final class DefaultAuthRepository: AuthRepository {
         let authEndpoint = AuthEndpoint.signInWithApple(requestDTO: signInWithAppleRequestDTO)
         
         return networkService.request(authEndpoint, interceptor: nil)
-            .decode(type: SignInResponseDTO.self, decoder: JSONDecoder())
-            .map { [weak self] signInResponseDTO -> SignInResult in
-                // 응답 저장
-                self?.tokenStorage.save(signInResponseDTO.accessToken, for: .accessToken)
-                self?.tokenStorage.save(signInResponseDTO.refreshToken, for: .refreshToken)
+            .decode(type: SignInWithAppleResponseDTO.self, decoder: JSONDecoder())
+            .map { [weak self] signInWithAppleResponseDTO in
+                self?.tokenStorage.save(String(signInWithAppleResponseDTO.userID), for: .userID)
+                self?.tokenStorage.save(signInWithAppleResponseDTO.accessToken, for: .accessToken)
+                self?.tokenStorage.save(signInWithAppleResponseDTO.refreshToken, for: .refreshToken)
                 
-                return signInResponseDTO.isRegistered ? .success : .needSignUp
+                return signInWithAppleResponseDTO.isRegistered ? .success : .needSignUp
             }
             .catchAndReturn(.failure)
     }
@@ -45,7 +45,7 @@ final class DefaultAuthRepository: AuthRepository {
         let userID = Int(tokenStorage.get(.userID) ?? invalidToken)
         let signUpRequestDTO = SignUpRequestDTO(userID: userID, selectedFields: selectedFields)
         let authEndpoint = AuthEndpoint.signUp(requestDTO: signUpRequestDTO)
-
+        
         return networkService.request(authEndpoint, interceptor: AuthInterceptor())
             .map { _ in .success }
             .catchAndReturn(.failure)
