@@ -18,12 +18,20 @@ extension ChatEndpoint: Endpoint {
         case .chatRooms(let userID):    
             return "/chat/\(userID)"
             
-        case .leaveChatRoom(chatRoomID: let chatRoomID):
-            return "/chat/\(chatRoomID)"
+        case .leaveChatRoom:
+            return "/chat"
         }
     }
     
-    var queryParameters: QueryParameters? { nil }
+    var queryParameters: QueryParameters? {
+        switch self {
+        case .chatRooms:
+            return nil
+            
+        case .leaveChatRoom(let chatRoomID):
+            return ["chatRoomId": chatRoomID]
+        }
+    }
     
     var method: HTTPMethod {
         switch self {

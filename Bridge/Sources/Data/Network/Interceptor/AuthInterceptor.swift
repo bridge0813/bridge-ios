@@ -17,8 +17,8 @@ struct AuthInterceptor: Interceptor {
     }
     
     func adapt(_ request: inout URLRequest) {
-        guard let accessToken = tokenStorage.get(.accessToken) else { return }
-        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        let accessToken = tokenStorage.get(.accessToken) ?? invalidToken
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
     }
     
     func shouldRetry(_ request: URLRequest, httpResponse: HTTPURLResponse, data: Data) -> Observable<Data> {
@@ -33,13 +33,15 @@ struct AuthInterceptor: Interceptor {
         let refreshToken = tokenStorage.get(.refreshToken) ?? invalidToken
         
         var request = request
-        request.addValue("Bearer \(refreshToken)", forHTTPHeaderField: "Authorization-refresh")
+        request.setValue("Bearer \(refreshToken)", forHTTPHeaderField: "Authorization-refresh")
         
         return URLSession.shared.rx.data(request: request)
             .flatMap { data in
-                let accessToken = String(data: data, encoding: .utf8)
-                tokenStorage.save(accessToken ?? invalidToken, for: .accessToken)
-                adapt(&request)
+                let accessTokenResponseDTO = try? JSONDecoder().decode(AccessTokenResponseDTO.self, from: data)
+                let accessToken = accessTokenResponseDTO?.accessToken ?? invalidToken
+                tokenStorage.save(accessToken, for: .accessToken)
+                request.setValue(nil, forHTTPHeaderField: "Authorization-refresh")  // 헤더 제거
+                request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
                 return URLSession.shared.rx.data(request: request)
             }
     }

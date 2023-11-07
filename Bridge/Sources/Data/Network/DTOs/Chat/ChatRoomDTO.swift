@@ -29,7 +29,7 @@ struct ChatRoomDTO: Codable {
 
 // MARK: - For test
 extension ChatRoomDTO {
-    // TODO: 수정 필요 (id충돌 주의)
+    // TODO: 수정 필요 (id 충돌 주의)
     func toEntity() -> ChatRoom {
         ChatRoom(
             id: id,
