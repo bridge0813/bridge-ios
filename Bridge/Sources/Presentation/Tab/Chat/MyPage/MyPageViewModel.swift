@@ -11,6 +11,7 @@ import RxSwift
 final class MyPageViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
+        let bellButtonTapped: Observable<Void>
         let signIn: Observable<Void>
     }
     
@@ -29,6 +30,13 @@ final class MyPageViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
+        input.bellButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                print("bell")
+            })
+            .disposed(by: disposeBag)
+        
         input.signIn
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
