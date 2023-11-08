@@ -139,7 +139,7 @@ private extension ChatRoomListViewController {
             chatRoomListTableView.isHidden = false
             placeholderView.isHidden = true
             
-        case .needSignIn:
+        case .signInNeeded:
             placeholderView.configurePlaceholderView(
                 for: .needSignIn,
                 configuration: BridgePlaceholderView.PlaceholderConfiguration(
