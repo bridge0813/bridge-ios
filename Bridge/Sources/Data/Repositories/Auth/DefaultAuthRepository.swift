@@ -18,7 +18,7 @@ final class DefaultAuthRepository: AuthRepository {
         self.tokenStorage = tokenStorage
     }
     
-    func signInWithApple(credentials: UserCredentials) -> Observable<SignInResult> {
+    func signInWithApple(credentials: UserCredentials) -> Observable<Bool> {
         if !credentials.name.isEmpty {  // 이름은 2번째 로그인부터 빈 문자열이 리턴되므로, 빈 문자열 저장하지 않도록 처리
             tokenStorage.save(credentials.name, for: .userName)
         }
@@ -36,18 +36,16 @@ final class DefaultAuthRepository: AuthRepository {
                 self?.tokenStorage.save(signInWithAppleResponseDTO.accessToken, for: .accessToken)
                 self?.tokenStorage.save(signInWithAppleResponseDTO.refreshToken, for: .refreshToken)
                 
-                return signInWithAppleResponseDTO.isRegistered ? .success : .needSignUp
+                return signInWithAppleResponseDTO.isRegistered
             }
-            .catchAndReturn(.failure)
     }
     
-    func signUp(selectedFields: [String]) -> Observable<SignUpResult> {
+    func signUp(selectedFields: [String]) -> Observable<Void> {
         let userID = Int(tokenStorage.get(.userID) ?? invalidToken)
         let signUpRequestDTO = SignUpRequestDTO(userID: userID, selectedFields: selectedFields)
         let authEndpoint = AuthEndpoint.signUp(requestDTO: signUpRequestDTO)
         
         return networkService.request(authEndpoint, interceptor: AuthInterceptor())
-            .map { _ in .success }
-            .catchAndReturn(.failure)
+            .map { _ in }
     }
 }

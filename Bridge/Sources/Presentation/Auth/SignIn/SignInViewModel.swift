@@ -53,9 +53,14 @@ final class SignInViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 switch result {
-                case .needSignUp:   owner.coordinator?.showSetFieldViewController()
-                case .success:      owner.coordinator?.finish()
-                case .failure:      owner.coordinator?.showErrorAlert(configuration: .networkError)
+                case .signUpNeeded:
+                    owner.coordinator?.showSetFieldViewController()
+                    
+                case .success:          
+                    owner.coordinator?.finish()
+                    
+                case .failure: 
+                    owner.coordinator?.showErrorAlert(configuration: .networkError)
                 }
             })
             .disposed(by: disposeBag)

@@ -37,8 +37,11 @@ final class SetFieldViewModel: ViewModelType {
         
         input.fieldTagButtonTapped
             .subscribe(onNext: { field in
-                if selectedFields.contains(field) { selectedFields.remove(field) }
-                else { selectedFields.insert(field) }
+                if selectedFields.contains(field) {
+                    selectedFields.remove(field)
+                } else {
+                    selectedFields.insert(field)
+                }
                 
                 completeButtonEnabled.onNext(!selectedFields.isEmpty)
             })
@@ -50,18 +53,17 @@ final class SetFieldViewModel: ViewModelType {
                 owner.signUpUseCase.signUp(selectedFields: selectedFields)
             }
             .observe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .subscribe(onNext: { owner, result in
-                switch result {
-                case .success:
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
                     owner.coordinator?.finish()
-                    
-                case .failure:
+                },
+                onError: { owner, _ in
                     owner.coordinator?.showErrorAlert(configuration: .networkError) {
                         owner.coordinator?.finish()
                     }
                 }
-            })
+            )
             .disposed(by: disposeBag)
         
         return Output(isCompleteButtonEnabled: completeButtonEnabled.asDriver(onErrorJustReturn: true))
