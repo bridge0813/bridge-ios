@@ -13,6 +13,8 @@ import RxSwift
 
 final class MyPageViewController: BaseViewController {
     // MARK: - UI
+    private let navigationTitleView = BridgeNavigationTitleView(title: "MY PAGE")
+    
     private let bellButton: UIButton = {
         let button = UIButton()
         button.setImage(
@@ -24,11 +26,13 @@ final class MyPageViewController: BaseViewController {
     
     private let rootFlexContainer = UIView()
     
-    private let signInButton = BridgeButton(
-        title: "로그인",
-        font: BridgeFont.button1.font,
-        backgroundColor: BridgeColor.primary1
-    )
+    private lazy var myPageTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(MenuCell.self)
+        tableView.rowHeight = 44
+        tableView.separatorStyle = .none
+        return tableView
+    }()
     
     // MARK: - Property
     private let viewModel: MyPageViewModel
@@ -42,6 +46,7 @@ final class MyPageViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = BridgeColor.primary3
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,17 +61,15 @@ final class MyPageViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationTitleView)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: bellButton)
-        
     }
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.define { flex in
-            flex.addItem().grow(1)
-            flex.addItem(signInButton).width(343).height(45).alignSelf(.center)
-            flex.addItem().grow(1)
+            flex.addItem(myPageTableView).grow(1)
         }
     }
     
@@ -79,9 +82,19 @@ final class MyPageViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = MyPageViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
             bellButtonTapped: bellButton.rx.tap.asObservable(),
-            signIn: signInButton.rx.tap.asObservable()
+            itemSelected: myPageTableView.rx.itemSelected.map { $0.row }
         )
-        _ = viewModel.transform(input: input)
+        let output = viewModel.transform(input: input)
+
+        output.menus
+            .bind(to: myPageTableView.rx.items(
+                cellIdentifier: MenuCell.reuseIdentifier,
+                cellType: MenuCell.self
+            )) { _, element, cell in
+                cell.configure(with: element)
+            }
+            .disposed(by: disposeBag)
     }
 }

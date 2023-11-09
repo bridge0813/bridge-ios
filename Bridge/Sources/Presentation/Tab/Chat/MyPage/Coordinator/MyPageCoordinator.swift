@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 final class MyPageCoordinator: Coordinator {
     // MARK: - Property
@@ -43,5 +44,32 @@ extension MyPageCoordinator {
 extension MyPageCoordinator {
     func showSignInViewController() {
         delegate?.showSignInViewController()
+    }
+}
+
+// MARK: - External
+extension MyPageCoordinator {
+    func openSettings() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString),
+              UIApplication.shared.canOpenURL(settingsUrl)
+        else { return }
+        
+        UIApplication.shared.open(settingsUrl)
+    }
+    
+    func showOpenSourceLicense() {
+        guard let url = URL(string: "https://shell-cardinal-3e8.notion.site/aa00892a9e5a4355824fc29680cf11e8?pvs=4") else {
+            return
+        }
+        let safariViewController = SFSafariViewController(url: url)
+        navigationController.present(safariViewController, animated: true)
+    }
+    
+    func showPrivacyPolicy() {
+        guard let url = URL(string: "https://shell-cardinal-3e8.notion.site/976beef192834c0daba4cd97835bf133?pvs=4") else {
+            return
+        }
+        let safariViewController = SFSafariViewController(url: url)
+        navigationController.present(safariViewController, animated: true)
     }
 }

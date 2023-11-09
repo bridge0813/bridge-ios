@@ -111,6 +111,7 @@
 		7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */; };
 		7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */; };
 		7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */; };
+		7BB5C77C2AFCE8220021BEC5 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB5C77B2AFCE8220021BEC5 /* MenuCell.swift */; };
 		7BB8C51F2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8C51E2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift */; };
 		7BB8C5212AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8C5202AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift */; };
 		7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8C5222AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift */; };
@@ -284,6 +285,7 @@
 		7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageType.swift; sourceTree = "<group>"; };
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
+		7BB5C77B2AFCE8220021BEC5 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		7BB8C51E2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertConfiguration.swift; sourceTree = "<group>"; };
 		7BB8C5202AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeErrorAlertViewController.swift; sourceTree = "<group>"; };
 		7BB8C5222AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+RxKeyboard.swift"; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 				7B6C20462AF886EF005689F5 /* Coordinator */,
 				7B6C20492AF887E0005689F5 /* MyPageViewModel.swift */,
 				7B6C20442AF886BD005689F5 /* MyPageViewController.swift */,
+				7BB5C77B2AFCE8220021BEC5 /* MenuCell.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1476,6 +1479,7 @@
 				7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */,
 				7BA36CB92A9D9A29000DAB02 /* HTTP.swift in Sources */,
 				7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */,
+				7BB5C77C2AFCE8220021BEC5 /* MenuCell.swift in Sources */,
 				7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */,
 				7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */,
 				7B1E5ABE2ADCFD880053E9B3 /* MessageViewModel.swift in Sources */,
