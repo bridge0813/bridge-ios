@@ -50,24 +50,29 @@ final class ApplicantRestrictionViewController: BaseViewController {
         backgroundColor: BridgeColor.gray4
     )
     
-    // MARK: - Properties
+    // MARK: - Property
     private let viewModel: ApplicantRestrictionViewModel
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(viewModel: ApplicantRestrictionViewModel) {
         self.viewModel = viewModel
         super.init()
     }
     
     
-    // MARK: - Lifecycles
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
+    
+    // MARK: - Configuration
+    override func configureAttributes() {
+        configureNavigationUI()
+    }
+    
+    private func configureNavigationUI() {
+        navigationItem.title = "모집글 작성"
     }
     
     // MARK: - Layout
@@ -95,13 +100,9 @@ final class ApplicantRestrictionViewController: BaseViewController {
         }
     }
     
-    // MARK: - Configure
-    override func configureAttributes() {
-        configureNavigationUI()
-    }
-    
-    private func configureNavigationUI() {
-        navigationItem.title = "모집글 작성"
+    override func viewDidLayoutSubviews() {
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Bind

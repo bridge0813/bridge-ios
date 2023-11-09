@@ -10,7 +10,7 @@ import FlexLayout
 import PinLayout
 
 final class ProjectSectionHeaderView: BaseCollectionReusableView {
-    // MARK: - Properties
+    // MARK: - UI
     private let containerView = UIView()
     
     private let titleLabel: UILabel = {
@@ -36,7 +36,7 @@ final class ProjectSectionHeaderView: BaseCollectionReusableView {
         return label
     }()
     
-    // MARK: - Configurations
+    // MARK: - Layout
     override func configureLayouts() {
         addSubview(containerView)
         containerView.flex.direction(.row).justifyContent(.start).alignItems(.center).define { flex in

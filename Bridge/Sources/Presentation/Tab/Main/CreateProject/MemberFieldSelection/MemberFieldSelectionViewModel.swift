@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 
 final class MemberFieldSelectionViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
         let dismissButtonTapped: Observable<Void>
         let fieldTagButtonTapped: Observable<String>
@@ -20,13 +20,13 @@ final class MemberFieldSelectionViewModel: ViewModelType {
         let isNextButtonEnabled: Driver<Bool>
     }
     
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
     private let dataStorage: ProjectDataStorage
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator,
         dataStorage: ProjectDataStorage
@@ -35,7 +35,7 @@ final class MemberFieldSelectionViewModel: ViewModelType {
         self.dataStorage = dataStorage
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         let nextButtonEnabled = BehaviorSubject<Bool>(value: false)
         var selectedFields: [String] = []

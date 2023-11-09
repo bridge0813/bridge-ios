@@ -49,13 +49,20 @@ class BridgeBasePopUpView: BaseView {
         return button
     }()
     
-    // MARK: - Properties
+    // MARK: - Property
     /// 팝업 뷰의 높이(상속받는 객체는 이를 설정해주어야 함)
     var containerHeight: CGFloat { 0 }
     
     /// 드래그로 뷰를 어느 정도까지 내렸을 때 dismiss할 것인지 결정하는 y
     var dismissYPosition: CGFloat { 0 }
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+        rootFlexContainer.addGestureRecognizer(panGesture)
+    }
     
     // MARK: - Layout
     override func configureLayouts() {
@@ -66,14 +73,6 @@ class BridgeBasePopUpView: BaseView {
         super.layoutSubviews()
         rootFlexContainer.pin.below(of: self).width(100%).height(containerHeight)
         rootFlexContainer.flex.layout()
-    }
-    
-    // MARK: - Configure
-    override func configureAttributes() {
-        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-        
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
-        rootFlexContainer.addGestureRecognizer(panGesture)
     }
     
     // MARK: - HandleGesture

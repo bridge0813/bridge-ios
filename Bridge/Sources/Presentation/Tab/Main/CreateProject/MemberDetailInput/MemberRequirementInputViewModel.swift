@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 
 final class MemberRequirementInputViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
         let viewDidLoad: Observable<Void>
         let recruitNumber: Observable<Int>
@@ -25,14 +25,14 @@ final class MemberRequirementInputViewModel: ViewModelType {
         let isNextButtonEnabled: Driver<Bool>
     }
     
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
     private var selectedFields: [String]
     private let dataStorage: ProjectDataStorage
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator,
         selectedFields: [String],
@@ -43,7 +43,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
         self.dataStorage = dataStorage
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         var requirement = MemberRequirement(field: "", recruitNumber: 0, requiredSkills: [], expectation: "")
         

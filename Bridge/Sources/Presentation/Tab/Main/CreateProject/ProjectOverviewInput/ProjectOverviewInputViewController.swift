@@ -90,24 +90,29 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         return button
     }()
     
-    // MARK: - Properties
+    // MARK: - Property
     private let viewModel: ProjectDescriptionInputViewModel
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(viewModel: ProjectDescriptionInputViewModel) {
         self.viewModel = viewModel
         super.init()
     }
     
     
-    // MARK: - Lifecycles
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
+    // MARK: - Configuration
+    override func configureAttributes() {
+        configureNavigationUI()
+        enableKeyboardHiding()
+    }
+    
+    private func configureNavigationUI() {
+        navigationItem.title = "모집글 작성"
     }
     
     // MARK: - Layout
@@ -141,14 +146,9 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         }
     }
     
-    // MARK: - Configure
-    override func configureAttributes() {
-        configureNavigationUI()
-        enableKeyboardHiding()
-    }
-    
-    private func configureNavigationUI() {
-        navigationItem.title = "모집글 작성"
+    override func viewDidLayoutSubviews() {
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Bind

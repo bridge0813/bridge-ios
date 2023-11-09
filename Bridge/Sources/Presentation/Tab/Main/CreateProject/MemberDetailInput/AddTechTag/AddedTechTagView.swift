@@ -29,7 +29,7 @@ final class AddedTechTagView: BaseView {
         return collectionView
     }()
     
-    // MARK: - Properties
+    // MARK: - Property
     var tagNames: [String] = [] {
         didSet {
             collectionView.backgroundColor = .clear

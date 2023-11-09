@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainCoordinator: Coordinator {
-    // MARK: - Properties
+    // MARK: - Property
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
@@ -17,7 +17,7 @@ final class MainCoordinator: Coordinator {
     private let fetchProjectsUseCase: FetchAllProjectsUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []

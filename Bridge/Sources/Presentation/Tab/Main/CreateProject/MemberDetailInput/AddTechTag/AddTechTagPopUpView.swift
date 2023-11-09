@@ -23,7 +23,7 @@ final class AddTechTagPopUpView: BridgeBasePopUpView {
         return collectionView
     }()
     
-    // MARK: - Properties
+    // MARK: - Property
     override var containerHeight: CGFloat { 576 }
     override var dismissYPosition: CGFloat { 300 }
     
@@ -76,6 +76,12 @@ final class AddTechTagPopUpView: BridgeBasePopUpView {
             .share()
     }
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        super.configureAttributes()
+        titleLabel.text = "스택"
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         super.configureLayouts()
@@ -96,12 +102,6 @@ final class AddTechTagPopUpView: BridgeBasePopUpView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-    }
-    
-    // MARK: - configure
-    override func configureAttributes() {
-        super.configureAttributes()
-        titleLabel.text = "스택"
     }
 }
 

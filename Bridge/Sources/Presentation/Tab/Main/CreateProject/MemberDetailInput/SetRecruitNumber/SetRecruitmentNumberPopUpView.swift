@@ -22,7 +22,7 @@ final class SetRecruitmentNumberPopUpView: BridgeBasePopUpView {
         return picker
     }()
     
-    // MARK: - Properties
+    // MARK: - Property
     override var containerHeight: CGFloat { 409 }
     override var dismissYPosition: CGFloat { 250 }
     
@@ -36,6 +36,12 @@ final class SetRecruitmentNumberPopUpView: BridgeBasePopUpView {
             }
             .distinctUntilChanged()
             .share()
+    }
+    
+    // MARK: - Configuration
+    override func configureAttributes() {
+        super.configureAttributes()
+        titleLabel.text = "모집 인원"
     }
     
     // MARK: - Layout
@@ -58,12 +64,6 @@ final class SetRecruitmentNumberPopUpView: BridgeBasePopUpView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-    }
-    
-    // MARK: - Configure
-    override func configureAttributes() {
-        super.configureAttributes()
-        titleLabel.text = "모집 인원"
     }
 
     // MARK: - Bind

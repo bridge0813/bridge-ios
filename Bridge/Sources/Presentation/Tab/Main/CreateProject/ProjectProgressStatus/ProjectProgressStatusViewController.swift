@@ -99,24 +99,36 @@ final class ProjectProgressStatusViewController: BaseViewController {
         return button
     }()
     
-    // MARK: - Properties
+    // MARK: - Property
     private let viewModel: ProjectProgressStatusViewModel
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(viewModel: ProjectProgressStatusViewModel) {
         self.viewModel = viewModel
         super.init()
     }
     
     
-    // MARK: - Lifecycles
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
+    // MARK: - Configuration
+    override func configureAttributes() {
+        configureNavigationUI()
+        progressStepAnchorView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(anchorViewTapped))
+        )
+    }
+    
+    private func configureNavigationUI() {
+        navigationItem.title = "모집글 작성"
+    }
+    
+    @objc private func anchorViewTapped(_ sender: UITapGestureRecognizer) {
+        progressStepAnchorView.isActive = true
+        progressStepDropdown.show()
     }
     
     // MARK: - Layout
@@ -143,21 +155,9 @@ final class ProjectProgressStatusViewController: BaseViewController {
         }
     }
     
-    // MARK: - Configure
-    override func configureAttributes() {
-        configureNavigationUI()
-        progressStepAnchorView.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(anchorViewTapped))
-        )
-    }
-    
-    private func configureNavigationUI() {
-        navigationItem.title = "모집글 작성"
-    }
-    
-    @objc private func anchorViewTapped(_ sender: UITapGestureRecognizer) {
-        progressStepAnchorView.isActive = true
-        progressStepDropdown.show()
+    override func viewDidLayoutSubviews() {
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Bind

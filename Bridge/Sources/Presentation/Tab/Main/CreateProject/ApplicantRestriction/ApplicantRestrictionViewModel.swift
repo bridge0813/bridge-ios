@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class ApplicantRestrictionViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
         let selectedRestriction: Observable<String>
         let nextButtonTapped: Observable<Void>
@@ -20,13 +20,13 @@ final class ApplicantRestrictionViewModel: ViewModelType {
         let selectedRestrictions: Driver<Set<String>>
     }
     
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
     private let dataStorage: ProjectDataStorage
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator,
         dataStorage: ProjectDataStorage
@@ -35,7 +35,7 @@ final class ApplicantRestrictionViewModel: ViewModelType {
         self.dataStorage = dataStorage
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         let selectedRestrictions = BehaviorRelay<Set<String>>(value: [])
         

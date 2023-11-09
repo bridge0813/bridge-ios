@@ -61,7 +61,7 @@ final class DropDown: BaseView {
     let willHide = PublishSubject<Void>()              // 드롭다운이 사라질 때
     
     
-    // MARK: - Properties
+    // MARK: - Property
     private var xConstant: CGFloat?
     private var yConstant: CGFloat?
     private var widthConstant: CGFloat?

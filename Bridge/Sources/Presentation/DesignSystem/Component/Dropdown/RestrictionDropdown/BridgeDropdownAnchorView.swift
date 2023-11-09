@@ -37,14 +37,14 @@ final class BridgeDropdownAnchorView: BaseView {
         return imageView
     }()
     
-    // MARK: - Properties
+    // MARK: - Property
     var isActive: Bool = false {
         didSet {
             updateStyleForDropdownState()
         }
     }
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(_ defaultOption: String) {
         restrictionOptionLabel.text = defaultOption
         super.init(frame: .zero)

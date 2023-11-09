@@ -94,7 +94,7 @@ final class MainViewController: BaseViewController {
     
     private let createProjectButton = BridgeCreateProjectButton()
     
-    // MARK: - Properties
+    // MARK: - Property
     private let viewModel: MainViewModel
     
     typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
@@ -102,13 +102,13 @@ final class MainViewController: BaseViewController {
     private var dataSource: DataSource?
     
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
         super.init()
     }
     
-    // MARK: - Lifecycles
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -118,6 +118,19 @@ final class MainViewController: BaseViewController {
         
         rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
+    }
+    
+    // MARK: - Configuration
+    override func configureAttributes() {
+        configureNavigationUI()
+    }
+    
+    private func configureNavigationUI() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: fieldCategoryAnchorButton)
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(customView: searchButton),
+            UIBarButtonItem(customView: filterButton)
+        ]
     }
     
     // MARK: - Layout
@@ -146,20 +159,7 @@ final class MainViewController: BaseViewController {
         }
     }
     
-    // MARK: - Configure
-    override func configureAttributes() {
-        configureNavigationUI()
-    }
-    
-    private func configureNavigationUI() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: fieldCategoryAnchorButton)
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(customView: searchButton),
-            UIBarButtonItem(customView: filterButton)
-        ]
-    }
-    
-    // MARK: - Bind
+    // MARK: - Binding
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),

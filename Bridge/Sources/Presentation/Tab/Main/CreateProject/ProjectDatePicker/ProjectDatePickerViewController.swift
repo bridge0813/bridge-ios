@@ -91,28 +91,28 @@ final class ProjectDatePickerViewController: BaseViewController {
         return button
     }()
     
-    // MARK: - Properties
+    // MARK: - Property
     private let viewModel: ProjectDatePickerViewModel
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(viewModel: ProjectDatePickerViewModel) {
         self.viewModel = viewModel
         super.init()
     }
     
     
-    // MARK: - Lifecycles
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
-        
-        contentContainer.pin.all()
-        contentContainer.flex.layout(mode: .adjustHeight)
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentContainer.frame.height)
+    // MARK: - Configuration
+    override func configureAttributes() {
+        configureNavigationUI()
+    }
+    
+    private func configureNavigationUI() {
+        navigationItem.title = "모집글 작성"
     }
     
     // MARK: - Layout
@@ -147,13 +147,13 @@ final class ProjectDatePickerViewController: BaseViewController {
         }
     }
     
-    // MARK: - Configure
-    override func configureAttributes() {
-        configureNavigationUI()
-    }
-    
-    private func configureNavigationUI() {
-        navigationItem.title = "모집글 작성"
+    override func viewDidLayoutSubviews() {
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.flex.layout()
+        
+        contentContainer.pin.all()
+        contentContainer.flex.layout(mode: .adjustHeight)
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentContainer.frame.height)
     }
     
     // MARK: - Bind

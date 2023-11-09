@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 
 final class MainViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
         let didScroll: Observable<CGPoint>
@@ -28,13 +28,13 @@ final class MainViewModel: ViewModelType {
         let topMargins: Driver<(CGFloat, CGFloat)>  // 카테고리, 컬렉션 뷰의 마진
     }
 
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
     private let fetchProjectsUseCase: FetchAllProjectsUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: MainCoordinator,
         fetchProjectsUseCase: FetchAllProjectsUseCase,
@@ -45,7 +45,7 @@ final class MainViewModel: ViewModelType {
         self.fetchHotProjectsUseCase = fetchHotProjectsUseCase
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         // MARK: - Fetch Projects
         let projects = input.viewWillAppear

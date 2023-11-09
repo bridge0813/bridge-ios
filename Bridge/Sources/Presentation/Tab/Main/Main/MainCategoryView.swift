@@ -22,7 +22,7 @@ final class MainCategoryView: BaseView {
     private let comingSoonButton = MainCategoryButton(.comingSoon)
     private let comingSoonButton2 = MainCategoryButton(.comingSoon)
     
-    // MARK: - Configurations
+    // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).define { flex in

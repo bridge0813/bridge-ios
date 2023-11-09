@@ -24,7 +24,7 @@ final class DatePickerPopUpView: BridgeBasePopUpView {
         return datePicker
     }()
     
-    // MARK: - Properties
+    // MARK: - Property
     override var containerHeight: CGFloat { 547 }
     override var dismissYPosition: CGFloat { 300 }
     

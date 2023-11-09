@@ -58,24 +58,28 @@ final class CompletionViewController: BaseViewController {
         return button
     }()
     
-    // MARK: - Properties
+    // MARK: - Property
     private let viewModel: CompletionViewModel
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(viewModel: CompletionViewModel) {
         self.viewModel = viewModel
         super.init()
     }
     
     
-    // MARK: - Lifecycles
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
+    // MARK: - Configuration
+    override func configureAttributes() {
+        configureNavigationUI()
+    }
+    
+    private func configureNavigationUI() {
+        navigationItem.title = "모집글 작성"
     }
     
     // MARK: - Layout
@@ -91,15 +95,12 @@ final class CompletionViewController: BaseViewController {
         }
     }
     
-    // MARK: - Configure
-    override func configureAttributes() {
-        configureNavigationUI()
+    override func viewDidLayoutSubviews() {
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.flex.layout()
     }
     
-    private func configureNavigationUI() {
-        navigationItem.title = "모집글 작성"
-    }
-    
+    // MARK: - Binding
     override func bind() {
         let input = CompletionViewModel.Input(
             completeButtonTapped: completeButton.rx.tap.asObservable()

@@ -8,7 +8,7 @@
 import RxSwift
 
 final class CompletionViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
         let completeButtonTapped: Observable<Void>
     }
@@ -17,19 +17,19 @@ final class CompletionViewModel: ViewModelType {
         
     }
     
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator
     ) {
         self.coordinator = coordinator
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         input.completeButtonTapped
             .withUnretained(self)

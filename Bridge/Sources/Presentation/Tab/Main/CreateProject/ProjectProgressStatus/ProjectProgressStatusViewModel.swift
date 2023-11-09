@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 
 final class ProjectProgressStatusViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
         let progressMethodButtonTapped: Observable<String>
         let progressStep: Observable<String>
@@ -22,13 +22,13 @@ final class ProjectProgressStatusViewModel: ViewModelType {
         let isNextButtonEnabled: Driver<Bool>
     }
     
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
     private let dataStorage: ProjectDataStorage
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator,
         dataStorage: ProjectDataStorage
@@ -37,7 +37,7 @@ final class ProjectProgressStatusViewModel: ViewModelType {
         self.dataStorage = dataStorage
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         input.nextButtonTapped
             .withUnretained(self)

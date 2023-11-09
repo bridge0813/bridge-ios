@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class ProjectDatePickerViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
         let date: Observable<(type: String, date: Date)>
         let nextButtonTapped: Observable<Void>
@@ -20,13 +20,13 @@ final class ProjectDatePickerViewModel: ViewModelType {
         let date: Driver<(type: String, date: Date)>
     }
     
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
     private let dataStorage: ProjectDataStorage
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator,
         dataStorage: ProjectDataStorage
@@ -35,7 +35,7 @@ final class ProjectDatePickerViewModel: ViewModelType {
         self.dataStorage = dataStorage
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         let date = input.date
             .do(onNext: { [weak self] result in

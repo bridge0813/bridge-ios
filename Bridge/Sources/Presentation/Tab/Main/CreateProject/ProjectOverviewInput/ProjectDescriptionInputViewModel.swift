@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 
 final class ProjectDescriptionInputViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
         let titleTextChanged: Observable<String>
         let descriptionTextChanged: Observable<String>
@@ -20,13 +20,13 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
         let isNextButtonEnabled: Driver<Bool>
     }
     
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
     private let dataStorage: ProjectDataStorage
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator,
         dataStorage: ProjectDataStorage
@@ -35,7 +35,7 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
         self.dataStorage = dataStorage
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         input.nextButtonTapped
             .withUnretained(self)

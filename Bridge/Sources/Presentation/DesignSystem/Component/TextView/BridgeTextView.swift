@@ -44,7 +44,7 @@ final class BridgeTextView: BaseView {
         return label
     }()
     
-    // MARK: - Properties
+    // MARK: - Property
     var resultText: Observable<String> {
         return textView.rx.didEndEditing
             .withLatestFrom(textView.rx.text.orEmpty)

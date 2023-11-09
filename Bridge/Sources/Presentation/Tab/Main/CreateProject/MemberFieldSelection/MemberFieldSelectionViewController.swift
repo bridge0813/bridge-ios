@@ -68,16 +68,16 @@ final class MemberFieldSelectionViewController: BaseViewController {
         backgroundColor: BridgeColor.gray4
     )
     
-    // MARK: - Properties
+    // MARK: - Property
     private let viewModel: MemberFieldSelectionViewModel
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(viewModel: MemberFieldSelectionViewModel) {
         self.viewModel = viewModel
         super.init()
     }
     
-    // MARK: - Lifecycles
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -88,18 +88,14 @@ final class MemberFieldSelectionViewController: BaseViewController {
         navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = nil
     }
     
-    override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
-        
-        contentContainer.pin.all()
-        contentContainer.flex.layout(mode: .adjustHeight)
-        
-        // 130은 스크롤 뷰의 스크롤이 가장 아래로 내려갔을 때, padding 값(피그마 스크롤 처리 참고).
-        scrollView.contentSize = CGSize(
-            width: scrollView.frame.width,
-            height: contentContainer.frame.height + 130
-        )
+    // MARK: - Configuration
+    override func configureAttributes() {
+        configureNavigationUI()
+    }
+    
+    private func configureNavigationUI() {
+        navigationItem.leftBarButtonItem = dismissButton
+        navigationItem.title = "모집글 작성"
     }
     
     // MARK: - Layout
@@ -127,17 +123,21 @@ final class MemberFieldSelectionViewController: BaseViewController {
         }
     }
     
-    // MARK: - Configure
-    override func configureAttributes() {
-        configureNavigationUI()
+    override func viewDidLayoutSubviews() {
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.flex.layout()
+        
+        contentContainer.pin.all()
+        contentContainer.flex.layout(mode: .adjustHeight)
+        
+        // 130은 스크롤 뷰의 스크롤이 가장 아래로 내려갔을 때, padding 값(피그마 스크롤 처리 참고).
+        scrollView.contentSize = CGSize(
+            width: scrollView.frame.width,
+            height: contentContainer.frame.height + 130
+        )
     }
     
-    private func configureNavigationUI() {
-        navigationItem.leftBarButtonItem = dismissButton
-        navigationItem.title = "모집글 작성"
-    }
-    
-    // MARK: - Bind
+    // MARK: - Binding
     override func bind() {
         let input = MemberFieldSelectionViewModel.Input(
             dismissButtonTapped: dismissButton.rx.tap.asObservable(),
