@@ -98,8 +98,6 @@ extension ChatRoomListViewController {
     private func configureDataSource() {
         dataSource = DataSource(tableView: chatRoomListTableView) { tableView, indexPath, item in
             guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else { return ChatRoomCell() }
-            cell.backgroundColor = .clear
-            cell.selectionStyle = .none
             cell.configure(with: item)
             return cell
         }
