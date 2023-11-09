@@ -30,7 +30,7 @@
 		7B153C0C2AD64E5800618280 /* ChatEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C0B2AD64E5800618280 /* ChatEndpoint.swift */; };
 		7B153C0F2AD6CF0D00618280 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C0E2AD6CF0D00618280 /* Interceptor.swift */; };
 		7B153C112AD6D0E100618280 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C102AD6D0E100618280 /* AuthInterceptor.swift */; };
-		7B1742EC2AF9003E004F0953 /* BarAppearanceConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1742EB2AF9003E004F0953 /* BarAppearanceConfigurable.swift */; };
+		7B1742EC2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1742EB2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift */; };
 		7B1742F42AFA46A7004F0953 /* AccessTokenResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1742F32AFA46A7004F0953 /* AccessTokenResponseDTO.swift */; };
 		7B1922CC2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1922CB2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift */; };
 		7B1922D12AE166E600EBDD2E /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1922D02AE166E600EBDD2E /* UIViewController+Keyboard.swift */; };
@@ -209,7 +209,7 @@
 		7B153C0B2AD64E5800618280 /* ChatEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatEndpoint.swift; sourceTree = "<group>"; };
 		7B153C0E2AD6CF0D00618280 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		7B153C102AD6D0E100618280 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
-		7B1742EB2AF9003E004F0953 /* BarAppearanceConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarAppearanceConfigurable.swift; sourceTree = "<group>"; };
+		7B1742EB2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarAppearanceConfigurable.swift; sourceTree = "<group>"; };
 		7B1742F32AFA46A7004F0953 /* AccessTokenResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponseDTO.swift; sourceTree = "<group>"; };
 		7B1922CB2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RxKeyboard.swift"; sourceTree = "<group>"; };
 		7B1922D02AE166E600EBDD2E /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
@@ -508,7 +508,7 @@
 			children = (
 				7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */,
 				7BA36CC82A9E1640000DAB02 /* Reusable.swift */,
-				7B1742EB2AF9003E004F0953 /* BarAppearanceConfigurable.swift */,
+				7B1742EB2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1481,7 +1481,7 @@
 				7B1E5ABE2ADCFD880053E9B3 /* MessageViewModel.swift in Sources */,
 				7C8B82402ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift in Sources */,
 				7C55E6502AE50D9E0018FA5D /* PlaceholderView.swift in Sources */,
-				7B1742EC2AF9003E004F0953 /* BarAppearanceConfigurable.swift in Sources */,
+				7B1742EC2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift in Sources */,
 				7BFECA222AEBEC0B009B4C7D /* ChatCell.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,

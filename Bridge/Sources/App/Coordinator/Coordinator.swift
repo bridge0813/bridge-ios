@@ -17,7 +17,7 @@ extension CoordinatorDelegate {
     func showSignInViewController() { }
 }
 
-protocol Coordinator: AnyObject, Alertable, BarAppearanceConfigurable {
+protocol Coordinator: AnyObject, Alertable {
     var delegate: CoordinatorDelegate? { get set }
     var navigationController: UINavigationController { get set }
     var childCoordinators: [Coordinator] { get set }

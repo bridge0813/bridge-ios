@@ -34,7 +34,7 @@ final class SignInViewController: BaseViewController {
         configuration.baseBackgroundColor = .black
         configuration.attributedTitle = AttributedString(
             "Apple로 로그인",
-            attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.white])
+            attributes: AttributeContainer([.font: UIFont.boldSystemFont(ofSize: 15), .foregroundColor: UIColor.white])
         )
         configuration.image = UIImage(systemName: "apple.logo")
         configuration.imagePadding = 12
@@ -59,6 +59,11 @@ final class SignInViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNoShadowNavigationBarAppearance()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         configureDefaultNavigationBarAppearance()
@@ -67,7 +72,6 @@ final class SignInViewController: BaseViewController {
     // MARK: - Configuration
     override func configureAttributes() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
-        configureNoShadowNavigationBarAppearance()
     }
     
     override func configureLayouts() {

@@ -47,6 +47,16 @@ final class SetFieldViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNoShadowNavigationBarAppearance()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        configureDefaultNavigationBarAppearance()
+    }
+    
     // MARK: - Configuration
     override func configureAttributes() {
         navigationItem.title = "관심분야"

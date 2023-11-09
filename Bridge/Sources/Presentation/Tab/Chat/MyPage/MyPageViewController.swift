@@ -42,11 +42,11 @@ final class MyPageViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureTransparentNavigationBarAppearance()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -8,18 +8,20 @@
 import UIKit
 
 final class TabBarCoordinator: Coordinator {
-    
+    // MARK: - Property
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
     var tabBarController: UITabBarController
     var childCoordinators: [Coordinator]
     
+    // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.tabBarController = UITabBarController()
         self.childCoordinators = []
     }
     
+    // MARK: - Start
     func start() {
         let pages = TabBarPageType.allCases
         let viewControllers = pages.map { createTabNavigationController(of: $0) }
@@ -27,6 +29,7 @@ final class TabBarCoordinator: Coordinator {
     }
 }
 
+// MARK: - Configuration
 private extension TabBarCoordinator {
     func configureTabBarController(with viewControllers: [UIViewController]) {
         tabBarController.viewControllers = viewControllers
@@ -100,14 +103,41 @@ extension TabBarCoordinator {
 // MARK: - Bar appearance
 private extension TabBarCoordinator {
     func configureBarAppearance() {
-        configureDefaultNavigationBarAppearance()
-        configureDefaultTabBarAppearance()
+        let backButtonImage = UIImage(named: "chevron.left")?
+            .resize(to: CGSize(width: 24, height: 24))
+            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -2, bottom: 2, right: 0))
         
-        tabBarController.tabBar.layer.masksToBounds = false
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
+        navigationBarAppearance.titleTextAttributes = [.font: BridgeFont.subtitle1.font, .foregroundColor: BridgeColor.gray01]
+        navigationBarAppearance.shadowColor = BridgeColor.gray06
+        
+        UINavigationBar.appearance().tintColor = BridgeColor.gray01
+        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+        
+        let tabBarItemAppearance = UITabBarItemAppearance()
+        tabBarItemAppearance.normal.iconColor = BridgeColor.gray04
+        tabBarItemAppearance.normal.titleTextAttributes = [.foregroundColor: BridgeColor.gray04]
+        tabBarItemAppearance.selected.iconColor = BridgeColor.primary1
+        tabBarItemAppearance.selected.titleTextAttributes = [.foregroundColor: BridgeColor.primary1]
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = .white
+        tabBarAppearance.shadowImage = nil
+        tabBarAppearance.shadowColor = nil
+        
+        tabBarAppearance.stackedLayoutAppearance = tabBarItemAppearance
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        
         tabBarController.tabBar.layer.shadowColor = UIColor.black.cgColor
         tabBarController.tabBar.layer.shadowOpacity = 0.04
         tabBarController.tabBar.layer.shadowOffset = CGSize(width: 0, height: -6)
-        tabBarController.tabBar.layer.shadowRadius = 10.0
+        tabBarController.tabBar.layer.shadowRadius = 10
     }
 }
 
