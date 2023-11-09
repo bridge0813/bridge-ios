@@ -82,6 +82,12 @@ final class MemberFieldSelectionViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.standardAppearance.shadowColor = nil
+        navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = nil
+    }
+    
     override func viewDidLayoutSubviews() {
         rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()

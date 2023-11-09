@@ -38,7 +38,6 @@ extension CreateProjectCoordinator {
         let viewController = MemberFieldSelectionViewController(viewModel: viewModel)
         createProjectNavigationController = UINavigationController(rootViewController: viewController)
         createProjectNavigationController?.modalPresentationStyle = .fullScreen
-        configureNavigationAppearance()
         
         navigationController.present(
             createProjectNavigationController ?? UINavigationController(),
@@ -104,36 +103,5 @@ extension CreateProjectCoordinator {
         
         let viewController = CompletionViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
-    }
-}
-
-// MARK: - Configuration
-extension CreateProjectCoordinator {
-    private func configureNavigationAppearance() {
-        let backButtonImage = UIImage(named: "chevron.left")?.resize(to: CGSize(width: 24, height: 24))
-            
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithDefaultBackground()
-        appearance.backgroundColor = BridgeColor.gray10
-        appearance.shadowColor = nil
-        appearance.titleTextAttributes = [
-            .font: BridgeFont.subtitle1.font,
-            .foregroundColor: BridgeColor.gray1
-        ]
-        appearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
-        appearance.backButtonAppearance = configureBackButtonAppearance()
-        
-        createProjectNavigationController?.navigationBar.standardAppearance = appearance
-        createProjectNavigationController?.navigationBar.scrollEdgeAppearance = appearance
-    }
-    
-    private func configureBackButtonAppearance() -> UIBarButtonItemAppearance {
-        let backButtonAppearance = UIBarButtonItemAppearance()
-        backButtonAppearance.normal.titleTextAttributes = [
-            .foregroundColor: UIColor.clear,
-            .font: UIFont.systemFont(ofSize: 0)
-        ]
-        
-        return backButtonAppearance
     }
 }
