@@ -11,8 +11,6 @@ import PinLayout
 
 final class ChatRoomCell: BaseTableViewCell {
     // MARK: - UI
-    private let rootFlexContainer = UIView()
-    
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "profile")
@@ -59,16 +57,14 @@ final class ChatRoomCell: BaseTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImageView.image = nil
-        nameLabel.text = ""
-        lastMessageReceivedTimeLabel.text = ""
-        lastMessageContentLabel.text = ""
+        nameLabel.text = nil
+        lastMessageReceivedTimeLabel.text = nil
+        lastMessageContentLabel.text = nil
     }
     
     // MARK: - Layout
     override func configureLayouts() {
-        contentView.addSubview(rootFlexContainer)
-        
-        rootFlexContainer.flex.direction(.row).alignItems(.center).marginVertical(20).define { flex in
+        contentView.flex.direction(.row).alignItems(.center).marginVertical(20).define { flex in
             flex.addItem(profileImageView).size(48).marginLeft(16).marginRight(12)
             
             flex.addItem().define { flex in
@@ -90,8 +86,8 @@ final class ChatRoomCell: BaseTableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.all()
-        rootFlexContainer.flex.layout()
+        contentView.pin.all()
+        contentView.flex.layout()
     }
 }
 
