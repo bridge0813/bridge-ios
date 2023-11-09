@@ -68,27 +68,23 @@ final class ChatRoomCell: BaseTableViewCell {
     override func configureLayouts() {
         contentView.addSubview(rootFlexContainer)
         
-        rootFlexContainer.flex.define { flex in
-            flex.addItem().direction(.row).alignItems(.center).marginVertical(20).define { flex in
-                flex.addItem(profileImageView).size(48).marginLeft(16).marginRight(12)
-                
-                flex.addItem().define { flex in
-                    flex.addItem().width(200).define { flex in
-                        flex.addItem().direction(.row).marginBottom(4).define { flex in
-                            flex.addItem(nameLabel).marginRight(8).shrink(1)
-                            flex.addItem(lastMessageReceivedTimeLabel)
-                        }
-                        
-                        flex.addItem(lastMessageContentLabel)
+        rootFlexContainer.flex.direction(.row).alignItems(.center).marginVertical(20).define { flex in
+            flex.addItem(profileImageView).size(48).marginLeft(16).marginRight(12)
+            
+            flex.addItem().define { flex in
+                flex.addItem().width(200).define { flex in
+                    flex.addItem().direction(.row).marginBottom(4).define { flex in
+                        flex.addItem(nameLabel).marginRight(8).shrink(1)
+                        flex.addItem(lastMessageReceivedTimeLabel)
                     }
+                    
+                    flex.addItem(lastMessageContentLabel)
                 }
-                
-                flex.addItem().grow(1)  // spacer
-                
-                flex.addItem(unreadMessageCountLabel).marginHorizontal(16)
             }
             
-            flex.addItem().height(1).backgroundColor(BridgeColor.gray06)  // divider
+            flex.addItem().grow(1)  // spacer
+            
+            flex.addItem(unreadMessageCountLabel).marginHorizontal(16)
         }
     }
     

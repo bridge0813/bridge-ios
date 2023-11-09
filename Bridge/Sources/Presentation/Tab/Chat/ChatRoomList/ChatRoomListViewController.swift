@@ -19,7 +19,8 @@ final class ChatRoomListViewController: BaseViewController {
         let tableView = UITableView()
         tableView.register(ChatRoomCell.self)
         tableView.rowHeight = 88
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = .singleLine
+        tableView.separatorInset = .zero
         return tableView
     }()
     
