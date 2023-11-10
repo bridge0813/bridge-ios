@@ -19,7 +19,7 @@ final class DefaultChatRoomRepository: ChatRoomRepository {
     }
     
     func fetchChatRooms() -> Observable<[ChatRoom]> {
-        let userID = tokenStorage.get(.userID) ?? ""
+        let userID = tokenStorage.get(.userID) ?? invalidToken
         let chatEndpoint = ChatEndpoint.chatRooms(userID: userID)
     
         return networkService.request(chatEndpoint, interceptor: AuthInterceptor())

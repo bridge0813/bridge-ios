@@ -21,7 +21,7 @@ final class ProjectCell: BaseCollectionViewCell {
         view.layer.shadowRadius = 5
         view.layer.cornerRadius = 8
         view.layer.borderWidth = 1.0
-        view.layer.borderColor = BridgeColor.gray8.cgColor
+        view.layer.borderColor = BridgeColor.gray08.cgColor
         view.clipsToBounds = true
         view.layer.masksToBounds = false
         
@@ -31,7 +31,7 @@ final class ProjectCell: BaseCollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.configureTextWithLineHeight(text: "실제 상업용 여행사 웹사이트 개발할 백엔드 개발자 구합니다.", lineHeight: 24)
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.font = BridgeFont.subtitle3Long.font
         label.numberOfLines = 2
         
@@ -52,7 +52,7 @@ final class ProjectCell: BaseCollectionViewCell {
     private let recruitNumberLabel: UILabel = {
         let label = UILabel()
         label.text = "1명 모집"
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         label.font = BridgeFont.body4.font
         
         return label
@@ -61,7 +61,7 @@ final class ProjectCell: BaseCollectionViewCell {
     private let deadlineLabel: UILabel = {
         let label = UILabel()
         label.text = "2023.8.20 모집 마감"
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         label.font = BridgeFont.body4.font
         
         return label
@@ -79,7 +79,7 @@ final class ProjectCell: BaseCollectionViewCell {
             
             flex.addItem()
                 .height(1)
-                .backgroundColor(BridgeColor.gray8)
+                .backgroundColor(BridgeColor.gray08)
                 .marginHorizontal(18)
                 .marginBottom(11)
             

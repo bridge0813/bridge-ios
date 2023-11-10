@@ -27,8 +27,16 @@ final class ChatCoordinator: Coordinator {
         
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
-        chatRoomRepository = MockChatRoomRepository()
+        
+#if DEBUG
+//        chatRoomRepository = MockChatRoomRepository()
+        chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
         messageRepository = MockMessageRepository()
+#else
+        chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
+        messageRepository = MockMessageRepository()
+#endif
+        
         fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
         leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
         observeMessageUseCase = DefaultObserveMessageUseCase(messageRepository: messageRepository)
@@ -40,7 +48,7 @@ final class ChatCoordinator: Coordinator {
 }
 
 extension ChatCoordinator {
-    func showChatRoomListViewController() {
+    private func showChatRoomListViewController() {
         let chatRoomListViewModel = ChatRoomListViewModel(
             coordinator: self,
             fetchChatRoomsUseCase: fetchChatRoomsUseCase,

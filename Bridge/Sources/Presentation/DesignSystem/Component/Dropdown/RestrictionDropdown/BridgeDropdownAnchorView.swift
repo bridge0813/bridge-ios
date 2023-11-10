@@ -23,8 +23,14 @@ final class BridgeDropdownAnchorView: BaseView {
     
     private let restrictionOptionLabel: UILabel = {
         let label = UILabel()
+<<<<<<< HEAD:Bridge/Sources/Presentation/DesignSystem/Component/Dropdown/RestrictionDropdown/RestrictionDropdownAnchorView.swift
+        label.text = "제한 없음"
+        label.textColor = BridgeColor.gray01
+        label.font = BridgeFont.button2.font
+=======
         label.textColor = BridgeColor.gray3
         label.font = BridgeFont.body2.font
+>>>>>>> main:Bridge/Sources/Presentation/DesignSystem/Component/Dropdown/RestrictionDropdown/BridgeDropdownAnchorView.swift
         
         return label
     }()

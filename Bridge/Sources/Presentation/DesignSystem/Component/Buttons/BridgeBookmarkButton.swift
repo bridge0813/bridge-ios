@@ -16,14 +16,14 @@ final class BridgeBookmarkButton: BaseButton {
         var configuration = UIButton.Configuration.filled()
         configuration.image = buttonImage
         configuration.baseForegroundColor = BridgeColor.gray10
-        configuration.baseBackgroundColor = BridgeColor.gray4
+        configuration.baseBackgroundColor = BridgeColor.gray04
         
         layer.cornerRadius = 4
         self.configuration = configuration
         changesSelectionAsPrimaryAction = true
         configurationUpdateHandler = { button in
             let tintColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray10
-            let backgroundColor: UIColor = button.state == .selected ? BridgeColor.primary3 : BridgeColor.gray4
+            let backgroundColor: UIColor = button.state == .selected ? BridgeColor.primary3 : BridgeColor.gray04
 
             var updatedConfiguration = button.configuration
             updatedConfiguration?.baseForegroundColor = tintColor

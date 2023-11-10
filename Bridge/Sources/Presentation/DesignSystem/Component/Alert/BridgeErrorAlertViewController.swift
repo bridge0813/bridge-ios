@@ -30,21 +30,26 @@ final class BridgeErrorAlertViewController: BaseViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         return label
     }()
     
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2Long.font
-        label.textColor = BridgeColor.gray2
+        label.textColor = BridgeColor.gray02
         label.numberOfLines = 0
         return label
     }()
     
+    private var primaryAction: PrimaryActionClosure?
+    
     // MARK: - Initializer
-    init(configuration: ErrorAlertConfiguration) {
+    init(configuration: ErrorAlertConfiguration, primaryAction: PrimaryActionClosure?) {
+        self.primaryAction = primaryAction
+        
         super.init()
+        
         titleLabel.text = configuration.title
         descriptionLabel.text = configuration.description
     }
@@ -60,6 +65,10 @@ final class BridgeErrorAlertViewController: BaseViewController {
         super.viewDidAppear(animated)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
+            if let primaryAction = self?.primaryAction {
+                primaryAction()
+            }
+            
             self?.dismiss(animated: true)
         }
     }
@@ -68,6 +77,10 @@ final class BridgeErrorAlertViewController: BaseViewController {
         let location = sender.location(in: view)
         
         if backgroundView.frame.contains(location) {
+            if let primaryAction {
+                primaryAction()
+            }
+            
             dismiss(animated: true)
         }
     }

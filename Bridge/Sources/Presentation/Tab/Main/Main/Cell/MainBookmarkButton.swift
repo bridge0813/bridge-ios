@@ -12,12 +12,12 @@ final class MainBookmarkButton: BaseButton {
     override func configureAttributes() {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .clear
-        configuration.baseForegroundColor = BridgeColor.gray6
+        configuration.baseForegroundColor = BridgeColor.gray06
 
         self.configuration = configuration
         changesSelectionAsPrimaryAction = true
         configurationUpdateHandler = { button in
-            let tintColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray6
+            let tintColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray06
             let imageName: String = button.state == .selected ? "bookmark.fill" : "bookmark"
             
             let buttonImage = UIImage(named: imageName)?

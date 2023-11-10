@@ -17,7 +17,7 @@ final class PlaceholderView: BaseView {
     let projectCountLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body4.font
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         
         let labelText = "0개의 프로젝트"
         let attributedString = NSMutableAttributedString(string: labelText)
@@ -44,7 +44,7 @@ final class PlaceholderView: BaseView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.textAlignment = .center
         
         return label
@@ -53,7 +53,7 @@ final class PlaceholderView: BaseView {
     private let subTitleLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray4
+        label.textColor = BridgeColor.gray04
         label.numberOfLines = 0
         
         return label

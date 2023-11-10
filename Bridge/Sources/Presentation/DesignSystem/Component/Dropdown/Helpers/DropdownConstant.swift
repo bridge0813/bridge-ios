@@ -10,7 +10,7 @@ import UIKit
 // DropDown 라이브러리에서 사용하는 여러 상수들을 정의
 enum DropdownConstant {
     enum DropdownItem {
-        static let textColor = BridgeColor.gray1
+        static let textColor = BridgeColor.gray01
         static let textFont = BridgeFont.button2.font
         static let selectedBackgroundColor = UIColor.clear
     }

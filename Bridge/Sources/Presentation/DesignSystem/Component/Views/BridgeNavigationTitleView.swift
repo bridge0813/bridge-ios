@@ -11,9 +11,8 @@ final class BridgeNavigationTitleView: BaseView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.backgroundColor = .clear
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = BridgeFont.headline1.font
+        label.textColor = BridgeColor.gray01
         return label
     }()
     

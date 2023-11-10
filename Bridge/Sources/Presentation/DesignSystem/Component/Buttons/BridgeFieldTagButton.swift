@@ -19,12 +19,12 @@ final class BridgeFieldTagButton: BaseButton {
     
     override func configureAttributes() {
         var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = BridgeColor.gray9
+        configuration.baseBackgroundColor = BridgeColor.gray09
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
         
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.tag1.font
-        titleContainer.foregroundColor = BridgeColor.gray3
+        titleContainer.foregroundColor = BridgeColor.gray03
         configuration.attributedTitle = AttributedString(title, attributes: titleContainer)
         
         layer.borderColor = BridgeColor.primary1.cgColor
@@ -33,8 +33,8 @@ final class BridgeFieldTagButton: BaseButton {
         self.configuration = configuration
         changesSelectionAsPrimaryAction = true
         configurationUpdateHandler = { button in
-            let textColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray3
-            let backgroundColor: UIColor = button.state == .selected ? BridgeColor.gray10 : BridgeColor.gray9
+            let textColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray03
+            let backgroundColor: UIColor = button.state == .selected ? BridgeColor.gray10 : BridgeColor.gray09
             let borderWidth: CGFloat = button.state == .selected ? 1 : 0
             
             button.layer.borderWidth = borderWidth

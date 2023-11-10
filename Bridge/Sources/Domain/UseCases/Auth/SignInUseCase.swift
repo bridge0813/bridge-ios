@@ -21,5 +21,9 @@ final class DefaultSignInUseCase: SignInUseCase {
     
     func signInWithApple(credentials: UserCredentials) -> Observable<SignInResult> {
         authRepository.signInWithApple(credentials: credentials)
+            .map { isRegistered in
+                isRegistered ? .success : .signUpNeeded
+            }
+            .catchAndReturn(.failure)
     }
 }
