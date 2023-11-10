@@ -176,6 +176,12 @@
 		7C8CC41A2AF40A100032F237 /* BaseProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC4192AF40A100032F237 /* BaseProgressView.swift */; };
 		7C8CC41C2AF522A10032F237 /* BridgeBasePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */; };
 		7CA04F0F2AF8F867007B9191 /* TechStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F0E2AF8F867007B9191 /* TechStack.swift */; };
+		7CA04F122AFDF694007B9191 /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */; };
+		7CA04F142AFDF71C007B9191 /* FirstSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F132AFDF71C007B9191 /* FirstSectionView.swift */; };
+		7CA04F162AFDF72A007B9191 /* SecondSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F152AFDF72A007B9191 /* SecondSectionView.swift */; };
+		7CA04F182AFDF749007B9191 /* ThirdSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F172AFDF749007B9191 /* ThirdSectionView.swift */; };
+		7CA04F1A2AFDFE4B007B9191 /* ProjectDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */; };
+		7CA04F1E2AFE4B0F007B9191 /* RecruitFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -356,6 +362,12 @@
 		7C8CC4192AF40A100032F237 /* BaseProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProgressView.swift; sourceTree = "<group>"; };
 		7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBasePopUpView.swift; sourceTree = "<group>"; };
 		7CA04F0E2AF8F867007B9191 /* TechStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechStack.swift; sourceTree = "<group>"; };
+		7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
+		7CA04F132AFDF71C007B9191 /* FirstSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSectionView.swift; sourceTree = "<group>"; };
+		7CA04F152AFDF72A007B9191 /* SecondSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSectionView.swift; sourceTree = "<group>"; };
+		7CA04F172AFDF749007B9191 /* ThirdSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdSectionView.swift; sourceTree = "<group>"; };
+		7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewModel.swift; sourceTree = "<group>"; };
+		7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldCell.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -1244,6 +1256,19 @@
 			path = TechStack;
 			sourceTree = "<group>";
 		};
+		7CA04F102AFDF645007B9191 /* ProjectDetail */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */,
+				7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */,
+				7CA04F132AFDF71C007B9191 /* FirstSectionView.swift */,
+				7CA04F152AFDF72A007B9191 /* SecondSectionView.swift */,
+				7CA04F172AFDF749007B9191 /* ThirdSectionView.swift */,
+				7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */,
+			);
+			path = ProjectDetail;
+			sourceTree = "<group>";
+		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -1330,6 +1355,7 @@
 				7CF93E022A9C65040013EBD6 /* Coordinator */,
 				7CF93E032A9C650D0013EBD6 /* Main */,
 				7CC9F6C12AAEE9E800685EA9 /* CreateProject */,
+				7CA04F102AFDF645007B9191 /* ProjectDetail */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1480,6 +1506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
+				7CA04F142AFDF71C007B9191 /* FirstSectionView.swift in Sources */,
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
 				7B3289352ADE55DA009DF3C2 /* BridgeMessageInputBar.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */,
@@ -1489,6 +1516,7 @@
 				7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
+				7CA04F1E2AFE4B0F007B9191 /* RecruitFieldCell.swift in Sources */,
 				7BA36C9D2A9C5105000DAB02 /* Message.swift in Sources */,
 				7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */,
 				7BA36CBF2A9DA44F000DAB02 /* NetworkError.swift in Sources */,
@@ -1553,6 +1581,7 @@
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B2D76EC2AA993C700E5907B /* AuthCoordinator.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
+				7CA04F1A2AFDFE4B007B9191 /* ProjectDetailViewModel.swift in Sources */,
 				7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7B02A66A2AE000DE00C8D4A1 /* WebSocketEndpoint.swift in Sources */,
@@ -1585,6 +1614,7 @@
 				7B1922D12AE166E600EBDD2E /* UIViewController+Keyboard.swift in Sources */,
 				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */,
+				7CA04F162AFDF72A007B9191 /* SecondSectionView.swift in Sources */,
 				7C8CC4182AF4091D0032F237 /* BridgeProgressView.swift in Sources */,
 				7B14DB2E2AB1DA39009A00EB /* SignInResult.swift in Sources */,
 				7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */,
@@ -1598,6 +1628,7 @@
 				7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
 				7BB8C51F2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift in Sources */,
+				7CA04F122AFDF694007B9191 /* ProjectDetailViewController.swift in Sources */,
 				7B14DB382AB3040F009A00EB /* BridgePlaceholderView.swift in Sources */,
 				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
 				7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */,
@@ -1610,6 +1641,7 @@
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,
 				7C569CF32A9F67C60063D362 /* Project.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
+				7CA04F182AFDF749007B9191 /* ThirdSectionView.swift in Sources */,
 				7B1E5ABC2ADCFD790053E9B3 /* MessageViewController.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,

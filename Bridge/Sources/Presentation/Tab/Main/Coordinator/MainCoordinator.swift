@@ -61,7 +61,9 @@ extension MainCoordinator {
     }
     
     func connectToProjectDetailFlow(with id: String) {
-        print(id)
+        let projectDetailViewModel = ProjectDetailViewModel()
+        let projectDetailVC = ProjectDetailViewController(viewModel: projectDetailViewModel)
+        navigationController.pushViewController(projectDetailVC, animated: true)
     }
     
     func connectToCreateProjectFlow() {
