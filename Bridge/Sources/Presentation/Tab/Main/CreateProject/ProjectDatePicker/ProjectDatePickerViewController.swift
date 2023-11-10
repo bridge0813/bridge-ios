@@ -20,7 +20,7 @@ final class ProjectDatePickerViewController: BaseViewController {
     
     private let dividerView: UIView = {
         let divider = UIView()
-        divider.backgroundColor = BridgeColor.gray6
+        divider.backgroundColor = BridgeColor.gray06
         divider.isHidden = true
         
         return divider
@@ -40,7 +40,7 @@ final class ProjectDatePickerViewController: BaseViewController {
         let label = UILabel()
         label.configureTextWithLineHeight(text: "당신의 프로젝트에 대한\n기본 정보를 알려주세요!", lineHeight: 30)
         label.font = BridgeFont.headline1Long.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.numberOfLines = 2
         
         return label
@@ -54,7 +54,7 @@ final class ProjectDatePickerViewController: BaseViewController {
         let label = UILabel()
         label.text = "모집 마감일"
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -64,7 +64,7 @@ final class ProjectDatePickerViewController: BaseViewController {
         let label = UILabel()
         label.text = "시작일"
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -74,7 +74,7 @@ final class ProjectDatePickerViewController: BaseViewController {
         let label = UILabel()
         label.text = "예상 완료일"
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -84,7 +84,7 @@ final class ProjectDatePickerViewController: BaseViewController {
         let button = BridgeButton(
             title: "다음",
             font: BridgeFont.button1.font,
-            backgroundColor: BridgeColor.gray4
+            backgroundColor: BridgeColor.gray04
         )
         button.isEnabled = false
         

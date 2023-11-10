@@ -16,22 +16,16 @@ final class BridgeDropdownAnchorView: BaseView {
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
         view.layer.borderWidth = 1
-        view.layer.borderColor = BridgeColor.gray6.cgColor
+        view.layer.borderColor = BridgeColor.gray06.cgColor
         
         return view
     }()
     
     private let restrictionOptionLabel: UILabel = {
         let label = UILabel()
-<<<<<<< HEAD:Bridge/Sources/Presentation/DesignSystem/Component/Dropdown/RestrictionDropdown/RestrictionDropdownAnchorView.swift
         label.text = "제한 없음"
-        label.textColor = BridgeColor.gray01
-        label.font = BridgeFont.button2.font
-=======
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         label.font = BridgeFont.body2.font
->>>>>>> main:Bridge/Sources/Presentation/DesignSystem/Component/Dropdown/RestrictionDropdown/BridgeDropdownAnchorView.swift
-        
         return label
     }()
     
@@ -73,8 +67,8 @@ final class BridgeDropdownAnchorView: BaseView {
     
     // MARK: - Methods
     private func updateStyleForDropdownState() {
-        let textColor = isActive ? BridgeColor.gray1 : BridgeColor.gray3
-        let borderColor = isActive ? BridgeColor.primary1.cgColor : BridgeColor.gray6.cgColor
+        let textColor = isActive ? BridgeColor.gray01 : BridgeColor.gray03
+        let borderColor = isActive ? BridgeColor.primary1.cgColor : BridgeColor.gray06.cgColor
         let image: UIImage? = isActive ? UIImage(named: "dropup.chevron") : UIImage(named: "dropdown.chevron")
         
         UIView.animate(withDuration: 0.2) { [weak self] in

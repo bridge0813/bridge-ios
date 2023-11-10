@@ -63,7 +63,7 @@ final class DatePickerPopUpView: BridgeBasePopUpView {
             
             flex.addItem(titleLabel).width(150).height(22).marginTop(30).marginLeft(16)
             
-            flex.addItem().backgroundColor(BridgeColor.gray8).height(1).marginTop(8)
+            flex.addItem().backgroundColor(BridgeColor.gray08).height(1).marginTop(8)
             
             flex.addItem(datePicker).marginTop(40).marginHorizontal(16)
            

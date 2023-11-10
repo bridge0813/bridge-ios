@@ -16,7 +16,7 @@ final class BridgeProgressView: BaseProgressView {
     
     override func configureAttributes() {
         progressTintColor = BridgeColor.primary1
-        backgroundColor = BridgeColor.gray7
+        backgroundColor = BridgeColor.gray07
     }
 
 }

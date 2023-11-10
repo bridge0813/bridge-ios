@@ -23,7 +23,7 @@ class BridgeBasePopUpView: BaseView {
     
     let dragHandleBar: UIView = {
         let view = UIView()
-        view.backgroundColor = BridgeColor.gray8
+        view.backgroundColor = BridgeColor.gray08
         view.clipsToBounds = true
         view.layer.cornerRadius = 2.5
         
@@ -33,7 +33,7 @@ class BridgeBasePopUpView: BaseView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.subtitle1.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -42,7 +42,7 @@ class BridgeBasePopUpView: BaseView {
         let button = BridgeButton(
             title: "완료",
             font: BridgeFont.button1.font,
-            backgroundColor: BridgeColor.gray4
+            backgroundColor: BridgeColor.gray04
         )
         button.isEnabled = false
         

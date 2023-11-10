@@ -17,7 +17,7 @@ enum DropdownConstant {
     
     enum DropdownUI {
         static let borderWidth: CGFloat = 1
-        static let borderColor = BridgeColor.gray8.cgColor
+        static let borderColor = BridgeColor.gray08.cgColor
         static let cornerRadius: CGFloat = 8
         static let rowHeight: CGFloat = 42
         static let heightPadding: CGFloat = 20
