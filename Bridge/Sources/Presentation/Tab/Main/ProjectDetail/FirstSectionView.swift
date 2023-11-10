@@ -19,20 +19,7 @@ final class FirstSectionView: BaseView {
         return view
     }()
     
-    // TODO: 디자인 시스템 ChipLabel 개발 필요
-    private let dDayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "D-12"
-        label.textAlignment = .center
-        label.textColor = BridgeColor.primary1
-        label.font = BridgeFont.caption1.font
-        label.clipsToBounds = true
-        label.layer.cornerRadius = 20
-        label.layer.borderColor = BridgeColor.primary1.cgColor
-        label.layer.borderWidth = 1
-        
-        return label
-    }()
+    private let dDayLabel = BridgeChipLineLabel("D-12")
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -61,7 +48,7 @@ final class FirstSectionView: BaseView {
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.paddingHorizontal(16).define { flex in
-            flex.addItem(dDayLabel).width(47).height(22).marginTop(24)
+            flex.addItem(dDayLabel).width(dDayLabel.intrinsicContentSize.width).height(22).marginTop(24)
             flex.addItem(titleLabel).height(60).marginTop(16).marginRight(49)
             flex.addItem(descriptionLabel).marginTop(8)
             flex.addItem().height(32)  // 바텀마진
