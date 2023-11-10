@@ -13,13 +13,13 @@ struct Project {
     var title: String
     var description: String
     var dDays: Int
-    var recruitmentDeadline: Date
+    var deadline: Date
     var startDate: Date?
     var endDate: Date?
     var memberRequirements: [MemberRequirement]
     var applicantRestrictions: [String]
     var progressMethod: String
-    var progressStatus: String
+    var progressStep: String
     var userEmail: String
 }
 
@@ -30,13 +30,13 @@ extension Project {
             title: "",
             description: "",
             dDays: 0,
-            recruitmentDeadline: Date(),
+            deadline: Date(),
             startDate: nil,
             endDate: nil,
             memberRequirements: [],
             applicantRestrictions: [],
             progressMethod: "",
-            progressStatus: "",
+            progressStep: "",
             userEmail: ""
         )
     }

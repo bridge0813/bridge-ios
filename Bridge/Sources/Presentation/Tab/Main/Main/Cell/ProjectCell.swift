@@ -67,7 +67,7 @@ final class ProjectCell: BaseCollectionViewCell {
         return label
     }()
     
-    // MARK: - Configure
+    // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).height(149).define { flex in

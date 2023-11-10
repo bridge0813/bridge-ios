@@ -12,73 +12,99 @@ import RxCocoa
 import RxSwift
 
 final class CompletionViewController: BaseViewController {
-    // MARK: - Properties
+    // MARK: - UI
     private let rootFlexContainer = UIView()
-   
-    private let instructionLabel: UILabel = {
+    
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.configureLabel(
-            textColor: .black,
-            font: .boldSystemFont(ofSize: 18),
-            numberOfLines: 2
+        label.configureTextWithLineHeight(
+            text: "모집글 작성 완료!\n좋은 팀원들을 만날거예요!",
+            lineHeight: 30,
+            alignment: .center
         )
-        label.text = "모집글 작성 완료! \n좋은 팀원들을 만날거에요"
-        label.lineBreakMode = .byTruncatingTail
+        label.font = BridgeFont.headline1Long.font
+        label.textColor = BridgeColor.gray1
+        label.numberOfLines = 2
+        
         return label
     }()
     
-    private let completionButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("완료", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+    private let subTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "관리페이지에서 수정할 수 있어요"
+        label.font = BridgeFont.body2Long.font
+        label.textColor = BridgeColor.gray4
+        
+        return label
+    }()
+    
+    private let castleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "blockcastle")
+        imageView.backgroundColor = .clear
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
+    }()
+    
+    private let completeButton: BridgeButton = {
+        let button = BridgeButton(
+            title: "완료",
+            font: BridgeFont.button1.font,
+            backgroundColor: BridgeColor.gray4
+        )
+        button.isEnabled = true
         
         return button
     }()
-
+    
+    // MARK: - Property
     private let viewModel: CompletionViewModel
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(viewModel: CompletionViewModel) {
         self.viewModel = viewModel
         super.init()
     }
     
-    // MARK: - Lifecycles
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        configureNavigationUI()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea).marginTop(10)
-        rootFlexContainer.flex.layout()
-    }
-    
-    // MARK: - Methods
-    private func configureNavigationUI() {
-    }
-    
-    override func configureLayouts() {
-        view.addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).padding(5).alignItems(.center).define { flex in
-            flex.addItem(instructionLabel).marginHorizontal(10).marginTop(20)
-            flex.addItem(completionButton).width(50).height(50).marginTop(50)
-        }
-    }
-    
+    // MARK: - Configuration
     override func configureAttributes() {
         configureNavigationUI()
     }
     
+    private func configureNavigationUI() {
+        navigationItem.title = "모집글 작성"
+    }
+    
+    // MARK: - Layout
+    override func configureLayouts() {
+        view.addSubview(rootFlexContainer)
+        
+        rootFlexContainer.flex.alignItems(.center).define { flex in
+            flex.addItem(titleLabel).width(210).height(60).marginTop(56)
+            flex.addItem(subTitleLabel).width(180).height(20).marginTop(8)
+            flex.addItem(castleImageView).size(200).marginTop(114)
+            flex.addItem().grow(1)
+            flex.addItem(completeButton).alignSelf(.stretch).height(52).marginHorizontal(16).marginBottom(24)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.flex.layout()
+    }
+    
+    // MARK: - Binding
     override func bind() {
         let input = CompletionViewModel.Input(
-            completionButtonTapped: completionButton.rx.tap.asObservable()
+            completeButtonTapped: completeButton.rx.tap.asObservable()
         )
-        let output = viewModel.transform(input: input)
+        let _ = viewModel.transform(input: input)
     }
 }

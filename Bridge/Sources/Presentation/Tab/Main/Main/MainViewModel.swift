@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 
 final class MainViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
         let didScroll: Observable<CGPoint>
@@ -28,13 +28,13 @@ final class MainViewModel: ViewModelType {
         let topMargins: Driver<(CGFloat, CGFloat)>  // 카테고리, 컬렉션 뷰의 마진
     }
 
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
     private let fetchProjectsUseCase: FetchAllProjectsUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: MainCoordinator,
         fetchProjectsUseCase: FetchAllProjectsUseCase,
@@ -45,7 +45,7 @@ final class MainViewModel: ViewModelType {
         self.fetchHotProjectsUseCase = fetchHotProjectsUseCase
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         // MARK: - Fetch Projects
         let projects = input.viewWillAppear
@@ -107,15 +107,14 @@ final class MainViewModel: ViewModelType {
         let topMargins = input.didScroll
             .map { offset in
                 let categoryHeight: CGFloat = 102.0
-                let minTop: CGFloat = 44.0
+                let minTop: CGFloat = 0
                 
                 // 컬렉션뷰 마진계산
-                let maxCollectionViewMargin: CGFloat = 146.0
                 let collectionViewMargin = min(
-                    maxCollectionViewMargin,
+                    categoryHeight,
                     max(
                         minTop,
-                        maxCollectionViewMargin - (offset.y * (maxCollectionViewMargin - minTop) / categoryHeight)
+                        categoryHeight - (offset.y * (categoryHeight - minTop) / categoryHeight)
                     )
                 )
                 
@@ -138,7 +137,9 @@ final class MainViewModel: ViewModelType {
         input.createButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.connectToCreateProjectFlow()
+                owner.coordinator?.showAlert(configuration: .createProject, primaryAction: {
+                    owner.coordinator?.connectToCreateProjectFlow()
+                })
             })
             .disposed(by: disposeBag)
         

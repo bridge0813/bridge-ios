@@ -28,7 +28,49 @@ final class MainViewController: BaseViewController {
         return placeholderView
     }()
     
-    private let topMenuView = TopMenuView()
+    private let fieldCategoryAnchorButton = FieldCategoryAnchorButton()
+    private lazy var fieldDropdown: DropDown = {
+        let dropdown = DropDown(
+            anchorView: fieldCategoryAnchorButton,
+            bottomOffset: CGPoint(x: 0, y: 10),
+            dataSource: ["UI/UX", "전체"],
+            cellHeight: 46,
+            itemTextColor: BridgeColor.gray3,
+            itemTextFont: BridgeFont.body2.font,
+            selectedItemTextColor: BridgeColor.gray1,
+            dimmedBackgroundColor: .black.withAlphaComponent(0.3),
+            width: 147,
+            cornerRadius: 4
+        )
+        
+        return dropdown
+    }()
+    
+    private let filterButton: UIButton = {
+        let buttonImage = UIImage(named: "hamburger")?
+            .resize(to: CGSize(width: 24, height: 24))
+        
+        var configuration = UIButton.Configuration.filled()
+        configuration.baseBackgroundColor = .clear
+        configuration.baseForegroundColor = .clear
+        configuration.image = buttonImage
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8)
+        
+        let button = UIButton()
+        button.configuration = configuration
+        button.setImage(buttonImage, for: .normal)
+        return button
+    }()
+
+    private let searchButton: UIButton = {
+        let buttonImage = UIImage(named: "magnifyingglass")?
+            .resize(to: CGSize(width: 24, height: 24))
+            
+        let button = UIButton()
+        button.setImage(buttonImage, for: .normal)
+        return button
+    }()
+    
     private let categoryView = MainCategoryView()
     
     private lazy var collectionView: UICollectionView = {
@@ -52,7 +94,7 @@ final class MainViewController: BaseViewController {
     
     private let createProjectButton = BridgeCreateProjectButton()
     
-    // MARK: - Properties
+    // MARK: - Property
     private let viewModel: MainViewModel
     
     typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
@@ -60,56 +102,53 @@ final class MainViewController: BaseViewController {
     private var dataSource: DataSource?
     
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
         super.init()
     }
     
-    // MARK: - Lifecycles
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.bringSubviewToFront(topMenuView)
         rootFlexContainer.flex.layout()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        navigationController?.setNavigationBarHidden(false, animated: false)
+    // MARK: - Configuration
+    override func configureAttributes() {
+        configureNavigationUI()
     }
     
-    // MARK: - Configure
+    private func configureNavigationUI() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: fieldCategoryAnchorButton)
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(customView: searchButton),
+            UIBarButtonItem(customView: filterButton)
+        ]
+    }
+    
+    // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).define { flex in
-            flex.addItem(topMenuView)
-            
             flex.addItem(categoryView)
                 .position(.absolute)
                 .height(102)
-                .top(44)
             
             flex.addItem(collectionView)
                 .position(.absolute)
-                .top(146)
             
             flex.addItem(placeholderView)
                 .position(.absolute)
                 .width(100%)
                 .height(75%)
-                .top(146)
+                .top(102)
             
             flex.addItem(createProjectButton)
                 .position(.absolute)
@@ -120,12 +159,12 @@ final class MainViewController: BaseViewController {
         }
     }
     
-    // MARK: - Bind
+    // MARK: - Binding
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             didScroll: collectionView.rx.contentOffset.asObservable(),
-            filterButtonTapped: topMenuView.filterButton.rx.tap.asObservable(),
+            filterButtonTapped: filterButton.rx.tap.asObservable(),
             itemSelected: collectionView.rx.itemSelected.asObservable(),
             createButtonTapped: createProjectButton.rx.tap.asObservable(),
             categoryButtonTapped: categoryView.categoryButtonTapped
@@ -186,18 +225,17 @@ final class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        // TODO: - 바인딩 처리 예정
-        topMenuView.fieldCategoryAnchorButton.rx.tap.asDriver()
+        // 드롭다운 Show
+        fieldCategoryAnchorButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] in
-                self?.topMenuView.fieldDropdown.show()
+                self?.fieldDropdown.show()
             })
             .disposed(by: disposeBag)
             
-        
-        topMenuView.fieldDropdown.itemSelected
-            .withUnretained(self)
-            .subscribe(onNext: { owner, item in
-                owner.topMenuView.fieldCategoryAnchorButton.updateTitle(item.title)
+        // TODO: - 바인딩 처리 예정
+        fieldDropdown.itemSelected.asDriver(onErrorJustReturn: (0, ""))
+            .drive(onNext: { [weak self] item in
+                self?.fieldCategoryAnchorButton.updateTitle(item.title)
             })
             .disposed(by: disposeBag)
     }
@@ -236,7 +274,10 @@ extension MainViewController {
 // MARK: - 컬렉션 뷰의 Scroll 처리
 extension MainViewController {
     func updateTopMargin(categoryMargin: CGFloat, collectionViewMargin: CGFloat) {
-        topMenuView.dividerView.isHidden = categoryMargin == -58.0 ? false : true
+        let dividerColor = categoryMargin == -102.0 ? BridgeColor.gray6 : nil
+        
+        navigationController?.navigationBar.standardAppearance.shadowColor = dividerColor
+        navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = dividerColor
         
         categoryView.flex
             .position(.absolute)

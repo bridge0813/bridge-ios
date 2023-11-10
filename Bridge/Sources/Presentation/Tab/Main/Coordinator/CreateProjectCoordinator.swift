@@ -8,7 +8,7 @@
 import UIKit
 
 final class CreateProjectCoordinator: Coordinator {
-    // MARK: - Properties
+    // MARK: - Property
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
@@ -16,7 +16,7 @@ final class CreateProjectCoordinator: Coordinator {
     private let projectDataStorage = ProjectDataStorage()
     private var createProjectNavigationController: UINavigationController?
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []
@@ -45,9 +45,7 @@ extension CreateProjectCoordinator {
         )
     }
     
-    func showMemberRequirementInputViewController(
-        with selectedFields: [String]
-    ) {
+    func showMemberRequirementInputViewController(with selectedFields: [String]) {
         let viewModel = MemberRequirementInputViewModel(
             coordinator: self,
             selectedFields: selectedFields,

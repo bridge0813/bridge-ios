@@ -14,6 +14,7 @@ final class ChatRoomDropdownMenuCell: BaseDropdownCell {
     private lazy var optionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = BridgeColor.gray3
+
         return imageView
     }()
     
@@ -29,6 +30,7 @@ final class ChatRoomDropdownMenuCell: BaseDropdownCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
     }

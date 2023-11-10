@@ -15,13 +15,13 @@ final class ProjectDataStorage {
             title: "",
             description: "",
             dDays: 0,
-            recruitmentDeadline: Date(),
+            deadline: Date(),
             startDate: nil,
             endDate: nil,
             memberRequirements: [],
             applicantRestrictions: [],
             progressMethod: "",
-            progressStatus: "",
+            progressStep: "",
             userEmail: ""
         )
 }
@@ -42,13 +42,13 @@ extension ProjectDataStorage {
     }
     
     // MARK: - ApplicantRestriction(지원제한)
-    func updateApplicantRestriction(with restrictions: [ApplicantRestrictionViewModel.RestrictionTagType]) {
-        currentProject.applicantRestrictions = restrictions.map { $0.rawValue }
+    func updateApplicantRestriction(with restriction: [String]) {
+        currentProject.applicantRestrictions = restriction
     }
     
     // MARK: - ProjectDatePicker(날짜설정)
-    func updateRecruitmentDeadline(with date: Date) {
-        currentProject.recruitmentDeadline = date
+    func updateDeadline(with date: Date) {
+        currentProject.deadline = date
     }
     
     func updateStartDate(with date: Date?) {
@@ -64,8 +64,8 @@ extension ProjectDataStorage {
         currentProject.progressMethod = method
     }
     
-    func updateProgressStatus(with status: String) {
-        currentProject.progressStatus = status
+    func updateProgressStep(with step: String) {
+        currentProject.progressStep = step
     }
     
     // MARK: - ProjectDescriptionInput(제목 및 소개)

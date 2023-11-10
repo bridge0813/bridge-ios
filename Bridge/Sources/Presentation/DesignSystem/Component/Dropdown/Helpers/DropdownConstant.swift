@@ -16,7 +16,8 @@ enum DropdownConstant {
     }
     
     enum DropdownUI {
-        static let backgroundColor: UIColor = .clear
+        static let borderWidth: CGFloat = 1
+        static let borderColor = BridgeColor.gray8.cgColor
         static let cornerRadius: CGFloat = 8
         static let rowHeight: CGFloat = 42
         static let heightPadding: CGFloat = 20
@@ -24,9 +25,9 @@ enum DropdownConstant {
         
         // 그림자
         static let shadowColor = UIColor.black
-        static let shadowOffset = CGSize.zero
-        static let shadowOpacity: Float = 0.7
-        static let shadowRadius: CGFloat = 0.4
+        static let shadowOffset = CGSize(width: 0, height: 4)
+        static let shadowOpacity: Float = 0.03
+        static let shadowRadius: CGFloat = 4
     }
     
     enum Animation {

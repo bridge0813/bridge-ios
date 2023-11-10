@@ -36,6 +36,8 @@ final class DropDown: BaseView {
     // MARK: - 드롭다운 UI
     private var width: CGFloat?
     private var cornerRadius: CGFloat
+    private var borderWidth: CGFloat
+    private var borderColor: CGColor
     private var shadowColor: UIColor
     private var shadowOffset: CGSize
     private var shadowOpacity: Float
@@ -59,7 +61,7 @@ final class DropDown: BaseView {
     let willHide = PublishSubject<Void>()              // 드롭다운이 사라질 때
     
     
-    // MARK: - Properties
+    // MARK: - Property
     private var xConstant: CGFloat?
     private var yConstant: CGFloat?
     private var widthConstant: CGFloat?
@@ -72,7 +74,11 @@ final class DropDown: BaseView {
     private var bottomOffset: CGPoint
     
     var dataSource: [String]
-    private var selectedItemIndexRow: IndexRow?  // 선택한 항목을 추적
+    var selectedItemIndexRow: IndexRow? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     private var tableHeight: CGFloat {
         return tableView.rowHeight * CGFloat(dataSource.count)
@@ -109,8 +115,9 @@ final class DropDown: BaseView {
         tableViewBackgroundColor: UIColor = .white,
         dimmedBackgroundColor: UIColor = .clear,
         width: CGFloat? = nil,
-        backgroundColor: UIColor = DropdownConstant.DropdownUI.backgroundColor,
         cornerRadius: CGFloat = DropdownConstant.DropdownUI.cornerRadius,
+        borderWidth: CGFloat = DropdownConstant.DropdownUI.borderWidth,
+        borderColor: CGColor = DropdownConstant.DropdownUI.borderColor,
         shadowColor: UIColor = DropdownConstant.DropdownUI.shadowColor,
         shadowOffset: CGSize = DropdownConstant.DropdownUI.shadowOffset,
         shadowOpacity: Float = DropdownConstant.DropdownUI.shadowOpacity,
@@ -133,6 +140,8 @@ final class DropDown: BaseView {
         self.dimmedBackgroundColor = dimmedBackgroundColor
         self.width = width
         self.cornerRadius = cornerRadius
+        self.borderWidth = borderWidth
+        self.borderColor = borderColor
         self.shadowColor = shadowColor
         self.shadowOffset = shadowOffset
         self.shadowOpacity = shadowOpacity
@@ -143,13 +152,14 @@ final class DropDown: BaseView {
         self.customCellConfiguration = customCellConfiguration
         
         super.init(frame: .zero)
-        self.backgroundColor = backgroundColor
     }
     
     override func configureAttributes() {
         DispatchQueue.main.async {
             self.updateConstraintsIfNeeded()
         }
+        
+        backgroundColor = .clear
         
         tableView.register(customCellType, forCellReuseIdentifier: BaseDropdownCell.identifier)
         tableView.delegate = self
@@ -162,6 +172,8 @@ final class DropDown: BaseView {
         
         tableViewContainer.backgroundColor = tableViewBackgroundColor
         tableViewContainer.layer.cornerRadius = cornerRadius
+        tableViewContainer.layer.borderWidth = borderWidth
+        tableViewContainer.layer.borderColor = borderColor
         tableViewContainer.layer.shadowColor = shadowColor.cgColor
         tableViewContainer.layer.shadowOffset = shadowOffset
         tableViewContainer.layer.shadowOpacity = shadowOpacity
@@ -248,15 +260,14 @@ extension DropDown {
         
         // 현재 화면의 주 윈도우 가져오기.
         guard let window = UIWindow.visibleWindow() else { return }
-
-        // 드롭다운이 UIBarButtonItem과 연결된 경우 bottomOffset 처리
-        if let anchorView = anchorView as? UIBarButtonItem {
-            bottomOffset = computeOffsetForBarButtonItem(anchorView: anchorView, window: window)
-        }
         
         // 드롭다운 레이아웃 계산
-        layout = computeLayoutBottomDisplay(window: window)
-                
+        if anchorView is UIBarButtonItem {
+            layout = computeLayoutBarbuttonDisplay(window: window)
+        } else {
+            layout = computeLayoutBottomDisplay(window: window)
+        }
+        
         // 드롭다운의 width가 드롭다운이 차지할 수 있는 최대크기를 계산하여 적절하게 설정.
         constraintWidthToFittingSizeIfNecessary(layout: &layout)
         
@@ -277,24 +288,7 @@ extension DropDown {
         self.canBeDisplayed = canBeDisplayed
     }
     
-    /// anchorView가 UIBarButtonItem일 경우, bottomOffset을 조절해주는 메서드.
-    private func computeOffsetForBarButtonItem(anchorView: UIBarButtonItem, window: UIWindow) -> CGPoint {
-        // UIBarButton이 right 버튼인지 체크
-        let anchorViewFrame = anchorView.plainView.convert(anchorView.plainView.bounds, to: window)
-        let isRightBarButtonItem = anchorViewFrame.minX > window.frame.midX
-
-        // 만약 오른쪽 버튼이 아니라면, CGPoint.zero 반환
-        guard isRightBarButtonItem else { return bottomOffset }
-
-        let width = width ?? fittingWidth()                     // 드롭다운의 width를 설정하거나 적절한 width를 계산하여 가져옴
-        let anchorViewWidth = anchorView.plainView.frame.width  // anchorView의 width를 가져옴
-
-        let x = -(width - anchorViewWidth) - 8
-
-        return CGPoint(x: x, y: -5)
-    }
-    
-    /// 아래 방향으로 표시되는 드롭다운의 x, y, width, offscreenHeight
+    /// 드롭다운의 x, y, width, offscreenHeight
     private func computeLayoutBottomDisplay(window: UIWindow) -> ComputeLayoutTuple {
         
         var offscreenHeight: CGFloat = 0
@@ -313,12 +307,47 @@ extension DropDown {
         let windowMaxY = window.bounds.maxY
 
         if maxY > windowMaxY {
-            offscreenHeight = abs(maxY - windowMaxY)
+            offscreenHeight = abs(maxY - windowMaxY) + 15  // 15값은 가장자리에 붙지 않도록 주는 패딩값
         }
         
         return (x, y, width, offscreenHeight)
     }
     
+    /// anchorView가 BarButton일 경우 드롭다운 좌표 계산
+    private func computeLayoutBarbuttonDisplay(window: UIWindow) -> ComputeLayoutTuple {
+        var offscreenHeight: CGFloat = 0
+        let width = width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
+        
+        // 앵커뷰의 x와 y 좌표
+        let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? window.frame.midX - (width / 2)
+        let anchorViewY = anchorView?.plainView.windowFrame?.maxY ?? window.frame.midY - (tableHeight / 2)
+        
+        // 앵커뷰의 MaxX 좌표
+        let anchorViewRightX = anchorView?.plainView.windowFrame?.maxX ?? window.frame.midX + (width / 2)
+        
+        // 화면 밖으로 나가는 width 계산 후 x좌표 조정
+        var x = anchorViewX
+        let overflow = x + width - window.bounds.maxX // 드롭다운이 화면 밖으로 얼마나 나가는지 계산
+        if overflow > 0 {
+            x -= overflow + (window.bounds.maxX - anchorViewRightX)
+        }
+        
+        // 드롭다운의 x, y좌표 계산
+        x += bottomOffset.x
+        let y = anchorViewY + bottomOffset.y
+        
+        
+        // 화면 밖으로 나가는 높이 계산
+        let maxY = y + tableHeight
+        let windowMaxY = window.bounds.maxY
+        
+        if maxY > windowMaxY {
+            offscreenHeight = abs(maxY - windowMaxY)
+        }
+        
+        return (x, y, width, offscreenHeight)
+    }
+   
     /// 드롭다운의 항목 중 컨텐츠의 크기가 가장 큰 항목의 width를 계산하여 반환
     private func fittingWidth() -> CGFloat {
         guard let templateCell = tableView.dequeueReusableCell(withIdentifier: BaseDropdownCell.identifier)
