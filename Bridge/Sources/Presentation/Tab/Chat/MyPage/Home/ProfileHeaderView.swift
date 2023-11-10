@@ -103,7 +103,7 @@ final class ProfileHeaderView: BaseView {
                 }
                 
                 flex.addItem(interestedMenuBackgroundView).direction(.row).height(83).padding(24, 20).define { flex in
-                    flex.addItem(interestedFieldButton)
+                    flex.addItem(interestedFieldButton).marginRight(65)
                     flex.addItem(bookmarkedProjectButton)
                 }
             }
