@@ -26,11 +26,16 @@ final class MyPageViewController: BaseViewController {
     
     private let rootFlexContainer = UIView()
     
+    private let profileHeaderView = ProfileHeaderView()
+    
     private lazy var myPageTableView: UITableView = {
         let tableView = UITableView()
+        profileHeaderView.flex.height(233)
+        tableView.tableHeaderView = profileHeaderView
         tableView.register(MenuCell.self)
         tableView.rowHeight = 44
         tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
         return tableView
     }()
     
@@ -46,7 +51,6 @@ final class MyPageViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = BridgeColor.primary3
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,10 +65,12 @@ final class MyPageViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
+        view.backgroundColor = BridgeColor.primary3
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationTitleView)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: bellButton)
     }
     
+    // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
@@ -84,6 +90,8 @@ final class MyPageViewController: BaseViewController {
         let input = MyPageViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             bellButtonTapped: bellButton.rx.tap.asObservable(),
+            interestedFieldButtonTapped: profileHeaderView.interestedFieldButtonTapped,
+            bookmarkedProjectButtonTapped: profileHeaderView.bookmarkedProjectButtonTapped,
             itemSelected: myPageTableView.rx.itemSelected.map { $0.row }
         )
         let output = viewModel.transform(input: input)

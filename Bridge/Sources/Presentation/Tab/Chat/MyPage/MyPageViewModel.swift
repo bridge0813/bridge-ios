@@ -13,6 +13,8 @@ final class MyPageViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>
         let bellButtonTapped: Observable<Void>
+        let interestedFieldButtonTapped: Observable<Void>
+        let bookmarkedProjectButtonTapped: Observable<Void>
         let itemSelected: Observable<Int>
     }
     
@@ -47,6 +49,20 @@ final class MyPageViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        input.interestedFieldButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { _, _ in
+                print("interestedFieldButtonTapped")
+            })
+            .disposed(by: disposeBag)
+        
+        input.bookmarkedProjectButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { _, _ in
+                print("bookmarkedProjectButtonTapped")
+            })
+            .disposed(by: disposeBag)
+        
         input.itemSelected
             .map { Menu.allCases[$0] }
             .withUnretained(self)
@@ -65,8 +81,8 @@ private extension MyPageViewModel {
         case signIn = "로그인"
         case signOut = "로그아웃"
         case notification = "알림설정"
-        case privacyPolicy = "개인정보 처리방침"
-        case versionInfo = "버전정보 (1.0.0)"
+        case privacyPolicy = "개인정보처리방침"
+        case versionInfo = "버전정보 1.0.0"
         case openSourceLicense = "오픈소스 라이선스"
         case withdrawal = "회원탈퇴"
     }
