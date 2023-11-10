@@ -67,7 +67,7 @@ final class ProfileHeaderView: BaseView {
         configuration.titlePadding = 3
         configuration.image = UIImage(named: "graphic_check")?.resize(to: CGSize(width: 34, height: 34))
         configuration.imagePlacement = .trailing
-        configuration.imagePadding = 20
+        configuration.imagePadding = 30
         return UIButton(configuration: configuration)
     }()
     
@@ -85,14 +85,14 @@ final class ProfileHeaderView: BaseView {
         configuration.titlePadding = 3
         configuration.image = UIImage(named: "graphic_files")?.resize(to: CGSize(width: 34, height: 34))
         configuration.imagePlacement = .trailing
-        configuration.imagePadding = 20
+        configuration.imagePadding = 30
         return UIButton(configuration: configuration)
     }()
     
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-
+        
         rootFlexContainer.flex.define { flex in
             flex.addItem().height(185).paddingHorizontal(16).backgroundColor(BridgeColor.primary3).define { flex in
                 flex.addItem().direction(.row).alignItems(.center).marginTop(40).marginBottom(18).define { flex in
@@ -102,11 +102,15 @@ final class ProfileHeaderView: BaseView {
                     flex.addItem(manageProfileButton).width(83).height(30).cornerRadius(15)
                 }
                 
-                flex.addItem(interestedMenuBackgroundView).direction(.row).height(83).padding(24, 20).define { flex in
-                    flex.addItem(interestedFieldButton)
-                    flex.addItem().grow(1)
-                    flex.addItem(bookmarkedProjectButton)
-                }
+                flex.addItem(interestedMenuBackgroundView)
+                    .direction(.row)
+                    .justifyContent(.spaceBetween)
+                    .height(83)
+                    .padding(24, 20)
+                    .define { flex in
+                        flex.addItem(interestedFieldButton)
+                        flex.addItem(bookmarkedProjectButton)
+                    }
             }
         }
     }

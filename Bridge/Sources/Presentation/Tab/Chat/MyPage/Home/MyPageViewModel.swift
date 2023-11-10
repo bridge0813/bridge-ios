@@ -44,22 +44,22 @@ final class MyPageViewModel: ViewModelType {
         
         input.bellButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { _, _ in
-                
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showPushAlertViewController()
             })
             .disposed(by: disposeBag)
         
         input.interestedFieldButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { _, _ in
-                print("interestedFieldButtonTapped")
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showSetInterestedFieldViewController()
             })
             .disposed(by: disposeBag)
         
         input.bookmarkedProjectButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { _, _ in
-                print("bookmarkedProjectButtonTapped")
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showBookmarkedProjectsViewController()
             })
             .disposed(by: disposeBag)
         

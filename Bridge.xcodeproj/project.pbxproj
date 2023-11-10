@@ -382,6 +382,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B0171C22AFE507E00AC121F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7B6C20492AF887E0005689F5 /* MyPageViewModel.swift */,
+				7B6C20442AF886BD005689F5 /* MyPageViewController.swift */,
+				7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */,
+				7BB5C77B2AFCE8220021BEC5 /* MenuCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		7B02A6632ADFFC9600C8D4A1 /* WebSocketService */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,10 +661,7 @@
 			isa = PBXGroup;
 			children = (
 				7B6C20462AF886EF005689F5 /* Coordinator */,
-				7B6C20492AF887E0005689F5 /* MyPageViewModel.swift */,
-				7B6C20442AF886BD005689F5 /* MyPageViewController.swift */,
-				7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */,
-				7BB5C77B2AFCE8220021BEC5 /* MenuCell.swift */,
+				7B0171C22AFE507E00AC121F /* Home */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";

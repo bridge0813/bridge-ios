@@ -38,6 +38,18 @@ extension MyPageCoordinator {
         let myPageViewController = MyPageViewController(viewModel: myPageViewModel)
         navigationController.pushViewController(myPageViewController, animated: false)
     }
+    
+    func showPushAlertViewController() {
+        
+    }
+    
+    func showSetInterestedFieldViewController() {
+        
+    }
+    
+    func showBookmarkedProjectsViewController() {
+        
+    }
 }
 
 // MARK: - Auth
