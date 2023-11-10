@@ -152,10 +152,15 @@
 		7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */; };
 		7C55E63B2ADEA2A40018FA5D /* MockProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E63A2ADEA2A40018FA5D /* MockProjectRepository.swift */; };
 		7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E63C2ADEE1CB0018FA5D /* MainBookmarkButton.swift */; };
-		7C55E6442AE17B270018FA5D /* TopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6432AE17B270018FA5D /* TopMenuView.swift */; };
 		7C55E64A2AE44B5F0018FA5D /* HotProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6492AE44B5F0018FA5D /* HotProjectCell.swift */; };
 		7C55E64E2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E64D2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift */; };
 		7C55E6502AE50D9E0018FA5D /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E64F2AE50D9E0018FA5D /* PlaceholderView.swift */; };
+		7C55E6562AE811660018FA5D /* BridgeSetDisplayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6552AE811660018FA5D /* BridgeSetDisplayButton.swift */; };
+		7C55E6582AE811A20018FA5D /* AddTechStackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6572AE811A20018FA5D /* AddTechStackButton.swift */; };
+		7C55E65A2AE8DEC70018FA5D /* BridgeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6592AE8DEC70018FA5D /* BridgeTextView.swift */; };
+		7C55E65C2AE961250018FA5D /* AddedTechTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */; };
+		7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift */; };
+		7C55E6632AEBBCBF0018FA5D /* AddTechTagPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6622AEBBCBF0018FA5D /* AddTechTagPopUpView.swift */; };
 		7C569CF32A9F67C60063D362 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF22A9F67C60063D362 /* Project.swift */; };
 		7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */; };
 		7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */; };
@@ -171,6 +176,12 @@
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
 		7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */; };
 		7C8B82402ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823F2ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift */; };
+		7C8CC4132AEEB5CC0032F237 /* TechTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC4122AEEB5CC0032F237 /* TechTagCell.swift */; };
+		7C8CC4152AF024060032F237 /* DatePickerPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC4142AF024060032F237 /* DatePickerPopUpView.swift */; };
+		7C8CC4182AF4091D0032F237 /* BridgeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC4172AF4091D0032F237 /* BridgeProgressView.swift */; };
+		7C8CC41A2AF40A100032F237 /* BaseProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC4192AF40A100032F237 /* BaseProgressView.swift */; };
+		7C8CC41C2AF522A10032F237 /* BridgeBasePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */; };
+		7CA04F0F2AF8F867007B9191 /* TechStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F0E2AF8F867007B9191 /* TechStack.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -182,7 +193,7 @@
 		7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */; };
 		7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */; };
 		7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803D2ACF143A00230C86 /* Dropdown.swift */; };
-		7CE080402ACF147500230C86 /* RestrictionDropdownAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */; };
+		7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */; };
 		7CE080492AD79ADD00230C86 /* FieldCategoryAnchorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */; };
 		7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
@@ -327,10 +338,15 @@
 		7C55E6322ADBFAFB0018FA5D /* SectionDividerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDividerHeaderView.swift; sourceTree = "<group>"; };
 		7C55E63A2ADEA2A40018FA5D /* MockProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProjectRepository.swift; sourceTree = "<group>"; };
 		7C55E63C2ADEE1CB0018FA5D /* MainBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBookmarkButton.swift; sourceTree = "<group>"; };
-		7C55E6432AE17B270018FA5D /* TopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuView.swift; sourceTree = "<group>"; };
 		7C55E6492AE44B5F0018FA5D /* HotProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectCell.swift; sourceTree = "<group>"; };
 		7C55E64D2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutConfiguration.swift; sourceTree = "<group>"; };
 		7C55E64F2AE50D9E0018FA5D /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		7C55E6552AE811660018FA5D /* BridgeSetDisplayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSetDisplayButton.swift; sourceTree = "<group>"; };
+		7C55E6572AE811A20018FA5D /* AddTechStackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTechStackButton.swift; sourceTree = "<group>"; };
+		7C55E6592AE8DEC70018FA5D /* BridgeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeTextView.swift; sourceTree = "<group>"; };
+		7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedTechTagView.swift; sourceTree = "<group>"; };
+		7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRecruitmentNumberPopUpView.swift; sourceTree = "<group>"; };
+		7C55E6622AEBBCBF0018FA5D /* AddTechTagPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTechTagPopUpView.swift; sourceTree = "<group>"; };
 		7C569CF22A9F67C60063D362 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
@@ -346,6 +362,12 @@
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorView.swift; sourceTree = "<group>"; };
 		7C8B823F2ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDropdownMenuCell.swift; sourceTree = "<group>"; };
+		7C8CC4122AEEB5CC0032F237 /* TechTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechTagCell.swift; sourceTree = "<group>"; };
+		7C8CC4142AF024060032F237 /* DatePickerPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPopUpView.swift; sourceTree = "<group>"; };
+		7C8CC4172AF4091D0032F237 /* BridgeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeProgressView.swift; sourceTree = "<group>"; };
+		7C8CC4192AF40A100032F237 /* BaseProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProgressView.swift; sourceTree = "<group>"; };
+		7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBasePopUpView.swift; sourceTree = "<group>"; };
+		7CA04F0E2AF8F867007B9191 /* TechStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechStack.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -357,7 +379,7 @@
 		7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewController.swift; sourceTree = "<group>"; };
 		7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDropdownCell.swift; sourceTree = "<group>"; };
 		7CE0803D2ACF143A00230C86 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
-		7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionDropdownAnchorView.swift; sourceTree = "<group>"; };
+		7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeDropdownAnchorView.swift; sourceTree = "<group>"; };
 		7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldCategoryAnchorButton.swift; sourceTree = "<group>"; };
 		7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -794,6 +816,7 @@
 				7B14DB292AB1625D009A00EB /* User */,
 				7C569CF12A9F67860063D362 /* Main */,
 				7BA36C992A9C5081000DAB02 /* Chat */,
+				7CA04F0D2AF8F852007B9191 /* TechStack */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -944,6 +967,7 @@
 				7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */,
 				7C42701D2AA4540C009BE6AF /* BaseCollectionReusableView.swift */,
 				7C8639582AC28B4F00064588 /* BaseButton.swift */,
+				7C8CC4192AF40A100032F237 /* BaseProgressView.swift */,
 			);
 			path = Bases;
 			sourceTree = "<group>";
@@ -1061,6 +1085,9 @@
 				7C1366402AC2783100EB415D /* Buttons */,
 				7B6123872AC2D00C006E72C1 /* MessageBox */,
 				7C8B822D2AC96CC000F7B889 /* Dropdown */,
+				7C8CC40F2AEEA1DA0032F237 /* TextView */,
+				7C8CC4162AF408ED0032F237 /* ProgressView */,
+				7CA04F0C2AF8F740007B9191 /* PopUp */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1076,6 +1103,7 @@
 				7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */,
 				7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */,
 				7C40CBC92AC6B597000F4C9F /* BridgeCreateProjectButton.swift */,
+				7C55E6552AE811660018FA5D /* BridgeSetDisplayButton.swift */,
 				7C8B822C2AC8498C00F7B889 /* ButtonGroup */,
 			);
 			path = Buttons;
@@ -1207,6 +1235,57 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		7C8CC40F2AEEA1DA0032F237 /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				7C55E6592AE8DEC70018FA5D /* BridgeTextView.swift */,
+			);
+			path = TextView;
+			sourceTree = "<group>";
+		};
+		7C8CC4102AEEA3810032F237 /* SetRecruitNumber */ = {
+			isa = PBXGroup;
+			children = (
+				7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift */,
+			);
+			path = SetRecruitNumber;
+			sourceTree = "<group>";
+		};
+		7C8CC4112AEEA3A10032F237 /* AddTechTag */ = {
+			isa = PBXGroup;
+			children = (
+				7C55E6572AE811A20018FA5D /* AddTechStackButton.swift */,
+				7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */,
+				7C55E6622AEBBCBF0018FA5D /* AddTechTagPopUpView.swift */,
+				7C8CC4122AEEB5CC0032F237 /* TechTagCell.swift */,
+			);
+			path = AddTechTag;
+			sourceTree = "<group>";
+		};
+		7C8CC4162AF408ED0032F237 /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				7C8CC4172AF4091D0032F237 /* BridgeProgressView.swift */,
+			);
+			path = ProgressView;
+			sourceTree = "<group>";
+		};
+		7CA04F0C2AF8F740007B9191 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
+		7CA04F0D2AF8F852007B9191 /* TechStack */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F0E2AF8F867007B9191 /* TechStack.swift */,
+			);
+			path = TechStack;
+			sourceTree = "<group>";
+		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -1235,6 +1314,8 @@
 			children = (
 				7CC9F6CA2AAF0EEC00685EA9 /* MemberRequirementInputViewModel.swift */,
 				7CC9F6CC2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift */,
+				7C8CC4102AEEA3810032F237 /* SetRecruitNumber */,
+				7C8CC4112AEEA3A10032F237 /* AddTechTag */,
 			);
 			path = MemberDetailInput;
 			sourceTree = "<group>";
@@ -1244,6 +1325,7 @@
 			children = (
 				7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */,
 				7CC9F6CF2AAF132E00685EA9 /* ProjectDatePickerViewController.swift */,
+				7C8CC4142AF024060032F237 /* DatePickerPopUpView.swift */,
 			);
 			path = ProjectDatePicker;
 			sourceTree = "<group>";
@@ -1278,7 +1360,7 @@
 		7CE080432ACF155000230C86 /* RestrictionDropdown */ = {
 			isa = PBXGroup;
 			children = (
-				7CE0803F2ACF147500230C86 /* RestrictionDropdownAnchorView.swift */,
+				7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */,
 			);
 			path = RestrictionDropdown;
 			sourceTree = "<group>";
@@ -1312,7 +1394,6 @@
 				7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */,
 				7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */,
 				7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */,
-				7C55E6432AE17B270018FA5D /* TopMenuView.swift */,
 				7C55E6352ADC06E20018FA5D /* Cell */,
 				7C55E6342ADC06C30018FA5D /* HeaderView */,
 				7C55E63E2ADF8C370018FA5D /* PlaceholderView */,
@@ -1448,6 +1529,7 @@
 				7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */,
 				7B1742F42AFA46A7004F0953 /* AccessTokenResponseDTO.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
+				7C8CC4152AF024060032F237 /* DatePickerPopUpView.swift in Sources */,
 				7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
@@ -1469,11 +1551,15 @@
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
 				7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
+				7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift in Sources */,
+				7C8CC41A2AF40A100032F237 /* BaseProgressView.swift in Sources */,
 				7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */,
 				7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */,
 				7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */,
+				7CA04F0F2AF8F867007B9191 /* TechStack.swift in Sources */,
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
 				7B61236A2ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift in Sources */,
+				7C55E6562AE811660018FA5D /* BridgeSetDisplayButton.swift in Sources */,
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7B92B7EB2AE5052900B0E954 /* MockMessageRepository.swift in Sources */,
 				7C55E6292AD7EFEF0018FA5D /* MainCategoryButton.swift in Sources */,
@@ -1524,6 +1610,7 @@
 				7C40CBC82AC69447000F4C9F /* BridgeSmallButtonGroup.swift in Sources */,
 				7B153C0F2AD6CF0D00618280 /* Interceptor.swift in Sources */,
 				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
+				7C55E6582AE811A20018FA5D /* AddTechStackButton.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
 				7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */,
@@ -1542,10 +1629,12 @@
 				7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */,
 				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
 				7B6C20452AF886BD005689F5 /* MyPageViewController.swift in Sources */,
+				7C55E65C2AE961250018FA5D /* AddedTechTagView.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
 				7B1922D12AE166E600EBDD2E /* UIViewController+Keyboard.swift in Sources */,
 				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */,
+				7C8CC4182AF4091D0032F237 /* BridgeProgressView.swift in Sources */,
 				7B14DB2E2AB1DA39009A00EB /* SignInResult.swift in Sources */,
 				7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */,
 				7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */,
@@ -1554,6 +1643,7 @@
 				7BA36CB52A9D9828000DAB02 /* Endpoint.swift in Sources */,
 				7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */,
 				7C40CBC22AC5C2BF000F4C9F /* BridgeMediumButtonGroup.swift in Sources */,
+				7C55E65A2AE8DEC70018FA5D /* BridgeTextView.swift in Sources */,
 				7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
 				7BB8C51F2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift in Sources */,
@@ -1575,21 +1665,23 @@
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
 				7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */,
 				7C40CBCA2AC6B597000F4C9F /* BridgeCreateProjectButton.swift in Sources */,
+				7C8CC41C2AF522A10032F237 /* BridgeBasePopUpView.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
 				7C24003D2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
 				7C40CBA12AC3E595000F4C9F /* BridgeTechTagButton.swift in Sources */,
 				7B61238D2AC2F320006E72C1 /* BridgeWarningMessageBox.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
-				7C55E6442AE17B270018FA5D /* TopMenuView.swift in Sources */,
+				7C55E6632AEBBCBF0018FA5D /* AddTechTagPopUpView.swift in Sources */,
 				7BFECA242AECE632009B4C7D /* ApplicationResultCell.swift in Sources */,
-				7CE080402ACF147500230C86 /* RestrictionDropdownAnchorView.swift in Sources */,
+				7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7B02A6652ADFFCCD00C8D4A1 /* WebSocketService.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
+				7C8CC4132AEEB5CC0032F237 /* TechTagCell.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
 				7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */,

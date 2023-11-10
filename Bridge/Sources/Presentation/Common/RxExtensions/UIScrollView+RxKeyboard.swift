@@ -51,3 +51,29 @@ extension Reactive where Base: UICollectionView {
         }
     }
 }
+
+extension Reactive where Base: UIScrollView {
+    var yPosition: Binder<CGFloat> {
+        Binder(base) { scrollView, keyboardHeight in
+            UIView.animate(withDuration: 0.3) {
+                if keyboardHeight == 0 {
+                    scrollView.transform = CGAffineTransform.identity
+                } else {
+                    // ScrollView 최하단으로 내리기
+                    let contentSize = scrollView.contentSize.height
+                    let scrollViewHeight = scrollView.bounds.height
+                    scrollView.setContentOffset(CGPoint(x: 0, y: contentSize - scrollViewHeight), animated: true)
+                    
+                    // ScrollView가 아래에서 어느정도 띄워져있는지 체크
+                    let window = UIWindow.visibleWindow() ?? UIWindow()
+                    let scrollViewMaxY = scrollView.windowFrame?.maxY ?? 550
+                    let windowMaxY = window.bounds.maxY
+                    let scrollViewBottomMargin = windowMaxY - scrollViewMaxY
+                    
+                    let yPosition = keyboardHeight - (scrollViewBottomMargin)
+                    scrollView.transform = CGAffineTransform(translationX: 0, y: -yPosition)
+                }
+            }
+        }
+    }
+}

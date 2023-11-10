@@ -52,7 +52,7 @@ final class BridgeSetFieldView: BaseView {
         addSubview(rootFlexContainer)
         
         let labelMargin: CGFloat = 14           // 레이블과 다른 컴포넌트 간 마진
-        let sectionMargin: CGFloat = 24         // 섹션 간 마진
+        let sectionMargin: CGFloat = 32         // 섹션 간 마진
         let containerSize: CGFloat = 200        // 관심분야 버튼 컨테이너 크기
         let buttonMargin: CGFloat = 12          // 관심분야 버튼 간 간격
         
@@ -88,7 +88,7 @@ final class BridgeSetFieldView: BaseView {
                     .define { flex in
                         flex.addItem(uiuxButton).marginRight(buttonMargin).marginBottom(buttonMargin)
                         flex.addItem(bibxButton)
-                        flex.addItem(videomotionButton)
+                        flex.addItem(videomotionButton).marginBottom(buttonMargin)
                     }
             }
             

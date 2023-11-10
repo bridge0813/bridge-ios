@@ -15,6 +15,7 @@ final class FieldCategoryAnchorButton: BaseButton {
         var configuration = UIButton.Configuration.filled()
         configuration.baseForegroundColor = .clear
         configuration.baseBackgroundColor = .clear
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         configuration.image = buttonImage
         configuration.imagePlacement = .trailing

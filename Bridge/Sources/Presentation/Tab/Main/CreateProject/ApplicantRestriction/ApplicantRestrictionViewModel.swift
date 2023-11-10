@@ -10,24 +10,23 @@ import RxSwift
 import RxCocoa
 
 final class ApplicantRestrictionViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
+        let selectedRestriction: Observable<String>
         let nextButtonTapped: Observable<Void>
-        let restrictionTagButtonTapped: Observable<RestrictionTagType>
     }
     
     struct Output {
-        let restrictionTag: Driver<RestrictionTagType>
+        let selectedRestrictions: Driver<Set<String>>
     }
     
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
     private let dataStorage: ProjectDataStorage
-    private var restrictions: [RestrictionTagType] = []
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator,
         dataStorage: ProjectDataStorage
@@ -36,40 +35,31 @@ final class ApplicantRestrictionViewModel: ViewModelType {
         self.dataStorage = dataStorage
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
+        let selectedRestrictions = BehaviorRelay<Set<String>>(value: [])
+        
+        input.selectedRestriction
+            .subscribe(onNext: { restriction in
+                var restrictions = selectedRestrictions.value
+                
+                if restrictions.contains(restriction) { restrictions.remove(restriction) }
+                else { restrictions.insert(restriction) }
+                
+                selectedRestrictions.accept(restrictions)
+            })
+            .disposed(by: disposeBag)
+        
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.dataStorage.updateApplicantRestriction(with: owner.restrictions)
+                owner.dataStorage.updateApplicantRestriction(with: selectedRestrictions.value.map { $0 })
                 owner.coordinator?.showProjectDatePickerViewController()
             })
             .disposed(by: disposeBag)
         
-        let restrictionTag = input.restrictionTagButtonTapped
-            .withUnretained(self)
-            .flatMap { owner, type in
-                
-                if let index = owner.restrictions.firstIndex(of: type) {
-                    owner.restrictions.remove(at: index)
-                } else {
-                    owner.restrictions.append(type)
-                }
-                
-                return Observable.just(type)
-            }
-            .asDriver(onErrorJustReturn: RestrictionTagType.student)
-        
         return Output(
-            restrictionTag: restrictionTag
+            selectedRestrictions: selectedRestrictions.asDriver(onErrorJustReturn: [])
         )
-    }
-}
-
-extension ApplicantRestrictionViewModel {
-    enum RestrictionTagType: String {
-        case student = "학생"
-        case currentEmployee = "현직자"
-        case jobSeeker = "취준생"
     }
 }

@@ -6,26 +6,29 @@
 //
 
 import RxSwift
+import RxCocoa
 
 final class ProjectProgressStatusViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
+        let progressMethodButtonTapped: Observable<String>
+        let progressStep: Observable<String>
         let nextButtonTapped: Observable<Void>
-        let progressMethodButtonTapped: Observable<ProgressMethod>
-        let statusButtonTapped: Observable<ProgressStatus>
     }
     
     struct Output {
-        
+        let progressMethod: Driver<String>
+        let progressStep: Driver<String>
+        let isNextButtonEnabled: Driver<Bool>
     }
     
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
     private let dataStorage: ProjectDataStorage
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator,
         dataStorage: ProjectDataStorage
@@ -34,7 +37,7 @@ final class ProjectProgressStatusViewModel: ViewModelType {
         self.dataStorage = dataStorage
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         input.nextButtonTapped
             .withUnretained(self)
@@ -43,36 +46,29 @@ final class ProjectProgressStatusViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        input.progressMethodButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, method in
-                owner.dataStorage.updateProgressMethod(with: method.rawValue)
+        let progressMethod = input.progressMethodButtonTapped
+            .do(onNext: { [weak self] method in
+                self?.dataStorage.updateProgressMethod(with: method)
             })
-            .disposed(by: disposeBag)
         
-        input.statusButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, status in
-                owner.dataStorage.updateProgressStatus(with: status.rawValue)
+        let progressStep = input.progressStep
+            .do(onNext: { [weak self] step in
+                self?.dataStorage.updateProgressStep(with: step)
             })
-            .disposed(by: disposeBag)
+                
+        let isNextButtonEnabled = Observable.combineLatest(
+            input.progressMethodButtonTapped.map { !$0.isEmpty },
+            input.progressStep.map { !$0.isEmpty }
+        )
+        .map { progressMethodIsValid, progressStepIsValid in
+            return progressMethodIsValid && progressStepIsValid
+        }
         
-        return Output()
-    }
-}
-
-extension ProjectProgressStatusViewModel {
-    enum ProgressMethod: String {
-        case online = "온라인"
-        case offline = "오프라인"
-        case blended = "블렌디드"
-    }
-    
-    enum ProgressStatus: String {
-        case notStarted = "시작하기 전이에요"
-        case planning = "기획 중이에요"
-        case planCompleted = "기획이 완료됐어요"
-        case designing = "디자인 중이에요"
-        case designCompleted = "디자인 완료됐어요"
+                
+        return Output(
+            progressMethod: progressMethod.asDriver(onErrorJustReturn: ""),
+            progressStep: progressStep.asDriver(onErrorJustReturn: ""),
+            isNextButtonEnabled: isNextButtonEnabled.asDriver(onErrorJustReturn: false)
+        )
     }
 }

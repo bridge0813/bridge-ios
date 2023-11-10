@@ -9,25 +9,24 @@ import RxSwift
 import RxCocoa
 
 final class MemberFieldSelectionViewModel: ViewModelType {
-    // MARK: - Nested Types
+    // MARK: - Input & Output
     struct Input {
-        let nextButtonTapped: Observable<Void>
         let dismissButtonTapped: Observable<Void>
-        let fieldButtonTapped: Observable<RecruitFieldType>
+        let fieldTagButtonTapped: Observable<String>
+        let nextButtonTapped: Observable<Void>
     }
     
     struct Output {
-        let selectedField: Driver<RecruitFieldType>
+        let isNextButtonEnabled: Driver<Bool>
     }
     
-    // MARK: - Properties
+    // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
     
     private let dataStorage: ProjectDataStorage
-    private var selectedFields: [RecruitFieldType] = []
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator,
         dataStorage: ProjectDataStorage
@@ -36,18 +35,10 @@ final class MemberFieldSelectionViewModel: ViewModelType {
         self.dataStorage = dataStorage
     }
     
-    // MARK: - Methods
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
-        input.nextButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.dataStorage.removeAllMemberRequirements()
-                
-                owner.coordinator?.showMemberRequirementInputViewController(
-                    with: owner.selectedFields.map { $0.rawValue }
-                )
-            })
-            .disposed(by: disposeBag)
+        let nextButtonEnabled = BehaviorSubject<Bool>(value: false)
+        var selectedFields: [String] = []
         
         input.dismissButtonTapped
             .withUnretained(self)
@@ -56,28 +47,27 @@ final class MemberFieldSelectionViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        let selectedField = input.fieldButtonTapped
-            .withUnretained(self)
-            .flatMap { owner, type in
-                if let index = owner.selectedFields.firstIndex(of: type) {
-                    owner.selectedFields.remove(at: index)
+        input.fieldTagButtonTapped
+            .subscribe(onNext: { field in
+                if let index = selectedFields.firstIndex(of: field) {
+                    selectedFields.remove(at: index)
+                    
                 } else {
-                    owner.selectedFields.append(type)
+                    selectedFields.append(field)
                 }
                 
-                return Observable.just(type)
-            }
-            .asDriver(onErrorJustReturn: RecruitFieldType.iOS)
+                nextButtonEnabled.onNext(!selectedFields.isEmpty)
+            })
+            .disposed(by: disposeBag)
         
-        return Output(
-            selectedField: selectedField
-        )
-    }
-}
-
-// MARK: - UI DataSource
-extension MemberFieldSelectionViewModel {
-    enum RecruitFieldType: String {
-        case iOS, android, frontEnd, backEnd, uiux, bibx, videomotion, pm
+        input.nextButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.dataStorage.removeAllMemberRequirements()  // 기존에 저장되었던 데이터 제거.
+                owner.coordinator?.showMemberRequirementInputViewController(with: selectedFields)
+            })
+            .disposed(by: disposeBag)
+        
+        return Output(isNextButtonEnabled: nextButtonEnabled.asDriver(onErrorJustReturn: true))
     }
 }

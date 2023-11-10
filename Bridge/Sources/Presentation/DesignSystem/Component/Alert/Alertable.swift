@@ -35,7 +35,11 @@ extension Alertable {
         primaryAction: PrimaryActionClosure?,
         cancelAction: CancelActionClosure?
     ) {
-        let alertViewController = BridgeAlertViewController(configuration: configuration, primaryAction: primaryAction)
+        let alertViewController = BridgeAlertViewController(
+            configuration: configuration,
+            primaryAction: primaryAction,
+            cancelAction: cancelAction
+        )
         alertViewController.modalPresentationStyle = .overFullScreen
         alertViewController.modalTransitionStyle = .crossDissolve
         target.present(alertViewController, animated: true, completion: nil)

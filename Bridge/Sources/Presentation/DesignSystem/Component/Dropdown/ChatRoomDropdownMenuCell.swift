@@ -29,6 +29,7 @@ final class ChatRoomDropdownMenuCell: BaseDropdownCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
     }

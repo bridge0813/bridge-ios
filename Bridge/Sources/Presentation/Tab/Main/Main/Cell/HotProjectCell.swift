@@ -53,7 +53,7 @@ final class HotProjectCell: BaseCollectionViewCell {
     
     private let scrapButton = MainBookmarkButton()
     
-    // MARK: - Configure
+    // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.row).height(100).alignItems(.center).define { flex in

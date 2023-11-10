@@ -9,10 +9,10 @@ import UIKit
 import RxSwift
 
 class BaseCollectionReusableView: UICollectionReusableView {
-    // MARK: - Properties
+    // MARK: - Property
     var disposeBag = DisposeBag()
     
-    // MARK: - Initializer
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         
