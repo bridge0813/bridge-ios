@@ -12,11 +12,10 @@ final class BridgeChipFillLabel: BaseLabel {
     
     private let type: ChipType
     
-    init(text: String, backgroundColor: UIColor, type: ChipType) {
+    init(backgroundColor: UIColor, type: ChipType) {
         self.type = type
         
         super.init(frame: .zero)
-        self.text = text
         self.backgroundColor = backgroundColor
     }
     

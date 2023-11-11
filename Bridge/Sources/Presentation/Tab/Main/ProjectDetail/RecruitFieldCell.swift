@@ -21,7 +21,7 @@ final class RecruitFieldCell: BaseCollectionViewCell {
         return view
     }()
     
-    private let tagLabel = BridgeChipFillLabel(text: "개발", backgroundColor: BridgeColor.primary1, type: .short)
+    private let tagLabel = BridgeChipFillLabel(backgroundColor: BridgeColor.primary1, type: .short)
     
     private let fieldLabel: UILabel = {
         let label = UILabel()

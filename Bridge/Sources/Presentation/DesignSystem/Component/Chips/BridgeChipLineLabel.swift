@@ -12,11 +12,6 @@ final class BridgeChipLineLabel: BaseLabel {
     
     private let padding = UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
     
-    init(_ text: String) {
-        super.init(frame: .zero)
-        self.text = text
-    }
-    
     override func configureAttributes() {
         textAlignment = .center
         textColor = BridgeColor.primary1
