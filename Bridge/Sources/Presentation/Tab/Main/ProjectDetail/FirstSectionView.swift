@@ -46,9 +46,6 @@ final class FirstSectionView: BaseView {
         return label
     }()
     
-    // MARK: - Property
-    
-    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)

@@ -121,10 +121,6 @@ final class SecondSectionView: BaseView {
     // TODO: - 이미지 정렬문제 해결필요
     private let warningMessageBox = BridgeWarningMessageBox("이 프로젝트는 학생, 취준생의 지원이 제한되어 있습니다.")
     
-    
-    // MARK: - Property
-    
-    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)

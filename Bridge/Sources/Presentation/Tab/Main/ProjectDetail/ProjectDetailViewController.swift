@@ -31,6 +31,14 @@ final class ProjectDetailViewController: BaseViewController {
         return view
     }()
     
+    private let dividerView: UIView = {
+        let divider = UIView()
+        divider.backgroundColor = BridgeColor.gray6
+        divider.isHidden = true
+        
+        return divider
+    }()
+    
     private let firstSectionView = FirstSectionView()
     private let secondSectionView = SecondSectionView()
     private let thirdSectionView = ThirdSectionView()
@@ -97,9 +105,10 @@ final class ProjectDetailViewController: BaseViewController {
         scrollView.addSubview(contentContainer)
         
         rootFlexContainer.flex.define { flex in
+            flex.addItem(dividerView).height(1)
             flex.addItem().grow(1)
             
-            flex.addItem(scrollView).position(.absolute).width(100%).top(0).bottom(102)
+            flex.addItem(scrollView).position(.absolute).width(100%).top(1).bottom(102)
             flex.addItem(menuBar).direction(.row).height(102).paddingHorizontal(16).define { flex in
                 flex.addItem(bookmarkButton).width(54).height(52).marginTop(15)
                 flex.addItem(applyButton).grow(1).height(52).marginTop(15).marginLeft(12)
@@ -131,5 +140,15 @@ final class ProjectDetailViewController: BaseViewController {
             viewWillAppear: self.rx.viewWillAppear.asObservable()
         )
         let output = viewModel.transform(input: input)
+        
+        // 구분선 등장
+        scrollView.rx.contentOffset
+            .map { $0.y > 0 }
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .subscribe(onNext: { owner, shouldHidden in
+                owner.dividerView.isHidden = !shouldHidden
+            })
+            .disposed(by: disposeBag)
     }
 }
