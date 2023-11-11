@@ -8,6 +8,8 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
+import RxCocoa
 
 /// 상세 모집글의 세 번째 섹션(모집중인 분야 소개)
 final class ThirdSectionView: BaseView {
@@ -44,32 +46,41 @@ final class ThirdSectionView: BaseView {
         
         button.setImage(buttonImage, for: .normal)
         button.tintColor = BridgeColor.gray3
+        button.contentHorizontalAlignment = .right
         
         return button
     }()
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
-        collectionView.register(TechTagCell.self)
+        collectionView.register(RecruitFieldCell.self)
         
         return collectionView
     }()
     
     // MARK: - Property
-    
+    var goToDetailButtonTapped: Observable<Void> {
+        return goToDetailButton.rx.tap.asObservable()
+    }
     
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.define { flex in
-            flex.addItem().direction(.row).justifyContent(.spaceBetween).height(24).marginTop(32).define { flex in
-                flex.addItem(recruitLabel).width(200).marginLeft(16)
-                flex.addItem(goToDetailButton).size(16).marginRight(13)
-            }
+            flex.addItem()
+                .direction(.row)
+                .justifyContent(.spaceBetween)
+                .alignItems(.center)
+                .height(24)
+                .marginTop(32)
+                .define { flex in
+                flex.addItem(recruitLabel).marginLeft(16)
+                flex.addItem(goToDetailButton).grow(1).marginRight(13)
+                }
             
-            flex.addItem(collectionView).marginTop(14)
+            flex.addItem(collectionView).height(127).marginTop(14)
             
-            flex.addItem().height(30)
+            flex.addItem().height(20)
         }
     }
     
@@ -77,6 +88,32 @@ final class ThirdSectionView: BaseView {
         super.layoutSubviews()
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
+    }
+    
+    // MARK: - Binding
+    override func bind() {
+        // 임시
+        let data = [
+            MemberRequirement(field: "ios", recruitNumber: 2, requiredSkills: [], expectation: ""),
+            MemberRequirement(field: "android", recruitNumber: 2, requiredSkills: [], expectation: ""),
+            MemberRequirement(field: "frontend", recruitNumber: 2, requiredSkills: [], expectation: ""),
+            MemberRequirement(field: "backend", recruitNumber: 2, requiredSkills: [], expectation: ""),
+            MemberRequirement(field: "uiux", recruitNumber: 2, requiredSkills: [], expectation: ""),
+            MemberRequirement(field: "bibx", recruitNumber: 2, requiredSkills: [], expectation: ""),
+            MemberRequirement(field: "videomotion", recruitNumber: 2, requiredSkills: [], expectation: ""),
+            MemberRequirement(field: "pm", recruitNumber: 2, requiredSkills: [], expectation: "")
+        ]
+        
+        Observable.of(data)
+            .bind(
+                to: collectionView.rx.items(
+                    cellIdentifier: RecruitFieldCell.reuseIdentifier,
+                    cellType: RecruitFieldCell.self
+                )
+            ) { _, data, cell in
+                cell.configureCell(with: data)
+            }
+            .disposed(by: disposeBag)
     }
 }
 

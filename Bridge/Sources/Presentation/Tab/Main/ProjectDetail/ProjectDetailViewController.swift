@@ -97,18 +97,13 @@ final class ProjectDetailViewController: BaseViewController {
         scrollView.addSubview(contentContainer)
         
         rootFlexContainer.flex.define { flex in
-            flex.addItem(scrollView).grow(1)
-            flex.addItem(menuBar)
-                .position(.absolute)
-                .direction(.row)
-                .width(100%)
-                .height(102)
-                .padding(16)
-                .bottom(0)
-                .define { flex in
-                    flex.addItem(bookmarkButton).width(54).height(52).marginTop(15)
-                    flex.addItem(applyButton).grow(1).height(52).marginTop(15).marginLeft(12)
-                }
+            flex.addItem().grow(1)
+            
+            flex.addItem(scrollView).position(.absolute).width(100%).top(0).bottom(102)
+            flex.addItem(menuBar).direction(.row).height(102).paddingHorizontal(16).define { flex in
+                flex.addItem(bookmarkButton).width(54).height(52).marginTop(15)
+                flex.addItem(applyButton).grow(1).height(52).marginTop(15).marginLeft(12)
+            }
         }
         
         contentContainer.flex.define { flex in
@@ -119,12 +114,12 @@ final class ProjectDetailViewController: BaseViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.pin.top(view.pin.safeArea.top).left().bottom().right()
         rootFlexContainer.flex.layout()
         
         contentContainer.pin.all()
         contentContainer.flex.layout(mode: .adjustHeight)
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentContainer.frame.height + 102)
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentContainer.frame.height)
         
         let shadowPath = UIBezierPath(rect: menuBar.bounds)
         menuBar.layer.shadowPath = shadowPath.cgPath
@@ -136,6 +131,5 @@ final class ProjectDetailViewController: BaseViewController {
             viewWillAppear: self.rx.viewWillAppear.asObservable()
         )
         let output = viewModel.transform(input: input)
-       
     }
 }
