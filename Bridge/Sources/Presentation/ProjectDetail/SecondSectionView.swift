@@ -39,7 +39,6 @@ final class SecondSectionView: BaseView {
     
     private let deadlineLabel: UILabel = {
         let label = UILabel()
-        label.text = "2023.09.05"
         label.font = BridgeFont.body2.font
         label.textColor = BridgeColor.gray1
         
@@ -57,7 +56,6 @@ final class SecondSectionView: BaseView {
     
     private let periodLabel: UILabel = {
         let label = UILabel()
-        label.text = "2023.09.11~2023.12.14(4개월)"
         label.font = BridgeFont.body2.font
         label.textColor = BridgeColor.gray1
         
@@ -75,7 +73,6 @@ final class SecondSectionView: BaseView {
     
     private let progressMethodLabel: UILabel = {
         let label = UILabel()
-        label.text = "블랜디드"
         label.font = BridgeFont.body2.font
         label.textColor = BridgeColor.gray1
         
@@ -93,7 +90,6 @@ final class SecondSectionView: BaseView {
     
     private let progressStepLabel: UILabel = {
         let label = UILabel()
-        label.text = "기획 중이에요"
         label.font = BridgeFont.body2.font
         label.textColor = BridgeColor.gray1
         
@@ -111,14 +107,13 @@ final class SecondSectionView: BaseView {
     
     private let restrictionLabel: UILabel = {
         let label = UILabel()
-        label.text = "학생, 취준생"
         label.font = BridgeFont.body2.font
         label.textColor = BridgeColor.gray1
         
         return label
     }()
     
-    private let warningMessageBox = BridgeWarningMessageBox("이 프로젝트는 학생, 취준생의 지원이 제한되어 있습니다.")
+    private let warningMessageBox = BridgeWarningMessageBox("")
     
     // MARK: - Layout
     override func configureLayouts() {
@@ -161,5 +156,49 @@ final class SecondSectionView: BaseView {
         super.layoutSubviews()
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
+    }
+    
+    func configureContents(with data: Project) {
+        if let startDate = data.startDate, let endDate = data.endDate {  // 둘 다 Date일 경우
+            let startDateString = startDate.toString(format: "yyyy.MM.dd")
+            let endDateString = endDate.toString(format: "yyyy.MM.dd")
+            let monthsBetweenDates = Calendar.current.dateComponents([.month], from: startDate, to: endDate).month ?? 0
+            
+            let labelText = "\(startDateString)~\(endDateString) (\(monthsBetweenDates)개월)"
+            let attributedString = NSMutableAttributedString(string: labelText)
+
+            if let rangeOfNumber = labelText.range(of: "(\(monthsBetweenDates)개월)") {
+                let nsRange = NSRange(rangeOfNumber, in: labelText)
+                attributedString.addAttribute(.foregroundColor, value: BridgeColor.primary1, range: nsRange)
+            }
+
+            periodLabel.attributedText = attributedString
+
+        } else if let startDate = data.startDate {  // startDate만 Date일 경우
+            let startDateString = startDate.toString(format: "yyyy.MM.dd")
+            periodLabel.text = "\(startDateString)~미정"
+
+        } else if let endDate = data.endDate {  // endDate만 Date일 경우
+            let endDateString = endDate.toString(format: "yyyy.MM.dd")
+            periodLabel.text = "미정~\(endDateString)"
+
+        } else {  // 둘 다 nil 일 경우
+            periodLabel.text = "미정"
+        }
+
+        deadlineLabel.text = data.deadline.toString(format: "yyyy.MM.dd")
+        progressMethodLabel.text = data.progressMethod
+        progressStepLabel.text = data.progressStep
+        
+        let restrictionText = data.applicantRestrictions.joined(separator: ", ")
+        restrictionLabel.text = restrictionText
+        
+        if restrictionText == "제한없음" {
+            warningMessageBox.flex.isIncludedInLayout(false).markDirty()
+            warningMessageBox.isHidden = true  // 이미지가 남아있는 에러에 대응
+            
+        } else {
+            warningMessageBox.updateTitle("이 프로젝트는 \(restrictionText)의 지원이 제한되어 있습니다.")
+        }
     }
 }

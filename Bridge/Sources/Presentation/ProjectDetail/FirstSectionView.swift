@@ -19,16 +19,10 @@ final class FirstSectionView: BaseView {
         return view
     }()
     
-    private let dDayLabel: BridgeChipLineLabel = {
-        let label = BridgeChipLineLabel()
-        label.text = "D-12"
-        
-        return label
-    }()
+    private let dDayLabel = BridgeChipLineLabel()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.configureTextWithLineHeight(text: "사이드 프젝으로 IOS앱을 같이 구현할 팀원을 구하고 있어요~", lineHeight: 30)
         label.font = BridgeFont.headline1Long.font
         label.textColor = BridgeColor.gray1
         label.numberOfLines = 0
@@ -38,7 +32,6 @@ final class FirstSectionView: BaseView {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.configureTextWithLineHeight(text: "당신이 찾고 있는 팀원의\n정보를 알려주세요!", lineHeight: 20)
         label.font = BridgeFont.body2Long.font
         label.textColor = BridgeColor.gray2
         label.numberOfLines = 0
@@ -50,7 +43,7 @@ final class FirstSectionView: BaseView {
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.paddingHorizontal(16).define { flex in
-            flex.addItem(dDayLabel).width(dDayLabel.intrinsicContentSize.width).height(22).marginTop(24)
+            flex.addItem(dDayLabel).marginTop(24)
             flex.addItem(titleLabel).height(60).marginTop(16).marginRight(49)
             flex.addItem(descriptionLabel).marginTop(8)
             flex.addItem().height(32)  // 바텀마진
@@ -61,5 +54,15 @@ final class FirstSectionView: BaseView {
         super.layoutSubviews()
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
+    }
+    
+    func configureContents(with data: Project) {
+        dDayLabel.text = "D-\(String(data.dDays))"
+        titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 30)
+        descriptionLabel.configureTextWithLineHeight(text: data.description, lineHeight: 20)
+        
+        dDayLabel.flex.width(dDayLabel.intrinsicContentSize.width).height(22)
+        dDayLabel.flex.markDirty()
+        setNeedsLayout()
     }
 }

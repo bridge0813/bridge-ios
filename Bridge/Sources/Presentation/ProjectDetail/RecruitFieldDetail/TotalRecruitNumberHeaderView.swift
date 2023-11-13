@@ -38,9 +38,9 @@ final class TotalRecruitNumberHeaderView: BaseCollectionReusableView {
 }
 // MARK: - Configuration
 extension TotalRecruitNumberHeaderView {
-    func configureLabel(with data: [MemberRequirement]) {
-        let totalNumber = data.reduce(0) { partialResult, memberRequirement in
-            return partialResult + memberRequirement.recruitNumber
+    func configureLabel(with requirements: [MemberRequirement]) {
+        let totalNumber = requirements.reduce(0) { partialResult, requirement in
+            return partialResult + requirement.recruitNumber
         }
         
         let labelText = "\(totalNumber)명 모집중"

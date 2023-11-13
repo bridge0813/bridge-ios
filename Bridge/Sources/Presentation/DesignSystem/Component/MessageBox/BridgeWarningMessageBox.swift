@@ -39,4 +39,8 @@ final class BridgeWarningMessageBox: BridgeMessageBox {
         backgroundView.pin.all()
         backgroundView.flex.layout()
     }
+    
+    func updateTitle(_ message: String) {
+        messageLabel.text = message
+    }
 }

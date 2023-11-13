@@ -11,7 +11,7 @@ import RxCocoa
 final class ProjectDetailViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        let viewWillAppear: Observable<Bool>
+        let viewDidLoad: Observable<Void>
         let goToDetailButtonTapped: ControlEvent<Void>?
     }
     
@@ -35,17 +35,17 @@ final class ProjectDetailViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        let project = input.viewWillAppear
+        let project = input.viewDidLoad
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.projectDetailUseCase.fetchProject(with: 0)  // ID 받아서 처리
             }
         
         input.goToDetailButtonTapped?
+            .withLatestFrom(project)
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                // 임시
-                owner.coordinator?.showRecruitFieldDetailViewController(with: [])
+            .subscribe(onNext: { owner, project in
+                owner.coordinator?.showRecruitFieldDetailViewController(with: project.memberRequirements)
             })
             .disposed(by: disposeBag)
         

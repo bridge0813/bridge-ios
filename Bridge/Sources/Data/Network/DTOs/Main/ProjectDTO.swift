@@ -149,7 +149,7 @@ extension ProjectDTO {
         ],
         tagLimit: ["학생", "취준생"],
         meetingWay: "온라인",
-        stage: "기획 중",
+        stage: "기획 중이에요",
         userEmail: ""
     )
 }

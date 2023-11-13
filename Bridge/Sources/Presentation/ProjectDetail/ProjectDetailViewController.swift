@@ -110,14 +110,18 @@ final class ProjectDetailViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = ProjectDetailViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            viewDidLoad: .just(()),
             goToDetailButtonTapped: thirdSectionView.goToDetailButtonTapped
         )
         let output = viewModel.transform(input: input)
         
         output.project
             .drive(onNext: { [weak self] data in
-                print(data)
+                guard let self else { return }
+                
+                self.firstSectionView.configureContents(with: data)
+                self.secondSectionView.configureContents(with: data)
+                self.thirdSectionView.configureContents(with: data.memberRequirements)
             })
             .disposed(by: disposeBag)
         

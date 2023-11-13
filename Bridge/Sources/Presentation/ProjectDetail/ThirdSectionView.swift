@@ -26,15 +26,6 @@ final class ThirdSectionView: BaseView {
         label.font = BridgeFont.subtitle2.font
         label.textColor = BridgeColor.gray1
         
-        let labelText = "2명 모집중"
-        let attributedString = NSMutableAttributedString(string: labelText)
-
-        if let rangeOfNumber = labelText.range(of: "2명") {
-            let nsRange = NSRange(rangeOfNumber, in: labelText)
-            attributedString.addAttribute(.foregroundColor, value: BridgeColor.primary1, range: nsRange)
-        }
-        label.attributedText = attributedString
-        
         return label
     }()
     
@@ -63,6 +54,36 @@ final class ThirdSectionView: BaseView {
         return goToDetailButton.rx.tap
     }
     
+    // MARK: - Configuration
+    func configureContents(with requirements: [MemberRequirement]) {
+        // 모집중인 총 인원 구하기
+        let totalNumber = requirements.reduce(0) { partialResult, requirement in
+            return partialResult + requirement.recruitNumber
+        }
+        
+        let labelText = "\(totalNumber)명 모집중"
+        let attributedString = NSMutableAttributedString(string: labelText)
+
+        if let rangeOfNumber = labelText.range(of: "\(totalNumber)명") {
+            let nsRange = NSRange(rangeOfNumber, in: labelText)
+            attributedString.addAttribute(.foregroundColor, value: BridgeColor.primary1, range: nsRange)
+        }
+
+        recruitLabel.attributedText = attributedString
+        
+        // 컬렉션 뷰 Cell 구현
+        Observable.of(requirements)
+            .bind(
+                to: collectionView.rx.items(
+                    cellIdentifier: RecruitFieldCell.reuseIdentifier,
+                    cellType: RecruitFieldCell.self
+                )
+            ) { _, requirement, cell in
+                cell.configureCell(with: requirement)
+            }
+            .disposed(by: disposeBag)
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
@@ -88,32 +109,6 @@ final class ThirdSectionView: BaseView {
         super.layoutSubviews()
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
-    }
-    
-    // MARK: - Binding
-    override func bind() {
-        // 임시
-        let data = [
-            MemberRequirement(field: "ios", recruitNumber: 2, requiredSkills: [], expectation: ""),
-            MemberRequirement(field: "android", recruitNumber: 2, requiredSkills: [], expectation: ""),
-            MemberRequirement(field: "frontend", recruitNumber: 2, requiredSkills: [], expectation: ""),
-            MemberRequirement(field: "backend", recruitNumber: 2, requiredSkills: [], expectation: ""),
-            MemberRequirement(field: "uiux", recruitNumber: 2, requiredSkills: [], expectation: ""),
-            MemberRequirement(field: "bibx", recruitNumber: 2, requiredSkills: [], expectation: ""),
-            MemberRequirement(field: "videomotion", recruitNumber: 2, requiredSkills: [], expectation: ""),
-            MemberRequirement(field: "pm", recruitNumber: 2, requiredSkills: [], expectation: "")
-        ]
-        
-        Observable.of(data)
-            .bind(
-                to: collectionView.rx.items(
-                    cellIdentifier: RecruitFieldCell.reuseIdentifier,
-                    cellType: RecruitFieldCell.self
-                )
-            ) { _, data, cell in
-                cell.configureCell(with: data)
-            }
-            .disposed(by: disposeBag)
     }
 }
 
