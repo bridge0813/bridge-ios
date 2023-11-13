@@ -8,37 +8,37 @@
 import Foundation
 
 enum ChatEndpoint {
-    case chatRooms(userID: String)
-    case leaveChatRoom(chatRoomID: String)
+    case channels(userID: String)
+    case leaveChannel(id: String)
 }
 
 extension ChatEndpoint: Endpoint {
     var path: String {
         switch self {
-        case .chatRooms(let userID):    
+        case .channels(let userID):    
             return "/chat/\(userID)"
             
-        case .leaveChatRoom:
+        case .leaveChannel:
             return "/chat"
         }
     }
     
     var queryParameters: QueryParameters? {
         switch self {
-        case .chatRooms:
+        case .channels:
             return nil
             
-        case .leaveChatRoom(let chatRoomID):
-            return ["chatRoomId": chatRoomID]
+        case .leaveChannel(let id):
+            return ["chatRoomId": id]
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .chatRooms:        
+        case .channels:        
             return .get
             
-        case .leaveChatRoom:
+        case .leaveChannel:
             return .delete
         }
     }

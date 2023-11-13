@@ -1,5 +1,5 @@
 //
-//  MessageViewModel.swift
+//  ChannelViewModel.swift
 //  Bridge
 //
 //  Created by 정호윤 on 10/16/23.
@@ -8,7 +8,7 @@
 import RxCocoa
 import RxSwift
 
-final class MessageViewModel: ViewModelType {
+final class ChannelViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
@@ -18,25 +18,26 @@ final class MessageViewModel: ViewModelType {
     }
     
     struct Output {
-        let chatRoom: Driver<ChatRoom>
+        let channel: Driver<Channel>
         let messages: Driver<[Message]>
     }
     
     // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: ChatCoordinator?
-    private let chatRoom: ChatRoom
-    private let observeMessageUseCase: ObserveMessageUseCase
+    
+    private let channel: Channel
+    private let observeChannelUseCase: ObserveChannelUseCase
     
     // MARK: - Init
     init(
         coordinator: ChatCoordinator?,
-        chatRoom: ChatRoom,
-        observeMessageUseCase: ObserveMessageUseCase
+        channel: Channel,
+        observeChannelUseCase: ObserveChannelUseCase
     ) {
         self.coordinator = coordinator
-        self.chatRoom = chatRoom
-        self.observeMessageUseCase = observeMessageUseCase
+        self.channel = channel
+        self.observeChannelUseCase = observeChannelUseCase
     }
     
     // MARK: - Transformation
@@ -44,7 +45,7 @@ final class MessageViewModel: ViewModelType {
         let messages = input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
-                owner.observeMessageUseCase.observe(chatRoomID: owner.chatRoom.id)
+                owner.observeChannelUseCase.observeChannel(id: owner.channel.id)
             }
         
         input.profileButtonTapped
@@ -59,10 +60,10 @@ final class MessageViewModel: ViewModelType {
             .subscribe(onNext: { owner, itemTitle in
                 switch itemTitle {
                 case "채팅방 나가기":
-                    owner.coordinator?.showAlert(configuration: .leaveChatRoom) { }
+                    owner.coordinator?.showAlert(configuration: .leaveChannel)
                     
                 case "신고하기":
-                    owner.coordinator?.showAlert(configuration: .report) { }
+                    owner.coordinator?.showAlert(configuration: .report)
                     
                 default:
                     break
@@ -78,14 +79,14 @@ final class MessageViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            chatRoom: Driver.just(chatRoom),
+            channel: Driver.just(channel),
             messages: messages.asDriver(onErrorJustReturn: [.onError])
         )
     }
 }
 
 // MARK: - Data source
-extension MessageViewModel {
+extension ChannelViewModel {
     enum Section {
         case main
     }

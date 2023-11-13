@@ -1,5 +1,5 @@
 //
-//  ChatRoom.swift
+//  Channel.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/08/28.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatRoom {
+struct Channel {
     /// 가장 최근에 수신된 메시지와 관련된 정보를 저장하기 위한 타입
     struct LastMessage {
         let receivedTime: String
@@ -31,8 +31,8 @@ struct ChatRoom {
     let unreadMessageCount: String
 }
 
-extension ChatRoom {
-    static let onError = ChatRoom(
+extension Channel {
+    static let onError = Channel(
         id: UUID().uuidString,
         myID: UUID().uuidString,
         opponentID: UUID().uuidString,
@@ -43,5 +43,5 @@ extension ChatRoom {
     )
 }
 
-extension ChatRoom: Hashable { }
-extension ChatRoom.LastMessage: Hashable { }
+extension Channel: Hashable { }
+extension Channel.LastMessage: Hashable { }

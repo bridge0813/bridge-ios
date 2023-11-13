@@ -1,5 +1,5 @@
 //
-//  ChatRoomCell.swift
+//  ChannelCell.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/08/29.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class ChatRoomCell: BaseTableViewCell {
+final class ChannelCell: BaseTableViewCell {
     // MARK: - UI
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -92,17 +92,17 @@ final class ChatRoomCell: BaseTableViewCell {
 }
 
 // MARK: - Configuration
-extension ChatRoomCell {
-    func configure(with chatRoom: ChatRoom) {
-        nameLabel.text = chatRoom.name
-        lastMessageReceivedTimeLabel.text = chatRoom.lastMessage.receivedTime
-        lastMessageContentLabel.text = chatRoom.lastMessage.content
-        configureUnreadMessageCountLabel(Int(chatRoom.unreadMessageCount) ?? 0)
+extension ChannelCell {
+    func configure(with channel: Channel) {
+        nameLabel.text = channel.name
+        lastMessageReceivedTimeLabel.text = channel.lastMessage.receivedTime
+        lastMessageContentLabel.text = channel.lastMessage.content
+        configureUnreadMessageCountLabel(Int(channel.unreadMessageCount) ?? 0)
     }
 }
 
 // MARK: - 읽지 않은 메시지 개수에 따른 디스플레이 설정
-private extension ChatRoomCell {
+private extension ChannelCell {
     func configureUnreadMessageCountLabel(_ unreadMessageCount: Int) {
         let displayState = UnreadMessageDisplayState(unreadMessageCount)
         

@@ -1,15 +1,33 @@
 //
-//  MockMessageRepository.swift
+//  MockChannelRepository.swift
 //  Bridge
 //
-//  Created by 정호윤 on 10/22/23.
+//  Created by 정호윤 on 10/11/23.
 //
 
 import RxSwift
 
-// TODO: dto로 수정
-final class MockMessageRepository: MessageRepository {
-    func observe(chatRoomID: String) -> Observable<[Message]> {
+final class MockChannelRepository: ChannelRepository {
+    func fetchChannels() -> Observable<[Channel]> {
+        .just(ChannelDTO.testArray.map { $0.toEntity() })
+//        .error(NetworkError.statusCode(401))
+    }
+    
+    func leaveChannel(id: String) -> Observable<Void> {
+        Observable.create { observer in
+            if let index = ChannelDTO.testArray.firstIndex(where: { $0.id == id }) {
+                ChannelDTO.testArray.remove(at: index)
+                observer.onNext(())
+            } else {
+                observer.onError(NetworkError.unknown)
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    // TODO: DTO로 수정
+    func observeChannel(id: String) -> Observable<[Message]> {
         .just([
             Message(
                 id: "0",

@@ -1,5 +1,5 @@
 //
-//  ChatRoomDropdownMenuCell.swift
+//  ChannelDropdownMenuCell.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/10/05.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class ChatRoomDropdownMenuCell: BaseDropdownCell {
+final class ChannelDropdownMenuCell: BaseDropdownCell {
     // MARK: - UI
     private lazy var optionImageView: UIImageView = {
         let imageView = UIImageView()
@@ -36,7 +36,7 @@ final class ChatRoomDropdownMenuCell: BaseDropdownCell {
 }
 
 // MARK: - Configuration
-extension ChatRoomDropdownMenuCell {
+extension ChannelDropdownMenuCell {
     func configure(image: UIImage?) {
         optionImageView.image = image?.resize(to: CGSize(width: 20, height: 20)).withRenderingMode(.alwaysTemplate)
     }

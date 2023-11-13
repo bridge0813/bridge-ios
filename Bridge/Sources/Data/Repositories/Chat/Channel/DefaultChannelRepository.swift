@@ -1,5 +1,5 @@
 //
-//  DefaultChatRoomRepository.swift
+//  DefaultChannelRepository.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/08/28.
@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-final class DefaultChatRoomRepository: ChatRoomRepository {
+final class DefaultChannelRepository: ChannelRepository {
     
     private let networkService: NetworkService
     private let tokenStorage: TokenStorage
@@ -18,21 +18,26 @@ final class DefaultChatRoomRepository: ChatRoomRepository {
         self.tokenStorage = tokenStorage
     }
     
-    func fetchChatRooms() -> Observable<[ChatRoom]> {
+    func fetchChannels() -> Observable<[Channel]> {
         let userID = tokenStorage.get(.userID) ?? invalidToken
-        let chatEndpoint = ChatEndpoint.chatRooms(userID: userID)
+        let chatEndpoint = ChatEndpoint.channels(userID: userID)
     
         return networkService.request(chatEndpoint, interceptor: AuthInterceptor())
-            .decode(type: [ChatRoomDTO].self, decoder: JSONDecoder())
-            .map { chatRoomDTOs in
-                chatRoomDTOs.map { $0.toEntity() }
+            .decode(type: [ChannelDTO].self, decoder: JSONDecoder())
+            .map { channelDTOs in
+                channelDTOs.map { $0.toEntity() }
             }
     }
     
-    func leaveChatRoom(id: String) -> Observable<Void> {
-        let chatEndpoint = ChatEndpoint.leaveChatRoom(chatRoomID: id)
+    func leaveChannel(id: String) -> Observable<Void> {
+        let chatEndpoint = ChatEndpoint.leaveChannel(id: id)
         
         return networkService.request(chatEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
+    }
+    
+    // TODO: 구현
+    func observeChannel(id: String) -> Observable<[Message]> {
+        .just([])
     }
 }

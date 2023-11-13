@@ -1,5 +1,5 @@
 //
-//  ChatRoomDTO.swift
+//  ChannelDTO.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/08/29.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatRoomDTO: Codable {
+struct ChannelDTO: Codable {
     let id: String
     var image: String?
     let name: String
@@ -28,16 +28,16 @@ struct ChatRoomDTO: Codable {
 }
 
 // MARK: - For test
-extension ChatRoomDTO {
+extension ChannelDTO {
     // TODO: 수정 필요 (id 충돌 주의)
-    func toEntity() -> ChatRoom {
-        ChatRoom(
+    func toEntity() -> Channel {
+        Channel(
             id: id,
             myID: "",
             opponentID: "",
             image: nil,
             name: name,
-            lastMessage: ChatRoom.LastMessage(
+            lastMessage: Channel.LastMessage(
                 receivedTime: lastMessageReceivedTime?.toTimeString() ?? "오류",
                 content: "nil"
             ),
@@ -62,9 +62,9 @@ extension String {
 }
 
 
-extension ChatRoomDTO {
-    static var testArray: [ChatRoomDTO] = [
-//        ChatRoomDTO(
+extension ChannelDTO {
+    static var testArray: [ChannelDTO] = [
+//        ChannelDTO(
 //            id: "1",
 //            image: "urlString",
 //            name: "정호윤",
@@ -73,7 +73,7 @@ extension ChatRoomDTO {
 //            lastMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
 //            unreadMessageCount: "0"
 //        ),
-//        ChatRoomDTO(
+//        ChannelDTO(
 //            id: "2",
 //            image: "urlString",
 //            name: "채팅방 2",
@@ -82,7 +82,7 @@ extension ChatRoomDTO {
 //            lastMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
 //            unreadMessageCount: "10"
 //        ),
-//        ChatRoomDTO(
+//        ChannelDTO(
 //            id: "3",
 //            image: "urlString",
 //            name: "채팅방 이름이 길어진 경우에 대한 테스트입니다.",
@@ -91,7 +91,7 @@ extension ChatRoomDTO {
 //            lastMessageContent: "이미지가 수신된 경우의 미리보기 메시지입니다.",
 //            unreadMessageCount: "1000"
 //        ),
-//        ChatRoomDTO(
+//        ChannelDTO(
 //            id: "4",
 //            image: "urlString",
 //            name: "채팅방 4",
@@ -100,7 +100,7 @@ extension ChatRoomDTO {
 //            lastMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
 //            unreadMessageCount: "999"
 //        ),
-//        ChatRoomDTO(
+//        ChannelDTO(
 //            id: "5",
 //            image: "urlString",
 //            name: "채팅방 5",
@@ -109,7 +109,7 @@ extension ChatRoomDTO {
 //            lastMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
 //            unreadMessageCount: "1"
 //        ),
-//        ChatRoomDTO(
+//        ChannelDTO(
 //            id: "6",
 //            image: "urlString",
 //            name: "채팅방 6",

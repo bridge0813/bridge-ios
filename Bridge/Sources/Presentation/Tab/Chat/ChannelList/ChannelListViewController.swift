@@ -1,5 +1,5 @@
 //
-//  ChatRoomListViewController.swift
+//  ChannelListViewController.swift
 //  Bridge
 //
 //  Created by 정호윤 on 2023/08/26.
@@ -11,13 +11,13 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
-final class ChatRoomListViewController: BaseViewController {
+final class ChannelListViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
-    private lazy var chatRoomListTableView: UITableView = {
+    private lazy var channelListTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(ChatRoomCell.self)
+        tableView.register(ChannelCell.self)
         tableView.rowHeight = 88
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = .zero
@@ -27,15 +27,15 @@ final class ChatRoomListViewController: BaseViewController {
     private var placeholderView = BridgePlaceholderView()
     
     // MARK: - Property
-    private typealias DataSource = UITableViewDiffableDataSource<ChatRoomListViewModel.Section, ChatRoom>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<ChatRoomListViewModel.Section, ChatRoom>
+    private typealias DataSource = UITableViewDiffableDataSource<ChannelListViewModel.Section, Channel>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<ChannelListViewModel.Section, Channel>
     private var dataSource: DataSource?
     
-    private let viewModel: ChatRoomListViewModel
-    private let leaveChatRoom = PublishRelay<Int>()
+    private let viewModel: ChannelListViewModel
+    private let leaveChannel = PublishRelay<Int>()
     
     // MARK: - Init
-    init(viewModel: ChatRoomListViewModel) {
+    init(viewModel: ChannelListViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -55,7 +55,7 @@ final class ChatRoomListViewController: BaseViewController {
         view.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.define { flex in
-            flex.addItem(chatRoomListTableView).isIncludedInLayout(!chatRoomListTableView.isHidden).grow(1)
+            flex.addItem(channelListTableView).isIncludedInLayout(!channelListTableView.isHidden).grow(1)
             flex.addItem(placeholderView).isIncludedInLayout(!placeholderView.isHidden).grow(1)
         }
     }
@@ -68,20 +68,20 @@ final class ChatRoomListViewController: BaseViewController {
     
     // MARK: - Binding
     override func bind() {
-        chatRoomListTableView.rx
+        channelListTableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
         
-        let input = ChatRoomListViewModel.Input(
+        let input = ChannelListViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            itemSelected: chatRoomListTableView.rx.itemSelected.map { $0.row },
-            leaveChatRoom: leaveChatRoom.asObservable()
+            itemSelected: channelListTableView.rx.itemSelected.map { $0.row },
+            leaveChannel: leaveChannel.asObservable()
         )
         let output = viewModel.transform(input: input)
         
-        output.chatRooms
-            .drive { [weak self] chatRooms in
-                self?.applySnapshot(with: chatRooms)
+        output.channels
+            .drive { [weak self] channels in
+                self?.applySnapshot(with: channels)
             }
             .disposed(by: disposeBag)
         
@@ -94,31 +94,31 @@ final class ChatRoomListViewController: BaseViewController {
 }
 
 // MARK: - Data source
-extension ChatRoomListViewController {
+extension ChannelListViewController {
     private func configureDataSource() {
-        dataSource = DataSource(tableView: chatRoomListTableView) { tableView, indexPath, item in
-            guard let cell = tableView.dequeueReusableCell(ChatRoomCell.self, for: indexPath) else { return ChatRoomCell() }
+        dataSource = DataSource(tableView: channelListTableView) { tableView, indexPath, item in
+            guard let cell = tableView.dequeueReusableCell(ChannelCell.self, for: indexPath) else { return ChannelCell() }
             cell.configure(with: item)
             return cell
         }
     }
     
-    private func applySnapshot(with chatRooms: [ChatRoom]) {
+    private func applySnapshot(with channels: [Channel]) {
         var snapshot = Snapshot()
         snapshot.appendSections([.main])
-        snapshot.appendItems(chatRooms)
+        snapshot.appendItems(channels)
         dataSource?.apply(snapshot)
     }
 }
 
 // MARK: - Delegate
-extension ChatRoomListViewController: UITableViewDelegate {
+extension ChannelListViewController: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "나가기") { [weak self] _, _, completion in
-            self?.leaveChatRoom.accept(indexPath.row)
+            self?.leaveChannel.accept(indexPath.row)
             completion(true)
         }
         
@@ -127,15 +127,15 @@ extension ChatRoomListViewController: UITableViewDelegate {
 }
 
 // MARK: - View state handling
-private extension ChatRoomListViewController {
+private extension ChannelListViewController {
     /// 뷰의 상태에 따라 화면에 표시되는 컴포넌트를 설정하는 함수
-    func handleViewState(_ viewState: ChatRoomListViewModel.ViewState) {
-        chatRoomListTableView.isHidden = true
+    func handleViewState(_ viewState: ChannelListViewModel.ViewState) {
+        channelListTableView.isHidden = true
         placeholderView.isHidden = false
         
         switch viewState {
         case .general:
-            chatRoomListTableView.isHidden = false
+            channelListTableView.isHidden = false
             placeholderView.isHidden = true
             
         case .signInNeeded:
@@ -148,7 +148,7 @@ private extension ChatRoomListViewController {
             )
             
         case .empty:
-            placeholderView.configurePlaceholderView(for: .emptyChatRoom)
+            placeholderView.configurePlaceholderView(for: .empty)
             
         case .error:
             placeholderView.configurePlaceholderView(for: .error)

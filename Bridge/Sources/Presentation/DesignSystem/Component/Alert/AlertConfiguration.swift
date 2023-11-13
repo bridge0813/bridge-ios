@@ -96,7 +96,7 @@ extension AlertConfiguration {
  
 // MARK: - Chat
 extension AlertConfiguration {
-    static let leaveChatRoom = AlertConfiguration(
+    static let leaveChannel = AlertConfiguration(
         title: "채팅방에서 나갈까요?",
         description: "채팅 목록 및 대화 내용이 모두 삭제됩니다.",
         rightButtonTitle: "나가기"

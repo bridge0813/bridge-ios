@@ -14,12 +14,11 @@ final class ChatCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     
     private let authRepository: AuthRepository
-    private let chatRoomRepository: ChatRoomRepository
-    private let messageRepository: MessageRepository
+    private let channelRepository: ChannelRepository
     
-    private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
-    private let leaveChatRoomUseCase: LeaveChatRoomUseCase
-    private let observeMessageUseCase: ObserveMessageUseCase
+    private let fetchChannelsUseCase: FetchChannelsUseCase
+    private let leaveChannelUseCase: LeaveChannelUseCase
+    private let observeChannelUseCase: ObserveChannelUseCase
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -28,44 +27,36 @@ final class ChatCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
         
-#if DEBUG
-//        chatRoomRepository = MockChatRoomRepository()
-        chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
-        messageRepository = MockMessageRepository()
-#else
-        chatRoomRepository = DefaultChatRoomRepository(networkService: networkService)
-        messageRepository = MockMessageRepository()
-#endif
-        
-        fetchChatRoomsUseCase = DefaultFetchChatRoomsUseCase(chatRoomRepository: chatRoomRepository)
-        leaveChatRoomUseCase = DefaultLeaveChatRoomUseCase(chatRoomRepository: chatRoomRepository)
-        observeMessageUseCase = DefaultObserveMessageUseCase(messageRepository: messageRepository)
+        channelRepository = DefaultChannelRepository(networkService: networkService) 
+        fetchChannelsUseCase = DefaultFetchChannelsUseCase(channelRepository: channelRepository)
+        leaveChannelUseCase = DefaultLeaveChannelUseCase(channelRepository: channelRepository)
+        observeChannelUseCase = DefaultObserveChannelUseCase(channelRepository: channelRepository)
     }
     
     func start() {
-        showChatRoomListViewController()
+        showChannelListViewController()
     }
 }
 
 extension ChatCoordinator {
-    private func showChatRoomListViewController() {
-        let chatRoomListViewModel = ChatRoomListViewModel(
+    private func showChannelListViewController() {
+        let channelListViewModel = ChannelListViewModel(
             coordinator: self,
-            fetchChatRoomsUseCase: fetchChatRoomsUseCase,
-            leaveChatRoomUseCase: leaveChatRoomUseCase
+            fetchChannelsUseCase: fetchChannelsUseCase,
+            leaveChannelUseCase: leaveChannelUseCase
         )
-        let chatRoomListViewController = ChatRoomListViewController(viewModel: chatRoomListViewModel)
-        navigationController.pushViewController(chatRoomListViewController, animated: true)
+        let channelListViewController = ChannelListViewController(viewModel: channelListViewModel)
+        navigationController.pushViewController(channelListViewController, animated: true)
     }
     
-    func showChatRoomViewController(of chatRoom: ChatRoom) {
-        let chatRoomViewModel = MessageViewModel(
+    func showChannelViewController(of channel: Channel) {
+        let channelViewModel = ChannelViewModel(
             coordinator: self,
-            chatRoom: chatRoom,
-            observeMessageUseCase: observeMessageUseCase
+            channel: channel,
+            observeChannelUseCase: observeChannelUseCase
         )
-        let chatRoomViewController = MessageViewController(viewModel: chatRoomViewModel)
-        navigationController.pushViewController(chatRoomViewController, animated: true)
+        let channelViewController = ChannelViewController(viewModel: channelViewModel)
+        navigationController.pushViewController(channelViewController, animated: true)
     }
 }
 

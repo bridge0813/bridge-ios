@@ -1,5 +1,5 @@
 //
-//  MessageViewController.swift
+//  ChannelViewController.swift
 //  Bridge
 //
 //  Created by 정호윤 on 10/16/23.
@@ -11,7 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
-final class MessageViewController: BaseViewController {
+final class ChannelViewController: BaseViewController {
     // MARK: - UI
     private let profileButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
@@ -42,9 +42,9 @@ final class MessageViewController: BaseViewController {
         itemTextColor: BridgeColor.gray03,
         width: 147,
         cornerRadius: 4,
-        customCellType: ChatRoomDropdownMenuCell.self,
+        customCellType: ChannelDropdownMenuCell.self,
         customCellConfiguration: { index, _, cell in
-            guard let cell = cell as? ChatRoomDropdownMenuCell else { return }
+            guard let cell = cell as? ChannelDropdownMenuCell else { return }
             cell.configure(image: UIImage(named: ["leave", "warning"][index]))
         }
     )
@@ -67,14 +67,14 @@ final class MessageViewController: BaseViewController {
     private let messageInputBar = BridgeMessageInputBar()
     
     // MARK: - Property
-    private typealias DataSource = UICollectionViewDiffableDataSource<MessageViewModel.Section, Message>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<MessageViewModel.Section, Message>
+    private typealias DataSource = UICollectionViewDiffableDataSource<ChannelViewModel.Section, Message>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<ChannelViewModel.Section, Message>
     private var dataSource: DataSource?
     
-    private let viewModel: MessageViewModel
+    private let viewModel: ChannelViewModel
     
     // MARK: - Init
-    init(viewModel: MessageViewModel) {
+    init(viewModel: ChannelViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -107,9 +107,9 @@ final class MessageViewController: BaseViewController {
         navigationItem.rightBarButtonItem = menuBarButton
     }
     
-    private func configureProfileButton(with chatRoom: ChatRoom) {
+    private func configureProfileButton(with channel: Channel) {
         profileButton.configuration?.attributedTitle = AttributedString(
-            chatRoom.name,
+            channel.name,
             attributes: AttributeContainer([.font: BridgeFont.subtitle2.font, .foregroundColor: BridgeColor.gray01])
         )
     }
@@ -147,7 +147,7 @@ final class MessageViewController: BaseViewController {
             .bind(to: messageCollectionView.rx.yPosition)
             .disposed(by: disposeBag)
         
-        let input = MessageViewModel.Input(
+        let input = ChannelViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             profileButtonTapped: profileButton.rx.tap.asObservable(),
             dropdownMenuItemSelected: dropdownMenu.itemSelected.map { $0.title }.asObservable(),
@@ -155,9 +155,9 @@ final class MessageViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
-        output.chatRoom
-            .drive { [weak self] chatRoom in
-                self?.configureProfileButton(with: chatRoom)
+        output.channel
+            .drive { [weak self] channel in
+                self?.configureProfileButton(with: channel)
             }
             .disposed(by: disposeBag)
         
@@ -170,7 +170,7 @@ final class MessageViewController: BaseViewController {
 }
 
 // MARK: - Data source
-extension MessageViewController {
+extension ChannelViewController {
     private func configureDataSource() {
         dataSource = DataSource(collectionView: messageCollectionView) { [weak self] collectionView, indexPath, item in
             let currentMessage = item
@@ -214,7 +214,7 @@ extension MessageViewController {
 }
 
 // MARK: - Layout
-private extension MessageViewController {
+private extension ChannelViewController {
     func createLayout() -> UICollectionViewLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.estimatedItemSize = CGSize(width: view.frame.width, height: 66)
