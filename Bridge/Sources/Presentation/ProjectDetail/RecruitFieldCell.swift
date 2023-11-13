@@ -14,7 +14,7 @@ final class RecruitFieldCell: BaseCollectionViewCell {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = BridgeColor.gray9
+        view.backgroundColor = BridgeColor.gray09
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
         
@@ -25,7 +25,7 @@ final class RecruitFieldCell: BaseCollectionViewCell {
     
     private let fieldLabel: UILabel = {
         let label = UILabel()
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.font = BridgeFont.subtitle2.font
     
         return label

@@ -16,14 +16,14 @@ final class RecruitFieldDetailViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = BridgeColor.gray9
+        view.backgroundColor = BridgeColor.gray09
         
         return view
     }()
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
-        collectionView.backgroundColor = BridgeColor.gray9
+        collectionView.backgroundColor = BridgeColor.gray09
         collectionView.register(RecruitFieldDetailCell.self)
         collectionView.register(
             TotalRecruitNumberHeaderView.self,

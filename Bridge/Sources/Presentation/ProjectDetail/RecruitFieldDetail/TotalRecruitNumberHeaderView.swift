@@ -17,7 +17,7 @@ final class TotalRecruitNumberHeaderView: BaseCollectionReusableView {
     private let recruitNumberLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body4.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()

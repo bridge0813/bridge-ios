@@ -23,7 +23,7 @@ final class SecondSectionView: BaseView {
         let label = UILabel()
         label.text = "기본정보"
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -32,7 +32,7 @@ final class SecondSectionView: BaseView {
         let label = UILabel()
         label.text = "모집 마감일"
         label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         
         return label
     }()
@@ -40,7 +40,7 @@ final class SecondSectionView: BaseView {
     private let deadlineLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -49,7 +49,7 @@ final class SecondSectionView: BaseView {
         let label = UILabel()
         label.text = "프로젝트 기간"
         label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         
         return label
     }()
@@ -57,7 +57,7 @@ final class SecondSectionView: BaseView {
     private let periodLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -66,7 +66,7 @@ final class SecondSectionView: BaseView {
         let label = UILabel()
         label.text = "진행 방식"
         label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         
         return label
     }()
@@ -74,7 +74,7 @@ final class SecondSectionView: BaseView {
     private let progressMethodLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -83,7 +83,7 @@ final class SecondSectionView: BaseView {
         let label = UILabel()
         label.text = "진행 단계"
         label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         
         return label
     }()
@@ -91,7 +91,7 @@ final class SecondSectionView: BaseView {
     private let progressStepLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -100,7 +100,7 @@ final class SecondSectionView: BaseView {
         let label = UILabel()
         label.text = "지원자 제한"
         label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         
         return label
     }()
@@ -108,7 +108,7 @@ final class SecondSectionView: BaseView {
     private let restrictionLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()

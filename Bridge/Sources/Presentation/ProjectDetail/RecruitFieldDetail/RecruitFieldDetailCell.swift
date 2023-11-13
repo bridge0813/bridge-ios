@@ -25,7 +25,7 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
     
     private let fieldLabel: UILabel = {
         let label = UILabel()
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.font = BridgeFont.subtitle1.font
     
         return label
@@ -42,7 +42,7 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
     private let requirementTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "바라는 점"
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.font = BridgeFont.body1.font
     
         return label
@@ -50,7 +50,7 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
     
     private let requirementLabel: UILabel = {
         let label = UILabel()
-        label.textColor = BridgeColor.gray2
+        label.textColor = BridgeColor.gray02
         label.font = BridgeFont.body2.font
         label.numberOfLines = 0
         
@@ -59,7 +59,7 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
     
     private let dividerView: UIView = {  // Cell의 재사용에 대응하기 위한 명시적 구분선
         let view = UIView()
-        view.backgroundColor = BridgeColor.gray8
+        view.backgroundColor = BridgeColor.gray08
         
         return view
     }()
@@ -67,7 +67,7 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
     private let techStackLabel: UILabel = {
         let label = UILabel()
         label.text = "스택"
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.font = BridgeFont.body2.font
     
         return label
@@ -88,7 +88,7 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
         contentView.backgroundColor = BridgeColor.gray10
         contentView.layer.cornerRadius = 12
         contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = BridgeColor.gray8.cgColor
+        contentView.layer.borderColor = BridgeColor.gray08.cgColor
         contentView.clipsToBounds = true
     }
     

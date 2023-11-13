@@ -26,14 +26,14 @@ final class ProjectDetailViewController: BaseViewController {
     
     private let contentContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = BridgeColor.gray9
+        view.backgroundColor = BridgeColor.gray09
         
         return view
     }()
     
     private let dividerView: UIView = {
         let divider = UIView()
-        divider.backgroundColor = BridgeColor.gray6
+        divider.backgroundColor = BridgeColor.gray06
         divider.isHidden = true
         
         return divider

@@ -24,7 +24,7 @@ final class FirstSectionView: BaseView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.headline1Long.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.numberOfLines = 0
         
         return label
@@ -33,7 +33,7 @@ final class FirstSectionView: BaseView {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2Long.font
-        label.textColor = BridgeColor.gray2
+        label.textColor = BridgeColor.gray02
         label.numberOfLines = 0
         
         return label

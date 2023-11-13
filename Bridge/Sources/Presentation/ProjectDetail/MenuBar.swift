@@ -30,7 +30,7 @@ final class MenuBar: BaseView {
         let button = BridgeButton(
             title: "지원하기",
             font: BridgeFont.button1.font,
-            backgroundColor: BridgeColor.gray4
+            backgroundColor: BridgeColor.gray04
         )
         button.isEnabled = true
         

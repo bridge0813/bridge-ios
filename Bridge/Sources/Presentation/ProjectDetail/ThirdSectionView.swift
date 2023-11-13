@@ -24,7 +24,7 @@ final class ThirdSectionView: BaseView {
     private let recruitLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -36,7 +36,7 @@ final class ThirdSectionView: BaseView {
             .withRenderingMode(.alwaysTemplate)
         
         button.setImage(buttonImage, for: .normal)
-        button.tintColor = BridgeColor.gray3
+        button.tintColor = BridgeColor.gray03
         button.contentHorizontalAlignment = .right
         
         return button
