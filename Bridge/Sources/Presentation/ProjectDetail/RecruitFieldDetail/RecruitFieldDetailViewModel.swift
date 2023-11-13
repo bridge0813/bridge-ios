@@ -41,7 +41,7 @@ final class RecruitFieldDetailViewModel: ViewModelType {
     }
 }
 
-// MARK: - UI DataSource
+// MARK: - Data source
 extension RecruitFieldDetailViewModel {
     enum Section: CaseIterable {
         case main

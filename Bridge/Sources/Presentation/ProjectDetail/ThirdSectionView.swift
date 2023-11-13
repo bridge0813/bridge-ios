@@ -71,7 +71,7 @@ final class ThirdSectionView: BaseView {
 
         recruitLabel.attributedText = attributedString
         
-        // 컬렉션 뷰 Cell 구현
+        // Data source
         Observable.of(requirements)
             .bind(
                 to: collectionView.rx.items(

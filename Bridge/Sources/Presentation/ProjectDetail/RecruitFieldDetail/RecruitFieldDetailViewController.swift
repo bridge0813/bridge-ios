@@ -140,7 +140,7 @@ extension RecruitFieldDetailViewController {
     }
 }
 
-// MARK: - DiffableDataSource
+// MARK: - Data source
 extension RecruitFieldDetailViewController {
     private func configureDataSource() {
         dataSource = DataSource(
