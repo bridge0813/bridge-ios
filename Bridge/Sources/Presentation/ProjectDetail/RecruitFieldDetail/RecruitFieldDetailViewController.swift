@@ -55,11 +55,13 @@ final class RecruitFieldDetailViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureNavigationBarAppearance(with: BridgeColor.gray09)
         tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        configureDefaultNavigationBarAppearance()
         tabBarController?.tabBar.isHidden = false
     }
     

@@ -59,6 +59,20 @@ extension NavigationBarAppearanceConfigurable {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
     }
+    
+    func configureNavigationBarAppearance(with backgroundColor: UIColor) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = backgroundColor
+        appearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
+        appearance.titleTextAttributes = [.font: BridgeFont.subtitle1.font, .foregroundColor: BridgeColor.gray01]
+        appearance.shadowColor = nil
+        
+        navigationController?.navigationBar.tintColor = BridgeColor.gray01
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+    }
 }
 
 extension UIViewController: NavigationBarAppearanceConfigurable { }
