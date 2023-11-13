@@ -1,5 +1,5 @@
 //
-//  ChatCell.swift
+//  BaseChatCell.swift
 //  Bridge
 //
 //  Created by 정호윤 on 10/27/23.
@@ -10,7 +10,7 @@ import FlexLayout
 import PinLayout
 
 /// 채팅 셀의  레이아웃 등을 설정하는  base class
-class ChatCell: BaseCollectionViewCell {
+class BaseChatCell: BaseCollectionViewCell {
     // MARK: - UI
     private let dateLabel: UILabel = {
         let label = UILabel()
@@ -68,7 +68,7 @@ class ChatCell: BaseCollectionViewCell {
 }
 
 // MARK: - Configuration
-private extension ChatCell {
+private extension BaseChatCell {
     func configureMessageBubble(by sender: Sender) {
         switch sender {
         case .me:

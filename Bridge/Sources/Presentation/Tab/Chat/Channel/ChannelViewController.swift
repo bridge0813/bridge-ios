@@ -58,7 +58,7 @@ final class ChannelViewController: BaseViewController {
     private lazy var messageCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.backgroundColor = BridgeColor.gray09
-        collectionView.register(ChatCell.self)
+        collectionView.register(BaseChatCell.self)
         collectionView.register(MessageCell.self)
         collectionView.register(ApplicationResultCell.self)
         return collectionView
@@ -182,7 +182,7 @@ extension ChannelViewController {
                 return previousMessage.sentDate != currentMessage.sentDate
             }
             
-            let cell: ChatCell
+            let cell: BaseChatCell
             switch item.type {
             case .text:
                 cell = collectionView.dequeueReusableCell(MessageCell.self, for: indexPath) ?? MessageCell()
@@ -191,7 +191,7 @@ extension ChannelViewController {
                 cell = collectionView.dequeueReusableCell(ApplicationResultCell.self, for: indexPath) ?? ApplicationResultCell()
                 
             default:
-                cell = ChatCell()
+                cell = BaseChatCell()
             }
             
             cell.configure(with: item, shouldShowDate: shouldShowDate)

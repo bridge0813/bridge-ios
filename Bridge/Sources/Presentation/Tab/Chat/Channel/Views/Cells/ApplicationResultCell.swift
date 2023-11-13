@@ -9,8 +9,8 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-/// 프로젝트 지원 결과(수락/거절)을 나타내는 셀
-final class ApplicationResultCell: ChatCell {
+/// 프로젝트 지원 결과(수락 or 거절)를 나타내는 셀
+final class ApplicationResultCell: BaseChatCell {
     // MARK: - UI
     private let messageLabel: UILabel = {
         let label = UILabel()

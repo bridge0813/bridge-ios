@@ -116,7 +116,7 @@
 		7BCA18072AFDCC0F00257B04 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */; };
 		7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */; };
 		7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */; };
-		7BFECA222AEBEC0B009B4C7D /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA212AEBEC0B009B4C7D /* ChatCell.swift */; };
+		7BFECA222AEBEC0B009B4C7D /* BaseChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA212AEBEC0B009B4C7D /* BaseChatCell.swift */; };
 		7BFECA242AECE632009B4C7D /* ApplicationResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */; };
 		7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366342AC15ECF00EB415D /* BridgeBookmarkButton.swift */; };
 		7C1366392AC16C4D00EB415D /* BridgeRemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366382AC16C4D00EB415D /* BridgeRemoveButton.swift */; };
@@ -299,7 +299,7 @@
 		7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSetFieldView.swift; sourceTree = "<group>"; };
 		7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthRepository.swift; sourceTree = "<group>"; };
-		7BFECA212AEBEC0B009B4C7D /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		7BFECA212AEBEC0B009B4C7D /* BaseChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatCell.swift; sourceTree = "<group>"; };
 		7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationResultCell.swift; sourceTree = "<group>"; };
 		7C1366342AC15ECF00EB415D /* BridgeBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBookmarkButton.swift; sourceTree = "<group>"; };
 		7C1366382AC16C4D00EB415D /* BridgeRemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeRemoveButton.swift; sourceTree = "<group>"; };
@@ -1029,7 +1029,7 @@
 		7BFECA202AEBEBE4009B4C7D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				7BFECA212AEBEC0B009B4C7D /* ChatCell.swift */,
+				7BFECA212AEBEC0B009B4C7D /* BaseChatCell.swift */,
 				7B1922D42AE287C900EBDD2E /* MessageCell.swift */,
 				7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */,
 			);
@@ -1542,7 +1542,7 @@
 				7C8B82402ACE91C500F7B889 /* ChannelDropdownMenuCell.swift in Sources */,
 				7C55E6502AE50D9E0018FA5D /* PlaceholderView.swift in Sources */,
 				7B1742EC2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift in Sources */,
-				7BFECA222AEBEC0B009B4C7D /* ChatCell.swift in Sources */,
+				7BFECA222AEBEC0B009B4C7D /* BaseChatCell.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
 				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,

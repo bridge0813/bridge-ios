@@ -10,7 +10,7 @@ import FlexLayout
 import PinLayout
 
 /// 메시지만 갖는 셀
-final class MessageCell: ChatCell {
+final class MessageCell: BaseChatCell {
     // MARK: - UI
     private let messageLabel: UILabel = {
         let label = UILabel()
