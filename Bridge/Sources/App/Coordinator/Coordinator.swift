@@ -26,12 +26,24 @@ protocol Coordinator: AnyObject, Alertable {
     
     func start()
     func finish()
+    
+    // 코디네이터를 종료(finish)하지 않고, 단순히 현재 뷰 컨트롤러를 내비게이션 스택에서 제거
+    func pop()
+    func dismiss()
 }
 
 extension Coordinator {
     func finish() {
         childCoordinators.removeAll()
         delegate?.didFinish(childCoordinator: self)
+    }
+    
+    func pop() {
+        navigationController.popViewController(animated: true)
+    }
+    
+    func dismiss() {
+        navigationController.dismiss(animated: true)
     }
 }
 

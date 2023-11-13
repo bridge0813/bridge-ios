@@ -61,11 +61,6 @@ extension ChatCoordinator {
         let channelViewController = ChannelViewController(viewModel: channelViewModel)
         navigationController.pushViewController(channelViewController, animated: true)
     }
-    
-    // TODO: 이렇게 하는게 맞나...
-    func pop() {
-        navigationController.popViewController(animated: true)
-    }
 }
 
 // MARK: - Auth
