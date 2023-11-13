@@ -11,13 +11,17 @@ final class ProjectDetailCoordinator: Coordinator {
     // MARK: - Property
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
-    var childCoordinators: [Coordinator]
+    var childCoordinators: [Coordinator] = []
+    
+    private let projectDetailRepository: ProjectDetailRepository
+    private let projectDetailUseCase: FetchProjectDetailUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.childCoordinators = []
-
+        
+        projectDetailRepository = MockProjectDetailRepository()
+        projectDetailUseCase = DefaultFetchProjectDetailUseCase(projectDetailRepository: projectDetailRepository)
     }
     
     // MARK: - Methods
@@ -30,7 +34,8 @@ extension ProjectDetailCoordinator {
     // MARK: - Show
     func showProjectDetailViewController() {
         let viewModel = ProjectDetailViewModel(
-            coordinator: self
+            coordinator: self,
+            projectDetailUseCase: projectDetailUseCase
         )
         
         let vc = ProjectDetailViewController(viewModel: viewModel)

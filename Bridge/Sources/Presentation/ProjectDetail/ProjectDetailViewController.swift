@@ -115,6 +115,12 @@ final class ProjectDetailViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
+        output.project
+            .drive(onNext: { [weak self] data in
+                print(data)
+            })
+            .disposed(by: disposeBag)
+        
         // 구분선 등장
         scrollView.rx.contentOffset
             .map { $0.y > 0 }
