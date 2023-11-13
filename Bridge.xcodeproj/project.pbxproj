@@ -756,23 +756,6 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		7B92B7E12AE501B400B0E954 /* Message */ = {
-			isa = PBXGroup;
-			children = (
-				7B92B7E22AE501CD00B0E954 /* ObserveChannelUseCase.swift */,
-			);
-			path = Message;
-			sourceTree = "<group>";
-		};
-		7B92B7E62AE504FF00B0E954 /* Channel */ = {
-			isa = PBXGroup;
-			children = (
-				7BA36CA32A9C6849000DAB02 /* DefaultChannelRepository.swift */,
-				7B153C072AD64A6B00618280 /* MockChannelRepository.swift */,
-			);
-			path = Channel;
-			sourceTree = "<group>";
-		};
 		7BA36C8C2A9C4B20000DAB02 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,19 +812,11 @@
 		7BA36C952A9C4D0F000DAB02 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				7BA36C962A9C4D5A000DAB02 /* Channel */,
-				7B92B7E12AE501B400B0E954 /* Message */,
-			);
-			path = Chat;
-			sourceTree = "<group>";
-		};
-		7BA36C962A9C4D5A000DAB02 /* Channel */ = {
-			isa = PBXGroup;
-			children = (
 				7BA36C972A9C503C000DAB02 /* FetchChannelsUseCase.swift */,
 				7BA36C9E2A9C6229000DAB02 /* LeaveChannelUseCase.swift */,
+				7B92B7E22AE501CD00B0E954 /* ObserveChannelUseCase.swift */,
 			);
-			path = Channel;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		7BA36C992A9C5081000DAB02 /* Chat */ = {
@@ -876,7 +851,8 @@
 		7BA36CA22A9C681B000DAB02 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				7B92B7E62AE504FF00B0E954 /* Channel */,
+				7BA36CA32A9C6849000DAB02 /* DefaultChannelRepository.swift */,
+				7B153C072AD64A6B00618280 /* MockChannelRepository.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
