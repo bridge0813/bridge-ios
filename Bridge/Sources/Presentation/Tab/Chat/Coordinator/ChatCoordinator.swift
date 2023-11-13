@@ -15,10 +15,11 @@ final class ChatCoordinator: Coordinator {
     
     private let authRepository: AuthRepository
     private let channelRepository: ChannelRepository
+    private let messageRepository: MessageRepository
     
     private let fetchChannelsUseCase: FetchChannelsUseCase
     private let leaveChannelUseCase: LeaveChannelUseCase
-    private let observeChannelUseCase: ObserveChannelUseCase
+    private let fetchMessagesUseCase: FetchMessagesUseCase
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -26,11 +27,12 @@ final class ChatCoordinator: Coordinator {
         
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
+        channelRepository = DefaultChannelRepository(networkService: networkService)
+        messageRepository = DefaultMessageRepository(networkService: networkService)
         
-        channelRepository = DefaultChannelRepository(networkService: networkService) 
         fetchChannelsUseCase = DefaultFetchChannelsUseCase(channelRepository: channelRepository)
         leaveChannelUseCase = DefaultLeaveChannelUseCase(channelRepository: channelRepository)
-        observeChannelUseCase = DefaultObserveChannelUseCase(channelRepository: channelRepository)
+        fetchMessagesUseCase = DefaultFetchMessagesUseCase(messageRepository: messageRepository)
     }
     
     func start() {
@@ -53,7 +55,7 @@ extension ChatCoordinator {
         let channelViewModel = ChannelViewModel(
             coordinator: self,
             channel: channel,
-            observeChannelUseCase: observeChannelUseCase
+            fetchMessagesUseCase: fetchMessagesUseCase
         )
         let channelViewController = ChannelViewController(viewModel: channelViewModel)
         navigationController.pushViewController(channelViewController, animated: true)

@@ -10,6 +10,4 @@ import RxSwift
 protocol ChannelRepository {
     func fetchChannels() -> Observable<[Channel]>
     func leaveChannel(id: String) -> Observable<Void>
-    
-    func observeChannel(id: String) -> Observable<[Message]>
 }

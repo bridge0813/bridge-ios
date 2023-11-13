@@ -1,5 +1,5 @@
 //
-//  ChatEndpoint.swift
+//  ChannelEndpoint.swift
 //  Bridge
 //
 //  Created by 정호윤 on 10/11/23.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum ChatEndpoint {
+enum ChannelEndpoint {
     case channels(userID: String)
     case leaveChannel(id: String)
 }
 
-extension ChatEndpoint: Endpoint {
+extension ChannelEndpoint: Endpoint {
     var path: String {
         switch self {
         case .channels(let userID):    

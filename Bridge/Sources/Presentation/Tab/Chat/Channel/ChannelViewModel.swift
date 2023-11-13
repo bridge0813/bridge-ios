@@ -27,17 +27,17 @@ final class ChannelViewModel: ViewModelType {
     private weak var coordinator: ChatCoordinator?
     
     private let channel: Channel
-    private let observeChannelUseCase: ObserveChannelUseCase
+    private let fetchMessagesUseCase: FetchMessagesUseCase
     
     // MARK: - Init
     init(
         coordinator: ChatCoordinator?,
         channel: Channel,
-        observeChannelUseCase: ObserveChannelUseCase
+        fetchMessagesUseCase: FetchMessagesUseCase
     ) {
         self.coordinator = coordinator
         self.channel = channel
-        self.observeChannelUseCase = observeChannelUseCase
+        self.fetchMessagesUseCase = fetchMessagesUseCase
     }
     
     // MARK: - Transformation
@@ -45,7 +45,7 @@ final class ChannelViewModel: ViewModelType {
         let messages = input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
-                owner.observeChannelUseCase.observeChannel(id: owner.channel.id)
+                owner.fetchMessagesUseCase.fetchMessages(channelId: owner.channel.id)
             }
         
         input.profileButtonTapped
