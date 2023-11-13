@@ -33,7 +33,7 @@ final class BridgeButton: BaseButton {
 
     private func updateBackgroundColor() {
         UIView.animate(withDuration: 0.3) { [unowned self] in
-            self.backgroundColor = self.isEnabled ? BridgeColor.primary1 : BridgeColor.gray4
+            self.backgroundColor = self.isEnabled ? BridgeColor.primary1 : BridgeColor.gray04
         }
     }
 }

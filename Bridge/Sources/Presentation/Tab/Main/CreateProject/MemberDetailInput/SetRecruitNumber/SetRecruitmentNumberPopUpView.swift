@@ -53,7 +53,7 @@ final class SetRecruitmentNumberPopUpView: BridgeBasePopUpView {
             
             flex.addItem(titleLabel).width(67).height(22).marginTop(30).marginLeft(16)
             
-            flex.addItem().backgroundColor(BridgeColor.gray8).height(1).marginTop(7)
+            flex.addItem().backgroundColor(BridgeColor.gray08).height(1).marginTop(7)
             
             flex.addItem(pickerView).height(120).marginTop(56)
             
@@ -97,7 +97,7 @@ extension SetRecruitmentNumberPopUpView: UIPickerViewDataSource, UIPickerViewDel
         let label = UILabel()
         
         label.text = ["1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명", "9명", "10명"][row]
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.font = BridgeFont.headline1.font
         label.textAlignment = .center
         

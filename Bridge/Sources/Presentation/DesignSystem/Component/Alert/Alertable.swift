@@ -20,7 +20,12 @@ protocol Alertable: AnyObject {
         primaryAction: PrimaryActionClosure?,
         cancelAction: CancelActionClosure?
     )
-    func showErrorAlert(target: UIViewController, configuration: ErrorAlertConfiguration)
+    
+    func showErrorAlert(
+        target: UIViewController,
+        configuration: ErrorAlertConfiguration,
+        primaryAction: PrimaryActionClosure?
+    )
 }
 
 extension Alertable {
@@ -40,8 +45,8 @@ extension Alertable {
         target.present(alertViewController, animated: true, completion: nil)
     }
     
-    func showErrorAlert(target: UIViewController, configuration: ErrorAlertConfiguration) {
-        let alertViewController = BridgeErrorAlertViewController(configuration: configuration)
+    func showErrorAlert(target: UIViewController, configuration: ErrorAlertConfiguration, primaryAction: PrimaryActionClosure?) {
+        let alertViewController = BridgeErrorAlertViewController(configuration: configuration, primaryAction: primaryAction)
         alertViewController.modalPresentationStyle = .overFullScreen
         alertViewController.modalTransitionStyle = .crossDissolve
         target.present(alertViewController, animated: true, completion: nil)

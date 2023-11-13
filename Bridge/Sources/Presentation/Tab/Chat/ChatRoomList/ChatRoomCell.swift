@@ -10,10 +10,7 @@ import FlexLayout
 import PinLayout
 
 final class ChatRoomCell: BaseTableViewCell {
-    
     // MARK: - UI
-    private let rootFlexContainer = UIView()
-    
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "profile")
@@ -26,7 +23,7 @@ final class ChatRoomCell: BaseTableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
@@ -34,14 +31,14 @@ final class ChatRoomCell: BaseTableViewCell {
     private let lastMessageReceivedTimeLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.caption1.font
-        label.textColor = BridgeColor.gray4
+        label.textColor = BridgeColor.gray04
         return label
     }()
     
     private let lastMessageContentLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2Long.font
-        label.textColor = BridgeColor.gray2
+        label.textColor = BridgeColor.gray02
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
@@ -50,52 +47,47 @@ final class ChatRoomCell: BaseTableViewCell {
         let label = UILabel()
         label.backgroundColor = .systemRed
         label.font = BridgeFont.caption1.font
-        label.textColor = BridgeColor.gray9
+        label.textColor = BridgeColor.gray09
         label.textAlignment = .center
         label.clipsToBounds = true
         return label
     }()
     
+    // MARK: - Preparation
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImageView.image = nil
-        nameLabel.text = ""
-        lastMessageReceivedTimeLabel.text = ""
-        lastMessageContentLabel.text = ""
+        nameLabel.text = nil
+        lastMessageReceivedTimeLabel.text = nil
+        lastMessageContentLabel.text = nil
     }
     
-    // MARK: - Layouts
+    // MARK: - Layout
     override func configureLayouts() {
-        contentView.addSubview(rootFlexContainer)
-        
-        rootFlexContainer.flex.define { flex in
-            flex.addItem().direction(.row).alignItems(.center).marginVertical(20).define { flex in
-                flex.addItem(profileImageView).size(48).marginLeft(16).marginRight(12)
-                
-                flex.addItem().define { flex in
-                    flex.addItem().width(200).define { flex in
-                        flex.addItem().direction(.row).marginBottom(4).define { flex in
-                            flex.addItem(nameLabel).marginRight(8).shrink(1)
-                            flex.addItem(lastMessageReceivedTimeLabel)
-                        }
-                        
-                        flex.addItem(lastMessageContentLabel)
+        contentView.flex.direction(.row).alignItems(.center).marginVertical(20).define { flex in
+            flex.addItem(profileImageView).size(48).marginLeft(16).marginRight(12)
+            
+            flex.addItem().define { flex in
+                flex.addItem().width(200).define { flex in
+                    flex.addItem().direction(.row).marginBottom(4).define { flex in
+                        flex.addItem(nameLabel).marginRight(8).shrink(1)
+                        flex.addItem(lastMessageReceivedTimeLabel)
                     }
+                    
+                    flex.addItem(lastMessageContentLabel)
                 }
-                
-                flex.addItem().grow(1)  // spacer
-                
-                flex.addItem(unreadMessageCountLabel).marginHorizontal(16)
             }
             
-            flex.addItem().height(1).backgroundColor(BridgeColor.gray6)  // divider
+            flex.addItem().grow(1)  // spacer
+            
+            flex.addItem(unreadMessageCountLabel).marginHorizontal(16)
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.all()
-        rootFlexContainer.flex.layout()
+        contentView.pin.all()
+        contentView.flex.layout()
     }
 }
 

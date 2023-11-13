@@ -18,7 +18,7 @@ final class SetFieldViewController: BaseViewController {
         let label = UILabel()
         label.configureTextWithLineHeight(text: "당신의 관심 프로젝트는\n어떤 분야인가요?", lineHeight: 30)
         label.font = BridgeFont.headline1Long.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.numberOfLines = 0
         return label
     }()
@@ -30,12 +30,13 @@ final class SetFieldViewController: BaseViewController {
     private let completeButton = BridgeButton(
         title: "관심분야 설정하기",
         font: BridgeFont.button1.font,
-        backgroundColor: BridgeColor.gray4
+        backgroundColor: BridgeColor.gray04
     )
     
-    // MARK: - Init
+    // MARK: - Property
     private let viewModel: SetFieldViewModel
     
+    // MARK: - Init
     init(viewModel: SetFieldViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -44,6 +45,16 @@ final class SetFieldViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNoShadowNavigationBarAppearance()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        configureDefaultNavigationBarAppearance()
     }
     
     // MARK: - Configuration
@@ -75,6 +86,7 @@ final class SetFieldViewController: BaseViewController {
         rootFlexContainer.flex.layout()
     }
     
+    // MARK: - Binding
     override func bind() {
         let input = SetFieldViewModel.Input(
             fieldTagButtonTapped: setFieldView.fieldTagButtonTapped,

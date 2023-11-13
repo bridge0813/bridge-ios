@@ -22,7 +22,7 @@ final class MainViewController: BaseViewController {
     
     private let placeholderView: PlaceholderView = {
         let placeholderView = PlaceholderView()
-        placeholderView.backgroundColor = BridgeColor.gray9
+        placeholderView.backgroundColor = BridgeColor.gray09
         placeholderView.isHidden = true
         
         return placeholderView
@@ -35,9 +35,9 @@ final class MainViewController: BaseViewController {
             bottomOffset: CGPoint(x: 0, y: 10),
             dataSource: ["UI/UX", "전체"],
             cellHeight: 46,
-            itemTextColor: BridgeColor.gray3,
+            itemTextColor: BridgeColor.gray03,
             itemTextFont: BridgeFont.body2.font,
-            selectedItemTextColor: BridgeColor.gray1,
+            selectedItemTextColor: BridgeColor.gray01,
             dimmedBackgroundColor: .black.withAlphaComponent(0.3),
             width: 147,
             cornerRadius: 4
@@ -75,7 +75,7 @@ final class MainViewController: BaseViewController {
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = BridgeColor.gray9
+        collectionView.backgroundColor = BridgeColor.gray09
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ProjectCell.self)
         collectionView.register(HotProjectCell.self)
@@ -274,7 +274,7 @@ extension MainViewController {
 // MARK: - 컬렉션 뷰의 Scroll 처리
 extension MainViewController {
     func updateTopMargin(categoryMargin: CGFloat, collectionViewMargin: CGFloat) {
-        let dividerColor = categoryMargin == -102.0 ? BridgeColor.gray6 : nil
+        let dividerColor = categoryMargin == -102.0 ? BridgeColor.gray06 : nil
         
         navigationController?.navigationBar.standardAppearance.shadowColor = dividerColor
         navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = dividerColor

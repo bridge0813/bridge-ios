@@ -22,7 +22,7 @@ final class ProjectProgressStatusViewController: BaseViewController {
         let label = UILabel()
         label.configureTextWithLineHeight(text: "당신의 프로젝트에 대한\n기본 정보를 알려주세요!", lineHeight: 30)
         label.font = BridgeFont.headline1Long.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.numberOfLines = 2
         
         return label
@@ -32,7 +32,7 @@ final class ProjectProgressStatusViewController: BaseViewController {
         let label = UILabel()
         label.text = "진행 방식"
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -62,7 +62,7 @@ final class ProjectProgressStatusViewController: BaseViewController {
         let label = UILabel()
         label.text = "진행 단계"
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -75,12 +75,12 @@ final class ProjectProgressStatusViewController: BaseViewController {
             anchorView: progressStepAnchorView,
             bottomOffset: CGPoint(x: 0, y: 8),
             dataSource: ["시작하기 전이에요", "기획 중이에요", "기획이 완료됐어요", "디자인 중이에요", "디자인 완료됐어요", "개발 중이에요", "개발이 완료됐어요"],
-            itemTextColor: BridgeColor.gray3,
+            itemTextColor: BridgeColor.gray03,
             itemTextFont: BridgeFont.body2.font,
-            selectedItemTextColor: BridgeColor.gray1,
+            selectedItemTextColor: BridgeColor.gray01,
             selectedItemBackgroundColor: BridgeColor.primary3,
             cornerRadius: 8,
-            borderColor: BridgeColor.gray6.cgColor,
+            borderColor: BridgeColor.gray06.cgColor,
             shadowColor: .clear
         )
         dropdown.selectedItemIndexRow = 0
@@ -92,7 +92,7 @@ final class ProjectProgressStatusViewController: BaseViewController {
         let button = BridgeButton(
             title: "다음",
             font: BridgeFont.button1.font,
-            backgroundColor: BridgeColor.gray4
+            backgroundColor: BridgeColor.gray04
         )
         button.isEnabled = false
         

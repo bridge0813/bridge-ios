@@ -11,12 +11,12 @@ import PinLayout
 
 /// 채팅 셀의  레이아웃 등을 설정하는  base class
 class ChatCell: BaseCollectionViewCell {
-    
+    // MARK: - UI
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = BridgeFont.caption1.font
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         return label
     }()
     
@@ -29,10 +29,11 @@ class ChatCell: BaseCollectionViewCell {
     private let timeLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.caption1.font
-        label.textColor = BridgeColor.gray3
+        label.textColor = BridgeColor.gray03
         return label
     }()
     
+    // MARK: - Preparation
     override func prepareForReuse() {
         super.prepareForReuse()
         dateLabel.text = ""

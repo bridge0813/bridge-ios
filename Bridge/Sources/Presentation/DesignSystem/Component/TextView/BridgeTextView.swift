@@ -15,7 +15,7 @@ final class BridgeTextView: BaseView {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()
-        view.layer.borderColor = BridgeColor.gray6.cgColor
+        view.layer.borderColor = BridgeColor.gray06.cgColor
         view.layer.borderWidth = 1
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
@@ -27,7 +27,7 @@ final class BridgeTextView: BaseView {
         let textView = UITextView()
         textView.text = textViewPlaceholder
         textView.font = BridgeFont.body2.font
-        textView.textColor = BridgeColor.gray4
+        textView.textColor = BridgeColor.gray04
         textView.textContainerInset = UIEdgeInsets(top: 16, left: 10, bottom: 0, right: 10)
         
         return textView
@@ -35,7 +35,7 @@ final class BridgeTextView: BaseView {
     
     private lazy var countLabel: UILabel = {
         let label = UILabel()
-        label.textColor = BridgeColor.gray4
+        label.textColor = BridgeColor.gray04
         label.font = BridgeFont.caption1.font
         label.backgroundColor = .clear
         label.text = "0/\(maxCount)"
@@ -86,7 +86,7 @@ final class BridgeTextView: BaseView {
                 
                 if self.textView.text == self.textViewPlaceholder {
                     self.textView.text = nil
-                    self.textView.textColor = BridgeColor.gray1
+                    self.textView.textColor = BridgeColor.gray01
                 }
             })
             .disposed(by: disposeBag)
@@ -125,11 +125,11 @@ final class BridgeTextView: BaseView {
                 
                 if self.textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     self.textView.text = self.textViewPlaceholder
-                    self.textView.textColor = BridgeColor.gray4
+                    self.textView.textColor = BridgeColor.gray04
                 }
                 
-                self.rootFlexContainer.layer.borderColor = BridgeColor.gray6.cgColor
-                self.countLabel.textColor = BridgeColor.gray4
+                self.rootFlexContainer.layer.borderColor = BridgeColor.gray06.cgColor
+                self.countLabel.textColor = BridgeColor.gray04
             })
             .disposed(by: disposeBag)
     }

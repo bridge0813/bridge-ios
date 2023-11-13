@@ -11,7 +11,7 @@ import PinLayout
 
 /// 메시지만 갖는 셀
 final class MessageCell: ChatCell {
-    
+    // MARK: - UI
     private let messageLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2Long.font
@@ -21,6 +21,7 @@ final class MessageCell: ChatCell {
         return label
     }()
     
+    // MARK: - Preparation
     override func prepareForReuse() {
         super.prepareForReuse()
         messageLabel.text = ""
@@ -57,7 +58,7 @@ private extension MessageCell {
         
         switch message.sender {
         case .me:       messageLabel.textColor = BridgeColor.gray10
-        case .opponent: messageLabel.textColor = BridgeColor.gray1
+        case .opponent: messageLabel.textColor = BridgeColor.gray01
         }
     }
 }

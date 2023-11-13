@@ -32,7 +32,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     private let dividerView: UIView = {
         let divider = UIView()
-        divider.backgroundColor = BridgeColor.gray6
+        divider.backgroundColor = BridgeColor.gray06
         divider.isHidden = true
         
         return divider
@@ -52,7 +52,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
         let label = UILabel()
         label.configureTextWithLineHeight(text: "어떤 분야의 팀원을\n찾고 있나요?", lineHeight: 30)
         label.font = BridgeFont.headline1Long.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.numberOfLines = 2
         
         return label
@@ -65,7 +65,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
     private let nextButton = BridgeButton(
         title: "다음",
         font: BridgeFont.button1.font,
-        backgroundColor: BridgeColor.gray4
+        backgroundColor: BridgeColor.gray04
     )
     
     // MARK: - Property

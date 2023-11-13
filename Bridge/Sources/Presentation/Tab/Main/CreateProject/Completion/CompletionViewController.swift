@@ -23,7 +23,7 @@ final class CompletionViewController: BaseViewController {
             alignment: .center
         )
         label.font = BridgeFont.headline1Long.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.numberOfLines = 2
         
         return label
@@ -33,7 +33,7 @@ final class CompletionViewController: BaseViewController {
         let label = UILabel()
         label.text = "관리페이지에서 수정할 수 있어요"
         label.font = BridgeFont.body2Long.font
-        label.textColor = BridgeColor.gray4
+        label.textColor = BridgeColor.gray04
         
         return label
     }()
@@ -51,7 +51,7 @@ final class CompletionViewController: BaseViewController {
         let button = BridgeButton(
             title: "완료",
             font: BridgeFont.button1.font,
-            backgroundColor: BridgeColor.gray4
+            backgroundColor: BridgeColor.gray04
         )
         button.isEnabled = true
         

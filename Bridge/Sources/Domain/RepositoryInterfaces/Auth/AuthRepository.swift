@@ -8,6 +8,6 @@
 import RxSwift
 
 protocol AuthRepository {
-    func signInWithApple(credentials: UserCredentials) -> Observable<SignInResult>
-    func signUp(selectedFields: [String]) -> Observable<SignUpResult>
+    func signInWithApple(credentials: UserCredentials) -> Observable<Bool>
+    func signUp(selectedFields: [String]) -> Observable<Void>
 }

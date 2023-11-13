@@ -11,7 +11,6 @@
 		7B02A6672ADFFCD900C8D4A1 /* DefaultWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02A6662ADFFCD900C8D4A1 /* DefaultWebSocketService.swift */; };
 		7B02A66A2AE000DE00C8D4A1 /* WebSocketEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02A6692AE000DE00C8D4A1 /* WebSocketEndpoint.swift */; };
 		7B02A66C2AE0021A00C8D4A1 /* DefaultWebSocketEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02A66B2AE0021A00C8D4A1 /* DefaultWebSocketEndpoint.swift */; };
-		7B0FD3CC2AD913D900C91045 /* SignUpResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0FD3CB2AD913D900C91045 /* SignUpResult.swift */; };
 		7B0FD3E92ADBC22700C91045 /* RxCocoaURLError+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */; };
 		7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */; };
 		7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */; };
@@ -22,7 +21,6 @@
 		7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB302AB1DACF009A00EB /* AuthRepository.swift */; };
 		7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB332AB1DBFD009A00EB /* DefaultAuthRepository.swift */; };
 		7B14DB382AB3040F009A00EB /* BridgePlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB372AB3040F009A00EB /* BridgePlaceholderView.swift */; };
-		7B14DB442AB57D29009A00EB /* UserAuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB432AB57D29009A00EB /* UserAuthState.swift */; };
 		7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB462AB86051009A00EB /* TokenStorage.swift */; };
 		7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB4A2AB86099009A00EB /* KeychainError.swift */; };
 		7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB4E2AB8659E009A00EB /* KeychainTokenStroage.swift */; };
@@ -32,6 +30,8 @@
 		7B153C0C2AD64E5800618280 /* ChatEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C0B2AD64E5800618280 /* ChatEndpoint.swift */; };
 		7B153C0F2AD6CF0D00618280 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C0E2AD6CF0D00618280 /* Interceptor.swift */; };
 		7B153C112AD6D0E100618280 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C102AD6D0E100618280 /* AuthInterceptor.swift */; };
+		7B1742EC2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1742EB2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift */; };
+		7B1742F42AFA46A7004F0953 /* AccessTokenResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1742F32AFA46A7004F0953 /* AccessTokenResponseDTO.swift */; };
 		7B1922CC2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1922CB2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift */; };
 		7B1922D12AE166E600EBDD2E /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1922D02AE166E600EBDD2E /* UIViewController+Keyboard.swift */; };
 		7B1922D52AE287C900EBDD2E /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1922D42AE287C900EBDD2E /* MessageCell.swift */; };
@@ -44,7 +44,7 @@
 		7B2D770A2AAB0FDF00E5907B /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */; };
 		7B3289352ADE55DA009DF3C2 /* BridgeMessageInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3289342ADE55DA009DF3C2 /* BridgeMessageInputBar.swift */; };
 		7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */; };
-		7B61236A2ABF05B6006E72C1 /* SignInResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */; };
+		7B61236A2ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123692ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift */; };
 		7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61236E2AC15905006E72C1 /* BridgeFont.swift */; };
 		7B61237A2AC15D2E006E72C1 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123712AC15D2D006E72C1 /* Pretendard-Black.otf */; };
 		7B61237B2AC15D2E006E72C1 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B6123722AC15D2E006E72C1 /* Pretendard-Regular.otf */; };
@@ -63,6 +63,9 @@
 		7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123932AC4345B006E72C1 /* BridgeAlertViewController.swift */; };
 		7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123972AC443EC006E72C1 /* Alertable.swift */; };
 		7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123992AC446D1006E72C1 /* AlertConfiguration.swift */; };
+		7B6C20452AF886BD005689F5 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C20442AF886BD005689F5 /* MyPageViewController.swift */; };
+		7B6C20482AF88707005689F5 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C20472AF88707005689F5 /* MyPageCoordinator.swift */; };
+		7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C20492AF887E0005689F5 /* MyPageViewModel.swift */; };
 		7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7402A9330C6001B5D2C /* AppDelegate.swift */; };
 		7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */; };
 		7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B71E7492A9330C7001B5D2C /* Assets.xcassets */; };
@@ -108,9 +111,12 @@
 		7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */; };
 		7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */; };
 		7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */; };
+		7BB5C77C2AFCE8220021BEC5 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB5C77B2AFCE8220021BEC5 /* MenuCell.swift */; };
 		7BB8C51F2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8C51E2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift */; };
 		7BB8C5212AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8C5202AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift */; };
 		7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8C5222AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift */; };
+		7BBD662A2AFB98D2001644D1 /* ObservableType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD66292AFB98D2001644D1 /* ObservableType+.swift */; };
+		7BCA18072AFDCC0F00257B04 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */; };
 		7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */; };
 		7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */; };
 		7BFECA222AEBEC0B009B4C7D /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA212AEBEC0B009B4C7D /* ChatCell.swift */; };
@@ -216,7 +222,6 @@
 		7B02A6662ADFFCD900C8D4A1 /* DefaultWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWebSocketService.swift; sourceTree = "<group>"; };
 		7B02A6692AE000DE00C8D4A1 /* WebSocketEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketEndpoint.swift; sourceTree = "<group>"; };
 		7B02A66B2AE0021A00C8D4A1 /* DefaultWebSocketEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWebSocketEndpoint.swift; sourceTree = "<group>"; };
-		7B0FD3CB2AD913D900C91045 /* SignUpResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResult.swift; sourceTree = "<group>"; };
 		7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxCocoaURLError+.swift"; sourceTree = "<group>"; };
 		7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewModel.swift; sourceTree = "<group>"; };
 		7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewController.swift; sourceTree = "<group>"; };
@@ -227,7 +232,6 @@
 		7B14DB302AB1DACF009A00EB /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		7B14DB332AB1DBFD009A00EB /* DefaultAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthRepository.swift; sourceTree = "<group>"; };
 		7B14DB372AB3040F009A00EB /* BridgePlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgePlaceholderView.swift; sourceTree = "<group>"; };
-		7B14DB432AB57D29009A00EB /* UserAuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthState.swift; sourceTree = "<group>"; };
 		7B14DB462AB86051009A00EB /* TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		7B14DB4A2AB86099009A00EB /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		7B14DB4E2AB8659E009A00EB /* KeychainTokenStroage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTokenStroage.swift; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 		7B153C0B2AD64E5800618280 /* ChatEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatEndpoint.swift; sourceTree = "<group>"; };
 		7B153C0E2AD6CF0D00618280 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		7B153C102AD6D0E100618280 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
+		7B1742EB2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarAppearanceConfigurable.swift; sourceTree = "<group>"; };
+		7B1742F32AFA46A7004F0953 /* AccessTokenResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponseDTO.swift; sourceTree = "<group>"; };
 		7B1922CB2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RxKeyboard.swift"; sourceTree = "<group>"; };
 		7B1922D02AE166E600EBDD2E /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		7B1922D42AE287C900EBDD2E /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
@@ -249,7 +255,7 @@
 		7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		7B3289342ADE55DA009DF3C2 /* BridgeMessageInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeMessageInputBar.swift; sourceTree = "<group>"; };
 		7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleRequestDTO.swift; sourceTree = "<group>"; };
-		7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResponseDTO.swift; sourceTree = "<group>"; };
+		7B6123692ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleResponseDTO.swift; sourceTree = "<group>"; };
 		7B61236E2AC15905006E72C1 /* BridgeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFont.swift; sourceTree = "<group>"; };
 		7B6123712AC15D2D006E72C1 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		7B6123722AC15D2E006E72C1 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -268,6 +274,9 @@
 		7B6123932AC4345B006E72C1 /* BridgeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAlertViewController.swift; sourceTree = "<group>"; };
 		7B6123972AC443EC006E72C1 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		7B6123992AC446D1006E72C1 /* AlertConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertConfiguration.swift; sourceTree = "<group>"; };
+		7B6C20442AF886BD005689F5 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		7B6C20472AF88707005689F5 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
+		7B6C20492AF887E0005689F5 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7B71E73D2A9330C6001B5D2C /* Bridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B71E7402A9330C6001B5D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B71E7422A9330C6001B5D2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -307,9 +316,12 @@
 		7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2482A98560E00AA2328 /* TabBarPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageType.swift; sourceTree = "<group>"; };
 		7BB2C24C2A985A4200AA2328 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
+		7BB5C77B2AFCE8220021BEC5 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		7BB8C51E2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertConfiguration.swift; sourceTree = "<group>"; };
 		7BB8C5202AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeErrorAlertViewController.swift; sourceTree = "<group>"; };
 		7BB8C5222AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+RxKeyboard.swift"; sourceTree = "<group>"; };
+		7BBD66292AFB98D2001644D1 /* ObservableType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+.swift"; sourceTree = "<group>"; };
+		7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSetFieldView.swift; sourceTree = "<group>"; };
 		7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthRepository.swift; sourceTree = "<group>"; };
 		7BFECA212AEBEC0B009B4C7D /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
@@ -430,6 +442,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B0171C22AFE507E00AC121F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7B6C20492AF887E0005689F5 /* MyPageViewModel.swift */,
+				7B6C20442AF886BD005689F5 /* MyPageViewController.swift */,
+				7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */,
+				7BB5C77B2AFCE8220021BEC5 /* MenuCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		7B02A6632ADFFC9600C8D4A1 /* WebSocketService */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,6 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				7B0FD3EC2ADBCC9C00C91045 /* Proxies */,
+				7BBD66292AFB98D2001644D1 /* ObservableType+.swift */,
 				7B2D76E72AA86A2400E5907B /* UIViewController+Rx.swift */,
 				7B1922CB2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift */,
 				7BB8C5222AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift */,
@@ -489,8 +513,6 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB2D2AB1DA39009A00EB /* SignInResult.swift */,
-				7B0FD3CB2AD913D900C91045 /* SignUpResult.swift */,
-				7B14DB432AB57D29009A00EB /* UserAuthState.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -561,6 +583,7 @@
 			children = (
 				7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */,
 				7BA36CC82A9E1640000DAB02 /* Reusable.swift */,
+				7B1742EB2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -694,6 +717,23 @@
 			path = Alert;
 			sourceTree = "<group>";
 		};
+		7B6C20432AF8869C005689F5 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				7B6C20462AF886EF005689F5 /* Coordinator */,
+				7B0171C22AFE507E00AC121F /* Home */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		7B6C20462AF886EF005689F5 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7B6C20472AF88707005689F5 /* MyPageCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		7B71E7342A9330C6001B5D2C = {
 			isa = PBXGroup;
 			children = (
@@ -746,7 +786,8 @@
 			isa = PBXGroup;
 			children = (
 				7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */,
-				7B6123692ABF05B6006E72C1 /* SignInResponseDTO.swift */,
+				7B6123692ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift */,
+				7B1742F32AFA46A7004F0953 /* AccessTokenResponseDTO.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -1046,6 +1087,7 @@
 				7BB2C24B2A985A2200AA2328 /* Coordinator */,
 				7BB2C24E2A985AB500AA2328 /* ChatRoomList */,
 				7B1E5ABA2ADCFD5F0053E9B3 /* ChatRoom */,
+				7B6C20432AF8869C005689F5 /* MyPage */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1598,7 +1640,9 @@
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
 				7B3289352ADE55DA009DF3C2 /* BridgeMessageInputBar.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */,
+				7B6C20482AF88707005689F5 /* MyPageCoordinator.swift in Sources */,
 				7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */,
+				7B1742F42AFA46A7004F0953 /* AccessTokenResponseDTO.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7CA04F2C2B01F822007B9191 /* MenuBar.swift in Sources */,
 				7C8CC4152AF024060032F237 /* DatePickerPopUpView.swift in Sources */,
@@ -1614,6 +1658,7 @@
 				7B1922CC2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift in Sources */,
 				7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */,
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
+				7BBD662A2AFB98D2001644D1 /* ObservableType+.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
 				7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */,
 				7B153C082AD64A6B00618280 /* MockChatRoomRepository.swift in Sources */,
@@ -1633,7 +1678,7 @@
 				7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */,
 				7CA04F0F2AF8F867007B9191 /* TechStack.swift in Sources */,
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
-				7B61236A2ABF05B6006E72C1 /* SignInResponseDTO.swift in Sources */,
+				7B61236A2ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift in Sources */,
 				7C55E6562AE811660018FA5D /* BridgeSetDisplayButton.swift in Sources */,
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7B92B7EB2AE5052900B0E954 /* MockMessageRepository.swift in Sources */,
@@ -1648,21 +1693,25 @@
 				7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */,
 				7C55E63B2ADEA2A40018FA5D /* MockProjectRepository.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChatRoomDTO.swift in Sources */,
+				7BCA18072AFDCC0F00257B04 /* ProfileHeaderView.swift in Sources */,
 				7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */,
 				7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */,
 				7BA36CB92A9D9A29000DAB02 /* HTTP.swift in Sources */,
 				7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */,
+				7BB5C77C2AFCE8220021BEC5 /* MenuCell.swift in Sources */,
 				7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */,
 				7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */,
 				7B1E5ABE2ADCFD880053E9B3 /* MessageViewModel.swift in Sources */,
 				7C8B82402ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift in Sources */,
 				7C55E6502AE50D9E0018FA5D /* PlaceholderView.swift in Sources */,
+				7B1742EC2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift in Sources */,
 				7BFECA222AEBEC0B009B4C7D /* ChatCell.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
 				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,
 				7BA36C9B2A9C5091000DAB02 /* ChatRoom.swift in Sources */,
 				7B92B7E52AE503F700B0E954 /* MessageRepository.swift in Sources */,
+				7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */,
 				7B92B7E32AE501CD00B0E954 /* ObserveMessageUseCase.swift in Sources */,
 				7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */,
 				7BA36CCE2A9E185A000DAB02 /* ChatRoomCell.swift in Sources */,
@@ -1687,8 +1736,6 @@
 				7C55E6582AE811A20018FA5D /* AddTechStackButton.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
-				7CA04F412B022D95007B9191 /* FetchProjectDetailUseCase.swift in Sources */,
-				7B14DB442AB57D29009A00EB /* UserAuthState.swift in Sources */,
 				7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */,
 				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
 				7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */,
@@ -1706,6 +1753,7 @@
 				7B1922D52AE287C900EBDD2E /* MessageCell.swift in Sources */,
 				7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */,
 				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
+				7B6C20452AF886BD005689F5 /* MyPageViewController.swift in Sources */,
 				7C55E65C2AE961250018FA5D /* AddedTechTagView.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
 				7B1922D12AE166E600EBDD2E /* UIViewController+Keyboard.swift in Sources */,
@@ -1752,8 +1800,6 @@
 				7C24003D2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift in Sources */,
 				7CF93E052A9C65490013EBD6 /* MainCoordinator.swift in Sources */,
 				7C40CBA12AC3E595000F4C9F /* BridgeTechTagButton.swift in Sources */,
-				7B0FD3CC2AD913D900C91045 /* SignUpResult.swift in Sources */,
-				7CA04F272AFFDA2D007B9191 /* RecruitFieldDetailViewController.swift in Sources */,
 				7B61238D2AC2F320006E72C1 /* BridgeWarningMessageBox.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7C55E6632AEBBCBF0018FA5D /* AddTechTagPopUpView.swift in Sources */,
@@ -1970,6 +2016,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = bridge_release;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

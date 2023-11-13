@@ -6,7 +6,12 @@
 //
 
 enum SignInResult {
-    case needSignUp
+    /// 회원가입이 필요한 신규 유저
+    case signUpNeeded
+    
+    /// 로그인 성공
     case success
+    
+    /// 실패
     case failure
 }

@@ -9,7 +9,7 @@ import AuthenticationServices
 import RxSwift
 
 final class SignInViewModel: ViewModelType {
-    
+    // MARK: - Input & Output
     struct Input {
         let dismissButtonTapped: Observable<Void>
         let signInWithAppleButtonTapped: Observable<Void>
@@ -17,16 +17,18 @@ final class SignInViewModel: ViewModelType {
     
     struct Output { }
     
+    // MARK: - Property
     let disposeBag = DisposeBag()
-    
     weak var coordinator: AuthCoordinator?
     private let signInUseCase: SignInUseCase
     
+    // MARK: - Init
     init(coordinator: AuthCoordinator, signInUseCase: SignInUseCase) {
         self.coordinator = coordinator
         self.signInUseCase = signInUseCase
     }
     
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         input.dismissButtonTapped
             .withUnretained(self)
@@ -51,9 +53,14 @@ final class SignInViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 switch result {
-                case .needSignUp:   owner.coordinator?.showSetFieldViewController()
-                case .success:      owner.coordinator?.finish()
-                case .failure:      owner.coordinator?.showErrorAlert(configuration: .networkError)
+                case .signUpNeeded:
+                    owner.coordinator?.showSetFieldViewController()
+                    
+                case .success:          
+                    owner.coordinator?.finish()
+                    
+                case .failure: 
+                    owner.coordinator?.showErrorAlert(configuration: .networkError)
                 }
             })
             .disposed(by: disposeBag)

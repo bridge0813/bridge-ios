@@ -24,11 +24,11 @@ final class BridgeSetDisplayButton: BaseButton {
         
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.body2.font
-        titleContainer.foregroundColor = BridgeColor.gray4
+        titleContainer.foregroundColor = BridgeColor.gray04
         configuration.attributedTitle = AttributedString(placeholderText, attributes: titleContainer)
         
         self.configuration = configuration
-        layer.borderColor = BridgeColor.gray6.cgColor
+        layer.borderColor = BridgeColor.gray06.cgColor
         layer.borderWidth = 1
         layer.cornerRadius = 8
         contentHorizontalAlignment = .leading
@@ -37,7 +37,7 @@ final class BridgeSetDisplayButton: BaseButton {
     func updateTitle(_ title: String) {
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.body2.font
-        titleContainer.foregroundColor = BridgeColor.gray2
+        titleContainer.foregroundColor = BridgeColor.gray02
         configuration?.attributedTitle = AttributedString(title, attributes: titleContainer)
     }
 }

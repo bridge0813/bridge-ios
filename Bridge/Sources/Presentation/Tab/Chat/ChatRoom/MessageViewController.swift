@@ -20,7 +20,7 @@ final class MessageViewController: BaseViewController {
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -4, bottom: 0, trailing: 0)
         
         let button = UIButton(configuration: configuration)
-        button.imageView?.backgroundColor = BridgeColor.gray9
+        button.imageView?.backgroundColor = BridgeColor.gray09
         button.imageView?.layer.cornerRadius = 14
         button.imageView?.clipsToBounds = true
         button.imageView?.contentMode = .scaleAspectFit
@@ -39,7 +39,7 @@ final class MessageViewController: BaseViewController {
         bottomOffset: CGPoint(x: 0, y: 30),
         dataSource: ["채팅방 나가기", "신고하기"],
         cellHeight: 43,
-        itemTextColor: BridgeColor.gray3,
+        itemTextColor: BridgeColor.gray03,
         width: 147,
         cornerRadius: 4,
         customCellType: ChatRoomDropdownMenuCell.self,
@@ -51,13 +51,13 @@ final class MessageViewController: BaseViewController {
     
     private let rootFlexConatiner: UIView = {
         let view = UIView()
-        view.backgroundColor = BridgeColor.gray9
+        view.backgroundColor = BridgeColor.gray09
         return view
     }()
     
     private lazy var messageCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.backgroundColor = BridgeColor.gray9
+        collectionView.backgroundColor = BridgeColor.gray09
         collectionView.register(ChatCell.self)
         collectionView.register(MessageCell.self)
         collectionView.register(ApplicationResultCell.self)
@@ -73,6 +73,7 @@ final class MessageViewController: BaseViewController {
     
     private let viewModel: MessageViewModel
     
+    // MARK: - Init
     init(viewModel: MessageViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -109,7 +110,7 @@ final class MessageViewController: BaseViewController {
     private func configureProfileButton(with chatRoom: ChatRoom) {
         profileButton.configuration?.attributedTitle = AttributedString(
             chatRoom.name,
-            attributes: AttributeContainer([.font: BridgeFont.subtitle2.font, .foregroundColor: BridgeColor.gray1])
+            attributes: AttributeContainer([.font: BridgeFont.subtitle2.font, .foregroundColor: BridgeColor.gray01])
         )
     }
     

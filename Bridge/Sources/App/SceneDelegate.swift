@@ -31,12 +31,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
-        let endpoint = DefaultWebSocketEndpoint()
-        socket.connect(endpoint)
+//        let endpoint = DefaultWebSocketEndpoint()
+//        socket.connect(endpoint)
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
-        socket.disconnect()
+//        socket.disconnect()
     }
 }
 

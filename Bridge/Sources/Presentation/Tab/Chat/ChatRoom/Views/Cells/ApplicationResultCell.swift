@@ -11,7 +11,7 @@ import PinLayout
 
 /// 프로젝트 지원 결과(수락/거절)을 나타내는 셀
 final class ApplicationResultCell: ChatCell {
-    
+    // MARK: - UI
     private let messageLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2Long.font
@@ -27,6 +27,13 @@ final class ApplicationResultCell: ChatCell {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+    
+    // MARK: - Preparation
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        messageLabel.text = ""
+        emojiImageView.image = nil
+    }
     
     // MARK: - Layout
     override func layoutSubviews() {
@@ -59,7 +66,7 @@ private extension ApplicationResultCell {
     func configureMessageLabel(with message: Message) {
         switch message.sender {
         case .me:       messageLabel.textColor = BridgeColor.gray10
-        case .opponent: messageLabel.textColor = BridgeColor.gray1
+        case .opponent: messageLabel.textColor = BridgeColor.gray01
         }
         
         switch message.type {

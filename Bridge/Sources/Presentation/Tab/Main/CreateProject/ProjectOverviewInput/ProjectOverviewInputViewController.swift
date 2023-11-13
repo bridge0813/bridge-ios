@@ -24,7 +24,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         let label = UILabel()
         label.configureTextWithLineHeight(text: "당신의 프로젝트를\n소개해주세요!", lineHeight: 30)
         label.font = BridgeFont.headline1Long.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.numberOfLines = 2
         
         return label
@@ -34,7 +34,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         let label = UILabel()
         label.text = "제목"
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -43,12 +43,12 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(
             string: "글의 제목을 입력해주세요.",
-            attributes: [.foregroundColor: BridgeColor.gray4]
+            attributes: [.foregroundColor: BridgeColor.gray04]
         )
         textField.font = BridgeFont.body2.font
-        textField.textColor = BridgeColor.gray1
+        textField.textColor = BridgeColor.gray01
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = BridgeColor.gray6.cgColor
+        textField.layer.borderColor = BridgeColor.gray06.cgColor
         textField.layer.cornerRadius = 8
         textField.clipsToBounds = true
         textField.addLeftPadding(with: 16)
@@ -60,7 +60,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         let label = UILabel()
         label.text = "소개"
         label.font = BridgeFont.subtitle2.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -69,10 +69,10 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         let textView = UITextView()
         textView.text = "프로젝트에 대해 소개해 주세요."  // Placeholder
         textView.font = BridgeFont.body2.font
-        textView.textColor = BridgeColor.gray4
+        textView.textColor = BridgeColor.gray04
         textView.textContainerInset = UIEdgeInsets(top: 16, left: 12, bottom: 16, right: 12)
         textView.layer.borderWidth = 1
-        textView.layer.borderColor = BridgeColor.gray6.cgColor
+        textView.layer.borderColor = BridgeColor.gray06.cgColor
         textView.layer.cornerRadius = 8
         textView.clipsToBounds = true
         
@@ -83,7 +83,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         let button = BridgeButton(
             title: "다음",
             font: BridgeFont.button1.font,
-            backgroundColor: BridgeColor.gray4
+            backgroundColor: BridgeColor.gray04
         )
         button.isEnabled = false
         
@@ -178,7 +178,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
             .subscribe(onNext: { owner, _ in
                 if owner.descriptionTextView.text == "프로젝트에 대해 소개해 주세요." {
                     owner.descriptionTextView.text = nil
-                    owner.descriptionTextView.textColor = BridgeColor.gray1
+                    owner.descriptionTextView.textColor = BridgeColor.gray01
                 }
             })
             .disposed(by: disposeBag)
@@ -190,7 +190,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
             .subscribe(onNext: { owner, _ in
                 if owner.descriptionTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     owner.descriptionTextView.text = "프로젝트에 대해 소개해 주세요."
-                    owner.descriptionTextView.textColor = BridgeColor.gray4
+                    owner.descriptionTextView.textColor = BridgeColor.gray04
                 }
             })
             .disposed(by: disposeBag)

@@ -36,7 +36,7 @@ final class BridgeAlertViewController: BaseViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.subtitle1.font
-        label.textColor = BridgeColor.gray1
+        label.textColor = BridgeColor.gray01
         label.textAlignment = .center
         return label
     }()
@@ -44,13 +44,13 @@ final class BridgeAlertViewController: BaseViewController {
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2Long.font
-        label.textColor = BridgeColor.gray4
+        label.textColor = BridgeColor.gray04
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
     }()
     
-    private lazy var leftButton = BridgeButton(title: "", font: BridgeFont.button2.font, backgroundColor: BridgeColor.gray4)
+    private lazy var leftButton = BridgeButton(title: "", font: BridgeFont.button2.font, backgroundColor: BridgeColor.gray04)
     private lazy var rightButton = BridgeButton(title: "", font: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
     
     private var primaryAction: PrimaryActionClosure?

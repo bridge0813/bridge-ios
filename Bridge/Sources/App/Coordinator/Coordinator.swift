@@ -59,11 +59,11 @@ extension Coordinator {
         }
     }
     
-    func showErrorAlert(configuration: ErrorAlertConfiguration) {
+    func showErrorAlert(configuration: ErrorAlertConfiguration, primaryAction: PrimaryActionClosure? = nil) {
         if let presentedViewContoller = navigationController.presentedViewController {
-            showErrorAlert(target: presentedViewContoller, configuration: configuration)
+            showErrorAlert(target: presentedViewContoller, configuration: configuration, primaryAction: primaryAction)
         } else {
-            showErrorAlert(target: navigationController, configuration: configuration)
+            showErrorAlert(target: navigationController, configuration: configuration, primaryAction: primaryAction)
         }
     }
 }

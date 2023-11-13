@@ -18,7 +18,7 @@ final class AddedTechTagView: BaseView {
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
-        collectionView.backgroundColor = BridgeColor.gray9
+        collectionView.backgroundColor = BridgeColor.gray09
         collectionView.layer.cornerRadius = 4
         collectionView.clipsToBounds = true
         collectionView.isScrollEnabled = false

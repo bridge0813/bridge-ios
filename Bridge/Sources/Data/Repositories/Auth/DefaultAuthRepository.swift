@@ -18,37 +18,34 @@ final class DefaultAuthRepository: AuthRepository {
         self.tokenStorage = tokenStorage
     }
     
-    func signInWithApple(credentials: UserCredentials) -> Observable<SignInResult> {
+    func signInWithApple(credentials: UserCredentials) -> Observable<Bool> {
         if !credentials.name.isEmpty {  // 이름은 2번째 로그인부터 빈 문자열이 리턴되므로, 빈 문자열 저장하지 않도록 처리
             tokenStorage.save(credentials.name, for: .userName)
         }
         
         let signInWithAppleRequestDTO = SignInWithAppleRequestDTO(
-            userName: tokenStorage.get(.userName) ?? "",
-            identityToken: credentials.identityToken ?? ""
+            userName: tokenStorage.get(.userName) ?? invalidToken,
+            identityToken: credentials.identityToken ?? invalidToken
         )
         let authEndpoint = AuthEndpoint.signInWithApple(requestDTO: signInWithAppleRequestDTO)
         
         return networkService.request(authEndpoint, interceptor: nil)
-            .decode(type: SignInResponseDTO.self, decoder: JSONDecoder())
-            .map { [weak self] signInResponseDTO -> SignInResult in
-                // 응답 저장
-                self?.tokenStorage.save(signInResponseDTO.accessToken, for: .accessToken)
-                self?.tokenStorage.save(signInResponseDTO.refreshToken, for: .refreshToken)
-                self?.tokenStorage.save(String(signInResponseDTO.userId), for: .userID)
+            .decode(type: SignInWithAppleResponseDTO.self, decoder: JSONDecoder())
+            .map { [weak self] signInWithAppleResponseDTO in
+                self?.tokenStorage.save(String(signInWithAppleResponseDTO.userID), for: .userID)
+                self?.tokenStorage.save(signInWithAppleResponseDTO.accessToken, for: .accessToken)
+                self?.tokenStorage.save(signInWithAppleResponseDTO.refreshToken, for: .refreshToken)
                 
-                return signInResponseDTO.isRegistered ? .success : .needSignUp
+                return signInWithAppleResponseDTO.isRegistered
             }
-            .catchAndReturn(.failure)
     }
     
-    func signUp(selectedFields: [String]) -> Observable<SignUpResult> {
-        let userID = Int(tokenStorage.get(.userID) ?? "")
+    func signUp(selectedFields: [String]) -> Observable<Void> {
+        let userID = Int(tokenStorage.get(.userID) ?? invalidToken)
         let signUpRequestDTO = SignUpRequestDTO(userID: userID, selectedFields: selectedFields)
         let authEndpoint = AuthEndpoint.signUp(requestDTO: signUpRequestDTO)
-
+        
         return networkService.request(authEndpoint, interceptor: AuthInterceptor())
-            .map { _ in .success }
-            .catchAndReturn(.failure)
+            .map { _ in }
     }
 }

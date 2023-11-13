@@ -9,7 +9,7 @@ import RxCocoa
 import RxSwift
 
 final class ChatRoomListViewModel: ViewModelType {
-    
+    // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
         let itemSelected: Observable<Int>
@@ -21,12 +21,13 @@ final class ChatRoomListViewModel: ViewModelType {
         let viewState: Driver<ViewState>
     }
     
+    // MARK: - Property
     let disposeBag = DisposeBag()
-    
     private weak var coordinator: ChatCoordinator?
     private let fetchChatRoomsUseCase: FetchChatRoomsUseCase
     private let leaveChatRoomUseCase: LeaveChatRoomUseCase
     
+    // MARK: - Init
     init(
         coordinator: ChatCoordinator,
         fetchChatRoomsUseCase: FetchChatRoomsUseCase,
@@ -37,6 +38,7 @@ final class ChatRoomListViewModel: ViewModelType {
         self.leaveChatRoomUseCase = leaveChatRoomUseCase
     }
     
+    // MARK: - Transformation
     func transform(input: Input) -> Output {
         let chatRoomsRelay = BehaviorRelay<[ChatRoom]>(value: [])
         let viewState = BehaviorRelay<ViewState>(value: .general)
@@ -44,23 +46,19 @@ final class ChatRoomListViewModel: ViewModelType {
         input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
-                owner.fetchChatRoomsUseCase.fetchChatRooms()
+                owner.fetchChatRoomsUseCase.fetchChatRooms().toResult()
             }
-            .subscribe(
-                onNext: { chatRooms in
-                    if chatRooms.isEmpty { viewState.accept(.empty) }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let chatRooms):
+                    viewState.accept(chatRooms.isEmpty ? .empty : .general)
                     chatRoomsRelay.accept(chatRooms)
-                },
-                onError: { error in
-                    switch error as? NetworkError {
-                    case .statusCode(let statusCode):
-                        return statusCode == 401 ? viewState.accept(.notSignedIn) : viewState.accept(.error)
-                        
-                    default:
-                        return viewState.accept(.error)
-                    }
+                    
+                case .failure(let error):
+                    owner.handleError(error, viewState: viewState)
                 }
-            )
+            })
             .disposed(by: disposeBag)
         
         input.itemSelected
@@ -68,7 +66,7 @@ final class ChatRoomListViewModel: ViewModelType {
                 chatRooms[index]
             }
             .withUnretained(self)
-            .subscribe(onNext: { owner, chatRoom in               
+            .subscribe(onNext: { owner, chatRoom in
                 owner.coordinator?.showChatRoomViewController(of: chatRoom)
             })
             .disposed(by: disposeBag)
@@ -95,17 +93,30 @@ final class ChatRoomListViewModel: ViewModelType {
     }
 }
 
-// MARK: Data source
+// MARK: - View state handling
 extension ChatRoomListViewModel {
-    enum Section: CaseIterable {
-        case main
-    }
-    
-    /// ChatRoomListTableView에서 보여줘야 하는 화면을 결정
+    /// ChatRoomListViewController에서 보여줘야 하는 화면의 종류
     enum ViewState {
         case general
         case empty
-        case notSignedIn
+        case signInNeeded
         case error
+    }
+    
+    private func handleError(_ error: Error, viewState: BehaviorRelay<ViewState>) {
+        switch error as? NetworkError {
+        case .statusCode(let statusCode):
+            viewState.accept(statusCode == 401 ? .signInNeeded : .error)
+            
+        default:
+            viewState.accept(.error)
+        }
+    }
+}
+
+// MARK: - Data source
+extension ChatRoomListViewModel {
+    enum Section: CaseIterable {
+        case main
     }
 }
