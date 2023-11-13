@@ -43,28 +43,7 @@ final class ProjectDetailViewController: BaseViewController {
     private let secondSectionView = SecondSectionView()
     private let thirdSectionView = ThirdSectionView()
 
-    private let menuBar: UIView = {
-        let view = UIView()
-        view.backgroundColor = BridgeColor.gray10
-        view.layer.masksToBounds = false
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.04
-        view.layer.shadowOffset = CGSize(width: 0, height: -6)
-        view.layer.shadowRadius = 10.0
-        
-        return view
-    }()
-    private let bookmarkButton = BridgeBookmarkButton()
-    private let applyButton: BridgeButton = {
-        let button = BridgeButton(
-            title: "지원하기",
-            font: BridgeFont.button1.font,
-            backgroundColor: BridgeColor.gray4
-        )
-        button.isEnabled = true
-        
-        return button
-    }()
+    private let menuBar = MenuBar()
     
     // MARK: - Property
     private let viewModel: ProjectDetailViewModel
@@ -109,10 +88,7 @@ final class ProjectDetailViewController: BaseViewController {
             flex.addItem().grow(1)
             
             flex.addItem(scrollView).position(.absolute).width(100%).top(1).bottom(102)
-            flex.addItem(menuBar).direction(.row).height(102).paddingHorizontal(16).define { flex in
-                flex.addItem(bookmarkButton).width(54).height(52).marginTop(15)
-                flex.addItem(applyButton).grow(1).height(52).marginTop(15).marginLeft(12)
-            }
+            flex.addItem(menuBar)
         }
         
         contentContainer.flex.define { flex in
@@ -129,15 +105,13 @@ final class ProjectDetailViewController: BaseViewController {
         contentContainer.pin.all()
         contentContainer.flex.layout(mode: .adjustHeight)
         scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentContainer.frame.height)
-        
-        let shadowPath = UIBezierPath(rect: menuBar.bounds)
-        menuBar.layer.shadowPath = shadowPath.cgPath
     }
     
     // MARK: - Binding
     override func bind() {
         let input = ProjectDetailViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asObservable()
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            goToDetailButtonTapped: thirdSectionView.goToDetailButtonTapped
         )
         let output = viewModel.transform(input: input)
         

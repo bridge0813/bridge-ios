@@ -59,8 +59,8 @@ final class ThirdSectionView: BaseView {
     }()
     
     // MARK: - Property
-    var goToDetailButtonTapped: Observable<Void> {
-        return goToDetailButton.rx.tap.asObservable()
+    var goToDetailButtonTapped: ControlEvent<Void> {
+        return goToDetailButton.rx.tap
     }
     
     // MARK: - Layout

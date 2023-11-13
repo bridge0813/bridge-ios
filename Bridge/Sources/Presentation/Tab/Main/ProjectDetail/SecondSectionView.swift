@@ -118,7 +118,6 @@ final class SecondSectionView: BaseView {
         return label
     }()
     
-    // TODO: - 이미지 정렬문제 해결필요
     private let warningMessageBox = BridgeWarningMessageBox("이 프로젝트는 학생, 취준생의 지원이 제한되어 있습니다.")
     
     // MARK: - Layout

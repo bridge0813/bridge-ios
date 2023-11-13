@@ -61,9 +61,10 @@ extension MainCoordinator {
     }
     
     func connectToProjectDetailFlow(with id: String) {
-        let projectDetailViewModel = ProjectDetailViewModel()
-        let projectDetailVC = ProjectDetailViewController(viewModel: projectDetailViewModel)
-        navigationController.pushViewController(projectDetailVC, animated: true)
+        // TODO: - 연결된 코디네이터 제거 작업
+        let coordinator = ProjectDetailCoordinator(navigationController: navigationController)
+        coordinator.start()
+        childCoordinators.append(coordinator)
     }
     
     func connectToCreateProjectFlow() {
