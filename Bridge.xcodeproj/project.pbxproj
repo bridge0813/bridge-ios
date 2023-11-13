@@ -194,6 +194,7 @@
 		7CA04F372B0229D0007B9191 /* ProjectDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F362B0229D0007B9191 /* ProjectDetailRepository.swift */; };
 		7CA04F3A2B022B49007B9191 /* MockProjectDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F392B022B49007B9191 /* MockProjectDetailRepository.swift */; };
 		7CA04F3E2B022BAD007B9191 /* DefaultProjectDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F3D2B022BAD007B9191 /* DefaultProjectDetailRepository.swift */; };
+		7CA04F412B022D95007B9191 /* FetchProjectDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F402B022D95007B9191 /* FetchProjectDetailUseCase.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -392,6 +393,7 @@
 		7CA04F362B0229D0007B9191 /* ProjectDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailRepository.swift; sourceTree = "<group>"; };
 		7CA04F392B022B49007B9191 /* MockProjectDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProjectDetailRepository.swift; sourceTree = "<group>"; };
 		7CA04F3D2B022BAD007B9191 /* DefaultProjectDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProjectDetailRepository.swift; sourceTree = "<group>"; };
+		7CA04F402B022D95007B9191 /* FetchProjectDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProjectDetailUseCase.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -831,6 +833,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB262AB15E69009A00EB /* Auth */,
+				7CA04F3F2B022D69007B9191 /* ProjectDetail */,
 				7C569CF82A9F6D360063D362 /* Main */,
 				7BA36C952A9C4D0F000DAB02 /* Chat */,
 			);
@@ -1346,6 +1349,14 @@
 			path = ProjectDetail;
 			sourceTree = "<group>";
 		};
+		7CA04F3F2B022D69007B9191 /* ProjectDetail */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F402B022D95007B9191 /* FetchProjectDetailUseCase.swift */,
+			);
+			path = ProjectDetail;
+			sourceTree = "<group>";
+		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -1676,6 +1687,7 @@
 				7C55E6582AE811A20018FA5D /* AddTechStackButton.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
+				7CA04F412B022D95007B9191 /* FetchProjectDetailUseCase.swift in Sources */,
 				7B14DB442AB57D29009A00EB /* UserAuthState.swift in Sources */,
 				7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */,
 				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
