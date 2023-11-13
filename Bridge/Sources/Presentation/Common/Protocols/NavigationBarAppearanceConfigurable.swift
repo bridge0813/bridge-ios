@@ -11,7 +11,7 @@ import UIKit
 protocol NavigationBarAppearanceConfigurable: UIViewController {
     func configureDefaultNavigationBarAppearance(with backgroundColor: UIColor)
     func configureNoShadowNavigationBarAppearance(with backgroundColor: UIColor)
-    func configureTransparentNavigationBarAppearance(with backgroundColor: UIColor)
+    func configureTransparentNavigationBarAppearance()
 }
 
 // MARK: - Navigation bar
@@ -50,10 +50,9 @@ extension NavigationBarAppearanceConfigurable {
         navigationController?.navigationBar.compactAppearance = appearance
     }
     
-    func configureTransparentNavigationBarAppearance(with backgroundColor: UIColor = BridgeColor.gray10) {
+    func configureTransparentNavigationBarAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = backgroundColor
         appearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
         appearance.titleTextAttributes = [.font: BridgeFont.subtitle1.font, .foregroundColor: BridgeColor.gray01]
         
