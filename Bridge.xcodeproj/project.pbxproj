@@ -1004,6 +1004,7 @@
 				7B61236B2AC158B0006E72C1 /* DesignSystem */,
 				7BA36C8C2A9C4B20000DAB02 /* Common */,
 				7B2D76E92AA993AF00E5907B /* Auth */,
+				7CA04F102AFDF645007B9191 /* ProjectDetail */,
 				7BB2C2452A98546400AA2328 /* Tab */,
 			);
 			path = Presentation;
@@ -1279,6 +1280,7 @@
 		7CA04F102AFDF645007B9191 /* ProjectDetail */ = {
 			isa = PBXGroup;
 			children = (
+				7CA04F342B0225FE007B9191 /* Coordinator */,
 				7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */,
 				7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */,
 				7CA04F2B2B01F822007B9191 /* MenuBar.swift */,
@@ -1309,6 +1311,14 @@
 				7CA04F2D2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift */,
 			);
 			path = RecruitFieldDetail;
+			sourceTree = "<group>";
+		};
+		7CA04F342B0225FE007B9191 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F312B020B94007B9191 /* ProjectDetailCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
@@ -1397,7 +1407,6 @@
 				7CF93E022A9C65040013EBD6 /* Coordinator */,
 				7CF93E032A9C650D0013EBD6 /* Main */,
 				7CC9F6C12AAEE9E800685EA9 /* CreateProject */,
-				7CA04F102AFDF645007B9191 /* ProjectDetail */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1407,7 +1416,6 @@
 			children = (
 				7CF93E042A9C65490013EBD6 /* MainCoordinator.swift */,
 				7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */,
-				7CA04F312B020B94007B9191 /* ProjectDetailCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
