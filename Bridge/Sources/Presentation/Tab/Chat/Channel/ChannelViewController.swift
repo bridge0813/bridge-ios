@@ -36,7 +36,7 @@ final class ChannelViewController: BaseViewController {
     )
     private lazy var dropdownMenu = DropDown(
         anchorView: menuBarButton,
-        bottomOffset: CGPoint(x: 0, y: 30),
+        bottomOffset: CGPoint(x: 0, y: 14),
         dataSource: ["채팅방 나가기", "신고하기"],
         cellHeight: 43,
         itemTextColor: BridgeColor.gray03,

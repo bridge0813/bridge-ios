@@ -10,25 +10,26 @@ import Foundation
 struct MessageDTO: Decodable {
     let content: String
     let sender: String
-    let sentDate: String
+//    let sentDate: String
     let sentTime: String
     
     enum CodingKeys: String, CodingKey {
         case content
         case sender = "senderType"
-        case sentDate = "sendDate"
+//        case sentDate = "sendDate"
         case sentTime = "sendTime"
     }
 }
 
 extension MessageDTO {
+    // TODO: 수정 필요
     func toEntity() -> Message {
         Message(
             id: UUID().uuidString,
             sender: sender == "MAKER" ? .me : .opponent,
             type: .text(content),
             sentDate: "23-11-13",
-            sentTime: "오후 12:00",
+            sentTime: "오전 12:00",
             state: .unread
         )
     }

@@ -28,16 +28,19 @@ final class ChannelViewModel: ViewModelType {
     
     private let channel: Channel
     private let fetchMessagesUseCase: FetchMessagesUseCase
+    private let leaveChannelUseCase: LeaveChannelUseCase
     
     // MARK: - Init
     init(
         coordinator: ChatCoordinator?,
         channel: Channel,
-        fetchMessagesUseCase: FetchMessagesUseCase
+        fetchMessagesUseCase: FetchMessagesUseCase,
+        leaveChannelUseCase: LeaveChannelUseCase
     ) {
         self.coordinator = coordinator
         self.channel = channel
         self.fetchMessagesUseCase = fetchMessagesUseCase
+        self.leaveChannelUseCase = leaveChannelUseCase
     }
     
     // MARK: - Transformation
@@ -60,7 +63,15 @@ final class ChannelViewModel: ViewModelType {
             .subscribe(onNext: { owner, itemTitle in
                 switch itemTitle {
                 case "채팅방 나가기":
-                    owner.coordinator?.showAlert(configuration: .leaveChannel)
+                    owner.coordinator?.showAlert(configuration: .leaveChannel, primaryAction: {
+                        owner.coordinator?.pop()
+                        //                        owner.leaveChannelUseCase.leaveChannel(id: owner.channel.id)
+                        //                            .withUnretained(self)
+                        //                            .subscribe(onNext: { owner, _ in
+                        //                                owner.coordinator?.finish()
+                        //                            })
+                        //                            .disposed(by: disposeBag)
+                    })
                     
                 case "신고하기":
                     owner.coordinator?.showAlert(configuration: .report)

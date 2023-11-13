@@ -8,7 +8,7 @@
 import Foundation
 
 struct ChannelDTO: Codable {
-    let id: String
+    let id: String?
     var image: String?
     let name: String
     var lastMessageReceivedTime: String?
@@ -22,7 +22,7 @@ struct ChannelDTO: Codable {
         case name = "roomName"
         case lastMessageReceivedTime = "lastTime"
 //        case lastMessageType // tbd
-        case lastMessageContent = "latestMessage"
+        case lastMessageContent = "lastMessage"
 //        case unreadMessageCount  // tbd
     }
 }
@@ -32,14 +32,14 @@ extension ChannelDTO {
     // TODO: 수정 필요 (id 충돌 주의)
     func toEntity() -> Channel {
         Channel(
-            id: id,
+            id: id ?? "-1",  // 얘도 임시로 해논거라 옵셔널 제거해야함
             myID: "",
             opponentID: "",
             image: nil,
             name: name,
             lastMessage: Channel.LastMessage(
-                receivedTime: lastMessageReceivedTime?.toTimeString() ?? "오류",
-                content: "nil"
+                receivedTime: lastMessageReceivedTime?.toTime() ?? "",
+                content: lastMessageContent ?? "최신 메시지가 존재하지 않습니다."
             ),
             unreadMessageCount: "0"
         )
@@ -47,17 +47,17 @@ extension ChannelDTO {
 }
 
 extension String {
-    func toTimeString() -> String? {
-        // ISO 8601 문자열을 Date 객체로 변환
+    func toTime() -> String? {
+        // ISO 8601 형식의 문자열을 Date 객체로 변환
         let isoFormatter = ISO8601DateFormatter()
         guard let date = isoFormatter.date(from: self) else { return nil }
         
         // Date 객체를 "오전/오후 x시 x분" 형태로 변환
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "a h시 mm분"
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "a h시 mm분"
         
-        return formatter.string(from: date)
+        return dateFormatter.string(from: date)
     }
 }
 

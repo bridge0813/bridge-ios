@@ -93,7 +93,7 @@ private extension MyPageViewModel {
             coordinator?.showSignInViewController()
             
         case .signOut:
-            coordinator?.showAlert(configuration: .signOut) { }
+            coordinator?.showAlert(configuration: .signOut)
             
         case .notification:
             coordinator?.openSettings()
@@ -108,7 +108,7 @@ private extension MyPageViewModel {
             coordinator?.showOpenSourceLicense()
             
         case .withdrawal:
-            coordinator?.showAlert(configuration: .withdrawal) { }
+            coordinator?.showAlert(configuration: .withdrawal)
         }
     }
 }

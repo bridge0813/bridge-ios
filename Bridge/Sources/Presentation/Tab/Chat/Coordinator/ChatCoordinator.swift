@@ -55,10 +55,16 @@ extension ChatCoordinator {
         let channelViewModel = ChannelViewModel(
             coordinator: self,
             channel: channel,
-            fetchMessagesUseCase: fetchMessagesUseCase
+            fetchMessagesUseCase: fetchMessagesUseCase,
+            leaveChannelUseCase: leaveChannelUseCase
         )
         let channelViewController = ChannelViewController(viewModel: channelViewModel)
         navigationController.pushViewController(channelViewController, animated: true)
+    }
+    
+    // TODO: 이렇게 하는게 맞나...
+    func pop() {
+        navigationController.popViewController(animated: true)
     }
 }
 
