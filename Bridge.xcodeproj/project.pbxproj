@@ -1024,6 +1024,7 @@
 				7BB2C2442A98542700AA2328 /* Coordinator */,
 				7CF93E012A9C64EB0013EBD6 /* Main */,
 				7BB2C24A2A985A0400AA2328 /* Chat */,
+				7B6C20432AF8869C005689F5 /* MyPage */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -1034,7 +1035,6 @@
 				7BB2C24B2A985A2200AA2328 /* Coordinator */,
 				7BB2C24E2A985AB500AA2328 /* ChannelList */,
 				7B1E5ABA2ADCFD5F0053E9B3 /* Channel */,
-				7B6C20432AF8869C005689F5 /* MyPage */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
