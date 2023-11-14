@@ -65,11 +65,11 @@ final class BridgeErrorAlertViewController: BaseViewController {
         super.viewDidAppear(animated)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
-            if let primaryAction = self?.primaryAction {
-                primaryAction()
+            self?.dismiss(animated: true) {
+                if let primaryAction = self?.primaryAction {
+                    primaryAction()
+                }
             }
-            
-            self?.dismiss(animated: true)
         }
     }
     
@@ -77,11 +77,11 @@ final class BridgeErrorAlertViewController: BaseViewController {
         let location = sender.location(in: view)
         
         if backgroundView.frame.contains(location) {
-            if let primaryAction {
-                primaryAction()
+            dismiss(animated: true) { [weak self] in
+                if let primaryAction = self?.primaryAction {
+                    primaryAction()
+                }
             }
-            
-            dismiss(animated: true)
         }
     }
     

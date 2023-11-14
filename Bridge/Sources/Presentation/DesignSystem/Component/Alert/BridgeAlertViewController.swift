@@ -87,10 +87,10 @@ final class BridgeAlertViewController: BaseViewController {
         leftButton.rx.tap
             .withUnretained(self)
             .subscribe { owner, _ in
-                owner.dismiss(animated: true)
-                
-                if let cancelAction = owner.cancelAction {
-                    cancelAction()
+                owner.dismiss(animated: true) {
+                    if let cancelAction = owner.cancelAction {
+                        cancelAction()
+                    }
                 }
             }
             .disposed(by: disposeBag)
@@ -98,10 +98,10 @@ final class BridgeAlertViewController: BaseViewController {
         rightButton.rx.tap
             .withUnretained(self)
             .subscribe { owner, _ in
-                owner.dismiss(animated: true)
-                
-                if let primaryAction = owner.primaryAction {
-                    primaryAction()
+                owner.dismiss(animated: true) {
+                    if let primaryAction = owner.primaryAction {
+                        primaryAction()
+                    }
                 }
             }
             .disposed(by: disposeBag)
