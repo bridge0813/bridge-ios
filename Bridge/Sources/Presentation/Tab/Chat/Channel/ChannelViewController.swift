@@ -34,7 +34,7 @@ final class ChannelViewController: BaseViewController {
         target: self,
         action: nil
     )
-    private lazy var dropdownMenu = DropDown(
+    private lazy var dropdown = DropDown(
         anchorView: menuBarButton,
         bottomOffset: CGPoint(x: 0, y: 14),
         dataSource: ["채팅방 나가기", "신고하기"],
@@ -135,7 +135,7 @@ final class ChannelViewController: BaseViewController {
         menuBarButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.dropdownMenu.show()
+                owner.dropdown.show()
             })
             .disposed(by: disposeBag)
         
@@ -150,7 +150,7 @@ final class ChannelViewController: BaseViewController {
         let input = ChannelViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             profileButtonTapped: profileButton.rx.tap.asObservable(),
-            dropdownMenuItemSelected: dropdownMenu.itemSelected.map { $0.title }.asObservable(),
+            dropdownItemSelected: dropdown.itemSelected.map { $0.title }.asObservable(),
             sendMessage: messageInputBar.sendMessage
         )
         let output = viewModel.transform(input: input)

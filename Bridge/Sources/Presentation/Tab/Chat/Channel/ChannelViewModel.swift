@@ -13,7 +13,7 @@ final class ChannelViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>
         let profileButtonTapped: Observable<Void>
-        let dropdownMenuItemSelected: Observable<String>
+        let dropdownItemSelected: Observable<String>
         let sendMessage: Observable<String>
     }
     
@@ -50,27 +50,26 @@ final class ChannelViewModel: ViewModelType {
             .flatMap { owner, _ in
                 owner.fetchMessagesUseCase.fetchMessages(channelId: owner.channel.id)
             }
+            .observe(on: MainScheduler.instance)
+            .catch { [weak self] _ in
+                self?.coordinator?.showErrorAlert(configuration: .defaultError)
+                return .just([])
+            }
         
         input.profileButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { _, _ in
-                print("profile button tapped")  // 프로필 뷰 show
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showProfileViewController(of: owner.channel.opponentID)
             })
             .disposed(by: disposeBag)
         
-        input.dropdownMenuItemSelected
+        input.dropdownItemSelected
             .withUnretained(self)
-            .subscribe(onNext: { owner, itemTitle in
-                switch itemTitle {
+            .subscribe(onNext: { owner, item in
+                switch item {
                 case "채팅방 나가기":
                     owner.coordinator?.showAlert(configuration: .leaveChannel, primaryAction: {
-                        owner.coordinator?.pop()
-                        //                        owner.leaveChannelUseCase.leaveChannel(id: owner.channel.id)
-                        //                            .withUnretained(self)
-                        //                            .subscribe(onNext: { owner, _ in
-                        //                                owner.coordinator?.finish()
-                        //                            })
-                        //                            .disposed(by: disposeBag)
+                        owner.leaveChannel()
                     })
                     
                 case "신고하기":
@@ -91,7 +90,7 @@ final class ChannelViewModel: ViewModelType {
         
         return Output(
             channel: Driver.just(channel),
-            messages: messages.asDriver(onErrorJustReturn: [.onError])
+            messages: messages.asDriver(onErrorJustReturn: [])
         )
     }
 }
@@ -100,5 +99,25 @@ final class ChannelViewModel: ViewModelType {
 extension ChannelViewModel {
     enum Section {
         case main
+    }
+}
+
+// MARK: - Dropdown selected
+private extension ChannelViewModel {
+    func leaveChannel() {
+        leaveChannelUseCase.leaveChannel(id: channel.id)
+            .observe(on: MainScheduler.instance)
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    owner.coordinator?.pop()
+                },
+                onError: { owner, _ in
+                    owner.coordinator?.showErrorAlert(configuration: .defaultError) {
+                        owner.coordinator?.pop()
+                    }
+                }
+            )
+            .disposed(by: disposeBag)
     }
 }
