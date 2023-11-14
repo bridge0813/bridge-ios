@@ -77,13 +77,26 @@ final class ChannelListViewModel: ViewModelType {
             }
             .withUnretained(self)
             .flatMap { owner, channelID in
-                owner.leaveChannelUseCase.leaveChannel(id: channelID)
+                owner.leaveChannelUseCase.leaveChannel(id: channelID).toResult()
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.fetchChannelsUseCase.fetchChannels()
-            }
-            .bind(to: channels)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let id):
+                    var currentChannels = channels.value
+                    if let deletedChannelIndex = currentChannels.firstIndex(where: { $0.id == id }) {
+                        currentChannels.remove(at: deletedChannelIndex)
+                        viewState.accept(currentChannels.isEmpty ? .empty : .general)
+                        channels.accept(currentChannels)
+                    }
+                    
+                case .failure:
+                    owner.coordinator?.showErrorAlert(
+                        configuration: ErrorAlertConfiguration(title: "오류", description: "채팅방을 나가지 못했습니다.")
+                    )
+                }
+            })
             .disposed(by: disposeBag)
         
         return Output(

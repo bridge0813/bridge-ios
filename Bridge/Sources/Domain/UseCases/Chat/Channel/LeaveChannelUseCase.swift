@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol LeaveChannelUseCase {
-    func leaveChannel(id: String) -> Observable<Void>
+    func leaveChannel(id: String) -> Observable<String>
 }
 
 final class DefaultLeaveChannelUseCase: LeaveChannelUseCase {
@@ -19,7 +19,7 @@ final class DefaultLeaveChannelUseCase: LeaveChannelUseCase {
         self.channelRepository = channelRepository
     }
     
-    func leaveChannel(id: String) -> Observable<Void> {
+    func leaveChannel(id: String) -> Observable<String> {
         channelRepository.leaveChannel(id: id)
     }
 }

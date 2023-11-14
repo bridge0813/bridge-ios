@@ -29,11 +29,11 @@ final class DefaultChannelRepository: ChannelRepository {
             }
     }
     
-    func leaveChannel(id: String) -> Observable<Void> {
+    func leaveChannel(id: String) -> Observable<String> {
         let channelEndpoint = ChannelEndpoint.leaveChannel(id: id)
         
         return networkService.request(channelEndpoint, interceptor: AuthInterceptor())
-            .map { _ in }
+            .map { _ in id }
     }
     
     func observe(id: String) -> Observable<Message> {

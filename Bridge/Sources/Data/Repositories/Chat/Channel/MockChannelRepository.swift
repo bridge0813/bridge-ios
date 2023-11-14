@@ -14,11 +14,11 @@ final class MockChannelRepository: ChannelRepository {
 //        .error(NetworkError.statusCode(401))
     }
     
-    func leaveChannel(id: String) -> Observable<Void> {
+    func leaveChannel(id: String) -> Observable<String> {
         Observable.create { observer in
             if let index = ChannelDTO.testArray.firstIndex(where: { $0.id == id }) {
                 ChannelDTO.testArray.remove(at: index)
-                observer.onNext(())
+                observer.onNext(id)
             } else {
                 observer.onError(NetworkError.unknown)
             }
