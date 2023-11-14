@@ -19,7 +19,7 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
         return view
     }()
     
-    private let tagLabel = BridgeChipFillLabel(backgroundColor: BridgeColor.primary1, type: .short)
+    private let tagLabel = BridgeFilledChip(backgroundColor: BridgeColor.primary1, type: .short)
     
     private let flexContainer = UIView()  // Cell의 재사용에 대응하기 위한 명시적 컨테이너
     

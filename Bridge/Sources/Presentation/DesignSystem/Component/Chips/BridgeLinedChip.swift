@@ -8,7 +8,7 @@
 import UIKit
 
 /// 디자인시스템 중 Chip의 Line에 해당되는 라벨(D-day를 나타낼 때 사용됨)
-final class BridgeChipLineLabel: BaseLabel {
+final class BridgeLinedChip: BaseLabel {
     
     private let padding = UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
     

@@ -189,8 +189,8 @@
 		7CA04F1A2AFDFE4B007B9191 /* ProjectDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */; };
 		7CA04F1E2AFE4B0F007B9191 /* RecruitFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */; };
 		7CA04F212AFE772C007B9191 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F202AFE772C007B9191 /* BaseLabel.swift */; };
-		7CA04F232AFE77AB007B9191 /* BridgeChipFillLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F222AFE77AB007B9191 /* BridgeChipFillLabel.swift */; };
-		7CA04F252AFE7B6E007B9191 /* BridgeChipLineLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F242AFE7B6E007B9191 /* BridgeChipLineLabel.swift */; };
+		7CA04F232AFE77AB007B9191 /* BridgeFilledChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F222AFE77AB007B9191 /* BridgeFilledChip.swift */; };
+		7CA04F252AFE7B6E007B9191 /* BridgeLinedChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F242AFE7B6E007B9191 /* BridgeLinedChip.swift */; };
 		7CA04F292AFFDF6A007B9191 /* RecruitFieldDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F282AFFDF6A007B9191 /* RecruitFieldDetailCell.swift */; };
 		7CA04F2C2B01F822007B9191 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F2B2B01F822007B9191 /* MenuBar.swift */; };
 		7CA04F2E2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F2D2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift */; };
@@ -394,8 +394,8 @@
 		7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewModel.swift; sourceTree = "<group>"; };
 		7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldCell.swift; sourceTree = "<group>"; };
 		7CA04F202AFE772C007B9191 /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
-		7CA04F222AFE77AB007B9191 /* BridgeChipFillLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeChipFillLabel.swift; sourceTree = "<group>"; };
-		7CA04F242AFE7B6E007B9191 /* BridgeChipLineLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeChipLineLabel.swift; sourceTree = "<group>"; };
+		7CA04F222AFE77AB007B9191 /* BridgeFilledChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFilledChip.swift; sourceTree = "<group>"; };
+		7CA04F242AFE7B6E007B9191 /* BridgeLinedChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeLinedChip.swift; sourceTree = "<group>"; };
 		7CA04F282AFFDF6A007B9191 /* RecruitFieldDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldDetailCell.swift; sourceTree = "<group>"; };
 		7CA04F2B2B01F822007B9191 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		7CA04F2D2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRecruitNumberHeaderView.swift; sourceTree = "<group>"; };
@@ -1349,8 +1349,8 @@
 		7CA04F1F2AFE7659007B9191 /* Chips */ = {
 			isa = PBXGroup;
 			children = (
-				7CA04F222AFE77AB007B9191 /* BridgeChipFillLabel.swift */,
-				7CA04F242AFE7B6E007B9191 /* BridgeChipLineLabel.swift */,
+				7CA04F222AFE77AB007B9191 /* BridgeFilledChip.swift */,
+				7CA04F242AFE7B6E007B9191 /* BridgeLinedChip.swift */,
 			);
 			path = Chips;
 			sourceTree = "<group>";
@@ -1647,7 +1647,7 @@
 				7CA04F2C2B01F822007B9191 /* MenuBar.swift in Sources */,
 				7C8CC4152AF024060032F237 /* DatePickerPopUpView.swift in Sources */,
 				7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */,
-				7CA04F232AFE77AB007B9191 /* BridgeChipFillLabel.swift in Sources */,
+				7CA04F232AFE77AB007B9191 /* BridgeFilledChip.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
 				7CA04F1E2AFE4B0F007B9191 /* RecruitFieldCell.swift in Sources */,
@@ -1685,7 +1685,7 @@
 				7C55E6292AD7EFEF0018FA5D /* MainCategoryButton.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChatRoomsUseCase.swift in Sources */,
 				7CE080492AD79ADD00230C86 /* FieldCategoryAnchorButton.swift in Sources */,
-				7CA04F252AFE7B6E007B9191 /* BridgeChipLineLabel.swift in Sources */,
+				7CA04F252AFE7B6E007B9191 /* BridgeLinedChip.swift in Sources */,
 				7C55E6312ADBF6AA0018FA5D /* ProjectCountHeaderView.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
 				7C40CBA32AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift in Sources */,

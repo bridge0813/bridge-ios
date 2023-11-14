@@ -8,7 +8,7 @@
 import UIKit
 
 /// 디자인시스템 중 Chip의 Fill에 해당되는 라벨(short 버전 및 long 버전)
-final class BridgeChipFillLabel: BaseLabel {
+final class BridgeFilledChip: BaseLabel {
     
     private let type: ChipType
     
@@ -42,7 +42,7 @@ final class BridgeChipFillLabel: BaseLabel {
     }
 }
 
-extension BridgeChipFillLabel {
+extension BridgeFilledChip {
     enum ChipType {
         case short
         case long

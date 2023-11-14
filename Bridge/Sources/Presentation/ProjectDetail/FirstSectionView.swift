@@ -19,7 +19,7 @@ final class FirstSectionView: BaseView {
         return view
     }()
     
-    private let dDayLabel = BridgeChipLineLabel()
+    private let dDayLabel = BridgeLinedChip()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
