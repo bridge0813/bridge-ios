@@ -60,7 +60,7 @@ final class SignInViewModel: ViewModelType {
                     owner.coordinator?.finish()
                     
                 case .failure: 
-                    owner.coordinator?.showErrorAlert(configuration: .networkError)
+                    owner.coordinator?.showErrorAlert(configuration: .defaultError)
                 }
             })
             .disposed(by: disposeBag)
