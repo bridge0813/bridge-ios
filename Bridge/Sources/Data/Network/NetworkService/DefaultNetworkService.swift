@@ -18,13 +18,17 @@ final class DefaultNetworkService: NetworkService {
         
         return URLSession.shared.rx.response(request: request)
             .flatMap { httpResponse, data in
-                interceptor?.shouldRetry(request, httpResponse: httpResponse, data: data) ?? .just(data)
-            }
-            .catch { error in
-                if let rxCocoaError = error as? RxCocoaURLError {
-                    return .error(rxCocoaError.toNetworkError())
-                } else {
-                    return .error(NetworkError.underlying(error))
+                let statusCode = httpResponse.statusCode
+                
+                switch statusCode {
+                case 200 ..< 300:
+                    return Observable.just(data)
+                    
+                case 401:
+                    return interceptor?.retry(request, data: data) ?? Observable.error(NetworkError.statusCode(statusCode))
+                    
+                default:
+                    return Observable.error(NetworkError.statusCode(statusCode))
                 }
             }
     }
