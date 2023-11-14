@@ -48,9 +48,13 @@ extension ChannelDTO {
 
 extension String {
     func toTime() -> String? {
+        var isoString = self
+        isoString += "+09:00"
+        
         // ISO 8601 형식의 문자열을 Date 객체로 변환
         let isoFormatter = ISO8601DateFormatter()
-        guard let date = isoFormatter.date(from: self) else { return nil }
+//        isoFormatter.formatOptions = [.withFullDate, .withFullTime]
+        guard let date = isoFormatter.date(from: isoString) else { return nil }
         
         // Date 객체를 "오전/오후 x시 x분" 형태로 변환
         let dateFormatter = DateFormatter()
