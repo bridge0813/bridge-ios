@@ -40,7 +40,7 @@ final class ChannelListViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        let channelsRelay = BehaviorRelay<[Channel]>(value: [])
+        let channels = BehaviorRelay<[Channel]>(value: [])
         let viewState = BehaviorRelay<ViewState>(value: .general)
         
         input.viewWillAppear
@@ -51,9 +51,9 @@ final class ChannelListViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 switch result {
-                case .success(let channels):
-                    viewState.accept(channels.isEmpty ? .empty : .general)
-                    channelsRelay.accept(channels)
+                case .success(let fetchedChannels):
+                    viewState.accept(fetchedChannels.isEmpty ? .empty : .general)
+                    channels.accept(fetchedChannels)
                     
                 case .failure(let error):
                     owner.handleError(error, viewState: viewState)
@@ -62,18 +62,18 @@ final class ChannelListViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         input.itemSelected
-            .withLatestFrom(channelsRelay) { index, channels in
-                channels[index]
+            .withLatestFrom(channels) { index, currentChannels in
+                currentChannels[index]
             }
             .withUnretained(self)
-            .subscribe(onNext: { owner, channel in
-                owner.coordinator?.showChannelViewController(of: channel)
+            .subscribe(onNext: { owner, selectedChannel in
+                owner.coordinator?.showChannelViewController(of: selectedChannel)
             })
             .disposed(by: disposeBag)
         
         input.leaveChannel
-            .withLatestFrom(channelsRelay) { index, channels in
-                channels[index].id
+            .withLatestFrom(channels) { index, currentChannels in
+                currentChannels[index].id
             }
             .withUnretained(self)
             .flatMap { owner, channelID in
@@ -83,11 +83,11 @@ final class ChannelListViewModel: ViewModelType {
             .flatMap { owner, _ in
                 owner.fetchChannelsUseCase.fetchChannels()
             }
-            .bind(to: channelsRelay)
+            .bind(to: channels)
             .disposed(by: disposeBag)
         
         return Output(
-            channels: channelsRelay.asDriver(),
+            channels: channels.asDriver(),
             viewState: viewState.asDriver()
         )
     }
