@@ -84,19 +84,25 @@ final class BridgeAlertViewController: BaseViewController {
         view.backgroundColor = .clear
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
         
-        leftButton.rx.tap.asObservable()
+        leftButton.rx.tap
             .withUnretained(self)
             .subscribe { owner, _ in
                 owner.dismiss(animated: true)
-                if let cancelAction = owner.cancelAction { cancelAction() }
+                
+                if let cancelAction = owner.cancelAction {
+                    cancelAction()
+                }
             }
             .disposed(by: disposeBag)
         
-        rightButton.rx.tap.asObservable()
+        rightButton.rx.tap
             .withUnretained(self)
             .subscribe { owner, _ in
                 owner.dismiss(animated: true)
-                if let primaryAction = owner.primaryAction { primaryAction() }
+                
+                if let primaryAction = owner.primaryAction {
+                    primaryAction()
+                }
             }
             .disposed(by: disposeBag)
     }
