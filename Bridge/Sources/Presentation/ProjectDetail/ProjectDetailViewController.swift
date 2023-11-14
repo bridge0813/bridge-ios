@@ -73,10 +73,6 @@ final class ProjectDetailViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        configureNavigationUI()
-    }
-    
-    private func configureNavigationUI() {
         navigationItem.title = "프로젝트 상세"
     }
     
@@ -106,7 +102,7 @@ final class ProjectDetailViewController: BaseViewController {
         
         contentContainer.pin.all()
         contentContainer.flex.layout(mode: .adjustHeight)
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentContainer.frame.height)
+        scrollView.contentSize = contentContainer.frame.size
     }
     
     // MARK: - Binding
