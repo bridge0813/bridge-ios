@@ -201,8 +201,6 @@
 		7CA04F3E2B022BAD007B9191 /* DefaultProjectDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F3D2B022BAD007B9191 /* DefaultProjectDetailRepository.swift */; };
 		7CA04F432B029B3A007B9191 /* FetchProjectDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F422B029B3A007B9191 /* FetchProjectDetailUseCase.swift */; };
 		7CA04F452B029B7C007B9191 /* RecruitFieldDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F442B029B7C007B9191 /* RecruitFieldDetailViewController.swift */; };
-		7CA04F472B029C0D007B9191 /* SignUpResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F462B029C0D007B9191 /* SignUpResult.swift */; };
-		7CA04F492B029C22007B9191 /* UserAuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F482B029C22007B9191 /* UserAuthState.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -408,8 +406,6 @@
 		7CA04F3D2B022BAD007B9191 /* DefaultProjectDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProjectDetailRepository.swift; sourceTree = "<group>"; };
 		7CA04F422B029B3A007B9191 /* FetchProjectDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProjectDetailUseCase.swift; sourceTree = "<group>"; };
 		7CA04F442B029B7C007B9191 /* RecruitFieldDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldDetailViewController.swift; sourceTree = "<group>"; };
-		7CA04F462B029C0D007B9191 /* SignUpResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResult.swift; sourceTree = "<group>"; };
-		7CA04F482B029C22007B9191 /* UserAuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthState.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -517,8 +513,6 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB2D2AB1DA39009A00EB /* SignInResult.swift */,
-				7CA04F462B029C0D007B9191 /* SignUpResult.swift */,
-				7CA04F482B029C22007B9191 /* UserAuthState.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1653,7 +1647,6 @@
 				7CA04F2C2B01F822007B9191 /* MenuBar.swift in Sources */,
 				7C8CC4152AF024060032F237 /* DatePickerPopUpView.swift in Sources */,
 				7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */,
-				7CA04F492B029C22007B9191 /* UserAuthState.swift in Sources */,
 				7CA04F232AFE77AB007B9191 /* BridgeChipFillLabel.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChatRoomRepository.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
@@ -1755,7 +1748,6 @@
 				7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */,
 				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,
-				7CA04F472B029C0D007B9191 /* SignUpResult.swift in Sources */,
 				7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */,
 				7B61238B2AC2D03E006E72C1 /* BridgeTipMessageBox.swift in Sources */,
 				7B1922D52AE287C900EBDD2E /* MessageCell.swift in Sources */,
