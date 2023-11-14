@@ -10,10 +10,10 @@ import RxSwift
 final class MockProjectRepository: ProjectRepository {
     // MARK: - Methods
     func fetchAllProjects() -> Observable<[Project]> {
-        .just(ProjectDTO.projectTestArray.compactMap { $0.toModel() })
+        .just(ProjectDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
     func fetchHotProjects() -> Observable<[Project]> {
-        .just(ProjectDTO.projectTestArray.compactMap { $0.toModel() })
+        .just(ProjectDTO.projectTestArray.compactMap { $0.toEntity() })
     }
 }

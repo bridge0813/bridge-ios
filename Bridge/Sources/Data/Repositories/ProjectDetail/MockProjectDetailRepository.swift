@@ -9,6 +9,6 @@ import RxSwift
 
 final class MockProjectDetailRepository: ProjectDetailRepository {
     func fetchProject(with projectID: Int) -> Observable<Project> {
-        .just(ProjectDTO.projectDetailTest.toModel())
+        .just(ProjectDTO.projectDetailTest.toEntity())
     }
 }

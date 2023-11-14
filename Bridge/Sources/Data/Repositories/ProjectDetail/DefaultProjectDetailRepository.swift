@@ -18,6 +18,6 @@ final class DefaultProjectDetailRepository: ProjectDetailRepository {
     
     // MARK: - Methods
     func fetchProject(with projectID: Int) -> Observable<Project> {
-        .just(ProjectDTO.projectDetailTest.toModel())
+        .just(ProjectDTO.projectDetailTest.toEntity())
     }
 }

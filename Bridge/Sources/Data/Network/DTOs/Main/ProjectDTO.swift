@@ -22,7 +22,7 @@ struct ProjectDTO: Codable {
 }
 
 extension ProjectDTO {
-    func toModel() -> Project {
+    func toEntity() -> Project {
         Project(
             id: id,
             title: title,
