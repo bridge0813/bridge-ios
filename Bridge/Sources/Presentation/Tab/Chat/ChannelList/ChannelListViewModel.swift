@@ -73,11 +73,11 @@ final class ChannelListViewModel: ViewModelType {
         
         input.leaveChannel
             .withLatestFrom(channelsRelay) { index, channels in
-                channels[index]
+                channels[index].id
             }
             .withUnretained(self)
-            .flatMap { owner, channel in
-                owner.leaveChannelUseCase.leaveChannel(id: channel.id)
+            .flatMap { owner, channelID in
+                owner.leaveChannelUseCase.leaveChannel(id: channelID)
             }
             .withUnretained(self)
             .flatMap { owner, _ in
