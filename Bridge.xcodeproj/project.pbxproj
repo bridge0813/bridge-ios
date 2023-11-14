@@ -183,9 +183,9 @@
 		7C8CC41C2AF522A10032F237 /* BridgeBasePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */; };
 		7CA04F0F2AF8F867007B9191 /* TechStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F0E2AF8F867007B9191 /* TechStack.swift */; };
 		7CA04F122AFDF694007B9191 /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */; };
-		7CA04F142AFDF71C007B9191 /* FirstSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F132AFDF71C007B9191 /* FirstSectionView.swift */; };
-		7CA04F162AFDF72A007B9191 /* SecondSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F152AFDF72A007B9191 /* SecondSectionView.swift */; };
-		7CA04F182AFDF749007B9191 /* ThirdSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F172AFDF749007B9191 /* ThirdSectionView.swift */; };
+		7CA04F142AFDF71C007B9191 /* TitleDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F132AFDF71C007B9191 /* TitleDescriptionView.swift */; };
+		7CA04F162AFDF72A007B9191 /* BasicInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F152AFDF72A007B9191 /* BasicInfoView.swift */; };
+		7CA04F182AFDF749007B9191 /* RecruitmentFieldInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F172AFDF749007B9191 /* RecruitmentFieldInfoView.swift */; };
 		7CA04F1A2AFDFE4B007B9191 /* ProjectDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */; };
 		7CA04F1E2AFE4B0F007B9191 /* RecruitFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */; };
 		7CA04F212AFE772C007B9191 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F202AFE772C007B9191 /* BaseLabel.swift */; };
@@ -388,9 +388,9 @@
 		7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBasePopUpView.swift; sourceTree = "<group>"; };
 		7CA04F0E2AF8F867007B9191 /* TechStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechStack.swift; sourceTree = "<group>"; };
 		7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
-		7CA04F132AFDF71C007B9191 /* FirstSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSectionView.swift; sourceTree = "<group>"; };
-		7CA04F152AFDF72A007B9191 /* SecondSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSectionView.swift; sourceTree = "<group>"; };
-		7CA04F172AFDF749007B9191 /* ThirdSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdSectionView.swift; sourceTree = "<group>"; };
+		7CA04F132AFDF71C007B9191 /* TitleDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleDescriptionView.swift; sourceTree = "<group>"; };
+		7CA04F152AFDF72A007B9191 /* BasicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoView.swift; sourceTree = "<group>"; };
+		7CA04F172AFDF749007B9191 /* RecruitmentFieldInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentFieldInfoView.swift; sourceTree = "<group>"; };
 		7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewModel.swift; sourceTree = "<group>"; };
 		7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldCell.swift; sourceTree = "<group>"; };
 		7CA04F202AFE772C007B9191 /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
@@ -1337,9 +1337,9 @@
 				7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */,
 				7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */,
 				7CA04F2B2B01F822007B9191 /* ProjectDetailMenuBar.swift */,
-				7CA04F132AFDF71C007B9191 /* FirstSectionView.swift */,
-				7CA04F152AFDF72A007B9191 /* SecondSectionView.swift */,
-				7CA04F172AFDF749007B9191 /* ThirdSectionView.swift */,
+				7CA04F132AFDF71C007B9191 /* TitleDescriptionView.swift */,
+				7CA04F152AFDF72A007B9191 /* BasicInfoView.swift */,
+				7CA04F172AFDF749007B9191 /* RecruitmentFieldInfoView.swift */,
 				7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */,
 				7CA04F2A2AFFDF70007B9191 /* RecruitFieldDetail */,
 			);
@@ -1636,7 +1636,7 @@
 			files = (
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
 				7CA04F212AFE772C007B9191 /* BaseLabel.swift in Sources */,
-				7CA04F142AFDF71C007B9191 /* FirstSectionView.swift in Sources */,
+				7CA04F142AFDF71C007B9191 /* TitleDescriptionView.swift in Sources */,
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
 				7B3289352ADE55DA009DF3C2 /* BridgeMessageInputBar.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */,
@@ -1759,7 +1759,7 @@
 				7B1922D12AE166E600EBDD2E /* UIViewController+Keyboard.swift in Sources */,
 				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */,
-				7CA04F162AFDF72A007B9191 /* SecondSectionView.swift in Sources */,
+				7CA04F162AFDF72A007B9191 /* BasicInfoView.swift in Sources */,
 				7C8CC4182AF4091D0032F237 /* BridgeProgressView.swift in Sources */,
 				7B14DB2E2AB1DA39009A00EB /* SignInResult.swift in Sources */,
 				7CA04F292AFFDF6A007B9191 /* RecruitFieldDetailCell.swift in Sources */,
@@ -1788,7 +1788,7 @@
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,
 				7C569CF32A9F67C60063D362 /* Project.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
-				7CA04F182AFDF749007B9191 /* ThirdSectionView.swift in Sources */,
+				7CA04F182AFDF749007B9191 /* RecruitmentFieldInfoView.swift in Sources */,
 				7B1E5ABC2ADCFD790053E9B3 /* MessageViewController.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,

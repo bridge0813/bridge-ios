@@ -39,9 +39,9 @@ final class ProjectDetailViewController: BaseViewController {
         return divider
     }()
     
-    private let firstSectionView = FirstSectionView()
-    private let secondSectionView = SecondSectionView()
-    private let thirdSectionView = ThirdSectionView()
+    private let titleDescriptionView = TitleDescriptionView()
+    private let basicInfoView = BasicInfoView()
+    private let recruitmentFieldInfoView = RecruitmentFieldInfoView()
 
     private let menuBar = ProjectDetailMenuBar()
     
@@ -94,9 +94,9 @@ final class ProjectDetailViewController: BaseViewController {
         }
         
         contentContainer.flex.define { flex in
-            flex.addItem(firstSectionView)
-            flex.addItem(secondSectionView).marginTop(8)
-            flex.addItem(thirdSectionView).marginTop(8)
+            flex.addItem(titleDescriptionView)
+            flex.addItem(basicInfoView).marginTop(8)
+            flex.addItem(recruitmentFieldInfoView).marginTop(8)
         }
     }
     
@@ -113,7 +113,7 @@ final class ProjectDetailViewController: BaseViewController {
     override func bind() {
         let input = ProjectDetailViewModel.Input(
             viewDidLoad: .just(()),
-            goToDetailButtonTapped: thirdSectionView.goToDetailButtonTapped
+            goToDetailButtonTapped: recruitmentFieldInfoView.goToDetailButtonTapped
         )
         let output = viewModel.transform(input: input)
         
@@ -121,9 +121,9 @@ final class ProjectDetailViewController: BaseViewController {
             .drive(onNext: { [weak self] data in
                 guard let self else { return }
                 
-                self.firstSectionView.configureContents(with: data)
-                self.secondSectionView.configureContents(with: data)
-                self.thirdSectionView.configureContents(with: data.memberRequirements)
+                self.titleDescriptionView.configureContents(with: data)
+                self.basicInfoView.configureContents(with: data)
+                self.recruitmentFieldInfoView.configureContents(with: data.memberRequirements)
             })
             .disposed(by: disposeBag)
         

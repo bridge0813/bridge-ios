@@ -1,5 +1,5 @@
 //
-//  SecondSectionView.swift
+//  BasicInfoView.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/11/10.
@@ -9,8 +9,8 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-/// 상세 모집글의 두 번째 섹션(기본정보)
-final class SecondSectionView: BaseView {
+/// 상세 모집글의 기본 정보를 나타내는 뷰
+final class BasicInfoView: BaseView {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()

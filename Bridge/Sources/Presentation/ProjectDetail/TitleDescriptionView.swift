@@ -1,5 +1,5 @@
 //
-//  FirstSectionView.swift
+//  TitleDescriptionView.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/11/10.
@@ -9,8 +9,8 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-/// 상세 모집글의 첫 번째 섹션(제목, 소개 등)
-final class FirstSectionView: BaseView {
+/// 상세 모집글의 제목과 소개를 나타내는 뷰
+final class TitleDescriptionView: BaseView {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()

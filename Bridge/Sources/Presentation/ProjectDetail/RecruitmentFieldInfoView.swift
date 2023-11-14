@@ -1,5 +1,5 @@
 //
-//  ThirdSectionView.swift
+//  RecruitmentFieldInfoView.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/11/10.
@@ -11,8 +11,8 @@ import PinLayout
 import RxSwift
 import RxCocoa
 
-/// 상세 모집글의 세 번째 섹션(모집중인 분야 소개)
-final class ThirdSectionView: BaseView {
+/// 상세 모집글의 모집중인 분야와 인원 수를 나타내는 뷰
+final class RecruitmentFieldInfoView: BaseView {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()
@@ -113,7 +113,7 @@ final class ThirdSectionView: BaseView {
 }
 
 // MARK: - CompositionalLayout
-extension ThirdSectionView {
+extension RecruitmentFieldInfoView {
     private func configureLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
