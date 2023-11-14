@@ -192,7 +192,7 @@
 		7CA04F232AFE77AB007B9191 /* BridgeFilledChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F222AFE77AB007B9191 /* BridgeFilledChip.swift */; };
 		7CA04F252AFE7B6E007B9191 /* BridgeLinedChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F242AFE7B6E007B9191 /* BridgeLinedChip.swift */; };
 		7CA04F292AFFDF6A007B9191 /* RecruitFieldDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F282AFFDF6A007B9191 /* RecruitFieldDetailCell.swift */; };
-		7CA04F2C2B01F822007B9191 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F2B2B01F822007B9191 /* MenuBar.swift */; };
+		7CA04F2C2B01F822007B9191 /* ProjectDetailMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F2B2B01F822007B9191 /* ProjectDetailMenuBar.swift */; };
 		7CA04F2E2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F2D2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift */; };
 		7CA04F302B0208FF007B9191 /* RecruitFieldDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F2F2B0208FF007B9191 /* RecruitFieldDetailViewModel.swift */; };
 		7CA04F322B020B94007B9191 /* ProjectDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F312B020B94007B9191 /* ProjectDetailCoordinator.swift */; };
@@ -397,7 +397,7 @@
 		7CA04F222AFE77AB007B9191 /* BridgeFilledChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFilledChip.swift; sourceTree = "<group>"; };
 		7CA04F242AFE7B6E007B9191 /* BridgeLinedChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeLinedChip.swift; sourceTree = "<group>"; };
 		7CA04F282AFFDF6A007B9191 /* RecruitFieldDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldDetailCell.swift; sourceTree = "<group>"; };
-		7CA04F2B2B01F822007B9191 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		7CA04F2B2B01F822007B9191 /* ProjectDetailMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailMenuBar.swift; sourceTree = "<group>"; };
 		7CA04F2D2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRecruitNumberHeaderView.swift; sourceTree = "<group>"; };
 		7CA04F2F2B0208FF007B9191 /* RecruitFieldDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldDetailViewModel.swift; sourceTree = "<group>"; };
 		7CA04F312B020B94007B9191 /* ProjectDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailCoordinator.swift; sourceTree = "<group>"; };
@@ -1336,7 +1336,7 @@
 				7CA04F342B0225FE007B9191 /* Coordinator */,
 				7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */,
 				7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */,
-				7CA04F2B2B01F822007B9191 /* MenuBar.swift */,
+				7CA04F2B2B01F822007B9191 /* ProjectDetailMenuBar.swift */,
 				7CA04F132AFDF71C007B9191 /* FirstSectionView.swift */,
 				7CA04F152AFDF72A007B9191 /* SecondSectionView.swift */,
 				7CA04F172AFDF749007B9191 /* ThirdSectionView.swift */,
@@ -1644,7 +1644,7 @@
 				7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */,
 				7B1742F42AFA46A7004F0953 /* AccessTokenResponseDTO.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
-				7CA04F2C2B01F822007B9191 /* MenuBar.swift in Sources */,
+				7CA04F2C2B01F822007B9191 /* ProjectDetailMenuBar.swift in Sources */,
 				7C8CC4152AF024060032F237 /* DatePickerPopUpView.swift in Sources */,
 				7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */,
 				7CA04F232AFE77AB007B9191 /* BridgeFilledChip.swift in Sources */,

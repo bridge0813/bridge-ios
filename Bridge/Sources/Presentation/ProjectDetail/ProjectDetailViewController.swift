@@ -43,7 +43,7 @@ final class ProjectDetailViewController: BaseViewController {
     private let secondSectionView = SecondSectionView()
     private let thirdSectionView = ThirdSectionView()
 
-    private let menuBar = MenuBar()
+    private let menuBar = ProjectDetailMenuBar()
     
     // MARK: - Property
     private let viewModel: ProjectDetailViewModel

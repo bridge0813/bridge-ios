@@ -9,8 +9,8 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-/// 상세 모집글의 첫 번째 섹션(제목, 소개 등)
-final class MenuBar: BaseView {
+/// 프로젝트 상세의 하단 메뉴 바
+final class ProjectDetailMenuBar: BaseView {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()

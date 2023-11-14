@@ -45,8 +45,7 @@ final class FirstSectionView: BaseView {
         rootFlexContainer.flex.paddingHorizontal(16).define { flex in
             flex.addItem(dDayLabel).marginTop(24)
             flex.addItem(titleLabel).height(60).marginTop(16).marginRight(49)
-            flex.addItem(descriptionLabel).marginTop(8)
-            flex.addItem().height(32)  // 바텀마진
+            flex.addItem(descriptionLabel).marginTop(8).marginBottom(32)
         }
     }
     

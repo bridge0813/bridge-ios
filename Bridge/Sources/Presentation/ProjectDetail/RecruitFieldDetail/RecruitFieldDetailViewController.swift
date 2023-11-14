@@ -33,7 +33,7 @@ final class RecruitFieldDetailViewController: BaseViewController {
         return collectionView
     }()
     
-    private let menuBar = MenuBar()
+    private let menuBar = ProjectDetailMenuBar()
     
     // MARK: - Property
     private typealias DataSource = UICollectionViewDiffableDataSource<RecruitFieldDetailViewModel.Section, MemberRequirement>
