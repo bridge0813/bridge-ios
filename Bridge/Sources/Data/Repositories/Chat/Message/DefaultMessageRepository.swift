@@ -27,4 +27,8 @@ final class DefaultMessageRepository: MessageRepository {
                 messageDTOs.map { $0.toEntity() }
             }
     }
+    
+    func send(message: String) -> Observable<Void> {
+        return .just(())
+    }
 }

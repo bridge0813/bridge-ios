@@ -35,4 +35,8 @@ final class DefaultChannelRepository: ChannelRepository {
         return networkService.request(channelEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
     }
+    
+    func observe(id: String) -> Observable<Message> {
+        .just(.onError)
+    }
 }

@@ -9,4 +9,5 @@ import RxSwift
 
 protocol MessageRepository {
     func fetchMessages(channelID: String) -> Observable<[Message]>
+    func send(message: String) -> Observable<Void>
 }

@@ -88,4 +88,8 @@ final class MockMessageRepository: MessageRepository {
             )
         ])
     }
+    
+    func send(message: String) -> Observable<Void> {
+        .just(())
+    }
 }

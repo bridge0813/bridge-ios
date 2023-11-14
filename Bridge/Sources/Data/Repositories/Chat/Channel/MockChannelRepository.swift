@@ -5,6 +5,7 @@
 //  Created by 정호윤 on 10/11/23.
 //
 
+import Foundation
 import RxSwift
 
 final class MockChannelRepository: ChannelRepository {
@@ -24,5 +25,20 @@ final class MockChannelRepository: ChannelRepository {
             
             return Disposables.create()
         }
+    }
+    
+    // MARK: - DTO로 수정
+    func observe(id: String) -> Observable<Message> {
+        Observable<Int>.interval(.seconds(2), scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
+            .map { _ in
+                Message(
+                    id: UUID().uuidString,
+                    sender: .opponent,
+                    type: .text("ads"),
+                    sentDate: "2023-12-01",
+                    sentTime: "오전 12:00",
+                    state: .unread
+                )
+            }
     }
 }

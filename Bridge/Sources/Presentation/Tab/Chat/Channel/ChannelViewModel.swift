@@ -27,34 +27,55 @@ final class ChannelViewModel: ViewModelType {
     private weak var coordinator: ChatCoordinator?
     
     private let channel: Channel
-    private let fetchMessagesUseCase: FetchMessagesUseCase
     private let leaveChannelUseCase: LeaveChannelUseCase
+    private let observeChannelUseCase: ObserveChannelUseCase
+    private let fetchMessagesUseCase: FetchMessagesUseCase
+    private let sendMessageUseCase: SendMessageUseCase
     
     // MARK: - Init
     init(
         coordinator: ChatCoordinator?,
         channel: Channel,
+        leaveChannelUseCase: LeaveChannelUseCase,
+        observeChannelUseCase: ObserveChannelUseCase,
         fetchMessagesUseCase: FetchMessagesUseCase,
-        leaveChannelUseCase: LeaveChannelUseCase
+        sendMessageUseCase: SendMessageUseCase
     ) {
         self.coordinator = coordinator
         self.channel = channel
-        self.fetchMessagesUseCase = fetchMessagesUseCase
         self.leaveChannelUseCase = leaveChannelUseCase
+        self.observeChannelUseCase = observeChannelUseCase
+        self.fetchMessagesUseCase = fetchMessagesUseCase
+        self.sendMessageUseCase = sendMessageUseCase
     }
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        let messages = input.viewWillAppear
+        let messages = BehaviorRelay<[Message]>(value: [])
+        
+        observeChannelUseCase.observe(id: channel.id)
+            .map { incomingMessage in
+                var currentMessages = messages.value
+                currentMessages.append(incomingMessage)
+                return currentMessages
+            }
+            .bind(to: messages)
+            .disposed(by: disposeBag)
+        
+        input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.fetchMessagesUseCase.fetchMessages(channelId: owner.channel.id)
             }
             .observe(on: MainScheduler.instance)
             .catch { [weak self] _ in
-                self?.coordinator?.showErrorAlert(configuration: .defaultError)
+                self?.coordinator?.showErrorAlert(configuration: .defaultError) {
+                    self?.coordinator?.pop()
+                }
                 return .just([])
             }
+            .bind(to: messages)
+            .disposed(by: disposeBag)
         
         input.profileButtonTapped
             .withUnretained(self)
@@ -83,8 +104,18 @@ final class ChannelViewModel: ViewModelType {
         
         input.sendMessage
             .withUnretained(self)
-            .subscribe(onNext: { _, _ in
-                
+            .flatMap { owner, message in
+                owner.sendMessageUseCase.send(message: message).toResult()
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success:
+                    return
+                    
+                case .failure:
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(title: "메시지 전송 실패"))
+                }
             })
             .disposed(by: disposeBag)
         
