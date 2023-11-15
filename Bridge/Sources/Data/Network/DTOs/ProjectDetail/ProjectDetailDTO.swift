@@ -35,7 +35,33 @@ struct ProjectDetailDTO: Codable {
 }
 
 extension ProjectDetailDTO {
-    
+    // TODO: - Date형식으로 변경받을 수 있는지 여쭤보기
+    func toEntity() -> ProjectDetail {
+        ProjectDetail(
+            title: title,
+            description: description,
+            dDays: Date().calculateDDay(to: deadline.toDate(with: "yyyy.MM.dd")),
+            deadline: deadline.toDate(with: "yyyy.MM.dd"),
+            startDate: startDate?.toDate(with: "yyyy.MM.dd"),
+            endDate: endDate?.toDate(with: "yyyy.MM.dd"),
+            memberRequirements: memberRequirements.map { $0.toEntity() },
+            applicantRestrictions: applicantRestrictions,
+            progressMethod: progressMethod,
+            progressStep: progressStep,
+            userName: userName,
+            isScrapped: isScrapped,
+            isMyProject: isMyProject
+        )
+    }
+}
+
+extension String {
+    func toDate(with format: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        
+        return dateFormatter.date(from: self) ?? Date()
+    }
 }
 
 extension ProjectDetailDTO {

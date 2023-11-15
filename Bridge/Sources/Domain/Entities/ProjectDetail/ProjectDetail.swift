@@ -9,7 +9,6 @@ import Foundation
 
 // TODO: - let, var 추후조정
 struct ProjectDetail {
-    let id: String
     let title: String
     let description: String
     let dDays: Int
@@ -28,7 +27,6 @@ struct ProjectDetail {
 extension ProjectDetail {
     static var onError: Self {
         ProjectDetail(
-            id: UUID().uuidString,
             title: "",
             description: "",
             dDays: 0,

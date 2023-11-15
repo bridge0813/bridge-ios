@@ -20,3 +20,14 @@ struct MemberRequirementDTO: Codable {
         case requirementText = "requirement"
     }
 }
+
+extension MemberRequirementDTO {
+    func toEntity() -> MemberRequirement {
+        MemberRequirement(
+            field: field,
+            recruitNumber: recruitNumber,
+            requiredSkills: requiredSkills,
+            requirementText: requirementText
+        )
+    }
+}
