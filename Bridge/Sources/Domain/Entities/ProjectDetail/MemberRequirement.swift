@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MemberRequirement: Codable {
+struct MemberRequirement {
     var field: String
     var recruitNumber: Int
     var requiredSkills: [String]

@@ -13,7 +13,7 @@ struct ProjectDetailDTO: Codable {
     let deadline: String
     let startDate: String?
     let endDate: String?
-    let memberRequirements: [MemberRequirement]
+    let memberRequirements: [MemberRequirementDTO]
     let applicantRestrictions: [String]
     let progressMethod: String
     let progressStep: String
