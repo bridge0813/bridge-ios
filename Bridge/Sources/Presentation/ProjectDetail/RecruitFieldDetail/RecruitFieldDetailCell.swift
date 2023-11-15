@@ -134,12 +134,12 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.pin.top().left(16).bottom(12).right(16)
+        contentView.pin.all()
         contentView.flex.layout()
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        contentView.pin.top().left(16).bottom(12).right(16)
+        contentView.pin.all()
         contentView.flex.layout(mode: .adjustHeight)
 
         return contentView.frame.size

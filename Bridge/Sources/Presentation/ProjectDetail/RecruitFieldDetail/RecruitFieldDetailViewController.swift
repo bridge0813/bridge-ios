@@ -144,7 +144,8 @@ extension RecruitFieldDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 24, leading: 0, bottom: bottomInset, trailing: 0)
+        section.interGroupSpacing = 12
+        section.contentInsets = NSDirectionalEdgeInsets(top: 24, leading: 16, bottom: bottomInset, trailing: 16)
         
         return UICollectionViewCompositionalLayout(section: section)
     }

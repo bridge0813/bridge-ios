@@ -26,7 +26,7 @@ final class TotalRecruitNumberHeaderView: BaseCollectionReusableView {
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.row).alignItems(.end).define { flex in
-            flex.addItem(recruitNumberLabel).marginLeft(16)
+            flex.addItem(recruitNumberLabel)
         }
     }
     
