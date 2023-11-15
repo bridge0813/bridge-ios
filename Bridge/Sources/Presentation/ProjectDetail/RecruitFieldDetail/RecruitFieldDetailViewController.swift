@@ -68,10 +68,6 @@ final class RecruitFieldDetailViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        configureNavigationUI()
-    }
-    
-    private func configureNavigationUI() {
         navigationItem.title = "모집중인 분야"
     }
     
