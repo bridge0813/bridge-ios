@@ -24,6 +24,7 @@ final class RecruitFieldDetailViewController: BaseViewController {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
         collectionView.backgroundColor = BridgeColor.gray09
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.register(RecruitFieldDetailCell.self)
         collectionView.register(
             TotalRecruitNumberHeaderView.self,

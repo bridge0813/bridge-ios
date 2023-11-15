@@ -95,8 +95,8 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
     // MARK: - Layout
     private func configureLayout() {
         contentView.flex.define { flex in
-            flex.addItem(blueContainer).height(95).define { flex in
-                flex.addItem(tagLabel).width(tagLabel.intrinsicContentSize.width).height(22).marginTop(24).marginLeft(16)
+            flex.addItem(blueContainer).height(95).paddingLeft(16).define { flex in
+                flex.addItem(tagLabel).width(tagLabel.intrinsicContentSize.width).height(22).marginTop(24)
                 
                 flex.addItem(flexContainer)
                     .direction(.row)
@@ -105,7 +105,7 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
                     .height(22)
                     .marginTop(15)
                     .define { flex in
-                        flex.addItem(fieldLabel).marginLeft(16)
+                        flex.addItem(fieldLabel)
                         flex.addItem(recruitNumberLabel).height(14).marginRight(18)
                     }
             }
@@ -148,6 +148,11 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
 
 // MARK: - Configuration
 extension RecruitFieldDetailCell {
+    struct FieldStyle {
+        let tag: String
+        let field: String
+    }
+    
     enum FieldType: String {
         case ios
         case android
@@ -157,45 +162,27 @@ extension RecruitFieldDetailCell {
         case bibx
         case videomotion
         case pm
+        
+        var style: FieldStyle {
+            switch self {
+            case .ios: return FieldStyle(tag: "개발", field: "iOS")
+            case .android: return FieldStyle(tag: "개발", field: "안드로이드")
+            case .frontend: return FieldStyle(tag: "개발", field: "프론트엔드")
+            case .backend: return FieldStyle(tag: "개발", field: "백엔드")
+            case .uiux: return FieldStyle(tag: "디자인", field: "UI/UX")
+            case .bibx: return FieldStyle(tag: "디자인", field: "BI/BX")
+            case .videomotion: return FieldStyle(tag: "디자인", field: "영상/모션")
+            case .pm: return FieldStyle(tag: "기획", field: "PM")
+            }
+        }
     }
     
     func configureCell(with data: MemberRequirement) {
-        guard let field = FieldType(rawValue: data.field) else { return }
+        guard let type = FieldType(rawValue: data.field) else { return }
         
-        // 분야에 맞는 text 및 이미지 설정
-        switch field {
-        case .ios:
-            tagLabel.text = "개발"
-            fieldLabel.text = "iOS"
-            
-        case .android:
-            tagLabel.text = "개발"
-            fieldLabel.text = "안드로이드"
-            
-        case .frontend:
-            tagLabel.text = "개발"
-            fieldLabel.text = "프론트엔드"
-            
-        case .backend:
-            tagLabel.text = "개발"
-            fieldLabel.text = "백엔드"
-            
-        case .uiux:
-            tagLabel.text = "디자인"
-            fieldLabel.text = "UI/UX"
-            
-        case .bibx:
-            tagLabel.text = "디자인"
-            fieldLabel.text = "BI/BX"
-            
-        case .videomotion:
-            tagLabel.text = "디자인"
-            fieldLabel.text = "영상/모션"
-            
-        case .pm:
-            tagLabel.text = "기획"
-            fieldLabel.text = "PM"
-        }
+        // 분야에 맞는 텍스트 설정.
+        tagLabel.text = type.style.tag
+        fieldLabel.text = type.style.field
         
         // 모집인원 수 텍스트 설정.
         recruitNumberLabel.text = "\(data.recruitNumber)명 모집중"
