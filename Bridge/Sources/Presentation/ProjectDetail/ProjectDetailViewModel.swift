@@ -13,6 +13,9 @@ final class ProjectDetailViewModel: ViewModelType {
     struct Input {
         let viewDidLoad: Observable<Void>
         let goToDetailButtonTapped: Observable<Void>
+        let editButtonTapped: Observable<Void>
+        let closeButtonTapped: Observable<Void>
+        let deleteButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -46,6 +49,27 @@ final class ProjectDetailViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, projectDetail in
                 owner.coordinator?.showRecruitFieldDetailViewController(with: projectDetail)
+            })
+            .disposed(by: disposeBag)
+        
+        input.editButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showAlert(configuration: .editProject)
+            })
+            .disposed(by: disposeBag)
+        
+        input.closeButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showAlert(configuration: .closeProject)
+            })
+            .disposed(by: disposeBag)
+        
+        input.deleteButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showAlert(configuration: .deleteProject)
             })
             .disposed(by: disposeBag)
         

@@ -107,7 +107,10 @@ final class ProjectDetailViewController: BaseViewController {
     override func bind() {
         let input = ProjectDetailViewModel.Input(
             viewDidLoad: .just(()),
-            goToDetailButtonTapped: goToDetailButtonTapped.asObservable()
+            goToDetailButtonTapped: goToDetailButtonTapped.asObservable(),
+            editButtonTapped: menuPopUpView.editButtonTapped,
+            closeButtonTapped: menuPopUpView.closeButtonTapped,
+            deleteButtonTapped: menuPopUpView.deleteButtonTapped
         )
         let output = viewModel.transform(input: input)
         
