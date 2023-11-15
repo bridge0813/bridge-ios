@@ -188,7 +188,7 @@ extension RecruitFieldDetailCell {
         recruitNumberLabel.text = "\(data.recruitNumber)명 모집중"
         
         // 바라는 점 텍스트 설정.
-        requirementLabel.text = data.expectation
+        requirementLabel.text = data.requirementText
         
         // 태그버튼 생성
         let buttons = data.requiredSkills.map { title in

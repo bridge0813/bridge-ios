@@ -143,9 +143,9 @@ extension ProjectDTO {
         startDate: Date(),
         endDate: Date(),
         recruit: [
-            MemberRequirement(field: "ios", recruitNumber: 2, requiredSkills: ["Swift", "UIKit", "SwiftUI", "RxSwift", "RxCocoa"], expectation: "스위프트 사용에 익숙하신 분이었으면 좋겠습니다."),
-            MemberRequirement(field: "uiux", recruitNumber: 2, requiredSkills: ["photoshop", "Figma", "illustrator"], expectation: "피그마 사용에 능숙했으면 좋겠습니다."),
-            MemberRequirement(field: "pm", recruitNumber: 2, requiredSkills: ["Notion", "Jira", "Slack"], expectation: "노션 사용에 능숙했으면 좋겠습니다.")
+            MemberRequirement(field: "ios", recruitNumber: 2, requiredSkills: ["Swift", "UIKit", "SwiftUI", "RxSwift", "RxCocoa"], requirementText: "스위프트 사용에 익숙하신 분이었으면 좋겠습니다."),
+            MemberRequirement(field: "uiux", recruitNumber: 2, requiredSkills: ["photoshop", "Figma", "illustrator"], requirementText: "피그마 사용에 능숙했으면 좋겠습니다."),
+            MemberRequirement(field: "pm", recruitNumber: 2, requiredSkills: ["Notion", "Jira", "Slack"], requirementText: "노션 사용에 능숙했으면 좋겠습니다.")
         ],
         tagLimit: ["학생", "취준생"],
         meetingWay: "온라인",
