@@ -26,6 +26,8 @@ final class ProjectDetailViewController: BaseViewController {
         action: nil
     )
     
+    private let menuPopUpView = ProjectManagementMenuPopUpView()
+    
     private let dividerView: UIView = {
         let divider = UIView()
         divider.backgroundColor = BridgeColor.gray06
@@ -132,6 +134,14 @@ final class ProjectDetailViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner, shouldHidden in
                 owner.dividerView.isHidden = !shouldHidden
+            })
+            .disposed(by: disposeBag)
+        
+        // 메뉴 팝업 뷰 보여주기
+        menuButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.menuPopUpView.show()
             })
             .disposed(by: disposeBag)
     }
