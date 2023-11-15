@@ -169,7 +169,6 @@
 		7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D082A9F7E160063D362 /* DefaultProjectRepository.swift */; };
 		7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */; };
 		7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */; };
-		7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D122AA1E7020063D362 /* ProjectSectionHeaderView.swift */; };
 		7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8639582AC28B4F00064588 /* BaseButton.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
@@ -183,9 +182,6 @@
 		7C8CC41C2AF522A10032F237 /* BridgeBasePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */; };
 		7CA04F0F2AF8F867007B9191 /* TechStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F0E2AF8F867007B9191 /* TechStack.swift */; };
 		7CA04F122AFDF694007B9191 /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */; };
-		7CA04F142AFDF71C007B9191 /* TitleDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F132AFDF71C007B9191 /* TitleDescriptionView.swift */; };
-		7CA04F162AFDF72A007B9191 /* BasicInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F152AFDF72A007B9191 /* BasicInfoView.swift */; };
-		7CA04F182AFDF749007B9191 /* RecruitmentFieldInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F172AFDF749007B9191 /* RecruitmentFieldInfoView.swift */; };
 		7CA04F1A2AFDFE4B007B9191 /* ProjectDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */; };
 		7CA04F1E2AFE4B0F007B9191 /* RecruitFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */; };
 		7CA04F212AFE772C007B9191 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F202AFE772C007B9191 /* BaseLabel.swift */; };
@@ -201,6 +197,7 @@
 		7CA04F3E2B022BAD007B9191 /* DefaultProjectDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F3D2B022BAD007B9191 /* DefaultProjectDetailRepository.swift */; };
 		7CA04F432B029B3A007B9191 /* FetchProjectDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F422B029B3A007B9191 /* FetchProjectDetailUseCase.swift */; };
 		7CA04F452B029B7C007B9191 /* RecruitFieldDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F442B029B7C007B9191 /* RecruitFieldDetailViewController.swift */; };
+		7CA04F4B2B03D5DE007B9191 /* ProjectDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F4A2B03D5DE007B9191 /* ProjectDetailHeaderView.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -374,7 +371,6 @@
 		7C569D082A9F7E160063D362 /* DefaultProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProjectRepository.swift; sourceTree = "<group>"; };
 		7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
-		7C569D122AA1E7020063D362 /* ProjectSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSectionHeaderView.swift; sourceTree = "<group>"; };
 		7C8639582AC28B4F00064588 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
@@ -388,9 +384,6 @@
 		7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBasePopUpView.swift; sourceTree = "<group>"; };
 		7CA04F0E2AF8F867007B9191 /* TechStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechStack.swift; sourceTree = "<group>"; };
 		7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
-		7CA04F132AFDF71C007B9191 /* TitleDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleDescriptionView.swift; sourceTree = "<group>"; };
-		7CA04F152AFDF72A007B9191 /* BasicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoView.swift; sourceTree = "<group>"; };
-		7CA04F172AFDF749007B9191 /* RecruitmentFieldInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentFieldInfoView.swift; sourceTree = "<group>"; };
 		7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewModel.swift; sourceTree = "<group>"; };
 		7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldCell.swift; sourceTree = "<group>"; };
 		7CA04F202AFE772C007B9191 /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
@@ -406,6 +399,7 @@
 		7CA04F3D2B022BAD007B9191 /* DefaultProjectDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProjectDetailRepository.swift; sourceTree = "<group>"; };
 		7CA04F422B029B3A007B9191 /* FetchProjectDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProjectDetailUseCase.swift; sourceTree = "<group>"; };
 		7CA04F442B029B7C007B9191 /* RecruitFieldDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldDetailViewController.swift; sourceTree = "<group>"; };
+		7CA04F4A2B03D5DE007B9191 /* ProjectDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailHeaderView.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -1031,7 +1025,6 @@
 			isa = PBXGroup;
 			children = (
 				7BA36CD42A9F7D38000DAB02 /* BridgeNavigationTitleView.swift */,
-				7C569D122AA1E7020063D362 /* ProjectSectionHeaderView.swift */,
 				7B14DB372AB3040F009A00EB /* BridgePlaceholderView.swift */,
 				7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */,
 			);
@@ -1336,11 +1329,9 @@
 				7CA04F342B0225FE007B9191 /* Coordinator */,
 				7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */,
 				7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */,
-				7CA04F2B2B01F822007B9191 /* ProjectDetailMenuBar.swift */,
-				7CA04F132AFDF71C007B9191 /* TitleDescriptionView.swift */,
-				7CA04F152AFDF72A007B9191 /* BasicInfoView.swift */,
-				7CA04F172AFDF749007B9191 /* RecruitmentFieldInfoView.swift */,
+				7CA04F4A2B03D5DE007B9191 /* ProjectDetailHeaderView.swift */,
 				7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */,
+				7CA04F2B2B01F822007B9191 /* ProjectDetailMenuBar.swift */,
 				7CA04F2A2AFFDF70007B9191 /* RecruitFieldDetail */,
 			);
 			path = ProjectDetail;
@@ -1636,7 +1627,6 @@
 			files = (
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
 				7CA04F212AFE772C007B9191 /* BaseLabel.swift in Sources */,
-				7CA04F142AFDF71C007B9191 /* TitleDescriptionView.swift in Sources */,
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
 				7B3289352ADE55DA009DF3C2 /* BridgeMessageInputBar.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */,
@@ -1748,6 +1738,7 @@
 				7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */,
 				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,
+				7CA04F4B2B03D5DE007B9191 /* ProjectDetailHeaderView.swift in Sources */,
 				7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */,
 				7B61238B2AC2D03E006E72C1 /* BridgeTipMessageBox.swift in Sources */,
 				7B1922D52AE287C900EBDD2E /* MessageCell.swift in Sources */,
@@ -1759,7 +1750,6 @@
 				7B1922D12AE166E600EBDD2E /* UIViewController+Keyboard.swift in Sources */,
 				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChatRoomRepository.swift in Sources */,
-				7CA04F162AFDF72A007B9191 /* BasicInfoView.swift in Sources */,
 				7C8CC4182AF4091D0032F237 /* BridgeProgressView.swift in Sources */,
 				7B14DB2E2AB1DA39009A00EB /* SignInResult.swift in Sources */,
 				7CA04F292AFFDF6A007B9191 /* RecruitFieldDetailCell.swift in Sources */,
@@ -1772,7 +1762,6 @@
 				7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */,
 				7C40CBC22AC5C2BF000F4C9F /* BridgeMediumButtonGroup.swift in Sources */,
 				7C55E65A2AE8DEC70018FA5D /* BridgeTextView.swift in Sources */,
-				7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
 				7BB8C51F2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift in Sources */,
 				7CA04F122AFDF694007B9191 /* ProjectDetailViewController.swift in Sources */,
@@ -1788,7 +1777,6 @@
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,
 				7C569CF32A9F67C60063D362 /* Project.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
-				7CA04F182AFDF749007B9191 /* RecruitmentFieldInfoView.swift in Sources */,
 				7B1E5ABC2ADCFD790053E9B3 /* MessageViewController.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,

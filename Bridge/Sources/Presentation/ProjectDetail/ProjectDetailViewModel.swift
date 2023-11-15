@@ -12,7 +12,7 @@ final class ProjectDetailViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewDidLoad: Observable<Void>
-        let goToDetailButtonTapped: ControlEvent<Void>?
+        let goToDetailButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -41,7 +41,7 @@ final class ProjectDetailViewModel: ViewModelType {
                 owner.projectDetailUseCase.fetchProject(with: 0)  // ID 받아서 처리
             }
         
-        input.goToDetailButtonTapped?
+        input.goToDetailButtonTapped
             .withLatestFrom(project)
             .withUnretained(self)
             .subscribe(onNext: { owner, project in
@@ -50,5 +50,12 @@ final class ProjectDetailViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(project: project.asDriver(onErrorJustReturn: Project.onError))
+    }
+}
+
+// MARK: - Data source
+extension ProjectDetailViewModel {
+    enum Section: CaseIterable {
+        case main
     }
 }

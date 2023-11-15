@@ -86,42 +86,42 @@ extension RecruitFieldCell {
         case .ios:
             tagLabel.text = "개발"
             fieldLabel.text = "iOS"
-            emojiImageView.image = UIImage(named: "icon_ios")
+            emojiImageView.image = UIImage(named: "field_ios")
             
         case .android:
             tagLabel.text = "개발"
             fieldLabel.text = "안드로이드"
-            emojiImageView.image = UIImage(named: "icon_android")
+            emojiImageView.image = UIImage(named: "field_android")
             
         case .frontend:
             tagLabel.text = "개발"
             fieldLabel.text = "프론트엔드"
-            emojiImageView.image = UIImage(named: "icon_frontend")
+            emojiImageView.image = UIImage(named: "field_frontend")
             
         case .backend:
             tagLabel.text = "개발"
             fieldLabel.text = "백엔드"
-            emojiImageView.image = UIImage(named: "icon_backend")
+            emojiImageView.image = UIImage(named: "field_backend")
             
         case .uiux:
             tagLabel.text = "디자인"
             fieldLabel.text = "UI/UX"
-            emojiImageView.image = UIImage(named: "icon_uiux")
+            emojiImageView.image = UIImage(named: "field_uiux")
             
         case .bibx:
             tagLabel.text = "디자인"
             fieldLabel.text = "BI/BX"
-            emojiImageView.image = UIImage(named: "icon_bibx")
+            emojiImageView.image = UIImage(named: "field_bibx")
             
         case .videomotion:
             tagLabel.text = "디자인"
             fieldLabel.text = "영상/모션"
-            emojiImageView.image = UIImage(named: "icon_videomotion")
+            emojiImageView.image = UIImage(named: "field_videomotion")
             
         case .pm:
             tagLabel.text = "기획"
             fieldLabel.text = "PM"
-            emojiImageView.image = UIImage(named: "icon_pm")
+            emojiImageView.image = UIImage(named: "field_pm")
         }
         
         // 모집인원 수 텍스트 설정.
