@@ -46,15 +46,20 @@ final class RecruitFieldCell: BaseCollectionViewCell {
     }()
     
     // MARK: - Layout
-    private func configureLayout() {
+    override func configureLayouts() {
         contentView.addSubview(rootFlexContainer)
-        rootFlexContainer.flex.define { flex in
-            flex.addItem(tagLabel).width(tagLabel.intrinsicContentSize.width).height(22).marginTop(14).marginLeft(14)
+        
+        rootFlexContainer.flex.paddingLeft(14).define { flex in
+            flex.addItem(tagLabel).marginTop(14)
             
-            flex.addItem(fieldLabel).height(24).marginTop(31).marginLeft(14)
-            flex.addItem(recruitNumberLabel).height(14).marginTop(4).marginLeft(14)
-            
-            flex.addItem(emojiImageView).position(.absolute).size(38).bottom(14).right(12)
+            flex.addItem().direction(.row).justifyContent(.spaceBetween).marginTop(31).define { flex in
+                flex.addItem().define { flex in
+                    flex.addItem(fieldLabel).height(24)
+                    flex.addItem(recruitNumberLabel).height(14).marginTop(4)
+                }
+                
+                flex.addItem(emojiImageView).size(38).marginTop(8).marginRight(12)
+            }
         }
     }
     
@@ -67,6 +72,12 @@ final class RecruitFieldCell: BaseCollectionViewCell {
 
 // MARK: - Configuration
 extension RecruitFieldCell {
+    struct FieldStyle {
+        let tag: String
+        let field: String
+        let imageName: String
+    }
+    
     enum FieldType: String {
         case ios
         case android
@@ -76,58 +87,32 @@ extension RecruitFieldCell {
         case bibx
         case videomotion
         case pm
+        
+        var style: FieldStyle {
+            switch self {
+            case .ios: return FieldStyle(tag: "개발", field: "iOS", imageName: "field_ios")
+            case .android: return FieldStyle(tag: "개발", field: "안드로이드", imageName: "field_android")
+            case .frontend: return FieldStyle(tag: "개발", field: "프론트엔드", imageName: "field_frontend")
+            case .backend: return FieldStyle(tag: "개발", field: "백엔드", imageName: "field_backend")
+            case .uiux: return FieldStyle(tag: "디자인", field: "UI/UX", imageName: "field_uiux")
+            case .bibx: return FieldStyle(tag: "디자인", field: "BI/BX", imageName: "field_bibx")
+            case .videomotion: return FieldStyle(tag: "디자인", field: "영상/모션", imageName: "field_videomotion")
+            case .pm: return FieldStyle(tag: "기획", field: "PM", imageName: "field_pm")
+            }
+        }
     }
     
     func configureCell(with data: MemberRequirement) {
-        guard let field = FieldType(rawValue: data.field) else { return }
+        guard let type = FieldType(rawValue: data.field) else { return }
         
         // 분야에 맞는 text 및 이미지 설정
-        switch field {
-        case .ios:
-            tagLabel.text = "개발"
-            fieldLabel.text = "iOS"
-            emojiImageView.image = UIImage(named: "field_ios")
-            
-        case .android:
-            tagLabel.text = "개발"
-            fieldLabel.text = "안드로이드"
-            emojiImageView.image = UIImage(named: "field_android")
-            
-        case .frontend:
-            tagLabel.text = "개발"
-            fieldLabel.text = "프론트엔드"
-            emojiImageView.image = UIImage(named: "field_frontend")
-            
-        case .backend:
-            tagLabel.text = "개발"
-            fieldLabel.text = "백엔드"
-            emojiImageView.image = UIImage(named: "field_backend")
-            
-        case .uiux:
-            tagLabel.text = "디자인"
-            fieldLabel.text = "UI/UX"
-            emojiImageView.image = UIImage(named: "field_uiux")
-            
-        case .bibx:
-            tagLabel.text = "디자인"
-            fieldLabel.text = "BI/BX"
-            emojiImageView.image = UIImage(named: "field_bibx")
-            
-        case .videomotion:
-            tagLabel.text = "디자인"
-            fieldLabel.text = "영상/모션"
-            emojiImageView.image = UIImage(named: "field_videomotion")
-            
-        case .pm:
-            tagLabel.text = "기획"
-            fieldLabel.text = "PM"
-            emojiImageView.image = UIImage(named: "field_pm")
-        }
+        tagLabel.text = type.style.tag
+        fieldLabel.text = type.style.field
+        emojiImageView.image = UIImage(named: type.style.imageName)
         
         // 모집인원 수 텍스트 설정.
         recruitNumberLabel.text = "\(data.recruitNumber)명 모집중"
         
-        // 라벨의 텍스트가 모두 결정되고 나서 레이아웃을 계산
-        configureLayout()
+        tagLabel.flex.width(tagLabel.intrinsicContentSize.width).height(22).markDirty()
     }
 }
