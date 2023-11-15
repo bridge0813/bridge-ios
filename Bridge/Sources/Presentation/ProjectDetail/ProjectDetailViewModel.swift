@@ -17,6 +17,7 @@ final class ProjectDetailViewModel: ViewModelType {
         let closeButtonTapped: Observable<Void>
         let deleteButtonTapped: Observable<Void>
         let applyButtonTapped: Observable<Void>
+        let bookmarkButtonTapped: Observable<Bool>
     }
     
     struct Output {
@@ -78,6 +79,17 @@ final class ProjectDetailViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.showAlert(configuration: .apply)
+            })
+            .disposed(by: disposeBag)
+        
+        input.bookmarkButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, isSelected in
+                if isSelected {
+                    // 스크랩
+                } else {
+                    // 스크랩 취소
+                }
             })
             .disposed(by: disposeBag)
         

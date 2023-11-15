@@ -40,8 +40,12 @@ final class ProjectDetailMenuBar: BaseView {
     }()
     
     // MARK: - Property
-    var bookmarkButtonTapped: Observable<Void> {
-        return bookmarkButton.rx.tap.asObservable()
+    var bookmarkButtonTapped: Observable<Bool> {
+        return bookmarkButton.rx.tap
+            .withUnretained(self)
+            .map { owner, _ in
+                return owner.bookmarkButton.isSelected
+            }
     }
     
     var applyButtonTapped: Observable<Void> {
