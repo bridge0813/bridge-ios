@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol FetchProjectDetailUseCase {
-    func fetchProject(with projectID: Int) -> Observable<Project>
+    func fetchProject(with projectID: Int) -> Observable<ProjectDetail>
 }
 
 final class DefaultFetchProjectDetailUseCase: FetchProjectDetailUseCase {
@@ -19,7 +19,7 @@ final class DefaultFetchProjectDetailUseCase: FetchProjectDetailUseCase {
         self.projectDetailRepository = projectDetailRepository
     }
     
-    func fetchProject(with projectID: Int) -> Observable<Project> {
+    func fetchProject(with projectID: Int) -> Observable<ProjectDetail> {
         projectDetailRepository.fetchProject(with: projectID)
     }
 }

@@ -16,7 +16,7 @@ final class ProjectDetailViewModel: ViewModelType {
     }
     
     struct Output {
-        let project: Driver<Project>
+        let projectDetail: Driver<ProjectDetail>
     }
     
     // MARK: - Property
@@ -35,21 +35,21 @@ final class ProjectDetailViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        let project = input.viewDidLoad
+        let projectDetail = input.viewDidLoad
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.projectDetailUseCase.fetchProject(with: 0)  // ID 받아서 처리
             }
         
         input.goToDetailButtonTapped
-            .withLatestFrom(project)
+            .withLatestFrom(projectDetail)
             .withUnretained(self)
-            .subscribe(onNext: { owner, project in
-                owner.coordinator?.showRecruitFieldDetailViewController(with: project.memberRequirements)
+            .subscribe(onNext: { owner, projectDetail in
+                owner.coordinator?.showRecruitFieldDetailViewController(with: projectDetail.memberRequirements)
             })
             .disposed(by: disposeBag)
         
-        return Output(project: project.asDriver(onErrorJustReturn: Project.onError))
+        return Output(projectDetail: projectDetail.asDriver(onErrorJustReturn: ProjectDetail.onError))
     }
 }
 

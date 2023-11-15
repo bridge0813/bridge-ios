@@ -237,7 +237,7 @@ final class ProjectDetailHeaderView: BaseCollectionReusableView {
 
 // MARK: - Configuration
 extension ProjectDetailHeaderView {
-    func configureContents(with data: Project) {
+    func configureContents(with data: ProjectDetail) {
         dDayLabel.text = "D-\(String(data.dDays))"
         titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 30)
         descriptionLabel.configureTextWithLineHeight(text: data.description, lineHeight: 20)
@@ -271,7 +271,7 @@ extension ProjectDetailHeaderView {
         setNeedsLayout()
     }
     
-    func configurePeriodLabel(with data: Project) {
+    func configurePeriodLabel(with data: ProjectDetail) {
         let startDateString = data.startDate?.toString(format: "yyyy.MM.dd") ?? "미정"
         let endDateString = data.endDate?.toString(format: "yyyy.MM.dd") ?? "미정"
         

@@ -99,13 +99,13 @@ final class ProjectDetailViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
-        output.project
-            .drive(onNext: { [weak self] project in
+        output.projectDetail
+            .drive(onNext: { [weak self] projectDetail in
                 guard let self else { return }
                 
                 self.configureDataSource()
-                self.configureSupplementaryView(with: project)
-                self.applySnapshot(with: project.memberRequirements)
+                self.configureSupplementaryView(with: projectDetail)
+                self.applySnapshot(with: projectDetail.memberRequirements)
             })
             .disposed(by: disposeBag)
         
@@ -174,7 +174,7 @@ extension ProjectDetailViewController {
         }
     }
     
-    private func configureSupplementaryView(with project: Project) {
+    private func configureSupplementaryView(with projectDetail: ProjectDetail) {
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             guard let headerView = collectionView.dequeueReusableSupplementaryView(
                 ProjectDetailHeaderView.self,
@@ -184,7 +184,7 @@ extension ProjectDetailViewController {
             
             guard let self else { return UICollectionReusableView() }
             
-            headerView.configureContents(with: project)
+            headerView.configureContents(with: projectDetail)
             headerView.goToDetailButtonTapped
                 .bind(to: self.goToDetailButtonTapped)
                 .disposed(by: headerView.disposeBag)

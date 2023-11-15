@@ -8,5 +8,5 @@
 import RxSwift
 
 protocol ProjectDetailRepository {
-    func fetchProject(with projectID: Int) -> Observable<Project>
+    func fetchProject(with projectID: Int) -> Observable<ProjectDetail>
 }
