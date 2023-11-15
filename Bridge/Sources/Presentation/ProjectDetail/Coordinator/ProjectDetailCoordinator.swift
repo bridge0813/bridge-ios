@@ -13,15 +13,15 @@ final class ProjectDetailCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     
-    private let projectDetailRepository: ProjectDetailRepository
+    private let projectRepository: ProjectRepository
     private let projectDetailUseCase: FetchProjectDetailUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         
-        projectDetailRepository = MockProjectDetailRepository()
-        projectDetailUseCase = DefaultFetchProjectDetailUseCase(projectDetailRepository: projectDetailRepository)
+        projectRepository = MockProjectRepository()
+        projectDetailUseCase = DefaultFetchProjectDetailUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Methods
