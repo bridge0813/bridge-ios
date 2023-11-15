@@ -16,6 +16,16 @@ final class ProjectDetailViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
+    private lazy var menuButton = UIBarButtonItem(
+        image: UIImage(named: "kebab")?
+            .resize(to: CGSize(width: 24, height: 24))
+            .withRenderingMode(.alwaysTemplate)
+            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -8)),
+        style: .plain,
+        target: self,
+        action: nil
+    )
+    
     private let dividerView: UIView = {
         let divider = UIView()
         divider.backgroundColor = BridgeColor.gray06
@@ -25,7 +35,7 @@ final class ProjectDetailViewController: BaseViewController {
     }()
     
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(RecruitFieldCell.self)
         collectionView.register(
@@ -103,6 +113,12 @@ final class ProjectDetailViewController: BaseViewController {
             .drive(onNext: { [weak self] projectDetail in
                 guard let self else { return }
                 
+                self.menuBar.configureContents(with: projectDetail)
+                self.menuBar.flex.isIncludedInLayout(!projectDetail.isMyProject).markDirty()
+                self.menuBar.isHidden = projectDetail.isMyProject
+                self.navigationItem.rightBarButtonItem = projectDetail.isMyProject ? menuButton : nil
+                
+                self.collectionView.collectionViewLayout = configureLayout(with: projectDetail.isMyProject)
                 self.configureDataSource()
                 self.configureSupplementaryView(with: projectDetail)
                 self.applySnapshot(with: projectDetail.memberRequirements)
@@ -123,7 +139,9 @@ final class ProjectDetailViewController: BaseViewController {
 
 // MARK: - CompositionalLayout
 extension ProjectDetailViewController {
-    private func configureLayout() -> UICollectionViewLayout {
+    private func configureLayout(with isMyProject: Bool) -> UICollectionViewLayout {
+        let bottomInset: CGFloat = isMyProject ? 59 : 20
+        
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(1.0)
@@ -152,7 +170,7 @@ extension ProjectDetailViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
         section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 16, bottom: 20, trailing: 16)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 16, bottom: bottomInset, trailing: 16)
         section.orthogonalScrollingBehavior = .continuous
         
         return UICollectionViewCompositionalLayout(section: section)

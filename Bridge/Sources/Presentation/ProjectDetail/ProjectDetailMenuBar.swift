@@ -55,3 +55,10 @@ final class ProjectDetailMenuBar: BaseView {
         rootFlexContainer.layer.shadowPath = shadowPath.cgPath
     }
 }
+
+// MARK: - Configuration
+extension ProjectDetailMenuBar {
+    func configureContents(with data: ProjectDetail) {
+        bookmarkButton.isSelected = data.isScrapped
+    }
+}

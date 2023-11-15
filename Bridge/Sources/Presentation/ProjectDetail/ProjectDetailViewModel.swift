@@ -45,7 +45,7 @@ final class ProjectDetailViewModel: ViewModelType {
             .withLatestFrom(projectDetail)
             .withUnretained(self)
             .subscribe(onNext: { owner, projectDetail in
-                owner.coordinator?.showRecruitFieldDetailViewController(with: projectDetail.memberRequirements)
+                owner.coordinator?.showRecruitFieldDetailViewController(with: projectDetail)
             })
             .disposed(by: disposeBag)
         

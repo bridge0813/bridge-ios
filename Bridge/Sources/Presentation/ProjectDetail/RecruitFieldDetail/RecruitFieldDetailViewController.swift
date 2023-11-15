@@ -22,7 +22,7 @@ final class RecruitFieldDetailViewController: BaseViewController {
     }()
     
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.backgroundColor = BridgeColor.gray09
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(RecruitFieldDetailCell.self)
@@ -96,13 +96,18 @@ final class RecruitFieldDetailViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
-        output.requirements
-            .drive(onNext: { [weak self] data in
+        output.projectDetail
+            .drive(onNext: { [weak self] projectDetail in
                 guard let self else { return }
                 
+                self.menuBar.configureContents(with: projectDetail)
+                self.menuBar.flex.isIncludedInLayout(!projectDetail.isMyProject).markDirty()
+                self.menuBar.isHidden = projectDetail.isMyProject
+                
+                self.collectionView.collectionViewLayout = configureLayout(with: projectDetail.isMyProject)
                 self.configureDataSource()
-                self.configureSupplementaryView(with: data)
-                self.applySnapshot(with: data)
+                self.configureSupplementaryView(with: projectDetail.memberRequirements)
+                self.applySnapshot(with: projectDetail.memberRequirements)
             })
             .disposed(by: disposeBag)
     }
@@ -110,7 +115,9 @@ final class RecruitFieldDetailViewController: BaseViewController {
 
 // MARK: - CompositionalLayout
 extension RecruitFieldDetailViewController {
-    private func configureLayout() -> UICollectionViewLayout {
+    private func configureLayout(with isMyProject: Bool) -> UICollectionViewLayout {
+        let bottomInset: CGFloat = isMyProject ? 54 : 0
+        
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .estimated(330)
@@ -137,7 +144,7 @@ extension RecruitFieldDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 24, leading: 0, bottom: bottomInset, trailing: 0)
         
         return UICollectionViewCompositionalLayout(section: section)
     }
