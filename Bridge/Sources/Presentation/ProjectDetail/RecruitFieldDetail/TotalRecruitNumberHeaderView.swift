@@ -43,14 +43,9 @@ extension TotalRecruitNumberHeaderView {
             return partialResult + requirement.recruitNumber
         }
         
-        let labelText = "\(totalNumber)명 모집중"
-        let attributedString = NSMutableAttributedString(string: labelText)
-
-        if let rangeOfNumber = labelText.range(of: "\(totalNumber)명") {
-            let nsRange = NSRange(rangeOfNumber, in: labelText)
-            attributedString.addAttribute(.foregroundColor, value: BridgeColor.primary1, range: nsRange)
-        }
-
-        recruitNumberLabel.attributedText = attributedString
+        recruitNumberLabel.highlightedTextColor(
+            text: "\(totalNumber)명 모집중",
+            highlightedText: "\(totalNumber)명"
+        )
     }
 }

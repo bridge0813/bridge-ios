@@ -261,7 +261,10 @@ extension ProjectDetailHeaderView {
         let totalNumber = data.memberRequirements.reduce(0) { partialResult, requirement in
             return partialResult + requirement.recruitNumber
         }
-        recruitNumberLabel.highlightTextColor(text: "\(totalNumber)명 모집중", highlightText: "\(totalNumber)명")
+        recruitNumberLabel.highlightedTextColor(
+            text: "\(totalNumber)명 모집중",
+            highlightedText: "\(totalNumber)명"
+        )
         
         dDayLabel.flex.width(dDayLabel.intrinsicContentSize.width).height(22)
         dDayLabel.flex.markDirty()
@@ -277,9 +280,9 @@ extension ProjectDetailHeaderView {
         case (let startDate?, let endDate?):  // 둘 다 Date일 경우
             let monthsBetweenDates = Calendar.current.dateComponents([.month], from: startDate, to: endDate).month ?? 0
             
-            periodLabel.highlightTextColor(
+            periodLabel.highlightedTextColor(
                 text: "\(startDateString)~\(endDateString) (\(monthsBetweenDates)개월)",
-                highlightText: "(\(monthsBetweenDates)개월)"
+                highlightedText: "(\(monthsBetweenDates)개월)"
             )
             
         case (nil, nil):  // 둘 다 nil 일 경우

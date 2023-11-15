@@ -39,14 +39,10 @@ final class ProjectCountHeaderView: BaseCollectionReusableView {
 // MARK: - Configuration
 extension ProjectCountHeaderView {
     func configureCountLabel(with count: String) {
-        let labelText = "\(count)개의 프로젝트"
-        let attributedString = NSMutableAttributedString(string: labelText)
-
-        if let rangeOfNumber = labelText.range(of: "\(count)") {
-            let nsRange = NSRange(rangeOfNumber, in: labelText)
-            attributedString.addAttribute(.foregroundColor, value: BridgeColor.primary1, range: nsRange)
-        }
-
-        projectCountLabel.attributedText = attributedString
+        projectCountLabel.highlightedTextColor(
+            text: "\(count)개의 프로젝트",
+            highlightedText: String(count),
+            hignlightedTextColor: BridgeColor.secondary1
+        )
     }
 }

@@ -18,16 +18,7 @@ final class PlaceholderView: BaseView {
         let label = UILabel()
         label.font = BridgeFont.body4.font
         label.textColor = BridgeColor.gray03
-        
-        let labelText = "0개의 프로젝트"
-        let attributedString = NSMutableAttributedString(string: labelText)
-
-        if let rangeOfNumber = labelText.range(of: "0") {
-            let nsRange = NSRange(rangeOfNumber, in: labelText)
-            attributedString.addAttribute(.foregroundColor, value: BridgeColor.primary1, range: nsRange)
-        }
-
-        label.attributedText = attributedString
+        label.highlightedTextColor(text: "0개의 프로젝트", highlightedText: "0")
         label.isHidden = true
         
         return label
