@@ -129,4 +129,11 @@ extension AlertConfiguration {
         description: nil,
         rightButtonTitle: "삭제하기"
     )
+    
+    static let apply = AlertConfiguration(
+        imageName: "graphic_support",
+        title: "프로젝트를 지원할까요?",
+        description: "프로젝트의 팀원이 되어 함께 해보세요.",
+        rightButtonTitle: "지원하기"
+    )
 }

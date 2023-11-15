@@ -110,7 +110,8 @@ final class ProjectDetailViewController: BaseViewController {
             goToDetailButtonTapped: goToDetailButtonTapped.asObservable(),
             editButtonTapped: menuPopUpView.editButtonTapped,
             closeButtonTapped: menuPopUpView.closeButtonTapped,
-            deleteButtonTapped: menuPopUpView.deleteButtonTapped
+            deleteButtonTapped: menuPopUpView.deleteButtonTapped,
+            applyButtonTapped: menuBar.applyButtonTapped
         )
         let output = viewModel.transform(input: input)
         

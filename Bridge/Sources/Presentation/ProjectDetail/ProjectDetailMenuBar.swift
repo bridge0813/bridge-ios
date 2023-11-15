@@ -8,6 +8,8 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
+import RxCocoa
 
 /// 프로젝트 상세의 하단 메뉴 바
 final class ProjectDetailMenuBar: BaseView {
@@ -36,6 +38,15 @@ final class ProjectDetailMenuBar: BaseView {
         
         return button
     }()
+    
+    // MARK: - Property
+    var bookmarkButtonTapped: Observable<Void> {
+        return bookmarkButton.rx.tap.asObservable()
+    }
+    
+    var applyButtonTapped: Observable<Void> {
+        return applyButton.rx.tap.asObservable()
+    }
     
     // MARK: - Layout
     override func configureLayouts() {
