@@ -220,7 +220,7 @@ extension ProjectDetailViewController {
             headerView.configureContents(with: projectDetail)
             headerView.goToDetailButtonTapped
                 .bind(to: self.goToDetailButtonTapped)
-                .disposed(by: headerView.disposeBag)
+                .disposed(by: self.disposeBag)
             
             return headerView
         }
