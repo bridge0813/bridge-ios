@@ -5,17 +5,14 @@
 //  Created by 정호윤 on 10/18/23.
 //
 
-import Foundation
 import Starscream
 
-// TODO: 방식 자체 고민해보기...
 final class DefaultWebSocketService: WebSocketService {
     
     private var socket: WebSocket?
     
-    func connect(_ endpoint: WebSocketEndpoint) {
+    func connect(_ endpoint: Endpoint) {
         guard let request = endpoint.toURLRequest() else { return }
-        
         socket = WebSocket(request: request)
         socket?.delegate = self
         socket?.connect()
@@ -37,7 +34,6 @@ extension DefaultWebSocketService: WebSocketDelegate {
             print("viabilityChanged")
             
         case .connected(let headers):
-            client.write(string: "정호윤")
             print("websocket connected: \(headers)")
             
         case .disconnected(let reason, let code):
@@ -62,7 +58,7 @@ extension DefaultWebSocketService: WebSocketDelegate {
             print("websocket canclled")
             
         case .error(let error):
-            print("websocket error: \(String(describing: error))")
+            print("websocket error: \(String(describing: error?.localizedDescription)))")
         }
     }
 }

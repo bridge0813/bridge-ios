@@ -8,6 +8,6 @@
 import Foundation
 
 protocol WebSocketService {
-    func connect(_ endpoint: WebSocketEndpoint)
+    func connect(_ endpoint: Endpoint)
     func disconnect()
 }

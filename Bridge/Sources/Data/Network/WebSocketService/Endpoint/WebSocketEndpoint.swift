@@ -7,35 +7,38 @@
 
 import Foundation
 
-protocol WebSocketEndpoint {
-    typealias Headers = [String: String]
-    
-    var baseURL: URL? { get }
-    var requestHeaders: Headers? { get }
-    var timeoutInterval: TimeInterval { get }
-    
-    func toURLRequest() -> URLRequest?
+enum WebSocketEndpoint {
+    case connect
 }
 
-extension WebSocketEndpoint {
+extension WebSocketEndpoint: Endpoint {
     var baseURL: URL? {
-        URL(string: "ws://169.254.210.65:1337/")
+        URL(string: "http://54.180.195.17:8080")
     }
     
-    var timeoutInterval: TimeInterval { 5 }
-    
-    func toURLRequest() -> URLRequest? {
-        guard let url = baseURL else { return nil }
-        
-        var request = URLRequest(url: url)
-        request.timeoutInterval = timeoutInterval
-        
-        if let requestHeaders {
-            for (header, value) in requestHeaders {
-                request.setValue(value, forHTTPHeaderField: header)
-            }
+    var path: String {
+        switch self {
+        case .connect:  
+            return "/ws"
         }
-        
-        return request
+    }
+    
+    var headers: HTTPHeaders {
+        [:]
+    }
+    
+    var queryParameters: QueryParameters? {
+        nil
+    }
+    
+    var method: HTTPMethod {
+        switch self {
+        case .connect:
+            return .get
+        }
+    }
+    
+    var body: Encodable? {
+        nil
     }
 }

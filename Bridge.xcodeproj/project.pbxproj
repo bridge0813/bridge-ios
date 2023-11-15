@@ -10,7 +10,6 @@
 		7B02A6652ADFFCCD00C8D4A1 /* WebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02A6642ADFFCCD00C8D4A1 /* WebSocketService.swift */; };
 		7B02A6672ADFFCD900C8D4A1 /* DefaultWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02A6662ADFFCD900C8D4A1 /* DefaultWebSocketService.swift */; };
 		7B02A66A2AE000DE00C8D4A1 /* WebSocketEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02A6692AE000DE00C8D4A1 /* WebSocketEndpoint.swift */; };
-		7B02A66C2AE0021A00C8D4A1 /* DefaultWebSocketEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02A66B2AE0021A00C8D4A1 /* DefaultWebSocketEndpoint.swift */; };
 		7B0FD3E92ADBC22700C91045 /* RxCocoaURLError+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */; };
 		7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */; };
 		7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */; };
@@ -43,6 +42,8 @@
 		7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D76F22AA9941C00E5907B /* SignInViewController.swift */; };
 		7B2D770A2AAB0FDF00E5907B /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */; };
 		7B3289352ADE55DA009DF3C2 /* BridgeMessageInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3289342ADE55DA009DF3C2 /* BridgeMessageInputBar.swift */; };
+		7B3B373C2B038FE400C2F8AD /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3B373B2B038FE400C2F8AD /* SendMessageUseCase.swift */; };
+		7B3B373E2B03931C00C2F8AD /* ObserveChannelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3B373D2B03931C00C2F8AD /* ObserveChannelUseCase.swift */; };
 		7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */; };
 		7B61236A2ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123692ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift */; };
 		7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61236E2AC15905006E72C1 /* BridgeFont.swift */; };
@@ -78,6 +79,8 @@
 		7B71E7612A933C18001B5D2C /* FlexLayoutYoga in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7602A933C18001B5D2C /* FlexLayoutYoga */; };
 		7B71E7632A933C18001B5D2C /* FlexLayoutYogaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7622A933C18001B5D2C /* FlexLayoutYogaKit */; };
 		7B71E7662A933C25001B5D2C /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71E7652A933C25001B5D2C /* PinLayout */; };
+		7B8DE8112B034E6B003EA34A /* StompType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8DE8102B034E6B003EA34A /* StompType.swift */; };
+		7B8DE8182B035BF6003EA34A /* StompFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8DE8172B035BF6003EA34A /* StompFrame.swift */; };
 		7B9142D62B01CE8B006EA52F /* MessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9142D52B01CE8B006EA52F /* MessageRepository.swift */; };
 		7B9142D82B01CF31006EA52F /* DefaultMessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9142D72B01CF31006EA52F /* DefaultMessageRepository.swift */; };
 		7B9142DA2B01CF61006EA52F /* MockMessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9142D92B01CF61006EA52F /* MockMessageRepository.swift */; };
@@ -204,7 +207,6 @@
 		7B02A6642ADFFCCD00C8D4A1 /* WebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketService.swift; sourceTree = "<group>"; };
 		7B02A6662ADFFCD900C8D4A1 /* DefaultWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWebSocketService.swift; sourceTree = "<group>"; };
 		7B02A6692AE000DE00C8D4A1 /* WebSocketEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketEndpoint.swift; sourceTree = "<group>"; };
-		7B02A66B2AE0021A00C8D4A1 /* DefaultWebSocketEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWebSocketEndpoint.swift; sourceTree = "<group>"; };
 		7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxCocoaURLError+.swift"; sourceTree = "<group>"; };
 		7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewModel.swift; sourceTree = "<group>"; };
 		7B14DB222AB04B40009A00EB /* SetFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +239,8 @@
 		7B2D76F52AA9A85700E5907B /* Bridge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bridge.entitlements; sourceTree = "<group>"; };
 		7B2D77092AAB0FDF00E5907B /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		7B3289342ADE55DA009DF3C2 /* BridgeMessageInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeMessageInputBar.swift; sourceTree = "<group>"; };
+		7B3B373B2B038FE400C2F8AD /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
+		7B3B373D2B03931C00C2F8AD /* ObserveChannelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserveChannelUseCase.swift; sourceTree = "<group>"; };
 		7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleRequestDTO.swift; sourceTree = "<group>"; };
 		7B6123692ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleResponseDTO.swift; sourceTree = "<group>"; };
 		7B61236E2AC15905006E72C1 /* BridgeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFont.swift; sourceTree = "<group>"; };
@@ -266,6 +270,8 @@
 		7B71E7492A9330C7001B5D2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B71E74C2A9330C7001B5D2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B71E74E2A9330C7001B5D2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B8DE8102B034E6B003EA34A /* StompType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompType.swift; sourceTree = "<group>"; };
+		7B8DE8172B035BF6003EA34A /* StompFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompFrame.swift; sourceTree = "<group>"; };
 		7B9142D52B01CE8B006EA52F /* MessageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRepository.swift; sourceTree = "<group>"; };
 		7B9142D72B01CF31006EA52F /* DefaultMessageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMessageRepository.swift; sourceTree = "<group>"; };
 		7B9142D92B01CF61006EA52F /* MockMessageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMessageRepository.swift; sourceTree = "<group>"; };
@@ -422,6 +428,7 @@
 		7B02A6632ADFFC9600C8D4A1 /* WebSocketService */ = {
 			isa = PBXGroup;
 			children = (
+				7B8DE80F2B034E5C003EA34A /* Stomp */,
 				7B02A6682AE000CB00C8D4A1 /* Endpoint */,
 				7B02A6642ADFFCCD00C8D4A1 /* WebSocketService.swift */,
 				7B02A6662ADFFCD900C8D4A1 /* DefaultWebSocketService.swift */,
@@ -433,7 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				7B02A6692AE000DE00C8D4A1 /* WebSocketEndpoint.swift */,
-				7B02A66B2AE0021A00C8D4A1 /* DefaultWebSocketEndpoint.swift */,
+				7B8DE8172B035BF6003EA34A /* StompFrame.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -619,6 +626,25 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7B3B37392B038FC800C2F8AD /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				7BA36C972A9C503C000DAB02 /* FetchChannelsUseCase.swift */,
+				7BA36C9E2A9C6229000DAB02 /* LeaveChannelUseCase.swift */,
+				7B3B373D2B03931C00C2F8AD /* ObserveChannelUseCase.swift */,
+			);
+			path = Channel;
+			sourceTree = "<group>";
+		};
+		7B3B373A2B038FD400C2F8AD /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				7B92B7E22AE501CD00B0E954 /* FetchMessagesUseCase.swift */,
+				7B3B373B2B038FE400C2F8AD /* SendMessageUseCase.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		7B61235C2ABD9C9E006E72C1 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -749,6 +775,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		7B8DE80F2B034E5C003EA34A /* Stomp */ = {
+			isa = PBXGroup;
+			children = (
+				7B8DE8102B034E6B003EA34A /* StompType.swift */,
+			);
+			path = Stomp;
+			sourceTree = "<group>";
+		};
 		7B9142DB2B01CF66006EA52F /* Channel */ = {
 			isa = PBXGroup;
 			children = (
@@ -841,9 +875,8 @@
 		7BA36C952A9C4D0F000DAB02 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				7BA36C972A9C503C000DAB02 /* FetchChannelsUseCase.swift */,
-				7BA36C9E2A9C6229000DAB02 /* LeaveChannelUseCase.swift */,
-				7B92B7E22AE501CD00B0E954 /* FetchMessagesUseCase.swift */,
+				7B3B37392B038FC800C2F8AD /* Channel */,
+				7B3B373A2B038FD400C2F8AD /* Message */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1538,6 +1571,7 @@
 				7BA36C902A9C4BB3000DAB02 /* ChannelListViewModel.swift in Sources */,
 				7BB8C5212AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift in Sources */,
 				7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */,
+				7B3B373C2B038FE400C2F8AD /* SendMessageUseCase.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
 				7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
@@ -1580,6 +1614,8 @@
 				7B9142DE2B01D080006EA52F /* MessageEndpoint.swift in Sources */,
 				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,
 				7BA36C9B2A9C5091000DAB02 /* Channel.swift in Sources */,
+				7B8DE8182B035BF6003EA34A /* StompFrame.swift in Sources */,
+				7B8DE8112B034E6B003EA34A /* StompType.swift in Sources */,
 				7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */,
 				7B92B7E32AE501CD00B0E954 /* FetchMessagesUseCase.swift in Sources */,
 				7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */,
@@ -1625,6 +1661,7 @@
 				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChannelRepository.swift in Sources */,
 				7C8CC4182AF4091D0032F237 /* BridgeProgressView.swift in Sources */,
+				7B3B373E2B03931C00C2F8AD /* ObserveChannelUseCase.swift in Sources */,
 				7B14DB2E2AB1DA39009A00EB /* SignInResult.swift in Sources */,
 				7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */,
 				7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */,
@@ -1641,7 +1678,6 @@
 				7B14DB382AB3040F009A00EB /* BridgePlaceholderView.swift in Sources */,
 				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
 				7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */,
-				7B02A66C2AE0021A00C8D4A1 /* DefaultWebSocketEndpoint.swift in Sources */,
 				7B9142E02B01D4EB006EA52F /* MessageDTO.swift in Sources */,
 				7B02A6672ADFFCD900C8D4A1 /* DefaultWebSocketService.swift in Sources */,
 				7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */,

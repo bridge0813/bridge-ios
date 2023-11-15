@@ -16,6 +16,6 @@ protocol Adapter {
 }
 
 protocol Retrier {
-    /// Response를 확인해 요청을 재시도할지 결정하는 함수
-    func shouldRetry(_ request: URLRequest, httpResponse: HTTPURLResponse, data: Data) -> Observable<Data>
+    /// 요청을 다시 시도하는 함수
+    func retry(_ request: URLRequest, data: Data) -> Observable<Data>
 }
