@@ -37,7 +37,7 @@ extension UILabel {
 
         if let rangeOfNumber = text.range(of: highlightedText) {
             let nsRange = NSRange(rangeOfNumber, in: text)
-            attributedString.addAttribute(.foregroundColor, value: BridgeColor.primary1, range: nsRange)
+            attributedString.addAttribute(.foregroundColor, value: hignlightedTextColor, range: nsRange)
         }
 
         attributedText = attributedString
