@@ -112,7 +112,7 @@ final class RecruitFieldDetailViewController: BaseViewController {
 // MARK: - CompositionalLayout
 extension RecruitFieldDetailViewController {
     private func configureLayout(with isMyProject: Bool) -> UICollectionViewLayout {
-        let bottomInset: CGFloat = isMyProject ? 54 : 0
+        let bottomInset: CGFloat = isMyProject ? 54 : 20
         
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
