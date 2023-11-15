@@ -192,9 +192,6 @@
 		7CA04F2E2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F2D2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift */; };
 		7CA04F302B0208FF007B9191 /* RecruitFieldDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F2F2B0208FF007B9191 /* RecruitFieldDetailViewModel.swift */; };
 		7CA04F322B020B94007B9191 /* ProjectDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F312B020B94007B9191 /* ProjectDetailCoordinator.swift */; };
-		7CA04F372B0229D0007B9191 /* ProjectDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F362B0229D0007B9191 /* ProjectDetailRepository.swift */; };
-		7CA04F3A2B022B49007B9191 /* MockProjectDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F392B022B49007B9191 /* MockProjectDetailRepository.swift */; };
-		7CA04F3E2B022BAD007B9191 /* DefaultProjectDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F3D2B022BAD007B9191 /* DefaultProjectDetailRepository.swift */; };
 		7CA04F432B029B3A007B9191 /* FetchProjectDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F422B029B3A007B9191 /* FetchProjectDetailUseCase.swift */; };
 		7CA04F452B029B7C007B9191 /* RecruitFieldDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F442B029B7C007B9191 /* RecruitFieldDetailViewController.swift */; };
 		7CA04F4B2B03D5DE007B9191 /* ProjectDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F4A2B03D5DE007B9191 /* ProjectDetailHeaderView.swift */; };
@@ -397,9 +394,6 @@
 		7CA04F2D2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRecruitNumberHeaderView.swift; sourceTree = "<group>"; };
 		7CA04F2F2B0208FF007B9191 /* RecruitFieldDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldDetailViewModel.swift; sourceTree = "<group>"; };
 		7CA04F312B020B94007B9191 /* ProjectDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailCoordinator.swift; sourceTree = "<group>"; };
-		7CA04F362B0229D0007B9191 /* ProjectDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailRepository.swift; sourceTree = "<group>"; };
-		7CA04F392B022B49007B9191 /* MockProjectDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProjectDetailRepository.swift; sourceTree = "<group>"; };
-		7CA04F3D2B022BAD007B9191 /* DefaultProjectDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProjectDetailRepository.swift; sourceTree = "<group>"; };
 		7CA04F422B029B3A007B9191 /* FetchProjectDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProjectDetailUseCase.swift; sourceTree = "<group>"; };
 		7CA04F442B029B7C007B9191 /* RecruitFieldDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldDetailViewController.swift; sourceTree = "<group>"; };
 		7CA04F4A2B03D5DE007B9191 /* ProjectDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailHeaderView.swift; sourceTree = "<group>"; };
@@ -864,7 +858,6 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB2F2AB1DAC3009A00EB /* Auth */,
-				7CA04F352B0229A3007B9191 /* ProjectDetail */,
 				7C569CFB2A9F6F8A0063D362 /* Main */,
 				7BA36CA52A9C6878000DAB02 /* Chat */,
 			);
@@ -923,7 +916,6 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB322AB1DBEC009A00EB /* Auth */,
-				7CA04F382B022B2B007B9191 /* ProjectDetail */,
 				7C569D072A9F7E060063D362 /* Main */,
 				7BA36CA22A9C681B000DAB02 /* Chat */,
 			);
@@ -1372,23 +1364,6 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		7CA04F352B0229A3007B9191 /* ProjectDetail */ = {
-			isa = PBXGroup;
-			children = (
-				7CA04F362B0229D0007B9191 /* ProjectDetailRepository.swift */,
-			);
-			path = ProjectDetail;
-			sourceTree = "<group>";
-		};
-		7CA04F382B022B2B007B9191 /* ProjectDetail */ = {
-			isa = PBXGroup;
-			children = (
-				7CA04F3D2B022BAD007B9191 /* DefaultProjectDetailRepository.swift */,
-				7CA04F392B022B49007B9191 /* MockProjectDetailRepository.swift */,
-			);
-			path = ProjectDetail;
-			sourceTree = "<group>";
-		};
 		7CA04F3F2B022D69007B9191 /* ProjectDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1683,7 +1658,6 @@
 				7BB8C5212AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift in Sources */,
 				7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
-				7CA04F3E2B022BAD007B9191 /* DefaultProjectDetailRepository.swift in Sources */,
 				7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
 				7CA04F322B020B94007B9191 /* ProjectDetailCoordinator.swift in Sources */,
@@ -1739,7 +1713,6 @@
 				7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */,
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B2D76EC2AA993C700E5907B /* AuthCoordinator.swift in Sources */,
-				7CA04F372B0229D0007B9191 /* ProjectDetailRepository.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
 				7CA04F1A2AFDFE4B007B9191 /* ProjectDetailViewModel.swift in Sources */,
 				7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */,
@@ -1761,7 +1734,6 @@
 				7C55E64A2AE44B5F0018FA5D /* HotProjectCell.swift in Sources */,
 				7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */,
 				7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */,
-				7CA04F3A2B022B49007B9191 /* MockProjectDetailRepository.swift in Sources */,
 				7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */,
 				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,

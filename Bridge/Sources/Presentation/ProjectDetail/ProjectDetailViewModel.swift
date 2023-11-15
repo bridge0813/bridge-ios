@@ -38,7 +38,7 @@ final class ProjectDetailViewModel: ViewModelType {
         let projectDetail = input.viewDidLoad
             .withUnretained(self)
             .flatMap { owner, _ in
-                owner.projectDetailUseCase.fetchProject(with: 0)  // ID 받아서 처리
+                owner.projectDetailUseCase.fetchProjectDetail(with: 0)  // ID 받아서 처리
             }
         
         input.goToDetailButtonTapped

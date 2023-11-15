@@ -8,18 +8,18 @@
 import RxSwift
 
 protocol FetchProjectDetailUseCase {
-    func fetchProject(with projectID: Int) -> Observable<ProjectDetail>
+    func fetchProjectDetail(with projectID: Int) -> Observable<ProjectDetail>
 }
 
 final class DefaultFetchProjectDetailUseCase: FetchProjectDetailUseCase {
     
-    private let projectDetailRepository: ProjectDetailRepository
+    private let projectRepository: ProjectRepository
     
-    init(projectDetailRepository: ProjectDetailRepository) {
-        self.projectDetailRepository = projectDetailRepository
+    init(projectRepository: ProjectRepository) {
+        self.projectRepository = projectRepository
     }
     
-    func fetchProject(with projectID: Int) -> Observable<ProjectDetail> {
-        projectDetailRepository.fetchProject(with: projectID)
+    func fetchProjectDetail(with projectID: Int) -> Observable<ProjectDetail> {
+        projectRepository.fetchProjectDetail(with: projectID)
     }
 }

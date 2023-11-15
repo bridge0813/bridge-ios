@@ -24,4 +24,8 @@ final class DefaultProjectRepository: ProjectRepository {
     func fetchHotProjects() -> Observable<[Project]> {
         .just(ProjectDTO.projectTestArray.compactMap { $0.toEntity() })
     }
+    
+    func fetchProjectDetail(with projectID: Int) -> Observable<ProjectDetail> {
+        .just(ProjectDetailDTO.projectDetailTest.toEntity())
+    }
 }
