@@ -11,10 +11,16 @@ import RxSwift
 final class DefaultMessageRepository: MessageRepository {
     
     private let networkService: NetworkService
+    private let webSocketService: WebSocketService
     private let tokenStorage: TokenStorage
     
-    init(networkService: NetworkService, tokenStorage: TokenStorage = KeychainTokenStorage()) {
+    init(
+        networkService: NetworkService,
+        webSocketService: WebSocketService,
+        tokenStorage: TokenStorage = KeychainTokenStorage()
+    ) {
         self.networkService = networkService
+        self.webSocketService = webSocketService
         self.tokenStorage = tokenStorage
     }
     
@@ -22,13 +28,22 @@ final class DefaultMessageRepository: MessageRepository {
         let messageEndpoint = MessageEndpoint.messages(channelID: channelID)
         
         return networkService.request(messageEndpoint, interceptor: nil)
-            .decode(type: [MessageDTO].self, decoder: JSONDecoder())
+            .decode(type: [MessageResponseDTO].self, decoder: JSONDecoder())
             .map { messageDTOs in
                 messageDTOs.map { $0.toEntity() }
             }
     }
     
-    func send(message: String) -> Observable<Void> {
+    func sendMessage(_ message: String, to channel: String) -> Observable<Void> {
+        let messageRequestDTO = MessageRequestDTO(
+            channelID: channel,
+            type: .talk,
+            sender: tokenStorage.get(.userName),
+            content: message
+        )
+        
+        let messageStompEndpoint = MessageStompEndpoint.sendMessage(requestDTO: messageRequestDTO)
+        webSocketService.send(messageStompEndpoint)
         return .just(())
     }
 }

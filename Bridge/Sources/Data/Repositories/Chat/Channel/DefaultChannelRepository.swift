@@ -11,15 +11,21 @@ import RxSwift
 final class DefaultChannelRepository: ChannelRepository {
     
     private let networkService: NetworkService
+    private let webSocketService: WebSocketService
     private let tokenStorage: TokenStorage
     
-    init(networkService: NetworkService, tokenStorage: TokenStorage = KeychainTokenStorage()) {
+    init(
+        networkService: NetworkService,
+        webSocketService: WebSocketService,
+        tokenStorage: TokenStorage = KeychainTokenStorage()
+    ) {
         self.networkService = networkService
+        self.webSocketService = webSocketService
         self.tokenStorage = tokenStorage
     }
     
     func fetchChannels() -> Observable<[Channel]> {
-        let userID = tokenStorage.get(.userID) ?? invalidToken
+        let userID = tokenStorage.get(.userID)
         let channelEndpoint = ChannelEndpoint.channels(userID: userID)
     
         return networkService.request(channelEndpoint, interceptor: AuthInterceptor())
@@ -36,7 +42,9 @@ final class DefaultChannelRepository: ChannelRepository {
             .map { _ in id }
     }
     
-    func observe(id: String) -> Observable<Message> {
-        .just(.onError)
+    func observeChannel(id: String) -> Observable<Message> {
+        let messageStompEndpoint = MessageStompEndpoint.subscribe(destination: id)
+        webSocketService.subscribe(messageStompEndpoint)
+        return .just(.onError)
     }
 }
