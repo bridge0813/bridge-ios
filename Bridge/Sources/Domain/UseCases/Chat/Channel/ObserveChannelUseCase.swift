@@ -19,6 +19,6 @@ final class DefaultObserveChannelUseCase: ObserveChannelUseCase {
     }
     
     func observe(id: String) -> Observable<Message> {
-        channelRepository.observe(id: id)
+        channelRepository.observeChannel(id: id)
     }
 }
