@@ -24,7 +24,7 @@ final class DefaultAuthRepository: AuthRepository {
         }
         
         let signInWithAppleRequestDTO = SignInWithAppleRequestDTO(
-            userName: tokenStorage.get(.userName) ?? invalidToken,
+            userName: tokenStorage.get(.userName),
             identityToken: credentials.identityToken ?? invalidToken
         )
         let authEndpoint = AuthEndpoint.signInWithApple(requestDTO: signInWithAppleRequestDTO)
@@ -41,7 +41,7 @@ final class DefaultAuthRepository: AuthRepository {
     }
     
     func signUp(selectedFields: [String]) -> Observable<Void> {
-        let userID = Int(tokenStorage.get(.userID) ?? invalidToken)
+        let userID = Int(tokenStorage.get(.userID))
         let signUpRequestDTO = SignUpRequestDTO(userID: userID, selectedFields: selectedFields)
         let authEndpoint = AuthEndpoint.signUp(requestDTO: signUpRequestDTO)
         
