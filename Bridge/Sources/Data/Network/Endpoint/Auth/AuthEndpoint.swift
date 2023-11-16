@@ -5,8 +5,6 @@
 //  Created by 정호윤 on 2023/09/19.
 //
 
-import Foundation
-
 enum AuthEndpoint {
     case signInWithApple(requestDTO: SignInWithAppleRequestDTO)
     case signUp(requestDTO: SignUpRequestDTO)

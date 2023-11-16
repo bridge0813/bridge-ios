@@ -5,8 +5,6 @@
 //  Created by 정호윤 on 11/13/23.
 //
 
-import Foundation
-
 enum MessageEndpoint: Endpoint {
     case messages(channelID: String)
 }
