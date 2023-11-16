@@ -50,7 +50,10 @@ extension ProjectDetailDTO {
             progressStep: progressStep,
             userName: userName,
             isScrapped: isScrapped,
-            isMyProject: isMyProject
+            isMyProject: isMyProject,
+            totalRecruitNumber: memberRequirements.reduce(0) { partialResult, requirement in
+                return partialResult + requirement.recruitNumber
+            }
         )
     }
 }
@@ -81,6 +84,6 @@ extension ProjectDetailDTO {
         progressStep: "기획 중이에요",
         userName: "",
         isScrapped: true,
-        isMyProject: false
+        isMyProject: true
     )
 }

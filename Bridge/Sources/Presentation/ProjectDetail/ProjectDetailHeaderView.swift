@@ -258,12 +258,10 @@ extension ProjectDetailHeaderView {
             warningMessageBox.updateTitle("이 프로젝트는 \(restrictionText)의 지원이 제한되어 있습니다.")
         }
         
-        let totalNumber = data.memberRequirements.reduce(0) { partialResult, requirement in
-            return partialResult + requirement.recruitNumber
-        }
+        
         recruitNumberLabel.highlightedTextColor(
-            text: "\(totalNumber)명 모집중",
-            highlightedText: "\(totalNumber)명"
+            text: "\(data.totalRecruitNumber)명 모집중",
+            highlightedText: "\(data.totalRecruitNumber)명"
         )
         
         dDayLabel.flex.width(dDayLabel.intrinsicContentSize.width).height(22)

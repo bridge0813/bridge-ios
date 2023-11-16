@@ -22,6 +22,7 @@ struct ProjectDetail {
     let userName: String
     let isScrapped: Bool
     let isMyProject: Bool
+    let totalRecruitNumber: Int
 }
 
 extension ProjectDetail {
@@ -39,7 +40,8 @@ extension ProjectDetail {
             progressStep: "",
             userName: "",
             isScrapped: false,
-            isMyProject: false
+            isMyProject: false,
+            totalRecruitNumber: 0
         )
     }
 }

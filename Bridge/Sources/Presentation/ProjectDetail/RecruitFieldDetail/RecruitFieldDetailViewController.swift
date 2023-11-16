@@ -102,7 +102,7 @@ final class RecruitFieldDetailViewController: BaseViewController {
                 
                 self.collectionView.collectionViewLayout = configureLayout(with: projectDetail.isMyProject)
                 self.configureDataSource()
-                self.configureSupplementaryView(with: projectDetail.memberRequirements)
+                self.configureSupplementaryView(with: projectDetail.totalRecruitNumber)
                 self.applySnapshot(with: projectDetail.memberRequirements)
             })
             .disposed(by: disposeBag)
@@ -162,7 +162,7 @@ extension RecruitFieldDetailViewController {
         }
     }
     
-    private func configureSupplementaryView(with requirements: [MemberRequirement]) {
+    private func configureSupplementaryView(with totalNumber: Int) {
         dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
             guard let headerView = collectionView.dequeueReusableSupplementaryView(
                 TotalRecruitNumberHeaderView.self,
@@ -170,7 +170,7 @@ extension RecruitFieldDetailViewController {
                 for: indexPath
             ) else { return UICollectionReusableView() }
             
-            headerView.configureLabel(with: requirements)
+            headerView.configureLabel(with: totalNumber)
             
             return headerView
         }
