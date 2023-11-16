@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Starscream
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -33,7 +32,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func sceneWillEnterForeground(_ scene: UIScene) {
         let webSocketEndpoint = WebSocketEndpoint.connect
-        socket.connect(webSocketEndpoint)
+        let stompEndpoint = MessageStompEndpoint.connect
+        socket.connect(endpoint: webSocketEndpoint, stompEndpoint: stompEndpoint)
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {

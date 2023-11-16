@@ -8,57 +8,75 @@
 import Starscream
 
 final class DefaultWebSocketService: WebSocketService {
-    
+
     private var socket: WebSocket?
+    private var stompConnectFrame: String?
     
-    func connect(_ endpoint: Endpoint) {
+    func connect(endpoint: Endpoint, stompEndpoint: StompEndpoint) {
         guard let request = endpoint.toURLRequest() else { return }
         socket = WebSocket(request: request)
         socket?.delegate = self
         socket?.connect()
+        
+        stompConnectFrame = stompEndpoint.toFrame()
     }
     
     func disconnect() {
         socket?.disconnect()
     }
     
-    func write() {
-        
+    func subscribe(_ endpoint: StompEndpoint) {
+        let frame = endpoint.toFrame()
+        socket?.write(string: frame)
+    }
+    
+    func send(_ endpoint: StompEndpoint) {
+        let frame = endpoint.toFrame()
+        socket?.write(string: frame)
     }
 }
 
+// 메시지 data로 오면 data를 리턴해주면 되고, string이면 data로 바꿔서 리턴??
 extension DefaultWebSocketService: WebSocketDelegate {
     func didReceive(event: WebSocketEvent, client: WebSocketClient) {
         switch event {
         case .viabilityChanged:
-            print("viabilityChanged")
+            print("[Viability Changed]\n")
             
-        case .connected(let headers):
-            print("websocket connected: \(headers)")
+        case .connected:
+            print("[WebSocket Connected]\n")
+            socket?.write(string: stompConnectFrame ?? "")
             
         case .disconnected(let reason, let code):
-            print("websocket disconnected: \(reason) with code: \(code)")
+            print("[Websocket Disconnected]")
+            print("\(reason) with code \(code)\n")
             
         case .text(let text):
-            print("Received string: \(text)")
+            print("[Received String]")
+            print(text + "\n")
             
         case .binary(let data):
-            print("Received binary data: \(data.count)")
+            print("[Received Binary Data]")
+            print("\(data)\n")
             
-        case .ping, .pong:
-            break
+        case .ping:
+            print("[Received Ping]")
+            
+        case .pong:
+            print("[Received Pong]")
             
         case .reconnectSuggested:
-            print("reconnectSuggested")
+            print("[Reconnect Suggested]")
             
         case .peerClosed:
-            print("peer closed")
+            print("[Peer Closed]")
             
         case .cancelled:
-            print("websocket canclled")
+            print("[WebSocket Canclled]")
             
         case .error(let error):
-            print("websocket error: \(String(describing: error?.localizedDescription)))")
+            print("[WebSocket Error]")
+            print(error ?? "unknown error")
         }
     }
 }
