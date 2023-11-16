@@ -22,7 +22,7 @@ final class RecruitFieldDetailViewController: BaseViewController {
     }()
     
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
         collectionView.backgroundColor = BridgeColor.gray09
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(RecruitFieldDetailCell.self)
@@ -33,8 +33,6 @@ final class RecruitFieldDetailViewController: BaseViewController {
         
         return collectionView
     }()
-    
-    private let menuBar = ProjectDetailMenuBar()
     
     // MARK: - Property
     private typealias DataSource = UICollectionViewDiffableDataSource<RecruitFieldDetailViewModel.Section, MemberRequirement>
@@ -77,7 +75,6 @@ final class RecruitFieldDetailViewController: BaseViewController {
         
         rootFlexContainer.flex.define { flex in
             flex.addItem(collectionView).grow(1)
-            flex.addItem(menuBar)
         }
     }
     
@@ -96,11 +93,6 @@ final class RecruitFieldDetailViewController: BaseViewController {
             .drive(onNext: { [weak self] projectDetail in
                 guard let self else { return }
                 
-                self.menuBar.configureContents(with: projectDetail)
-                self.menuBar.flex.isIncludedInLayout(!projectDetail.isMyProject).markDirty()
-                self.menuBar.isHidden = projectDetail.isMyProject
-                
-                self.collectionView.collectionViewLayout = configureLayout(with: projectDetail.isMyProject)
                 self.configureDataSource()
                 self.configureSupplementaryView(with: projectDetail.totalRecruitNumber)
                 self.applySnapshot(with: projectDetail.memberRequirements)
@@ -111,9 +103,7 @@ final class RecruitFieldDetailViewController: BaseViewController {
 
 // MARK: - CompositionalLayout
 extension RecruitFieldDetailViewController {
-    private func configureLayout(with isMyProject: Bool) -> UICollectionViewLayout {
-        let bottomInset: CGFloat = isMyProject ? 54 : 20
-        
+    private func configureLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .estimated(330)
@@ -141,7 +131,7 @@ extension RecruitFieldDetailViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
         section.interGroupSpacing = 12
-        section.contentInsets = NSDirectionalEdgeInsets(top: 24, leading: 16, bottom: bottomInset, trailing: 16)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 24, leading: 16, bottom: 54, trailing: 16)
         
         return UICollectionViewCompositionalLayout(section: section)
     }
