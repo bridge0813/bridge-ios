@@ -18,12 +18,12 @@ struct AuthInterceptor: Interceptor {
     }
     
     func adapt(_ request: inout URLRequest) {
-        let accessToken = tokenStorage.get(.accessToken) ?? invalidToken
+        let accessToken = tokenStorage.get(.accessToken)
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
     }
     
     func retry(_ request: URLRequest, data: Data) -> Observable<Data> {
-        let refreshToken = tokenStorage.get(.refreshToken) ?? invalidToken
+        let refreshToken = tokenStorage.get(.refreshToken)
         
         var request = request
         request.setValue("Bearer \(refreshToken)", forHTTPHeaderField: "Authorization-refresh")
