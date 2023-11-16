@@ -74,12 +74,12 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
     }()
     
     private let tagContainer = UIView()
-    private var tagButtons: [BridgeFieldTagButton] = []
+    private var tags: [ProjectDetailTechTag] = []
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        tagButtons.forEach { button in
-            button.removeFromSuperview()
+        tags.forEach { tag in
+            tag.removeFromSuperview()
         }
     }
 
@@ -125,8 +125,8 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
                 .marginHorizontal(16)
                 .marginBottom(20)
                 .define { flex in
-                    tagButtons.forEach { button in
-                        flex.addItem(button).height(38).marginRight(8).marginBottom(8)
+                    tags.forEach { tag in
+                        flex.addItem(tag).height(38).marginRight(8).marginBottom(8)
                     }
                 }
         }
@@ -191,13 +191,10 @@ extension RecruitFieldDetailCell {
         requirementLabel.text = data.requirementText
         
         // 태그버튼 생성
-        let buttons = data.requiredSkills.map { title in
-            let button = BridgeFieldTagButton(title)
-            button.changesSelectionAsPrimaryAction = false
-            
-            return button
+        let tags = data.requiredSkills.map { tagName in
+            return ProjectDetailTechTag(tagName)
         }
-        tagButtons = buttons
+        self.tags = tags
         
         configureLayout()
     }
