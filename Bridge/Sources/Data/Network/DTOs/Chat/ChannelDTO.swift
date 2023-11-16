@@ -29,7 +29,7 @@ struct ChannelDTO: Codable {
 
 // MARK: - For test
 extension ChannelDTO {
-    // TODO: 수정 필요 (id 충돌 주의)
+    // TODO: 수정 필요 (id 충돌 주의 -> hashable 직접 정의해야할수도 - 애니메이션 키고 확인해보기)
     func toEntity() -> Channel {
         Channel(
             id: id ?? "-1",  // 얘도 임시로 해논거라 옵셔널 제거해야함
@@ -38,33 +38,13 @@ extension ChannelDTO {
             image: nil,
             name: name,
             lastMessage: Channel.LastMessage(
-                receivedTime: lastMessageReceivedTime?.toTime() ?? "",
+                receivedTime: lastMessageReceivedTime?.toDetailedTime() ?? "",
                 content: lastMessageContent ?? "최신 메시지가 존재하지 않습니다."
             ),
             unreadMessageCount: "0"
         )
     }
 }
-
-extension String {
-    func toTime() -> String? {
-        var isoString = self
-        isoString += "+09:00"
-        
-        // ISO 8601 형식의 문자열을 Date 객체로 변환
-        let isoFormatter = ISO8601DateFormatter()
-//        isoFormatter.formatOptions = [.withFullDate, .withFullTime]
-        guard let date = isoFormatter.date(from: isoString) else { return nil }
-        
-        // Date 객체를 "오전/오후 x시 x분" 형태로 변환
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        dateFormatter.dateFormat = "a h시 mm분"
-        
-        return dateFormatter.string(from: date)
-    }
-}
-
 
 extension ChannelDTO {
     static var testArray: [ChannelDTO] = [

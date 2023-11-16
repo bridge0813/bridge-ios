@@ -27,18 +27,15 @@ final class MockChannelRepository: ChannelRepository {
         }
     }
     
-    // MARK: - DTO로 수정
-    func observe(id: String) -> Observable<Message> {
+    func observeChannel(id: String) -> Observable<Message> {
         Observable<Int>.interval(.seconds(2), scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
             .map { _ in
-                Message(
-                    id: UUID().uuidString,
+                MessageResponseDTO(
+                    content: "일정 간격으로 방출되는 메시지",
                     sender: .opponent,
-                    type: .text("ads"),
-                    sentDate: "2023-12-01",
-                    sentTime: "오전 12:00",
-                    state: .unread
+                    sentDateAndTime: "2023-11-16T11:30:00"
                 )
+                .toEntity()
             }
     }
 }
