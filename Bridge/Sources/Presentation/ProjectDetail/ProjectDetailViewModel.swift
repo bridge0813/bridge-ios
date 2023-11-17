@@ -11,7 +11,6 @@ import RxCocoa
 final class ProjectDetailViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        let viewDidLoad: Observable<Void>
         let goToDetailButtonTapped: Observable<Void>
         let editButtonTapped: Observable<Void>
         let closeButtonTapped: Observable<Void>
@@ -40,11 +39,7 @@ final class ProjectDetailViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        let projectDetail = input.viewDidLoad
-            .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.projectDetailUseCase.fetchProjectDetail(with: 0)  // ID 받아서 처리
-            }
+        let projectDetail = projectDetailUseCase.fetchProjectDetail(with: 0)  // ID 받아서 처리
         
         input.goToDetailButtonTapped
             .withLatestFrom(projectDetail)
