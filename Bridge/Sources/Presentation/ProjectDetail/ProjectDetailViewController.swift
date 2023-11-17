@@ -87,6 +87,21 @@ final class ProjectDetailViewController: BaseViewController {
         navigationItem.title = "프로젝트 상세"
     }
     
+    /// 컬렉션 뷰의 레이아웃 및 데이터소스를 설정
+    private func configureCollectionView(with data: ProjectDetail) {
+        collectionView.collectionViewLayout = configureLayout(with: data.isMyProject)
+        configureDataSource()
+        configureSupplementaryView(with: data)
+        applySnapshot(with: data.memberRequirements)
+    }
+    
+    /// MenuBar의 컨텐츠 설정 및 해당 모집글이 자신의 글인지 여부에 따라 MenuBar의 유무를 결정
+    private func configureMenuBar(with data: ProjectDetail) {
+        menuBar.configureContents(with: data)
+        menuBar.flex.isIncludedInLayout(!data.isMyProject).markDirty()
+        menuBar.isHidden = data.isMyProject
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
@@ -120,15 +135,9 @@ final class ProjectDetailViewController: BaseViewController {
             .drive(onNext: { [weak self] projectDetail in
                 guard let self else { return }
                 
-                self.menuBar.configureContents(with: projectDetail)
-                self.menuBar.flex.isIncludedInLayout(!projectDetail.isMyProject).markDirty()
-                self.menuBar.isHidden = projectDetail.isMyProject
                 self.navigationItem.rightBarButtonItem = projectDetail.isMyProject ? menuButton : nil
-                
-                self.collectionView.collectionViewLayout = configureLayout(with: projectDetail.isMyProject)
-                self.configureDataSource()
-                self.configureSupplementaryView(with: projectDetail)
-                self.applySnapshot(with: projectDetail.memberRequirements)
+                self.configureMenuBar(with: projectDetail)
+                self.configureCollectionView(with: projectDetail)
             })
             .disposed(by: disposeBag)
         
@@ -155,7 +164,7 @@ final class ProjectDetailViewController: BaseViewController {
 // MARK: - CompositionalLayout
 extension ProjectDetailViewController {
     private func configureLayout(with isMyProject: Bool) -> UICollectionViewLayout {
-        let bottomInset: CGFloat = isMyProject ? 59 : 20
+        let bottomInset: CGFloat = isMyProject ? 59 : 20  // 현재 모집글이 내 글인지 여부에 따라 bottomInset을 조절해줌.
         
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
