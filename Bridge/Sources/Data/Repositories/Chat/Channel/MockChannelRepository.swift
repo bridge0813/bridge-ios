@@ -27,7 +27,7 @@ final class MockChannelRepository: ChannelRepository {
         }
     }
     
-    func observeChannel(id: String) -> Observable<Message> {
+    func subscribeChannel(id: String) -> Observable<Message> {
         Observable<Int>.interval(.seconds(2), scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
             .map { _ in
                 MessageResponseDTO(

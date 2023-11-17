@@ -5,7 +5,9 @@
 //  Created by 정호윤 on 11/15/23.
 //
 
-struct MessageRequestDTO: Encodable {
+import Foundation
+
+struct MessageRequestDTO: Codable {
     let channelID: String
     let type: String
     let sender: String
@@ -31,5 +33,19 @@ extension MessageRequestDTO {
         case talk = "TALK"
         case accept
         case refuse
+    }
+}
+
+// TODO: 수정필요!
+extension MessageRequestDTO {
+    func toEntity() -> Message {
+        Message(
+            id: UUID().uuidString,
+            sender: .me,
+            type: .text(content),
+            sentDate: "",
+            sentTime: "",
+            state: .read
+        )
     }
 }

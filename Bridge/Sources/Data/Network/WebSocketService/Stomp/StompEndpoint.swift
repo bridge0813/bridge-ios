@@ -47,6 +47,7 @@ extension StompEndpoint {
         
         // NULL character
         frame.append("\0")
+        
         return frame
     }
 }

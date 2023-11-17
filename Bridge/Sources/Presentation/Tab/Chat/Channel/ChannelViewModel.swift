@@ -28,7 +28,7 @@ final class ChannelViewModel: ViewModelType {
     
     private let channel: Channel
     private let leaveChannelUseCase: LeaveChannelUseCase
-    private let observeChannelUseCase: ObserveChannelUseCase
+    private let channelSubscriptionUseCase: ChannelSubscriptionUseCase
     private let fetchMessagesUseCase: FetchMessagesUseCase
     private let sendMessageUseCase: SendMessageUseCase
     
@@ -37,14 +37,14 @@ final class ChannelViewModel: ViewModelType {
         coordinator: ChatCoordinator?,
         channel: Channel,
         leaveChannelUseCase: LeaveChannelUseCase,
-        observeChannelUseCase: ObserveChannelUseCase,
+        channelSubscriptionUseCase: ChannelSubscriptionUseCase,
         fetchMessagesUseCase: FetchMessagesUseCase,
         sendMessageUseCase: SendMessageUseCase
     ) {
         self.coordinator = coordinator
         self.channel = channel
         self.leaveChannelUseCase = leaveChannelUseCase
-        self.observeChannelUseCase = observeChannelUseCase
+        self.channelSubscriptionUseCase = channelSubscriptionUseCase
         self.fetchMessagesUseCase = fetchMessagesUseCase
         self.sendMessageUseCase = sendMessageUseCase
     }
@@ -53,7 +53,7 @@ final class ChannelViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let messages = BehaviorRelay<[Message]>(value: [])
         
-        observeChannelUseCase.observe(id: channel.id)
+        channelSubscriptionUseCase.subscribe(id: channel.id)
             .map { incomingMessage in
                 var currentMessages = messages.value
                 currentMessages.append(incomingMessage)

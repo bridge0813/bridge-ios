@@ -20,7 +20,7 @@ final class ChatCoordinator: Coordinator {
     private let fetchChannelsUseCase: FetchChannelsUseCase
     private let leaveChannelUseCase: LeaveChannelUseCase
     private let fetchMessagesUseCase: FetchMessagesUseCase
-    private let observeChannelUseCase: ObserveChannelUseCase
+    private let channelSubscriptionUseCase: ChannelSubscriptionUseCase
     private let sendMessageUseCase: SendMessageUseCase
     
     init(navigationController: UINavigationController) {
@@ -28,14 +28,13 @@ final class ChatCoordinator: Coordinator {
         self.childCoordinators = []
         
         let networkService = DefaultNetworkService()
-        let webSocketService = DefaultWebSocketService()
         authRepository = DefaultAuthRepository(networkService: networkService)
-        channelRepository = DefaultChannelRepository(networkService: networkService, webSocketService: webSocketService)
-        messageRepository = DefaultMessageRepository(networkService: networkService, webSocketService: webSocketService)
+        channelRepository = DefaultChannelRepository(networkService: networkService)
+        messageRepository = DefaultMessageRepository(networkService: networkService)
         
         fetchChannelsUseCase = DefaultFetchChannelsUseCase(channelRepository: channelRepository)
         leaveChannelUseCase = DefaultLeaveChannelUseCase(channelRepository: channelRepository)
-        observeChannelUseCase = DefaultObserveChannelUseCase(channelRepository: channelRepository)
+        channelSubscriptionUseCase = DefaultChannelSubscriptionUseCase(channelRepository: channelRepository)
         fetchMessagesUseCase = DefaultFetchMessagesUseCase(messageRepository: messageRepository)
         sendMessageUseCase = DefaultSendMessageUseCase(messageRepository: messageRepository)
     }
@@ -61,7 +60,7 @@ extension ChatCoordinator {
             coordinator: self,
             channel: channel,
             leaveChannelUseCase: leaveChannelUseCase,
-            observeChannelUseCase: observeChannelUseCase,
+            channelSubscriptionUseCase: channelSubscriptionUseCase,
             fetchMessagesUseCase: fetchMessagesUseCase,
             sendMessageUseCase: sendMessageUseCase
         )

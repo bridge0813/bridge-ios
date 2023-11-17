@@ -9,22 +9,31 @@ import Foundation
 
 enum MessageStompEndpoint {
     case connect
+    case disconnect
     case subscribe(destination: String)
+    case unsubscribe(destination: String)
     case sendMessage(requestDTO: MessageRequestDTO)
 }
 
 extension MessageStompEndpoint: StompEndpoint {
     var command: StompRequestCommand {
         switch self {
-        case .connect:      
+        case .connect:
             return .connect
             
-        case .subscribe:    
+        case .disconnect:
+            return .disconnect
+            
+        case .subscribe:
             return .subscribe
             
-        case .sendMessage:         
+        case .unsubscribe:
+            return .unsubscribe
+            
+        case .sendMessage:
             return .send
         }
+        
     }
     
     var headers: StompHeaders? {
@@ -32,26 +41,26 @@ extension MessageStompEndpoint: StompEndpoint {
         case .connect:
             return [StompHeaderKey.acceptVersion.rawValue: "1.1,1.2"]
             
+        case .disconnect:
+            return nil
+            
         case .subscribe(let destination):
             return [
-                StompHeaderKey.id.rawValue: destination,
+                StompHeaderKey.id.rawValue: UUID().uuidString,
                 StompHeaderKey.destination.rawValue: "/sub/chat/room/\(destination)"
             ]
             
+        case .unsubscribe(let destination):
+            return [StompHeaderKey.id.rawValue: destination]
+            
         case .sendMessage:
-            return [
-                StompHeaderKey.destination.rawValue: "/pub/chat/message",
-                StompHeaderKey.contentType.rawValue: "application/json"
-            ]
+            return [StompHeaderKey.destination.rawValue: "/pub/chat/message"]
         }
     }
     
     var body: Encodable? {
         switch self {
-        case .connect:
-            return nil
-            
-        case .subscribe:
+        case .connect, .disconnect, .subscribe, .unsubscribe:
             return nil
             
         case .sendMessage(let messageRequestDTO):

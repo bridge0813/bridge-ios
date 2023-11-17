@@ -11,7 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     private var appCoordinator: AppCoordinator?
-    private let socket: WebSocketService = DefaultWebSocketService()
 
     func scene(
         _ scene: UIScene,
@@ -30,14 +29,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appCoordinator?.start()
     }
     
+    // 웹 소켓 연결
     func sceneWillEnterForeground(_ scene: UIScene) {
         let webSocketEndpoint = WebSocketEndpoint.connect
-        let stompEndpoint = MessageStompEndpoint.connect
-        socket.connect(endpoint: webSocketEndpoint, stompEndpoint: stompEndpoint)
+        WebSocketService.shared.connect(endpoint: webSocketEndpoint)
     }
     
+    // 웹 소켓 연결 해제
     func sceneDidEnterBackground(_ scene: UIScene) {
-        socket.disconnect()
+        WebSocketService.shared.disconnect()
     }
 }
 
