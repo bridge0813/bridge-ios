@@ -122,9 +122,7 @@ final class ProjectDetailViewController: BaseViewController {
     override func bind() {
         let input = ProjectDetailViewModel.Input(
             goToDetailButtonTapped: goToDetailButtonTapped.asObservable(),
-            editButtonTapped: menuPopUpView.editButtonTapped,
-            closeButtonTapped: menuPopUpView.closeButtonTapped,
-            deleteButtonTapped: menuPopUpView.deleteButtonTapped,
+            menuTapped: menuPopUpView.menuTapped,
             applyButtonTapped: menuBar.applyButtonTapped,
             bookmarkButtonTapped: menuBar.bookmarkButtonTapped
         )

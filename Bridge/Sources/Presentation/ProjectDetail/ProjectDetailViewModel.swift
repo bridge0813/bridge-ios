@@ -12,9 +12,7 @@ final class ProjectDetailViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let goToDetailButtonTapped: Observable<Void>
-        let editButtonTapped: Observable<Void>
-        let closeButtonTapped: Observable<Void>
-        let deleteButtonTapped: Observable<Void>
+        let menuTapped: Observable<String>
         let applyButtonTapped: Observable<Void>
         let bookmarkButtonTapped: Observable<Bool>
     }
@@ -49,24 +47,15 @@ final class ProjectDetailViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        input.editButtonTapped
+        input.menuTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showAlert(configuration: .editProject)
-            })
-            .disposed(by: disposeBag)
-        
-        input.closeButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showAlert(configuration: .closeProject)
-            })
-            .disposed(by: disposeBag)
-        
-        input.deleteButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showAlert(configuration: .deleteProject)
+            .subscribe(onNext: { owner, menu in
+                switch menu {
+                case "수정": owner.coordinator?.showAlert(configuration: .editProject)
+                case "마감": owner.coordinator?.showAlert(configuration: .closeProject)
+                case "삭제": owner.coordinator?.showAlert(configuration: .deleteProject)
+                default: print("Error")
+                }
             })
             .disposed(by: disposeBag)
         

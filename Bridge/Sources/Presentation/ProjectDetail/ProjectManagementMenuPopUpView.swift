@@ -45,25 +45,27 @@ final class ProjectManagementMenuPopUpView: BridgeBasePopUpView {
     override var containerHeight: CGFloat { 206 }
     override var dismissYPosition: CGFloat { 130 }
     
-    var editButtonTapped: Observable<Void> {
-        return editButton.rx.tap
-            .do(onNext: { [weak self] in
-                self?.hide()
-            })
-    }
-    
-    var closeButtonTapped: Observable<Void> {
-        return closeButton.rx.tap
-            .do(onNext: { [weak self] in
-                self?.hide()
-            })
-    }
-    
-    var deleteButtonTapped: Observable<Void> {
-        return deleteButton.rx.tap
-            .do(onNext: { [weak self] in
-                self?.hide()
-            })
+    var menuTapped: Observable<String> {
+        return Observable.merge(
+            editButton.rx.tap
+                .withUnretained(self)
+                .map { owner, _ in
+                    owner.hide()
+                    return "수정"
+                },
+            closeButton.rx.tap
+                .withUnretained(self)
+                .map { owner, _ in
+                    owner.hide()
+                    return "마감"
+                },
+            deleteButton.rx.tap
+                .withUnretained(self)
+                .map { owner, _ in
+                    owner.hide()
+                    return "삭제"
+                }
+        )
     }
     
     // MARK: - Configuration
