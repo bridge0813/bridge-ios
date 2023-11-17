@@ -109,3 +109,31 @@ extension AlertConfiguration {
         rightButtonTitle: "신고하기"
     )
 }
+
+// MARK: - ProjectDetail
+extension AlertConfiguration {
+    static let editProject = AlertConfiguration(
+        title: "프로젝트를 수정할까요?",
+        description: nil,
+        rightButtonTitle: "수정하기"
+    )
+    
+    static let closeProject = AlertConfiguration(
+        title: "프로젝트를 마감할까요?",
+        description: nil,
+        rightButtonTitle: "마감하기"
+    )
+    
+    static let deleteProject = AlertConfiguration(
+        title: "프로젝트를 삭제할까요?",
+        description: nil,
+        rightButtonTitle: "삭제하기"
+    )
+    
+    static let apply = AlertConfiguration(
+        imageName: "graphic_support",
+        title: "프로젝트를 지원할까요?",
+        description: "프로젝트의 팀원이 되어 함께 해보세요.",
+        rightButtonTitle: "지원하기"
+    )
+}

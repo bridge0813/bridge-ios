@@ -10,4 +10,5 @@ import RxSwift
 protocol ProjectRepository {
     func fetchAllProjects() -> Observable<[Project]>
     func fetchHotProjects() -> Observable<[Project]>
+    func fetchProjectDetail(with projectID: Int) -> Observable<ProjectDetail>
 }
