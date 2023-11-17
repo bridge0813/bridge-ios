@@ -11,13 +11,16 @@ import RxSwift
 final class DefaultMessageRepository: MessageRepository {
     
     private let networkService: NetworkService
+    private let stompService: StompService
     private let tokenStorage: TokenStorage
     
     init(
         networkService: NetworkService,
+        stompService: StompService,
         tokenStorage: TokenStorage = KeychainTokenStorage()
     ) {
         self.networkService = networkService
+        self.stompService = stompService
         self.tokenStorage = tokenStorage
     }
     
@@ -40,7 +43,7 @@ final class DefaultMessageRepository: MessageRepository {
         )
         
         let messageStompEndpoint = MessageStompEndpoint.sendMessage(requestDTO: messageRequestDTO)
-        WebSocketService.shared.send(messageStompEndpoint)
+        stompService.send(messageStompEndpoint)
         return .just(())
     }
 }

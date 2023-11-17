@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B02A6652ADFFCCD00C8D4A1 /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02A6642ADFFCCD00C8D4A1 /* temp.swift */; };
-		7B02A6672ADFFCD900C8D4A1 /* WebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02A6662ADFFCD900C8D4A1 /* WebSocketService.swift */; };
+		7B02A6672ADFFCD900C8D4A1 /* DefaultWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02A6662ADFFCD900C8D4A1 /* DefaultWebSocketService.swift */; };
 		7B02A66A2AE000DE00C8D4A1 /* WebSocketEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02A6692AE000DE00C8D4A1 /* WebSocketEndpoint.swift */; };
 		7B0FD3E92ADBC22700C91045 /* RxCocoaURLError+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */; };
 		7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */; };
@@ -93,6 +92,9 @@
 		7B9420542B04F46F00FEE058 /* MessageRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420532B04F46F00FEE058 /* MessageRequestDTO.swift */; };
 		7B9420582B05AC8900FEE058 /* String+DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420572B05AC8900FEE058 /* String+DateFormat.swift */; };
 		7B9C31A72B0753EF007E36B2 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C31A62B0753EF007E36B2 /* String+Regex.swift */; };
+		7B9C31A92B0772B8007E36B2 /* WebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C31A82B0772B8007E36B2 /* WebSocketService.swift */; };
+		7B9C31AB2B07752C007E36B2 /* StompService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C31AA2B07752C007E36B2 /* StompService.swift */; };
+		7B9C31AF2B07761C007E36B2 /* DefaultStompService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C31AE2B07761C007E36B2 /* DefaultStompService.swift */; };
 		7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */; };
 		7BA36C902A9C4BB3000DAB02 /* ChannelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C8F2A9C4BB3000DAB02 /* ChannelListViewModel.swift */; };
 		7BA36C982A9C503C000DAB02 /* FetchChannelsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36C972A9C503C000DAB02 /* FetchChannelsUseCase.swift */; };
@@ -208,8 +210,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7B02A6642ADFFCCD00C8D4A1 /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
-		7B02A6662ADFFCD900C8D4A1 /* WebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketService.swift; sourceTree = "<group>"; };
+		7B02A6662ADFFCD900C8D4A1 /* DefaultWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWebSocketService.swift; sourceTree = "<group>"; };
 		7B02A6692AE000DE00C8D4A1 /* WebSocketEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketEndpoint.swift; sourceTree = "<group>"; };
 		7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxCocoaURLError+.swift"; sourceTree = "<group>"; };
 		7B14DB202AB04AE9009A00EB /* SetFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFieldViewModel.swift; sourceTree = "<group>"; };
@@ -288,6 +289,9 @@
 		7B9420532B04F46F00FEE058 /* MessageRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRequestDTO.swift; sourceTree = "<group>"; };
 		7B9420572B05AC8900FEE058 /* String+DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateFormat.swift"; sourceTree = "<group>"; };
 		7B9C31A62B0753EF007E36B2 /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
+		7B9C31A82B0772B8007E36B2 /* WebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketService.swift; sourceTree = "<group>"; };
+		7B9C31AA2B07752C007E36B2 /* StompService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompService.swift; sourceTree = "<group>"; };
+		7B9C31AE2B07761C007E36B2 /* DefaultStompService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStompService.swift; sourceTree = "<group>"; };
 		7BA36C8D2A9C4B33000DAB02 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		7BA36C8F2A9C4BB3000DAB02 /* ChannelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewModel.swift; sourceTree = "<group>"; };
 		7BA36C972A9C503C000DAB02 /* FetchChannelsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChannelsUseCase.swift; sourceTree = "<group>"; };
@@ -436,21 +440,11 @@
 		7B02A6632ADFFC9600C8D4A1 /* WebSocketService */ = {
 			isa = PBXGroup;
 			children = (
-				7B02A6682AE000CB00C8D4A1 /* WebSocket */,
-				7B8DE80F2B034E5C003EA34A /* Stomp */,
-				7B02A6642ADFFCCD00C8D4A1 /* temp.swift */,
-				7B02A6662ADFFCD900C8D4A1 /* WebSocketService.swift */,
-				7B9C31A52B0753DD007E36B2 /* Extensions */,
+				7B9C31A82B0772B8007E36B2 /* WebSocketService.swift */,
+				7B02A6662ADFFCD900C8D4A1 /* DefaultWebSocketService.swift */,
+				7B8DE80F2B034E5C003EA34A /* StompService */,
 			);
 			path = WebSocketService;
-			sourceTree = "<group>";
-		};
-		7B02A6682AE000CB00C8D4A1 /* WebSocket */ = {
-			isa = PBXGroup;
-			children = (
-				7B02A6692AE000DE00C8D4A1 /* WebSocketEndpoint.swift */,
-			);
-			path = WebSocket;
 			sourceTree = "<group>";
 		};
 		7B0CFB8A2AD3D19500EA9C0D /* RxExtensions */ = {
@@ -783,14 +777,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		7B8DE80F2B034E5C003EA34A /* Stomp */ = {
+		7B8DE80F2B034E5C003EA34A /* StompService */ = {
 			isa = PBXGroup;
 			children = (
-				7B8DE8102B034E6B003EA34A /* Stomp.swift */,
-				7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */,
-				7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */,
+				7B9C31AA2B07752C007E36B2 /* StompService.swift */,
+				7B9C31AE2B07761C007E36B2 /* DefaultStompService.swift */,
+				7B9C31A52B0753DD007E36B2 /* Extensions */,
 			);
-			path = Stomp;
+			path = StompService;
 			sourceTree = "<group>";
 		};
 		7B9142DB2B01CF66006EA52F /* Channel */ = {
@@ -843,6 +837,15 @@
 				7B9C31A62B0753EF007E36B2 /* String+Regex.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7B9C31AD2B07756F007E36B2 /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				7B02A6692AE000DE00C8D4A1 /* WebSocketEndpoint.swift */,
+				7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */,
+			);
+			path = WebSocket;
 			sourceTree = "<group>";
 		};
 		7BA36C8C2A9C4B20000DAB02 /* Common */ = {
@@ -991,9 +994,12 @@
 			isa = PBXGroup;
 			children = (
 				7BA36CB82A9D9A29000DAB02 /* HTTP.swift */,
+				7B8DE8102B034E6B003EA34A /* Stomp.swift */,
 				7BA36CB42A9D9828000DAB02 /* Endpoint.swift */,
+				7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */,
 				7B153C092AD64E2A00618280 /* Auth */,
 				7B153C0A2AD64E3200618280 /* Chat */,
+				7B9C31AD2B07756F007E36B2 /* WebSocket */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1603,6 +1609,7 @@
 				7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */,
 				7B3B373C2B038FE400C2F8AD /* SendMessageUseCase.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
+				7B9C31A92B0772B8007E36B2 /* WebSocketService.swift in Sources */,
 				7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */,
 				7B9C31A72B0753EF007E36B2 /* String+Regex.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
@@ -1610,6 +1617,7 @@
 				7C8CC41A2AF40A100032F237 /* BaseProgressView.swift in Sources */,
 				7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */,
 				7B9142D62B01CE8B006EA52F /* MessageRepository.swift in Sources */,
+				7B9C31AB2B07752C007E36B2 /* StompService.swift in Sources */,
 				7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */,
 				7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */,
 				7CA04F0F2AF8F867007B9191 /* TechStack.swift in Sources */,
@@ -1710,7 +1718,7 @@
 				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
 				7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */,
 				7B9142E02B01D4EB006EA52F /* MessageResponseDTO.swift in Sources */,
-				7B02A6672ADFFCD900C8D4A1 /* WebSocketService.swift in Sources */,
+				7B02A6672ADFFCD900C8D4A1 /* DefaultWebSocketService.swift in Sources */,
 				7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */,
 				7B153C112AD6D0E100618280 /* AuthInterceptor.swift in Sources */,
 				7B9142DA2B01CF61006EA52F /* MockMessageRepository.swift in Sources */,
@@ -1725,6 +1733,7 @@
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
 				7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */,
 				7C40CBCA2AC6B597000F4C9F /* BridgeCreateProjectButton.swift in Sources */,
+				7B9C31AF2B07761C007E36B2 /* DefaultStompService.swift in Sources */,
 				7C8CC41C2AF522A10032F237 /* BridgeBasePopUpView.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
 				7C24003D2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift in Sources */,
@@ -1736,7 +1745,6 @@
 				7BFECA242AECE632009B4C7D /* ApplicationResultCell.swift in Sources */,
 				7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
-				7B02A6652ADFFCCD00C8D4A1 /* temp.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,

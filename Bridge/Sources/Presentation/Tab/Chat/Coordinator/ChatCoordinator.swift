@@ -28,9 +28,10 @@ final class ChatCoordinator: Coordinator {
         self.childCoordinators = []
         
         let networkService = DefaultNetworkService()
+        let stompService = DefaultStompService(webSocketService: DefaultWebSocketService.shared)
         authRepository = DefaultAuthRepository(networkService: networkService)
-        channelRepository = DefaultChannelRepository(networkService: networkService)
-        messageRepository = DefaultMessageRepository(networkService: networkService)
+        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
+        messageRepository = DefaultMessageRepository(networkService: networkService, stompService: stompService)
         
         fetchChannelsUseCase = DefaultFetchChannelsUseCase(channelRepository: channelRepository)
         leaveChannelUseCase = DefaultLeaveChannelUseCase(channelRepository: channelRepository)

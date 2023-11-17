@@ -11,13 +11,16 @@ import RxSwift
 final class DefaultChannelRepository: ChannelRepository {
     
     private let networkService: NetworkService
+    private let stompService: StompService
     private let tokenStorage: TokenStorage
     
     init(
         networkService: NetworkService,
+        stompService: StompService,
         tokenStorage: TokenStorage = KeychainTokenStorage()
     ) {
         self.networkService = networkService
+        self.stompService = stompService
         self.tokenStorage = tokenStorage
     }
     
@@ -43,7 +46,7 @@ final class DefaultChannelRepository: ChannelRepository {
         let stompConnectEndpoint = MessageStompEndpoint.connect
         let stompSubscribeEndpoint = MessageStompEndpoint.subscribe(destination: id)
         
-        return WebSocketService.shared.subscribe(stompConnectEndpoint, stompSubscribeEndpoint)
+        return stompService.subscribe(stompConnectEndpoint, stompSubscribeEndpoint)
             .decode(type: MessageRequestDTO.self, decoder: JSONDecoder())
             .map { $0.toEntity() }
     }
