@@ -848,6 +848,24 @@
 			path = WebSocket;
 			sourceTree = "<group>";
 		};
+		7B9C31B02B0788C0007E36B2 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7BA36CB42A9D9828000DAB02 /* Endpoint.swift */,
+				7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7B9C31B12B0788D1007E36B2 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				7BA36CB82A9D9A29000DAB02 /* HTTP.swift */,
+				7B8DE8102B034E6B003EA34A /* Stomp.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
 		7BA36C8C2A9C4B20000DAB02 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -993,10 +1011,8 @@
 		7BA36CB32A9D980F000DAB02 /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
-				7BA36CB82A9D9A29000DAB02 /* HTTP.swift */,
-				7B8DE8102B034E6B003EA34A /* Stomp.swift */,
-				7BA36CB42A9D9828000DAB02 /* Endpoint.swift */,
-				7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */,
+				7B9C31B12B0788D1007E36B2 /* Types */,
+				7B9C31B02B0788C0007E36B2 /* Protocols */,
 				7B153C092AD64E2A00618280 /* Auth */,
 				7B153C0A2AD64E3200618280 /* Chat */,
 				7B9C31AD2B07756F007E36B2 /* WebSocket */,
