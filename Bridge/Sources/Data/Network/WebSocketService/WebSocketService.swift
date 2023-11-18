@@ -22,5 +22,5 @@ protocol WebSocketServiceDelegate: AnyObject {
     func webSocketDidConnect()
     func webSocketDidDisconnect()
     
-    func webSocketDidReceive(text data: Data)
+    func webSocketDidReceive(text: String)
 }

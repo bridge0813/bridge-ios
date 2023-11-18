@@ -5,7 +5,6 @@
 //  Created by 정호윤 on 10/18/23.
 //
 
-import Foundation
 import Starscream
 
 final class DefaultWebSocketService: WebSocketService {
@@ -35,42 +34,42 @@ final class DefaultWebSocketService: WebSocketService {
 extension DefaultWebSocketService: WebSocketDelegate {
     func didReceive(event: WebSocketEvent, client: WebSocketClient) {
         switch event {
+        case .viabilityChanged:
+            print("[Websocket] Viability changed")
+            
         case .connected:
-            print("WebSocket connected")
+            print("[WebSocket] Connected")
             delegate?.webSocketDidConnect()
             
         case .disconnected(let reason, let code):
-            print("Websocket disconnected")
+            print("[Websocket] Disconnected")
             print("\(reason) with code \(code)")
             delegate?.webSocketDidDisconnect()
             
         case .text(let string):
-            print("Received string")
+            print("[Websocket] Received string")
             print(string)
-            // stomp send인지 확인하는 로직 필요할듯
-            if let jsonString = string.extractJsonString(),
-               let data = jsonString.data(using: .utf8) {
-                delegate?.webSocketDidReceive(text: data)
-            }
+            delegate?.webSocketDidReceive(text: string)
             
         case .binary(let data):
-            print("Received binary data")
+            print("[Websocket] Received binary data")
             print("\(data)")
             
         case .reconnectSuggested:
-            print("Reconnect suggested")
+            print("[Websocket] Reconnect suggested")
             
         case .peerClosed:
-            print("Peer closed")
+            print("[Websocket] Peer closed")
             
         case .cancelled:
-            print("WebSocket canclled")
+            print("[WebSocket] Canclled")
             
         case .error(let error):
-            print("WebSocket error: ", String(describing: error))
+            print("[WebSocket] Error")
+            print(String(describing: error))
             
         default:
-            print("WebSocket did receive something")
+            print("[WebSocket] Did receive something")
         }
     }
 }

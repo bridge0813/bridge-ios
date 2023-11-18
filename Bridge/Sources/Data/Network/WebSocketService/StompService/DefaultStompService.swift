@@ -50,7 +50,11 @@ extension DefaultStompService: WebSocketServiceDelegate {
         
     }
     
-    func webSocketDidReceive(text data: Data) {
-        incomingMessage.onNext(data)
+    func webSocketDidReceive(text: String) {
+        // stomp send인지 확인하는 로직 필요할듯
+        if let jsonString = text.extractJsonString(),
+           let data = jsonString.data(using: .utf8) {
+            incomingMessage.onNext(data)
+        }
     }
 }
