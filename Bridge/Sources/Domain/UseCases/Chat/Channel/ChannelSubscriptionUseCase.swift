@@ -12,6 +12,7 @@ protocol ChannelSubscriptionUseCase {
 }
 
 final class DefaultChannelSubscriptionUseCase: ChannelSubscriptionUseCase {
+    
     private let channelRepository: ChannelRepository
     
     init(channelRepository: ChannelRepository) {

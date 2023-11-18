@@ -187,7 +187,7 @@ extension ChannelViewController {
             case .text:
                 cell = collectionView.dequeueReusableCell(MessageCell.self, for: indexPath) ?? MessageCell()
                 
-            case .accept, .refuse:
+            case .accept, .reject:
                 cell = collectionView.dequeueReusableCell(ApplicationResultCell.self, for: indexPath) ?? ApplicationResultCell()
                 
             default:

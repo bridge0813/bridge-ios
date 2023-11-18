@@ -26,7 +26,7 @@ enum MessageType {
     case image
     case file
     case accept
-    case refuse
+    case reject
 }
 
 enum State {

@@ -71,7 +71,7 @@ private extension ApplicationResultCell {
         
         switch message.type {
         case .accept:   messageLabel.text = "소중한 지원 감사드립니다!\n저희 프로젝트에 참여해주실래요?"
-        case .refuse:   messageLabel.text = "소중한 지원 감사드립니다!\n아쉽지만 다음 기회에 같이해요..."
+        case .reject:   messageLabel.text = "소중한 지원 감사드립니다!\n아쉽지만 다음 기회에 같이해요..."
         default:        break
         }
     }
@@ -79,7 +79,7 @@ private extension ApplicationResultCell {
     func configureImageView(by messageType: MessageType) {
         switch messageType {
         case .accept:   emojiImageView.image = UIImage(named: "graphic_handshake")
-        case .refuse:   emojiImageView.image = UIImage(named: "graphic_refuse")
+        case .reject:   emojiImageView.image = UIImage(named: "graphic_refuse")
         default:        break
         }
     }
