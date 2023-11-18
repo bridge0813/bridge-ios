@@ -8,10 +8,12 @@
 import Foundation
 
 enum MessageStompEndpoint {
-    case connect
+    case connect(destination: String)
     case disconnect
+    
     case subscribe(destination: String)
     case unsubscribe(destination: String)
+    
     case sendMessage(requestDTO: MessageRequestDTO)
 }
 
@@ -38,8 +40,11 @@ extension MessageStompEndpoint: StompEndpoint {
     
     var headers: StompHeaders? {
         switch self {
-        case .connect:
-            return [StompHeaderKey.acceptVersion.rawValue: "1.1,1.2"]
+        case .connect(let destination):
+            return [
+                StompHeaderKey.acceptVersion.rawValue: "1.1,1.2",
+                StompHeaderKey.message.rawValue: destination
+            ]
             
         case .disconnect:
             return nil

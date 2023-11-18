@@ -43,7 +43,7 @@ final class DefaultChannelRepository: ChannelRepository {
     }
     
     func subscribeChannel(id: String) -> Observable<Message> {
-        let stompConnectEndpoint = MessageStompEndpoint.connect
+        let stompConnectEndpoint = MessageStompEndpoint.connect(destination: id)
         let stompSubscribeEndpoint = MessageStompEndpoint.subscribe(destination: id)
         
         return stompService.subscribe(stompConnectEndpoint, stompSubscribeEndpoint)
