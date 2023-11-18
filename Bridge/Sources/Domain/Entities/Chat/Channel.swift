@@ -28,7 +28,7 @@ struct Channel {
     let lastMessage: LastMessage
 
     /// 읽지 않은 메시지 개수
-    let unreadMessageCount: String
+    let unreadMessageCount: Int
 }
 
 extension Channel {
@@ -39,7 +39,7 @@ extension Channel {
         image: nil,
         name: "채팅방 이름을 불러올 수 없습니다.",
         lastMessage: LastMessage(receivedTime: String(), content: "메시지를 불러올 수 없습니다."),
-        unreadMessageCount: "0"
+        unreadMessageCount: 0
     )
 }
 

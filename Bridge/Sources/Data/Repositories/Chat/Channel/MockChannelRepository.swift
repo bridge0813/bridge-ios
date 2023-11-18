@@ -30,10 +30,11 @@ final class MockChannelRepository: ChannelRepository {
     func subscribeChannel(id: String) -> Observable<Message> {
         Observable<Int>.interval(.seconds(2), scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
             .map { _ in
-                MessageResponseDTO(
+                MessageDTO(
                     content: "일정 간격으로 방출되는 메시지",
                     sender: .opponent,
-                    sentDateAndTime: "2023-11-16T11:30:00"
+                    sentDateAndTime: "2023-11-16T11:30:00",
+                    hasRead: false
                 )
                 .toEntity()
             }

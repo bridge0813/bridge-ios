@@ -9,7 +9,7 @@ import RxSwift
 
 final class MockMessageRepository: MessageRepository {
     func fetchMessages(channelID: String) -> Observable<[Message]> {
-        .just(MessageResponseDTO.testArray.map { $0.toEntity() })
+        .just(MessageDTO.testArray.map { $0.toEntity() })
     }
     
     func sendMessage(_ message: String, to channel: String) { }
