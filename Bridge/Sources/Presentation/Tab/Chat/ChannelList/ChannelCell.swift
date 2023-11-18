@@ -16,7 +16,8 @@ final class ChannelCell: BaseTableViewCell {
         imageView.image = UIImage(named: "profile")
         imageView.layer.cornerRadius = 24
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = BridgeColor.gray09
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -64,23 +65,21 @@ final class ChannelCell: BaseTableViewCell {
     
     // MARK: - Layout
     override func configureLayouts() {
-        contentView.flex.direction(.row).alignItems(.center).marginVertical(20).define { flex in
-            flex.addItem(profileImageView).size(48).marginLeft(16).marginRight(12)
+        contentView.flex.direction(.row).alignItems(.center).padding(20, 16).define { flex in
+            flex.addItem(profileImageView).size(48).marginRight(12)
             
             flex.addItem().define { flex in
-                flex.addItem().width(200).define { flex in
-                    flex.addItem().direction(.row).marginBottom(4).define { flex in
-                        flex.addItem(nameLabel).marginRight(8).shrink(1)
-                        flex.addItem(lastMessageReceivedTimeLabel)
-                    }
-                    
-                    flex.addItem(lastMessageContentLabel)
+                flex.addItem().direction(.row).width(200).marginBottom(4).define { flex in
+                    flex.addItem(nameLabel).marginRight(8)
+                    flex.addItem(lastMessageReceivedTimeLabel)
                 }
+                
+                flex.addItem(lastMessageContentLabel)
             }
             
             flex.addItem().grow(1)  // spacer
             
-            flex.addItem(unreadMessageCountLabel).marginHorizontal(16)
+            flex.addItem(unreadMessageCountLabel)
         }
     }
     
@@ -98,6 +97,12 @@ extension ChannelCell {
         lastMessageReceivedTimeLabel.text = channel.lastMessage.receivedTime
         lastMessageContentLabel.text = channel.lastMessage.content
         configureUnreadMessageCountLabel(Int(channel.unreadMessageCount) ?? 0)
+        
+        profileImageView.flex.markDirty()
+        nameLabel.flex.markDirty()
+        lastMessageReceivedTimeLabel.flex.markDirty()
+        unreadMessageCountLabel.flex.markDirty()
+        contentView.flex.layout()
     }
 }
 
