@@ -31,7 +31,7 @@ final class ApplicationResultCell: BaseChatCell {
     // MARK: - Preparation
     override func prepareForReuse() {
         super.prepareForReuse()
-        messageLabel.text = ""
+        messageLabel.text = nil
         emojiImageView.image = nil
     }
     
@@ -59,6 +59,10 @@ final class ApplicationResultCell: BaseChatCell {
         }
         
         super.configure(with: message, shouldShowDate: shouldShowDate)
+        
+        messageLabel.flex.markDirty()
+        emojiImageView.flex.markDirty()
+        chatBubble.flex.layout()
     }
 }
 

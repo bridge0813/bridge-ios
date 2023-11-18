@@ -24,7 +24,7 @@ final class MessageCell: BaseChatCell {
     // MARK: - Preparation
     override func prepareForReuse() {
         super.prepareForReuse()
-        messageLabel.text = ""
+        messageLabel.text = nil
     }
     
     // MARK: - Layout
@@ -49,6 +49,9 @@ final class MessageCell: BaseChatCell {
         }
         
         super.configure(with: message, shouldShowDate: shouldShowDate)
+        
+        messageLabel.flex.markDirty()
+        chatBubble.flex.layout()
     }
 }
 

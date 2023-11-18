@@ -36,8 +36,8 @@ class BaseChatCell: BaseCollectionViewCell {
     // MARK: - Preparation
     override func prepareForReuse() {
         super.prepareForReuse()
-        dateLabel.text = ""
-        timeLabel.text = ""
+        dateLabel.text = nil
+        timeLabel.text = nil
     }
     
     // MARK: - Layout
@@ -64,6 +64,11 @@ class BaseChatCell: BaseCollectionViewCell {
         timeLabel.text = message.sentTime
         configureMessageBubble(by: message.sender)
         configureLayout(by: message.sender)  // 보낸 사람에 따른 레이아웃(좌, 우) 설정
+        
+        dateLabel.flex.markDirty()
+        chatBubble.flex.markDirty()
+        timeLabel.flex.markDirty()
+        contentView.flex.layout()
     }
 }
 
