@@ -26,9 +26,9 @@ final class DefaultChannelRepository: ChannelRepository {
     
     func fetchChannels() -> Observable<[Channel]> {
         let userID = tokenStorage.get(.userID)
-        let channelEndpoint = ChannelEndpoint.channels(userID: userID)
+        let channelEndpoint = ChannelEndpoint.fetchChannels(userID: userID)
         
-        return networkService.request(channelEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: channelEndpoint, interceptor: AuthInterceptor())
             .decode(type: [ChannelDTO].self, decoder: JSONDecoder())
             .map { channelDTOs in
                 channelDTOs.map { $0.toEntity() }
@@ -38,7 +38,7 @@ final class DefaultChannelRepository: ChannelRepository {
     func leaveChannel(id: String) -> Observable<String> {
         let channelEndpoint = ChannelEndpoint.leaveChannel(id: id)
         
-        return networkService.request(channelEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: channelEndpoint, interceptor: AuthInterceptor())
             .map { _ in id }
     }
     

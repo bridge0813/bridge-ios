@@ -6,27 +6,27 @@
 //
 
 enum MessageEndpoint: Endpoint {
-    case messages(channelID: String)
+    case fetchMessages(channelID: String)
 }
 
 extension MessageEndpoint {
     var path: String {
         switch self {
-        case .messages:
+        case .fetchMessages:
             return "/chat"
         }
     }
     
     var queryParameters: QueryParameters? {
         switch self {
-        case .messages(let channelID):
+        case .fetchMessages(let channelID):
             return ["chatRoomId": channelID]
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .messages:
+        case .fetchMessages:
             return .get
         }
     }

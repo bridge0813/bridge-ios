@@ -14,7 +14,7 @@ enum MessageStompEndpoint {
     case subscribe(destination: String)
     case unsubscribe(destination: String)
     
-    case sendMessage(requestDTO: MessageRequestDTO)
+    case send(requestDTO: MessageRequestDTO)
 }
 
 extension MessageStompEndpoint: StompEndpoint {
@@ -32,7 +32,7 @@ extension MessageStompEndpoint: StompEndpoint {
         case .unsubscribe:
             return .unsubscribe
             
-        case .sendMessage:
+        case .send:
             return .send
         }
         
@@ -49,16 +49,17 @@ extension MessageStompEndpoint: StompEndpoint {
         case .disconnect:
             return nil
             
+        // TODO: subscribe, unsubscribe id 헤더 수정 필요
         case .subscribe(let destination):
             return [
-                StompHeaderKey.id.rawValue: UUID().uuidString,
+                StompHeaderKey.id.rawValue: destination,
                 StompHeaderKey.destination.rawValue: "/sub/chat/room/\(destination)"
             ]
             
         case .unsubscribe(let destination):
             return [StompHeaderKey.id.rawValue: destination]
             
-        case .sendMessage:
+        case .send:
             return [StompHeaderKey.destination.rawValue: "/pub/chat/message"]
         }
     }
@@ -68,7 +69,7 @@ extension MessageStompEndpoint: StompEndpoint {
         case .connect, .disconnect, .subscribe, .unsubscribe:
             return nil
             
-        case .sendMessage(let messageRequestDTO):
+        case .send(let messageRequestDTO):
             return messageRequestDTO
         }
     }

@@ -29,7 +29,7 @@ final class DefaultAuthRepository: AuthRepository {
         )
         let authEndpoint = AuthEndpoint.signInWithApple(requestDTO: signInWithAppleRequestDTO)
         
-        return networkService.request(authEndpoint, interceptor: nil)
+        return networkService.request(to: authEndpoint, interceptor: nil)
             .decode(type: SignInWithAppleResponseDTO.self, decoder: JSONDecoder())
             .map { [weak self] signInWithAppleResponseDTO in
                 self?.tokenStorage.save(String(signInWithAppleResponseDTO.userID), for: .userID)
@@ -45,7 +45,7 @@ final class DefaultAuthRepository: AuthRepository {
         let signUpRequestDTO = SignUpRequestDTO(userID: userID, selectedFields: selectedFields)
         let authEndpoint = AuthEndpoint.signUp(requestDTO: signUpRequestDTO)
         
-        return networkService.request(authEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: authEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
     }
 }

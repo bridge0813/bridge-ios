@@ -11,7 +11,7 @@ import RxSwift
 
 final class DefaultNetworkService: NetworkService {
     
-    func request(_ endpoint: Endpoint, interceptor: Interceptor?) -> Observable<Data> {
+    func request(to endpoint: Endpoint, interceptor: Interceptor?) -> Observable<Data> {
         guard var request = endpoint.toURLRequest() else { return .error(NetworkError.invalidRequest) }
         
         interceptor?.adapt(&request)

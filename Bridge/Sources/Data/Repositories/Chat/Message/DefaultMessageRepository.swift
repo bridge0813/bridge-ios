@@ -25,9 +25,9 @@ final class DefaultMessageRepository: MessageRepository {
     }
     
     func fetchMessages(channelID: String) -> Observable<[Message]> {
-        let messageEndpoint = MessageEndpoint.messages(channelID: channelID)
+        let messageEndpoint = MessageEndpoint.fetchMessages(channelID: channelID)
         
-        return networkService.request(messageEndpoint, interceptor: nil)
+        return networkService.request(to: messageEndpoint, interceptor: nil)
             .decode(type: [MessageResponseDTO].self, decoder: JSONDecoder())
             .map { messageDTOs in
                 messageDTOs.map { $0.toEntity() }
@@ -42,7 +42,7 @@ final class DefaultMessageRepository: MessageRepository {
             content: message
         )
         
-        let messageStompEndpoint = MessageStompEndpoint.sendMessage(requestDTO: messageRequestDTO)
+        let messageStompEndpoint = MessageStompEndpoint.send(requestDTO: messageRequestDTO)
         stompService.send(messageStompEndpoint)
         return .just(())
     }

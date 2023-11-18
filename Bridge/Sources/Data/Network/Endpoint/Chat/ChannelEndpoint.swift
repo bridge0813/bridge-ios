@@ -6,14 +6,14 @@
 //
 
 enum ChannelEndpoint {
-    case channels(userID: String)
+    case fetchChannels(userID: String)
     case leaveChannel(id: String)
 }
 
 extension ChannelEndpoint: Endpoint {
     var path: String {
         switch self {
-        case .channels(let userID):    
+        case .fetchChannels(let userID):    
             return "/chat/\(userID)"
             
         case .leaveChannel:
@@ -23,7 +23,7 @@ extension ChannelEndpoint: Endpoint {
     
     var queryParameters: QueryParameters? {
         switch self {
-        case .channels:
+        case .fetchChannels:
             return nil
             
         case .leaveChannel(let id):
@@ -33,7 +33,7 @@ extension ChannelEndpoint: Endpoint {
     
     var method: HTTPMethod {
         switch self {
-        case .channels:        
+        case .fetchChannels:        
             return .get
             
         case .leaveChannel:

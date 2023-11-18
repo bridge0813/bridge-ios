@@ -10,32 +10,44 @@ enum AuthEndpoint {
     case signUp(requestDTO: SignUpRequestDTO)
 }
 
-extension AuthEndpoint: Endpoint {   
+extension AuthEndpoint: Endpoint {
     var path: String {
         switch self {
-        case .signInWithApple:  return "/login/apple"
-        case .signUp:           return "/signup"
+        case .signInWithApple:
+            return "/login/apple"
+            
+        case .signUp:
+            return "/signup"
         }
     }
     
     var queryParameters: QueryParameters? {
         switch self {
-        case .signInWithApple:  return nil
-        case .signUp:           return nil
+        case .signInWithApple:
+            return nil
+            
+        case .signUp:
+            return nil
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .signInWithApple:  return .post
-        case .signUp:           return .post
+        case .signInWithApple:
+            return .post
+            
+        case .signUp:
+            return .post
         }
     }
     
     var body: Encodable? {
         switch self {
-        case .signInWithApple(let requestDTO):  return requestDTO
-        case .signUp(let requestDTO):           return requestDTO
+        case .signInWithApple(let requestDTO):
+            return requestDTO
+            
+        case .signUp(let requestDTO):
+            return requestDTO
         }
     }
 }

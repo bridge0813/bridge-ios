@@ -11,7 +11,6 @@ import RxSwift
 final class DefaultStompService: StompService {
     
     private let webSocketService: WebSocketService
-    
     private let incomingMessage = PublishSubject<Data>()
     
     init(webSocketService: WebSocketService) {
@@ -30,9 +29,13 @@ final class DefaultStompService: StompService {
         return incomingMessage
     }
     
-    func unsubscribe(_ endpoint: StompEndpoint) {
-        let frame = endpoint.toFrame()
-        webSocketService.write(frame, completion: nil)
+    func unsubscribe(_ disconnectEndpoint: StompEndpoint, _ unsubscribeEndpoint: StompEndpoint) {
+        let disconnectFrame = disconnectEndpoint.toFrame()
+        let unsubscribeFrame = unsubscribeEndpoint.toFrame()
+        
+        webSocketService.write(unsubscribeFrame) { [weak self] in
+            self?.webSocketService.write(disconnectFrame, completion: nil)
+        }
     }
     
     func send(_ endpoint: StompEndpoint) {
@@ -41,15 +44,7 @@ final class DefaultStompService: StompService {
     }
 }
 
-extension DefaultStompService: WebSocketServiceDelegate {
-    func webSocketDidConnect() {
-        
-    }
-    
-    func webSocketDidDisconnect() {
-        
-    }
-    
+extension DefaultStompService: WebSocketServiceDelegate {    
     func webSocketDidReceive(text: String) {
         // stomp send인지 확인하는 로직 필요할듯
         if let jsonString = text.extractJsonString(),
@@ -57,4 +52,6 @@ extension DefaultStompService: WebSocketServiceDelegate {
             incomingMessage.onNext(data)
         }
     }
+    
+    func webSocketDidReceive(data: Data) { }
 }

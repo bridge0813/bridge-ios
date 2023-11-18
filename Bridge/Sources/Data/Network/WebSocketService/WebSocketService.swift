@@ -5,22 +5,13 @@
 //  Created by 정호윤 on 11/17/23.
 //
 
-import Foundation
-
 protocol WebSocketService: AnyObject {
-    typealias Frame = String
+    typealias WebSocketFrame = String
     
     var delegate: WebSocketServiceDelegate? { get set }
     
-    func connect(_ endpoint: Endpoint)
+    func connect(to endpoint: Endpoint)
     func disconnect()
     
-    func write(_ frame: Frame, completion: (() -> Void)?)
-}
-
-protocol WebSocketServiceDelegate: AnyObject {
-    func webSocketDidConnect()
-    func webSocketDidDisconnect()
-    
-    func webSocketDidReceive(text: String)
+    func write(_ frame: WebSocketFrame, completion: (() -> Void)?)
 }

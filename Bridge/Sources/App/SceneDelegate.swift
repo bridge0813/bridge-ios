@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // 웹 소켓 연결
     func sceneWillEnterForeground(_ scene: UIScene) {
         let webSocketEndpoint = WebSocketEndpoint.connect
-        DefaultWebSocketService.shared.connect(webSocketEndpoint)
+        DefaultWebSocketService.shared.connect(to: webSocketEndpoint)
     }
     
     // 웹 소켓 연결 해제
