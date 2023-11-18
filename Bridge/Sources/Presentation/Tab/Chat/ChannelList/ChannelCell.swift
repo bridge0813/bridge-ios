@@ -68,8 +68,8 @@ final class ChannelCell: BaseTableViewCell {
         contentView.flex.direction(.row).alignItems(.center).padding(20, 16).define { flex in
             flex.addItem(profileImageView).size(48).marginRight(12)
             
-            flex.addItem().define { flex in
-                flex.addItem().direction(.row).width(200).marginBottom(4).define { flex in
+            flex.addItem().width(200).define { flex in
+                flex.addItem().direction(.row).marginBottom(4).define { flex in
                     flex.addItem(nameLabel).marginRight(8)
                     flex.addItem(lastMessageReceivedTimeLabel)
                 }
