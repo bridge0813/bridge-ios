@@ -58,6 +58,7 @@ final class ChannelViewController: BaseViewController {
     private lazy var messageCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.backgroundColor = BridgeColor.gray09
+        collectionView.alwaysBounceVertical = true
         collectionView.register(BaseChatCell.self)
         collectionView.register(MessageCell.self)
         collectionView.register(ApplicationResultCell.self)
@@ -203,7 +204,7 @@ extension ChannelViewController {
         var snapshot = Snapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(messages)
-        dataSource?.apply(snapshot)
+        dataSource?.apply(snapshot, animatingDifferences: false)
         
         // 가장 아래로 스크롤
         if let lastItem = snapshot.itemIdentifiers(inSection: .main).last,
