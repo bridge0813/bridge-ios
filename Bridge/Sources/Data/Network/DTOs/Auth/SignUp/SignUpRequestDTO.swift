@@ -11,7 +11,7 @@ struct SignUpRequestDTO: Encodable {
     
     enum CodingKeys: String, CodingKey {
         case userID = "userId"
-        case userField
+        case selectedFields = "fieldName"
     }
 }
 
@@ -25,7 +25,7 @@ extension SignUpRequestDTO {
             try container.encodeNil(forKey: .userID)  // null 값 명시적으로 인코딩
         }
         
-        try container.encode(selectedFields, forKey: .userField)
+        try container.encode(selectedFields, forKey: .selectedFields)
     }
 }
 
