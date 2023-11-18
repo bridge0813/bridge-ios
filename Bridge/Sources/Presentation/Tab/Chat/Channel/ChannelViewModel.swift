@@ -104,18 +104,8 @@ final class ChannelViewModel: ViewModelType {
         
         input.sendMessage
             .withUnretained(self)
-            .flatMap { owner, message in
-                owner.sendMessageUseCase.sendMessage(message, to: owner.channel.id).toResult()
-            }
-            .withUnretained(self)
-            .subscribe(onNext: { owner, result in
-                switch result {
-                case .success:
-                    return
-                    
-                case .failure:
-                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(title: "메시지 전송 실패"))
-                }
+            .subscribe(onNext: { owner, message in
+                owner.sendMessageUseCase.sendMessage(message, to: owner.channel.id)
             })
             .disposed(by: disposeBag)
         

@@ -12,7 +12,5 @@ final class MockMessageRepository: MessageRepository {
         .just(MessageResponseDTO.testArray.map { $0.toEntity() })
     }
     
-    func sendMessage(_ message: String, to channel: String) -> Observable<Void> {
-        .just(())
-    }
+    func sendMessage(_ message: String, to channel: String) { }
 }

@@ -34,7 +34,7 @@ final class DefaultMessageRepository: MessageRepository {
             }
     }
     
-    func sendMessage(_ message: String, to channel: String) -> Observable<Void> {
+    func sendMessage(_ message: String, to channel: String) {
         let messageRequestDTO = MessageRequestDTO(
             channelID: channel,
             type: .talk,
@@ -44,6 +44,5 @@ final class DefaultMessageRepository: MessageRepository {
         
         let messageStompEndpoint = MessageStompEndpoint.send(requestDTO: messageRequestDTO)
         stompService.send(messageStompEndpoint)
-        return .just(())
     }
 }
