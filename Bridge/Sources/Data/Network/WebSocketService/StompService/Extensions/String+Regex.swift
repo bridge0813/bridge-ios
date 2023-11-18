@@ -6,13 +6,23 @@
 //
 
 extension String {
+    /// 정규표현식을 사용해 STOMP 프레임에서 커맨드를 추출하는 함수
+    func extractCommand(_ command: StompResponseCommand) -> String? {
+        let pattern = "^\(command.rawValue)"
+        
+        if let range = self.range(of: pattern, options: [.regularExpression]) {
+            return String(self[range])
+        } else {
+            return nil
+        }
+    }
+    
     /// 정규표현식을 사용해 STOMP 프레임에서 JSON 부분만 추출하는 함수
     func extractJsonString() -> String? {
-        let string = self
         let pattern = "\\{.*\\}"
         
-        if let firstIndex = string.range(of: pattern, options: .regularExpression) {
-            return String(string[firstIndex])
+        if let range = self.range(of: pattern, options: .regularExpression) {
+            return String(self[range])
         } else {
             return nil
         }

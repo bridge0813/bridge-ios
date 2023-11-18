@@ -44,13 +44,15 @@ final class DefaultStompService: StompService {
     }
 }
 
-extension DefaultStompService: WebSocketServiceDelegate {    
+extension DefaultStompService: WebSocketServiceDelegate {
     func webSocketDidReceive(text: String) {
-        // stomp send인지 확인하는 로직 필요할듯
-        if let jsonString = text.extractJsonString(),
-           let data = jsonString.data(using: .utf8) {
-            incomingMessage.onNext(data)
-        }
+        guard let command = text.extractCommand(.message),
+              command == StompResponseCommand.message.rawValue,
+              let jsonString = text.extractJsonString(),
+              let data = jsonString.data(using: .utf8) 
+        else { return }
+        
+        incomingMessage.onNext(data)
     }
     
     func webSocketDidReceive(data: Data) { }
