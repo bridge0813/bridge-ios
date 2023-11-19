@@ -203,6 +203,7 @@
 		7CA04F5E2B0A029A007B9191 /* CreateProjectDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F5D2B0A029A007B9191 /* CreateProjectDTO.swift */; };
 		7CA04F622B0A4C84007B9191 /* CreateProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F612B0A4C84007B9191 /* CreateProject.swift */; };
 		7CA04F652B0A6148007B9191 /* ProjectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */; };
+		7CA04F692B0A6F02007B9191 /* CreateProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -410,6 +411,7 @@
 		7CA04F5D2B0A029A007B9191 /* CreateProjectDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectDTO.swift; sourceTree = "<group>"; };
 		7CA04F612B0A4C84007B9191 /* CreateProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProject.swift; sourceTree = "<group>"; };
 		7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEndpoint.swift; sourceTree = "<group>"; };
+		7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectUseCase.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -877,8 +879,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB262AB15E69009A00EB /* Auth */,
-				7CA04F3F2B022D69007B9191 /* ProjectDetail */,
-				7C569CF82A9F6D360063D362 /* Main */,
+				7CA04F662B0A6EA5007B9191 /* Project */,
 				7BA36C952A9C4D0F000DAB02 /* Chat */,
 			);
 			path = UseCases;
@@ -1375,12 +1376,12 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		7CA04F3F2B022D69007B9191 /* ProjectDetail */ = {
+		7CA04F3F2B022D69007B9191 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
 				7CA04F422B029B3A007B9191 /* FetchProjectDetailUseCase.swift */,
 			);
-			path = ProjectDetail;
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		7CA04F4C2B04A6B4007B9191 /* Detail */ = {
@@ -1443,6 +1444,24 @@
 				7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */,
 			);
 			path = Project;
+			sourceTree = "<group>";
+		};
+		7CA04F662B0A6EA5007B9191 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F672B0A6EC7007B9191 /* Create */,
+				7C569CF82A9F6D360063D362 /* Main */,
+				7CA04F3F2B022D69007B9191 /* Detail */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		7CA04F672B0A6EC7007B9191 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */,
+			);
+			path = Create;
 			sourceTree = "<group>";
 		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
@@ -1837,6 +1856,7 @@
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
 				7B1E5ABC2ADCFD790053E9B3 /* MessageViewController.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
+				7CA04F692B0A6F02007B9191 /* CreateProjectUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
 				7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */,
