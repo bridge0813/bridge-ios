@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TODO: - 수정필요
 struct ProjectDTO: Codable {
     let id: String
     let title: String
