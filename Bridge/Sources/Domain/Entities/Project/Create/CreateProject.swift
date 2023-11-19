@@ -6,13 +6,13 @@
 //
 
 struct CreateProject {
-    let title: String
-    let description: String
-    let deadline: String
-    let startDate: String?
-    let endDate: String?
-    let memberRequirements: [MemberRequirement]
-    let applicantRestrictions: [String]
-    let progressMethod: String
-    let progressStep: String
+    var title: String
+    var description: String
+    var deadline: String
+    var startDate: String?
+    var endDate: String?
+    var memberRequirements: [MemberRequirement]
+    var applicantRestrictions: [String]
+    var progressMethod: String
+    var progressStep: String
 }
