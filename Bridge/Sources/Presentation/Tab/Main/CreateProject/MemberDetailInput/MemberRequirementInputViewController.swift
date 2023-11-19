@@ -114,6 +114,11 @@ final class MemberRequirementInputViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNoShadowNavigationBarAppearance()
+    }
+    
     // MARK: - Configuration
     override func configureAttributes() {
         navigationItem.title = "모집글 작성"

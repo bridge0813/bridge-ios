@@ -84,8 +84,12 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.standardAppearance.shadowColor = nil
-        navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = nil
+        configureNoShadowNavigationBarAppearance()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        configureDefaultNavigationBarAppearance()
     }
     
     // MARK: - Configuration
