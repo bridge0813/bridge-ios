@@ -202,6 +202,7 @@
 		7CA04F572B05D50E007B9191 /* ProjectDetailTechTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F562B05D50E007B9191 /* ProjectDetailTechTag.swift */; };
 		7CA04F5E2B0A029A007B9191 /* CreateProjectDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F5D2B0A029A007B9191 /* CreateProjectDTO.swift */; };
 		7CA04F622B0A4C84007B9191 /* CreateProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F612B0A4C84007B9191 /* CreateProject.swift */; };
+		7CA04F652B0A6148007B9191 /* ProjectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -408,6 +409,7 @@
 		7CA04F562B05D50E007B9191 /* ProjectDetailTechTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailTechTag.swift; sourceTree = "<group>"; };
 		7CA04F5D2B0A029A007B9191 /* CreateProjectDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectDTO.swift; sourceTree = "<group>"; };
 		7CA04F612B0A4C84007B9191 /* CreateProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProject.swift; sourceTree = "<group>"; };
+		7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEndpoint.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -983,6 +985,7 @@
 				7BA36CB82A9D9A29000DAB02 /* HTTP.swift */,
 				7BA36CB42A9D9828000DAB02 /* Endpoint.swift */,
 				7B153C092AD64E2A00618280 /* Auth */,
+				7CA04F632B0A6134007B9191 /* Project */,
 				7B153C0A2AD64E3200618280 /* Chat */,
 			);
 			path = Endpoint;
@@ -1434,6 +1437,14 @@
 			path = Create;
 			sourceTree = "<group>";
 		};
+		7CA04F632B0A6134007B9191 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -1852,6 +1863,7 @@
 				7C8CC4132AEEB5CC0032F237 /* TechTagCell.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
+				7CA04F652B0A6148007B9191 /* ProjectEndpoint.swift in Sources */,
 				7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */,
 				7C1366422AC27F9100EB415D /* BridgeSendMessageButton.swift in Sources */,
 				7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */,
