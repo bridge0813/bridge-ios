@@ -82,14 +82,18 @@ final class ApplicantRestrictionViewController: BaseViewController {
             
             flex.addItem(restrictionLabel).width(60).height(24).marginTop(40)
             
-            flex.addItem().direction(.row).marginTop(14).define { flex in
-                flex.addItem(studentButton).height(38)
-                flex.addItem(currentEmployeeButton).height(38).marginLeft(14)
-            }
-            flex.addItem().direction(.row).marginTop(14).define { flex in
-                flex.addItem(jobSeekerButton).height(38)
-                flex.addItem(noRestrictionButton).height(38).marginLeft(14)
-            }
+            flex.addItem()
+                .direction(.row)
+                .alignItems(.start)
+                .wrap(.wrap)
+                .width(180)
+                .marginTop(14)
+                .define { flex in
+                    flex.addItem(studentButton).height(38).marginRight(14).marginBottom(14)
+                    flex.addItem(currentEmployeeButton).height(38)
+                    flex.addItem(jobSeekerButton).height(38).marginRight(14)
+                    flex.addItem(noRestrictionButton).height(38)
+                }
             
             flex.addItem().grow(1)
             flex.addItem(nextButton).height(52).marginBottom(24)

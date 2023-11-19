@@ -167,7 +167,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         contentContainer.pin.all()
         contentContainer.flex.layout(mode: .adjustHeight)
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentContainer.frame.height)
+        scrollView.contentSize = contentContainer.frame.size
     }
     
     // MARK: - Bind
