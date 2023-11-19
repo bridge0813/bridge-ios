@@ -45,7 +45,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        var requirement = MemberRequirement(field: "", recruitNumber: 0, requiredSkills: [], expectation: "")
+        var requirement = MemberRequirement(field: "", recruitNumber: 0, requiredSkills: [], requirementText: "")
         
         let selectedField = input.viewDidLoad
             .withUnretained(self)
@@ -69,7 +69,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
             
         input.requirementText
             .subscribe(onNext: { text in
-                requirement.expectation = text
+                requirement.requirementText = text
             })
             .disposed(by: disposeBag)
                 

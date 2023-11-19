@@ -7,11 +7,12 @@
 
 import Foundation
 
+// TODO: Codable 제거.
 struct MemberRequirement: Codable {
     var field: String
     var recruitNumber: Int
     var requiredSkills: [String]
-    var expectation: String
+    var requirementText: String
 }
 
 extension MemberRequirement: Hashable { }

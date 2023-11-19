@@ -58,7 +58,7 @@ class BridgeBasePopUpView: BaseView {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        backgroundColor = BridgeColor.backgroundBlur
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
         rootFlexContainer.addGestureRecognizer(panGesture)
