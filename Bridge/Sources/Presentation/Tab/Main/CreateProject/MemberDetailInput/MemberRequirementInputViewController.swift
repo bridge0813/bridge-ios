@@ -116,12 +116,8 @@ final class MemberRequirementInputViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        configureNavigationUI()
-        enableKeyboardHiding()
-    }
-    
-    private func configureNavigationUI() {
         navigationItem.title = "모집글 작성"
+        enableKeyboardHiding()
     }
     
     // MARK: - Layout

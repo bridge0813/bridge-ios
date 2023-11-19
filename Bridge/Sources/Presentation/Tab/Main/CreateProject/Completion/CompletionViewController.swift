@@ -75,10 +75,6 @@ final class CompletionViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        configureNavigationUI()
-    }
-    
-    private func configureNavigationUI() {
         navigationItem.title = "모집글 작성"
     }
     

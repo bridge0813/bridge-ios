@@ -90,10 +90,6 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        configureNavigationUI()
-    }
-    
-    private func configureNavigationUI() {
         navigationItem.leftBarButtonItem = dismissButton
         navigationItem.title = "모집글 작성"
     }
