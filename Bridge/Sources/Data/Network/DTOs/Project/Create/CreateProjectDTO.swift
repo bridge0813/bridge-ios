@@ -16,7 +16,7 @@ struct CreateProjectDTO: Encodable {
     let applicantRestrictions: [String]
     let progressMethod: String
     let progressStep: String
-    let userId: String
+    let userId: Int?
     
     enum CodingKeys: String, CodingKey {
         case title, startDate, endDate, userId
