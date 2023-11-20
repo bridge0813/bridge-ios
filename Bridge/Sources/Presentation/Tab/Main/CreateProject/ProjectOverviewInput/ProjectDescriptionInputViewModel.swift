@@ -52,7 +52,7 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
                 switch result {
                 case .success(let projectID):
                     print("projectID: \(projectID)")
-                    owner.coordinator?.showCompletionViewController()
+                    owner.coordinator?.showCompletionViewController(with: projectID)
                     
                 case .failure(let error):
                     let errorMessage = (error as? NetworkError)?.errorDescription ?? error.localizedDescription

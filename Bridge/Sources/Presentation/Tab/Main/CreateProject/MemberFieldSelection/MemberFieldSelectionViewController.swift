@@ -135,7 +135,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = MemberFieldSelectionViewModel.Input(
-            dismissButtonTapped: dismissButton.rx.tap.asObservable(),
+            dismissButtonTapped: dismissButton.rx.tap,
             fieldTagButtonTapped: setFieldView.fieldTagButtonTapped,
             nextButtonTapped: nextButton.rx.tap.asObservable()
         )

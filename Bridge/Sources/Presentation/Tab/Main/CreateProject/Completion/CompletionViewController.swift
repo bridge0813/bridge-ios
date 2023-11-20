@@ -99,7 +99,7 @@ final class CompletionViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = CompletionViewModel.Input(
-            completeButtonTapped: completeButton.rx.tap.asObservable()
+            completeButtonTapped: completeButton.rx.tap
         )
         let _ = viewModel.transform(input: input)
     }

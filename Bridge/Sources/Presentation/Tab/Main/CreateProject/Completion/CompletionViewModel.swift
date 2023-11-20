@@ -6,11 +6,12 @@
 //
 
 import RxSwift
+import RxCocoa
 
 final class CompletionViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        let completeButtonTapped: Observable<Void>
+        let completeButtonTapped: ControlEvent<Void>
     }
     
     struct Output {
