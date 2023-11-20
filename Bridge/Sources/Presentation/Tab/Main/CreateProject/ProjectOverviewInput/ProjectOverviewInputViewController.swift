@@ -170,7 +170,6 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         
         // TextView 플레이스홀더 구현
         descriptionTextView.rx.didBeginEditing
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 if owner.descriptionTextView.text == "프로젝트에 대해 소개해 주세요." {
@@ -182,7 +181,6 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         
         
         descriptionTextView.rx.didEndEditing
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 if owner.descriptionTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {

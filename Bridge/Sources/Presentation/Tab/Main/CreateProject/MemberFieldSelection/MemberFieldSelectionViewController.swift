@@ -152,7 +152,6 @@ final class MemberFieldSelectionViewController: BaseViewController {
         scrollView.rx.contentOffset
             .map { $0.y > 0 }
             .distinctUntilChanged()
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, shouldHidden in
                 owner.dividerView.isHidden = !shouldHidden

@@ -213,7 +213,6 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         // 모집인원 선택 팝업 뷰 보여주기
         setRecruitNumberButton.rx.tap
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.setRecruitmentNumberView.show()
@@ -222,7 +221,6 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         // 기술태그 추가 팝업 뷰 보여주기
         addTechStackButton.rx.tap
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.addTechTagPopUpView.show()
@@ -238,7 +236,6 @@ final class MemberRequirementInputViewController: BaseViewController {
         scrollView.rx.contentOffset
             .map { $0.y > 0 }
             .distinctUntilChanged()
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, shouldHidden in
                 owner.dividerView.isHidden = !shouldHidden

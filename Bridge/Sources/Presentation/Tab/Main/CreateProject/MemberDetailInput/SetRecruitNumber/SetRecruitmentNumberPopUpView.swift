@@ -69,7 +69,6 @@ final class SetRecruitmentNumberPopUpView: BridgeBasePopUpView {
     // MARK: - Bind
     override func bind() {
         pickerView.rx.itemSelected
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.completeButton.isEnabled = true
