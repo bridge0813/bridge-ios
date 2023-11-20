@@ -173,7 +173,6 @@ final class MemberRequirementInputViewController: BaseViewController {
     // MARK: - Bind
     override func bind() {
         let input = MemberRequirementInputViewModel.Input(
-            viewDidLoad: .just(()),
             recruitNumber: setRecruitmentNumberView.completeButtonTapped,
             techTags: addTechTagPopUpView.completeButtonTapped,
             requirementText: requirementTextView.resultText,
