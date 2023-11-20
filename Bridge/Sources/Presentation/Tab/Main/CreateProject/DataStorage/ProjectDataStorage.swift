@@ -24,6 +24,10 @@ final class ProjectDataStorage {
 }
 
 extension ProjectDataStorage {
+    var currentProject: CreateProject {
+        return createProject
+    }
+    
     // MARK: - MemberFieldSelection(모집하려는 팀원의 분야설정)
     func removeAllMemberRequirements() {
         createProject.memberRequirements.removeAll()

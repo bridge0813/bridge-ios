@@ -5,6 +5,7 @@
 //  Created by 엄지호 on 2023/08/30.
 //
 
+import Foundation
 import RxSwift
 
 final class DefaultProjectRepository: ProjectRepository {
@@ -31,12 +32,15 @@ final class DefaultProjectRepository: ProjectRepository {
         .just(ProjectDetailDTO.projectDetailTest.toEntity())
     }
     
-    func createProject(with project: CreateProject) -> Observable<String> {
+    func createProject(with project: CreateProject) -> Observable<Int> {
         let createProjectDTO = toCreateProjectDTO(from: project)
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)
         
         return networkService.request(createProjectEndpoint, interceptor: AuthInterceptor())
-            .map { String(data: $0, encoding: .utf8) ?? "" }
+            .decode(type: CreateProjectResponseDTO.self, decoder: JSONDecoder())
+            .map { dto in
+                return dto.projectId
+            }
     }
 }
 

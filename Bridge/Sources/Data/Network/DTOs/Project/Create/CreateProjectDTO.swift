@@ -28,3 +28,7 @@ struct CreateProjectDTO: Encodable {
         case progressStep = "stage"
     }
 }
+
+struct CreateProjectResponseDTO: Decodable {
+    let projectId: Int
+}

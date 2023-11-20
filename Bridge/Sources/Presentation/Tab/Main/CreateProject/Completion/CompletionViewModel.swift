@@ -20,13 +20,15 @@ final class CompletionViewModel: ViewModelType {
     // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
-    
+    private let projectId: Int  // 작성한 모집글을 확인할 때, 전달
     
     // MARK: - Init
     init(
-        coordinator: CreateProjectCoordinator
+        coordinator: CreateProjectCoordinator,
+        projectId: Int
     ) {
         self.coordinator = coordinator
+        self.projectId = projectId
     }
     
     // MARK: - Transformation
@@ -34,6 +36,7 @@ final class CompletionViewModel: ViewModelType {
         input.completeButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                // TODO: - ProjectID 전달
                 owner.coordinator?.showAlert(configuration: .checkProject, cancelAction: {
                     owner.coordinator?.finish()
                 })

@@ -11,5 +11,5 @@ protocol ProjectRepository {
     func fetchAllProjects() -> Observable<[Project]>
     func fetchHotProjects() -> Observable<[Project]>
     func fetchProjectDetail(with projectID: Int) -> Observable<ProjectDetail>
-    func createProject(with project: CreateProject) -> Observable<String>
+    func createProject(with project: CreateProject) -> Observable<Int>
 }

@@ -40,7 +40,7 @@ final class ProjectDatePickerViewModel: ViewModelType {
         let date = input.date
             .do(onNext: { [weak self] result in
                 guard let self else { return }
-                let dateString = result.date.toString(format: "yyyy-mm-dd")
+                let dateString = result.date.toString(format: "yyyy-MM-dd")
                 
                 switch result.type {
                 case "deadline": self.dataStorage.updateDeadline(with: dateString)
