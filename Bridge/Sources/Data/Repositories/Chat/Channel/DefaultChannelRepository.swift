@@ -43,21 +43,23 @@ final class DefaultChannelRepository: ChannelRepository {
     }
     
     func subscribeChannel(id: String) -> Observable<Message> {
-        let stompConnectEndpoint = MessageStompEndpoint.connect(
-            userName: tokenStorage.get(.userName),
-            destination: id
-        )
-        let stompSubscribeEndpoint = MessageStompEndpoint.subscribe(destination: id)
+        let userID = tokenStorage.get(.userID)
         
-        return stompService.subscribe(stompConnectEndpoint, stompSubscribeEndpoint)
+        let stompSubscribeEndpoint = MessageStompEndpoint.subscribe(
+            destination: id,
+            userID: userID
+        )
+        
+        return stompService.subscribe(stompSubscribeEndpoint)
             .decode(type: StompMessageDTO.self, decoder: JSONDecoder())
-            .map { $0.toEntity() }
+            .map { $0.toEntity(userID: userID) }
     }
     
     func unsubscribeChannel(id: String) {
-        let stompUnsubscribeEndpoint = MessageStompEndpoint.unsubscribe(destination: id)
-        let stompDisconnectEndpoint = MessageStompEndpoint.disconnect
-        
-        stompService.unsubscribe(stompUnsubscribeEndpoint, stompDisconnectEndpoint)
+        let stompUnsubscribeEndpoint = MessageStompEndpoint.unsubscribe(
+            destination: id,
+            userID: tokenStorage.get(.userID)
+        )
+        stompService.unsubscribe(stompUnsubscribeEndpoint)
     }
 }

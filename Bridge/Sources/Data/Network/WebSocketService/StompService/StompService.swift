@@ -9,8 +9,11 @@ import Foundation
 import RxSwift
 
 protocol StompService {
-    func subscribe(_ connectEndpoint: StompEndpoint, _ subscribeEndpoint: StompEndpoint) -> Observable<Data>
-    func unsubscribe(_ unsubscribeEndpoint: StompEndpoint, _ disconnectEndpoint: StompEndpoint)
+    func connect(_ stompEndpoint: StompEndpoint)
+    func disconnect(_ stompEndpoint: StompEndpoint)
+    
+    func subscribe(_ stompEndpoint: StompEndpoint) -> Observable<Data>
+    func unsubscribe(_ stompEndpoint: StompEndpoint)
     
     func send(_ endpoint: StompEndpoint)
 }

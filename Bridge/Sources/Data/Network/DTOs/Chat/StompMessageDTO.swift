@@ -9,38 +9,35 @@ import Foundation
 
 /// STOMP로 메시지 요청 및 응답을 위한 타입
 struct StompMessageDTO: Codable {
-    let messageID: String
+    let messageID = UUID().uuidString
     let channelID: String
+    let senderID: String
     let type: String
-    let sender: String
     let content: String
-    let hasRead: Bool
-    let sendTime: String?
+    let hasRead = false
+    let sentTime: String? = nil
     
     enum CodingKeys: String, CodingKey {
         case messageID = "messageId"
         case channelID = "chatRoomId"
+        case senderID
         case type
-        case sender
         case content = "message"
         case hasRead = "readStat"
-        case sendTime
+        case sentTime = "sendTime"
     }
     
-    init(channelID: String, type: MessageType, sender: String, content: String) {
-        self.messageID = UUID().uuidString
+    init(channelID: String, senderID: String, type: MessageResponseType, content: String) {
         self.channelID = channelID
         self.type = type.rawValue
-        self.sender = sender
+        self.senderID = senderID
         self.content = content
-        self.hasRead = false
-        self.sendTime = nil
     }
 }
 
 // MARK: - Custom type
 extension StompMessageDTO {
-    enum MessageType: String {
+    enum MessageResponseType: String {
         case talk = "TALK"
         case accept = "ACCEPT"
         case reject = "REJECT"
@@ -49,18 +46,28 @@ extension StompMessageDTO {
 
 // MARK: - Entity mapping
 extension StompMessageDTO {
-    func toEntity() -> Message {
-        // TODO: sender 판단 로직
-        // TODO: type 판단 로직
-        
-        return Message(
+    func toEntity(userID: String) -> Message {
+        Message(
             id: messageID,
-            sender: KeychainTokenStorage().get(.userName) == sender ? .me : .opponent,
-            type: .text(content),
-            sentDate: sendTime?.toDate() ?? "",
-            sentTime: sendTime?.toSimpleTime() ?? "",
+            sender: userID == senderID ? .me : .opponent,
+            type: mapToMessageType(type),
+            sentDate: sentTime?.toDate() ?? "",
+            sentTime: sentTime?.toSimpleTime() ?? "",
             hasRead: hasRead
         )
+    }
+    
+    private func mapToMessageType(_ type: String) -> MessageType {
+        switch type {
+        case MessageResponseType.accept.rawValue:
+            return .accept
+            
+        case MessageResponseType.reject.rawValue:
+            return .reject
+            
+        default:
+            return .text(content)
+        }
     }
 }
 
@@ -72,14 +79,14 @@ extension StompMessageDTO {
         try container.encode(messageID, forKey: .messageID)
         try container.encode(channelID, forKey: .channelID)
         try container.encode(type, forKey: .type)
-        try container.encode(sender, forKey: .sender)
+        try container.encode(senderID, forKey: .senderID)
         try container.encode(content, forKey: .content)
         try container.encode(hasRead, forKey: .hasRead)
         
-        if let sendTime {
-            try container.encode(sendTime, forKey: .sendTime)
+        if let sentTime {
+            try container.encode(sentTime, forKey: .sentTime)
         } else {
-            try container.encodeNil(forKey: .sendTime)  // null 값 명시적으로 인코딩
+            try container.encodeNil(forKey: .sentTime)  // null 값 명시적으로 인코딩
         }
     }
 }

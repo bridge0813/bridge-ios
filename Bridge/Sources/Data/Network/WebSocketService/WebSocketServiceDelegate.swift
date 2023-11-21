@@ -14,8 +14,3 @@ protocol WebSocketServiceDelegate: AnyObject {
     func webSocketDidReceive(text: String)
     func webSocketDidReceive(data: Data)
 }
-
-extension WebSocketServiceDelegate {
-    func webSocketDidConnect() { }
-    func webSocketDidDisconnect() { }
-}

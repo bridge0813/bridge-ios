@@ -41,6 +41,8 @@ extension StompEndpoint {
                 frame.append(jsonString)
             }
             
+        } else if command.rawValue == StompRequestCommand.disconnect.rawValue {
+            // Disconnect 프레임일 때는 new line character 추가하지 않음
         } else {
             frame.append("\n")
         }

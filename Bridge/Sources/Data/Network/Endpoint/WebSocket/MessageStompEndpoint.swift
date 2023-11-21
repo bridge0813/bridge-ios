@@ -8,11 +8,11 @@
 import Foundation
 
 enum MessageStompEndpoint {
-    case connect(userName: String, destination: String)
+    case connect
     case disconnect
     
-    case subscribe(destination: String)
-    case unsubscribe(destination: String)
+    case subscribe(destination: String, userID: String)
+    case unsubscribe(destination: String, userID: String)
     
     case send(requestDTO: StompMessageDTO)
 }
@@ -40,24 +40,20 @@ extension MessageStompEndpoint: StompEndpoint {
     
     var headers: StompHeaders? {
         switch self {
-        case .connect(let userName, let destination):
-            return [
-                StompHeaderKey.acceptVersion.rawValue: "1.1,1.2",
-                StompHeaderKey.host.rawValue: userName,
-                StompHeaderKey.message.rawValue: destination
-            ]
+        case .connect:
+            return [StompHeaderKey.acceptVersion.rawValue: "1.1,1.2"]
             
         case .disconnect:
             return nil
             
-        case .subscribe(let destination):
+        case .subscribe(let destination, let userID):
             return [
-                StompHeaderKey.id.rawValue: destination,
+                StompHeaderKey.id.rawValue: "\(destination)/\(userID)",
                 StompHeaderKey.destination.rawValue: "/sub/chat/room/\(destination)"
             ]
             
-        case .unsubscribe(let destination):
-            return [StompHeaderKey.id.rawValue: destination]
+        case .unsubscribe(let destination, let userID):
+            return [StompHeaderKey.id.rawValue: "\(destination)/\(userID)"]
             
         case .send:
             return [StompHeaderKey.destination.rawValue: "/pub/chat/message"]

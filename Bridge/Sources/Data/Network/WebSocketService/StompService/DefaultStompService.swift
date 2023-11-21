@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 final class DefaultStompService: StompService {
-    
+
     private let webSocketService: WebSocketService
     private let incomingMessage = PublishSubject<Data>()
     
@@ -18,33 +18,42 @@ final class DefaultStompService: StompService {
         webSocketService.delegate = self
     }
     
-    func subscribe(_ connectEndpoint: StompEndpoint, _ subscribeEndpoint: StompEndpoint) -> Observable<Data> {
-        let connectFrame = connectEndpoint.toFrame()
-        let subscribeFrame = subscribeEndpoint.toFrame()
-        
-        webSocketService.write(connectFrame) { [weak self] in
-            self?.webSocketService.write(subscribeFrame, completion: nil)
-        }
-        
+    func connect(_ stompEndpoint: StompEndpoint) {
+        let connectFrame = stompEndpoint.toFrame()
+        webSocketService.write(connectFrame)
+    }
+    
+    func disconnect(_ stompEndpoint: StompEndpoint) {
+        let disconnectFrame = stompEndpoint.toFrame()
+        webSocketService.write(disconnectFrame)
+    }
+    
+    func subscribe(_ stompEndpoint: StompEndpoint) -> Observable<Data> {
+        let subscribeFrame = stompEndpoint.toFrame()
+        webSocketService.write(subscribeFrame)
         return incomingMessage
     }
     
-    func unsubscribe(_ disconnectEndpoint: StompEndpoint, _ unsubscribeEndpoint: StompEndpoint) {
-        let disconnectFrame = disconnectEndpoint.toFrame()
-        let unsubscribeFrame = unsubscribeEndpoint.toFrame()
-        
-        webSocketService.write(unsubscribeFrame) { [weak self] in
-            self?.webSocketService.write(disconnectFrame, completion: nil)
-        }
+    func unsubscribe(_ stompEndpoint: StompEndpoint) {
+        let unsubscribeFrame = stompEndpoint.toFrame()
+        webSocketService.write(unsubscribeFrame)
     }
     
     func send(_ endpoint: StompEndpoint) {
         let frame = endpoint.toFrame()
-        webSocketService.write(frame, completion: nil)
+        webSocketService.write(frame)
     }
 }
 
 extension DefaultStompService: WebSocketServiceDelegate {
+    func webSocketDidConnect() {
+        connect(MessageStompEndpoint.connect)
+    }
+    
+    func webSocketDidDisconnect() {
+        disconnect(MessageStompEndpoint.disconnect)
+    }
+    
     func webSocketDidReceive(text: String) {
         guard let command = text.extractCommand(.message),
               command == StompResponseCommand.message.rawValue,

@@ -29,16 +29,17 @@ final class DefaultMessageRepository: MessageRepository {
         
         return networkService.request(to: messageEndpoint, interceptor: nil)
             .decode(type: [MessageDTO].self, decoder: JSONDecoder())
-            .map { messageDTOs in
-                messageDTOs.map { $0.toEntity() }
+            .map { [weak self] messageDTOs in
+                let userID = self?.tokenStorage.get(.userID) ?? invalidToken
+                return messageDTOs.map { $0.toEntity(userID: userID) }
             }
     }
     
     func sendMessage(_ message: String, to channel: String) {
         let messageRequestDTO = StompMessageDTO(
             channelID: channel,
+            senderID: tokenStorage.get(.userID),
             type: .talk,
-            sender: tokenStorage.get(.userName),
             content: message
         )
         

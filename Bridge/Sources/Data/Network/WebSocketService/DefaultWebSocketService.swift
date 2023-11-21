@@ -26,8 +26,8 @@ final class DefaultWebSocketService: WebSocketService {
         socket?.disconnect()
     }
     
-    func write(_ frame: WebSocketFrame, completion: (() -> Void)? = nil) {
-        socket?.write(string: frame, completion: completion)
+    func write(_ frame: WebSocketFrame) {
+        socket?.write(string: frame)
     }
 }
 
