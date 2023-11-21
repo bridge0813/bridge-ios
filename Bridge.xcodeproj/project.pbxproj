@@ -204,6 +204,7 @@
 		7CA04F622B0A4C84007B9191 /* CreateProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F612B0A4C84007B9191 /* CreateProject.swift */; };
 		7CA04F652B0A6148007B9191 /* ProjectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */; };
 		7CA04F692B0A6F02007B9191 /* CreateProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */; };
+		7CA04F6C2B0C5D29007B9191 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA04F6B2B0C5D29007B9191 /* Lottie */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -438,6 +439,7 @@
 				7B71E75F2A933C18001B5D2C /* FlexLayout in Frameworks */,
 				7B71E7632A933C18001B5D2C /* FlexLayoutYogaKit in Frameworks */,
 				7B71E75C2A933BF5001B5D2C /* RxSwift in Frameworks */,
+				7CA04F6C2B0C5D29007B9191 /* Lottie in Frameworks */,
 				7B71E7562A933BF5001B5D2C /* RxBlocking in Frameworks */,
 				7B71E7662A933C25001B5D2C /* PinLayout in Frameworks */,
 				7B71E7612A933C18001B5D2C /* FlexLayoutYoga in Frameworks */,
@@ -1606,6 +1608,7 @@
 				7B71E7622A933C18001B5D2C /* FlexLayoutYogaKit */,
 				7B71E7652A933C25001B5D2C /* PinLayout */,
 				7B1D9FB42ADE11A9005F42D9 /* Starscream */,
+				7CA04F6B2B0C5D29007B9191 /* Lottie */,
 			);
 			productName = Bridge;
 			productReference = 7B71E73D2A9330C6001B5D2C /* Bridge.app */;
@@ -1640,6 +1643,7 @@
 				7B71E75D2A933C18001B5D2C /* XCRemoteSwiftPackageReference "FlexLayout" */,
 				7B71E7642A933C25001B5D2C /* XCRemoteSwiftPackageReference "PinLayout" */,
 				7B1D9FB32ADE11A9005F42D9 /* XCRemoteSwiftPackageReference "Starscream" */,
+				7CA04F6A2B0C5D29007B9191 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 7B71E73E2A9330C6001B5D2C /* Products */;
 			projectDirPath = "";
@@ -2149,6 +2153,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		7CA04F6A2B0C5D29007B9191 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2196,6 +2208,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7B71E7642A933C25001B5D2C /* XCRemoteSwiftPackageReference "PinLayout" */;
 			productName = PinLayout;
+		};
+		7CA04F6B2B0C5D29007B9191 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CA04F6A2B0C5D29007B9191 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
