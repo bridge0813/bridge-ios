@@ -91,6 +91,16 @@ final class ProfileHeaderView: BaseView {
         return UIButton(configuration: configuration)
     }()
     
+    // MARK: - Init
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        interestedMenuBackgroundView.layer.shadowPath = UIBezierPath(
+            roundedRect: interestedMenuBackgroundView.bounds,
+            cornerRadius: 8
+        ).cgPath
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
