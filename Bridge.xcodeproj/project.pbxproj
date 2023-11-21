@@ -869,7 +869,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB2F2AB1DAC3009A00EB /* Auth */,
-				7C569CFB2A9F6F8A0063D362 /* Main */,
+				7C569CFB2A9F6F8A0063D362 /* Project */,
 				7BA36CA52A9C6878000DAB02 /* Chat */,
 			);
 			path = RepositoryInterfaces;
@@ -926,7 +926,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB322AB1DBEC009A00EB /* Auth */,
-				7C569D072A9F7E060063D362 /* Main */,
+				7C569D072A9F7E060063D362 /* Project */,
 				7BA36CA22A9C681B000DAB02 /* Chat */,
 			);
 			path = Repositories;
@@ -1217,12 +1217,12 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		7C569CFB2A9F6F8A0063D362 /* Main */ = {
+		7C569CFB2A9F6F8A0063D362 /* Project */ = {
 			isa = PBXGroup;
 			children = (
 				7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */,
 			);
-			path = Main;
+			path = Project;
 			sourceTree = "<group>";
 		};
 		7C569D012A9F720B0063D362 /* Main */ = {
@@ -1241,13 +1241,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		7C569D072A9F7E060063D362 /* Main */ = {
+		7C569D072A9F7E060063D362 /* Project */ = {
 			isa = PBXGroup;
 			children = (
 				7C569D082A9F7E160063D362 /* DefaultProjectRepository.swift */,
 				7C55E63A2ADEA2A40018FA5D /* MockProjectRepository.swift */,
 			);
-			path = Main;
+			path = Project;
 			sourceTree = "<group>";
 		};
 		7C8B822C2AC8498C00F7B889 /* ButtonGroup */ = {

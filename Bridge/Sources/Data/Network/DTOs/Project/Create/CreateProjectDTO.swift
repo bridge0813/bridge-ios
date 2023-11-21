@@ -5,7 +5,6 @@
 //  Created by 엄지호 on 2023/11/19.
 //
 
-// TODO: - 공통적으로 사용되는 부분 통합해보기.
 struct CreateProjectDTO: Encodable {
     let title: String
     let description: String
