@@ -70,7 +70,7 @@ final class ChannelCell: BaseTableViewCell {
             
             flex.addItem().width(200).define { flex in
                 flex.addItem().direction(.row).marginBottom(4).define { flex in
-                    flex.addItem(nameLabel).marginRight(8)
+                    flex.addItem(nameLabel).marginRight(8).shrink(1)
                     flex.addItem(lastMessageReceivedTimeLabel)
                 }
                 

@@ -11,6 +11,6 @@ protocol ChannelRepository {
     func fetchChannels() -> Observable<[Channel]>
     func leaveChannel(id: String) -> Observable<String>
     
-    func subscribeChannel(id: String) -> Observable<Message>
+    func subscribeChannel(id: String) -> Observable<[Message]>
     func unsubscribeChannel(id: String)
 }

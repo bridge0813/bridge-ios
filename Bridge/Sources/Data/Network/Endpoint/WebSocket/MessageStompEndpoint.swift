@@ -48,12 +48,16 @@ extension MessageStompEndpoint: StompEndpoint {
             
         case .subscribe(let destination, let userID):
             return [
-                StompHeaderKey.id.rawValue: "\(destination)/\(userID)",
-                StompHeaderKey.destination.rawValue: "/sub/chat/room/\(destination)"
+                StompHeaderKey.id.rawValue: userID,
+                StompHeaderKey.destination.rawValue: "/sub/chat/room/\(destination)",
+                StompHeaderKey.message.rawValue: "\(destination)/\(userID)"
             ]
             
         case .unsubscribe(let destination, let userID):
-            return [StompHeaderKey.id.rawValue: "\(destination)/\(userID)"]
+            return [
+                StompHeaderKey.message.rawValue: destination,
+                StompHeaderKey.id.rawValue: userID
+            ]
             
         case .send:
             return [StompHeaderKey.destination.rawValue: "/pub/chat/message"]

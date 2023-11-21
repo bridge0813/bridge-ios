@@ -9,8 +9,9 @@ import Foundation
 import RxSwift
 
 final class DefaultStompService: StompService {
-
+    
     private let webSocketService: WebSocketService
+    private let updatedMessages = PublishSubject<Data>()
     private let incomingMessage = PublishSubject<Data>()
     
     init(webSocketService: WebSocketService) {
@@ -31,7 +32,7 @@ final class DefaultStompService: StompService {
     func subscribe(_ stompEndpoint: StompEndpoint) -> Observable<Data> {
         let subscribeFrame = stompEndpoint.toFrame()
         webSocketService.write(subscribeFrame)
-        return incomingMessage
+        return updatedMessages
     }
     
     func unsubscribe(_ stompEndpoint: StompEndpoint) {
@@ -39,9 +40,10 @@ final class DefaultStompService: StompService {
         webSocketService.write(unsubscribeFrame)
     }
     
-    func send(_ endpoint: StompEndpoint) {
+    func send(_ endpoint: StompEndpoint) -> Observable<Data> {
         let frame = endpoint.toFrame()
         webSocketService.write(frame)
+        return incomingMessage
     }
 }
 
@@ -56,12 +58,14 @@ extension DefaultStompService: WebSocketServiceDelegate {
     
     func webSocketDidReceive(text: String) {
         guard let command = text.extractCommand(.message),
-              command == StompResponseCommand.message.rawValue,
-              let jsonString = text.extractJsonString(),
-              let data = jsonString.data(using: .utf8) 
+              command == StompResponseCommand.message.rawValue
         else { return }
         
-        incomingMessage.onNext(data)
+        if let jsonArrayString = text.extractJsonArrayString(), let data = jsonArrayString.data(using: .utf8) {
+            updatedMessages.onNext(data)
+        } else if let jsonString = text.extractJsonString(), let data = jsonString.data(using: .utf8) {
+            incomingMessage.onNext(data)
+        }
     }
     
     func webSocketDidReceive(data: Data) { }

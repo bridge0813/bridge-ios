@@ -55,11 +55,6 @@ final class ChannelViewModel: ViewModelType {
         let messages = BehaviorRelay<[Message]>(value: [])
         
         channelSubscriptionUseCase.subscribe(id: channel.id)
-            .map { incomingMessage in
-                var currentMessages = messages.value
-                currentMessages.append(incomingMessage)
-                return currentMessages
-            }
             .bind(to: messages)
             .disposed(by: disposeBag)
         
@@ -105,9 +100,15 @@ final class ChannelViewModel: ViewModelType {
         
         input.sendMessage
             .withUnretained(self)
-            .subscribe(onNext: { owner, message in
+            .flatMap { owner, message in
                 owner.sendMessageUseCase.sendMessage(message, to: owner.channel.id)
-            })
+            }
+            .map { incomingMessage in
+                var currentMessages = messages.value
+                currentMessages.append(incomingMessage)
+                return currentMessages
+            }
+            .bind(to: messages)
             .disposed(by: disposeBag)
         
         input.viewDidDisappear

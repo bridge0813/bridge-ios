@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol SendMessageUseCase {
-    func sendMessage(_ message: String, to channel: String)
+    func sendMessage(_ message: String, to channel: String) -> Observable<Message>
 }
 
 final class DefaultSendMessageUseCase: SendMessageUseCase {
@@ -19,7 +19,7 @@ final class DefaultSendMessageUseCase: SendMessageUseCase {
         self.messageRepository = messageRepository
     }
     
-    func sendMessage(_ message: String, to channel: String) {
+    func sendMessage(_ message: String, to channel: String) -> Observable<Message> {
         messageRepository.sendMessage(message, to: channel)
     }
 }

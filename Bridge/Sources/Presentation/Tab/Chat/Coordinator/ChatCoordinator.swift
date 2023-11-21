@@ -32,6 +32,8 @@ final class ChatCoordinator: Coordinator {
         authRepository = DefaultAuthRepository(networkService: networkService)
         channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
         messageRepository = DefaultMessageRepository(networkService: networkService, stompService: stompService)
+//        channelRepository = MockChannelRepository()
+//        messageRepository = MockMessageRepository()
         
         fetchChannelsUseCase = DefaultFetchChannelsUseCase(channelRepository: channelRepository)
         leaveChannelUseCase = DefaultLeaveChannelUseCase(channelRepository: channelRepository)

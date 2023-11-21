@@ -35,15 +35,20 @@ final class DefaultMessageRepository: MessageRepository {
             }
     }
     
-    func sendMessage(_ message: String, to channel: String) {
+    func sendMessage(_ message: String, to channel: String) -> Observable<Message> {
+        let userID = tokenStorage.get(.userID)
+        
         let messageRequestDTO = StompMessageDTO(
             channelID: channel,
-            senderID: tokenStorage.get(.userID),
+            senderID: userID,
             type: .talk,
             content: message
         )
         
         let messageStompEndpoint = MessageStompEndpoint.send(requestDTO: messageRequestDTO)
-        stompService.send(messageStompEndpoint)
+        
+        return stompService.send(messageStompEndpoint)
+            .decode(type: StompMessageDTO.self, decoder: JSONDecoder())
+            .map { $0.toEntity(userID: userID) }
     }
 }

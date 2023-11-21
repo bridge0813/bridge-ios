@@ -12,5 +12,14 @@ final class MockMessageRepository: MessageRepository {
         .just(MessageDTO.testArray.map { $0.toEntity(userID: "1") })
     }
     
-    func sendMessage(_ message: String, to channel: String) { }
+    func sendMessage(_ message: String, to channel: String) -> Observable<Message> {
+        .just(
+            StompMessageDTO(
+                channelID: channel,
+                senderID: "1",
+                type: .talk,
+                content: message
+            ).toEntity(userID: "1")
+        )
+    }
 }
