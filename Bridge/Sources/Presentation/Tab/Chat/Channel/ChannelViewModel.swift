@@ -15,6 +15,7 @@ final class ChannelViewModel: ViewModelType {
         let profileButtonTapped: Observable<Void>
         let dropdownItemSelected: Observable<String>
         let sendMessage: Observable<String>
+        let viewDidDisappear: Observable<Bool>
     }
     
     struct Output {
@@ -106,6 +107,13 @@ final class ChannelViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, message in
                 owner.sendMessageUseCase.sendMessage(message, to: owner.channel.id)
+            })
+            .disposed(by: disposeBag)
+        
+        input.viewDidDisappear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.channelSubscriptionUseCase.unsubscribe(id: owner.channel.id)
             })
             .disposed(by: disposeBag)
         

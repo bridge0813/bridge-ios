@@ -9,6 +9,7 @@ import RxSwift
 
 protocol ChannelSubscriptionUseCase {
     func subscribe(id: String) -> Observable<Message>
+    func unsubscribe(id: String)
 }
 
 final class DefaultChannelSubscriptionUseCase: ChannelSubscriptionUseCase {
@@ -21,5 +22,9 @@ final class DefaultChannelSubscriptionUseCase: ChannelSubscriptionUseCase {
     
     func subscribe(id: String) -> Observable<Message> {
         channelRepository.subscribeChannel(id: id)
+    }
+    
+    func unsubscribe(id: String) {
+        channelRepository.unsubscribeChannel(id: id)
     }
 }

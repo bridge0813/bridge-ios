@@ -152,7 +152,8 @@ final class ChannelViewController: BaseViewController {
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             profileButtonTapped: profileButton.rx.tap.asObservable(),
             dropdownItemSelected: dropdown.itemSelected.map { $0.title }.asObservable(),
-            sendMessage: messageInputBar.sendMessage
+            sendMessage: messageInputBar.sendMessage,
+            viewDidDisappear: self.rx.viewDidDisappear.asObservable()
         )
         let output = viewModel.transform(input: input)
         

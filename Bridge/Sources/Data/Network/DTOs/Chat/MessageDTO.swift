@@ -40,6 +40,8 @@ extension MessageDTO {
 // MARK: - Entity mapping
 extension MessageDTO {
     func toEntity() -> Message {
+        // TODO: sender 판단 로직 개선 필요 (키체인 대신)
+        
         Message(
             id: UUID().uuidString,
             sender: sender == "MAKER" ? .me : .opponent,

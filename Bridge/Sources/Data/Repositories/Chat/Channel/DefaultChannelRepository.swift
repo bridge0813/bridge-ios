@@ -53,4 +53,11 @@ final class DefaultChannelRepository: ChannelRepository {
             .decode(type: StompMessageDTO.self, decoder: JSONDecoder())
             .map { $0.toEntity() }
     }
+    
+    func unsubscribeChannel(id: String) {
+        let stompUnsubscribeEndpoint = MessageStompEndpoint.unsubscribe(destination: id)
+        let stompDisconnectEndpoint = MessageStompEndpoint.disconnect
+        
+        stompService.unsubscribe(stompUnsubscribeEndpoint, stompDisconnectEndpoint)
+    }
 }

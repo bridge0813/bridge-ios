@@ -39,4 +39,6 @@ final class MockChannelRepository: ChannelRepository {
                 .toEntity()
             }
     }
+    
+    func unsubscribeChannel(id: String) { }
 }

@@ -47,7 +47,11 @@ extension StompEndpoint {
         
         // NULL character
         frame.append("\0")
+        
+        #if DEBUG
         print(frame)
+        #endif
+        
         return frame
     }
 }

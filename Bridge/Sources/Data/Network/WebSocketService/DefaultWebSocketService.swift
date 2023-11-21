@@ -63,7 +63,7 @@ extension DefaultWebSocketService: WebSocketDelegate {
             print("[Websocket] Peer closed")
             
         case .cancelled:
-            print("[WebSocket] Canclled")
+            print("[WebSocket] Cancelled")
             
         case .error(let error):
             print("[WebSocket] Error")
