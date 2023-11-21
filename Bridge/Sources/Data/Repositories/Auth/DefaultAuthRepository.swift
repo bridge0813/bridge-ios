@@ -19,8 +19,10 @@ final class DefaultAuthRepository: AuthRepository {
     }
     
     func signInWithApple(credentials: UserCredentials) -> Observable<Bool> {
-        if !credentials.name.isEmpty {  // 이름은 2번째 로그인부터 빈 문자열이 리턴되므로, 빈 문자열 저장하지 않도록 처리
-            tokenStorage.save(credentials.name, for: .userName)
+        // 이름은 2번째 로그인부터 nil이 리턴되므로, nil을 저장하지 않도록 처리
+        if let userName = credentials.userName,
+           let givenName = credentials.givenName {
+            tokenStorage.save(userName + givenName, for: .userName)
         }
         
         let signInWithAppleRequestDTO = SignInWithAppleRequestDTO(

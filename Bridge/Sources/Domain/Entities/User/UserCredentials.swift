@@ -9,7 +9,8 @@ import Foundation
 
 struct UserCredentials {
     let id: String
-    let name: String
+    let userName: String?
+    let givenName: String?
     let identityToken: String?
     let authorizationCode: String?
 }
@@ -17,7 +18,8 @@ struct UserCredentials {
 extension UserCredentials {
     static let onError = UserCredentials(
         id: "",
-        name: "",
+        userName: nil,
+        givenName: nil,
         identityToken: nil,
         authorizationCode: nil
     )

@@ -71,19 +71,20 @@ final class SignInViewModel: ViewModelType {
 
 private extension SignInViewModel {
     func mapToUserCredentials(_ authorization: ASAuthorization) -> UserCredentials {
-        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential
-        else { return UserCredentials.onError }
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+            return UserCredentials.onError
+        }
         
         let userIdentifier = appleIDCredential.user
-        let userName = appleIDCredential.fullName?.familyName ?? ""
-        let givenName = appleIDCredential.fullName?.givenName ?? ""
-        let fullName = userName + givenName
+        let userName = appleIDCredential.fullName?.familyName
+        let givenName = appleIDCredential.fullName?.givenName
         let identityToken = String(data: appleIDCredential.identityToken ?? Data(), encoding: .utf8)
         let authorizationCode = String(data: appleIDCredential.authorizationCode ?? Data(), encoding: .utf8)
         
         return UserCredentials(
             id: userIdentifier,
-            name: fullName,
+            userName: userName,
+            givenName: givenName,
             identityToken: identityToken,
             authorizationCode: authorizationCode
         )
