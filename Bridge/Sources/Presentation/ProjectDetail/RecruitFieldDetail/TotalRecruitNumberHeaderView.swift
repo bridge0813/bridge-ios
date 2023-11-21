@@ -1,23 +1,23 @@
 //
-//  MainCollectionHeaderView.swift
+//  TotalRecruitNumberHeaderView.swift
 //  Bridge
 //
-//  Created by 엄지호 on 2023/10/15.
+//  Created by 엄지호 on 2023/11/13.
 //
 
 import UIKit
 import FlexLayout
 import PinLayout
 
-/// 모집글의 갯수를 나타내는 헤더뷰
-final class ProjectCountHeaderView: BaseCollectionReusableView {
+/// 총 모집인원의 수를 나타내는 헤더뷰
+final class TotalRecruitNumberHeaderView: BaseCollectionReusableView {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
-    private let projectCountLabel: UILabel = {
+    private let recruitNumberLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body4.font
-        label.textColor = BridgeColor.gray03
+        label.textColor = BridgeColor.gray01
         
         return label
     }()
@@ -26,7 +26,7 @@ final class ProjectCountHeaderView: BaseCollectionReusableView {
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.row).alignItems(.end).define { flex in
-            flex.addItem(projectCountLabel).marginLeft(16)
+            flex.addItem(recruitNumberLabel)
         }
     }
     
@@ -37,12 +37,11 @@ final class ProjectCountHeaderView: BaseCollectionReusableView {
     }
 }
 // MARK: - Configuration
-extension ProjectCountHeaderView {
-    func configureCountLabel(with count: String) {
-        projectCountLabel.highlightedTextColor(
-            text: "\(count)개의 프로젝트",
-            highlightedText: String(count),
-            hignlightedTextColor: BridgeColor.secondary1
+extension TotalRecruitNumberHeaderView {
+    func configureLabel(with totalNumber: Int) {
+        recruitNumberLabel.highlightedTextColor(
+            text: "\(totalNumber)명 모집중",
+            highlightedText: "\(totalNumber)명"
         )
     }
 }

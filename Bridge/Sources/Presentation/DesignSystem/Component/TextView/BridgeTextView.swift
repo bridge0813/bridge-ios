@@ -138,14 +138,10 @@ final class BridgeTextView: BaseView {
 // MARK: - UpdateCountLabel
 extension BridgeTextView {
     private func updateCountLabel(_ count: Int) {
-        let labelText = "\(count)/\(maxCount)"
-        let attributedString = NSMutableAttributedString(string: labelText)
-
-        if let rangeOfNumber = labelText.range(of: String(count)) {
-            let nsRange = NSRange(rangeOfNumber, in: labelText)
-            attributedString.addAttribute(.foregroundColor, value: BridgeColor.secondary1, range: nsRange)
-        }
-
-        countLabel.attributedText = attributedString
+        countLabel.highlightedTextColor(
+            text: "\(count)/\(maxCount)",
+            highlightedText: String(count),
+            hignlightedTextColor: BridgeColor.secondary1
+        )
     }
 }
