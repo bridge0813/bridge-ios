@@ -80,13 +80,11 @@ final class BridgeTextView: BaseView {
     override func bind() {
         // 유저가 텍스트 뷰를 터치했을 때, 플레이스 홀더를 제거
         textView.rx.didBeginEditing
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                guard let self else { return }
-                
-                if self.textView.text == self.textViewPlaceholder {
-                    self.textView.text = nil
-                    self.textView.textColor = BridgeColor.gray01
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                if owner.textView.text == owner.textViewPlaceholder {
+                    owner.textView.text = nil
+                    owner.textView.textColor = BridgeColor.gray01
                 }
             })
             .disposed(by: disposeBag)
@@ -96,40 +94,36 @@ final class BridgeTextView: BaseView {
         // 입력된 텍스트가 없을 경우 라벨의 컬러는 변경되지 않고, 라벨 텍스트는 0으로 만들어주어야 하기 때문에 조건을 설정.
         textView.rx.text.orEmpty
             .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(onNext: { [weak self] text in
-                guard let self else { return }
-                
+            .withUnretained(self)
+            .subscribe(onNext: { owner, text in
                 // 텍스트가 빈 문자열이지 않고, 텍스트홀더도 아닐 경우 활성화
-                if !text.isEmpty && text != self.textViewPlaceholder {
-                    self.updateCountLabel(text.count)
-                    self.rootFlexContainer.layer.borderColor = BridgeColor.primary1.cgColor
+                if !text.isEmpty && text != owner.textViewPlaceholder {
+                    owner.updateCountLabel(text.count)
+                    owner.rootFlexContainer.layer.borderColor = BridgeColor.primary1.cgColor
                     
                 } else if text.isEmpty {
-                    self.countLabel.text = "0/\(maxCount)"
+                    owner.countLabel.text = "0/\(owner.maxCount)"
                 }
                 
                 // 텍스트가 제한된 글자 수를 초과하면 잘라내기.
-                if text.count > self.maxCount {
-                    let index = text.index(text.startIndex, offsetBy: self.maxCount)
-                    self.textView.text = String(text[..<index])
+                if text.count > owner.maxCount {
+                    let index = text.index(text.startIndex, offsetBy: owner.maxCount)
+                    owner.textView.text = String(text[..<index])
                 }
             })
             .disposed(by: disposeBag)
 
         // 유저가 입력을 그만두었을 때
         textView.rx.didEndEditing
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                guard let self else { return }
-                
-                if self.textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    self.textView.text = self.textViewPlaceholder
-                    self.textView.textColor = BridgeColor.gray04
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                if owner.textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    owner.textView.text = self.textViewPlaceholder
+                    owner.textView.textColor = BridgeColor.gray04
                 }
                 
-                self.rootFlexContainer.layer.borderColor = BridgeColor.gray06.cgColor
-                self.countLabel.textColor = BridgeColor.gray04
+                owner.rootFlexContainer.layer.borderColor = BridgeColor.gray06.cgColor
+                owner.countLabel.textColor = BridgeColor.gray04
             })
             .disposed(by: disposeBag)
     }
