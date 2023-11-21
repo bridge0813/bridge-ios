@@ -59,7 +59,7 @@ final class DatePickerPopUpView: BridgeBasePopUpView {
         super.configureLayouts()
         
         rootFlexContainer.flex.define { flex in
-            flex.addItem(dragHandleBar).alignSelf(.center).width(27).height(5).marginTop(10)
+            flex.addItem(dragHandleBar).alignSelf(.center).marginTop(10)
             
             flex.addItem(titleLabel).width(150).height(22).marginTop(30).marginLeft(16)
             

@@ -78,7 +78,7 @@ final class ProjectManagementMenuPopUpView: BridgeBasePopUpView {
         super.configureLayouts()
         
         rootFlexContainer.flex.alignItems(.center).paddingHorizontal(18).define { flex in
-            flex.addItem(dragHandleBar).width(25).height(5).marginTop(8)
+            flex.addItem(dragHandleBar).marginTop(8)
             
             flex.addItem(editButton).width(56).height(19).marginTop(15)
             flex.addItem().backgroundColor(BridgeColor.gray09).width(100%).height(1).marginTop(16)
