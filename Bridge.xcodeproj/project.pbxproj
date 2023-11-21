@@ -1059,7 +1059,6 @@
 				7B61236B2AC158B0006E72C1 /* DesignSystem */,
 				7BA36C8C2A9C4B20000DAB02 /* Common */,
 				7B2D76E92AA993AF00E5907B /* Auth */,
-				7CA04F102AFDF645007B9191 /* ProjectDetail */,
 				7BB2C2452A98546400AA2328 /* Tab */,
 			);
 			path = Presentation;
@@ -1078,6 +1077,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB2C2442A98542700AA2328 /* Coordinator */,
+				7CA04F102AFDF645007B9191 /* ProjectDetail */,
 				7CF93E012A9C64EB0013EBD6 /* Main */,
 				7BB2C24A2A985A0400AA2328 /* Chat */,
 			);
