@@ -108,7 +108,7 @@ extension DatePickerPopUpView {
         switch setDateType {
         case .deadline:
             titleLabel.text = "모집 마감일"
-            datePicker.minimumDate = nil  // 초기화
+            datePicker.minimumDate = Date()  // 초기화
             datePicker.maximumDate = maximumDate
             datePicker.date = deadlineDate
             
