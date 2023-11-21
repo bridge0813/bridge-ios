@@ -10,10 +10,19 @@ import FlexLayout
 import PinLayout
 import RxCocoa
 import RxSwift
+import Lottie
 
 final class CompletionViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
+    
+    private let animationView: LottieAnimationView = {
+        let animationView = LottieAnimationView(name: "firecracker")
+        animationView.play()
+        animationView.contentMode = .scaleAspectFill
+        
+        return animationView
+    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -83,6 +92,11 @@ final class CompletionViewController: BaseViewController {
         view.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.alignItems(.center).define { flex in
+            flex.addItem(animationView)
+                .position(.absolute)
+                .width(100%)
+                .height(100%)
+            
             flex.addItem(titleLabel).width(210).height(60).marginTop(56)
             flex.addItem(subTitleLabel).width(180).height(20).marginTop(8)
             flex.addItem(castleImageView).size(200).marginTop(114)

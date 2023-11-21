@@ -205,6 +205,7 @@
 		7CA04F652B0A6148007B9191 /* ProjectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */; };
 		7CA04F692B0A6F02007B9191 /* CreateProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */; };
 		7CA04F6C2B0C5D29007B9191 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA04F6B2B0C5D29007B9191 /* Lottie */; };
+		7CA04F712B0C5FFE007B9191 /* firecracker.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CA04F702B0C5FFE007B9191 /* firecracker.json */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -413,6 +414,7 @@
 		7CA04F612B0A4C84007B9191 /* CreateProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProject.swift; sourceTree = "<group>"; };
 		7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEndpoint.swift; sourceTree = "<group>"; };
 		7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectUseCase.swift; sourceTree = "<group>"; };
+		7CA04F702B0C5FFE007B9191 /* firecracker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firecracker.json; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -783,6 +785,7 @@
 			isa = PBXGroup;
 			children = (
 				7B6123702AC15D0F006E72C1 /* Font */,
+				7CA04F6D2B0C5F27007B9191 /* Lottie */,
 				7B71E74B2A9330C7001B5D2C /* LaunchScreen.storyboard */,
 				7B71E7492A9330C7001B5D2C /* Assets.xcassets */,
 				7B71E74E2A9330C7001B5D2C /* Info.plist */,
@@ -1466,6 +1469,14 @@
 			path = Create;
 			sourceTree = "<group>";
 		};
+		7CA04F6D2B0C5F27007B9191 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F702B0C5FFE007B9191 /* firecracker.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -1662,6 +1673,7 @@
 				7B6123812AC15D2E006E72C1 /* Pretendard-SemiBold.otf in Resources */,
 				7B61237F2AC15D2E006E72C1 /* Pretendard-ExtraLight.otf in Resources */,
 				7B6123802AC15D2E006E72C1 /* Pretendard-Bold.otf in Resources */,
+				7CA04F712B0C5FFE007B9191 /* firecracker.json in Resources */,
 				7B6123822AC15D2E006E72C1 /* Pretendard-Thin.otf in Resources */,
 				7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */,
 				7B71E74D2A9330C7001B5D2C /* LaunchScreen.storyboard in Resources */,
