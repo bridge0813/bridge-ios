@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// 채널의 기존 메시지들을 불러오는데 사용하기 위한 타입
+/// 채널의 기존 메시지들을 불러기 위한 타입
 struct MessageDTO: Decodable {
     let content: String
     let sender: String

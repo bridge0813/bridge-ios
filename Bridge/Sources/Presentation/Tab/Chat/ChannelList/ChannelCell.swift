@@ -96,7 +96,7 @@ extension ChannelCell {
         nameLabel.text = channel.name
         lastMessageReceivedTimeLabel.text = channel.lastMessage.receivedTime
         lastMessageContentLabel.text = channel.lastMessage.content
-        configureUnreadMessageCountLabel(Int(channel.unreadMessageCount) ?? 0)
+        configureUnreadMessageCountLabel(Int(channel.unreadMessageCount))
         
         profileImageView.flex.markDirty()
         nameLabel.flex.markDirty()

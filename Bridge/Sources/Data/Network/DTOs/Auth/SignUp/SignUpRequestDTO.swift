@@ -28,4 +28,3 @@ extension SignUpRequestDTO {
         try container.encode(selectedFields, forKey: .selectedFields)
     }
 }
-

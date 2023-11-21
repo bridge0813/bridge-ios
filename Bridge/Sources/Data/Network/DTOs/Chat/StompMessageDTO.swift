@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// STOMP로 메시지 요청 및 응답을 위한 타입
 struct StompMessageDTO: Codable {
     let messageID: String
     let channelID: String
@@ -49,9 +50,12 @@ extension StompMessageDTO {
 // MARK: - Entity mapping
 extension StompMessageDTO {
     func toEntity() -> Message {
-        Message(
+        // TODO: sender 판단 로직
+        // TODO: type 판단 로직
+        
+        return Message(
             id: messageID,
-            sender: sender == self.sender ? .me : .opponent,
+            sender: KeychainTokenStorage().get(.userName) == sender ? .me : .opponent,
             type: .text(content),
             sentDate: sendTime?.toDate() ?? "",
             sentTime: sendTime?.toSimpleTime() ?? "",
