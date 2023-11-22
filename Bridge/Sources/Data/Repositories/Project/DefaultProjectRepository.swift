@@ -33,7 +33,7 @@ final class DefaultProjectRepository: ProjectRepository {
     }
     
     func createProject(with project: CreateProject) -> Observable<Int> {
-        let createProjectDTO = toCreateProjectDTO(from: project)
+        let createProjectDTO = convertToDTO(from: project)
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)
         
         return networkService.request(createProjectEndpoint, interceptor: AuthInterceptor())
@@ -45,7 +45,7 @@ final class DefaultProjectRepository: ProjectRepository {
 }
 
 private extension DefaultProjectRepository {
-    func toCreateProjectDTO(from project: CreateProject) -> CreateProjectDTO {
+    func convertToDTO(from project: CreateProject) -> CreateProjectDTO {
         let userID = Int(tokenStorage.get(.userID) ?? invalidToken)
         
         let memberRequirementsDTO = project.memberRequirements.map { requirement -> MemberRequirementDTO in
