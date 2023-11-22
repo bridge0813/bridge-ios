@@ -14,8 +14,8 @@ struct StompMessageDTO: Codable {
     let senderID: Int
     let type: String
     let content: String
-    let hasRead = false
-    let sentTime: String? = nil
+    var hasRead = false
+    var sentDateAndTime: String?
     
     enum CodingKeys: String, CodingKey {
         case messageID = "messageId"
@@ -24,7 +24,7 @@ struct StompMessageDTO: Codable {
         case type
         case content = "message"
         case hasRead = "readStat"
-        case sentTime = "sendTime"
+        case sentDateAndTime = "sendTime"
     }
     
     init(channelID: String, senderID: String, type: MessageResponseType, content: String) {
@@ -51,8 +51,8 @@ extension StompMessageDTO {
             id: messageID,
             sender: Int(userID) == senderID ? .me : .opponent,
             type: mapToMessageType(type),
-            sentDate: sentTime?.toDate() ?? "",
-            sentTime: sentTime?.toSimpleTime() ?? "",
+            sentDate: sentDateAndTime?.toDate() ?? "",
+            sentTime: sentDateAndTime?.toSimpleTime() ?? "",
             hasRead: hasRead
         )
     }
@@ -83,10 +83,10 @@ extension StompMessageDTO {
         try container.encode(content, forKey: .content)
         try container.encode(hasRead, forKey: .hasRead)
         
-        if let sentTime {
-            try container.encode(sentTime, forKey: .sentTime)
+        if let sentDateAndTime {
+            try container.encode(sentDateAndTime, forKey: .sentDateAndTime)
         } else {
-            try container.encodeNil(forKey: .sentTime)  // null 값 명시적으로 인코딩
+            try container.encodeNil(forKey: .sentDateAndTime)  // null 값 명시적으로 인코딩
         }
     }
 }

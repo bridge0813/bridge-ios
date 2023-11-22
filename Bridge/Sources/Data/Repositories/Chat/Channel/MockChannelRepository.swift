@@ -33,7 +33,7 @@ final class MockChannelRepository: ChannelRepository {
                 [
                     MessageDTO(
                         messageID: UUID().uuidString,
-                        senderID: "1",
+                        senderID: 1,
                         type: "TALK",
                         content: "일정 간격으로 방출되는 메시지",
                         sentDateAndTime: "2023-11-16T11:30:00",
