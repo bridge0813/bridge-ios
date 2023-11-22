@@ -6,7 +6,7 @@
 //
 
 enum ProjectEndpoint {
-    case create(requestDTO: CreateProjectDTO)
+    case create(requestDTO: CreateProjectRequestDTO)
 }
 
 extension ProjectEndpoint: Endpoint {

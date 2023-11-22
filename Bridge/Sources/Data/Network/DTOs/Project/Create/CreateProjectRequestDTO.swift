@@ -5,7 +5,7 @@
 //  Created by 엄지호 on 2023/11/19.
 //
 
-struct CreateProjectDTO: Encodable {
+struct CreateProjectRequestDTO: Encodable {
     let title: String
     let description: String
     let deadline: String
@@ -26,8 +26,4 @@ struct CreateProjectDTO: Encodable {
         case progressMethod = "meetingWay"
         case progressStep = "stage"
     }
-}
-
-struct CreateProjectResponseDTO: Decodable {
-    let projectId: Int
 }

@@ -45,7 +45,7 @@ final class DefaultProjectRepository: ProjectRepository {
 }
 
 private extension DefaultProjectRepository {
-    func convertToDTO(from project: Project) -> CreateProjectDTO {
+    func convertToDTO(from project: Project) -> CreateProjectRequestDTO {
         let userID = Int(tokenStorage.get(.userID) ?? invalidToken)
         
         let memberRequirementsDTO = project.memberRequirements.map { requirement -> MemberRequirementDTO in
@@ -57,7 +57,7 @@ private extension DefaultProjectRepository {
             )
         }
         
-        return CreateProjectDTO(
+        return CreateProjectRequestDTO(
             title: project.title,
             description: project.description,
             deadline: project.deadline.toString(format: "yyyy-MM-dd'T'HH:mm:ss"),
