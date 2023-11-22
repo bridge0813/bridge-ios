@@ -15,5 +15,6 @@ protocol StompService {
     func subscribe(_ stompEndpoint: StompEndpoint) -> Observable<Data>
     func unsubscribe(_ stompEndpoint: StompEndpoint)
     
-    func send(_ endpoint: StompEndpoint) -> Observable<Data>
+    func observe() -> Observable<Data>
+    func send(_ endpoint: StompEndpoint)
 }

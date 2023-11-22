@@ -58,6 +58,15 @@ final class ChannelViewModel: ViewModelType {
             .bind(to: messages)
             .disposed(by: disposeBag)
         
+        fetchMessagesUseCase.observeMessage()
+            .map { incomingMessage in
+                var currentMessages = messages.value
+                currentMessages.append(incomingMessage)
+                return currentMessages
+            }
+            .bind(to: messages)
+            .disposed(by: disposeBag)
+        
         input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
@@ -100,15 +109,9 @@ final class ChannelViewModel: ViewModelType {
         
         input.sendMessage
             .withUnretained(self)
-            .flatMap { owner, message in
+            .subscribe(onNext: { owner, message in
                 owner.sendMessageUseCase.sendMessage(message, to: owner.channel.id)
-            }
-            .map { incomingMessage in
-                var currentMessages = messages.value
-                currentMessages.append(incomingMessage)
-                return currentMessages
-            }
-            .bind(to: messages)
+            })
             .disposed(by: disposeBag)
         
         input.viewDidDisappear

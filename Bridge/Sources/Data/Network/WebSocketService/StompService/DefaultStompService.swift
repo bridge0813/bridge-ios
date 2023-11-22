@@ -37,15 +37,18 @@ final class DefaultStompService: StompService {
         return updatedMessages
     }
     
+    func observe() -> Observable<Data> {
+        incomingMessage
+    }
+    
     func unsubscribe(_ stompEndpoint: StompEndpoint) {
         let unsubscribeFrame = stompEndpoint.toFrame()
         webSocketService.write(unsubscribeFrame)
     }
     
-    func send(_ endpoint: StompEndpoint) -> Observable<Data> {
+    func send(_ endpoint: StompEndpoint) {
         let frame = endpoint.toFrame()
         webSocketService.write(frame)
-        return incomingMessage
     }
 }
 
