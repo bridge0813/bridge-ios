@@ -91,17 +91,14 @@ final class CompletionViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
-        rootFlexContainer.flex.alignItems(.center).define { flex in
-            flex.addItem(animationView)
-                .position(.absolute)
-                .width(100%)
-                .height(100%)
-            
-            flex.addItem(titleLabel).width(210).height(60).marginTop(56)
-            flex.addItem(subTitleLabel).width(180).height(20).marginTop(8)
-            flex.addItem(castleImageView).size(200).marginTop(114)
-            flex.addItem().grow(1)
-            flex.addItem(completeButton).alignSelf(.stretch).height(52).marginHorizontal(16).marginBottom(24)
+        rootFlexContainer.flex.define { flex in
+            flex.addItem(animationView).alignItems(.center).grow(1).define({ flex in
+                flex.addItem(titleLabel).width(210).height(60).marginTop(56)
+                flex.addItem(subTitleLabel).width(180).height(20).marginTop(8)
+                flex.addItem(castleImageView).size(200).marginTop(114)
+                flex.addItem().grow(1)
+                flex.addItem(completeButton).alignSelf(.stretch).height(52).marginHorizontal(16).marginBottom(24)
+            })
         }
     }
     
