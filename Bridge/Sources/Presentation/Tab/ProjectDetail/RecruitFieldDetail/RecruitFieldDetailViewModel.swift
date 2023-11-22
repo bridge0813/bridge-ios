@@ -15,28 +15,28 @@ final class RecruitFieldDetailViewModel: ViewModelType {
     }
     
     struct Output {
-        let projectDetail: Driver<ProjectDetail>
+        let projectDetail: Driver<Project>
     }
     
     // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: ProjectDetailCoordinator?
-    private var projectDetail: ProjectDetail
+    private var project: Project
     
     // MARK: - Init
     init(
         coordinator: ProjectDetailCoordinator,
-        projectDetail: ProjectDetail
+        project: Project
     ) {
         self.coordinator = coordinator
-        self.projectDetail = projectDetail
+        self.project = project
     }
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         
         return Output(
-            projectDetail: Observable.just(projectDetail).asDriver(onErrorJustReturn: ProjectDetail.onError)
+            projectDetail: Observable.just(project).asDriver(onErrorJustReturn: Project.onError)
         )
     }
 }

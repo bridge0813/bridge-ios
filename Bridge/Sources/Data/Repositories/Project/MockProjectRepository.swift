@@ -9,19 +9,19 @@ import RxSwift
 
 final class MockProjectRepository: ProjectRepository {
     // MARK: - Methods
-    func fetchAllProjects() -> Observable<[Project]> {
-        .just(ProjectDTO.projectTestArray.compactMap { $0.toEntity() })
+    func fetchAllProjects() -> Observable<[ProjectPreview]> {
+        .just(ProjectPreviewDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
-    func fetchHotProjects() -> Observable<[Project]> {
-        .just(ProjectDTO.projectTestArray.compactMap { $0.toEntity() })
+    func fetchHotProjects() -> Observable<[ProjectPreview]> {
+        .just(ProjectPreviewDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
-    func fetchProjectDetail(with projectID: Int) -> Observable<ProjectDetail> {
+    func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
         .just(ProjectDetailDTO.projectDetailTest.toEntity())
     }
     
-    func createProject(with project: CreateProject) -> Observable<Int> {
+    func create(with project: Project) -> Observable<Int> {
         .just(0)
     }
 }

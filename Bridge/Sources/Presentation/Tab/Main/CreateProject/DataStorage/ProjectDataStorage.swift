@@ -10,71 +10,76 @@ import RxSwift
 import RxCocoa
 
 final class ProjectDataStorage {
-    private var createProject = CreateProject(
+    private var project = Project(
         title: "",
         description: "",
-        deadline: "",
+        dDays: 0,
+        deadline: Date(),
         startDate: nil,
         endDate: nil,
         memberRequirements: [],
         applicantRestrictions: [],
         progressMethod: "",
-        progressStep: ""
+        progressStep: "",
+        userName: "",
+        isScrapped: false,
+        isMyProject: false,
+        totalRecruitNumber: 0
     )
 }
 
 extension ProjectDataStorage {
-    var currentProject: CreateProject {
-        return createProject
+    var currentProject: Project {
+        return project
     }
     
     // MARK: - MemberFieldSelection(모집하려는 팀원의 분야설정)
     func removeAllMemberRequirements() {
-        createProject.memberRequirements.removeAll()
+        project.memberRequirements.removeAll()
     }
     
     // MARK: - MemberRequirementInput(분야의 세부 요구사항)
     func updateMemberRequirements(with requirement: MemberRequirement) {
-        if let index = createProject.memberRequirements.firstIndex(where: { $0.field == requirement.field }) {
-            createProject.memberRequirements[index] = requirement
+        if let index = project.memberRequirements.firstIndex(where: { $0.field == requirement.field }) {
+            project.memberRequirements[index] = requirement
         } else {
-            createProject.memberRequirements.append(requirement)
+            project.memberRequirements.append(requirement)
         }
     }
     
     // MARK: - ApplicantRestriction(지원제한)
     func updateApplicantRestriction(with restriction: [String]) {
-        createProject.applicantRestrictions = restriction
+        project.applicantRestrictions = restriction
     }
     
     // MARK: - ProjectDatePicker(날짜설정)
-    func updateDeadline(with date: String) {
-        createProject.deadline = date
+    func updateDeadline(with date: Date) {
+        project.deadline = date
     }
     
-    func updateStartDate(with date: String?) {
-        createProject.startDate = date
+    func updateStartDate(with date: Date?) {
+        project.startDate = date
     }
     
-    func updateEndDate(with date: String?) {
-        createProject.endDate = date
+    func updateEndDate(with date: Date?) {
+        project.endDate = date
     }
     
     // MARK: - ProjectProgressStatus(진행방식 및 현황)
     func updateProgressMethod(with method: String) {
-        createProject.progressMethod = method
+        project.progressMethod = method
     }
     
     func updateProgressStep(with step: String) {
-        createProject.progressStep = step
+        project.progressStep = step
     }
     
     // MARK: - ProjectDescriptionInput(제목 및 소개)
     func updateTitle(with text: String) {
-        createProject.title = text
+        project.title = text
     }
     
     func updateDescription(with text: String) {
-        createProject.description = text
+        project.description = text
     }
 }

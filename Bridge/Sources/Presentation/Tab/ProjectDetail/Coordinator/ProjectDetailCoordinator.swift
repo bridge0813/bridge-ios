@@ -42,10 +42,10 @@ extension ProjectDetailCoordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func showRecruitFieldDetailViewController(with projectDetail: ProjectDetail) {
+    func showRecruitFieldDetailViewController(with project: Project) {
         let viewModel = RecruitFieldDetailViewModel(
             coordinator: self,
-            projectDetail: projectDetail
+            project: project
         )
         
         let vc = RecruitFieldDetailViewController(viewModel: viewModel)

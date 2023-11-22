@@ -112,6 +112,6 @@ final class CompletionViewController: BaseViewController {
         let input = CompletionViewModel.Input(
             completeButtonTapped: completeButton.rx.tap
         )
-        let _ = viewModel.transform(input: input)
+        _ = viewModel.transform(input: input)
     }
 }

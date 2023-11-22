@@ -20,19 +20,19 @@ final class DefaultProjectRepository: ProjectRepository {
     }
     
     // MARK: - Methods
-    func fetchAllProjects() -> Observable<[Project]> {
-        .just(ProjectDTO.projectTestArray.compactMap { $0.toEntity() })
+    func fetchAllProjects() -> Observable<[ProjectPreview]> {
+        .just(ProjectPreviewDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
-    func fetchHotProjects() -> Observable<[Project]> {
-        .just(ProjectDTO.projectTestArray.compactMap { $0.toEntity() })
+    func fetchHotProjects() -> Observable<[ProjectPreview]> {
+        .just(ProjectPreviewDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
-    func fetchProjectDetail(with projectID: Int) -> Observable<ProjectDetail> {
+    func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
         .just(ProjectDetailDTO.projectDetailTest.toEntity())
     }
     
-    func createProject(with project: CreateProject) -> Observable<Int> {
+    func create(with project: Project) -> Observable<Int> {
         let createProjectDTO = convertToDTO(from: project)
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)
         
@@ -45,7 +45,7 @@ final class DefaultProjectRepository: ProjectRepository {
 }
 
 private extension DefaultProjectRepository {
-    func convertToDTO(from project: CreateProject) -> CreateProjectDTO {
+    func convertToDTO(from project: Project) -> CreateProjectDTO {
         let userID = Int(tokenStorage.get(.userID) ?? invalidToken)
         
         let memberRequirementsDTO = project.memberRequirements.map { requirement -> MemberRequirementDTO in
@@ -60,9 +60,9 @@ private extension DefaultProjectRepository {
         return CreateProjectDTO(
             title: project.title,
             description: project.description,
-            deadline: project.deadline,
-            startDate: project.startDate,
-            endDate: project.endDate,
+            deadline: project.deadline.toString(format: "yyyy-MM-dd'T'HH:mm:ss"),
+            startDate: project.startDate?.toString(format: "yyyy-MM-dd'T'HH:mm:ss"),
+            endDate: project.endDate?.toString(format: "yyyy-MM-dd'T'HH:mm:ss"),
             memberRequirements: memberRequirementsDTO,
             applicantRestrictions: project.applicantRestrictions,
             progressMethod: project.progressMethod,

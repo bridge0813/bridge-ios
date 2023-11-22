@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol CreateProjectUseCase {
-    func create(with project: CreateProject) -> Observable<Int>
+    func create(with project: Project) -> Observable<Int>
 }
 
 final class DefaultCreateProjectUseCase: CreateProjectUseCase {
@@ -19,7 +19,7 @@ final class DefaultCreateProjectUseCase: CreateProjectUseCase {
         self.projectRepository = projectRepository
     }
     
-    func create(with project: CreateProject) -> Observable<Int> {
-        projectRepository.createProject(with: project)
+    func create(with project: Project) -> Observable<Int> {
+        projectRepository.create(with: project)
     }
 }

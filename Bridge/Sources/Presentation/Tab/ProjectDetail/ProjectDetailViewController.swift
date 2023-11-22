@@ -88,7 +88,7 @@ final class ProjectDetailViewController: BaseViewController {
     }
     
     /// 컬렉션 뷰의 레이아웃 및 데이터소스를 설정
-    private func configureCollectionView(with data: ProjectDetail) {
+    private func configureCollectionView(with data: Project) {
         collectionView.collectionViewLayout = configureLayout(with: data.isMyProject)
         configureDataSource()
         configureSupplementaryView(with: data)
@@ -96,7 +96,7 @@ final class ProjectDetailViewController: BaseViewController {
     }
     
     /// MenuBar의 컨텐츠 설정 및 해당 모집글이 자신의 글인지 여부에 따라 MenuBar의 유무를 결정
-    private func configureMenuBar(with data: ProjectDetail) {
+    private func configureMenuBar(with data: Project) {
         menuBar.configureContents(with: data)
         menuBar.flex.isIncludedInLayout(!data.isMyProject).markDirty()
         menuBar.isHidden = data.isMyProject
@@ -128,13 +128,13 @@ final class ProjectDetailViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
-        output.projectDetail
-            .drive(onNext: { [weak self] projectDetail in
+        output.project
+            .drive(onNext: { [weak self] project in
                 guard let self else { return }
                 
-                self.navigationItem.rightBarButtonItem = projectDetail.isMyProject ? menuButton : nil
-                self.configureMenuBar(with: projectDetail)
-                self.configureCollectionView(with: projectDetail)
+                self.navigationItem.rightBarButtonItem = project.isMyProject ? menuButton : nil
+                self.configureMenuBar(with: project)
+                self.configureCollectionView(with: project)
             })
             .disposed(by: disposeBag)
         
@@ -213,7 +213,7 @@ extension ProjectDetailViewController {
         }
     }
     
-    private func configureSupplementaryView(with projectDetail: ProjectDetail) {
+    private func configureSupplementaryView(with project: Project) {
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             guard let headerView = collectionView.dequeueReusableSupplementaryView(
                 ProjectDetailHeaderView.self,
@@ -223,7 +223,7 @@ extension ProjectDetailViewController {
             
             guard let self else { return UICollectionReusableView() }
             
-            headerView.configureContents(with: projectDetail)
+            headerView.configureContents(with: project)
             headerView.goToDetailButtonTapped
                 .bind(to: self.goToDetailButtonTapped)
                 .disposed(by: self.disposeBag)

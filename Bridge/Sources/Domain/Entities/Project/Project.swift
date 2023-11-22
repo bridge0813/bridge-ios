@@ -1,18 +1,16 @@
 //
-//  Project.swift
+//  ProjectDetail.swift
 //  Bridge
 //
-//  Created by 엄지호 on 2023/08/30.
+//  Created by 엄지호 on 2023/11/15.
 //
 
 import Foundation
 
-// TODO: - 데이터 구조에 따라 수정필요
 struct Project {
-    var id: String
     var title: String
     var description: String
-    var dDays: Int
+    let dDays: Int
     var deadline: Date
     var startDate: Date?
     var endDate: Date?
@@ -20,13 +18,15 @@ struct Project {
     var applicantRestrictions: [String]
     var progressMethod: String
     var progressStep: String
-    var userEmail: String
+    let userName: String
+    let isScrapped: Bool
+    let isMyProject: Bool
+    let totalRecruitNumber: Int
 }
 
 extension Project {
     static var onError: Self {
         Project(
-            id: UUID().uuidString,
             title: "",
             description: "",
             dDays: 0,
@@ -37,7 +37,10 @@ extension Project {
             applicantRestrictions: [],
             progressMethod: "",
             progressStep: "",
-            userEmail: ""
+            userName: "",
+            isScrapped: false,
+            isMyProject: false,
+            totalRecruitNumber: 0
         )
     }
 }

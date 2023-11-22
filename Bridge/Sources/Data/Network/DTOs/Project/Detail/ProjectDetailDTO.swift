@@ -35,9 +35,8 @@ struct ProjectDetailDTO: Codable {
 }
 
 extension ProjectDetailDTO {
-    // TODO: - Date형식으로 변경받을 수 있는지 여쭤보기
-    func toEntity() -> ProjectDetail {
-        ProjectDetail(
+    func toEntity() -> Project {
+        Project(
             title: title,
             description: description,
             dDays: Date().calculateDDay(to: deadline.toDate(with: "yyyy-MM-dd'T'HH:mm:ss")),

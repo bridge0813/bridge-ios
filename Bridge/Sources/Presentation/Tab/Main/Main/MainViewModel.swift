@@ -21,8 +21,8 @@ final class MainViewModel: ViewModelType {
     }
     
     struct Output {
-        let projects: Driver<[Project]>
-        let buttonTypeAndProjects: Driver<(String, [Project])>
+        let projects: Driver<[ProjectPreview]>
+        let buttonTypeAndProjects: Driver<(String, [ProjectPreview])>
         let buttonDisplayMode: Driver<CreateButtonDisplayState>
         let categoryAlpha: Driver<CGFloat>  // 카테고리 알파값
         let topMargins: Driver<(CGFloat, CGFloat)>  // 카테고리, 컬렉션 뷰의 마진
@@ -50,14 +50,14 @@ final class MainViewModel: ViewModelType {
         // MARK: - Fetch Projects
         let projects = input.viewWillAppear
             .withUnretained(self)
-            .flatMapLatest { owner, _ -> Observable<[Project]> in
+            .flatMapLatest { owner, _ -> Observable<[ProjectPreview]> in
                 return owner.fetchProjectsUseCase.execute()
             }
             .distinctUntilChanged()
         
         let buttonTypeAndProjects = input.categoryButtonTapped
             .withUnretained(self)
-            .flatMapLatest { owner, type -> Observable<(String, [Project])> in
+            .flatMapLatest { owner, type -> Observable<(String, [ProjectPreview])> in
                 switch type {
                 case "new":
                     return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 신규 데이터
@@ -144,7 +144,7 @@ final class MainViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            projects: projects.asDriver(onErrorJustReturn: [Project.onError]),
+            projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError]),
             buttonTypeAndProjects: buttonTypeAndProjects.asDriver(onErrorJustReturn: ("new", [])),
             buttonDisplayMode: layoutMode.asDriver(onErrorJustReturn: .both),
             categoryAlpha: categoryAlpha.asDriver(onErrorJustReturn: 1),
