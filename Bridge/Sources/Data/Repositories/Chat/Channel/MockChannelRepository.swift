@@ -32,6 +32,7 @@ final class MockChannelRepository: ChannelRepository {
             .map { _ in
                 [
                     MessageDTO(
+                        messageID: UUID().uuidString,
                         senderID: "1",
                         type: "TALK",
                         content: "일정 간격으로 방출되는 메시지",

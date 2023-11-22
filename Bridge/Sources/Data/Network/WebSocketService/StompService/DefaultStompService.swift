@@ -9,16 +9,18 @@ import Foundation
 import RxSwift
 
 final class DefaultStompService: StompService {
-    
+    // MARK: - Property
     private let webSocketService: WebSocketService
     private let updatedMessages = PublishSubject<Data>()
     private let incomingMessage = PublishSubject<Data>()
     
+    // MARK: - Init
     init(webSocketService: WebSocketService) {
         self.webSocketService = webSocketService
         webSocketService.delegate = self
     }
     
+    // MARK: - Method
     func connect(_ stompEndpoint: StompEndpoint) {
         let connectFrame = stompEndpoint.toFrame()
         webSocketService.write(connectFrame)
@@ -47,6 +49,7 @@ final class DefaultStompService: StompService {
     }
 }
 
+// MARK: - WebSocket delegate
 extension DefaultStompService: WebSocketServiceDelegate {
     func webSocketDidConnect() {
         connect(MessageStompEndpoint.connect)

@@ -20,7 +20,7 @@ struct StompMessageDTO: Codable {
     enum CodingKeys: String, CodingKey {
         case messageID = "messageId"
         case channelID = "chatRoomId"
-        case senderID
+        case senderID = "senderId"
         case type
         case content = "message"
         case hasRead = "readStat"
