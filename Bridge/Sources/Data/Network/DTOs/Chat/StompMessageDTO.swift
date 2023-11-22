@@ -11,7 +11,7 @@ import Foundation
 struct StompMessageDTO: Codable {
     let messageID = UUID().uuidString
     let channelID: String
-    let senderID: String
+    let senderID: Int
     let type: String
     let content: String
     let hasRead = false
@@ -30,7 +30,7 @@ struct StompMessageDTO: Codable {
     init(channelID: String, senderID: String, type: MessageResponseType, content: String) {
         self.channelID = channelID
         self.type = type.rawValue
-        self.senderID = senderID
+        self.senderID = Int(senderID) ?? -1
         self.content = content
     }
 }
@@ -49,7 +49,7 @@ extension StompMessageDTO {
     func toEntity(userID: String) -> Message {
         Message(
             id: messageID,
-            sender: userID == senderID ? .me : .opponent,
+            sender: Int(userID) == senderID ? .me : .opponent,
             type: mapToMessageType(type),
             sentDate: sentTime?.toDate() ?? "",
             sentTime: sentTime?.toSimpleTime() ?? "",
