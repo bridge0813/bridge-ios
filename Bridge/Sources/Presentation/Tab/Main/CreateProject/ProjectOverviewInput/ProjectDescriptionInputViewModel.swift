@@ -43,7 +43,6 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .flatMap { owner, _ in
-                print(owner.dataStorage.currentProject)
                 return owner.createProjectUseCase.create(with: owner.dataStorage.currentProject).toResult()
             }
             .observe(on: MainScheduler.instance)
@@ -51,7 +50,6 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
             .subscribe(onNext: { owner, result in
                 switch result {
                 case .success(let projectID):
-                    print("projectID: \(projectID)")
                     owner.coordinator?.showCompletionViewController(with: projectID)
                     
                 case .failure(let error):
