@@ -19,7 +19,7 @@ struct Project {
     var progressMethod: String
     var progressStep: String
     let userName: String
-    let isScrapped: Bool
+    let isBookmarked: Bool
     let isMyProject: Bool
     let totalRecruitNumber: Int
 }
@@ -38,7 +38,7 @@ extension Project {
             progressMethod: "",
             progressStep: "",
             userName: "",
-            isScrapped: false,
+            isBookmarked: false,
             isMyProject: false,
             totalRecruitNumber: 0
         )

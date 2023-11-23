@@ -18,7 +18,7 @@ struct ProjectDetailDTO: Codable {
     let progressMethod: String
     let progressStep: String
     let userName: String
-    let isScrapped: Bool
+    let isBookmarked: Bool
     let isMyProject: Bool
     
     enum CodingKeys: String, CodingKey {
@@ -29,7 +29,7 @@ struct ProjectDetailDTO: Codable {
         case applicantRestrictions = "tagLimit"
         case progressMethod = "meetingWay"
         case progressStep = "stage"
-        case isScrapped = "scrap"
+        case isBookmarked = "scrap"
         case isMyProject = "myProject"
     }
 }
@@ -48,7 +48,7 @@ extension ProjectDetailDTO {
             progressMethod: progressMethod,
             progressStep: progressStep,
             userName: userName,
-            isScrapped: isScrapped,
+            isBookmarked: isBookmarked,
             isMyProject: isMyProject,
             totalRecruitNumber: memberRequirements.reduce(0) { partialResult, requirement in
                 return partialResult + requirement.recruitNumber
@@ -82,7 +82,7 @@ extension ProjectDetailDTO {
         progressMethod: "온라인",
         progressStep: "기획 중이에요",
         userName: "",
-        isScrapped: true,
+        isBookmarked: true,
         isMyProject: true
     )
 }

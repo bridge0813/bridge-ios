@@ -22,7 +22,7 @@ final class ProjectDataStorage {
         progressMethod: "",
         progressStep: "",
         userName: "",
-        isScrapped: false,
+        isBookmarked: false,
         isMyProject: false,
         totalRecruitNumber: 0
     )

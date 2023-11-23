@@ -74,6 +74,6 @@ final class ProjectDetailMenuBar: BaseView {
 // MARK: - Configuration
 extension ProjectDetailMenuBar {
     func configureContents(with data: Project) {
-        bookmarkButton.isSelected = data.isScrapped
+        bookmarkButton.isSelected = data.isBookmarked
     }
 }
