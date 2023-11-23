@@ -46,30 +46,25 @@ final class MainViewController: BaseViewController {
         return dropdown
     }()
     
-    private let filterButton: UIButton = {
-        let buttonImage = UIImage(named: "hamburger")?
+    private lazy var filterButton = UIBarButtonItem(
+        image: UIImage(named: "hamburger")?
             .resize(to: CGSize(width: 24, height: 24))
-        
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = .clear
-        configuration.baseForegroundColor = .clear
-        configuration.image = buttonImage
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8)
-        
-        let button = UIButton()
-        button.configuration = configuration
-        button.setImage(buttonImage, for: .normal)
-        return button
-    }()
-
-    private let searchButton: UIButton = {
-        let buttonImage = UIImage(named: "magnifyingglass")?
+            .withRenderingMode(.alwaysTemplate)
+            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 0)),
+        style: .plain,
+        target: self,
+        action: nil
+    )
+    
+    private lazy var searchButton = UIBarButtonItem(
+        image: UIImage(named: "magnifyingglass")?
             .resize(to: CGSize(width: 24, height: 24))
-            
-        let button = UIButton()
-        button.setImage(buttonImage, for: .normal)
-        return button
-    }()
+            .withRenderingMode(.alwaysTemplate)
+            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)),
+        style: .plain,
+        target: self,
+        action: nil
+    )
     
     private let categoryView = MainCategoryView()
     
@@ -119,10 +114,7 @@ final class MainViewController: BaseViewController {
     
     private func configureNavigationUI() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: fieldCategoryAnchorButton)
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(customView: searchButton),
-            UIBarButtonItem(customView: filterButton)
-        ]
+        navigationItem.rightBarButtonItems = [searchButton, filterButton]
     }
     
     // MARK: - Layout
