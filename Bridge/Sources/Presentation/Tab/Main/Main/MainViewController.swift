@@ -97,8 +97,8 @@ final class MainViewController: BaseViewController {
     // MARK: - Property
     private let viewModel: MainViewModel
     
-    typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, ProjectPreview>
-    typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<ProjectPreview>
+    private typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, ProjectPreview>
+    private typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<ProjectPreview>
     private var dataSource: DataSource?
     
     
