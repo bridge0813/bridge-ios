@@ -36,7 +36,7 @@ final class DefaultProjectRepository: ProjectRepository {
         let createProjectDTO = convertToDTO(from: project)
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)
         
-        return networkService.request(createProjectEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(createProjectEndpoint, interceptor: nil)
             .decode(type: CreateProjectResponseDTO.self, decoder: JSONDecoder())
             .map { dto in
                 return dto.projectId
@@ -46,7 +46,7 @@ final class DefaultProjectRepository: ProjectRepository {
 
 private extension DefaultProjectRepository {
     func convertToDTO(from project: Project) -> CreateProjectRequestDTO {
-        let userID = Int(tokenStorage.get(.userID) ?? invalidToken)
+        let userID = Int(tokenStorage.get(.userID) ?? invalidToken) ?? 0
         
         let memberRequirementsDTO = project.memberRequirements.map { requirement -> MemberRequirementDTO in
             MemberRequirementDTO(
