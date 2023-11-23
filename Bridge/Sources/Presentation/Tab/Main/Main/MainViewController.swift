@@ -66,6 +66,14 @@ final class MainViewController: BaseViewController {
         action: nil
     )
     
+    private let dividerView: UIView = {
+        let divider = UIView()
+        divider.backgroundColor = BridgeColor.gray06
+        divider.isHidden = false
+        
+        return divider
+    }()
+    
     private let categoryView = MainCategoryView()
     
     private lazy var collectionView: UICollectionView = {
@@ -107,12 +115,18 @@ final class MainViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-    // MARK: - Configuration
-    override func configureAttributes() {
-        configureNavigationUI()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNoShadowNavigationBarAppearance()
     }
     
-    private func configureNavigationUI() {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        configureDefaultNavigationBarAppearance()
+    }
+    
+    // MARK: - Configuration
+    override func configureAttributes() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: fieldCategoryAnchorButton)
         navigationItem.rightBarButtonItems = [searchButton, filterButton]
     }
@@ -121,6 +135,8 @@ final class MainViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.define { flex in
+            flex.addItem(dividerView).height(1)
+            
             flex.addItem(categoryView)
                 .position(.absolute)
                 .height(102)
@@ -148,6 +164,8 @@ final class MainViewController: BaseViewController {
         
         rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
+        
+        rootFlexContainer.bringSubviewToFront(dividerView)
     }
     
     // MARK: - Binding
@@ -266,10 +284,7 @@ extension MainViewController {
 // MARK: - 컬렉션 뷰의 Scroll 처리
 extension MainViewController {
     func updateTopMargin(categoryMargin: CGFloat, collectionViewMargin: CGFloat) {
-        let dividerColor = categoryMargin == -102.0 ? BridgeColor.gray06 : nil
-        
-        navigationController?.navigationBar.standardAppearance.shadowColor = dividerColor
-        navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = dividerColor
+        dividerView.isHidden = categoryMargin != -102
         
         categoryView.flex
             .position(.absolute)
