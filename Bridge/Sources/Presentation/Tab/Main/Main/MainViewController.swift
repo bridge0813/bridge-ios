@@ -162,7 +162,6 @@ final class MainViewController: BaseViewController {
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            didScroll: collectionView.rx.contentOffset.asObservable(),
             filterButtonTapped: filterButton.rx.tap.asObservable(),
             itemSelected: collectionView.rx.itemSelected.asObservable(),
             createButtonTapped: createProjectButton.rx.tap.asObservable(),
@@ -179,7 +178,7 @@ final class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        // MARK: - 카테고리 버튼에 따라 컬렉션뷰(DataSource, Layout) 변경
+        // 카테고리 버튼에 따라 컬렉션뷰(DataSource, Layout) 변경
         output.buttonTypeAndProjects
             .drive(onNext: { [weak self] type, projects in
                 switch type {
@@ -205,22 +204,30 @@ final class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        // MARK: - 스크롤에 따른 레이아웃 처리(버튼, Header 처리)
-        output.buttonDisplayMode
-            .drive(onNext: { [weak self] mode in
-                self?.animateCreateButton(to: mode)
-            })
-            .disposed(by: disposeBag)
-        
-        output.categoryAlpha
-            .drive(onNext: { [weak self] alpha in
-                self?.categoryView.alpha = alpha
-            })
-            .disposed(by: disposeBag)
-        
-        output.topMargins
-            .drive(onNext: { [weak self] categoryMargin, collectionViewMargin in
-                self?.updateTopMargin(categoryMargin: categoryMargin, collectionViewMargin: collectionViewMargin)
+        // 스크롤에 따른 레이아웃 처리
+        collectionView.rx.contentOffset
+            .observe(on: MainScheduler.asyncInstance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, offset in
+                let categoryHeight: CGFloat = 102
+                let minAlpha: CGFloat = 0.0
+                let maxAlpha: CGFloat = 1.0
+                let minCategoryMargin: CGFloat = -categoryHeight
+
+                // 글쓰기 버튼 애니메이션 처리
+                owner.animateCreateButton(for: offset.y <= 0)
+
+                // 카테고리 헤더 뷰의 알파값 조정
+                let alphaOffset = offset.y / categoryHeight
+                let alpha = max(minAlpha, maxAlpha - alphaOffset)
+                owner.categoryView.alpha = alpha
+
+                // 컬렉션뷰 마진 계산
+                let collectionViewMargin = min(categoryHeight, max(0, categoryHeight - offset.y))
+
+                // 카테고리 마진 계산
+                let categoryMargin = min(0, max(minCategoryMargin, -offset.y))
+                owner.updateTopMargin(categoryMargin: categoryMargin, collectionViewMargin: collectionViewMargin)
             })
             .disposed(by: disposeBag)
         
@@ -242,22 +249,22 @@ final class MainViewController: BaseViewController {
 
 // MARK: - CreateProjectButtonAnimation
 extension MainViewController {
-    private func animateCreateButton(to mode: MainViewModel.CreateButtonDisplayState) {
+    private func animateCreateButton(for isExpanded: Bool) {
         UIView.animate(
             withDuration: 0.2,
             animations: { [weak self] in
-                self?.createProjectButton.updateButtonConfiguration(for: mode)
-                self?.updateButtonLayout(for: mode)
+                self?.createProjectButton.updateButtonConfiguration(for: isExpanded)
+                self?.updateButtonLayout(for: isExpanded)
             },
             completion: { [weak self] _ in
-                self?.createProjectButton.updateButtonTitle(for: mode)
+                self?.createProjectButton.updateButtonTitle(for: isExpanded)
                 self?.createProjectButton.contentHorizontalAlignment = .center
             }
         )
     }
     
-    private func updateButtonLayout(for state: MainViewModel.CreateButtonDisplayState) {
-        let buttonWidth: CGFloat = state == .both ? 106 : 48
+    private func updateButtonLayout(for isExpanded: Bool) {
+        let buttonWidth: CGFloat = isExpanded ? 106 : 48
         
         createProjectButton.flex.width(buttonWidth).height(48).markDirty()
         rootFlexContainer.flex.layout()

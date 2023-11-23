@@ -33,30 +33,27 @@ final class BridgeCreateProjectButton: BaseButton {
 
 extension BridgeCreateProjectButton {
     // MARK: - Button Configuration
-    func updateButtonConfiguration(for state: MainViewModel.CreateButtonDisplayState) {
-        switch state {
-        case .both:
+    func updateButtonConfiguration(for isExpanded: Bool) {
+        if isExpanded {
             titleLabel?.alpha = 1
-            updateButtonTitle(for: state)
-            
-        case .only:
+            updateButtonTitle(for: isExpanded)
+        } else {
             titleLabel?.alpha = 0
             contentHorizontalAlignment = .left
         }
     }
     
     // MARK: - Button Title
-    func updateButtonTitle(for state: MainViewModel.CreateButtonDisplayState) {
+    func updateButtonTitle(for isExpanded: Bool) {
         var updatedConfiguration = configuration
         
-        switch state {
-        case .both:
+        if isExpanded {
             var titleContainer = AttributeContainer()
             titleContainer.font = BridgeFont.subtitle1.font
             titleContainer.foregroundColor = BridgeColor.gray10
             updatedConfiguration?.attributedTitle = AttributedString("글쓰기", attributes: titleContainer)
             
-        case .only:
+        } else {
             updatedConfiguration?.attributedTitle = nil
         }
         

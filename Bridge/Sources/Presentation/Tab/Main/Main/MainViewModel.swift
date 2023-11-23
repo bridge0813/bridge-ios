@@ -13,7 +13,6 @@ final class MainViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
-        let didScroll: Observable<CGPoint>
         let filterButtonTapped: Observable<Void>
         let itemSelected: Observable<IndexPath>
         let createButtonTapped: Observable<Void>
@@ -23,9 +22,6 @@ final class MainViewModel: ViewModelType {
     struct Output {
         let projects: Driver<[ProjectPreview]>
         let buttonTypeAndProjects: Driver<(String, [ProjectPreview])>
-        let buttonDisplayMode: Driver<CreateButtonDisplayState>
-        let categoryAlpha: Driver<CGFloat>  // 카테고리 알파값
-        let topMargins: Driver<(CGFloat, CGFloat)>  // 카테고리, 컬렉션 뷰의 마진
     }
 
     // MARK: - Property
@@ -84,48 +80,6 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        // MARK: - Button State
-        let layoutMode = input.didScroll
-            .map { $0.y <= 0 ? CreateButtonDisplayState.both : .only }
-            .distinctUntilChanged()
-            .observe(on: MainScheduler.asyncInstance)
-        
-        let categoryAlpha = input.didScroll
-            .map { offset in
-                
-                let categoryHeight: CGFloat = 102.0
-                
-                // 알파 값의 최소 및 최대 범위 설정
-                let minAlpha: CGFloat = 0.0
-                let maxAlpha: CGFloat = 1.0
-                let alpha = max(minAlpha, maxAlpha - (offset.y / categoryHeight))
-                
-                return alpha
-            }
-            .observe(on: MainScheduler.asyncInstance)
-        
-        let topMargins = input.didScroll
-            .map { offset in
-                let categoryHeight: CGFloat = 102.0
-                let minTop: CGFloat = 0
-                
-                // 컬렉션뷰 마진계산
-                let collectionViewMargin = min(
-                    categoryHeight,
-                    max(
-                        minTop,
-                        categoryHeight - (offset.y * (categoryHeight - minTop) / categoryHeight)
-                    )
-                )
-                
-                // 카테고리 마진계산
-                let minCategoryMargin: CGFloat = minTop - categoryHeight
-                let categoryMargin = min(minTop, max(minCategoryMargin, minTop - offset.y))
-                
-                return (categoryMargin, collectionViewMargin)
-            }
-            .observe(on: MainScheduler.asyncInstance)
-        
         // MARK: - Button Actions
         input.filterButtonTapped
             .withUnretained(self)
@@ -145,10 +99,7 @@ final class MainViewModel: ViewModelType {
         
         return Output(
             projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError]),
-            buttonTypeAndProjects: buttonTypeAndProjects.asDriver(onErrorJustReturn: ("new", [])),
-            buttonDisplayMode: layoutMode.asDriver(onErrorJustReturn: .both),
-            categoryAlpha: categoryAlpha.asDriver(onErrorJustReturn: 1),
-            topMargins: topMargins.asDriver(onErrorJustReturn: (48, 150))
+            buttonTypeAndProjects: buttonTypeAndProjects.asDriver(onErrorJustReturn: ("new", []))
         )
     }
 }
@@ -163,10 +114,5 @@ extension MainViewModel {
     enum Section: CaseIterable {
         case hot
         case main
-    }
-    
-    enum CreateButtonDisplayState {
-        case both
-        case only
     }
 }
