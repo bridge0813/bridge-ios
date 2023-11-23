@@ -27,6 +27,7 @@ final class BridgeCreateProjectButton: BaseButton {
         configuration.attributedTitle = AttributedString("글쓰기", attributes: titleContainer)
         
         self.configuration = configuration
+        layer.cornerRadius = 24
     }
 }
 

@@ -101,7 +101,6 @@ final class MainViewController: BaseViewController {
     private typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<ProjectPreview>
     private var dataSource: DataSource?
     
-    
     // MARK: - Init
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -111,13 +110,6 @@ final class MainViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Configuration
@@ -136,7 +128,7 @@ final class MainViewController: BaseViewController {
     // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).define { flex in
+        rootFlexContainer.flex.define { flex in
             flex.addItem(categoryView)
                 .position(.absolute)
                 .height(102)
@@ -157,6 +149,13 @@ final class MainViewController: BaseViewController {
                 .width(106)
                 .height(48)
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Binding
@@ -209,7 +208,7 @@ final class MainViewController: BaseViewController {
         // MARK: - 스크롤에 따른 레이아웃 처리(버튼, Header 처리)
         output.buttonDisplayMode
             .drive(onNext: { [weak self] mode in
-                self?.animateLayoutChange(to: mode)
+                self?.animateCreateButton(to: mode)
             })
             .disposed(by: disposeBag)
         
@@ -243,7 +242,7 @@ final class MainViewController: BaseViewController {
 
 // MARK: - CreateProjectButtonAnimation
 extension MainViewController {
-    private func animateLayoutChange(to mode: MainViewModel.CreateButtonDisplayState) {
+    private func animateCreateButton(to mode: MainViewModel.CreateButtonDisplayState) {
         UIView.animate(
             withDuration: 0.2,
             animations: { [weak self] in
@@ -257,16 +256,10 @@ extension MainViewController {
         )
     }
     
-    // MARK: - Button Layout
     private func updateButtonLayout(for state: MainViewModel.CreateButtonDisplayState) {
         let buttonWidth: CGFloat = state == .both ? 106 : 48
         
-        createProjectButton.flex
-            .position(.absolute)
-            .cornerRadius(24)
-            .width(buttonWidth)
-            .height(48)
-        
+        createProjectButton.flex.width(buttonWidth).height(48).markDirty()
         rootFlexContainer.flex.layout()
     }
 }

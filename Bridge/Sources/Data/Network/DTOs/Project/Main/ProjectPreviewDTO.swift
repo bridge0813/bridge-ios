@@ -30,5 +30,13 @@ extension ProjectPreviewDTO {
 }
 
 extension ProjectPreviewDTO {
-    static var projectTestArray: [ProjectPreviewDTO] = []
+    static var projectTestArray: [ProjectPreviewDTO] = [
+        ProjectPreviewDTO(projectId: 0, title: "", deadline: "", totalRecruitNumber: 0),
+        ProjectPreviewDTO(projectId: 1, title: "", deadline: "", totalRecruitNumber: 0),
+        ProjectPreviewDTO(projectId: 2, title: "", deadline: "", totalRecruitNumber: 0),
+        ProjectPreviewDTO(projectId: 3, title: "", deadline: "", totalRecruitNumber: 0),
+        ProjectPreviewDTO(projectId: 4, title: "", deadline: "", totalRecruitNumber: 0),
+        ProjectPreviewDTO(projectId: 5, title: "", deadline: "", totalRecruitNumber: 0),
+        ProjectPreviewDTO(projectId: 6, title: "", deadline: "", totalRecruitNumber: 0)
+    ]
 }
