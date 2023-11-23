@@ -51,7 +51,7 @@ final class HotProjectCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let scrapButton = MainBookmarkButton()
+    private let bookmarkButton = MainBookmarkButton()
     
     // MARK: - Layout
     override func configureLayouts() {
@@ -66,7 +66,7 @@ final class HotProjectCell: BaseCollectionViewCell {
             
             flex.addItem().grow(1)
             
-            flex.addItem(scrapButton).size(24).marginRight(14)
+            flex.addItem(bookmarkButton).size(24).marginRight(14)
         }
     }
     

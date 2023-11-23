@@ -97,8 +97,8 @@ final class MainViewController: BaseViewController {
     // MARK: - Property
     private let viewModel: MainViewModel
     
-    typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, Project>
-    typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Project>
+    typealias DataSource = UICollectionViewDiffableDataSource<MainViewModel.Section, ProjectPreview>
+    typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<ProjectPreview>
     private var dataSource: DataSource?
     
     
@@ -297,7 +297,7 @@ extension MainViewController {
 
 // MARK: - 카테고리 -> 신규일 경우
 extension MainViewController {
-    private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [Project]) {
+    private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [ProjectPreview]) {
         var snapshot = SectionSnapshot()
         snapshot.append(projects)
         dataSource?.apply(snapshot, to: section)
@@ -316,7 +316,7 @@ extension MainViewController {
         }
     }
     
-    private func updateCollectionViewForNew(with projects: [Project]) {
+    private func updateCollectionViewForNew(with projects: [ProjectPreview]) {
         placeholderView.configureHolderView(.emptyProject)
         placeholderView.projectCountLabel.isHidden = true
         placeholderView.isHidden = !projects.isEmpty
@@ -338,7 +338,7 @@ extension MainViewController {
 
 // MARK: - 카테고리 -> 인기일 경우
 extension MainViewController {
-    private func updateCollectionViewForHot(with projects: [Project]) {
+    private func updateCollectionViewForHot(with projects: [ProjectPreview]) {
         placeholderView.configureHolderView(.emptyProject)
         placeholderView.projectCountLabel.isHidden = false
         placeholderView.isHidden = !projects.isEmpty
@@ -431,7 +431,7 @@ extension MainViewController {
 
 // MARK: - 카테고리 -> 마감임박일 경우
 extension MainViewController {
-    private func updateCollectionViewForDeadline(with projects: [Project]) {
+    private func updateCollectionViewForDeadline(with projects: [ProjectPreview]) {
         placeholderView.configureHolderView(.emptyProject)
         placeholderView.projectCountLabel.isHidden = false
         placeholderView.isHidden = !projects.isEmpty
@@ -468,7 +468,7 @@ extension MainViewController {
 
 // MARK: - 카테고리 -> 출시예정일 경우
 extension MainViewController {
-    private func updateCollectionViewForComingSoon(with projects: [Project]) {
+    private func updateCollectionViewForComingSoon(with projects: [ProjectPreview]) {
         placeholderView.configureHolderView(.comingSoon)
         placeholderView.projectCountLabel.isHidden = true
         placeholderView.isHidden = false

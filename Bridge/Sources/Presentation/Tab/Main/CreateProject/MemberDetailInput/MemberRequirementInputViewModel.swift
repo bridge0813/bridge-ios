@@ -11,7 +11,6 @@ import RxCocoa
 final class MemberRequirementInputViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        let viewDidLoad: Observable<Void>
         let recruitNumber: Observable<Int>
         let techTags: Observable<[String]>
         let requirementText: Observable<String>
@@ -45,17 +44,10 @@ final class MemberRequirementInputViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        var requirement = MemberRequirement(field: "", recruitNumber: 0, requiredSkills: [], requirementText: "")
+        let field = selectedFields[0]
+        selectedFields.removeFirst()   // 선택한 분야는 저장소에서 제거
         
-        let selectedField = input.viewDidLoad
-            .withUnretained(self)
-            .map { owner, _ in
-                let field = owner.selectedFields[0]  // 선택된 분야 가져오기
-                owner.selectedFields.removeFirst()   // 선택한 분야는 저장소에서 제거
-                requirement.field = field
-                
-                return FieldTagType(from: field).rawValue
-            }
+        var requirement = MemberRequirement(field: field, recruitNumber: 0, requiredSkills: [], requirementText: "")
         
         let recruitNumber = input.recruitNumber
             .do(onNext: { number in
@@ -99,7 +91,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
         }
                 
         return Output(
-            selectedField: selectedField.asDriver(onErrorJustReturn: ""),
+            selectedField: Observable.just(FieldTagType(from: field).rawValue).asDriver(onErrorJustReturn: ""),
             recruitNumber: recruitNumber.asDriver(onErrorJustReturn: 0),
             techTags: techTags.asDriver(onErrorJustReturn: []),
             isNextButtonEnabled: isNextButtonEnabled.asDriver(onErrorJustReturn: false)

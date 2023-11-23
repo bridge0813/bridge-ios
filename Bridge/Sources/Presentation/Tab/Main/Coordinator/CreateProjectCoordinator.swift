@@ -16,10 +16,17 @@ final class CreateProjectCoordinator: Coordinator {
     private let projectDataStorage = ProjectDataStorage()
     private var createProjectNavigationController: UINavigationController?
     
+    private let projectRepository: ProjectRepository
+    private let createProjectUseCase: CreateProjectUseCase
+    
     // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.childCoordinators = []
+        childCoordinators = []
+        
+        let networkService = DefaultNetworkService()
+        projectRepository = DefaultProjectRepository(networkService: networkService)
+        createProjectUseCase = DefaultCreateProjectUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Methods
@@ -89,16 +96,18 @@ extension CreateProjectCoordinator {
     func showProjectDescriptionInputViewController() {
         let viewModel = ProjectDescriptionInputViewModel(
             coordinator: self,
-            dataStorage: projectDataStorage
+            dataStorage: projectDataStorage,
+            createProjectUseCase: createProjectUseCase
         )
         
         let viewController = ProjectDescriptionInputViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showCompletionViewController() {
+    func showCompletionViewController(with projectId: Int) {
         let viewModel = CompletionViewModel(
-            coordinator: self
+            coordinator: self,
+            projectId: projectId
         )
         
         let viewController = CompletionViewController(viewModel: viewModel)

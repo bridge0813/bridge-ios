@@ -49,7 +49,7 @@ final class SetRecruitmentNumberPopUpView: BridgeBasePopUpView {
         super.configureLayouts()
         
         rootFlexContainer.flex.define { flex in
-            flex.addItem(dragHandleBar).alignSelf(.center).width(27).height(5).marginTop(10)
+            flex.addItem(dragHandleBar).alignSelf(.center).marginTop(10)
             
             flex.addItem(titleLabel).width(67).height(22).marginTop(30).marginLeft(16)
             
@@ -69,7 +69,6 @@ final class SetRecruitmentNumberPopUpView: BridgeBasePopUpView {
     // MARK: - Bind
     override func bind() {
         pickerView.rx.itemSelected
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.completeButton.isEnabled = true
