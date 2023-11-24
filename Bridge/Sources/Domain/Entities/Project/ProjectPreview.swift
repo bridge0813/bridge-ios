@@ -18,18 +18,16 @@ struct ProjectPreview {
 }
 
 extension ProjectPreview {
-    static var onError: Self {
-        ProjectPreview(
-            projectId: 0,
-            title: "",
-            description: "",
-            dDays: 0,
-            deadline: "",
-            totalRecruitNumber: 0,
-            rank: 0,
-            deadlineRank: 0
-        )
-    }
+    static let onError = ProjectPreview(
+        projectId: 0,
+        title: "모집글을 불러올 수 없습니다.",
+        description: "",
+        dDays: 0,
+        deadline: "",
+        totalRecruitNumber: 0,
+        rank: 0,
+        deadlineRank: 0
+    )
 }
 
 extension ProjectPreview: Hashable { }
