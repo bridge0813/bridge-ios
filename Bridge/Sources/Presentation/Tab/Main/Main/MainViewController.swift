@@ -260,7 +260,7 @@ extension MainViewController {
     private func updateButtonLayout(for isExpanded: Bool) {
         let buttonWidth: CGFloat = isExpanded ? 106 : 48
         
-        createProjectButton.flex.width(buttonWidth).height(48).markDirty()
+        createProjectButton.flex.width(buttonWidth).height(48)
         rootFlexContainer.flex.layout()
     }
 }
@@ -270,8 +270,8 @@ extension MainViewController {
     func updateTopMargin(categoryMargin: CGFloat, collectionViewMargin: CGFloat) {
         dividerView.isHidden = categoryMargin != -102
         
-        categoryView.flex.top(categoryMargin).markDirty()
-        collectionView.flex.top(collectionViewMargin).markDirty()
+        categoryView.flex.top(categoryMargin)
+        collectionView.flex.top(collectionViewMargin)
         rootFlexContainer.flex.layout()
     }
 }
