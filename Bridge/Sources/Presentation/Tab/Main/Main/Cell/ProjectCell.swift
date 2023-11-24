@@ -33,6 +33,7 @@ final class ProjectCell: BaseCollectionViewCell {
         label.configureTextWithLineHeight(text: "실제 상업용 여행사 웹사이트 개발할 백엔드 개발자 구합니다.", lineHeight: 24)
         label.textColor = BridgeColor.gray01
         label.font = BridgeFont.subtitle3Long.font
+        label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 2
         
         return label
@@ -70,21 +71,21 @@ final class ProjectCell: BaseCollectionViewCell {
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).height(149).define { flex in
-            flex.addItem(bookmarkButton).position(.absolute).size(24).top(19).right(18)
+        rootFlexContainer.flex.paddingHorizontal(18).define { flex in
             
-            flex.addItem(dDayLabel).marginTop(19).marginLeft(18)
+            flex.addItem().direction(.row).marginTop(19).define { flex in
+                flex.addItem().width(200).define { flex in
+                    flex.addItem(dDayLabel)
+                    flex.addItem(titleLabel).marginTop(5.8)
+                }
+                flex.addItem().grow(1)
+                flex.addItem(bookmarkButton).size(24).marginRight(0)
+            }
             
-            flex.addItem(titleLabel).marginTop(5.8).marginLeft(18).marginBottom(24.2).marginRight(129)
+            flex.addItem().backgroundColor(BridgeColor.gray08).height(1).marginTop(24.2)
             
-            flex.addItem()
-                .height(1)
-                .backgroundColor(BridgeColor.gray08)
-                .marginHorizontal(18)
-                .marginBottom(11)
-            
-            flex.addItem().direction(.row).alignItems(.center).define { flex in
-                flex.addItem(recruitNumberLabel).height(14).marginLeft(18)
+            flex.addItem().direction(.row).alignItems(.center).marginTop(11).define { flex in
+                flex.addItem(recruitNumberLabel).height(14)
                 flex.addItem(deadlineLabel).height(14).marginLeft(16)
             }
         }

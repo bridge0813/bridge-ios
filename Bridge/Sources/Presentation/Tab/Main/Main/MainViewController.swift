@@ -308,8 +308,8 @@ extension MainViewController {
     
     private func configureCompositionalLayoutForNew() -> UICollectionViewLayout {
         let config = CompositionalLayoutConfiguration(
-            groupHeight: 160,
-            sectionContentInsets: NSDirectionalEdgeInsets(top: 24, leading: 0, bottom: 80, trailing: 0),
+            groupHeight: 149,
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 24, leading: 0, bottom: 30, trailing: 0),
             headerHeight: nil
         )
         
@@ -383,14 +383,14 @@ extension MainViewController {
     
     private func configureCompositionalLayoutForHot() -> UICollectionViewLayout {
         let hotSectionConfig = CompositionalLayoutConfiguration(
-            groupHeight: 110,
+            groupHeight: 100,
             sectionContentInsets: NSDirectionalEdgeInsets(top: 16.2, leading: 0, bottom: 0, trailing: 0),
             headerHeight: 38
         )
         
         let mainSectionConfig = CompositionalLayoutConfiguration(
-            groupHeight: 160,
-            sectionContentInsets: NSDirectionalEdgeInsets(top: 26.2, leading: 0, bottom: 80, trailing: 0),
+            groupHeight: 149,
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 26.2, leading: 0, bottom: 30, trailing: 0),
             headerHeight: 42
         )
         
@@ -438,8 +438,8 @@ extension MainViewController {
     
     private func configureCompositionalLayoutForDeadline() -> UICollectionViewLayout {
         let config = CompositionalLayoutConfiguration(
-            groupHeight: 160,
-            sectionContentInsets: NSDirectionalEdgeInsets(top: 16.2, leading: 0, bottom: 80, trailing: 0),
+            groupHeight: 149,
+            sectionContentInsets: NSDirectionalEdgeInsets(top: 16.2, leading: 0, bottom: 30, trailing: 0),
             headerHeight: 38
         )
         

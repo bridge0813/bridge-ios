@@ -46,6 +46,7 @@ final class HotProjectCell: BaseCollectionViewCell {
         label.configureTextWithLineHeight(text: "사이드 프젝으로 IOS앱을 같이 구현할 \n팀원을 구하고 있어요~", lineHeight: 21)
         label.textColor = BridgeColor.gray01
         label.font = BridgeFont.body2.font
+        label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 2
         
         return label
@@ -56,12 +57,12 @@ final class HotProjectCell: BaseCollectionViewCell {
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.row).height(100).alignItems(.center).define { flex in
-            flex.addItem(rankingLabel).width(48).height(100).marginRight(18)
+        rootFlexContainer.flex.direction(.row).alignItems(.center).define { flex in
+            flex.addItem(rankingLabel).width(48).height(100)
             
-            flex.addItem().direction(.column).marginTop(19).marginBottom(19).define { flex in
-                flex.addItem(dDayLabel).marginBottom(6)
-                flex.addItem(titleLabel).width(206).height(42)
+            flex.addItem().width(206).height(62).marginLeft(18).define { flex in
+                flex.addItem(dDayLabel).height(14)
+                flex.addItem(titleLabel).height(42).marginTop(6)
             }
             
             flex.addItem().grow(1)
