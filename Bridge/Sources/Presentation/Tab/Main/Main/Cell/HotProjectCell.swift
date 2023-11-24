@@ -23,7 +23,6 @@ final class HotProjectCell: BaseCollectionViewCell {
     
     private let rankingLabel: UILabel = {
         let label = UILabel()
-        label.text = "1"
         label.textAlignment = .center
         label.textColor = BridgeColor.secondary2
         label.backgroundColor = BridgeColor.secondary3
@@ -34,7 +33,6 @@ final class HotProjectCell: BaseCollectionViewCell {
     
     private let dDayLabel: UILabel = {
         let label = UILabel()
-        label.text = "D-24"
         label.textColor = BridgeColor.secondary1
         label.font = BridgeFont.body3.font
         
@@ -43,7 +41,6 @@ final class HotProjectCell: BaseCollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.configureTextWithLineHeight(text: "사이드 프젝으로 IOS앱을 같이 구현할 \n팀원을 구하고 있어요~", lineHeight: 21)
         label.textColor = BridgeColor.gray01
         label.font = BridgeFont.body2.font
         label.lineBreakMode = .byTruncatingTail
@@ -77,7 +74,9 @@ final class HotProjectCell: BaseCollectionViewCell {
         rootFlexContainer.flex.layout()
     }
     
-    func configureCell() {
-       
+    func configureCell(with data: ProjectPreview) {
+        titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 21)
+        dDayLabel.text = "D-\(data.dDays)"
+        rankingLabel.text = String(data.rank)
     }
 }

@@ -41,7 +41,7 @@ extension ProjectCountHeaderView {
     func configureCountLabel(with count: String) {
         projectCountLabel.highlightedTextColor(
             text: "\(count)개의 프로젝트",
-            highlightedText: String(count)
+            highlightedText: count
         )
     }
 }

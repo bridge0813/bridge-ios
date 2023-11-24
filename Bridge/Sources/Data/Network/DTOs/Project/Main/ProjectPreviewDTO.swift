@@ -31,12 +31,12 @@ extension ProjectPreviewDTO {
 
 extension ProjectPreviewDTO {
     static var projectTestArray: [ProjectPreviewDTO] = [
-        ProjectPreviewDTO(projectId: 0, title: "", deadline: "", totalRecruitNumber: 0),
-        ProjectPreviewDTO(projectId: 1, title: "", deadline: "", totalRecruitNumber: 0),
-        ProjectPreviewDTO(projectId: 2, title: "", deadline: "", totalRecruitNumber: 0),
-        ProjectPreviewDTO(projectId: 3, title: "", deadline: "", totalRecruitNumber: 0),
-        ProjectPreviewDTO(projectId: 4, title: "", deadline: "", totalRecruitNumber: 0),
-        ProjectPreviewDTO(projectId: 5, title: "", deadline: "", totalRecruitNumber: 0),
-        ProjectPreviewDTO(projectId: 6, title: "", deadline: "", totalRecruitNumber: 0)
+        ProjectPreviewDTO(projectId: 0, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 6),
+        ProjectPreviewDTO(projectId: 1, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 5),
+        ProjectPreviewDTO(projectId: 2, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 3),
+        ProjectPreviewDTO(projectId: 3, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 6),
+        ProjectPreviewDTO(projectId: 4, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 8),
+        ProjectPreviewDTO(projectId: 5, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 8),
+        ProjectPreviewDTO(projectId: 6, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 7)
     ]
 }

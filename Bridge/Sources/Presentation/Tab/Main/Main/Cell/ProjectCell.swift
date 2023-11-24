@@ -30,7 +30,6 @@ final class ProjectCell: BaseCollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.configureTextWithLineHeight(text: "실제 상업용 여행사 웹사이트 개발할 백엔드 개발자 구합니다.", lineHeight: 24)
         label.textColor = BridgeColor.gray01
         label.font = BridgeFont.subtitle3Long.font
         label.lineBreakMode = .byTruncatingTail
@@ -41,7 +40,6 @@ final class ProjectCell: BaseCollectionViewCell {
     
     private let dDayLabel: UILabel = {
         let label = UILabel()
-        label.text = "D-28"
         label.textColor = BridgeColor.secondary1
         label.font = BridgeFont.body3.font
         
@@ -52,7 +50,6 @@ final class ProjectCell: BaseCollectionViewCell {
     
     private let recruitNumberLabel: UILabel = {
         let label = UILabel()
-        label.text = "1명 모집"
         label.textColor = BridgeColor.gray03
         label.font = BridgeFont.body4.font
         
@@ -61,7 +58,6 @@ final class ProjectCell: BaseCollectionViewCell {
     
     private let deadlineLabel: UILabel = {
         let label = UILabel()
-        label.text = "2023.8.20 모집 마감"
         label.textColor = BridgeColor.gray03
         label.font = BridgeFont.body4.font
         
@@ -102,7 +98,13 @@ final class ProjectCell: BaseCollectionViewCell {
         ).cgPath
     }
     
-    func configureCell() {
-       
+    func configureCell(with data: ProjectPreview) {
+        titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 24)
+        dDayLabel.text = "D-\(data.dDays)"
+        recruitNumberLabel.text = "\(data.totalRecruitNumber)명 모집"
+        deadlineLabel.text = "\(data.deadline) 모집 마감"
+        
+        recruitNumberLabel.flex.markDirty()
+        deadlineLabel.flex.markDirty()
     }
 }

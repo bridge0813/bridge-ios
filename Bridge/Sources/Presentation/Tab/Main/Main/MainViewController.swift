@@ -288,11 +288,11 @@ extension MainViewController {
     private func configureDataSource() {
         dataSource = DataSource(
             collectionView: collectionView
-        ) { collectionView, indexPath, _ in
+        ) { collectionView, indexPath, project in
             guard let cell = collectionView.dequeueReusableCell(ProjectCell.self, for: indexPath) else {
                 return UICollectionViewCell()
             }
-            
+            cell.configureCell(with: project)
             return cell
         }
     }
@@ -331,7 +331,7 @@ extension MainViewController {
     private func configureDataSourceForHot() {
         dataSource = DataSource(
             collectionView: collectionView
-        ) { collectionView, indexPath, _ in
+        ) { collectionView, indexPath, project in
             
             let section = MainViewModel.Section.allCases[indexPath.section]
             
@@ -341,6 +341,7 @@ extension MainViewController {
                     return UICollectionViewCell()
                 }
                 
+                cell.configureCell(with: project)
                 return cell
                 
             case .main:
@@ -348,6 +349,7 @@ extension MainViewController {
                     return UICollectionViewCell()
                 }
                 
+                cell.configureCell(with: project)
                 return cell
             }
         }
