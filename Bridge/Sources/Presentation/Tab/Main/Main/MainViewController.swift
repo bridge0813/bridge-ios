@@ -13,19 +13,13 @@ import RxSwift
 
 final class MainViewController: BaseViewController {
     // MARK: - UI
-    private let rootFlexContainer: UIView = {
-        let view = UIView()
-        view.clipsToBounds = true
+    private let rootFlexContainer = UIView()
+    
+    private let placeholderView: BridgePlaceholderView = {
+        let view = BridgePlaceholderView()
+        view.isHidden = true
         
         return view
-    }()
-    
-    private let placeholderView: PlaceholderView = {
-        let placeholderView = PlaceholderView()
-        placeholderView.backgroundColor = BridgeColor.gray09
-        placeholderView.isHidden = true
-        
-        return placeholderView
     }()
     
     private let fieldCategoryAnchorButton = FieldCategoryAnchorButton()
@@ -324,9 +318,9 @@ extension MainViewController {
     }
     
     private func updateCollectionViewForNew(with projects: [ProjectPreview]) {
-        placeholderView.configureHolderView(.emptyProject)
-        placeholderView.projectCountLabel.isHidden = true
+        placeholderView.configurePlaceholderView(for: .emptyProject)
         placeholderView.isHidden = !projects.isEmpty
+        
         configureDataSource()
         collectionView.collectionViewLayout = configureCompositionalLayoutForNew()
         applySectionSnapshot(to: .main, with: projects)
@@ -346,9 +340,9 @@ extension MainViewController {
 // MARK: - 카테고리 -> 인기일 경우
 extension MainViewController {
     private func updateCollectionViewForHot(with projects: [ProjectPreview]) {
-        placeholderView.configureHolderView(.emptyProject)
-        placeholderView.projectCountLabel.isHidden = false
+        placeholderView.configurePlaceholderView(for: .emptyProject)
         placeholderView.isHidden = !projects.isEmpty
+        
         configureDataSourceForHot()
         configureSupplementaryViewForHot(projects.count)
         collectionView.collectionViewLayout = configureCompositionalLayoutForHot()
@@ -439,9 +433,9 @@ extension MainViewController {
 // MARK: - 카테고리 -> 마감임박일 경우
 extension MainViewController {
     private func updateCollectionViewForDeadline(with projects: [ProjectPreview]) {
-        placeholderView.configureHolderView(.emptyProject)
-        placeholderView.projectCountLabel.isHidden = false
+        placeholderView.configurePlaceholderView(for: .emptyProject)
         placeholderView.isHidden = !projects.isEmpty
+        
         configureDataSource()
         configureSupplementaryViewForDeadline(projects.count)
         collectionView.collectionViewLayout = configureCompositionalLayoutForDeadline()
@@ -476,9 +470,9 @@ extension MainViewController {
 // MARK: - 카테고리 -> 출시예정일 경우
 extension MainViewController {
     private func updateCollectionViewForComingSoon(with projects: [ProjectPreview]) {
-        placeholderView.configureHolderView(.comingSoon)
-        placeholderView.projectCountLabel.isHidden = true
+        placeholderView.configurePlaceholderView(for: .comingSoon)
         placeholderView.isHidden = false
+        
         configureDataSource()
         collectionView.collectionViewLayout = configureCompositionalLayoutForNew()
         applySectionSnapshot(to: .main, with: projects)

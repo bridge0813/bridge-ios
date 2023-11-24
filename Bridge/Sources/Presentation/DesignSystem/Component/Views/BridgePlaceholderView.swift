@@ -36,6 +36,8 @@ final class BridgePlaceholderView: BaseView {
         label.font = BridgeFont.body2.font
         label.textColor = BridgeColor.gray04
         label.textAlignment = .center
+        label.numberOfLines = 0
+        
         return label
     }()
     
@@ -62,10 +64,13 @@ final class BridgePlaceholderView: BaseView {
 }
 
 extension BridgePlaceholderView {
-     enum PlaceholderType {
+    enum PlaceholderType {
         case needSignIn
         case error
         case emptyChatRoom
+        
+        case comingSoon
+        case emptyProject
     }
     
     struct PlaceholderConfiguration {
@@ -89,6 +94,16 @@ extension BridgePlaceholderView {
             emojiImageView.image = UIImage(named: "graphic_chat")
             titleLabel.text = "현재 채팅이 없어요!"
             descriptionLabel.text = "예비 팀원과 새로운 채팅을 시작해보세요."
+            
+        case .comingSoon:
+            emojiImageView.image = UIImage(named: "graphic_lock")
+            titleLabel.text = "출시 예정이에요!"
+            descriptionLabel.text = "빠른 시일 내에 소개할 수 있도록 \n브릿지가 노력할게요:)"
+            
+        case .emptyProject:
+            emojiImageView.image = UIImage(named: "graphic_search")
+            titleLabel.text = "올라온 모집글이 없어요!"
+            descriptionLabel.text = "조금만 기달려 주세요."
         }
         
         if let configuration {
