@@ -171,6 +171,9 @@
 		7C56E15C2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */; };
 		7C56E15F2B10F8E300454F5E /* ProfileEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E15E2B10F8E300454F5E /* ProfileEndpoint.swift */; };
 		7C56E1622B10FF8300454F5E /* ProfilePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1612B10FF8300454F5E /* ProfilePreview.swift */; };
+		7C56E1652B11027000454F5E /* FetchProfilePreviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */; };
+		7C56E1682B11034300454F5E /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1672B11034300454F5E /* ProfileRepository.swift */; };
+		7C56E16B2B11043400454F5E /* DefaultProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E16A2B11043400454F5E /* DefaultProfileRepository.swift */; };
 		7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8639582AC28B4F00064588 /* BaseButton.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
@@ -383,6 +386,9 @@
 		7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePreviewResponseDTO.swift; sourceTree = "<group>"; };
 		7C56E15E2B10F8E300454F5E /* ProfileEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEndpoint.swift; sourceTree = "<group>"; };
 		7C56E1612B10FF8300454F5E /* ProfilePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePreview.swift; sourceTree = "<group>"; };
+		7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProfilePreviewUseCase.swift; sourceTree = "<group>"; };
+		7C56E1672B11034300454F5E /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
+		7C56E16A2B11043400454F5E /* DefaultProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileRepository.swift; sourceTree = "<group>"; };
 		7C8639582AC28B4F00064588 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
@@ -881,6 +887,7 @@
 				7B14DB2F2AB1DAC3009A00EB /* Auth */,
 				7C569CFB2A9F6F8A0063D362 /* Project */,
 				7BA36CA52A9C6878000DAB02 /* Chat */,
+				7C56E1662B11031E00454F5E /* Profile */,
 			);
 			path = RepositoryInterfaces;
 			sourceTree = "<group>";
@@ -891,6 +898,7 @@
 				7B14DB262AB15E69009A00EB /* Auth */,
 				7CA04F662B0A6EA5007B9191 /* Project */,
 				7BA36C952A9C4D0F000DAB02 /* Chat */,
+				7C56E1632B11025300454F5E /* Profile */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -938,6 +946,7 @@
 				7B14DB322AB1DBEC009A00EB /* Auth */,
 				7C569D072A9F7E060063D362 /* Project */,
 				7BA36CA22A9C681B000DAB02 /* Chat */,
+				7C56E1692B1103F900454F5E /* Profile */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1266,6 +1275,30 @@
 			isa = PBXGroup;
 			children = (
 				7C56E1612B10FF8300454F5E /* ProfilePreview.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7C56E1632B11025300454F5E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7C56E1662B11031E00454F5E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7C56E1672B11034300454F5E /* ProfileRepository.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7C56E1692B1103F900454F5E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7C56E16A2B11043400454F5E /* DefaultProfileRepository.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1754,6 +1787,7 @@
 				7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift in Sources */,
 				7C8CC41A2AF40A100032F237 /* BaseProgressView.swift in Sources */,
 				7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */,
+				7C56E16B2B11043400454F5E /* DefaultProfileRepository.swift in Sources */,
 				7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */,
 				7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */,
 				7CA04F0F2AF8F867007B9191 /* TechStack.swift in Sources */,
@@ -1808,11 +1842,13 @@
 				7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7B02A66A2AE000DE00C8D4A1 /* WebSocketEndpoint.swift in Sources */,
+				7C56E1682B11034300454F5E /* ProfileRepository.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
 				7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */,
 				7C40CBC82AC69447000F4C9F /* BridgeSmallButtonGroup.swift in Sources */,
 				7C56E1622B10FF8300454F5E /* ProfilePreview.swift in Sources */,
 				7B153C0F2AD6CF0D00618280 /* Interceptor.swift in Sources */,
+				7C56E1652B11027000454F5E /* FetchProfilePreviewUseCase.swift in Sources */,
 				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
 				7C55E6582AE811A20018FA5D /* AddTechStackButton.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
