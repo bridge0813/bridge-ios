@@ -170,6 +170,7 @@
 		7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */; };
 		7C56E15C2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */; };
 		7C56E15F2B10F8E300454F5E /* ProfileEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E15E2B10F8E300454F5E /* ProfileEndpoint.swift */; };
+		7C56E1622B10FF8300454F5E /* ProfilePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1612B10FF8300454F5E /* ProfilePreview.swift */; };
 		7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8639582AC28B4F00064588 /* BaseButton.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
@@ -381,6 +382,7 @@
 		7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePreviewResponseDTO.swift; sourceTree = "<group>"; };
 		7C56E15E2B10F8E300454F5E /* ProfileEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEndpoint.swift; sourceTree = "<group>"; };
+		7C56E1612B10FF8300454F5E /* ProfilePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePreview.swift; sourceTree = "<group>"; };
 		7C8639582AC28B4F00064588 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
@@ -867,6 +869,7 @@
 				7B14DB292AB1625D009A00EB /* User */,
 				7CA04F5F2B0A4AE6007B9191 /* Project */,
 				7BA36C992A9C5081000DAB02 /* Chat */,
+				7C56E1602B10FF6200454F5E /* Profile */,
 				7CA04F0D2AF8F852007B9191 /* TechStack */,
 			);
 			path = Entities;
@@ -1255,6 +1258,14 @@
 			isa = PBXGroup;
 			children = (
 				7C56E15E2B10F8E300454F5E /* ProfileEndpoint.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7C56E1602B10FF6200454F5E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7C56E1612B10FF8300454F5E /* ProfilePreview.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1800,6 +1811,7 @@
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
 				7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */,
 				7C40CBC82AC69447000F4C9F /* BridgeSmallButtonGroup.swift in Sources */,
+				7C56E1622B10FF8300454F5E /* ProfilePreview.swift in Sources */,
 				7B153C0F2AD6CF0D00618280 /* Interceptor.swift in Sources */,
 				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
 				7C55E6582AE811A20018FA5D /* AddTechStackButton.swift in Sources */,

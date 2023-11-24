@@ -17,3 +17,9 @@ struct ProfilePreviewResponseDTO: Decodable {
         case bookmarkNumber = "bookmarkNum"
     }
 }
+
+extension ProfilePreviewResponseDTO {
+    func toEntity() -> ProfilePreview {
+        ProfilePreview(profileImage: profileImage, field: field, bookmarkNumber: bookmarkNumber)
+    }
+}
