@@ -25,7 +25,7 @@ final class MainCategoryView: BaseView {
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).define { flex in
+        rootFlexContainer.flex.define { flex in
             flex.addItem().grow(1)
             flex.addItem().direction(.row).alignItems(.center).marginHorizontal(5).define { flex in
                 flex.addItem(newButton)

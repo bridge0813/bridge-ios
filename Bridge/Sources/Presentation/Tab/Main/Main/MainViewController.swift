@@ -62,16 +62,22 @@ final class MainViewController: BaseViewController {
     
     private let dividerView: UIView = {
         let divider = UIView()
+        divider.flex.width(100%).height(1)
         divider.backgroundColor = BridgeColor.gray06
-        divider.isHidden = false
         
         return divider
     }()
     
-    private let categoryView = MainCategoryView()
+    private let categoryView: MainCategoryView = {
+        let view = MainCategoryView()
+        view.flex.width(100%).height(102)
+        
+        return view
+    }()
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.flex.width(100%).height(100%)
         collectionView.backgroundColor = BridgeColor.gray09
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ProjectCell.self)
@@ -129,27 +135,13 @@ final class MainViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.define { flex in
-            flex.addItem(dividerView).height(1)
+            flex.addItem(categoryView).position(.absolute)
+            flex.addItem(collectionView).position(.absolute)
+              
+            flex.addItem(dividerView)
+            flex.addItem(placeholderView).grow(1).marginTop(102)
             
-            flex.addItem(categoryView)
-                .position(.absolute)
-                .height(102)
-            
-            flex.addItem(collectionView)
-                .position(.absolute)
-            
-            flex.addItem(placeholderView)
-                .position(.absolute)
-                .width(100%)
-                .height(75%)
-                .top(102)
-            
-            flex.addItem(createProjectButton)
-                .position(.absolute)
-                .right(15)
-                .bottom(15)
-                .width(106)
-                .height(48)
+            flex.addItem(createProjectButton).position(.absolute).right(15).bottom(15)
         }
     }
     
@@ -158,8 +150,6 @@ final class MainViewController: BaseViewController {
         
         rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
-        
-        rootFlexContainer.bringSubviewToFront(dividerView)
     }
     
     // MARK: - Binding
@@ -251,7 +241,7 @@ final class MainViewController: BaseViewController {
     }
 }
 
-// MARK: - CreateProjectButtonAnimation
+// MARK: - 글쓰기버튼 애니메이션
 extension MainViewController {
     private func animateCreateButton(for isExpanded: Bool) {
         UIView.animate(
@@ -275,23 +265,13 @@ extension MainViewController {
     }
 }
 
-// MARK: - 컬렉션 뷰의 Scroll 처리
+// MARK: - 컬렉션 뷰 및 헤더 뷰 애니메이션
 extension MainViewController {
     func updateTopMargin(categoryMargin: CGFloat, collectionViewMargin: CGFloat) {
         dividerView.isHidden = categoryMargin != -102
         
-        categoryView.flex
-            .position(.absolute)
-            .width(100%)
-            .height(102)
-            .top(categoryMargin)
-        
-        collectionView.flex
-            .position(.absolute)
-            .width(100%)
-            .height(100%)
-            .top(collectionViewMargin)
-    
+        categoryView.flex.top(categoryMargin).markDirty()
+        collectionView.flex.top(collectionViewMargin).markDirty()
         rootFlexContainer.flex.layout()
     }
 }
