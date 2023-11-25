@@ -6,7 +6,7 @@
 //
 
 struct ProfilePreview {
-    let profileImage: String
+    let profileImage: String?
     let field: [String]
     let bookmarkNumber: Int
 }

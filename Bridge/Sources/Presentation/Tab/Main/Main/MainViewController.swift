@@ -155,7 +155,6 @@ final class MainViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = MainViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asObservable(),
             filterButtonTapped: filterButton.rx.tap.asObservable(),
             itemSelected: collectionView.rx.itemSelected.asObservable(),
             createButtonTapped: createProjectButton.rx.tap.asObservable(),

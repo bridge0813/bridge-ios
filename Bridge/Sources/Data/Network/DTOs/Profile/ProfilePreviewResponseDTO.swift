@@ -7,7 +7,7 @@
 
 /// MyPage를 조회할 때 사용되는 Response Body
 struct ProfilePreviewResponseDTO: Decodable {
-    let profileImage: String
+    let profileImage: String?
     let field: [String]
     let bookmarkNumber: Int
     

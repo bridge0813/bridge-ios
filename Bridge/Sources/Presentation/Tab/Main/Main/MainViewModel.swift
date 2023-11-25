@@ -12,7 +12,6 @@ import RxSwift
 final class MainViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        let viewWillAppear: Observable<Bool>  // 로그인 여부에 따라, 유저의 분야에 맞게 받아올 정보가 다름(수정 필요)
         let filterButtonTapped: Observable<Void>
         let itemSelected: Observable<IndexPath>
         let createButtonTapped: Observable<Void>
@@ -27,29 +26,53 @@ final class MainViewModel: ViewModelType {
     // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
+    
+    private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
     private let fetchProjectsUseCase: FetchAllProjectsUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
     // MARK: - Init
     init(
         coordinator: MainCoordinator,
+        fetchProfilePreviewUseCase: FetchProfilePreviewUseCase,
         fetchProjectsUseCase: FetchAllProjectsUseCase,
         fetchHotProjectsUseCase: FetchHotProjectsUseCase
     ) {
         self.coordinator = coordinator
+        self.fetchProfilePreviewUseCase = fetchProfilePreviewUseCase
         self.fetchProjectsUseCase = fetchProjectsUseCase
         self.fetchHotProjectsUseCase = fetchHotProjectsUseCase
     }
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        // MARK: - Fetch Projects
-        let projects = input.viewWillAppear
+        let projects = BehaviorRelay<[ProjectPreview]>(value: [])
+        let field = BehaviorRelay<[String]>(value: [])
+        
+        fetchProfilePreviewUseCase.fetchProfilePreview().toResult()
             .withUnretained(self)
-            .flatMapLatest { owner, _ -> Observable<[ProjectPreview]> in
-                return owner.fetchProjectsUseCase.execute()
+            .flatMap { owner, result -> Observable<Result<[ProjectPreview], Error>> in
+                switch result {
+                case .success(let profile):
+                    field.accept(profile.field)
+                    return owner.fetchProjectsUseCase.execute().toResult()  // 선택된 분야 - 신규 데이터 가져오기
+                    
+                case .failure:
+                    return owner.fetchProjectsUseCase.execute().toResult()  // 전체 - 신규 데이터 가져오기
+                }
             }
-            .distinctUntilChanged()
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projectPreviews):
+                    projects.accept(projectPreviews)
+                    
+                case .failure:
+                    owner.coordinator?.showErrorAlert(configuration: .networkError)
+                }
+            })
+            .disposed(by: disposeBag)
+        
         
         let buttonTypeAndProjects = input.categoryButtonTapped
             .withUnretained(self)

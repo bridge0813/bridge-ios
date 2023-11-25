@@ -13,7 +13,10 @@ final class MainCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
+    private let profileRepository: ProfileRepository
     private let projectRepository: ProjectRepository
+    
+    private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
     private let fetchProjectsUseCase: FetchAllProjectsUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
@@ -22,8 +25,11 @@ final class MainCoordinator: Coordinator {
         self.navigationController = navigationController
         self.childCoordinators = []
 
-//        let networkService = DefaultNetworkService()
+        let networkService = DefaultNetworkService()
+        profileRepository = DefaultProfileRepository(networkService: networkService)
         projectRepository = MockProjectRepository()
+        
+        fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(profileRepository: profileRepository)
         fetchProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
         fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
     }
@@ -39,6 +45,7 @@ extension MainCoordinator {
     func showMainViewController() {
         let mainViewModel = MainViewModel(
             coordinator: self,
+            fetchProfilePreviewUseCase: fetchProfilePreviewUseCase,
             fetchProjectsUseCase: fetchProjectsUseCase,
             fetchHotProjectsUseCase: fetchHotProjectsUseCase
         )
