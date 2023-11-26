@@ -70,15 +70,15 @@ final class ProjectCell: BaseCollectionViewCell {
         rootFlexContainer.flex.paddingHorizontal(18).define { flex in
             
             flex.addItem().direction(.row).marginTop(19).define { flex in
-                flex.addItem().width(200).define { flex in
+                flex.addItem().width(200).height(68).define { flex in
                     flex.addItem(dDayLabel)
-                    flex.addItem(titleLabel).marginTop(5.8)
+                    flex.addItem(titleLabel).marginTop(6)
                 }
                 flex.addItem().grow(1)
                 flex.addItem(bookmarkButton).size(24).marginRight(0)
             }
             
-            flex.addItem().backgroundColor(BridgeColor.gray08).height(1).marginTop(24.2)
+            flex.addItem().backgroundColor(BridgeColor.gray08).height(1).marginTop(24)
             
             flex.addItem().direction(.row).alignItems(.center).marginTop(11).define { flex in
                 flex.addItem(recruitNumberLabel).height(14)
