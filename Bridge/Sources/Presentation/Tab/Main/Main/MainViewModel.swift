@@ -20,7 +20,7 @@ final class MainViewModel: ViewModelType {
     
     struct Output {
         let projects: Driver<[ProjectPreview]>
-        let buttonTypeAndProjects: Driver<(String, [ProjectPreview])>
+//        let buttonTypeAndProjects: Driver<(String, [ProjectPreview])>
     }
 
     // MARK: - Property
@@ -28,19 +28,19 @@ final class MainViewModel: ViewModelType {
     private weak var coordinator: MainCoordinator?
     
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
-    private let fetchProjectsUseCase: FetchAllProjectsUseCase
+    private let fetchAllProjectsUseCase: FetchAllProjectsUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
     // MARK: - Init
     init(
         coordinator: MainCoordinator,
         fetchProfilePreviewUseCase: FetchProfilePreviewUseCase,
-        fetchProjectsUseCase: FetchAllProjectsUseCase,
+        fetchAllProjectsUseCase: FetchAllProjectsUseCase,
         fetchHotProjectsUseCase: FetchHotProjectsUseCase
     ) {
         self.coordinator = coordinator
         self.fetchProfilePreviewUseCase = fetchProfilePreviewUseCase
-        self.fetchProjectsUseCase = fetchProjectsUseCase
+        self.fetchAllProjectsUseCase = fetchAllProjectsUseCase
         self.fetchHotProjectsUseCase = fetchHotProjectsUseCase
     }
     
@@ -55,10 +55,10 @@ final class MainViewModel: ViewModelType {
                 switch result {
                 case .success(let profile):
                     field.accept(profile.field)
-                    return owner.fetchProjectsUseCase.execute().toResult()  // 선택된 분야 - 신규 데이터 가져오기
+                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()  // 선택된 분야 - 신규 데이터 가져오기
                     
                 case .failure:
-                    return owner.fetchProjectsUseCase.execute().toResult()  // 전체 - 신규 데이터 가져오기
+                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()  // 전체 - 신규 데이터 가져오기
                 }
             }
             .withUnretained(self)
@@ -74,26 +74,26 @@ final class MainViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         
-        let buttonTypeAndProjects = input.categoryButtonTapped
-            .withUnretained(self)
-            .flatMapLatest { owner, type -> Observable<(String, [ProjectPreview])> in
-                switch type {
-                case "new":
-                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 신규 데이터
-                    
-                case "hot":
-                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 인기 데이터
-                    
-                case "deadlineApproach":
-                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 마감임박 데이터
-                    
-                case "comingSoon", "comingSoon2":
-                    return .just((type, []))
-                    
-                default:
-                    return .just((type, []))
-                }
-            }
+//        let buttonTypeAndProjects = input.categoryButtonTapped
+//            .withUnretained(self)
+//            .flatMapLatest { owner, type -> Observable<(String, [ProjectPreview])> in
+//                switch type {
+//                case "new":
+//                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 신규 데이터
+//
+//                case "hot":
+//                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 인기 데이터
+//
+//                case "deadlineApproach":
+//                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 마감임박 데이터
+//
+//                case "comingSoon", "comingSoon2":
+//                    return .just((type, []))
+//
+//                default:
+//                    return .just((type, []))
+//                }
+//            }
             
         // MARK: - Item Selected
         input.itemSelected
@@ -121,15 +121,10 @@ final class MainViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError]),
-            buttonTypeAndProjects: buttonTypeAndProjects.asDriver(onErrorJustReturn: ("new", []))
+            projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError])
+//            buttonTypeAndProjects: buttonTypeAndProjects.asDriver(onErrorJustReturn: ("new", []))
         )
     }
-}
-
-// MARK: - Coordinator
-extension MainViewModel {
-    
 }
 
 // MARK: - UI DataSource

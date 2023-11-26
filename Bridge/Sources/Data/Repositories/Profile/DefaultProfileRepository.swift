@@ -20,7 +20,7 @@ final class DefaultProfileRepository: ProfileRepository {
     
     func fetchProfilePreview() -> Observable<ProfilePreview> {
         let userID = tokenStorage.get(.userID) ?? invalidToken
-        let profilePreviewEndpoint = ProfileEndpoint.profilePreview(userId: userID)
+        let profilePreviewEndpoint = ProfileEndpoint.fetchProfilePreview(userId: userID)
         
         return networkService.request(profilePreviewEndpoint, interceptor: AuthInterceptor())
             .decode(type: ProfilePreviewResponseDTO.self, decoder: JSONDecoder())

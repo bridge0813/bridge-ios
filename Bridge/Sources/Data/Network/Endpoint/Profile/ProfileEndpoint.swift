@@ -8,27 +8,27 @@
 import Foundation
 
 enum ProfileEndpoint {
-    case profilePreview(userId: String)
+    case fetchProfilePreview(userId: String)
 }
 
 extension ProfileEndpoint: Endpoint {
     var path: String {
         switch self {
-        case .profilePreview:
+        case .fetchProfilePreview:
             return "/users/mypage"
         }
     }
     
     var queryParameters: QueryParameters? {
         switch self {
-        case .profilePreview(let userId):
+        case .fetchProfilePreview(let userId):
             return ["userId": userId]
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .profilePreview:
+        case .fetchProfilePreview:
             return .get
         }
     }

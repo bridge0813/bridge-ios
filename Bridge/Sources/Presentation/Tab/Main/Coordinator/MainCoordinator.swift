@@ -17,7 +17,7 @@ final class MainCoordinator: Coordinator {
     private let projectRepository: ProjectRepository
     
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
-    private let fetchProjectsUseCase: FetchAllProjectsUseCase
+    private let fetchAllProjectsUseCase: FetchAllProjectsUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
     // MARK: - Init
@@ -27,10 +27,10 @@ final class MainCoordinator: Coordinator {
 
         let networkService = DefaultNetworkService()
         profileRepository = DefaultProfileRepository(networkService: networkService)
-        projectRepository = MockProjectRepository()
+        projectRepository = DefaultProjectRepository(networkService: networkService)
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(profileRepository: profileRepository)
-        fetchProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
+        fetchAllProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
         fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
     }
     
@@ -46,7 +46,7 @@ extension MainCoordinator {
         let mainViewModel = MainViewModel(
             coordinator: self,
             fetchProfilePreviewUseCase: fetchProfilePreviewUseCase,
-            fetchProjectsUseCase: fetchProjectsUseCase,
+            fetchAllProjectsUseCase: fetchAllProjectsUseCase,
             fetchHotProjectsUseCase: fetchHotProjectsUseCase
         )
         

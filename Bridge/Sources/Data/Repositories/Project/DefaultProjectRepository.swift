@@ -21,7 +21,11 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // MARK: - Methods
     func fetchAllProjects() -> Observable<[ProjectPreview]> {
-        .just(ProjectPreviewDTO.projectTestArray.compactMap { $0.toEntity() })
+        return networkService.request(ProjectEndpoint.fetchAllProjects, interceptor: nil)
+            .decode(type: [ProjectPreviewDTO].self, decoder: JSONDecoder())
+            .map { projectPreviewDTOs in
+                projectPreviewDTOs.map { $0.toEntity() }
+            }
     }
     
     func fetchHotProjects() -> Observable<[ProjectPreview]> {

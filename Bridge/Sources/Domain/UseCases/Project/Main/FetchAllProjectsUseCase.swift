@@ -1,5 +1,5 @@
 //
-//  ObserveProjectsUseCase.swift
+//  FetchAllProjectsUseCase.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/08/30.
@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol FetchAllProjectsUseCase {
-    func execute() -> Observable<[ProjectPreview]>
+    func fetchProjects() -> Observable<[ProjectPreview]>
 }
 
 final class DefaultFetchAllProjectsUseCase: FetchAllProjectsUseCase {
@@ -18,7 +18,7 @@ final class DefaultFetchAllProjectsUseCase: FetchAllProjectsUseCase {
         self.projectRepository = projectRepository
     }
     
-    func execute() -> Observable<[ProjectPreview]> {
+    func fetchProjects() -> Observable<[ProjectPreview]> {
         projectRepository.fetchAllProjects()
     }
 }

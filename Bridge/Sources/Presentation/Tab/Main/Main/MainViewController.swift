@@ -172,30 +172,30 @@ final class MainViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         // 카테고리 버튼에 따라 컬렉션뷰(DataSource, Layout) 변경
-        output.buttonTypeAndProjects
-            .drive(onNext: { [weak self] type, projects in
-                switch type {
-                case "new":
-                    self?.updateCollectionViewForNew(with: projects)
-                    
-                case "hot":
-                    self?.updateCollectionViewForHot(with: projects)
-                    self?.applySectionSnapshot(to: .hot, with: Array(projects.prefix(3)))
-                    self?.applySectionSnapshot(to: .main, with: Array(projects.dropFirst(3)))
-                    
-                case "deadlineApproach":
-                    self?.updateCollectionViewForDeadline(with: projects)
-                    
-                case "comingSoon", "comingSoon2":
-                    self?.updateCollectionViewForComingSoon(with: projects)
-                    
-                default:
-                    print(type)
-                }
-                
-                self?.categoryView.updateButtonState(type)  // 버튼 상태 변경
-            })
-            .disposed(by: disposeBag)
+//        output.buttonTypeAndProjects
+//            .drive(onNext: { [weak self] type, projects in
+//                switch type {
+//                case "new":
+//                    self?.updateCollectionViewForNew(with: projects)
+//                    
+//                case "hot":
+//                    self?.updateCollectionViewForHot(with: projects)
+//                    self?.applySectionSnapshot(to: .hot, with: Array(projects.prefix(3)))
+//                    self?.applySectionSnapshot(to: .main, with: Array(projects.dropFirst(3)))
+//                    
+//                case "deadlineApproach":
+//                    self?.updateCollectionViewForDeadline(with: projects)
+//                    
+//                case "comingSoon", "comingSoon2":
+//                    self?.updateCollectionViewForComingSoon(with: projects)
+//                    
+//                default:
+//                    print(type)
+//                }
+//                
+//                self?.categoryView.updateButtonState(type)  // 버튼 상태 변경
+//            })
+//            .disposed(by: disposeBag)
         
         // 스크롤에 따른 레이아웃 처리
         collectionView.rx.contentOffset

@@ -12,6 +12,12 @@ struct ProjectPreviewDTO: Codable {
     let title: String
     let deadline: String
     let totalRecruitNumber: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case projectId, title
+        case deadline = "dueDate"
+        case totalRecruitNumber = "recruitTotalNum"
+    }
 }
 
 extension ProjectPreviewDTO {
