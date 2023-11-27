@@ -47,6 +47,14 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
+    func fetchDeadlineProjects() -> Observable<[ProjectPreview]> {
+        return networkService.request(ProjectEndpoint.fetchDeadlineProjects, interceptor: nil)
+            .decode(type: [DeadlineProjectResponseDTO].self, decoder: JSONDecoder())
+            .map { deadlineProjectDTOs in
+                deadlineProjectDTOs.map { $0.toEntity() }
+            }
+    }
+    
     // MARK: - Detail
     func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
         .just(ProjectDetailDTO.projectDetailTest.toEntity())

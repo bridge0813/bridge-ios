@@ -31,6 +31,7 @@ final class MainViewModel: ViewModelType {
     private let fetchAllProjectsUseCase: FetchAllProjectsUseCase
     private let fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
+    private let fetchDeadlineProjectsUseCase: FetchDeadlineProjectsUseCase
     
     var selectedCategory: CategoryType = .new  // 현재 선택된 카테고리
     
@@ -40,13 +41,15 @@ final class MainViewModel: ViewModelType {
         fetchProfilePreviewUseCase: FetchProfilePreviewUseCase,
         fetchAllProjectsUseCase: FetchAllProjectsUseCase,
         fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase,
-        fetchHotProjectsUseCase: FetchHotProjectsUseCase
+        fetchHotProjectsUseCase: FetchHotProjectsUseCase,
+        fetchDeadlineProjectsUseCase: FetchDeadlineProjectsUseCase
     ) {
         self.coordinator = coordinator
         self.fetchProfilePreviewUseCase = fetchProfilePreviewUseCase
         self.fetchAllProjectsUseCase = fetchAllProjectsUseCase
         self.fetchProjectsByFieldUseCase = fetchProjectsByFieldUseCase
         self.fetchHotProjectsUseCase = fetchHotProjectsUseCase
+        self.fetchDeadlineProjectsUseCase = fetchDeadlineProjectsUseCase
     }
     
     // MARK: - Transformation
