@@ -23,22 +23,7 @@ final class MainViewController: BaseViewController {
     }()
     
     private let fieldCategoryAnchorButton = FieldCategoryAnchorButton()
-    private lazy var fieldDropdown: DropDown = {
-        let dropdown = DropDown(
-            anchorView: fieldCategoryAnchorButton,
-            bottomOffset: CGPoint(x: 0, y: 10),
-            dataSource: ["UI/UX", "전체"],
-            cellHeight: 46,
-            itemTextColor: BridgeColor.gray03,
-            itemTextFont: BridgeFont.body2.font,
-            selectedItemTextColor: BridgeColor.gray01,
-            dimmedBackgroundColor: .black.withAlphaComponent(0.3),
-            width: 147,
-            cornerRadius: 4
-        )
-        
-        return dropdown
-    }()
+    private var fieldDropdown: DropDown?
     
     private lazy var filterButton = UIBarButtonItem(
         image: UIImage(named: "hamburger")?
@@ -191,6 +176,42 @@ final class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        // 관심분야에 맞게 드롭다운 설정
+        output.fields
+            .drive(onNext: { [weak self] fields in
+                guard let self else { return }
+                
+                // 관심분야에 "전체" 넣어주기
+                var allFields = fields
+                allFields.insert("전체", at: 0)
+                
+                // 현재 선택된 관심분야 가져오기
+                let selectedField = UserDefaults.standard.string(forKey: "selectedField") ?? "전체"
+                let selectedIndex = allFields.firstIndex(of: selectedField) ?? 0
+                
+                // 로그인 여부에 따라, 드롭다운 이미지 조정.
+                self.fieldCategoryAnchorButton.isRemoved = fields.isEmpty
+                self.fieldCategoryAnchorButton.title = selectedField
+                self.fieldCategoryAnchorButton.sizeToFit()
+                
+                // TODO: - 드롭다운 Datasource 동적조정 가능하도록 수정.
+                self.fieldDropdown = DropDown(
+                    anchorView: fieldCategoryAnchorButton,
+                    bottomOffset: CGPoint(x: 0, y: 10),
+                    dataSource: allFields,
+                    cellHeight: 46,
+                    itemTextColor: BridgeColor.gray03,
+                    itemTextFont: BridgeFont.body2.font,
+                    selectedItemTextColor: BridgeColor.gray01,
+                    dimmedBackgroundColor: .black.withAlphaComponent(0.3),
+                    width: 147,
+                    cornerRadius: 4
+                )
+                
+                self.fieldDropdown?.selectedItemIndexRow = selectedIndex
+            })
+            .disposed(by: disposeBag)
+        
         
         // 스크롤에 따른 레이아웃 처리
         collectionView.rx.contentOffset
@@ -222,14 +243,14 @@ final class MainViewController: BaseViewController {
         // 드롭다운 Show
         fieldCategoryAnchorButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] in
-                self?.fieldDropdown.show()
+                self?.fieldDropdown?.show()
             })
             .disposed(by: disposeBag)
             
         // TODO: - 바인딩 처리 예정
-        fieldDropdown.itemSelected.asDriver(onErrorJustReturn: (0, ""))
+        fieldDropdown?.itemSelected.asDriver(onErrorJustReturn: (0, ""))
             .drive(onNext: { [weak self] item in
-                self?.fieldCategoryAnchorButton.updateTitle(item.title)
+                self?.fieldCategoryAnchorButton.title = item.title
             })
             .disposed(by: disposeBag)
     }

@@ -21,6 +21,7 @@ final class MainViewModel: ViewModelType {
     
     struct Output {
         let projects: Driver<[ProjectPreview]>
+        let fields: Driver<[String]>
     }
 
     // MARK: - Property
@@ -55,7 +56,7 @@ final class MainViewModel: ViewModelType {
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         let projects = BehaviorRelay<[ProjectPreview]>(value: [])
-        let field = BehaviorRelay<[String]>(value: [])
+        let fields = BehaviorRelay<[String]>(value: [])
         
         input.viewWillAppear
             .withUnretained(self)
@@ -69,7 +70,7 @@ final class MainViewModel: ViewModelType {
             .flatMap { owner, result -> Observable<Result<[ProjectPreview], Error>> in
                 switch result {
                 case .success(let profile):
-                    field.accept(profile.field)
+                    fields.accept(profile.field)
                     // IOS, AOS, FRONTEND, BACKEND, UIUX, BIBX, VIDEOMOTION, PM
                     // TODO - 나의 관심분야 중 선택된 분야를 찾고 데이터 찾아오기.
                     return owner.fetchProjectsByFieldUseCase.fetchProjects(for: "UIUX").toResult()
@@ -156,7 +157,8 @@ final class MainViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError])
+            projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError]),
+            fields: fields.asDriver(onErrorJustReturn: [])
         )
     }
 }
@@ -174,5 +176,16 @@ extension MainViewModel {
         case deadline
         case comingSoon
         case comingSoon2
+    }
+    
+    enum FieldType: String {
+        case IOS = "iOS"
+        case AOS = "안드로이드"
+        case FRONTEND = "프론트엔드"
+        case BACKEND = "백엔드"
+        case UIUX = "UI/UX"
+        case BIBX = "BI/BX"
+        case VIDEOMOTION = "영상/모션"
+        case PM = "PM"
     }
 }
