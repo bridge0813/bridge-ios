@@ -19,7 +19,7 @@ final class DefaultProjectRepository: ProjectRepository {
         self.tokenStorage = tokenStorage
     }
     
-    // MARK: - Methods
+    // MARK: - List
     func fetchAllProjects() -> Observable<[ProjectPreview]> {
         return networkService.request(ProjectEndpoint.fetchAllProjects, interceptor: nil)
             .decode(type: [ProjectPreviewDTO].self, decoder: JSONDecoder())
@@ -40,13 +40,20 @@ final class DefaultProjectRepository: ProjectRepository {
     }
     
     func fetchHotProjects() -> Observable<[ProjectPreview]> {
-        .just(ProjectPreviewDTO.projectTestArray.compactMap { $0.toEntity() })
+        return networkService.request(ProjectEndpoint.fetchHotProjects, interceptor: nil)
+            .decode(type: [HotProjectResponseDTO].self, decoder: JSONDecoder())
+            .map { hotProjectDTOs in
+                hotProjectDTOs.map { $0.toEntity() }
+            }
     }
     
+    // MARK: - Detail
     func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
         .just(ProjectDetailDTO.projectDetailTest.toEntity())
     }
     
+    
+    // MARK: - Create
     func create(with project: Project) -> Observable<Int> {
         let createProjectDTO = convertToDTO(from: project)
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)

@@ -78,6 +78,7 @@ final class MainViewController: BaseViewController {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.flex.width(100%).height(100%)
+        collectionView.bounces = false
         collectionView.backgroundColor = BridgeColor.gray09
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ProjectCell.self)
