@@ -59,7 +59,7 @@ final class HotProjectCell: BaseCollectionViewCell {
             
             flex.addItem().width(206).height(62).marginLeft(18).define { flex in
                 flex.addItem(dDayLabel).height(14)
-                flex.addItem(titleLabel).height(42).marginTop(6)
+                flex.addItem(titleLabel).marginTop(6)
             }
             
             flex.addItem().grow(1)
@@ -78,5 +78,7 @@ final class HotProjectCell: BaseCollectionViewCell {
         titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 21)
         dDayLabel.text = "D-\(data.dDays)"
         rankingLabel.text = String(data.rank)
+        
+        titleLabel.flex.markDirty()
     }
 }

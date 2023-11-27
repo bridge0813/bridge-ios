@@ -104,6 +104,7 @@ final class ProjectCell: BaseCollectionViewCell {
         recruitNumberLabel.text = "\(data.totalRecruitNumber)명 모집"
         deadlineLabel.text = "\(data.deadline) 모집 마감"
         
+        titleLabel.flex.markDirty()
         recruitNumberLabel.flex.markDirty()
         deadlineLabel.flex.markDirty()
     }
