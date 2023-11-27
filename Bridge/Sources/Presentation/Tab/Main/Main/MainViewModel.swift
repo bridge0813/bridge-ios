@@ -59,6 +59,9 @@ final class MainViewModel: ViewModelType {
         
         input.viewWillAppear
             .withUnretained(self)
+            .filter { owner, _ in
+                owner.selectedCategory == .new  // 카테고리가 신규일 경우에만 수행
+            }
             .flatMapLatest { owner, _ in
                 owner.fetchProfilePreviewUseCase.fetchProfilePreview().toResult()
             }
@@ -102,10 +105,10 @@ final class MainViewModel: ViewModelType {
                     return owner.fetchProjectsByFieldUseCase.fetchProjects(for: "UIUX").toResult()
                     
                 case .hot:
-                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
+                    return owner.fetchHotProjectsUseCase.fetchProjects().toResult()
                     
                 case .deadline:
-                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
+                    return owner.fetchDeadlineProjectsUseCase.fetchProjects().toResult()
                     
                 case .comingSoon, .comingSoon2:
                     return .just(Result.success([]))

@@ -17,7 +17,7 @@ struct HotProjectResponseDTO: Decodable {
     enum CodingKeys: String, CodingKey {
         case projectId, title, rank
         case deadline = "dueDate"
-        case totalRecruitNumber = "recruitTotalNum"
+        case totalRecruitNumber = "recruitNum"
     }
 }
 

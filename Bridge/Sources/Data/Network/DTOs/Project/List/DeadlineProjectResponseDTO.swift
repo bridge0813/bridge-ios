@@ -18,7 +18,7 @@ struct DeadlineProjectResponseDTO: Decodable {
         case projectId, title
         case deadline = "dueDate"
         case deadlineRank = "imminentRank"
-        case totalRecruitNumber = "recruitTotalNum"
+        case totalRecruitNumber = "recruitNum"
     }
 }
 

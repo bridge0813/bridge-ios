@@ -19,6 +19,6 @@ final class DefaultFetchDeadlineProjectsUseCase: FetchDeadlineProjectsUseCase {
     }
     
     func fetchProjects() -> Observable<[ProjectPreview]> {
-        projectRepository.fetchHotProjects()
+        projectRepository.fetchDeadlineProjects()
     }
 }
