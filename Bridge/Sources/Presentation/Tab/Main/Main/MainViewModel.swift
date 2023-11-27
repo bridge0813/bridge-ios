@@ -21,7 +21,6 @@ final class MainViewModel: ViewModelType {
     
     struct Output {
         let projects: Driver<[ProjectPreview]>
-//        let buttonTypeAndProjects: Driver<(String, [ProjectPreview])>
     }
 
     // MARK: - Property
@@ -32,6 +31,8 @@ final class MainViewModel: ViewModelType {
     private let fetchAllProjectsUseCase: FetchAllProjectsUseCase
     private let fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
+    
+    var selectedCategory: CategoryType = .new  // 현재 선택된 카테고리
     
     // MARK: - Init
     init(
@@ -88,26 +89,40 @@ final class MainViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         
-//        let buttonTypeAndProjects = input.categoryButtonTapped
-//            .withUnretained(self)
-//            .flatMapLatest { owner, type -> Observable<(String, [ProjectPreview])> in
-//                switch type {
-//                case "new":
-//                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 신규 데이터
-//
-//                case "hot":
-//                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 인기 데이터
-//
-//                case "deadlineApproach":
-//                    return owner.fetchProjectsUseCase.execute().map { (type, $0) }  // 마감임박 데이터
-//
-//                case "comingSoon", "comingSoon2":
-//                    return .just((type, []))
-//
-//                default:
-//                    return .just((type, []))
-//                }
-//            }
+        input.categoryButtonTapped
+            .withUnretained(self)
+            .flatMapLatest { owner, category -> Observable<Result<[ProjectPreview], Error>> in
+                owner.selectedCategory = CategoryType(rawValue: category) ?? .new
+                
+                switch owner.selectedCategory {
+                case .new:
+                    return owner.fetchProjectsByFieldUseCase.fetchProjects(for: "UIUX").toResult()
+                    
+                case .hot:
+                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
+                    
+                case .deadline:
+                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
+                    
+                case .comingSoon, .comingSoon2:
+                    return .just(Result.success([]))
+                }
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projectPreviews):
+                    projects.accept(projectPreviews)
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "오류",
+                        description: error.localizedDescription
+                    ))
+                }
+            })
+            .disposed(by: disposeBag)
             
         // MARK: - Item Selected
         input.itemSelected
@@ -136,7 +151,6 @@ final class MainViewModel: ViewModelType {
         
         return Output(
             projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError])
-//            buttonTypeAndProjects: buttonTypeAndProjects.asDriver(onErrorJustReturn: ("new", []))
         )
     }
 }
@@ -146,5 +160,13 @@ extension MainViewModel {
     enum Section: CaseIterable {
         case hot
         case main
+    }
+    
+    enum CategoryType: String {
+        case new
+        case hot
+        case deadline
+        case comingSoon
+        case comingSoon2
     }
 }

@@ -163,40 +163,33 @@ final class MainViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
-        // MARK: - Project 데이터
-        // viewWillAppear에 의해서 가져온 데이터로 기본값은 신규 데이터.
+        // 가져온 모집글에 맞게 DataSource 적용 및 UI 업데이트
         output.projects
             .drive(onNext: { [weak self] projects in
-                self?.updateCollectionViewForNew(with: projects)
-                self?.categoryView.updateButtonState("new")
+                guard let self else { return }
+                
+                let selectedCategory = self.viewModel.selectedCategory
+                
+                switch selectedCategory {
+                case .new:
+                    self.updateCollectionViewForNew(with: projects)
+                    
+                case .hot:
+                    self.updateCollectionViewForHot(with: projects)
+                    self.applySectionSnapshot(to: .hot, with: Array(projects.prefix(3)))
+                    self.applySectionSnapshot(to: .main, with: Array(projects.dropFirst(3)))
+                    
+                case .deadline:
+                    self.updateCollectionViewForDeadline(with: projects)
+                    
+                case .comingSoon, .comingSoon2:
+                    self.updateCollectionViewForComingSoon(with: projects)
+                }
+                
+                self.categoryView.updateButtonState(selectedCategory.rawValue)
             })
             .disposed(by: disposeBag)
         
-        // 카테고리 버튼에 따라 컬렉션뷰(DataSource, Layout) 변경
-//        output.buttonTypeAndProjects
-//            .drive(onNext: { [weak self] type, projects in
-//                switch type {
-//                case "new":
-//                    self?.updateCollectionViewForNew(with: projects)
-//
-//                case "hot":
-//                    self?.updateCollectionViewForHot(with: projects)
-//                    self?.applySectionSnapshot(to: .hot, with: Array(projects.prefix(3)))
-//                    self?.applySectionSnapshot(to: .main, with: Array(projects.dropFirst(3)))
-//
-//                case "deadlineApproach":
-//                    self?.updateCollectionViewForDeadline(with: projects)
-//
-//                case "comingSoon", "comingSoon2":
-//                    self?.updateCollectionViewForComingSoon(with: projects)
-//
-//                default:
-//                    print(type)
-//                }
-//
-//                self?.categoryView.updateButtonState(type)  // 버튼 상태 변경
-//            })
-//            .disposed(by: disposeBag)
         
         // 스크롤에 따른 레이아웃 처리
         collectionView.rx.contentOffset

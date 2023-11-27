@@ -57,7 +57,7 @@ extension MainCategoryView {
     enum CategoryButtonType: String {
         case new
         case hot
-        case deadlineApproach
+        case deadline
         case comingSoon
         case comingSoon2
     }
@@ -66,7 +66,7 @@ extension MainCategoryView {
         Observable.merge(
             newButton.rx.tap.map { CategoryButtonType.new.rawValue },
             hotButton.rx.tap.map { CategoryButtonType.hot.rawValue },
-            deadlineApproachButton.rx.tap.map { CategoryButtonType.deadlineApproach.rawValue },
+            deadlineApproachButton.rx.tap.map { CategoryButtonType.deadline.rawValue },
             comingSoonButton.rx.tap.map { CategoryButtonType.comingSoon.rawValue },
             comingSoonButton2.rx.tap.map { CategoryButtonType.comingSoon2.rawValue }
         )
@@ -84,7 +84,7 @@ extension MainCategoryView {
             case .hot:
                 hotButton.isSelected = true
                 
-            case .deadlineApproach:
+            case .deadline:
                 deadlineApproachButton.isSelected = true
                 
             case .comingSoon:
