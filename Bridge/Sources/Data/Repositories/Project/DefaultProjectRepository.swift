@@ -28,6 +28,17 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
+    func fetchProjectsByField(for field: String) -> Observable<[ProjectPreview]> {
+        let fieldRequestDTO = FieldRequestDTO(field: field)
+        let fetchProjectsEndPoint = ProjectEndpoint.fetchProjectsByField(requestDTO: fieldRequestDTO)
+        
+        return networkService.request(fetchProjectsEndPoint, interceptor: nil)
+            .decode(type: [ProjectPreviewDTO].self, decoder: JSONDecoder())
+            .map { projectPreviewDTOs in
+                projectPreviewDTOs.map { $0.toEntity() }
+            }
+    }
+    
     func fetchHotProjects() -> Observable<[ProjectPreview]> {
         .just(ProjectPreviewDTO.projectTestArray.compactMap { $0.toEntity() })
     }

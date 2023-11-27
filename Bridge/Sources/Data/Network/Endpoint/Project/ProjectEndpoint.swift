@@ -7,7 +7,10 @@
 
 enum ProjectEndpoint {
     case create(requestDTO: CreateProjectRequestDTO)
+    
+    // TODO: - 통합처리 생각해보기
     case fetchAllProjects
+    case fetchProjectsByField(requestDTO: FieldRequestDTO)
 }
 
 extension ProjectEndpoint: Endpoint {
@@ -18,6 +21,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .fetchAllProjects:
             return "/projects/all"
+            
+        case .fetchProjectsByField:
+            return "/projects/mypart"
         }
     }
     
@@ -27,6 +33,9 @@ extension ProjectEndpoint: Endpoint {
             return nil
             
         case .fetchAllProjects:
+            return nil
+            
+        case .fetchProjectsByField:
             return nil
         }
     }
@@ -38,6 +47,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .fetchAllProjects:
             return .get
+            
+        case .fetchProjectsByField:
+            return .post
         }
     }
     
@@ -48,6 +60,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .fetchAllProjects:
             return nil
+            
+        case .fetchProjectsByField(let field):
+            return field
         }
     }
 }

@@ -155,6 +155,7 @@ final class MainViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = MainViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
             filterButtonTapped: filterButton.rx.tap.asObservable(),
             itemSelected: collectionView.rx.itemSelected.asObservable(),
             createButtonTapped: createProjectButton.rx.tap.asObservable(),
@@ -177,22 +178,22 @@ final class MainViewController: BaseViewController {
 //                switch type {
 //                case "new":
 //                    self?.updateCollectionViewForNew(with: projects)
-//                    
+//
 //                case "hot":
 //                    self?.updateCollectionViewForHot(with: projects)
 //                    self?.applySectionSnapshot(to: .hot, with: Array(projects.prefix(3)))
 //                    self?.applySectionSnapshot(to: .main, with: Array(projects.dropFirst(3)))
-//                    
+//
 //                case "deadlineApproach":
 //                    self?.updateCollectionViewForDeadline(with: projects)
-//                    
+//
 //                case "comingSoon", "comingSoon2":
 //                    self?.updateCollectionViewForComingSoon(with: projects)
-//                    
+//
 //                default:
 //                    print(type)
 //                }
-//                
+//
 //                self?.categoryView.updateButtonState(type)  // 버튼 상태 변경
 //            })
 //            .disposed(by: disposeBag)

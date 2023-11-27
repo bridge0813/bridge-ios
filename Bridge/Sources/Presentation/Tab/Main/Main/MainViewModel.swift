@@ -12,6 +12,7 @@ import RxSwift
 final class MainViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
+        let viewWillAppear: Observable<Bool>
         let filterButtonTapped: Observable<Void>
         let itemSelected: Observable<IndexPath>
         let createButtonTapped: Observable<Void>
@@ -29,6 +30,7 @@ final class MainViewModel: ViewModelType {
     
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
     private let fetchAllProjectsUseCase: FetchAllProjectsUseCase
+    private let fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
     // MARK: - Init
@@ -36,11 +38,13 @@ final class MainViewModel: ViewModelType {
         coordinator: MainCoordinator,
         fetchProfilePreviewUseCase: FetchProfilePreviewUseCase,
         fetchAllProjectsUseCase: FetchAllProjectsUseCase,
+        fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase,
         fetchHotProjectsUseCase: FetchHotProjectsUseCase
     ) {
         self.coordinator = coordinator
         self.fetchProfilePreviewUseCase = fetchProfilePreviewUseCase
         self.fetchAllProjectsUseCase = fetchAllProjectsUseCase
+        self.fetchProjectsByFieldUseCase = fetchProjectsByFieldUseCase
         self.fetchHotProjectsUseCase = fetchHotProjectsUseCase
     }
     
@@ -49,26 +53,36 @@ final class MainViewModel: ViewModelType {
         let projects = BehaviorRelay<[ProjectPreview]>(value: [])
         let field = BehaviorRelay<[String]>(value: [])
         
-        fetchProfilePreviewUseCase.fetchProfilePreview().toResult()
+        input.viewWillAppear
+            .withUnretained(self)
+            .flatMapLatest { owner, _ in
+                owner.fetchProfilePreviewUseCase.fetchProfilePreview().toResult()
+            }
             .withUnretained(self)
             .flatMap { owner, result -> Observable<Result<[ProjectPreview], Error>> in
                 switch result {
                 case .success(let profile):
                     field.accept(profile.field)
-                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()  // 선택된 분야 - 신규 데이터 가져오기
+                    // IOS, AOS, FRONTEND, BACKEND, UIUX, BIBX, VIDEOMOTION, PM
+                    // TODO - 나의 관심분야 중 선택된 분야를 찾고 데이터 찾아오기.
+                    return owner.fetchProjectsByFieldUseCase.fetchProjects(for: "UIUX").toResult()
                     
                 case .failure:
                     return owner.fetchAllProjectsUseCase.fetchProjects().toResult()  // 전체 - 신규 데이터 가져오기
                 }
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 switch result {
                 case .success(let projectPreviews):
                     projects.accept(projectPreviews)
                     
-                case .failure:
-                    owner.coordinator?.showErrorAlert(configuration: .networkError)
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "오류",
+                        description: error.localizedDescription
+                    ))
                 }
             })
             .disposed(by: disposeBag)

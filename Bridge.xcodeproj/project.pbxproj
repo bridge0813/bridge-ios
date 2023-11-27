@@ -174,6 +174,8 @@
 		7C56E1652B11027000454F5E /* FetchProfilePreviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */; };
 		7C56E1682B11034300454F5E /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1672B11034300454F5E /* ProfileRepository.swift */; };
 		7C56E16B2B11043400454F5E /* DefaultProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E16A2B11043400454F5E /* DefaultProfileRepository.swift */; };
+		7C56E16D2B13256E00454F5E /* FetchProjectsByFieldUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E16C2B13256E00454F5E /* FetchProjectsByFieldUseCase.swift */; };
+		7C56E16F2B145E3000454F5E /* FieldRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E16E2B145E3000454F5E /* FieldRequestDTO.swift */; };
 		7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8639582AC28B4F00064588 /* BaseButton.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
@@ -389,6 +391,8 @@
 		7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProfilePreviewUseCase.swift; sourceTree = "<group>"; };
 		7C56E1672B11034300454F5E /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		7C56E16A2B11043400454F5E /* DefaultProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileRepository.swift; sourceTree = "<group>"; };
+		7C56E16C2B13256E00454F5E /* FetchProjectsByFieldUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProjectsByFieldUseCase.swift; sourceTree = "<group>"; };
+		7C56E16E2B145E3000454F5E /* FieldRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldRequestDTO.swift; sourceTree = "<group>"; };
 		7C8639582AC28B4F00064588 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
@@ -1213,13 +1217,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		7C569CF82A9F6D360063D362 /* Main */ = {
+		7C569CF82A9F6D360063D362 /* List */ = {
 			isa = PBXGroup;
 			children = (
 				7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */,
+				7C56E16C2B13256E00454F5E /* FetchProjectsByFieldUseCase.swift */,
 				7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */,
 			);
-			path = Main;
+			path = List;
 			sourceTree = "<group>";
 		};
 		7C569CFB2A9F6F8A0063D362 /* Project */ = {
@@ -1230,12 +1235,13 @@
 			path = Project;
 			sourceTree = "<group>";
 		};
-		7C569D012A9F720B0063D362 /* Main */ = {
+		7C569D012A9F720B0063D362 /* List */ = {
 			isa = PBXGroup;
 			children = (
 				7C569D022A9F72320063D362 /* ProjectPreviewDTO.swift */,
+				7C56E16E2B145E3000454F5E /* FieldRequestDTO.swift */,
 			);
-			path = Main;
+			path = List;
 			sourceTree = "<group>";
 		};
 		7C569D042A9F77330063D362 /* Utils */ = {
@@ -1450,7 +1456,7 @@
 			isa = PBXGroup;
 			children = (
 				7CA04F5C2B0A027A007B9191 /* Create */,
-				7C569D012A9F720B0063D362 /* Main */,
+				7C569D012A9F720B0063D362 /* List */,
 				7CA04F4F2B04AA52007B9191 /* Detail */,
 			);
 			path = Project;
@@ -1487,7 +1493,7 @@
 			isa = PBXGroup;
 			children = (
 				7CA04F672B0A6EC7007B9191 /* Create */,
-				7C569CF82A9F6D360063D362 /* Main */,
+				7C569CF82A9F6D360063D362 /* List */,
 				7CA04F3F2B022D69007B9191 /* Detail */,
 			);
 			path = Project;
@@ -1894,6 +1900,7 @@
 				7BB8C51F2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift in Sources */,
 				7C56E15F2B10F8E300454F5E /* ProfileEndpoint.swift in Sources */,
 				7CA04F122AFDF694007B9191 /* ProjectDetailViewController.swift in Sources */,
+				7C56E16D2B13256E00454F5E /* FetchProjectsByFieldUseCase.swift in Sources */,
 				7B14DB382AB3040F009A00EB /* BridgePlaceholderView.swift in Sources */,
 				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
 				7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */,
@@ -1908,6 +1915,7 @@
 				7C569CF32A9F67C60063D362 /* ProjectPreview.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
 				7B1E5ABC2ADCFD790053E9B3 /* MessageViewController.swift in Sources */,
+				7C56E16F2B145E3000454F5E /* FieldRequestDTO.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChatRoomUseCase.swift in Sources */,
 				7CA04F692B0A6F02007B9191 /* CreateProjectUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,

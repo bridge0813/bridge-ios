@@ -18,6 +18,7 @@ final class MainCoordinator: Coordinator {
     
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
     private let fetchAllProjectsUseCase: FetchAllProjectsUseCase
+    private let fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     
     // MARK: - Init
@@ -26,11 +27,12 @@ final class MainCoordinator: Coordinator {
         self.childCoordinators = []
 
         let networkService = DefaultNetworkService()
-        profileRepository = DefaultProfileRepository(networkService: networkService)
-        projectRepository = DefaultProjectRepository(networkService: networkService)
+        profileRepository = DefaultProfileRepository(networkService: networkService)  // 프로필
+        projectRepository = DefaultProjectRepository(networkService: networkService)  // 모집글
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(profileRepository: profileRepository)
         fetchAllProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
+        fetchProjectsByFieldUseCase = DefaultFetchProjectsByFieldUseCase(projectRepository: projectRepository)
         fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
     }
     
@@ -47,6 +49,7 @@ extension MainCoordinator {
             coordinator: self,
             fetchProfilePreviewUseCase: fetchProfilePreviewUseCase,
             fetchAllProjectsUseCase: fetchAllProjectsUseCase,
+            fetchProjectsByFieldUseCase: fetchProjectsByFieldUseCase,
             fetchHotProjectsUseCase: fetchHotProjectsUseCase
         )
         
