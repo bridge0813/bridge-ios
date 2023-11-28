@@ -23,7 +23,17 @@ final class MainViewController: BaseViewController {
     }()
     
     private let fieldCategoryAnchorButton = FieldCategoryAnchorButton()
-    private var fieldDropdown: DropDown?
+    private lazy var fieldDropdown = DropDown(
+        anchorView: fieldCategoryAnchorButton,
+        bottomOffset: CGPoint(x: 0, y: 10),
+        cellHeight: 46,
+        itemTextColor: BridgeColor.gray03,
+        itemTextFont: BridgeFont.body2.font,
+        selectedItemTextColor: BridgeColor.gray01,
+        dimmedBackgroundColor: .black.withAlphaComponent(0.3),
+        width: 147,
+        cornerRadius: 4
+    )
     
     private lazy var filterButton = UIBarButtonItem(
         image: UIImage(named: "hamburger")?
@@ -145,7 +155,8 @@ final class MainViewController: BaseViewController {
             filterButtonTapped: filterButton.rx.tap.asObservable(),
             itemSelected: collectionView.rx.itemSelected.asObservable(),
             createButtonTapped: createProjectButton.rx.tap.asObservable(),
-            categoryButtonTapped: categoryView.categoryButtonTapped
+            categoryButtonTapped: categoryView.categoryButtonTapped,
+            dropdownItemSelected: fieldDropdown.itemSelected.map { $0.title }
         )
         let output = viewModel.transform(input: input)
         
@@ -194,21 +205,19 @@ final class MainViewController: BaseViewController {
                 self.fieldCategoryAnchorButton.title = selectedField
                 self.fieldCategoryAnchorButton.sizeToFit()
                 
-                // TODO: - 드롭다운 Datasource 동적조정 가능하도록 수정.
-                self.fieldDropdown = DropDown(
-                    anchorView: fieldCategoryAnchorButton,
-                    bottomOffset: CGPoint(x: 0, y: 10),
-                    dataSource: allFields,
-                    cellHeight: 46,
-                    itemTextColor: BridgeColor.gray03,
-                    itemTextFont: BridgeFont.body2.font,
-                    selectedItemTextColor: BridgeColor.gray01,
-                    dimmedBackgroundColor: .black.withAlphaComponent(0.3),
-                    width: 147,
-                    cornerRadius: 4
-                )
+                // 드롭다운 설정
+                self.fieldDropdown.dataSource = allFields
+                self.fieldDropdown.selectedItemIndexRow = selectedIndex
+            })
+            .disposed(by: disposeBag)
+        
+        output.selectedField
+            .drive(onNext: { [weak self] field in
+                guard let self else { return }
                 
-                self.fieldDropdown?.selectedItemIndexRow = selectedIndex
+                self.fieldCategoryAnchorButton.title = field
+                self.fieldCategoryAnchorButton.sizeToFit()
+                
             })
             .disposed(by: disposeBag)
         
@@ -241,16 +250,10 @@ final class MainViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         // 드롭다운 Show
-        fieldCategoryAnchorButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] in
-                self?.fieldDropdown?.show()
-            })
-            .disposed(by: disposeBag)
-            
-        // TODO: - 바인딩 처리 예정
-        fieldDropdown?.itemSelected.asDriver(onErrorJustReturn: (0, ""))
-            .drive(onNext: { [weak self] item in
-                self?.fieldCategoryAnchorButton.title = item.title
+        fieldCategoryAnchorButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.fieldDropdown.show()
             })
             .disposed(by: disposeBag)
     }

@@ -17,11 +17,13 @@ final class MainViewModel: ViewModelType {
         let itemSelected: Observable<IndexPath>
         let createButtonTapped: Observable<Void>
         let categoryButtonTapped: Observable<String>
+        let dropdownItemSelected: Observable<String>
     }
     
     struct Output {
         let projects: Driver<[ProjectPreview]>
         let fields: Driver<[String]>
+        let selectedField: Driver<String>
     }
 
     // MARK: - Property
@@ -57,7 +59,11 @@ final class MainViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let projects = BehaviorRelay<[ProjectPreview]>(value: [])
         let fields = BehaviorRelay<[String]>(value: [])
+        let selectedField = BehaviorRelay<String>(
+            value: UserDefaults.standard.string(forKey: "selectedField") ?? "전체"
+        )
         
+        // 유저의 관심분야 및 모집글 가져오기
         input.viewWillAppear
             .withUnretained(self)
             .filter { owner, _ in
@@ -71,11 +77,18 @@ final class MainViewModel: ViewModelType {
                 switch result {
                 case .success(let profile):
                     fields.accept(profile.field)
-                    // IOS, AOS, FRONTEND, BACKEND, UIUX, BIBX, VIDEOMOTION, PM
-                    // TODO - 나의 관심분야 중 선택된 분야를 찾고 데이터 찾아오기.
-                    return owner.fetchProjectsByFieldUseCase.fetchProjects(for: "UIUX").toResult()
+                    
+                    // 유저의 관심분야 내에 선택한 관심분야가 존재하는지 파악.
+                    if profile.field.contains(selectedField.value) {
+                        let requestField = String(describing: FieldType(rawValue: selectedField.value) ?? .IOS)
+                        return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
+                        
+                    } else {
+                        return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
+                    }
                     
                 case .failure:
+                    fields.accept([])
                     return owner.fetchAllProjectsUseCase.fetchProjects().toResult()  // 전체 - 신규 데이터 가져오기
                 }
             }
@@ -95,7 +108,7 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        
+        // 카테고리에 맞게 모집글 가져오기
         input.categoryButtonTapped
             .withUnretained(self)
             .flatMapLatest { owner, category -> Observable<Result<[ProjectPreview], Error>> in
@@ -103,7 +116,14 @@ final class MainViewModel: ViewModelType {
                 
                 switch owner.selectedCategory {
                 case .new:
-                    return owner.fetchProjectsByFieldUseCase.fetchProjects(for: "UIUX").toResult()
+                    // 유저의 관심분야 내에 선택한 관심분야가 존재하는지 파악.
+                    if selectedField.value != "전체" {
+                        let requestField = String(describing: FieldType(rawValue: selectedField.value) ?? .IOS)
+                        return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
+                        
+                    } else {
+                        return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
+                    }
                     
                 case .hot:
                     return owner.fetchHotProjectsUseCase.fetchProjects().toResult()
@@ -131,7 +151,41 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
             
-        // MARK: - Item Selected
+        // 선택한 관심분야에 맞게 데이터가져오기
+        input.dropdownItemSelected
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .flatMap { owner, field -> Observable<Result<[ProjectPreview], Error>> in
+                UserDefaults.standard.set(field, forKey: "selectedField")  // 선택 관심분야 저장
+                owner.selectedCategory = .new  // 선택 카테고리 항상 신규
+                selectedField.accept(field)
+                
+                // 전체 모집글 가져오기
+                guard field != "전체" else {
+                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
+                }
+                
+                // 선택된 분야 RequestBody 표기법에 맞게 변경 및 모집글 가져오기
+                let requestField = String(describing: FieldType(rawValue: field) ?? .IOS)
+                return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projectPreviews):
+                    projects.accept(projectPreviews)
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "오류",
+                        description: error.localizedDescription
+                    ))
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // 선택한 모집글의 상세 뷰로 이동하기
         input.itemSelected
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
@@ -158,7 +212,8 @@ final class MainViewModel: ViewModelType {
         
         return Output(
             projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError]),
-            fields: fields.asDriver(onErrorJustReturn: [])
+            fields: fields.asDriver(onErrorJustReturn: []),
+            selectedField: selectedField.asDriver(onErrorJustReturn: "Error")
         )
     }
 }
@@ -178,7 +233,7 @@ extension MainViewModel {
         case comingSoon2
     }
     
-    enum FieldType: String {
+    enum FieldType: String, CustomStringConvertible {
         case IOS = "iOS"
         case AOS = "안드로이드"
         case FRONTEND = "프론트엔드"
@@ -187,5 +242,18 @@ extension MainViewModel {
         case BIBX = "BI/BX"
         case VIDEOMOTION = "영상/모션"
         case PM = "PM"
+        
+        var description: String {
+            switch self {
+            case .IOS: return "IOS"
+            case .AOS: return "AOS"
+            case .FRONTEND: return "FRONTEND"
+            case .BACKEND: return "BACKEND"
+            case .UIUX: return "UIUX"
+            case .BIBX: return "BIBX"
+            case .VIDEOMOTION: return "VIDEOMOTION"
+            case .PM: return "PM"
+            }
+        }
     }
 }
