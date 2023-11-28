@@ -76,10 +76,11 @@ final class MainViewModel: ViewModelType {
             .flatMap { owner, result -> Observable<Result<[ProjectPreview], Error>> in
                 switch result {
                 case .success(let profile):
+                    // 가져온 관심분야 accept
                     fields.accept(profile.field)
                     
-                    // 유저의 관심분야 내에 선택한 관심분야가 존재하는지 파악.
-                    if profile.field.contains(selectedField.value) {
+                    // 현재 선택된 분야가 "전체"가 아닐경우 && 현재 선택된 분야가 유저의 관심 분야 내에 있을 경우
+                    if selectedField.value != "전체" && profile.field.contains(selectedField.value) {
                         let requestField = String(describing: FieldType(rawValue: selectedField.value) ?? .IOS)
                         return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
                         
@@ -89,6 +90,7 @@ final class MainViewModel: ViewModelType {
                     
                 case .failure:
                     fields.accept([])
+                    UserDefaults.standard.set("전체", forKey: "selectedField")
                     return owner.fetchAllProjectsUseCase.fetchProjects().toResult()  // 전체 - 신규 데이터 가져오기
                 }
             }
@@ -110,14 +112,15 @@ final class MainViewModel: ViewModelType {
         
         // 카테고리에 맞게 모집글 가져오기
         input.categoryButtonTapped
+            .distinctUntilChanged()
             .withUnretained(self)
             .flatMapLatest { owner, category -> Observable<Result<[ProjectPreview], Error>> in
                 owner.selectedCategory = CategoryType(rawValue: category) ?? .new
                 
                 switch owner.selectedCategory {
                 case .new:
-                    // 유저의 관심분야 내에 선택한 관심분야가 존재하는지 파악.
-                    if selectedField.value != "전체" {
+                    // 현재 선택된 분야가 "전체"가 아닐경우 && 현재 선택된 분야가 유저의 관심 분야 내에 있을 경우
+                    if selectedField.value != "전체" && fields.value.contains(selectedField.value) {
                         let requestField = String(describing: FieldType(rawValue: selectedField.value) ?? .IOS)
                         return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
                         

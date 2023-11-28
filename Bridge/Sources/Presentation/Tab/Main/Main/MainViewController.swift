@@ -162,6 +162,7 @@ final class MainViewController: BaseViewController {
         
         // 가져온 모집글에 맞게 DataSource 적용 및 UI 업데이트
         output.projects
+            .skip(1)
             .drive(onNext: { [weak self] projects in
                 guard let self else { return }
                 
@@ -202,7 +203,7 @@ final class MainViewController: BaseViewController {
                 
                 // 로그인 여부에 따라, 드롭다운 이미지 조정.
                 self.fieldCategoryAnchorButton.isRemoved = fields.isEmpty
-                self.fieldCategoryAnchorButton.title = selectedField
+                self.fieldCategoryAnchorButton.title = allFields[selectedIndex]
                 self.fieldCategoryAnchorButton.sizeToFit()
                 
                 // 드롭다운 설정
@@ -212,12 +213,12 @@ final class MainViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         output.selectedField
+            .skip(1)  // 초기값 방출은 스킵
             .drive(onNext: { [weak self] field in
                 guard let self else { return }
                 
                 self.fieldCategoryAnchorButton.title = field
                 self.fieldCategoryAnchorButton.sizeToFit()
-                
             })
             .disposed(by: disposeBag)
         
