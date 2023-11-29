@@ -67,16 +67,7 @@ final class MainViewModel: ViewModelType {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
-                switch result {
-                case .success(let projectPreviews):
-                    projects.accept(projectPreviews)
-                    
-                case .failure(let error):
-                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                        title: "오류",
-                        description: error.localizedDescription
-                    ))
-                }
+                owner.handleFetchProjectsResult(for: result, projects: projects)
             })
             .disposed(by: disposeBag)
         
@@ -107,14 +98,7 @@ final class MainViewModel: ViewModelType {
                 
                 switch owner.selectedCategory {
                 case .new:
-                    // 선택된 분야가 "전체" 일 경우, 전체 모집글을, else 선택된 분야에 맞게 모집글 가져옴
-                    if selectedField.value == "전체" {
-                        return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
-                        
-                    } else {
-                        let requestField = String(describing: FieldType(rawValue: selectedField.value) ?? .IOS)
-                        return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
-                    }
+                    return owner.fetchProjectsForSelectedField(selectedField.value)
                     
                 case .hot:
                     return owner.fetchHotProjectsUseCase.fetchProjects().toResult()
@@ -129,16 +113,7 @@ final class MainViewModel: ViewModelType {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
-                switch result {
-                case .success(let projectPreviews):
-                    projects.accept(projectPreviews)
-                    
-                case .failure(let error):
-                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                        title: "오류",
-                        description: error.localizedDescription
-                    ))
-                }
+                owner.handleFetchProjectsResult(for: result, projects: projects)
             })
             .disposed(by: disposeBag)
             
@@ -150,28 +125,12 @@ final class MainViewModel: ViewModelType {
                 owner.selectedCategory = .new  // 카테고리 신규로 전환
                 selectedField.accept(field)
                 
-                // 선택된 분야가 "전체" 일 경우, 전체 모집글을, else 선택된 분야에 맞게 모집글 가져옴
-                if field == "전체" {
-                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
-                    
-                } else {
-                    let requestField = String(describing: FieldType(rawValue: field) ?? .IOS)
-                    return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
-                }
+                return owner.fetchProjectsForSelectedField(field)
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
-                switch result {
-                case .success(let projectPreviews):
-                    projects.accept(projectPreviews)
-                    
-                case .failure(let error):
-                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                        title: "오류",
-                        description: error.localizedDescription
-                    ))
-                }
+                owner.handleFetchProjectsResult(for: result, projects: projects)
             })
             .disposed(by: disposeBag)
         
@@ -183,7 +142,7 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        // MARK: - Button Actions
+        // 필터 이동
         input.filterButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
@@ -191,6 +150,7 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 글쓰기 이동
         input.createButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
@@ -252,6 +212,37 @@ extension MainViewModel {
             case .VIDEOMOTION: return "VIDEOMOTION"
             case .PM: return "PM"
             }
+        }
+    }
+}
+
+// MARK: - Methods
+private extension MainViewModel {
+    /// 모집글 네트워킹의 결과를 받아 처리
+    func handleFetchProjectsResult(
+        for result: Result<[ProjectPreview], Error>,
+        projects: BehaviorRelay<[ProjectPreview]>
+    ) {
+        switch result {
+        case .success(let projectPreviews):
+            projects.accept(projectPreviews)
+            
+        case .failure(let error):
+            coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                title: "오류",
+                description: error.localizedDescription
+            ))
+        }
+    }
+    
+    /// 선택된 분야에 맞게 네트워킹을 수행하는 메서드
+    func fetchProjectsForSelectedField(_ field: String) -> Observable<Result<[ProjectPreview], Error>> {
+        // 선택된 분야가 "전체" 일 경우, 전체 모집글을, else 선택된 분야에 맞게 모집글 가져옴
+        if field == "전체" {
+            return fetchAllProjectsUseCase.fetchProjects().toResult()
+        } else {
+            let requestField = String(describing: FieldType(rawValue: field) ?? .IOS)
+            return fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
         }
     }
 }
