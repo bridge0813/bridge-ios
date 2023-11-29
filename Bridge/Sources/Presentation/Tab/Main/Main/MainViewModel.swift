@@ -194,9 +194,17 @@ final class MainViewModel: ViewModelType {
         input.createButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showAlert(configuration: .createProject, primaryAction: {
-                    owner.coordinator?.connectToCreateProjectFlow()
-                })
+                // 로그인 여부 체크
+                if fields.value.isEmpty {
+                    owner.coordinator?.showAlert(configuration: .signIn, primaryAction: {
+                        owner.coordinator?.showSignInViewController()
+                    })
+                    
+                } else {
+                    owner.coordinator?.showAlert(configuration: .createProject, primaryAction: {
+                        owner.coordinator?.connectToCreateProjectFlow()
+                    })
+                }
             })
             .disposed(by: disposeBag)
         

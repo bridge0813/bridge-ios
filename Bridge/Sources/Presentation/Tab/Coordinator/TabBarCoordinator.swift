@@ -64,6 +64,7 @@ private extension TabBarCoordinator {
     func connectMainFlow(to tabNavigationController: UINavigationController) {
         let mainCoordinator = MainCoordinator(navigationController: tabNavigationController)
         mainCoordinator.start()
+        mainCoordinator.delegate = self
         childCoordinators.append(mainCoordinator)
     }
     

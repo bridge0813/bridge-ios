@@ -60,6 +60,10 @@ extension MainCoordinator {
         navigationController.pushViewController(mainVC, animated: true)
     }
     
+    func showSignInViewController() {
+        delegate?.showSignInViewController()
+    }
+    
     // MARK: - ConnectCoordinator
     func connectToNotificationFlow() {
         print("알림 뷰 이동")
