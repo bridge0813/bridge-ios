@@ -73,8 +73,8 @@ extension MainCoordinator {
         print("필터 뷰 이동")
     }
     
-    func connectToProjectSearchFlow(with query: String) {
-        print(query)
+    func connectToProjectSearchFlow() {
+        print("검색 뷰 이동")
     }
     
     func connectToProjectDetailFlow(with id: String) {

@@ -153,6 +153,7 @@ final class MainViewController: BaseViewController {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             filterButtonTapped: filterButton.rx.tap.asObservable(),
+            searchButtonTapped: searchButton.rx.tap,
             itemSelected: collectionView.rx.itemSelected.asObservable(),
             createButtonTapped: createProjectButton.rx.tap.asObservable(),
             categoryButtonTapped: categoryView.categoryButtonTapped,

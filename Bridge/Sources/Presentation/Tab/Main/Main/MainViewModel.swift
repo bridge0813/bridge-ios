@@ -14,6 +14,7 @@ final class MainViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>
         let filterButtonTapped: Observable<Void>
+        let searchButtonTapped: ControlEvent<Void>
         let itemSelected: Observable<IndexPath>
         let createButtonTapped: Observable<Void>
         let categoryButtonTapped: Observable<String>
@@ -150,6 +151,14 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 검색 이동
+        input.searchButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.connectToProjectSearchFlow()
+            })
+            .disposed(by: disposeBag)
+        
         // 글쓰기 이동
         input.createButtonTapped
             .withUnretained(self)
@@ -173,6 +182,37 @@ final class MainViewModel: ViewModelType {
             fields: fields.asDriver(onErrorJustReturn: []),
             selectedField: selectedField.asDriver(onErrorJustReturn: "Error")
         )
+    }
+}
+
+// MARK: - Methods
+private extension MainViewModel {
+    /// 모집글 네트워킹의 결과를 받아 처리
+    func handleFetchProjectsResult(
+        for result: Result<[ProjectPreview], Error>,
+        projects: BehaviorRelay<[ProjectPreview]>
+    ) {
+        switch result {
+        case .success(let projectPreviews):
+            projects.accept(projectPreviews)
+            
+        case .failure(let error):
+            coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                title: "오류",
+                description: error.localizedDescription
+            ))
+        }
+    }
+    
+    /// 선택된 분야에 맞게 네트워킹을 수행하는 메서드
+    func fetchProjectsForSelectedField(_ field: String) -> Observable<Result<[ProjectPreview], Error>> {
+        // 선택된 분야가 "전체" 일 경우, 전체 모집글을, else 선택된 분야에 맞게 모집글 가져옴
+        if field == "전체" {
+            return fetchAllProjectsUseCase.fetchProjects().toResult()
+        } else {
+            let requestField = String(describing: FieldType(rawValue: field) ?? .IOS)
+            return fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
+        }
     }
 }
 
@@ -212,37 +252,6 @@ extension MainViewModel {
             case .VIDEOMOTION: return "VIDEOMOTION"
             case .PM: return "PM"
             }
-        }
-    }
-}
-
-// MARK: - Methods
-private extension MainViewModel {
-    /// 모집글 네트워킹의 결과를 받아 처리
-    func handleFetchProjectsResult(
-        for result: Result<[ProjectPreview], Error>,
-        projects: BehaviorRelay<[ProjectPreview]>
-    ) {
-        switch result {
-        case .success(let projectPreviews):
-            projects.accept(projectPreviews)
-            
-        case .failure(let error):
-            coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                title: "오류",
-                description: error.localizedDescription
-            ))
-        }
-    }
-    
-    /// 선택된 분야에 맞게 네트워킹을 수행하는 메서드
-    func fetchProjectsForSelectedField(_ field: String) -> Observable<Result<[ProjectPreview], Error>> {
-        // 선택된 분야가 "전체" 일 경우, 전체 모집글을, else 선택된 분야에 맞게 모집글 가져옴
-        if field == "전체" {
-            return fetchAllProjectsUseCase.fetchProjects().toResult()
-        } else {
-            let requestField = String(describing: FieldType(rawValue: field) ?? .IOS)
-            return fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
         }
     }
 }
