@@ -198,8 +198,16 @@ final class MainViewController: BaseViewController {
                 allFields.insert("전체", at: 0)
                 self.fieldDropdown.dataSource = allFields
                 
-                // 로그인 여부에 따라, 드롭다운 이미지 조정.
-                self.fieldCategoryAnchorButton.isRemoved = fields.isEmpty
+                // 로그인 여부에 따라 드롭다운 조정
+                if fields.isEmpty {
+                    self.fieldCategoryAnchorButton.isImageVisible = false
+                    self.fieldCategoryAnchorButton.title = "전체"
+                    self.fieldDropdown.selectedItemIndexRow = 0
+                    
+                } else {
+                    self.fieldCategoryAnchorButton.isImageVisible = true
+                }
+                
                 self.fieldCategoryAnchorButton.sizeToFit()
             })
             .disposed(by: disposeBag)

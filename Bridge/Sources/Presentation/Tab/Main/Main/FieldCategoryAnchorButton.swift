@@ -16,15 +16,19 @@ final class FieldCategoryAnchorButton: BaseButton {
         }
     }
     
-    var isRemoved = false {
+    var isImageVisible = true {
         didSet {
-            if isRemoved {
-                configureWithoutImage()
+            if isImageVisible {
+                configureWithImage()
                 
             } else {
-                configureWithImage()
+                configureWithoutImage()
             }
         }
+    }
+    
+    override func configureAttributes() {
+        configureWithImage()
     }
 }
 
@@ -51,6 +55,11 @@ private extension FieldCategoryAnchorButton {
         configuration.image = buttonImage
         configuration.imagePlacement = .trailing
         configuration.imagePadding = 3
+        
+        var titleContainer = AttributeContainer()
+        titleContainer.font = BridgeFont.subtitle1.font
+        titleContainer.foregroundColor = BridgeColor.gray01
+        configuration.attributedTitle = AttributedString("전체", attributes: titleContainer)
         
         self.configuration = configuration
         contentHorizontalAlignment = .leading
