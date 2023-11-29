@@ -59,41 +59,11 @@ final class MainViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let projects = BehaviorRelay<[ProjectPreview]>(value: [])
         let fields = BehaviorRelay<[String]>(value: [])
-        let selectedField = BehaviorRelay<String>(
-            value: UserDefaults.standard.string(forKey: "selectedField") ?? "전체"
-        )
+        let selectedField = BehaviorRelay<String>(value: "전체")
         
-        // 유저의 관심분야 및 모집글 가져오기
-        input.viewWillAppear
-            .withUnretained(self)
-            .filter { owner, _ in
-                owner.selectedCategory == .new  // 카테고리가 신규일 경우에만 수행
-            }
-            .flatMapLatest { owner, _ in
-                owner.fetchProfilePreviewUseCase.fetchProfilePreview().toResult()
-            }
-            .withUnretained(self)
-            .flatMap { owner, result -> Observable<Result<[ProjectPreview], Error>> in
-                switch result {
-                case .success(let profile):
-                    // 가져온 관심분야 accept
-                    fields.accept(profile.field)
-                    
-                    // 현재 선택된 분야가 "전체"가 아닐경우 && 현재 선택된 분야가 유저의 관심 분야 내에 있을 경우
-                    if selectedField.value != "전체" && profile.field.contains(selectedField.value) {
-                        let requestField = String(describing: FieldType(rawValue: selectedField.value) ?? .IOS)
-                        return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
-                        
-                    } else {
-                        return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
-                    }
-                    
-                case .failure:
-                    fields.accept([])
-                    UserDefaults.standard.set("전체", forKey: "selectedField")
-                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()  // 전체 - 신규 데이터 가져오기
-                }
-            }
+        // viewDidLoad 시점, 전체 모집글 가져오기
+        fetchAllProjectsUseCase.fetchProjects()
+            .toResult()
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
@@ -110,6 +80,24 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 유저의 관심분야 가져오기
+        input.viewWillAppear
+            .withUnretained(self)
+            .flatMapLatest { owner, _ in
+                owner.fetchProfilePreviewUseCase.fetchProfilePreview().toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { result in
+                switch result {
+                case .success(let profile):
+                    fields.accept(profile.field)
+                    
+                case .failure:
+                    fields.accept([])
+                }
+            })
+            .disposed(by: disposeBag)
+        
         // 카테고리에 맞게 모집글 가져오기
         input.categoryButtonTapped
             .distinctUntilChanged()
@@ -119,13 +107,13 @@ final class MainViewModel: ViewModelType {
                 
                 switch owner.selectedCategory {
                 case .new:
-                    // 현재 선택된 분야가 "전체"가 아닐경우 && 현재 선택된 분야가 유저의 관심 분야 내에 있을 경우
-                    if selectedField.value != "전체" && fields.value.contains(selectedField.value) {
-                        let requestField = String(describing: FieldType(rawValue: selectedField.value) ?? .IOS)
-                        return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
+                    // 선택된 분야가 "전체" 일 경우, 전체 모집글을, else 선택된 분야에 맞게 모집글 가져옴
+                    if selectedField.value == "전체" {
+                        return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
                         
                     } else {
-                        return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
+                        let requestField = String(describing: FieldType(rawValue: selectedField.value) ?? .IOS)
+                        return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
                     }
                     
                 case .hot:
@@ -159,18 +147,17 @@ final class MainViewModel: ViewModelType {
             .distinctUntilChanged()
             .withUnretained(self)
             .flatMap { owner, field -> Observable<Result<[ProjectPreview], Error>> in
-                UserDefaults.standard.set(field, forKey: "selectedField")  // 선택 관심분야 저장
-                owner.selectedCategory = .new  // 선택 카테고리 항상 신규
+                owner.selectedCategory = .new  // 카테고리 신규로 전환
                 selectedField.accept(field)
                 
-                // 전체 모집글 가져오기
-                guard field != "전체" else {
+                // 선택된 분야가 "전체" 일 경우, 전체 모집글을, else 선택된 분야에 맞게 모집글 가져옴
+                if field == "전체" {
                     return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
+                    
+                } else {
+                    let requestField = String(describing: FieldType(rawValue: field) ?? .IOS)
+                    return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
                 }
-                
-                // 선택된 분야 RequestBody 표기법에 맞게 변경 및 모집글 가져오기
-                let requestField = String(describing: FieldType(rawValue: field) ?? .IOS)
-                return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)

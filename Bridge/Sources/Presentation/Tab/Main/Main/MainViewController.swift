@@ -162,7 +162,6 @@ final class MainViewController: BaseViewController {
         
         // 가져온 모집글에 맞게 DataSource 적용 및 UI 업데이트
         output.projects
-            .skip(1)
             .drive(onNext: { [weak self] projects in
                 guard let self else { return }
                 
@@ -190,32 +189,28 @@ final class MainViewController: BaseViewController {
         
         // 관심분야에 맞게 드롭다운 설정
         output.fields
+            .distinctUntilChanged()
             .drive(onNext: { [weak self] fields in
                 guard let self else { return }
                 
-                // 관심분야에 "전체" 넣어주기
+                // 관심분야에 "전체" 넣어주기.
                 var allFields = fields
                 allFields.insert("전체", at: 0)
-                
-                // 현재 선택된 관심분야 가져오기
-                let selectedField = UserDefaults.standard.string(forKey: "selectedField") ?? "전체"
-                let selectedIndex = allFields.firstIndex(of: selectedField) ?? 0
+                self.fieldDropdown.dataSource = allFields
                 
                 // 로그인 여부에 따라, 드롭다운 이미지 조정.
                 self.fieldCategoryAnchorButton.isRemoved = fields.isEmpty
-                self.fieldCategoryAnchorButton.title = allFields[selectedIndex]
                 self.fieldCategoryAnchorButton.sizeToFit()
-                
-                // 드롭다운 설정
-                self.fieldDropdown.dataSource = allFields
-                self.fieldDropdown.selectedItemIndexRow = selectedIndex
             })
             .disposed(by: disposeBag)
         
         output.selectedField
-            .skip(1)  // 초기값 방출은 스킵
             .drive(onNext: { [weak self] field in
                 guard let self else { return }
+                
+                // 선택된 분야에 맞게 UI 변경.
+                let selectedIndex = self.fieldDropdown.dataSource.firstIndex(of: field) ?? 0
+                self.fieldDropdown.selectedItemIndexRow = selectedIndex
                 
                 self.fieldCategoryAnchorButton.title = field
                 self.fieldCategoryAnchorButton.sizeToFit()
