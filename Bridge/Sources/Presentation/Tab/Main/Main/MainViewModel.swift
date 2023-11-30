@@ -223,7 +223,7 @@ private extension MainViewModel {
         if field == "전체" {
             return fetchAllProjectsUseCase.fetchProjects().toResult()
         } else {
-            let requestField = String(describing: FieldType(rawValue: field) ?? .IOS)
+            let requestField = String(describing: FieldType(rawValue: field) ?? .ios)
             return fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
         }
     }
@@ -245,25 +245,25 @@ extension MainViewModel {
     }
     
     enum FieldType: String, CustomStringConvertible {
-        case IOS = "iOS"
-        case AOS = "안드로이드"
-        case FRONTEND = "프론트엔드"
-        case BACKEND = "백엔드"
-        case UIUX = "UI/UX"
-        case BIBX = "BI/BX"
-        case VIDEOMOTION = "영상/모션"
-        case PM = "PM"
+        case ios = "iOS"
+        case android = "안드로이드"
+        case frontend = "프론트엔드"
+        case backend = "백엔드"
+        case uiux = "UI/UX"
+        case bibx = "BI/BX"
+        case videomotion = "영상/모션"
+        case pm = "PM"
         
         var description: String {
             switch self {
-            case .IOS: return "IOS"
-            case .AOS: return "AOS"
-            case .FRONTEND: return "FRONTEND"
-            case .BACKEND: return "BACKEND"
-            case .UIUX: return "UIUX"
-            case .BIBX: return "BIBX"
-            case .VIDEOMOTION: return "VIDEOMOTION"
-            case .PM: return "PM"
+            case .ios: return "IOS"
+            case .android: return "AOS"
+            case .frontend: return "FRONTEND"
+            case .backend: return "BACKEND"
+            case .uiux: return "UIUX"
+            case .bibx: return "BIBX"
+            case .videomotion: return "VIDEOMOTION"
+            case .pm: return "PM"
             }
         }
     }
