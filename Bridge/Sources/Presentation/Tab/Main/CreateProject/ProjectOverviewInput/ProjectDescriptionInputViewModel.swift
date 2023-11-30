@@ -43,7 +43,7 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .flatMap { owner, _ in
-                return owner.createProjectUseCase.create(with: owner.dataStorage.currentProject).toResult()
+                return owner.createProjectUseCase.create(project: owner.dataStorage.currentProject).toResult()
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)

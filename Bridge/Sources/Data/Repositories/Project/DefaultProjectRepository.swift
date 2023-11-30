@@ -62,7 +62,7 @@ final class DefaultProjectRepository: ProjectRepository {
     
     
     // MARK: - Create
-    func create(with project: Project) -> Observable<Int> {
+    func create(project: Project) -> Observable<Int> {
         let createProjectDTO = convertToDTO(from: project)
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)
         

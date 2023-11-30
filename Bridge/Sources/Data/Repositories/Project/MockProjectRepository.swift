@@ -29,7 +29,7 @@ final class MockProjectRepository: ProjectRepository {
         .just(ProjectDetailDTO.projectDetailTest.toEntity())
     }
     
-    func create(with project: Project) -> Observable<Int> {
+    func create(project: Project) -> Observable<Int> {
         .just(0)
     }
 }

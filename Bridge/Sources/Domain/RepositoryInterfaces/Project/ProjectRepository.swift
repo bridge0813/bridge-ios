@@ -18,5 +18,5 @@ protocol ProjectRepository {
     func fetchProjectDetail(with projectID: Int) -> Observable<Project>
     
     // MARK: - Create
-    func create(with project: Project) -> Observable<Int>
+    func create(project: Project) -> Observable<Int>
 }
