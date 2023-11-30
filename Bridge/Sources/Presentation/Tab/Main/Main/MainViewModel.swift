@@ -92,7 +92,6 @@ final class MainViewModel: ViewModelType {
         
         // 카테고리에 맞게 모집글 가져오기
         input.categoryButtonTapped
-            .distinctUntilChanged()
             .withUnretained(self)
             .flatMapLatest { owner, category -> Observable<Result<[ProjectPreview], Error>> in
                 owner.selectedCategory = CategoryType(rawValue: category) ?? .new
@@ -120,9 +119,8 @@ final class MainViewModel: ViewModelType {
             
         // 선택한 관심분야에 맞게 데이터가져오기
         input.dropdownItemSelected
-            .distinctUntilChanged()
             .withUnretained(self)
-            .flatMap { owner, field -> Observable<Result<[ProjectPreview], Error>> in
+            .flatMapLatest { owner, field -> Observable<Result<[ProjectPreview], Error>> in
                 owner.selectedCategory = .new  // 카테고리 신규로 전환
                 selectedField.accept(field)
                 
