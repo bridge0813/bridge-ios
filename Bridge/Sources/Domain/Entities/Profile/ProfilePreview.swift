@@ -7,10 +7,10 @@
 
 struct ProfilePreview {
     let profileImage: String?
-    let field: [String]
+    let fields: [String]
     let bookmarkNumber: Int
 }
 
 extension ProfilePreview {
-    static let onError = ProfilePreview(profileImage: "", field: [], bookmarkNumber: 0)
+    static let onError = ProfilePreview(profileImage: "", fields: [], bookmarkNumber: 0)
 }

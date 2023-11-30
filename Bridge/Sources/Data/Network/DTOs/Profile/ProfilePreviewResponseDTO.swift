@@ -8,11 +8,11 @@
 /// MyPage를 조회할 때 사용되는 Response Body
 struct ProfilePreviewResponseDTO: Decodable {
     let profileImage: String?
-    let field: [String]
+    let fields: [String]
     let bookmarkNumber: Int
     
     enum CodingKeys: String, CodingKey {
-        case field
+        case fields = "field"
         case profileImage = "profilePhoto"
         case bookmarkNumber = "bookmarkNum"
     }
@@ -20,6 +20,6 @@ struct ProfilePreviewResponseDTO: Decodable {
 
 extension ProfilePreviewResponseDTO {
     func toEntity() -> ProfilePreview {
-        ProfilePreview(profileImage: profileImage, field: field, bookmarkNumber: bookmarkNumber)
+        ProfilePreview(profileImage: profileImage, fields: fields, bookmarkNumber: bookmarkNumber)
     }
 }

@@ -82,7 +82,7 @@ final class MainViewModel: ViewModelType {
             .subscribe(onNext: { result in
                 switch result {
                 case .success(let profile):
-                    fields.accept(profile.field)
+                    fields.accept(profile.fields)
                     
                 case .failure:
                     fields.accept([])
