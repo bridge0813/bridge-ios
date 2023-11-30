@@ -152,10 +152,10 @@ final class MainViewController: BaseViewController {
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            filterButtonTapped: filterButton.rx.tap.asObservable(),
+            filterButtonTapped: filterButton.rx.tap,
             searchButtonTapped: searchButton.rx.tap,
-            itemSelected: collectionView.rx.itemSelected.asObservable(),
-            createButtonTapped: createProjectButton.rx.tap.asObservable(),
+            createButtonTapped: createProjectButton.rx.tap,
+            itemSelected: collectionView.rx.itemSelected,
             categoryButtonTapped: categoryView.categoryButtonTapped,
             dropdownItemSelected: fieldDropdown.itemSelected.map { $0.title }
         )

@@ -13,10 +13,10 @@ final class MainViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
-        let filterButtonTapped: Observable<Void>
+        let filterButtonTapped: ControlEvent<Void>
         let searchButtonTapped: ControlEvent<Void>
-        let itemSelected: Observable<IndexPath>
-        let createButtonTapped: Observable<Void>
+        let createButtonTapped: ControlEvent<Void>
+        let itemSelected: ControlEvent<IndexPath>
         let categoryButtonTapped: Observable<String>
         let dropdownItemSelected: Observable<String>
     }
@@ -138,8 +138,21 @@ final class MainViewModel: ViewModelType {
         // 선택한 모집글의 상세 뷰로 이동하기
         input.itemSelected
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.connectToProjectDetailFlow(with: "")
+            .subscribe(onNext: { owner, indexPath in
+                
+                let projectId: Int
+                
+                // 'hot' 카테고리 && 섹션이 0일 경우, 상단 섹션의 projectId를 사용.
+                if owner.selectedCategory == .hot && indexPath.section == 0 {
+                    projectId = projects.value[indexPath.row].projectId
+                    
+                } else {
+                    // 'hot' 카테고리인 경우 상단 섹션의 프로젝트 3개를 건너뛰고, prjectId를 사용.
+                    let offsetIndex = owner.selectedCategory == .hot ? 3 : 0
+                    projectId = projects.value[indexPath.row + offsetIndex].projectId
+                }
+                
+                owner.coordinator?.connectToProjectDetailFlow(with: projectId)
             })
             .disposed(by: disposeBag)
         
