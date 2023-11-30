@@ -208,6 +208,7 @@ private extension MainViewModel {
             projects.accept(projectPreviews)
             
         case .failure(let error):
+            projects.accept([])
             coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
                 title: "오류",
                 description: error.localizedDescription
