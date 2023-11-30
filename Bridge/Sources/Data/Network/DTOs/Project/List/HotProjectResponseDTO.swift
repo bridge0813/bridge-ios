@@ -8,14 +8,15 @@
 import Foundation
 
 struct HotProjectResponseDTO: Decodable {
-    let projectId: Int
+    let projectID: Int
     let title: String
     let deadline: String
     let rank: Int
     let totalRecruitNumber: Int
     
     enum CodingKeys: String, CodingKey {
-        case projectId, title, rank
+        case title, rank
+        case projectID = "projectId"
         case deadline = "dueDate"
         case totalRecruitNumber = "recruitNum"
     }
@@ -24,7 +25,7 @@ struct HotProjectResponseDTO: Decodable {
 extension HotProjectResponseDTO {
     func toEntity() -> ProjectPreview {
         ProjectPreview(
-            projectId: projectId,
+            projectID: projectID,
             title: title,
             description: "",
             dDays: Date().calculateDDay(to: deadline.toDate(with: "yyyy-MM-dd'T'HH:mm:ss")),

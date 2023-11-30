@@ -77,7 +77,7 @@ extension MainCoordinator {
         print("검색 뷰 이동")
     }
     
-    func connectToProjectDetailFlow(with projectId: Int) {
+    func connectToProjectDetailFlow(with projectID: Int) {
         // TODO: - 연결된 코디네이터 제거 작업
         let coordinator = ProjectDetailCoordinator(navigationController: navigationController)
         coordinator.start()

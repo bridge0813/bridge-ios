@@ -69,7 +69,7 @@ final class DefaultProjectRepository: ProjectRepository {
         return networkService.request(createProjectEndpoint, interceptor: nil)
             .decode(type: CreateProjectResponseDTO.self, decoder: JSONDecoder())
             .map { dto in
-                return dto.projectId
+                return dto.projectID
             }
     }
 }
@@ -97,7 +97,7 @@ private extension DefaultProjectRepository {
             applicantRestrictions: project.applicantRestrictions,
             progressMethod: project.progressMethod,
             progressStep: project.progressStep,
-            userId: userID
+            userID: userID
         )
     }
 }

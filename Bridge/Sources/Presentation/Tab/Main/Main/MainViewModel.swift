@@ -140,19 +140,19 @@ final class MainViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, indexPath in
                 
-                let projectId: Int
+                let projectID: Int
                 
-                // 'hot' 카테고리 && 섹션이 0일 경우, 상단 섹션의 projectId를 사용.
+                // 'hot' 카테고리 && 섹션이 0일 경우, 상단 섹션의 projectID를 사용.
                 if owner.selectedCategory == .hot && indexPath.section == 0 {
-                    projectId = projects.value[indexPath.row].projectId
+                    projectID = projects.value[indexPath.row].projectID
                     
                 } else {
-                    // 'hot' 카테고리인 경우 상단 섹션의 프로젝트 3개를 건너뛰고, prjectId를 사용.
+                    // 'hot' 카테고리인 경우 상단 섹션의 프로젝트 3개를 건너뛰고, prjectID를 사용.
                     let offsetIndex = owner.selectedCategory == .hot ? 3 : 0
-                    projectId = projects.value[indexPath.row + offsetIndex].projectId
+                    projectID = projects.value[indexPath.row + offsetIndex].projectID
                 }
                 
-                owner.coordinator?.connectToProjectDetailFlow(with: projectId)
+                owner.coordinator?.connectToProjectDetailFlow(with: projectID)
             })
             .disposed(by: disposeBag)
         

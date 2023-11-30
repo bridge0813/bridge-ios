@@ -8,7 +8,7 @@
 import Foundation
 
 enum ProfileEndpoint {
-    case fetchProfilePreview(userId: String)
+    case fetchProfilePreview(userID: String)
 }
 
 extension ProfileEndpoint: Endpoint {
@@ -21,8 +21,8 @@ extension ProfileEndpoint: Endpoint {
     
     var queryParameters: QueryParameters? {
         switch self {
-        case .fetchProfilePreview(let userId):
-            return ["userId": userId]
+        case .fetchProfilePreview(let userID):
+            return ["userId": userID]
         }
     }
     

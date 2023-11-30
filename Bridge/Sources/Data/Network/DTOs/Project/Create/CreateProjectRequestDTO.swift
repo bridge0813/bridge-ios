@@ -15,10 +15,11 @@ struct CreateProjectRequestDTO: Encodable {
     let applicantRestrictions: [String]
     let progressMethod: String
     let progressStep: String
-    let userId: Int
+    let userID: Int
     
     enum CodingKeys: String, CodingKey {
-        case title, startDate, endDate, userId
+        case title, startDate, endDate
+        case userID = "userId"
         case description = "overview"
         case deadline = "dueDate"
         case memberRequirements = "recruit"
@@ -39,7 +40,7 @@ extension CreateProjectRequestDTO {
         try container.encode(applicantRestrictions, forKey: .applicantRestrictions)
         try container.encode(progressMethod, forKey: .progressMethod)
         try container.encode(progressStep, forKey: .progressStep)
-        try container.encode(userId, forKey: .userId)
+        try container.encode(userID, forKey: .userID)
         
         // startDate
         if let startDate = startDate {

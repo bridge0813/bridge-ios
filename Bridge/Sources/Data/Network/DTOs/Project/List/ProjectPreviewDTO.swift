@@ -8,13 +8,14 @@
 import Foundation
 
 struct ProjectPreviewDTO: Codable {
-    let projectId: Int
+    let projectID: Int
     let title: String
     let deadline: String
     let totalRecruitNumber: Int
     
     enum CodingKeys: String, CodingKey {
-        case projectId, title
+        case title
+        case projectID = "projectId"
         case deadline = "dueDate"
         case totalRecruitNumber = "recruitTotalNum"
     }
@@ -23,7 +24,7 @@ struct ProjectPreviewDTO: Codable {
 extension ProjectPreviewDTO {
     func toEntity() -> ProjectPreview {
         ProjectPreview(
-            projectId: projectId,
+            projectID: projectID,
             title: title,
             description: "",
             dDays: Date().calculateDDay(to: deadline.toDate(with: "yyyy-MM-dd'T'HH:mm:ss")),
@@ -37,12 +38,12 @@ extension ProjectPreviewDTO {
 
 extension ProjectPreviewDTO {
     static var projectTestArray: [ProjectPreviewDTO] = [
-        ProjectPreviewDTO(projectId: 0, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 6),
-        ProjectPreviewDTO(projectId: 1, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 5),
-        ProjectPreviewDTO(projectId: 2, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 3),
-        ProjectPreviewDTO(projectId: 3, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 6),
-        ProjectPreviewDTO(projectId: 4, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 8),
-        ProjectPreviewDTO(projectId: 5, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 8),
-        ProjectPreviewDTO(projectId: 6, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 7)
+        ProjectPreviewDTO(projectID: 0, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 6),
+        ProjectPreviewDTO(projectID: 1, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 5),
+        ProjectPreviewDTO(projectID: 2, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 3),
+        ProjectPreviewDTO(projectID: 3, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 6),
+        ProjectPreviewDTO(projectID: 4, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 8),
+        ProjectPreviewDTO(projectID: 5, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 8),
+        ProjectPreviewDTO(projectID: 6, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", deadline: "2023.08.20", totalRecruitNumber: 7)
     ]
 }

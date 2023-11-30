@@ -104,10 +104,10 @@ extension CreateProjectCoordinator {
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showCompletionViewController(with projectId: Int) {
+    func showCompletionViewController(with projectID: Int) {
         let viewModel = CompletionViewModel(
             coordinator: self,
-            projectId: projectId
+            projectID: projectID
         )
         
         let viewController = CompletionViewController(viewModel: viewModel)
