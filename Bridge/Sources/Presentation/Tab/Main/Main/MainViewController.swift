@@ -143,7 +143,6 @@ final class MainViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
     }
@@ -193,27 +192,20 @@ final class MainViewController: BaseViewController {
             .distinctUntilChanged()
             .drive(onNext: { [weak self] fields in
                 guard let self else { return }
-                
+            
                 // 관심분야에 "전체" 넣어주기.
                 var allFields = fields
                 allFields.insert("전체", at: 0)
                 self.fieldDropdown.dataSource = allFields
                 
-                // 로그인 여부에 따라 드롭다운 조정
-                if fields.isEmpty {
-                    self.fieldCategoryAnchorButton.isImageVisible = false
-                    self.fieldCategoryAnchorButton.title = "전체"
-                    self.fieldDropdown.selectedItemIndexRow = 0
-                    
-                } else {
-                    self.fieldCategoryAnchorButton.isImageVisible = true
-                }
-                
+                // 로그인 유무에 따라 이미지가 표시될지 결정
+                self.fieldCategoryAnchorButton.isImageVisible = !fields.isEmpty
                 self.fieldCategoryAnchorButton.sizeToFit()
             })
             .disposed(by: disposeBag)
         
         output.selectedField
+            .skip(1)  // 첫 번째 방출은 스킵
             .drive(onNext: { [weak self] field in
                 guard let self else { return }
                 

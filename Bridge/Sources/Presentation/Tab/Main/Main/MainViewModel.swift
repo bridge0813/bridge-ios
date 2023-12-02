@@ -60,11 +60,44 @@ final class MainViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let projects = BehaviorRelay<[ProjectPreview]>(value: [])
         let fields = BehaviorRelay<[String]>(value: [])
-        let selectedField = BehaviorRelay<String>(value: "전체")
+        let selectedField = BehaviorRelay<String>(value: "")
         
-        // viewDidLoad 시점, 전체 모집글 가져오기
-        fetchAllProjectsUseCase.fetchProjects()
-            .toResult()
+        // 유저의 관심분야 가져오기, 카테고리가 신규일 경우 모집글 갱신
+        input.viewWillAppear
+            .withUnretained(self)
+            .flatMapLatest { owner, _ in
+                owner.fetchProfilePreviewUseCase.fetchProfilePreview().toResult()
+            }
+            .do(onNext: { result in
+                switch result {
+                case .success(let profile):
+                    let currentFields = fields.value  // 기존 관심분야
+                    fields.accept(profile.fields)
+                    
+                    // 기존 관심분야와 전달받은 관심분야를 비교하여 수정사항이 있는지 파악.
+                    // OR 선택한 분야가 없다면, 가장 관심분야 중 첫 번째 요소로 선택(이전 선택분야 유지)
+                    if currentFields != profile.fields || selectedField.value.isEmpty {
+                        selectedField.accept(profile.fields[0])
+                    }
+                    
+                case .failure:
+                    fields.accept([])
+                    selectedField.accept("전체")
+                }
+            })
+            .withUnretained(self)
+            .filter { owner, _ in owner.selectedCategory == .new }  // 카테고리가 신규일 경우에만 모집글 갱신
+            .flatMap { owner, _ -> Observable<Result<[ProjectPreview], Error>> in
+                // 로그인 상태가 아닌경우 -> 관심분야가 없음 -> 전체 모집글 조회
+                // else 가장 첫 번째 관심분야에 맞는 모집글 조회
+                if fields.value.isEmpty {
+                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
+                    
+                } else {
+                    let requestField = String(describing: FieldType(rawValue: selectedField.value) ?? .ios)
+                    return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
+                }
+            }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
@@ -72,23 +105,6 @@ final class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        // 유저의 관심분야 가져오기
-        input.viewWillAppear
-            .withUnretained(self)
-            .flatMapLatest { owner, _ in
-                owner.fetchProfilePreviewUseCase.fetchProfilePreview().toResult()
-            }
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { result in
-                switch result {
-                case .success(let profile):
-                    fields.accept(profile.fields)
-                    
-                case .failure:
-                    fields.accept([])
-                }
-            })
-            .disposed(by: disposeBag)
         
         // 카테고리에 맞게 모집글 가져오기
         input.categoryButtonTapped
