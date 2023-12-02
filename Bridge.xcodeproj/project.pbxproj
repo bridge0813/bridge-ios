@@ -163,7 +163,7 @@
 		7C569CF32A9F67C60063D362 /* ProjectPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF22A9F67C60063D362 /* ProjectPreview.swift */; };
 		7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */; };
 		7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */; };
-		7C569D032A9F72320063D362 /* ProjectPreviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D022A9F72320063D362 /* ProjectPreviewDTO.swift */; };
+		7C569D032A9F72320063D362 /* ProjectPreviewResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D022A9F72320063D362 /* ProjectPreviewResponseDTO.swift */; };
 		7C569D062A9F776B0063D362 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D052A9F776B0063D362 /* Date+.swift */; };
 		7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D082A9F7E160063D362 /* DefaultProjectRepository.swift */; };
 		7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */; };
@@ -383,7 +383,7 @@
 		7C569CF22A9F67C60063D362 /* ProjectPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPreview.swift; sourceTree = "<group>"; };
 		7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
-		7C569D022A9F72320063D362 /* ProjectPreviewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPreviewDTO.swift; sourceTree = "<group>"; };
+		7C569D022A9F72320063D362 /* ProjectPreviewResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPreviewResponseDTO.swift; sourceTree = "<group>"; };
 		7C569D052A9F776B0063D362 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		7C569D082A9F7E160063D362 /* DefaultProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProjectRepository.swift; sourceTree = "<group>"; };
 		7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1245,7 +1245,7 @@
 		7C569D012A9F720B0063D362 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				7C569D022A9F72320063D362 /* ProjectPreviewDTO.swift */,
+				7C569D022A9F72320063D362 /* ProjectPreviewResponseDTO.swift */,
 				7C56E16E2B145E3000454F5E /* FieldRequestDTO.swift */,
 				7C56E1702B14860100454F5E /* HotProjectResponseDTO.swift */,
 				7C56E1722B14907800454F5E /* DeadlineProjectResponseDTO.swift */,
@@ -1316,6 +1316,13 @@
 				7C56E16A2B11043400454F5E /* DefaultProfileRepository.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		7C87EE0A2B1B68960066691D /* Bookmark */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Bookmark;
 			sourceTree = "<group>";
 		};
 		7C8B822C2AC8498C00F7B889 /* ButtonGroup */ = {
@@ -1467,6 +1474,7 @@
 				7CA04F5C2B0A027A007B9191 /* Create */,
 				7C569D012A9F720B0063D362 /* List */,
 				7CA04F4F2B04AA52007B9191 /* Detail */,
+				7C87EE0A2B1B68960066691D /* Bookmark */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -1874,7 +1882,7 @@
 				7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */,
 				7CA04F732B0E675B007B9191 /* CreateProjectResponseDTO.swift in Sources */,
 				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
-				7C569D032A9F72320063D362 /* ProjectPreviewDTO.swift in Sources */,
+				7C569D032A9F72320063D362 /* ProjectPreviewResponseDTO.swift in Sources */,
 				7CA04F2E2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift in Sources */,
 				7C55E64E2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift in Sources */,
 				7C55E64A2AE44B5F0018FA5D /* HotProjectCell.swift in Sources */,

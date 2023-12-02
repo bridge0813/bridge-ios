@@ -22,7 +22,7 @@ final class DefaultProjectRepository: ProjectRepository {
     // MARK: - List
     func fetchAllProjects() -> Observable<[ProjectPreview]> {
         return networkService.request(ProjectEndpoint.fetchAllProjects, interceptor: nil)
-            .decode(type: [ProjectPreviewDTO].self, decoder: JSONDecoder())
+            .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
             .map { projectPreviewDTOs in
                 projectPreviewDTOs.map { $0.toEntity() }
             }
@@ -33,7 +33,7 @@ final class DefaultProjectRepository: ProjectRepository {
         let fetchProjectsEndPoint = ProjectEndpoint.fetchProjectsByField(requestDTO: fieldRequestDTO)
         
         return networkService.request(fetchProjectsEndPoint, interceptor: nil)
-            .decode(type: [ProjectPreviewDTO].self, decoder: JSONDecoder())
+            .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
             .map { projectPreviewDTOs in
                 projectPreviewDTOs.map { $0.toEntity() }
             }
