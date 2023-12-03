@@ -8,6 +8,8 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
+import RxCocoa
 
 /// 기본적인 모집글을 나타내는 Cell
 final class ProjectCell: BaseCollectionViewCell {
@@ -64,6 +66,15 @@ final class ProjectCell: BaseCollectionViewCell {
         return label
     }()
     
+    // MARK: - Property
+    weak var delegate: ProjectCellDelegate?
+    private var projectID = 0
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
@@ -98,11 +109,22 @@ final class ProjectCell: BaseCollectionViewCell {
         ).cgPath
     }
     
+    // MARK: - Binding
+    override func bind() {
+        bookmarkButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.delegate?.bookmarkButtonTapped(projectID: owner.projectID)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func configureCell(with data: ProjectPreview) {
         titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 24)
         dDayLabel.text = "D-\(data.dDays)"
         recruitNumberLabel.text = "\(data.totalRecruitNumber)명 모집"
         deadlineLabel.text = "\(data.deadline) 모집 마감"
+        projectID = data.projectID
         
         titleLabel.flex.markDirty()
         recruitNumberLabel.flex.markDirty()

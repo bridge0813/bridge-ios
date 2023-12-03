@@ -21,6 +21,7 @@ final class MainCoordinator: Coordinator {
     private let fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     private let fetchDeadlineProjectsUseCase: FetchDeadlineProjectsUseCase
+    private let bookmarkUseCase: BookmarkUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -36,6 +37,7 @@ final class MainCoordinator: Coordinator {
         fetchProjectsByFieldUseCase = DefaultFetchProjectsByFieldUseCase(projectRepository: projectRepository)
         fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
         fetchDeadlineProjectsUseCase = DefaultFetchDeadlineProjectsUseCase(projectRepository: projectRepository)
+        bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Methods
@@ -53,7 +55,8 @@ extension MainCoordinator {
             fetchAllProjectsUseCase: fetchAllProjectsUseCase,
             fetchProjectsByFieldUseCase: fetchProjectsByFieldUseCase,
             fetchHotProjectsUseCase: fetchHotProjectsUseCase,
-            fetchDeadlineProjectsUseCase: fetchDeadlineProjectsUseCase
+            fetchDeadlineProjectsUseCase: fetchDeadlineProjectsUseCase,
+            bookmarkUseCase: bookmarkUseCase
         )
         
         let mainVC = MainViewController(viewModel: mainViewModel)

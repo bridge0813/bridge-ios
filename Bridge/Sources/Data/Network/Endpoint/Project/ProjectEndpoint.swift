@@ -8,11 +8,12 @@
 enum ProjectEndpoint {
     case create(requestDTO: CreateProjectRequestDTO)
     
-    // TODO: - 통합처리 생각해보기
     case fetchAllProjects
     case fetchProjectsByField(requestDTO: FieldRequestDTO)
     case fetchHotProjects
     case fetchDeadlineProjects
+    
+    case bookmark(requestDTO: BookmarkRequestDTO, userID: String)
 }
 
 extension ProjectEndpoint: Endpoint {
@@ -32,6 +33,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .fetchDeadlineProjects:
             return "/projects/imminent"
+            
+        case .bookmark:
+            return "/project/scrap"
         }
     }
     
@@ -51,6 +55,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .fetchDeadlineProjects:
             return nil
+            
+        case .bookmark(_, userID: let userID):
+            return ["userId": userID]
         }
     }
     
@@ -70,6 +77,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .fetchDeadlineProjects:
             return .get
+            
+        case .bookmark:
+            return .post
         }
     }
     
@@ -89,6 +99,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .fetchDeadlineProjects:
             return nil
+            
+        case .bookmark(requestDTO: let projectID, _):
+            return projectID
         }
     }
 }

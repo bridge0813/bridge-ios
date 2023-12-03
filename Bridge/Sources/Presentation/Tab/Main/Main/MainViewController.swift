@@ -100,6 +100,8 @@ final class MainViewController: BaseViewController {
     private typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<ProjectPreview>
     private var dataSource: DataSource?
     
+    private let bookmarkButtonTapped = PublishSubject<Int>()
+    
     // MARK: - Init
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -155,6 +157,7 @@ final class MainViewController: BaseViewController {
             searchButtonTapped: searchButton.rx.tap,
             createButtonTapped: createProjectButton.rx.tap,
             itemSelected: collectionView.rx.itemSelected,
+            bookmarkButtonTapped: bookmarkButtonTapped,
             categoryButtonTapped: categoryView.categoryButtonTapped,
             dropdownItemSelected: fieldDropdown.itemSelected.map { $0.title }
         )
@@ -308,6 +311,7 @@ extension MainViewController {
                 return UICollectionViewCell()
             }
             cell.configureCell(with: project)
+            cell.delegate = self
             return cell
         }
     }
@@ -357,6 +361,7 @@ extension MainViewController {
                 }
                 
                 cell.configureCell(with: project)
+                cell.delegate = self
                 return cell
                 
             case .main:
@@ -365,6 +370,7 @@ extension MainViewController {
                 }
                 
                 cell.configureCell(with: project)
+                cell.delegate = self
                 return cell
             }
         }
@@ -473,5 +479,11 @@ extension MainViewController {
         configureDataSource()
         collectionView.collectionViewLayout = configureCompositionalLayoutForNew()
         applySectionSnapshot(to: .main, with: projects)
+    }
+}
+
+extension MainViewController: ProjectCellDelegate {
+    func bookmarkButtonTapped(projectID: Int) {
+        bookmarkButtonTapped.onNext(projectID)
     }
 }

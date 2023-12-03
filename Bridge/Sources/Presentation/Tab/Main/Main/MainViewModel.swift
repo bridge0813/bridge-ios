@@ -17,6 +17,7 @@ final class MainViewModel: ViewModelType {
         let searchButtonTapped: ControlEvent<Void>
         let createButtonTapped: ControlEvent<Void>
         let itemSelected: ControlEvent<IndexPath>
+        let bookmarkButtonTapped: Observable<Int>
         let categoryButtonTapped: Observable<String>
         let dropdownItemSelected: Observable<String>
     }
@@ -36,6 +37,7 @@ final class MainViewModel: ViewModelType {
     private let fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     private let fetchDeadlineProjectsUseCase: FetchDeadlineProjectsUseCase
+    private let bookmarkUseCase: BookmarkUseCase
     
     var selectedCategory: CategoryType = .new  // 현재 선택된 카테고리
     
@@ -46,7 +48,8 @@ final class MainViewModel: ViewModelType {
         fetchAllProjectsUseCase: FetchAllProjectsUseCase,
         fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase,
         fetchHotProjectsUseCase: FetchHotProjectsUseCase,
-        fetchDeadlineProjectsUseCase: FetchDeadlineProjectsUseCase
+        fetchDeadlineProjectsUseCase: FetchDeadlineProjectsUseCase,
+        bookmarkUseCase: BookmarkUseCase
     ) {
         self.coordinator = coordinator
         self.fetchProfilePreviewUseCase = fetchProfilePreviewUseCase
@@ -54,6 +57,7 @@ final class MainViewModel: ViewModelType {
         self.fetchProjectsByFieldUseCase = fetchProjectsByFieldUseCase
         self.fetchHotProjectsUseCase = fetchHotProjectsUseCase
         self.fetchDeadlineProjectsUseCase = fetchDeadlineProjectsUseCase
+        self.bookmarkUseCase = bookmarkUseCase
     }
     
     // MARK: - Transformation
@@ -169,6 +173,15 @@ final class MainViewModel: ViewModelType {
                 owner.coordinator?.connectToProjectDetailFlow(with: projectID)
             })
             .disposed(by: disposeBag)
+        
+        // 북마크
+        input.bookmarkButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, projectID in
+                print(projectID)
+            })
+            .disposed(by: disposeBag)
+        
         
         // 필터 이동
         input.filterButtonTapped

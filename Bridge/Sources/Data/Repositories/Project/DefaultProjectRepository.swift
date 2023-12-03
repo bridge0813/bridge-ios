@@ -19,7 +19,7 @@ final class DefaultProjectRepository: ProjectRepository {
         self.tokenStorage = tokenStorage
     }
     
-    // MARK: - List
+    // MARK: - Fetch
     func fetchAllProjects() -> Observable<[ProjectPreview]> {
         return networkService.request(ProjectEndpoint.fetchAllProjects, interceptor: nil)
             .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
@@ -55,7 +55,6 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
-    // MARK: - Detail
     func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
         .just(ProjectDetailDTO.projectDetailTest.toEntity())
     }
@@ -71,6 +70,15 @@ final class DefaultProjectRepository: ProjectRepository {
             .map { dto in
                 return dto.projectID
             }
+    }
+    
+    // MARK: - Bookmark
+    func bookmark(projectID: Int) -> Observable<Void> {
+        let userID = tokenStorage.get(.userID) ?? invalidToken
+        let bookmarkDTO = BookmarkRequestDTO(projectID: projectID)
+        let bookmarkEndpoint = ProjectEndpoint.bookmark(requestDTO: bookmarkDTO, userID: userID)
+        
+        return networkService.request(bookmarkEndpoint, interceptor: AuthInterceptor()).map { _ in }
     }
 }
 
