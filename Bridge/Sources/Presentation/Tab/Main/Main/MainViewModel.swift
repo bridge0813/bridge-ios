@@ -93,7 +93,7 @@ final class MainViewModel: ViewModelType {
             .flatMap { owner, _ -> Observable<Result<[ProjectPreview], Error>> in
                 // 로그인 상태가 아닌경우 -> 관심분야가 없음 -> 전체 모집글 조회
                 // else 가장 첫 번째 관심분야에 맞는 모집글 조회
-                if fields.value.isEmpty {
+                if selectedField.value == "전체" {
                     return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
                     
                 } else {
