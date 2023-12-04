@@ -158,7 +158,6 @@ final class MainViewModel: ViewModelType {
         input.itemSelected
             .withUnretained(self)
             .subscribe(onNext: { owner, projectID in
-                print(projectID)
                 owner.coordinator?.connectToProjectDetailFlow(with: projectID)
             })
             .disposed(by: disposeBag)

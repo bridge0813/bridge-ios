@@ -208,6 +208,7 @@ final class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        // 선택된 분야 처리
         output.selectedField
             .skip(1)  // 첫 번째 방출은 스킵
             .drive(onNext: { [weak self] field in
@@ -222,14 +223,13 @@ final class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        // 북마크 처리
         output.bookmarkedProjectID
             .skip(1)
             .drive(onNext: { [weak self] projectID in
                 self?.updateBookmarkedItem(projectID: projectID)
             })
             .disposed(by: disposeBag)
-        
-        
         
         // 스크롤에 따른 레이아웃 처리
         collectionView.rx.contentOffset
