@@ -14,15 +14,15 @@ final class MockProjectRepository: ProjectRepository {
     }
     
     func fetchProjectsByField(for field: String) -> Observable<[ProjectPreview]> {
-        .just(ProjectPreviewResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+        .just(ProjectPreviewResponseDTO.projectByFieldTestArray.compactMap { $0.toEntity() })
     }
     
     func fetchHotProjects() -> Observable<[ProjectPreview]> {
-        .just(ProjectPreviewResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+        .just(HotProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
     func fetchDeadlineProjects() -> Observable<[ProjectPreview]> {
-        .just(ProjectPreviewResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+        .just(DeadlineProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
     func fetchProjectDetail(with projectID: Int) -> Observable<Project> {

@@ -36,3 +36,10 @@ extension HotProjectResponseDTO {
         )
     }
 }
+
+extension HotProjectResponseDTO {
+    static var projectTestArray: [HotProjectResponseDTO] = [
+        HotProjectResponseDTO(projectID: 0, title: "인기 탑 1에 들어와있는 모집글이며, 이거는 첫 번째이며 이런 사람을 구합니다.", deadline: "2023.08.20", rank: 1, totalRecruitNumber: 10),
+        HotProjectResponseDTO(projectID: 1, title: "인기 탑 2에 들어와있는 모집글", deadline: "2023.08.20", rank: 2, totalRecruitNumber: 15)
+    ]
+}

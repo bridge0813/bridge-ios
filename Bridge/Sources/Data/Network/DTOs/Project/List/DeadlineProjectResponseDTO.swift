@@ -37,3 +37,13 @@ extension DeadlineProjectResponseDTO {
         )
     }
 }
+
+extension DeadlineProjectResponseDTO {
+    static var projectTestArray: [DeadlineProjectResponseDTO] = [
+        DeadlineProjectResponseDTO(projectID: 0, title: "여긴 마감임박 이다. 첫 번째 마감임박 모집글입니다. 이건 첫 번째 마감임박 모집글입니다.", deadline: "", deadlineRank: 0, totalRecruitNumber: 1),
+        DeadlineProjectResponseDTO(projectID: 1, title: "두 번째 마감임박 글입니다.", deadline: "", deadlineRank: 0, totalRecruitNumber: 2),
+        DeadlineProjectResponseDTO(projectID: 2, title: "세 번째 마감임박 글입니다.", deadline: "", deadlineRank: 0, totalRecruitNumber: 3),
+        DeadlineProjectResponseDTO(projectID: 3, title: "네 번째 마감임박 글입니다.", deadline: "", deadlineRank: 0, totalRecruitNumber: 4),
+        DeadlineProjectResponseDTO(projectID: 4, title: "다섯 번째 마감임박 글입니다.", deadline: "", deadlineRank: 0, totalRecruitNumber: 5)
+    ]
+}
