@@ -60,6 +60,7 @@ final class HotProjectCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        bind()
     }
     
     // MARK: - Layout
