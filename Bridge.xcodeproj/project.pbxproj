@@ -184,6 +184,7 @@
 		7C87EE0C2B1B6B020066691D /* BookmarkRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE0B2B1B6B020066691D /* BookmarkRequestDTO.swift */; };
 		7C87EE0F2B1B72290066691D /* BookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */; };
 		7C87EE112B1C4B180066691D /* ProjectCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE102B1C4B180066691D /* ProjectCellDelegate.swift */; };
+		7C87EE142B1C55C20066691D /* FilterPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE132B1C55C20066691D /* FilterPopUpView.swift */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
 		7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */; };
@@ -407,6 +408,7 @@
 		7C87EE0B2B1B6B020066691D /* BookmarkRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRequestDTO.swift; sourceTree = "<group>"; };
 		7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkUseCase.swift; sourceTree = "<group>"; };
 		7C87EE102B1C4B180066691D /* ProjectCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCellDelegate.swift; sourceTree = "<group>"; };
+		7C87EE132B1C55C20066691D /* FilterPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPopUpView.swift; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorView.swift; sourceTree = "<group>"; };
@@ -1341,6 +1343,14 @@
 			path = Bookmark;
 			sourceTree = "<group>";
 		};
+		7C87EE122B1C55970066691D /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				7C87EE132B1C55C20066691D /* FilterPopUpView.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		7C8B822C2AC8498C00F7B889 /* ButtonGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -1659,6 +1669,7 @@
 				7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */,
 				7C55E6352ADC06E20018FA5D /* Cell */,
 				7C55E6342ADC06C30018FA5D /* HeaderView */,
+				7C87EE122B1C55970066691D /* Filter */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1863,6 +1874,7 @@
 				7C8B82402ACE91C500F7B889 /* ChatRoomDropdownMenuCell.swift in Sources */,
 				7B1742EC2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift in Sources */,
 				7BFECA222AEBEC0B009B4C7D /* ChatCell.swift in Sources */,
+				7C87EE142B1C55C20066691D /* FilterPopUpView.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
 				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,

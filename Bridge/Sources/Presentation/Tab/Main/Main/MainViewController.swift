@@ -44,6 +44,7 @@ final class MainViewController: BaseViewController {
         target: self,
         action: nil
     )
+    private let filterPopUpView = FilterPopUpView()
     
     private lazy var searchButton = UIBarButtonItem(
         image: UIImage(named: "magnifyingglass")?
@@ -153,7 +154,6 @@ final class MainViewController: BaseViewController {
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            filterButtonTapped: filterButton.rx.tap,
             searchButtonTapped: searchButton.rx.tap,
             createButtonTapped: createProjectButton.rx.tap,
             itemSelected: collectionView.rx.itemSelected,
@@ -254,6 +254,14 @@ final class MainViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.fieldDropdown.show()
+            })
+            .disposed(by: disposeBag)
+        
+        // 필터뷰 Show
+        filterButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.filterPopUpView.show()
             })
             .disposed(by: disposeBag)
     }

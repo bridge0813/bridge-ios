@@ -13,7 +13,6 @@ final class MainViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
-        let filterButtonTapped: ControlEvent<Void>
         let searchButtonTapped: ControlEvent<Void>
         let createButtonTapped: ControlEvent<Void>
         let itemSelected: ControlEvent<IndexPath>
@@ -179,15 +178,6 @@ final class MainViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, projectID in
                 print(projectID)
-            })
-            .disposed(by: disposeBag)
-        
-        
-        // 필터 이동
-        input.filterButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.connectToProjectFilteringFlow()
             })
             .disposed(by: disposeBag)
         
