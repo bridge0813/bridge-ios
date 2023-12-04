@@ -7,4 +7,5 @@
 
 protocol ProjectCellDelegate: AnyObject {
     func bookmarkButtonTapped(projectID: Int)
+    func itemSelected(projectID: Int)
 }

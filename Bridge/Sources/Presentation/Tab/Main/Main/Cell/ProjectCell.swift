@@ -76,6 +76,17 @@ final class ProjectCell: BaseCollectionViewCell {
         bind()
     }
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        rootFlexContainer.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+        )
+    }
+    
+    @objc private func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        delegate?.itemSelected(projectID: projectID)
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)

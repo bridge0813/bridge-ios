@@ -102,6 +102,7 @@ final class MainViewController: BaseViewController {
     private var dataSource: DataSource?
     
     private let bookmarkButtonTapped = PublishSubject<Int>()
+    private let itemSelected = PublishSubject<Int>()
     
     // MARK: - Init
     init(viewModel: MainViewModel) {
@@ -156,7 +157,7 @@ final class MainViewController: BaseViewController {
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             searchButtonTapped: searchButton.rx.tap,
             createButtonTapped: createProjectButton.rx.tap,
-            itemSelected: collectionView.rx.itemSelected,
+            itemSelected: itemSelected,
             bookmarkButtonTapped: bookmarkButtonTapped,
             categoryButtonTapped: categoryView.categoryButtonTapped,
             dropdownItemSelected: fieldDropdown.itemSelected.map { $0.title }
@@ -502,6 +503,10 @@ extension MainViewController {
 extension MainViewController: ProjectCellDelegate {
     func bookmarkButtonTapped(projectID: Int) {
         bookmarkButtonTapped.onNext(projectID)
+    }
+    
+    func itemSelected(projectID: Int) {
+        itemSelected.onNext(projectID)
     }
 }
 
