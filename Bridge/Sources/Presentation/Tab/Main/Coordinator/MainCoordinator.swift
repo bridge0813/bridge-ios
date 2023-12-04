@@ -29,7 +29,8 @@ final class MainCoordinator: Coordinator {
         self.childCoordinators = []
 
         let networkService = DefaultNetworkService()
-        profileRepository = DefaultProfileRepository(networkService: networkService)  // 프로필
+        profileRepository = MockProfileRepository()
+//        DefaultProfileRepository(networkService: networkService)  // 프로필
         projectRepository = DefaultProjectRepository(networkService: networkService)  // 모집글
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(profileRepository: profileRepository)

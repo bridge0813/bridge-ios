@@ -23,3 +23,7 @@ extension ProfilePreviewResponseDTO {
         ProfilePreview(profileImage: profileImage, fields: fields, bookmarkNumber: bookmarkNumber)
     }
 }
+
+extension ProfilePreviewResponseDTO {
+    static var testData = ProfilePreviewResponseDTO(profileImage: "", fields: ["iOS", "UI/UX"], bookmarkNumber: 0)
+}
