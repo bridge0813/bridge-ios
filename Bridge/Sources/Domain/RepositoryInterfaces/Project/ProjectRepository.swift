@@ -19,5 +19,5 @@ protocol ProjectRepository {
     func create(project: Project) -> Observable<Int>
     
     // MARK: - Bookmark
-    func bookmark(projectID: Int) -> Observable<Void>
+    func bookmark(projectID: Int) -> Observable<Int>
 }

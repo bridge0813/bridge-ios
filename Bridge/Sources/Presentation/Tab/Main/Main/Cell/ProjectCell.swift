@@ -115,6 +115,7 @@ final class ProjectCell: BaseCollectionViewCell {
         bookmarkButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                owner.bookmarkButton.isSelected.toggle()
                 owner.delegate?.bookmarkButtonTapped(projectID: owner.projectID)
             })
             .disposed(by: disposeBag)
@@ -125,6 +126,7 @@ final class ProjectCell: BaseCollectionViewCell {
         dDayLabel.text = "D-\(data.dDays)"
         recruitNumberLabel.text = "\(data.totalRecruitNumber)명 모집"
         deadlineLabel.text = "\(data.deadline) 모집 마감"
+        bookmarkButton.isBookmarked = data.isBookmarked
         projectID = data.projectID
         
         titleLabel.flex.markDirty()

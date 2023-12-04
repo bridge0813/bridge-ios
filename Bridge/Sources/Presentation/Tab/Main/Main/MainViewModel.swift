@@ -25,6 +25,7 @@ final class MainViewModel: ViewModelType {
         let projects: Driver<[ProjectPreview]>
         let fields: Driver<[String]>
         let selectedField: Driver<String>
+        let bookmarkedProjectID: Driver<Int>
     }
 
     // MARK: - Property
@@ -64,6 +65,7 @@ final class MainViewModel: ViewModelType {
         let projects = BehaviorRelay<[ProjectPreview]>(value: [])
         let fields = BehaviorRelay<[String]>(value: [])
         let selectedField = BehaviorRelay<String>(value: "")
+        let bookmarkedProjectID = BehaviorRelay<Int>(value: 0)
         
         // 유저의 관심분야 가져오기, 카테고리가 신규일 경우 모집글 갱신
         input.viewWillAppear
@@ -156,28 +158,52 @@ final class MainViewModel: ViewModelType {
         input.itemSelected
             .withUnretained(self)
             .subscribe(onNext: { owner, indexPath in
-                
-                let projectID: Int
-                
-                // 'hot' 카테고리 && 섹션이 0일 경우, 상단 섹션의 projectID를 사용.
-                if owner.selectedCategory == .hot && indexPath.section == 0 {
-                    projectID = projects.value[indexPath.row].projectID
-                    
-                } else {
-                    // 'hot' 카테고리인 경우 상단 섹션의 프로젝트 3개를 건너뛰고, prjectID를 사용.
-                    let offsetIndex = owner.selectedCategory == .hot ? 3 : 0
-                    projectID = projects.value[indexPath.row + offsetIndex].projectID
-                }
-                
-                owner.coordinator?.connectToProjectDetailFlow(with: projectID)
+//                
+//                let projectID: Int
+//                
+//                // 'hot' 카테고리 && 섹션이 0일 경우, 상단 섹션의 projectID를 사용.
+//                if owner.selectedCategory == .hot && indexPath.section == 0 {
+//                    projectID = projects.value[indexPath.row].projectID
+//                    
+//                } else {
+//                    // 'hot' 카테고리인 경우 상단 섹션의 프로젝트 3개를 건너뛰고, prjectID를 사용.
+//                    let offsetIndex = owner.selectedCategory == .hot ? 3 : 0
+//                    projectID = projects.value[indexPath.row + offsetIndex].projectID
+//                }
+//                
+//                owner.coordinator?.connectToProjectDetailFlow(with: projectID)
             })
             .disposed(by: disposeBag)
         
         // 북마크
         input.bookmarkButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, projectID in
-                print(projectID)
+            .flatMap { owner, projectID -> Observable<Result<Int, Error>> in
+        
+                // 로그인이 되어 있지 않다면, Alert 보여주기
+                guard !fields.value.isEmpty else {
+                    owner.coordinator?.showAlert(configuration: .signIn, primaryAction: {
+                        owner.coordinator?.showSignInViewController()
+                    })
+                    return .empty()
+                }
+                
+                // 로그인이 되어 있다면, 북마크 수행
+                return owner.bookmarkUseCase.bookmark(projectID: projectID).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projectID):
+                    bookmarkedProjectID.accept(projectID)
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "오류",
+                        description: error.localizedDescription
+                    ))
+                }
             })
             .disposed(by: disposeBag)
         
@@ -210,7 +236,8 @@ final class MainViewModel: ViewModelType {
         return Output(
             projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError]),
             fields: fields.asDriver(onErrorJustReturn: []),
-            selectedField: selectedField.asDriver(onErrorJustReturn: "Error")
+            selectedField: selectedField.asDriver(onErrorJustReturn: "Error"),
+            bookmarkedProjectID: bookmarkedProjectID.asDriver(onErrorJustReturn: 0)
         )
     }
 }

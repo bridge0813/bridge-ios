@@ -15,6 +15,7 @@ struct ProjectPreview {
     let totalRecruitNumber: Int
     let rank: Int
     let deadlineRank: Int
+    var isBookmarked: Bool
 }
 
 extension ProjectPreview {
@@ -26,7 +27,8 @@ extension ProjectPreview {
         deadline: "",
         totalRecruitNumber: 0,
         rank: 0,
-        deadlineRank: 0
+        deadlineRank: 0,
+        isBookmarked: false
     )
 }
 

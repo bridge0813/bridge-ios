@@ -73,12 +73,13 @@ final class DefaultProjectRepository: ProjectRepository {
     }
     
     // MARK: - Bookmark
-    func bookmark(projectID: Int) -> Observable<Void> {
+    func bookmark(projectID: Int) -> Observable<Int> {
         let userID = tokenStorage.get(.userID) ?? invalidToken
         let bookmarkDTO = BookmarkRequestDTO(projectID: projectID)
         let bookmarkEndpoint = ProjectEndpoint.bookmark(requestDTO: bookmarkDTO, userID: userID)
         
-        return networkService.request(bookmarkEndpoint, interceptor: AuthInterceptor()).map { _ in }
+        return networkService.request(bookmarkEndpoint, interceptor: AuthInterceptor())
+            .map { _ in projectID }
     }
 }
 

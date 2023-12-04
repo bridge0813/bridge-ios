@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol BookmarkUseCase {
-    func bookmark(projectID: Int) -> Observable<Void>
+    func bookmark(projectID: Int) -> Observable<Int>
 }
 
 final class DefaultBookmarkUseCase: BookmarkUseCase {
@@ -19,7 +19,7 @@ final class DefaultBookmarkUseCase: BookmarkUseCase {
         self.projectRepository = projectRepository
     }
     
-    func bookmark(projectID: Int) -> Observable<Void> {
+    func bookmark(projectID: Int) -> Observable<Int> {
         projectRepository.bookmark(projectID: projectID)
     }
 }

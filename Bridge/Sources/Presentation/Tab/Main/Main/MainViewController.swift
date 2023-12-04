@@ -221,6 +221,33 @@ final class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        output.bookmarkedProjectID
+            .skip(1)
+            .drive(onNext: { [weak self] projectID in
+                guard let self, let dataSource else { return }
+                var snapshot = dataSource.snapshot(for: viewModel.selectedCategory == .hot ? .hot : .main)
+
+                if let index = snapshot.items.firstIndex(where: { $0.projectID == projectID }) {
+                    var updatedItem = snapshot.items[index]
+                    snapshot.delete([updatedItem])  // 기존 아이템 제거
+                    
+                    // 아이템 상태 변경
+                    updatedItem.isBookmarked.toggle()
+                    
+                    // 제거된 아이템의 위치에 변경된 아이템을 위치
+                    if index >= snapshot.items.count {
+                        snapshot.append([updatedItem])  // 기존 아이템이 마지막 요소였다면 append 사용
+                        
+                    } else {
+                        snapshot.insert([updatedItem], before: snapshot.items[index])  // 기존 위치에 insert
+                    }
+                }
+
+                dataSource.apply(snapshot, to: viewModel.selectedCategory == .hot ? .hot : .main)
+            })
+            .disposed(by: disposeBag)
+        
+        
         
         // 스크롤에 따른 레이아웃 처리
         collectionView.rx.contentOffset
@@ -307,7 +334,7 @@ extension MainViewController {
     private func applySectionSnapshot(to section: MainViewModel.Section, with projects: [ProjectPreview]) {
         var snapshot = SectionSnapshot()
         snapshot.append(projects)
-        dataSource?.apply(snapshot, to: section)
+        dataSource?.apply(snapshot, to: section, animatingDifferences: false)
     }
     
     /// 섹션이 하나일 때, 기본적인 DataSource(신규, 마감임박, 출시예정에서 사용됨)

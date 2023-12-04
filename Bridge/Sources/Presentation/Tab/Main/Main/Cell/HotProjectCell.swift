@@ -100,6 +100,7 @@ final class HotProjectCell: BaseCollectionViewCell {
         titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 21)
         dDayLabel.text = "D-\(data.dDays)"
         rankingLabel.text = String(data.rank)
+        bookmarkButton.isBookmarked = data.isBookmarked
         projectID = data.projectID
         
         titleLabel.flex.markDirty()
