@@ -224,26 +224,7 @@ final class MainViewController: BaseViewController {
         output.bookmarkedProjectID
             .skip(1)
             .drive(onNext: { [weak self] projectID in
-                guard let self, let dataSource else { return }
-                var snapshot = dataSource.snapshot(for: viewModel.selectedCategory == .hot ? .hot : .main)
-
-                if let index = snapshot.items.firstIndex(where: { $0.projectID == projectID }) {
-                    var updatedItem = snapshot.items[index]
-                    snapshot.delete([updatedItem])  // 기존 아이템 제거
-                    
-                    // 아이템 상태 변경
-                    updatedItem.isBookmarked.toggle()
-                    
-                    // 제거된 아이템의 위치에 변경된 아이템을 위치
-                    if index >= snapshot.items.count {
-                        snapshot.append([updatedItem])  // 기존 아이템이 마지막 요소였다면 append 사용
-                        
-                    } else {
-                        snapshot.insert([updatedItem], before: snapshot.items[index])  // 기존 위치에 insert
-                    }
-                }
-
-                dataSource.apply(snapshot, to: viewModel.selectedCategory == .hot ? .hot : .main)
+                self?.updateBookmarkedItem(projectID: projectID)
             })
             .disposed(by: disposeBag)
         
@@ -517,8 +498,44 @@ extension MainViewController {
     }
 }
 
+// MARK: - CellDelgate
 extension MainViewController: ProjectCellDelegate {
     func bookmarkButtonTapped(projectID: Int) {
         bookmarkButtonTapped.onNext(projectID)
+    }
+}
+
+// MARK: - Bookmark 처리
+extension MainViewController {
+    private func updateBookmarkedItem(projectID: Int) {
+        guard let dataSource else { return }
+        
+        let snapshot = dataSource.snapshot()
+        
+        let section = snapshot.sectionIdentifier(
+            containingItem: snapshot.itemIdentifiers.first { $0.projectID == projectID } ?? .onError
+        ) ?? .main
+        var sectionSnapshot = dataSource.snapshot(for: section)
+        
+        if let index = sectionSnapshot.items.firstIndex(where: { $0.projectID == projectID }) {
+            var updatedItem = sectionSnapshot.items[index]
+            
+            sectionSnapshot.delete([updatedItem])  // 기존 아이템 제거
+
+            // 아이템 상태 변경
+            updatedItem.isBookmarked.toggle()
+            
+            // 제거된 아이템의 위치에 변경된 아이템을 위치
+            if index >= sectionSnapshot.items.count {
+                // 기존 아이템이 마지막 요소였다면 append 사용
+                sectionSnapshot.append([updatedItem])
+
+            } else {
+                // 기존 위치에 insert
+                sectionSnapshot.insert([updatedItem], before: sectionSnapshot.items[index])
+            }
+
+            dataSource.apply(sectionSnapshot, to: section)
+        }
     }
 }
