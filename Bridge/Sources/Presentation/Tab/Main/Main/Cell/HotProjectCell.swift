@@ -66,11 +66,11 @@ final class HotProjectCell: BaseCollectionViewCell {
     // MARK: - Configuration
     override func configureAttributes() {
         rootFlexContainer.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+            UITapGestureRecognizer(target: self, action: #selector(containerTapped))
         )
     }
     
-    @objc private func backgroundTapped(_ sender: UITapGestureRecognizer) {
+    @objc private func containerTapped(_ sender: UITapGestureRecognizer) {
         delegate?.itemSelected(projectID: projectID)
     }
     
