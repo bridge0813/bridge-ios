@@ -16,6 +16,7 @@ extension UILabel {
         paragraphStyle.minimumLineHeight = lineHeight
         paragraphStyle.maximumLineHeight = lineHeight
         paragraphStyle.alignment = alignment
+        paragraphStyle.lineBreakMode = .byTruncatingTail
         
         let attributes: [NSAttributedString.Key: Any] = [
             .paragraphStyle: paragraphStyle,

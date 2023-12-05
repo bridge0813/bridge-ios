@@ -45,7 +45,6 @@ final class HotProjectCell: BaseCollectionViewCell {
         let label = UILabel()
         label.textColor = BridgeColor.gray01
         label.font = BridgeFont.body2.font
-        label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 2
         
         return label
