@@ -15,6 +15,20 @@ final class ManagementViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
+    private let applyTapButton: ManagementTapButton = {
+        let button = ManagementTapButton("지원")
+        button.isSelected = true
+        button.configuration?.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        return button
+    }()
+    private let recruitmentTapButton: ManagementTapButton = {
+        let button = ManagementTapButton("모집")
+        button.configuration?.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 0)
+        return button
+        
+    }()
+    
     private let placeholderView: BridgePlaceholderView = {
         let view = BridgePlaceholderView()
         view.isHidden = true
@@ -60,7 +74,10 @@ final class ManagementViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        
+        navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(customView: applyTapButton),
+            UIBarButtonItem(customView: recruitmentTapButton)
+        ]
     }
     
     // MARK: - Layout
