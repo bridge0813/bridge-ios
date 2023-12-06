@@ -30,6 +30,7 @@ final class ChannelViewModel: ViewModelType {
     private let channel: Channel
     private let leaveChannelUseCase: LeaveChannelUseCase
     private let channelSubscriptionUseCase: ChannelSubscriptionUseCase
+    private let observeMessageUseCase: ObserveMessageUseCase
     private let fetchMessagesUseCase: FetchMessagesUseCase
     private let sendMessageUseCase: SendMessageUseCase
     
@@ -39,6 +40,7 @@ final class ChannelViewModel: ViewModelType {
         channel: Channel,
         leaveChannelUseCase: LeaveChannelUseCase,
         channelSubscriptionUseCase: ChannelSubscriptionUseCase,
+        observeMessageUseCase: ObserveMessageUseCase,
         fetchMessagesUseCase: FetchMessagesUseCase,
         sendMessageUseCase: SendMessageUseCase
     ) {
@@ -46,6 +48,7 @@ final class ChannelViewModel: ViewModelType {
         self.channel = channel
         self.leaveChannelUseCase = leaveChannelUseCase
         self.channelSubscriptionUseCase = channelSubscriptionUseCase
+        self.observeMessageUseCase = observeMessageUseCase
         self.fetchMessagesUseCase = fetchMessagesUseCase
         self.sendMessageUseCase = sendMessageUseCase
     }
@@ -58,7 +61,7 @@ final class ChannelViewModel: ViewModelType {
             .bind(to: messages)
             .disposed(by: disposeBag)
         
-        fetchMessagesUseCase.observeMessage()
+        observeMessageUseCase.observeMessage()
             .map { incomingMessage in
                 var currentMessages = messages.value
                 currentMessages.append(incomingMessage)

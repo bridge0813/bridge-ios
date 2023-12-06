@@ -67,11 +67,11 @@ extension DefaultStompService: WebSocketServiceDelegate {
               command == StompResponseCommand.message.rawValue
         else { return }
         
-        if let jsonArrayString = text.extractJsonArrayString(), let data = jsonArrayString.data(using: .utf8) {
-            updatedMessages.onNext(data)
-        } else if let jsonString = text.extractJsonString(), let data = jsonString.data(using: .utf8) {
-            incomingMessage.onNext(data)
-        }
+//        if let jsonArrayString = text.extractJsonArrayString(), let data = jsonArrayString.data(using: .utf8) {
+//            updatedMessages.onNext(data)
+//        } else if let jsonString = text.extractJsonString(), let data = jsonString.data(using: .utf8) {
+//            incomingMessage.onNext(data)
+//        }
     }
     
     func webSocketDidReceive(data: Data) { }

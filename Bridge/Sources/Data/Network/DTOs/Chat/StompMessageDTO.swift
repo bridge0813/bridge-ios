@@ -16,6 +16,7 @@ struct StompMessageDTO: Codable {
     let content: String
     var hasRead = false
     var sentDateAndTime: String?
+    var chatHistory: ChatHistory?
     
     enum CodingKeys: String, CodingKey {
         case messageID = "messageId"
@@ -25,6 +26,7 @@ struct StompMessageDTO: Codable {
         case content = "message"
         case hasRead = "readStat"
         case sentDateAndTime = "sendTime"
+        case chatHistory
     }
     
     init(channelID: String, senderID: String, type: MessageResponseType, content: String) {

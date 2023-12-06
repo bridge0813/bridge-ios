@@ -9,7 +9,6 @@ import RxSwift
 
 protocol FetchMessagesUseCase {
     func fetchMessages(channelId: String) -> Observable<[Message]>
-    func observeMessage() -> Observable<Message>
 }
 
 final class DefaultFetchMessagesUseCase: FetchMessagesUseCase {
@@ -23,8 +22,4 @@ final class DefaultFetchMessagesUseCase: FetchMessagesUseCase {
     func fetchMessages(channelId: String) -> Observable<[Message]> {
         messageRepository.fetchMessages(channelID: channelId)
     }   
-    
-    func observeMessage() -> Observable<Message> {
-        messageRepository.observeMessage()
-    }
 }

@@ -118,6 +118,7 @@
 		7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CD22A9F3F6B000DAB02 /* BaseView.swift */; };
 		7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CD42A9F7D38000DAB02 /* BridgeNavigationTitleView.swift */; };
 		7BA36CDA2AA197F8000DAB02 /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CD92AA197F8000DAB02 /* ChannelListViewController.swift */; };
+		7BA5336B2B0EED5E00E69BFB /* ObserveMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA5336A2B0EED5E00E69BFB /* ObserveMessageUseCase.swift */; };
 		7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */; };
 		7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2402A9851B600AA2328 /* Coordinator.swift */; };
 		7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */; };
@@ -334,6 +335,7 @@
 		7BA36CD22A9F3F6B000DAB02 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7BA36CD42A9F7D38000DAB02 /* BridgeNavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeNavigationTitleView.swift; sourceTree = "<group>"; };
 		7BA36CD92AA197F8000DAB02 /* ChannelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
+		7BA5336A2B0EED5E00E69BFB /* ObserveMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserveMessageUseCase.swift; sourceTree = "<group>"; };
 		7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2402A9851B600AA2328 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -681,6 +683,7 @@
 			isa = PBXGroup;
 			children = (
 				7B92B7E22AE501CD00B0E954 /* FetchMessagesUseCase.swift */,
+				7BA5336A2B0EED5E00E69BFB /* ObserveMessageUseCase.swift */,
 				7B3B373B2B038FE400C2F8AD /* SendMessageUseCase.swift */,
 			);
 			path = Message;
@@ -1823,6 +1826,7 @@
 				7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */,
 				7CA04F2E2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift in Sources */,
 				7C55E64E2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift in Sources */,
+				7BA5336B2B0EED5E00E69BFB /* ObserveMessageUseCase.swift in Sources */,
 				7C55E64A2AE44B5F0018FA5D /* HotProjectCell.swift in Sources */,
 				7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */,
 				7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */,
@@ -1856,7 +1860,6 @@
 				7C40CBC22AC5C2BF000F4C9F /* BridgeMediumButtonGroup.swift in Sources */,
 				7C55E65A2AE8DEC70018FA5D /* BridgeTextView.swift in Sources */,
 				7B9142D82B01CF31006EA52F /* DefaultMessageRepository.swift in Sources */,
-				7C569D132AA1E7020063D362 /* ProjectSectionHeaderView.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
 				7BB8C51F2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift in Sources */,
 				7CA04F122AFDF694007B9191 /* ProjectDetailViewController.swift in Sources */,

@@ -51,9 +51,9 @@ final class DefaultChannelRepository: ChannelRepository {
         )
         
         return stompService.subscribe(stompSubscribeEndpoint)
-            .decode(type: [StompMessageDTO].self, decoder: JSONDecoder())
-            .map { stompMessageDTOs in
-                stompMessageDTOs.map { $0.toEntity(userID: userID) }
+            .decode(type: MessageDTO.self, decoder: JSONDecoder())
+            .map { messageDTO in
+                messageDTO.chatHistory.map { $0.toEntity(userID: userID) }
             }
     }
     

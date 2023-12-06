@@ -28,10 +28,10 @@ final class DefaultMessageRepository: MessageRepository {
         let messageEndpoint = MessageEndpoint.fetchMessages(channelID: channelID)
         
         return networkService.request(to: messageEndpoint, interceptor: nil)
-            .decode(type: [MessageDTO].self, decoder: JSONDecoder())
-            .map { [weak self] messageDTOs in
+            .decode(type: MessageDTO.self, decoder: JSONDecoder())
+            .map { [weak self] messageDTO in
                 let userID = self?.tokenStorage.get(.userID) ?? invalidToken
-                return messageDTOs.map { $0.toEntity(userID: userID) }
+                return messageDTO.chatHistory.map { $0.toEntity(userID: userID) }
             }
     }
     

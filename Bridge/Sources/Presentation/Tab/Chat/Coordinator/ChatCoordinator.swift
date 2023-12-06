@@ -19,8 +19,9 @@ final class ChatCoordinator: Coordinator {
     
     private let fetchChannelsUseCase: FetchChannelsUseCase
     private let leaveChannelUseCase: LeaveChannelUseCase
-    private let fetchMessagesUseCase: FetchMessagesUseCase
     private let channelSubscriptionUseCase: ChannelSubscriptionUseCase
+    private let observeMessageUseCase: ObserveMessageUseCase
+    private let fetchMessagesUseCase: FetchMessagesUseCase
     private let sendMessageUseCase: SendMessageUseCase
     
     init(navigationController: UINavigationController) {
@@ -38,6 +39,7 @@ final class ChatCoordinator: Coordinator {
         fetchChannelsUseCase = DefaultFetchChannelsUseCase(channelRepository: channelRepository)
         leaveChannelUseCase = DefaultLeaveChannelUseCase(channelRepository: channelRepository)
         channelSubscriptionUseCase = DefaultChannelSubscriptionUseCase(channelRepository: channelRepository)
+        observeMessageUseCase = DefaultObserveMessageUseCase(messageRepository: messageRepository)
         fetchMessagesUseCase = DefaultFetchMessagesUseCase(messageRepository: messageRepository)
         sendMessageUseCase = DefaultSendMessageUseCase(messageRepository: messageRepository)
     }
@@ -64,6 +66,7 @@ extension ChatCoordinator {
             channel: channel,
             leaveChannelUseCase: leaveChannelUseCase,
             channelSubscriptionUseCase: channelSubscriptionUseCase,
+            observeMessageUseCase: observeMessageUseCase,
             fetchMessagesUseCase: fetchMessagesUseCase,
             sendMessageUseCase: sendMessageUseCase
         )

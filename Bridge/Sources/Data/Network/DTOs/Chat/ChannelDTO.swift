@@ -8,32 +8,33 @@
 import Foundation
 
 struct ChannelDTO: Codable {
-    let id: String?
+    let channelID: String
+    let myID: Int
+    let opponentID: Int
     var image: String?
     let name: String
     var lastMessageReceivedTime: String?
-//    let lastMessageType: String
     var lastMessageContent: String?
     let unreadMessageCount: Int
     
     enum CodingKeys: String, CodingKey {
-        case id = "roomId"
+        case channelID = "roomId"
+        case myID = "makerId"
+        case opponentID = "receiverId"
         case image
         case name = "roomName"
         case lastMessageReceivedTime = "lastTime"
-//        case lastMessageType // tbd
         case lastMessageContent = "lastMessage"
         case unreadMessageCount = "notReadMessageCnt"
     }
 }
 
 extension ChannelDTO {
-    // TODO: 수정 필요 (id 충돌 주의 -> hashable 직접 정의해야할수도 - 애니메이션 키고 확인해보기)
     func toEntity() -> Channel {
         Channel(
-            id: id ?? "-1",  // 얘도 임시로 해논거라 옵셔널 제거해야함
-            myID: "",
-            opponentID: "",
+            id: channelID,
+            myID: String(myID),
+            opponentID: String(opponentID),
             image: nil,
             name: name,
             lastMessage: Channel.LastMessage(
@@ -48,7 +49,9 @@ extension ChannelDTO {
 extension ChannelDTO {
     static var testArray: [ChannelDTO] = [
         ChannelDTO(
-            id: "1",
+            channelID: "1",
+            myID: 1,
+            opponentID: 2,
             image: "urlString",
             name: "정호윤",
             lastMessageReceivedTime: "2023-09-05T09:15:30+00:00",
@@ -56,7 +59,9 @@ extension ChannelDTO {
             unreadMessageCount: 0
         ),
         ChannelDTO(
-            id: "2",
+            channelID: "2",
+            myID: 1,
+            opponentID: 2,
             image: "urlString",
             name: "채팅방 2",
             lastMessageReceivedTime: "2023-09-04T15:45:10+00:00",
@@ -64,7 +69,9 @@ extension ChannelDTO {
             unreadMessageCount: 2
         ),
         ChannelDTO(
-            id: "3",
+            channelID: "3",
+            myID: 1,
+            opponentID: 2,
             image: "urlString",
             name: "채팅방 이름이 길어진 경우에 대한 테스트입니다.",
             lastMessageReceivedTime: "2023-09-06T11:00:00+00:00",
@@ -72,7 +79,9 @@ extension ChannelDTO {
             unreadMessageCount: 10
         ),
         ChannelDTO(
-            id: "4",
+            channelID: "4",
+            myID: 1,
+            opponentID: 2,
             image: "urlString",
             name: "채팅방 4",
             lastMessageReceivedTime: "2023-09-04T19:30:20+00:00",
@@ -80,7 +89,9 @@ extension ChannelDTO {
             unreadMessageCount: 1000
         ),
         ChannelDTO(
-            id: "5",
+            channelID: "5",
+            myID: 1,
+            opponentID: 2,
             image: "urlString",
             name: "채팅방 5",
             lastMessageReceivedTime: "2023-09-04T04:55:55+00:00",
@@ -88,7 +99,9 @@ extension ChannelDTO {
             unreadMessageCount: 0
         ),
         ChannelDTO(
-            id: "6",
+            channelID: "6",
+            myID: 1,
+            opponentID: 2,
             image: "urlString",
             name: "채팅방 6",
             lastMessageReceivedTime: "2023-09-02T12:34:56+00:00",
