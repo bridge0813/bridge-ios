@@ -35,19 +35,11 @@ class BaseChatCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let readStatusLabel: UILabel = {
-        let label = UILabel()
-        label.font = BridgeFont.caption1.font
-        label.textColor = BridgeColor.primary1
-        return label
-    }()
-    
     // MARK: - Preparation
     override func prepareForReuse() {
         super.prepareForReuse()
         dateLabel.text = nil
         timeLabel.text = nil
-        readStatusLabel.text = nil
     }
     
     // MARK: - Layout
@@ -71,19 +63,12 @@ class BaseChatCell: BaseCollectionViewCell {
             dateLabel.isHidden = true
         }
         
-        if message.hasRead {
-            readStatusLabel.text = nil
-        } else {
-            readStatusLabel.text = "1"
-        }
-        
         timeLabel.text = message.sentTime
         configureMessageBubble(by: message.sender)
         configureLayout(by: message.sender)  // 보낸 사람에 따른 레이아웃(좌, 우) 설정
         
         dateLabel.flex.markDirty()
         chatBubble.flex.markDirty()
-        readStatusLabel.flex.markDirty()
         timeLabel.flex.markDirty()
         contentView.flex.layout()
     }
@@ -114,11 +99,7 @@ private extension BaseChatCell {
         contentView.flex.alignItems(alignment).paddingHorizontal(16).define { flex in
             flex.addItem(dateLabel).width(100%).marginBottom(24).isIncludedInLayout(!dateLabel.isHidden)
             flex.addItem(chatBubble)
-            
-            flex.addItem(bottomContainerView).direction(.row).marginTop(8).define { flex in
-                flex.addItem(readStatusLabel).marginRight(4)
-                flex.addItem(timeLabel)
-            }
+            flex.addItem(timeLabel).marginTop(8)
         }
     }
 }
