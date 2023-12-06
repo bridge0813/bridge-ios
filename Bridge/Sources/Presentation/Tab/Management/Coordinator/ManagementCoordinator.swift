@@ -1,0 +1,58 @@
+//
+//  ManagementCoordinator.swift
+//  Bridge
+//
+//  Created by 엄지호 on 12/6/23.
+//
+
+import UIKit
+
+final class ManagementCoordinator: Coordinator {
+    // MARK: - Property
+    weak var delegate: CoordinatorDelegate?
+    var navigationController: UINavigationController
+    var childCoordinators: [Coordinator]
+    
+    // MARK: - Init
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+        self.childCoordinators = []
+
+    }
+    
+    // MARK: - Methods
+    func start() {
+        showManagementViewController()
+    }
+}
+
+extension ManagementCoordinator {
+    // MARK: - Show
+    func showManagementViewController() {
+        let viewModel = ManagementViewModel(
+            coordinator: self
+        )
+        
+        let vc = ManagementViewController(viewModel: viewModel)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    // MARK: - Connect
+    func connectToProjectDetailFlow(with projectID: Int) {
+        // TODO: - 연결된 코디네이터 제거 작업
+        let coordinator = ProjectDetailCoordinator(navigationController: navigationController)
+        coordinator.start()
+        childCoordinators.append(coordinator)
+    }
+}
+
+// MARK: - CoordinatorDelegate
+extension ManagementCoordinator: CoordinatorDelegate {
+    func didFinish(childCoordinator: Coordinator) {
+        navigationController.dismiss(animated: true)
+        
+        if let index = childCoordinators.firstIndex(where: { $0 === childCoordinator }) {
+            childCoordinators.remove(at: index)
+        }
+    }
+}

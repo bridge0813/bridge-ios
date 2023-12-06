@@ -51,7 +51,7 @@ private extension TabBarCoordinator {
             connectMainFlow(to: tabNavigationController)
             
         case .management:
-            return
+            connectManagementFlow(to: tabNavigationController)
             
         case .chat:
             connectChatFlow(to: tabNavigationController)
@@ -68,7 +68,12 @@ private extension TabBarCoordinator {
         childCoordinators.append(mainCoordinator)
     }
     
-    func connectManagementFlow(to tabNavigationController: UINavigationController) { }
+    func connectManagementFlow(to tabNavigationController: UINavigationController) {
+        let managementCoordinator = ManagementCoordinator(navigationController: tabNavigationController)
+        managementCoordinator.start()
+        managementCoordinator.delegate = self
+        childCoordinators.append(managementCoordinator)
+    }
     
     func connectChatFlow(to tabNavigationController: UINavigationController) {
         let chatCoordinator = ChatCoordinator(navigationController: tabNavigationController)

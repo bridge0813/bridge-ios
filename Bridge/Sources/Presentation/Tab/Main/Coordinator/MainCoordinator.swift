@@ -69,7 +69,7 @@ extension MainCoordinator {
         delegate?.showSignInViewController()
     }
     
-    // MARK: - ConnectCoordinator
+    // MARK: - Connect
     func connectToNotificationFlow() {
         print("알림 뷰 이동")
     }
