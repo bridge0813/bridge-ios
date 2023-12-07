@@ -1,0 +1,96 @@
+//
+//  ManagementHeaderView.swift
+//  Bridge
+//
+//  Created by 엄지호 on 12/6/23.
+//
+
+import UIKit
+import FlexLayout
+import PinLayout
+import RxSwift
+import RxCocoa
+
+final class ManagementHeaderView: BaseCollectionReusableView {
+    // MARK: - UI
+    private let rootFlexContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = BridgeColor.gray10
+        return view
+    }()
+    
+    private let firstProjectsCountView = ProjectCountView("전체")
+    private let secondProjectsCountView = ProjectCountView("결과 대기")
+    private let thirdProjectsCountView = ProjectCountView("완료")
+    
+    private let filterButton: UIButton = {
+        let button = UIButton()
+        
+        let buttonImage = UIImage(named: "chevron.down")?.resize(to: CGSize(width: 12, height: 12))
+        
+        var configuration = UIButton.Configuration.filled()
+        configuration.baseForegroundColor = .clear
+        configuration.baseBackgroundColor = .clear
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        configuration.image = buttonImage
+        configuration.imagePlacement = .trailing
+        configuration.imagePadding = 4
+        
+        var titleContainer = AttributeContainer()
+        titleContainer.font = BridgeFont.body1.font
+        titleContainer.foregroundColor = BridgeColor.gray01
+        configuration.attributedTitle = AttributedString("전체", attributes: titleContainer)
+        
+        button.configuration = configuration
+        button.contentHorizontalAlignment = .leading
+        
+        return button
+    }()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
+    
+    // MARK: - Property
+    var filterButtonTapped: ControlEvent<Void> {
+        return filterButton.rx.tap
+    }
+    
+    // MARK: - Configuration
+    func configureHeaderView(projects: [ProjectPreview], currentTap: ManagementTapType) {
+        firstProjectsCountView.count = projects.count
+        secondProjectsCountView.count = 2
+        secondProjectsCountView.title = currentTap == .apply ? "결과 대기" : "현재 진행"
+        thirdProjectsCountView.count = 3
+    }
+    
+    // MARK: - Layout
+    override func configureLayouts() {
+        addSubview(rootFlexContainer)
+        rootFlexContainer.flex.padding(24, 16, 0, 16).define { flex in
+            flex.addItem().direction(.row).define { flex in
+                flex.addItem(firstProjectsCountView).grow(1)
+                flex.addItem(secondProjectsCountView).grow(1).marginLeft(11)
+                flex.addItem(thirdProjectsCountView).grow(1).marginLeft(11)
+            }
+            
+            flex.addItem(filterButton).marginTop(24)
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        rootFlexContainer.pin.all()
+        rootFlexContainer.flex.layout()
+    }
+}
+
+// MARK: - Data Source
+extension ManagementHeaderView {
+    enum ManagementTapType {
+        case apply
+        case recruitment
+    }
+}

@@ -8,20 +8,25 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
+import RxCocoa
 
 // 2개의 버튼이 붙어있는 뷰
 final class BridgeSmallButtonGroup: BaseView {
     private let rootFlexContainer = UIView()
     
-    let leftButton: BridgeButton
-    let rightButton: BridgeButton
+    private let leftButton: BridgeButton
+    private let rightButton: BridgeButton
     
-    let dividerView: UIView = {
-        let divider = UIView()
-        divider.backgroundColor = UIColor.white
-        return divider
-    }()
+    // MARK: - Property
+    var buttonGroupTapped: Observable<String?> {
+        Observable.merge(
+            leftButton.rx.tap.map { [weak self] in self?.leftButton.titleLabel?.text },
+            rightButton.rx.tap.map { [weak self] in self?.rightButton.titleLabel?.text }
+        )
+    }
     
+    // MARK: - Init
     init(_ titles: (String, String)) {
         leftButton = BridgeButton(title: titles.0, font: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
         rightButton = BridgeButton(title: titles.1, font: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
@@ -35,7 +40,7 @@ final class BridgeSmallButtonGroup: BaseView {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.row).cornerRadius(4).define { flex in
             flex.addItem(leftButton).grow(1)
-            flex.addItem(dividerView).width(0.4).height(20).alignSelf(.center)
+            flex.addItem().alignSelf(.center).backgroundColor(BridgeColor.gray10).width(0.4).height(20)
             flex.addItem(rightButton).grow(1)
         }
     }
