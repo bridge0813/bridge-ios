@@ -49,7 +49,7 @@ final class ApplicationResultCell: BaseChatCell {
     }
     
     // MARK: - Configuration
-    override func configure(with message: Message, shouldShowDate: Bool) {
+    override func configure(with message: Message, shouldShowDate: Bool, shouldShowReadStatus: Bool) {
         configureMessageLabel(with: message)
         configureImageView(by: message.type)
         
@@ -58,7 +58,7 @@ final class ApplicationResultCell: BaseChatCell {
             flex.addItem(emojiImageView).size(100)
         }
         
-        super.configure(with: message, shouldShowDate: shouldShowDate)
+        super.configure(with: message, shouldShowDate: shouldShowDate, shouldShowReadStatus: shouldShowReadStatus)
         
         messageLabel.flex.markDirty()
         emojiImageView.flex.markDirty()

@@ -41,14 +41,14 @@ final class MessageCell: BaseChatCell {
     }
     
     // MARK: - Configuration
-    override func configure(with message: Message, shouldShowDate: Bool) {
+    override func configure(with message: Message, shouldShowDate: Bool, shouldShowReadStatus: Bool) {
         configureMessageLabel(with: message)
         
         chatBubble.flex.width(messageLabel.intrinsicContentSize.width + 48).padding(12, 24).define { flex in
             flex.addItem(messageLabel)
         }
         
-        super.configure(with: message, shouldShowDate: shouldShowDate)
+        super.configure(with: message, shouldShowDate: shouldShowDate, shouldShowReadStatus: shouldShowReadStatus)
         
         messageLabel.flex.markDirty()
         chatBubble.flex.layout()

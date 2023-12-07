@@ -26,7 +26,8 @@ class BaseChatCell: BaseCollectionViewCell {
         return view
     }()
     
-    private let bottomContainerView = UIView()
+    // 읽음 여부 및 전송 시간 레이블의 컨테이너 뷰
+    private let statusContainerView = UIView()
     
     private let timeLabel: UILabel = {
         let label = UILabel()
@@ -35,12 +36,12 @@ class BaseChatCell: BaseCollectionViewCell {
         return label
     }()
     
-    // MARK: - Preparation
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        dateLabel.text = nil
-        timeLabel.text = nil
-    }
+    private let readStatusLabel: UILabel = {
+        let label = UILabel()
+        label.font = BridgeFont.caption1.font
+        label.textColor = BridgeColor.gray03
+        return label
+    }()
     
     // MARK: - Layout
     override func layoutSubviews() {
@@ -55,7 +56,7 @@ class BaseChatCell: BaseCollectionViewCell {
         return contentView.frame.size
     }
     
-    func configure(with message: Message, shouldShowDate: Bool) {
+    func configure(with message: Message, shouldShowDate: Bool, shouldShowReadStatus: Bool) {
         if shouldShowDate {
             dateLabel.isHidden = false
             dateLabel.text = message.sentDate
@@ -64,12 +65,21 @@ class BaseChatCell: BaseCollectionViewCell {
         }
         
         timeLabel.text = message.sentTime
+        
+        if shouldShowReadStatus {
+            readStatusLabel.text = "읽음"
+        } else {
+            readStatusLabel.text = nil
+        }
+        
         configureMessageBubble(by: message.sender)
+        
         configureLayout(by: message.sender)  // 보낸 사람에 따른 레이아웃(좌, 우) 설정
         
         dateLabel.flex.markDirty()
-        chatBubble.flex.markDirty()
         timeLabel.flex.markDirty()
+        readStatusLabel.flex.markDirty()
+        chatBubble.flex.markDirty()
         contentView.flex.layout()
     }
 }
@@ -89,17 +99,25 @@ private extension BaseChatCell {
     }
     
     func configureLayout(by sender: Sender) {
-        var alignment: Flex.AlignItems {
-            switch sender {
-            case .me:       return .end
-            case .opponent: return .start
+        switch sender {
+        case .me:
+            contentView.flex.alignItems(.end).paddingHorizontal(16).define { flex in
+                flex.addItem(dateLabel).width(100%).marginBottom(24).isIncludedInLayout(!dateLabel.isHidden)
+                flex.addItem(chatBubble)
+                flex.addItem(statusContainerView).direction(.row).marginTop(8).define { flex in
+                    flex.addItem(readStatusLabel).marginRight(12)
+                    flex.addItem(timeLabel)
+                }
             }
-        }
-        
-        contentView.flex.alignItems(alignment).paddingHorizontal(16).define { flex in
-            flex.addItem(dateLabel).width(100%).marginBottom(24).isIncludedInLayout(!dateLabel.isHidden)
-            flex.addItem(chatBubble)
-            flex.addItem(timeLabel).marginTop(8)
+            
+        case .opponent:
+            contentView.flex.alignItems(.start).paddingHorizontal(16).define { flex in
+                flex.addItem(dateLabel).width(100%).marginBottom(24).isIncludedInLayout(!dateLabel.isHidden)
+                flex.addItem(chatBubble)
+                flex.addItem(statusContainerView).direction(.row).marginTop(8).define { flex in
+                    flex.addItem(timeLabel)
+                }
+            }
         }
     }
 }

@@ -176,6 +176,8 @@ extension ChannelViewController {
     private func configureDataSource() {
         dataSource = DataSource(collectionView: messageCollectionView) { [weak self] collectionView, indexPath, item in
             let currentMessage = item
+            
+            // 날짜(yyyy-mm-dd)가 바뀌었는지 비교해 보여줘야 하는지 결정
             var shouldShowDate: Bool {
                 if indexPath.row == 0 { return true }
                 
@@ -184,7 +186,15 @@ extension ChannelViewController {
                 return previousMessage.sentDate != currentMessage.sentDate
             }
             
+            // 읽음 여부 처리를 위해 현재 셀이 마지막 셀인지 판단
+            var shouldShowReadStatus: Bool {
+                let lastSection = collectionView.numberOfSections - 1
+                let lastItem = collectionView.numberOfItems(inSection: lastSection) - 1
+                return indexPath.section == lastSection && indexPath.row == lastItem && item.sender == .me && item.hasRead
+            }
+            
             let cell: BaseChatCell
+            
             switch item.type {
             case .text:
                 cell = collectionView.dequeueReusableCell(MessageCell.self, for: indexPath) ?? MessageCell()
@@ -196,7 +206,7 @@ extension ChannelViewController {
                 cell = BaseChatCell()
             }
             
-            cell.configure(with: item, shouldShowDate: shouldShowDate)
+            cell.configure(with: item, shouldShowDate: shouldShowDate, shouldShowReadStatus: shouldShowReadStatus)
             return cell
         }
     }
