@@ -5,15 +5,16 @@
 //  Created by 정호윤 on 11/13/23.
 //
 
+import Foundation
 import RxSwift
 
 final class MockMessageRepository: MessageRepository {
     func fetchMessages(channelID: String) -> Observable<[Message]> {
-        .just(MessageDTO.testArray.map { $0.toEntity(userID: "1") })
+        .just(MessageDTO.testData.toEntity(userID: "1"))
     }
     
     func observeMessage() -> Observable<Message> {
-        .just(.onError)
+        .just(StompMessageResponseDTO.testData.toEntity(userID: "1"))
     }
     
     func sendMessage(_ message: String, to channel: String) { }

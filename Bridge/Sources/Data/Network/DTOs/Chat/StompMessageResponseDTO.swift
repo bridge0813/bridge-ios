@@ -14,8 +14,8 @@ struct StompMessageResponseDTO: Decodable {
     let senderID: Int
     let type: String
     let content: String
-    let hasRead: Bool
     var sentDateAndTime: String?
+    let hasRead: Bool
     var previousMessages: [PreviousMessageDTO]?
     
     enum CodingKeys: String, CodingKey {
@@ -24,8 +24,8 @@ struct StompMessageResponseDTO: Decodable {
         case senderID = "senderId"
         case type
         case content = "message"
-        case hasRead = "readStat"
         case sentDateAndTime = "sendTime"
+        case hasRead = "readStat"
         case previousMessages = "chatHistory"
     }
 }
@@ -64,4 +64,16 @@ extension StompMessageResponseDTO {
             return .text(content)
         }
     }
+}
+
+extension StompMessageResponseDTO {
+    static let testData = StompMessageResponseDTO(
+        messageID: UUID().uuidString,
+        channelID: "1",
+        senderID: 2,
+        type: "TALK",
+        content: "stomp response test",
+        sentDateAndTime: "2023-11-16T11:30:00",
+        hasRead: false
+    )
 }

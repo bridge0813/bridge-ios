@@ -14,8 +14,8 @@ struct StompMessageRequestDTO: Encodable {
     let senderID: Int
     let type: String
     let content: String
-    let hasRead: Bool
     var sentDateAndTime: String?
+    let hasRead: Bool
     
     enum CodingKeys: String, CodingKey {
         case messageID = "messageId"
@@ -23,8 +23,8 @@ struct StompMessageRequestDTO: Encodable {
         case senderID = "senderId"
         case type
         case content = "message"
-        case hasRead = "readStat"
         case sentDateAndTime = "sendTime"
+        case hasRead = "readStat"
     }
     
     init(channelID: String, senderID: String, type: MessageRequestType, content: String) {

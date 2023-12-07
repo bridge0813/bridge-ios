@@ -11,10 +11,10 @@ struct ChannelDTO: Codable {
     let channelID: String
     let myID: Int
     let opponentID: Int
-    var image: String?
+    let image: String?
     let name: String
-    var lastMessageReceivedTime: String?
-    var lastMessageContent: String?
+    let lastMessageReceivedTime: String?
+    let lastMessageContent: String?
     let unreadMessageCount: Int
     
     enum CodingKeys: String, CodingKey {

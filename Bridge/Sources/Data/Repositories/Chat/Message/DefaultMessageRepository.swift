@@ -31,7 +31,7 @@ final class DefaultMessageRepository: MessageRepository {
             .decode(type: MessageDTO.self, decoder: JSONDecoder())
             .map { [weak self] messageDTO in
                 let userID = self?.tokenStorage.get(.userID) ?? invalidToken
-                return messageDTO.chatHistory.map { $0.toEntity(userID: userID) }
+                return messageDTO.toEntity(userID: userID)
             }
     }
     
@@ -39,14 +39,14 @@ final class DefaultMessageRepository: MessageRepository {
         let userID = tokenStorage.get(.userID)
         
         return stompService.observe()
-            .decode(type: StompMessageDTO.self, decoder: JSONDecoder())
+            .decode(type: StompMessageResponseDTO.self, decoder: JSONDecoder())
             .map { $0.toEntity(userID: userID) }
     }
     
     func sendMessage(_ message: String, to channel: String) {
         let userID = tokenStorage.get(.userID)
         
-        let messageRequestDTO = StompMessageDTO(
+        let messageRequestDTO = StompMessageRequestDTO(
             channelID: channel,
             senderID: userID,
             type: .talk,

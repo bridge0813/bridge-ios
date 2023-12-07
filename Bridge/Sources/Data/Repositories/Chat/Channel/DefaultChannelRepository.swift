@@ -51,10 +51,8 @@ final class DefaultChannelRepository: ChannelRepository {
         )
         
         return stompService.subscribe(stompSubscribeEndpoint)
-            .decode(type: MessageDTO.self, decoder: JSONDecoder())
-            .map { messageDTO in
-                messageDTO.chatHistory.map { $0.toEntity(userID: userID) }
-            }
+            .decode(type: StompMessageUpdateDTO.self, decoder: JSONDecoder())
+            .map { $0.toEntity(userID: userID) }
     }
     
     func unsubscribeChannel(id: String) {

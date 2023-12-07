@@ -14,7 +14,7 @@ enum MessageStompEndpoint {
     case subscribe(destination: String, userID: String)
     case unsubscribe(destination: String, userID: String)
     
-    case send(requestDTO: StompMessageDTO)
+    case send(requestDTO: StompMessageRequestDTO)
 }
 
 extension MessageStompEndpoint: StompEndpoint {

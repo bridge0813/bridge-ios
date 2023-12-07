@@ -28,6 +28,7 @@
 		7B153C0C2AD64E5800618280 /* ChannelEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C0B2AD64E5800618280 /* ChannelEndpoint.swift */; };
 		7B153C0F2AD6CF0D00618280 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C0E2AD6CF0D00618280 /* Interceptor.swift */; };
 		7B153C112AD6D0E100618280 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B153C102AD6D0E100618280 /* AuthInterceptor.swift */; };
+		7B16F3282B21E1BF00A50B2F /* StompMessageUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B16F3272B21E1BF00A50B2F /* StompMessageUpdateDTO.swift */; };
 		7B1742EC2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1742EB2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift */; };
 		7B1742F42AFA46A7004F0953 /* AccessTokenResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1742F32AFA46A7004F0953 /* AccessTokenResponseDTO.swift */; };
 		7B1922CC2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1922CB2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift */; };
@@ -88,11 +89,13 @@
 		7B922CF82AD020CC00F3A336 /* SignUpRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B922CF72AD020CC00F3A336 /* SignUpRequestDTO.swift */; };
 		7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B922CFB2AD02EE400F3A336 /* SignUpUseCase.swift */; };
 		7B92B7E32AE501CD00B0E954 /* FetchMessagesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B92B7E22AE501CD00B0E954 /* FetchMessagesUseCase.swift */; };
+		7B93AAA32B2012D800650EA5 /* StompMessageRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93AAA22B2012D800650EA5 /* StompMessageRequestDTO.swift */; };
+		7B93AAA82B21997300650EA5 /* UnreadMessageCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93AAA72B21997300650EA5 /* UnreadMessageCountView.swift */; };
 		7B9420502B04DAAB00FEE058 /* StompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */; };
 		7B9420522B04DD9100FEE058 /* MessageStompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */; };
-		7B9420542B04F46F00FEE058 /* StompMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420532B04F46F00FEE058 /* StompMessageDTO.swift */; };
+		7B9420542B04F46F00FEE058 /* StompMessageResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */; };
 		7B9420582B05AC8900FEE058 /* String+DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420572B05AC8900FEE058 /* String+DateFormat.swift */; };
-		7B9C31A72B0753EF007E36B2 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C31A62B0753EF007E36B2 /* String+Regex.swift */; };
+		7B9C31A72B0753EF007E36B2 /* String+Stomp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C31A62B0753EF007E36B2 /* String+Stomp.swift */; };
 		7B9C31A92B0772B8007E36B2 /* WebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C31A82B0772B8007E36B2 /* WebSocketService.swift */; };
 		7B9C31AB2B07752C007E36B2 /* StompService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C31AA2B07752C007E36B2 /* StompService.swift */; };
 		7B9C31AF2B07761C007E36B2 /* DefaultStompService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C31AE2B07761C007E36B2 /* DefaultStompService.swift */; };
@@ -251,6 +254,7 @@
 		7B153C0B2AD64E5800618280 /* ChannelEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelEndpoint.swift; sourceTree = "<group>"; };
 		7B153C0E2AD6CF0D00618280 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		7B153C102AD6D0E100618280 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
+		7B16F3272B21E1BF00A50B2F /* StompMessageUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompMessageUpdateDTO.swift; sourceTree = "<group>"; };
 		7B1742EB2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarAppearanceConfigurable.swift; sourceTree = "<group>"; };
 		7B1742F32AFA46A7004F0953 /* AccessTokenResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponseDTO.swift; sourceTree = "<group>"; };
 		7B1922CB2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RxKeyboard.swift"; sourceTree = "<group>"; };
@@ -305,11 +309,13 @@
 		7B922CF72AD020CC00F3A336 /* SignUpRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestDTO.swift; sourceTree = "<group>"; };
 		7B922CFB2AD02EE400F3A336 /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
 		7B92B7E22AE501CD00B0E954 /* FetchMessagesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMessagesUseCase.swift; sourceTree = "<group>"; };
+		7B93AAA22B2012D800650EA5 /* StompMessageRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompMessageRequestDTO.swift; sourceTree = "<group>"; };
+		7B93AAA72B21997300650EA5 /* UnreadMessageCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadMessageCountView.swift; sourceTree = "<group>"; };
 		7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStompEndpoint.swift; sourceTree = "<group>"; };
-		7B9420532B04F46F00FEE058 /* StompMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompMessageDTO.swift; sourceTree = "<group>"; };
+		7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompMessageResponseDTO.swift; sourceTree = "<group>"; };
 		7B9420572B05AC8900FEE058 /* String+DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateFormat.swift"; sourceTree = "<group>"; };
-		7B9C31A62B0753EF007E36B2 /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
+		7B9C31A62B0753EF007E36B2 /* String+Stomp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Stomp.swift"; sourceTree = "<group>"; };
 		7B9C31A82B0772B8007E36B2 /* WebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketService.swift; sourceTree = "<group>"; };
 		7B9C31AA2B07752C007E36B2 /* StompService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompService.swift; sourceTree = "<group>"; };
 		7B9C31AE2B07761C007E36B2 /* DefaultStompService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStompService.swift; sourceTree = "<group>"; };
@@ -865,6 +871,15 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		7B93AAA42B2198E600650EA5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7BA36CCD2A9E185A000DAB02 /* ChannelCell.swift */,
+				7B93AAA72B21997300650EA5 /* UnreadMessageCountView.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		7B9420562B05AC6E00FEE058 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -876,7 +891,7 @@
 		7B9C31A52B0753DD007E36B2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7B9C31A62B0753EF007E36B2 /* String+Regex.swift */,
+				7B9C31A62B0753EF007E36B2 /* String+Stomp.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1048,7 +1063,9 @@
 			children = (
 				7BA36CB12A9D961F000DAB02 /* ChannelDTO.swift */,
 				7B9142DF2B01D4EB006EA52F /* MessageDTO.swift */,
-				7B9420532B04F46F00FEE058 /* StompMessageDTO.swift */,
+				7B93AAA22B2012D800650EA5 /* StompMessageRequestDTO.swift */,
+				7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */,
+				7B16F3272B21E1BF00A50B2F /* StompMessageUpdateDTO.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1181,7 +1198,7 @@
 			children = (
 				7BA36C8F2A9C4BB3000DAB02 /* ChannelListViewModel.swift */,
 				7BA36CD92AA197F8000DAB02 /* ChannelListViewController.swift */,
-				7BA36CCD2A9E185A000DAB02 /* ChannelCell.swift */,
+				7B93AAA42B2198E600650EA5 /* Cell */,
 			);
 			path = ChannelList;
 			sourceTree = "<group>";
@@ -1716,7 +1733,7 @@
 				7B3289352ADE55DA009DF3C2 /* BridgeMessageInputBar.swift in Sources */,
 				7B9420502B04DAAB00FEE058 /* StompEndpoint.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */,
-				7B9420542B04F46F00FEE058 /* StompMessageDTO.swift in Sources */,
+				7B9420542B04F46F00FEE058 /* StompMessageResponseDTO.swift in Sources */,
 				7B6C20482AF88707005689F5 /* MyPageCoordinator.swift in Sources */,
 				7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */,
 				7B1742F42AFA46A7004F0953 /* AccessTokenResponseDTO.swift in Sources */,
@@ -1749,7 +1766,7 @@
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
 				7B9C31A92B0772B8007E36B2 /* WebSocketService.swift in Sources */,
 				7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */,
-				7B9C31A72B0753EF007E36B2 /* String+Regex.swift in Sources */,
+				7B9C31A72B0753EF007E36B2 /* String+Stomp.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
 				7CA04F322B020B94007B9191 /* ProjectDetailCoordinator.swift in Sources */,
 				7CA04F552B04D88E007B9191 /* ProjectManagementMenuPopUpView.swift in Sources */,
@@ -1757,6 +1774,7 @@
 				7C8CC41A2AF40A100032F237 /* BaseProgressView.swift in Sources */,
 				7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */,
 				7B9142D62B01CE8B006EA52F /* MessageRepository.swift in Sources */,
+				7B93AAA32B2012D800650EA5 /* StompMessageRequestDTO.swift in Sources */,
 				7B9C31AB2B07752C007E36B2 /* StompService.swift in Sources */,
 				7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */,
 				7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */,
@@ -1767,6 +1785,7 @@
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7C55E6292AD7EFEF0018FA5D /* MainCategoryButton.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChannelsUseCase.swift in Sources */,
+				7B93AAA82B21997300650EA5 /* UnreadMessageCountView.swift in Sources */,
 				7CE080492AD79ADD00230C86 /* FieldCategoryAnchorButton.swift in Sources */,
 				7CA04F252AFE7B6E007B9191 /* BridgeLinedChip.swift in Sources */,
 				7C55E6312ADBF6AA0018FA5D /* ProjectCountHeaderView.swift in Sources */,
@@ -1840,6 +1859,7 @@
 				7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */,
 				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
 				7CA04F532B04B6E7007B9191 /* MemberRequirementDTO.swift in Sources */,
+				7B16F3282B21E1BF00A50B2F /* StompMessageUpdateDTO.swift in Sources */,
 				7B6C20452AF886BD005689F5 /* MyPageViewController.swift in Sources */,
 				7C55E65C2AE961250018FA5D /* AddedTechTagView.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,

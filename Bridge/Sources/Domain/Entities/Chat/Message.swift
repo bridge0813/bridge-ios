@@ -11,8 +11,8 @@ struct Message {
     let id: String
     let sender: Sender
     let type: MessageType
-    let sentDate: String
-    let sentTime: String
+    let sentDate: String?
+    let sentTime: String?
     let hasRead: Bool
 }
 
@@ -36,7 +36,7 @@ extension Message {
         type: .text("메시지 불러올 수 없습니다"),
         sentDate: "날짜를 불러올 수 없습니다.",
         sentTime: "시간을 불러올 수 없습니다.",
-        hasRead: true
+        hasRead: false
     )
 }
 
