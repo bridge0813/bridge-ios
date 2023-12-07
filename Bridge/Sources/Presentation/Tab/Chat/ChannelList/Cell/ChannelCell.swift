@@ -46,16 +46,6 @@ final class ChannelCell: BaseTableViewCell {
     
     private let unreadMessageCountView = UnreadMessageCountView()
     
-    // MARK: - Preparation
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        // TODO: 프로필 사진 네트워킹 시 추가
-        nameLabel.text = nil
-        lastMessageReceivedTimeLabel.text = nil
-        lastMessageContentLabel.text = nil
-//        unreadMessageCountView.unreadMessageCountLabel.text = nil
-    }
-    
     // MARK: - Layout
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         contentView.pin.width(size.width)
@@ -101,7 +91,6 @@ extension ChannelCell {
         lastMessageContentLabel.text = channel.lastMessage.content
         lastMessageContentLabel.flex.markDirty()
         
-        let unreadMessageCount = Int(channel.unreadMessageCount)
         unreadMessageCountView.configure(with: Int(channel.unreadMessageCount))
         unreadMessageCountView.flex.markDirty()
         

@@ -27,13 +27,7 @@ final class UnreadMessageCountView: BaseView {
         return label
     }()
     
-    // MARK: - Layout
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        backgroundView.pin.all()
-//        backgroundView.flex.layout()
-//    }
-    
+    // MARK: - Layout    
     override func configureLayouts() {
         addSubview(backgroundView)
         
