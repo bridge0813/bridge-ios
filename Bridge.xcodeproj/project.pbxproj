@@ -241,6 +241,8 @@
 		7CDFB6262B22CADC00272F77 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6252B22CADC00272F77 /* MenuButton.swift */; };
 		7CDFB6282B23093800272F77 /* ApplyProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6272B23093800272F77 /* ApplyProjectResponseDTO.swift */; };
 		7CDFB62A2B230ED500272F77 /* FetchApplyProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6292B230ED500272F77 /* FetchApplyProjectsUseCase.swift */; };
+		7CDFB62C2B23A9E700272F77 /* RecruitmentProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB62B2B23A9E700272F77 /* RecruitmentProjectResponseDTO.swift */; };
+		7CDFB62E2B23AAE400272F77 /* FetchRecruitmentProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB62D2B23AAE400272F77 /* FetchRecruitmentProjectsUseCase.swift */; };
 		7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */; };
 		7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803D2ACF143A00230C86 /* Dropdown.swift */; };
 		7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */; };
@@ -476,6 +478,8 @@
 		7CDFB6252B22CADC00272F77 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		7CDFB6272B23093800272F77 /* ApplyProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProjectResponseDTO.swift; sourceTree = "<group>"; };
 		7CDFB6292B230ED500272F77 /* FetchApplyProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchApplyProjectsUseCase.swift; sourceTree = "<group>"; };
+		7CDFB62B2B23A9E700272F77 /* RecruitmentProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitmentProjectResponseDTO.swift; sourceTree = "<group>"; };
+		7CDFB62D2B23AAE400272F77 /* FetchRecruitmentProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecruitmentProjectsUseCase.swift; sourceTree = "<group>"; };
 		7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDropdownCell.swift; sourceTree = "<group>"; };
 		7CE0803D2ACF143A00230C86 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeDropdownAnchorView.swift; sourceTree = "<group>"; };
@@ -1265,6 +1269,7 @@
 				7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */,
 				7C56E1742B14917900454F5E /* FetchDeadlineProjectsUseCase.swift */,
 				7CDFB6292B230ED500272F77 /* FetchApplyProjectsUseCase.swift */,
+				7CDFB62D2B23AAE400272F77 /* FetchRecruitmentProjectsUseCase.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -1285,6 +1290,7 @@
 				7C56E1702B14860100454F5E /* HotProjectResponseDTO.swift */,
 				7C56E1722B14907800454F5E /* DeadlineProjectResponseDTO.swift */,
 				7CDFB6272B23093800272F77 /* ApplyProjectResponseDTO.swift */,
+				7CDFB62B2B23A9E700272F77 /* RecruitmentProjectResponseDTO.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -1900,6 +1906,7 @@
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
 				7CA04F1E2AFE4B0F007B9191 /* RecruitFieldCell.swift in Sources */,
 				7BA36C9D2A9C5105000DAB02 /* Message.swift in Sources */,
+				7CDFB62C2B23A9E700272F77 /* RecruitmentProjectResponseDTO.swift in Sources */,
 				7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */,
 				7BA36CBF2A9DA44F000DAB02 /* NetworkError.swift in Sources */,
 				7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */,
@@ -1975,6 +1982,7 @@
 				7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */,
 				7BA36CCE2A9E185A000DAB02 /* ChatRoomCell.swift in Sources */,
 				7B153C0C2AD64E5800618280 /* ChatEndpoint.swift in Sources */,
+				7CDFB62E2B23AAE400272F77 /* FetchRecruitmentProjectsUseCase.swift in Sources */,
 				7C569D062A9F776B0063D362 /* Date+.swift in Sources */,
 				7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */,
 				7C87EE0C2B1B6B020066691D /* BookmarkRequestDTO.swift in Sources */,
