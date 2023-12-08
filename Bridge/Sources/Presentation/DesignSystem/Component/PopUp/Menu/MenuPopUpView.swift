@@ -11,7 +11,9 @@ import PinLayout
 import RxSwift
 import RxCocoa
 
-/// 3단 메뉴 팝업 뷰로 초기화 시 3가지 메뉴의 제목을 받는다. ex) - (String, String, String)
+/// 3단 메뉴 팝업 뷰
+/// - Parameter titles: 메뉴의 title로 3개의 문자열을 받는다. ex - (String, String, String)
+/// - Parameter isCheckmarked: 메뉴를 선택했을 때, 체크마크 표시를 할 지 결정하는 플래그
 final class MenuPopUpView: BridgeBasePopUpView {
     // MARK: - UI
     private let firstMenuButton: MenuButton = {
@@ -38,6 +40,13 @@ final class MenuPopUpView: BridgeBasePopUpView {
     // MARK: - Property
     override var containerHeight: CGFloat { 206 }
     override var dismissYPosition: CGFloat { 130 }
+    
+    /// 각 Menu 버튼의 title
+    var titles: (String, String, String) {
+        didSet {
+            updateMenuTitles()
+        }
+    }
     
     /// 선택되었다는 체크마크를 표시할 지 결정하는 플래그
     private let isCheckmarked: Bool
@@ -69,13 +78,12 @@ final class MenuPopUpView: BridgeBasePopUpView {
     }
     
     // MARK: - Init
-    init(_ titles: (String, String, String), isCheckmarked: Bool) {
-        firstMenuButton.title = titles.0
-        secondMenuButton.title = titles.1
-        thirdMenuButton.title = titles.2
-        
+    init(titles: (String, String, String), isCheckmarked: Bool) {
+        self.titles = titles
         self.isCheckmarked = isCheckmarked
+        
         super.init(frame: .zero)
+        updateMenuTitles()
     }
     
     // MARK: - Configuration
@@ -106,7 +114,7 @@ final class MenuPopUpView: BridgeBasePopUpView {
 }
 
 extension MenuPopUpView {
-    func updateMenuTitles(_ titles: (String, String, String)) {
+    private func updateMenuTitles() {
         firstMenuButton.title = titles.0
         secondMenuButton.title = titles.1
         thirdMenuButton.title = titles.2

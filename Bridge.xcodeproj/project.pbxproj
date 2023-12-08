@@ -1679,7 +1679,6 @@
 				7CDFB6172B201A7E00272F77 /* ManagementTapButton.swift */,
 				7CDFB61E2B204CE300272F77 /* Cell */,
 				7CDFB6192B20281300272F77 /* HeaderView */,
-				7CDFB6212B22367B00272F77 /* PopUp */,
 			);
 			path = Management;
 			sourceTree = "<group>";
@@ -1699,13 +1698,6 @@
 				7CDFB61F2B204D4F00272F77 /* ManagementProjectCell.swift */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		7CDFB6212B22367B00272F77 /* PopUp */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PopUp;
 			sourceTree = "<group>";
 		};
 		7CDFB6242B22CABF00272F77 /* Menu */ = {

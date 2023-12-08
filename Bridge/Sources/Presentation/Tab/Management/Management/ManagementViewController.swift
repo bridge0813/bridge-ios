@@ -49,6 +49,8 @@ final class ManagementViewController: BaseViewController {
         return collectionView
     }()
     
+    private let filterMenuPopUpView = MenuPopUpView(titles: ("전체", "결과 대기", "완료"), isCheckmarked: true)
+    
     // MARK: - Property
     private let viewModel: ManagementViewModel
     
@@ -106,7 +108,8 @@ final class ManagementViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = ManagementViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asObservable()
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            filterMenuTapped: filterMenuPopUpView.menuTapped
         )
         let output = viewModel.transform(input: input)
         
@@ -222,7 +225,7 @@ extension ManagementViewController {
             headerView.filterButtonTapped
                 .withUnretained(self)
                 .subscribe(onNext: { owner, _ in
-                    // 팝업뷰 보여주기.
+                    owner.filterMenuPopUpView.show()
                 })
                 .disposed(by: headerView.disposeBag)
             

@@ -24,12 +24,17 @@ final class MenuButton: BaseButton {
         self.configuration = configuration
         configurationUpdateHandler = { button in
             let buttonImage = button.state == .selected ?
-            UIImage(named: "checkmark")?.resize(to: CGSize(width: 13, height: 13)) : nil
+            UIImage(named: "checkmark")?.resize(to: CGSize(width: 15, height: 15)) : nil
+            
+            let contentInsets: NSDirectionalEdgeInsets = button.state == .selected ?
+                .init(top: 0, leading: 22, bottom: 0, trailing: 0) :
+                .init()
             
             var updatedConfiguration = button.configuration
             updatedConfiguration?.image = buttonImage
             updatedConfiguration?.imagePlacement = .trailing
-            updatedConfiguration?.imagePadding = 2
+            updatedConfiguration?.imagePadding = 7
+            updatedConfiguration?.contentInsets = contentInsets
             
             button.configuration = updatedConfiguration
         }
