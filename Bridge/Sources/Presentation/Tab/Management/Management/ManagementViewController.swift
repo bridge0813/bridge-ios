@@ -118,6 +118,7 @@ final class ManagementViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
+        // 탭 전환
         output.currentTap
             .skip(1)
             .drive(onNext: { [weak self] tapType in
@@ -136,7 +137,7 @@ final class ManagementViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         
-        
+
         let testArray = [
             ProjectPreview(projectID: 0, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", description: "기획부터 앱 출시깢 ㅣ함께하실 팀원을 모집중입니다이이이", dDays: 0, deadline: "2023.08.20", totalRecruitNumber: 0, rank: 0, deadlineRank: 0, isBookmarked: false),
             ProjectPreview(projectID: 1, title: "팀원 구함", description: "기획부터 앱 출시깢 ㅣ함께하실 팀원을 모집중입니다이이이", dDays: 0, deadline: "2023.08.20", totalRecruitNumber: 0, rank: 0, deadlineRank: 0, isBookmarked: false),

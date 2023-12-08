@@ -28,7 +28,7 @@ final class ManagementProjectCell: BaseCollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.flex.width(150).height(48)
+        label.flex.height(48)
         label.textColor = BridgeColor.gray01
         label.font = BridgeFont.subtitle2.font
         label.numberOfLines = 2
@@ -38,7 +38,7 @@ final class ManagementProjectCell: BaseCollectionViewCell {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.flex.width(250).height(14)
+        label.flex.height(14)
         label.textColor = BridgeColor.gray02
         label.font = BridgeFont.caption1.font
         label.lineBreakMode = .byTruncatingTail
