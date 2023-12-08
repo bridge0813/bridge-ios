@@ -239,6 +239,7 @@
 		7CDFB6202B204D4F00272F77 /* ManagementProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB61F2B204D4F00272F77 /* ManagementProjectCell.swift */; };
 		7CDFB6232B2236AB00272F77 /* MenuPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6222B2236AB00272F77 /* MenuPopUpView.swift */; };
 		7CDFB6262B22CADC00272F77 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6252B22CADC00272F77 /* MenuButton.swift */; };
+		7CDFB6282B23093800272F77 /* ApplyProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6272B23093800272F77 /* ApplyProjectResponseDTO.swift */; };
 		7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */; };
 		7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803D2ACF143A00230C86 /* Dropdown.swift */; };
 		7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */; };
@@ -472,6 +473,7 @@
 		7CDFB61F2B204D4F00272F77 /* ManagementProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementProjectCell.swift; sourceTree = "<group>"; };
 		7CDFB6222B2236AB00272F77 /* MenuPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpView.swift; sourceTree = "<group>"; };
 		7CDFB6252B22CADC00272F77 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		7CDFB6272B23093800272F77 /* ApplyProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProjectResponseDTO.swift; sourceTree = "<group>"; };
 		7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDropdownCell.swift; sourceTree = "<group>"; };
 		7CE0803D2ACF143A00230C86 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeDropdownAnchorView.swift; sourceTree = "<group>"; };
@@ -1279,6 +1281,7 @@
 				7C56E16E2B145E3000454F5E /* FieldRequestDTO.swift */,
 				7C56E1702B14860100454F5E /* HotProjectResponseDTO.swift */,
 				7C56E1722B14907800454F5E /* DeadlineProjectResponseDTO.swift */,
+				7CDFB6272B23093800272F77 /* ApplyProjectResponseDTO.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -1990,6 +1993,7 @@
 				7C56E1752B14917900454F5E /* FetchDeadlineProjectsUseCase.swift in Sources */,
 				7C56E1652B11027000454F5E /* FetchProfilePreviewUseCase.swift in Sources */,
 				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
+				7CDFB6282B23093800272F77 /* ApplyProjectResponseDTO.swift in Sources */,
 				7C55E6582AE811A20018FA5D /* AddTechStackButton.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
