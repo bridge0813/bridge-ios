@@ -15,7 +15,7 @@ struct StompMessageUpdateDTO: Decodable {
     let type: String?
     let content: String?
     var sentDateAndTime: String?
-    var previousMessages: [PreviousMessageDTO]
+    var previousMessages: MessageDTO
     
     enum CodingKeys: String, CodingKey {
         case messageID = "messageId"
@@ -40,6 +40,6 @@ extension StompMessageUpdateDTO {
 // MARK: - Entity mapping
 extension StompMessageUpdateDTO {
     func toEntity(userID: String) -> [Message] {
-        previousMessages.map { $0.toEntity(userID: userID) }
+        previousMessages.toEntity(userID: userID)
     }
 }

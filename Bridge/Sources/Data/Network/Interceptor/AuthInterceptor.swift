@@ -32,9 +32,12 @@ struct AuthInterceptor: Interceptor {
             .flatMap { data in
                 let accessTokenResponseDTO = try? JSONDecoder().decode(AccessTokenResponseDTO.self, from: data)
                 let accessToken = accessTokenResponseDTO?.accessToken ?? invalidToken
+                
                 tokenStorage.save(accessToken, for: .accessToken)
+                
                 request.setValue(nil, forHTTPHeaderField: "Authorization-refresh")  // 헤더 제거
                 request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+                
                 return URLSession.shared.rx.data(request: request)
             }
             .catch { error in

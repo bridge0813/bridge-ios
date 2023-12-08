@@ -16,7 +16,7 @@ struct StompMessageResponseDTO: Decodable {
     let content: String
     var sentDateAndTime: String?
     let hasRead: Bool
-    var previousMessages: [PreviousMessageDTO]?
+    var previousMessages: [MessageDTO]?
     
     enum CodingKeys: String, CodingKey {
         case messageID = "messageId"
