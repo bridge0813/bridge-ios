@@ -24,7 +24,7 @@ final class BridgeFilledChip: BaseLabel {
         textColor = BridgeColor.gray10
         font = BridgeFont.caption1.font
         clipsToBounds = true
-        layer.cornerRadius = 11
+        layer.cornerRadius = type.cornerRadius
     }
     
     /// drawText를 통해 텍스트를 그릴 때, 정해진 패딩값을 넣어주도록
@@ -51,6 +51,13 @@ extension BridgeFilledChip {
             switch self {
             case .short: return UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
             case .long: return UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
+            }
+        }
+        
+        var cornerRadius: CGFloat {
+            switch self {
+            case .short: return 11
+            case .long: return 13
             }
         }
     }
