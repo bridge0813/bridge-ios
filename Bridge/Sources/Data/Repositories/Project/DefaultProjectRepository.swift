@@ -20,6 +20,7 @@ final class DefaultProjectRepository: ProjectRepository {
     }
     
     // MARK: - Fetch
+    // 전체 모집글 목록 가져오기
     func fetchAllProjects() -> Observable<[ProjectPreview]> {
         return networkService.request(ProjectEndpoint.fetchAllProjects, interceptor: nil)
             .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
@@ -28,6 +29,7 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
+    // 특정 분야에 맞는 모집글 목록 가져오기
     func fetchProjectsByField(for field: String) -> Observable<[ProjectPreview]> {
         let fieldRequestDTO = FieldRequestDTO(field: field)
         let fetchProjectsEndPoint = ProjectEndpoint.fetchProjectsByField(requestDTO: fieldRequestDTO)
@@ -39,6 +41,7 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
+    // 인기 모집글 목록 가져오기
     func fetchHotProjects() -> Observable<[ProjectPreview]> {
         return networkService.request(ProjectEndpoint.fetchHotProjects, interceptor: nil)
             .decode(type: [HotProjectResponseDTO].self, decoder: JSONDecoder())
@@ -47,6 +50,7 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
+    // 마감임박 모집글 목록 가져오기
     func fetchDeadlineProjects() -> Observable<[ProjectPreview]> {
         return networkService.request(ProjectEndpoint.fetchDeadlineProjects, interceptor: nil)
             .decode(type: [DeadlineProjectResponseDTO].self, decoder: JSONDecoder())
@@ -55,10 +59,15 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
+    // 모집글 상세정보 가져오기
     func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
         .just(ProjectDetailDTO.projectDetailTest.toEntity())
     }
     
+    // 지원한 모집글 목록 가져오기
+    func fetchApplyProjects() -> Observable<[ProjectPreview]> {
+        .just(ApplyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+    }
     
     // MARK: - Create
     func create(project: Project) -> Observable<Int> {

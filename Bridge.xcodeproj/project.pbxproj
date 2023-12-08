@@ -240,6 +240,7 @@
 		7CDFB6232B2236AB00272F77 /* MenuPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6222B2236AB00272F77 /* MenuPopUpView.swift */; };
 		7CDFB6262B22CADC00272F77 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6252B22CADC00272F77 /* MenuButton.swift */; };
 		7CDFB6282B23093800272F77 /* ApplyProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6272B23093800272F77 /* ApplyProjectResponseDTO.swift */; };
+		7CDFB62A2B230ED500272F77 /* FetchApplyProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6292B230ED500272F77 /* FetchApplyProjectsUseCase.swift */; };
 		7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */; };
 		7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803D2ACF143A00230C86 /* Dropdown.swift */; };
 		7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */; };
@@ -474,6 +475,7 @@
 		7CDFB6222B2236AB00272F77 /* MenuPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpView.swift; sourceTree = "<group>"; };
 		7CDFB6252B22CADC00272F77 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		7CDFB6272B23093800272F77 /* ApplyProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProjectResponseDTO.swift; sourceTree = "<group>"; };
+		7CDFB6292B230ED500272F77 /* FetchApplyProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchApplyProjectsUseCase.swift; sourceTree = "<group>"; };
 		7CE0803B2ACF142400230C86 /* BaseDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDropdownCell.swift; sourceTree = "<group>"; };
 		7CE0803D2ACF143A00230C86 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeDropdownAnchorView.swift; sourceTree = "<group>"; };
@@ -1262,6 +1264,7 @@
 				7C56E16C2B13256E00454F5E /* FetchProjectsByFieldUseCase.swift */,
 				7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */,
 				7C56E1742B14917900454F5E /* FetchDeadlineProjectsUseCase.swift */,
+				7CDFB6292B230ED500272F77 /* FetchApplyProjectsUseCase.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -1931,6 +1934,7 @@
 				7CDFB61D2B202C7A00272F77 /* ProjectCountView.swift in Sources */,
 				7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */,
 				7B61236A2ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift in Sources */,
+				7CDFB62A2B230ED500272F77 /* FetchApplyProjectsUseCase.swift in Sources */,
 				7C55E6562AE811660018FA5D /* BridgeSetDisplayButton.swift in Sources */,
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
 				7B92B7EB2AE5052900B0E954 /* MockMessageRepository.swift in Sources */,
