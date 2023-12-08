@@ -13,11 +13,12 @@ final class ManagementViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
+        let managementTabButtonTapped: Observable<ManagementTapType>
         let filterMenuTapped: Observable<String>
     }
     
     struct Output {
-        
+        let currentTap: Driver<ManagementTapType>
     }
 
     // MARK: - Property
@@ -33,6 +34,22 @@ final class ManagementViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
+        let currentTap = BehaviorRelay<ManagementTapType>(value: .apply)
+        
+        // 지원 or 모집 탭 버튼 클릭
+        input.managementTabButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, tapType in
+                switch tapType {
+                case .apply:
+                    currentTap.accept(.apply)
+                    
+                case .recruitment:
+                    currentTap.accept(.recruitment)
+                }
+            })
+            .disposed(by: disposeBag)
+        
         
         input.filterMenuTapped
             .withUnretained(self)
@@ -49,7 +66,7 @@ final class ManagementViewModel: ViewModelType {
         
         
         return Output(
-            
+            currentTap: currentTap.asDriver(onErrorJustReturn: .apply)
         )
     }
 }
@@ -58,5 +75,10 @@ final class ManagementViewModel: ViewModelType {
 extension ManagementViewModel {
     enum Section: CaseIterable {
         case main
+    }
+    
+    enum ManagementTapType {
+        case apply
+        case recruitment
     }
 }

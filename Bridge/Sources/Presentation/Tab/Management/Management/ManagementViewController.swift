@@ -109,10 +109,33 @@ final class ManagementViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = ManagementViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            viewWillAppear: self.rx.viewWillAppear.asObservable(), 
+            managementTabButtonTapped: Observable.merge(
+                applyTapButton.rx.tap.map { .apply },
+                recruitmentTapButton.rx.tap.map { .recruitment }
+            ),
             filterMenuTapped: filterMenuPopUpView.menuTapped
         )
         let output = viewModel.transform(input: input)
+        
+        output.currentTap
+            .skip(1)
+            .drive(onNext: { [weak self] tapType in
+                guard let self else { return }
+               
+                switch tapType {
+                case .apply: 
+                    recruitmentTapButton.isSelected = false
+                    applyTapButton.isSelected = true
+                    
+                case .recruitment:
+                    applyTapButton.isSelected = false
+                    recruitmentTapButton.isSelected = true
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        
         
         let testArray = [
             ProjectPreview(projectID: 0, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", description: "기획부터 앱 출시깢 ㅣ함께하실 팀원을 모집중입니다이이이", dDays: 0, deadline: "2023.08.20", totalRecruitNumber: 0, rank: 0, deadlineRank: 0, isBookmarked: false),
