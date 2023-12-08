@@ -36,7 +36,8 @@ extension DeadlineProjectResponseDTO {
             totalRecruitNumber: totalRecruitNumber,
             rank: 0,
             deadlineRank: deadlineRank,
-            isBookmarked: isBookmarked
+            isBookmarked: isBookmarked, 
+            status: ""
         )
     }
 }

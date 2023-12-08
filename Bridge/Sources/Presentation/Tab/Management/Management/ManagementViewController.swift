@@ -135,21 +135,10 @@ final class ManagementViewController: BaseViewController {
                 }
             })
             .disposed(by: disposeBag)
-        
-        
-
-        let testArray = [
-            ProjectPreview(projectID: 0, title: "실제 상업용 여행사 웹사이트 개발할 개발자 구합니다", description: "기획부터 앱 출시깢 ㅣ함께하실 팀원을 모집중입니다이이이", dDays: 0, deadline: "2023.08.20", totalRecruitNumber: 0, rank: 0, deadlineRank: 0, isBookmarked: false),
-            ProjectPreview(projectID: 1, title: "팀원 구함", description: "기획부터 앱 출시깢 ㅣ함께하실 팀원을 모집중입니다이이이", dDays: 0, deadline: "2023.08.20", totalRecruitNumber: 0, rank: 0, deadlineRank: 0, isBookmarked: false),
-            ProjectPreview(projectID: 2, title: "아아아아아아아이이이이이이이잉오오오오오오에에에에에에에으스슷스ㅡㅅ스구구구구해해해해요요용", description: "구함", dDays: 0, deadline: "2023.12.31", totalRecruitNumber: 0, rank: 0, deadlineRank: 0, isBookmarked: false),
-            ProjectPreview(projectID: 3, title: "구함", description: "기획부터 앱 출시깢 ㅣ함께하실 팀원을 모집중입니다이이이이이아아아앙요요요요", dDays: 0, deadline: "2023.08.20", totalRecruitNumber: 0, rank: 0, deadlineRank: 0, isBookmarked: false),
-            ProjectPreview(projectID: 4, title: "티티티팀원", description: "기획부터 앱 출시깢 ㅣ함께하실 팀원을 모집중입니다이이이아아아아앙용우웅", dDays: 0, deadline: "2023.08.20", totalRecruitNumber: 0, rank: 0, deadlineRank: 0, isBookmarked: false),
-            ProjectPreview(projectID: 5, title: "백겡느드 구해요", description: "기획부터 앱 출시깢 ㅣ함께하실 팀원을 모집중입니다이이이이아아아어요쵼먀야ㅕㅇ", dDays: 0, deadline: "2023.08.20", totalRecruitNumber: 0, rank: 0, deadlineRank: 0, isBookmarked: false)
-        ]
-
-        configureDataSource()
-        configureSupplementaryView(with: testArray)
-        applySnapshot(with: testArray)
+//        
+//        configureDataSource()
+//        configureSupplementaryView(with: testArray)
+//        applySnapshot(with: testArray)
     }
 }
 

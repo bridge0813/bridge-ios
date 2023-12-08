@@ -34,7 +34,8 @@ extension ProjectPreviewResponseDTO {
             totalRecruitNumber: totalRecruitNumber,
             rank: 0,
             deadlineRank: 0,
-            isBookmarked: isBookmarked
+            isBookmarked: isBookmarked,
+            status: ""
         )
     }
 }

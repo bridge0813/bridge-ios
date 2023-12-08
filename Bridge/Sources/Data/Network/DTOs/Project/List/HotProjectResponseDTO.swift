@@ -35,7 +35,8 @@ extension HotProjectResponseDTO {
             totalRecruitNumber: totalRecruitNumber,
             rank: rank,
             deadlineRank: 0,
-            isBookmarked: isBookmarked
+            isBookmarked: isBookmarked,
+            status: ""
         )
     }
 }

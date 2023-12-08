@@ -34,7 +34,8 @@ extension ApplyProjectResponseDTO {
             totalRecruitNumber: 0,
             rank: 0,
             deadlineRank: 0,
-            isBookmarked: false
+            isBookmarked: false, 
+            status: status
         )
     }
 }
