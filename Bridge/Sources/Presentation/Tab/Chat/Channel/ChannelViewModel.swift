@@ -66,22 +66,24 @@ final class ChannelViewModel: ViewModelType {
             .share()
         
         channelSubscriptionUseCase.subscribe(id: channel.id)
+            .take(until: didEnterBackground)
             .bind(to: messages)
-            .disposed(by: activeDisposeBag)
+            .disposed(by: disposeBag)
         
         observeMessageUseCase.observeMessage()
+            .take(until: didEnterBackground)
             .map { incomingMessage in
                 var currentMessages = messages.value
                 currentMessages.append(incomingMessage)
                 return currentMessages
             }
             .bind(to: messages)
-            .disposed(by: activeDisposeBag)
+            .disposed(by: disposeBag)
         
         // 백그라운드 상태에서 포그라운드로 전환 시 재구독 (view did load 트리거 안되므로)
         willEnterForeground
             .withUnretained(self)
-            .flatMap { owner, _ in
+            .flatMapLatest { owner, _ in
                 owner.channelSubscriptionUseCase.subscribe(id: owner.channel.id)
             }
             .bind(to: messages)
@@ -89,7 +91,7 @@ final class ChannelViewModel: ViewModelType {
         
         willEnterForeground
             .withUnretained(self)
-            .flatMap { owner, _ in
+            .flatMapLatest { owner, _ in
                 owner.observeMessageUseCase.observeMessage()
             }
             .map { incomingMessage in
@@ -102,7 +104,7 @@ final class ChannelViewModel: ViewModelType {
         
         willEnterForeground
             .withUnretained(self)
-            .flatMap { owner, _ in
+            .flatMapLatest { owner, _ in
                 owner.fetchMessagesUseCase.fetchMessages(channelId: owner.channel.id)
             }
             .observe(on: MainScheduler.instance)
@@ -173,7 +175,6 @@ final class ChannelViewModel: ViewModelType {
         didEnterBackground
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.activeDisposeBag = DisposeBag()  // 기존 옵저버블 dispose (중복 구독 방지)
                 owner.channelSubscriptionUseCase.unsubscribe(id: owner.channel.id)
             })
             .disposed(by: disposeBag)
