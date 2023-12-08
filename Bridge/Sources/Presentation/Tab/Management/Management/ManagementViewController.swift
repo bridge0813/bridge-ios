@@ -39,6 +39,7 @@ final class ManagementViewController: BaseViewController {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
         collectionView.backgroundColor = BridgeColor.gray09
+        collectionView.bounces = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ManagementProjectCell.self)
         collectionView.register(
@@ -219,9 +220,7 @@ extension ManagementViewController {
                 for: indexPath
             ) else { return UICollectionReusableView() }
             
-            
             headerView.configureHeaderView(projects: projects, currentTap: .apply)
-            
             headerView.filterButtonTapped
                 .withUnretained(self)
                 .subscribe(onNext: { owner, _ in

@@ -84,6 +84,7 @@ final class MenuPopUpView: BridgeBasePopUpView {
         
         super.init(frame: .zero)
         updateMenuTitles()
+        updateCheckmarked("first")
     }
     
     // MARK: - Configuration
