@@ -11,6 +11,7 @@ import RxSwift
 final class DefaultStompService: StompService {
     // MARK: - Property
     private let webSocketService: WebSocketService
+    private let updatedData = PublishSubject<Data>()
     private let incomingData = PublishSubject<Data>()
     
     // MARK: - Init
@@ -33,7 +34,7 @@ final class DefaultStompService: StompService {
     func subscribe(_ stompEndpoint: StompEndpoint) -> Observable<Data> {
         let subscribeFrame = stompEndpoint.toFrame()
         webSocketService.write(subscribeFrame)
-        return incomingData
+        return updatedData
     }
     
     func observe() -> Observable<Data> {
@@ -63,12 +64,15 @@ extension DefaultStompService: WebSocketServiceDelegate {
     
     func webSocketDidReceive(text: String) {
         guard let command = text.extractCommand(.message),
-              command == StompResponseCommand.message.rawValue
+              command == StompResponseCommand.message.rawValue,
+              let jsonString = text.extractJsonString(),
+              let data = jsonString.data(using: .utf8)
         else { return }
-        
-        if let jsonString = text.extractJsonString(),
-           let data = jsonString.data(using: .utf8) {
+           
+        if jsonString.contains("\"chatHistory\":null") {
             incomingData.onNext(data)
+        } else {
+            updatedData.onNext(data)
         }
     }
     
