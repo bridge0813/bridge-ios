@@ -5,6 +5,7 @@
 //  Created by 정호윤 on 10/16/23.
 //
 
+import UIKit
 import RxCocoa
 import RxSwift
 
@@ -25,6 +26,7 @@ final class ChannelViewModel: ViewModelType {
     
     // MARK: - Property
     let disposeBag = DisposeBag()
+    private var activeDisposeBag = DisposeBag()
     private weak var coordinator: ChatCoordinator?
     
     private let channel: Channel
@@ -56,16 +58,59 @@ final class ChannelViewModel: ViewModelType {
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         let messages = BehaviorRelay<[Message]>(value: [])
+        let willEnterForeground = NotificationCenter.default.rx
+            .notification(UIApplication.willEnterForegroundNotification)
+            .share()
+        let didEnterBackground = NotificationCenter.default.rx
+            .notification(UIApplication.didEnterBackgroundNotification)
+            .share()
         
         channelSubscriptionUseCase.subscribe(id: channel.id)
             .bind(to: messages)
-            .disposed(by: disposeBag)
+            .disposed(by: activeDisposeBag)
         
         observeMessageUseCase.observeMessage()
             .map { incomingMessage in
                 var currentMessages = messages.value
                 currentMessages.append(incomingMessage)
                 return currentMessages
+            }
+            .bind(to: messages)
+            .disposed(by: activeDisposeBag)
+        
+        // 백그라운드 상태에서 포그라운드로 전환 시 재구독 (view did load 트리거 안되므로)
+        willEnterForeground
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.channelSubscriptionUseCase.subscribe(id: owner.channel.id)
+            }
+            .bind(to: messages)
+            .disposed(by: disposeBag)
+        
+        willEnterForeground
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.observeMessageUseCase.observeMessage()
+            }
+            .map { incomingMessage in
+                var currentMessages = messages.value
+                currentMessages.append(incomingMessage)
+                return currentMessages
+            }
+            .bind(to: messages)
+            .disposed(by: disposeBag)
+        
+        willEnterForeground
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.fetchMessagesUseCase.fetchMessages(channelId: owner.channel.id)
+            }
+            .observe(on: MainScheduler.instance)
+            .catch { [weak self] _ in
+                self?.coordinator?.showErrorAlert(configuration: .defaultError) {
+                    self?.coordinator?.pop()
+                }
+                return .just([])
             }
             .bind(to: messages)
             .disposed(by: disposeBag)
@@ -120,6 +165,15 @@ final class ChannelViewModel: ViewModelType {
         input.viewDidDisappear
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                owner.channelSubscriptionUseCase.unsubscribe(id: owner.channel.id)
+            })
+            .disposed(by: disposeBag)
+        
+        // 백그라운드로 전환 시 구독을 해제 (view did disappear 트리거 안되므로)
+        didEnterBackground
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.activeDisposeBag = DisposeBag()  // 기존 옵저버블 dispose (중복 구독 방지)
                 owner.channelSubscriptionUseCase.unsubscribe(id: owner.channel.id)
             })
             .disposed(by: disposeBag)
