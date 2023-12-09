@@ -145,14 +145,14 @@ extension ManagementViewModel {
             resultProjects = projectList
             
         case .pendingResult:
-            resultProjects = projectList.filter { $0.status == "대기중" }
+            resultProjects = projectList.filter { $0.status == "결과 대기중" }
             
         case .onGoing:
-            resultProjects = projectList.filter { $0.status == "모집중" }
+            resultProjects = projectList.filter { $0.status == "현재 진행중" }
             
         case .complete:
             resultProjects = projectList.filter {
-                $0.status == "완료" || $0.status == "수락" || $0.status == "거절"
+                $0.status == "모집완료" || $0.status == "수락" || $0.status == "거절"
             }
         }
         

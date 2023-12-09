@@ -35,8 +35,15 @@ extension ApplyProjectResponseDTO {
             rank: 0,
             deadlineRank: 0,
             isBookmarked: false, 
-            status: status
+            status: formatProjectStatusText(status: status)
         )
+    }
+    
+    private func formatProjectStatusText(status: String) -> String {
+        switch status {
+        case "대기중": return "결과 대기중"
+        default: return status
+        }
     }
 }
 

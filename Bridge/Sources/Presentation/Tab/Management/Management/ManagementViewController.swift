@@ -121,12 +121,10 @@ final class ManagementViewController: BaseViewController {
         output.projects
             .drive(onNext: { [weak self] projects in
                 guard let self else { return }
-                
-                let currentTap = self.applyTapButton.isSelected
-                
-                configureDataSource()
-                configureSupplementaryView(with: projects)
-                applySnapshot(with: projects)
+            
+                self.configureDataSource()
+                self.configureSupplementaryView(with: projects)
+                self.applySnapshot(with: projects)
             })
             .disposed(by: disposeBag)
         
@@ -192,12 +190,15 @@ extension ManagementViewController {
     private func configureDataSource() {
         dataSource = DataSource(
             collectionView: collectionView
-        ) { collectionView, indexPath, project in
+        ) { [weak self] collectionView, indexPath, project in
             guard let cell = collectionView.dequeueReusableCell(ManagementProjectCell.self, for: indexPath) else {
                 return UICollectionViewCell()
             }
+            
+            guard let self else { return UICollectionViewCell() }
+           
             // Cell 구성
-            cell.configureCell(with: project, currentTap: .recruitment)
+            cell.configureCell(with: project, selectedTap: self.applyTapButton.isSelected ? .apply : .recruitment)
             
             // 지원자 목록 or 프로젝트 상세
             cell.buttonGroupTapped

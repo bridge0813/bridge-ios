@@ -72,7 +72,7 @@ final class ManagementProjectCell: BaseCollectionViewCell {
             font: BridgeFont.body2.font,
             backgroundColor: BridgeColor.primary1
         )
-        button.flex.height(44)
+        button.flex.width(100%).height(44)
         button.isEnabled = true
         
         return button
@@ -80,7 +80,7 @@ final class ManagementProjectCell: BaseCollectionViewCell {
     
     private let menuButtonGroup: BridgeSmallButtonGroup = {
         let buttonGroup = BridgeSmallButtonGroup(("지원자 목록", "프로젝트 상세"))
-        buttonGroup.flex.height(44)
+        buttonGroup.flex.width(100%).height(44)
         return buttonGroup
     }()
     
@@ -133,18 +133,22 @@ final class ManagementProjectCell: BaseCollectionViewCell {
         contentView.layer.masksToBounds = false
     }
     
-    func configureCell(with data: ProjectPreview, currentTap: ManagementTapType) {
-        let statusType = ProjectStatusType(rawValue: "거절") ?? .onGoing
+    func configureCell(with data: ProjectPreview, selectedTap: ManagementTapType) {
+        // 상태 라벨
+        let statusType = ProjectStatusType(rawValue: data.status) ?? .onGoing
         statusLabel.text = statusType.rawValue
         statusLabel.backgroundColor = statusType.statusColor
+        
+        // 프로젝트 아이디
+        projectID = data.projectID
+        
         titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 24)
         descriptionLabel.text = data.description
         deadlineLabel.text = data.deadline
-        projectID = data.projectID
         
+        goToDetailButton.isHidden = selectedTap == .recruitment
+        menuButtonGroup.isHidden = selectedTap == .apply
         statusLabel.flex.width(statusLabel.intrinsicContentSize.width).height(26).markDirty()
-        goToDetailButton.flex.isIncludedInLayout(currentTap == .apply).markDirty()
-        menuButtonGroup.flex.isIncludedInLayout(currentTap == .recruitment).markDirty()
     }
     
     // MARK: - Layout
@@ -164,8 +168,13 @@ final class ManagementProjectCell: BaseCollectionViewCell {
                 flex.addItem(deadlineLabel)
             }
             
-            flex.addItem(goToDetailButton).isIncludedInLayout(true).marginTop(14)
-            flex.addItem(menuButtonGroup).isIncludedInLayout(false).marginTop(14)
+            // 두 버튼을 같은 위치에 배정(hidden 처리)
+            flex.addItem(goToDetailButton).marginTop(14)
+            flex.addItem(menuButtonGroup)
+                .position(.absolute)
+                .left(18)
+                .bottom(24)
+                .right(18)
         }
     }
     
@@ -187,8 +196,8 @@ extension ManagementProjectCell {
         case accept = "수락"
         case refuse = "거절"
         case pendingResult = "결과 대기중"
-        case complete = "모집 완료"
         case onGoing = "현재 진행중"
+        case complete = "모집완료"
         
         var statusColor: UIColor {
             switch self {
