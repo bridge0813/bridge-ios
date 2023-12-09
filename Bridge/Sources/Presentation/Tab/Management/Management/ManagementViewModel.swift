@@ -82,13 +82,28 @@ final class ManagementViewModel: ViewModelType {
         // 지원 or 모집 탭 버튼 클릭
         input.managementTabButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, tapType in
-                switch tapType {
-                case .apply:
-                    selectedTap.accept(.apply)
-                    
-                case .recruitment:
-                    selectedTap.accept(.recruitment)
+            .flatMapLatest { owner, tapType -> Observable<Result<[ProjectPreview], Error>> in
+                selectedFilterOption.accept(.all)  // 탭 전환 시 기본값으로 변경
+                selectedTap.accept(tapType)
+                
+                if tapType == .apply {
+                    return owner.fetchApplyProjectsUseCase.fetchProjects().toResult()
+                } else {
+                    return owner.fetchMyProjectsUseCase.fetchProjects().toResult()
+                }
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projectPreviews):
+                    projects.accept(projectPreviews)
+                
+                case .failure(let error):
+                    projects.accept([])
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "오류",
+                        description: error.localizedDescription
+                    ))
                 }
             })
             .disposed(by: disposeBag)
