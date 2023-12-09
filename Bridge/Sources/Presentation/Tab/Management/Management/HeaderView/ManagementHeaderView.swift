@@ -25,7 +25,6 @@ final class ManagementHeaderView: BaseCollectionReusableView {
     
     private let filterButton: UIButton = {
         let button = UIButton()
-        
         let buttonImage = UIImage(named: "chevron.down")?.resize(to: CGSize(width: 12, height: 12))
         
         var configuration = UIButton.Configuration.filled()
@@ -59,11 +58,17 @@ final class ManagementHeaderView: BaseCollectionReusableView {
     }
     
     // MARK: - Configuration
-    func configureHeaderView(projects: [ProjectPreview], currentTap: ManagementTapType) {
+    func configureHeaderView(projects: [ProjectPreview], selectedTap: ManagementTapType) {
         firstProjectsCountView.count = projects.count
-        secondProjectsCountView.count = 2
-        secondProjectsCountView.title = currentTap == .apply ? "결과 대기" : "현재 진행"
-        thirdProjectsCountView.count = 3
+        secondProjectsCountView.count = projects.filter {
+            $0.status == "결과 대기중" || $0.status == "현재 진행중"
+        }.count
+        
+        thirdProjectsCountView.count = projects.filter {
+            $0.status == "모집완료" || $0.status == "수락" || $0.status == "거절"
+        }.count
+        
+        secondProjectsCountView.title = selectedTap == .apply ? "결과 대기" : "현재 진행"
     }
     
     // MARK: - Layout

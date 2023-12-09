@@ -121,10 +121,28 @@ final class ManagementViewController: BaseViewController {
         output.projects
             .drive(onNext: { [weak self] projects in
                 guard let self else { return }
+                
+                var resultProjects: [ProjectPreview]
             
+                switch self.viewModel.selectedFilterOption {
+                case .all:
+                    resultProjects = projects
+                    
+                case .pendingResult:
+                    resultProjects = projects.filter { $0.status == "결과 대기중" }
+                    
+                case .onGoing:
+                    resultProjects = projects.filter { $0.status == "현재 진행중" }
+                    
+                case .complete:
+                    resultProjects = projects.filter {
+                        $0.status == "모집완료" || $0.status == "수락" || $0.status == "거절"
+                    }
+                }
+                
                 self.configureDataSource()
                 self.configureSupplementaryView(with: projects)
-                self.applySnapshot(with: projects)
+                self.applySnapshot(with: resultProjects)
             })
             .disposed(by: disposeBag)
         
@@ -235,14 +253,20 @@ extension ManagementViewController {
     }
     
     private func configureSupplementaryView(with projects: [ProjectPreview]) {
-        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             guard let headerView = collectionView.dequeueReusableSupplementaryView(
                 ManagementHeaderView.self,
                 ofKind: kind,
                 for: indexPath
             ) else { return UICollectionReusableView() }
             
-            headerView.configureHeaderView(projects: projects, currentTap: .apply)
+            guard let self else { return UICollectionViewCell() }
+           
+            headerView.configureHeaderView(
+                projects: projects,
+                selectedTap: self.applyTapButton.isSelected ? .apply : .recruitment
+            )
+            
             headerView.filterButtonTapped
                 .withUnretained(self)
                 .subscribe(onNext: { owner, _ in

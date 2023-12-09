@@ -29,6 +29,8 @@ final class ManagementViewModel: ViewModelType {
     private let fetchApplyProjectsUseCase: FetchApplyProjectsUseCase
     private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
     
+    var selectedFilterOption: FilterMenuType = .all // 현재 선택된 필터링 옵션
+    
     // MARK: - Init
     init(
         coordinator: ManagementCoordinator,
@@ -44,7 +46,6 @@ final class ManagementViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let projects = BehaviorRelay<[ProjectPreview]>(value: [])
         let selectedTap = BehaviorRelay<ManagementTapType>(value: .apply)    // 현재 선택된 탭(지원 or 모집)
-        let selectedFilterOption = BehaviorRelay<FilterMenuType>(value: .all)  // 현재 선택된 필터링 옵션
         
         // 1. 지원 or 모집 탭 구분에 따라 데이터 가져오기
         // 2. 성공 or 실패에 따라 처리
@@ -61,12 +62,8 @@ final class ManagementViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 switch result {
-                case .success(let projectPreviews):
-                    owner.applyFilterToProjects(
-                        projectList: projectPreviews,
-                        filterOption: selectedFilterOption.value,
-                        projects: projects
-                    )
+                case .success(let projectList):
+                    projects.accept(projectList)
                 
                 case .failure(let error):
                     projects.accept([])
@@ -83,7 +80,7 @@ final class ManagementViewModel: ViewModelType {
         input.managementTabButtonTapped
             .withUnretained(self)
             .flatMapLatest { owner, tapType -> Observable<Result<[ProjectPreview], Error>> in
-                selectedFilterOption.accept(.all)  // 탭 전환 시 기본값으로 변경
+                owner.selectedFilterOption = .all // 탭 전환 시 기본값으로 변경
                 selectedTap.accept(tapType)
                 
                 if tapType == .apply {
@@ -132,32 +129,7 @@ final class ManagementViewModel: ViewModelType {
 
 // MARK: - Methods
 extension ManagementViewModel {
-    /// 모집글들을 필터링 해주는 메서드.
-    private func applyFilterToProjects(
-        projectList: [ProjectPreview],
-        filterOption: FilterMenuType,
-        projects: BehaviorRelay<[ProjectPreview]>
-    ) {
-        var resultProjects: [ProjectPreview]
-        
-        switch filterOption {
-        case .all:
-            resultProjects = projectList
-            
-        case .pendingResult:
-            resultProjects = projectList.filter { $0.status == "결과 대기중" }
-            
-        case .onGoing:
-            resultProjects = projectList.filter { $0.status == "현재 진행중" }
-            
-        case .complete:
-            resultProjects = projectList.filter {
-                $0.status == "모집완료" || $0.status == "수락" || $0.status == "거절"
-            }
-        }
-        
-        projects.accept(resultProjects)
-    }
+
 }
 
 // MARK: - Data source
