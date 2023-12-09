@@ -1,5 +1,5 @@
 //
-//  FetchRecruitmentProjectsUseCase.swift
+//  FetchMyProjectsUseCase.swift
 //  Bridge
 //
 //  Created by 엄지호 on 12/9/23.
@@ -11,7 +11,7 @@ protocol FetchMyProjectsUseCase {
     func fetchProjects() -> Observable<[ProjectPreview]>
 }
 
-final class DefaultFetchRecruitmentProjectsUseCase: FetchMyProjectsUseCase {
+final class DefaultFetchMyProjectsUseCase: FetchMyProjectsUseCase {
     private let projectRepository: ProjectRepository
     
     init(projectRepository: ProjectRepository) {
@@ -19,6 +19,6 @@ final class DefaultFetchRecruitmentProjectsUseCase: FetchMyProjectsUseCase {
     }
     
     func fetchProjects() -> Observable<[ProjectPreview]> {
-        projectRepository.fetchRecruitmentProjects()
+        projectRepository.fetchMyProjects()
     }
 }

@@ -69,8 +69,8 @@ final class DefaultProjectRepository: ProjectRepository {
         .just(ApplyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
-    func fetchRecruitmentProjects() -> Observable<[ProjectPreview]> {
-        .just(RecruitmentProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+    func fetchMyProjects() -> Observable<[ProjectPreview]> {
+        .just(MyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
     // MARK: - Create

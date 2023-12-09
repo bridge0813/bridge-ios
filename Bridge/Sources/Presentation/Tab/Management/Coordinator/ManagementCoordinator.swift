@@ -13,11 +13,21 @@ final class ManagementCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
+    private let projectRepository: ProjectRepository
+    
+    private let fetchApplyProjectsUseCase: FetchApplyProjectsUseCase
+    private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
+    
     // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []
 
+        let networkService = DefaultNetworkService()
+        projectRepository = MockProjectRepository()
+
+        fetchApplyProjectsUseCase = DefaultFetchApplyProjectsUseCase(projectRepository: projectRepository)
+        fetchMyProjectsUseCase = DefaultFetchMyProjectsUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Methods
@@ -30,7 +40,9 @@ extension ManagementCoordinator {
     // MARK: - Show
     func showManagementViewController() {
         let viewModel = ManagementViewModel(
-            coordinator: self
+            coordinator: self,
+            fetchApplyProjectsUseCase: fetchApplyProjectsUseCase,
+            fetchMyProjectsUseCase: fetchMyProjectsUseCase
         )
         
         let vc = ManagementViewController(viewModel: viewModel)

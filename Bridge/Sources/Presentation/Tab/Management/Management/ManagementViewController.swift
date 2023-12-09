@@ -118,8 +118,20 @@ final class ManagementViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
+        output.projects
+            .drive(onNext: { [weak self] projects in
+                guard let self else { return }
+                
+                let currentTap = self.applyTapButton.isSelected
+                
+                configureDataSource()
+                configureSupplementaryView(with: projects)
+                applySnapshot(with: projects)
+            })
+            .disposed(by: disposeBag)
+        
         // 탭 전환
-        output.currentTap
+        output.selectedTap
             .skip(1)
             .drive(onNext: { [weak self] tapType in
                 guard let self else { return }
@@ -135,10 +147,6 @@ final class ManagementViewController: BaseViewController {
                 }
             })
             .disposed(by: disposeBag)
-//        
-//        configureDataSource()
-//        configureSupplementaryView(with: testArray)
-//        applySnapshot(with: testArray)
     }
 }
 
