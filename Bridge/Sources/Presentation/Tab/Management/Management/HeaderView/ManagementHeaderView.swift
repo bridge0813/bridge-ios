@@ -19,9 +19,9 @@ final class ManagementHeaderView: BaseCollectionReusableView {
         return view
     }()
     
-    private let firstProjectsCountView = ProjectCountView("전체")
-    private let secondProjectsCountView = ProjectCountView("결과 대기")
-    private let thirdProjectsCountView = ProjectCountView("완료")
+    private let allProjectsCountView = ProjectCountView("전체")
+    private let dynamicProjectsCountView = ProjectCountView("결과 대기")  // "결과 대기" 와 "현재 진행"으로 변경될 수 있음.
+    private let completedProjectsCountView = ProjectCountView("완료")
     
     private let filterButton: UIButton = {
         let button = UIButton()
@@ -57,18 +57,35 @@ final class ManagementHeaderView: BaseCollectionReusableView {
         return filterButton.rx.tap
     }
     
+    var filterButtonTitle: String = "전체" {
+        didSet {
+            updateFilterButtonTitle()
+        }
+    }
+    
     // MARK: - Configuration
     func configureHeaderView(projects: [ProjectPreview], selectedTap: ManagementTapType) {
-        firstProjectsCountView.count = projects.count
-        secondProjectsCountView.count = projects.filter {
+        allProjectsCountView.count = projects.count
+        dynamicProjectsCountView.count = projects.filter {
             $0.status == "결과 대기중" || $0.status == "현재 진행중"
         }.count
         
-        thirdProjectsCountView.count = projects.filter {
+        completedProjectsCountView.count = projects.filter {
             $0.status == "모집완료" || $0.status == "수락" || $0.status == "거절"
         }.count
         
-        secondProjectsCountView.title = selectedTap == .apply ? "결과 대기" : "현재 진행"
+        dynamicProjectsCountView.title = selectedTap == .apply ? "결과 대기" : "현재 진행"
+    }
+    
+    private func updateFilterButtonTitle() {
+        var updatedConfiguration = filterButton.configuration
+        
+        var titleContainer = AttributeContainer()
+        titleContainer.font = BridgeFont.body1.font
+        titleContainer.foregroundColor = BridgeColor.gray01
+        updatedConfiguration?.attributedTitle = AttributedString(filterButtonTitle, attributes: titleContainer)
+        
+        filterButton.configuration = updatedConfiguration
     }
     
     // MARK: - Layout
@@ -76,9 +93,9 @@ final class ManagementHeaderView: BaseCollectionReusableView {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.padding(24, 16, 0, 16).define { flex in
             flex.addItem().direction(.row).define { flex in
-                flex.addItem(firstProjectsCountView).grow(1)
-                flex.addItem(secondProjectsCountView).grow(1).marginLeft(11)
-                flex.addItem(thirdProjectsCountView).grow(1).marginLeft(11)
+                flex.addItem(allProjectsCountView).grow(1)
+                flex.addItem(dynamicProjectsCountView).grow(1).marginLeft(11)
+                flex.addItem(completedProjectsCountView).grow(1).marginLeft(11)
             }
             
             flex.addItem(filterButton).marginTop(24)

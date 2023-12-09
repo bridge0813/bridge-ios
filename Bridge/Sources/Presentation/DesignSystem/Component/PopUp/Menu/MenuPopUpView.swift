@@ -45,6 +45,7 @@ final class MenuPopUpView: BridgeBasePopUpView {
     var titles: (String, String, String) {
         didSet {
             updateMenuTitles()
+            updateCheckmarked("first")  // 메뉴가 변경되면 가장 첫 번째 옵션에 체크마크.
         }
     }
     

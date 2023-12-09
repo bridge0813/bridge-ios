@@ -49,14 +49,21 @@ final class ManagementViewController: BaseViewController {
         
         return collectionView
     }()
-    
+    private lazy var headerView: UICollectionReusableView = {
+        let view = self.collectionView.supplementaryView(
+        forElementKind: UICollectionView.elementKindSectionHeader,
+        at: IndexPath(item: 0, section: 0)) as? ManagementHeaderView
+        
+        return view ?? UICollectionReusableView()
+    }()
     private let filterMenuPopUpView = MenuPopUpView(titles: ("전체", "결과 대기", "완료"), isCheckmarked: true)
     
     // MARK: - Property
     private let viewModel: ManagementViewModel
     
     private typealias DataSource = UICollectionViewDiffableDataSource<ManagementViewModel.Section, ProjectPreview>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<ManagementViewModel.Section, ProjectPreview>
+    private typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<ProjectPreview>
+    
     private var dataSource: DataSource?
     
     private let goToDetailTapped = PublishSubject<Int>()
@@ -142,7 +149,7 @@ final class ManagementViewController: BaseViewController {
                 
                 self.configureDataSource()
                 self.configureSupplementaryView(with: projects)
-                self.applySnapshot(with: resultProjects)
+                self.applySectionSnapshot(with: resultProjects)
             })
             .disposed(by: disposeBag)
         
@@ -156,11 +163,23 @@ final class ManagementViewController: BaseViewController {
                 case .apply: 
                     recruitmentTapButton.isSelected = false
                     applyTapButton.isSelected = true
+                    self.filterMenuPopUpView.titles = ("전체", "결과 대기", "완료")  // 필터링 메뉴 변경
                     
                 case .recruitment:
                     applyTapButton.isSelected = false
                     recruitmentTapButton.isSelected = true
+                    self.filterMenuPopUpView.titles = ("전체", "현재 진행", "완료")
                 }
+                
+                // 탭 전환 시 "전체"로 초기화
+                self.updateFilterButtonTitleInHeaderView("전체")
+            })
+            .disposed(by: disposeBag)
+        
+        output.filterOption
+            .drive(onNext: { [weak self] option in
+                guard let self else { return }
+                self.updateFilterButtonTitleInHeaderView(option)
             })
             .disposed(by: disposeBag)
     }
@@ -278,10 +297,21 @@ extension ManagementViewController {
         }
     }
     
-    private func applySnapshot(with projects: [ProjectPreview]) {
-        var snapshot = Snapshot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(projects)
-        dataSource?.apply(snapshot)
+    private func applySectionSnapshot(with projects: [ProjectPreview]) {
+        var snapshot = SectionSnapshot()
+        snapshot.append(projects)
+        dataSource?.apply(snapshot, to: .main, animatingDifferences: false)
+    }
+}
+
+// MARK: - Methods
+extension ManagementViewController {
+    private func updateFilterButtonTitleInHeaderView(_ title: String) {
+        if let headerView = collectionView.supplementaryView(
+            forElementKind: UICollectionView.elementKindSectionHeader,
+            at: IndexPath(item: 0, section: 0)
+        ) as? ManagementHeaderView {
+            headerView.filterButtonTitle = title
+        }
     }
 }

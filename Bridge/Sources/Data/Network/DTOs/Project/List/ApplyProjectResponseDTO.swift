@@ -50,10 +50,10 @@ extension ApplyProjectResponseDTO {
 extension ApplyProjectResponseDTO {
     static var projectTestArray: [ApplyProjectResponseDTO] = [
         ApplyProjectResponseDTO(projectID: 0, title: "지원 탭에서 보내는 첫 번째 모집글입니다. 아라라라라라라라라라라리리리리리요요요라라라라", description: "기획부터 앱 출시까지 함께하실 팀원을 모집중입니다.....ㅇㅋㅋㅋㅋ가나다라마바사가나다라마바사", deadline: "2023.08.20", status: "수락"),
-        ApplyProjectResponseDTO(projectID: 0, title: "지원 탭에서 보내는 두 번째 모집글입니다.", description: "기획부터 앱 출시까지 함께하실 팀원을 모집중입니다", deadline: "2023.08.20", status: "거절"),
-        ApplyProjectResponseDTO(projectID: 0, title: "지원 탭에서 보내는 세 번째 모집글입니다.", description: "기획부", deadline: "2023.08.20", status: "대기중"),
-        ApplyProjectResponseDTO(projectID: 0, title: "지원 탭에서 보내는 네 번째 모집글입니다.", description: "기획", deadline: "2023.08.20", status: "대기중"),
-        ApplyProjectResponseDTO(projectID: 0, title: "다섯 번째 모집글입니다.", description: "기획부터 앱 출시까지 함께하실 팀원을 모집중입니다", deadline: "2023.08.20", status: "수락"),
-        ApplyProjectResponseDTO(projectID: 0, title: "여섯 번째.", description: "기획부터 앱 출시까지", deadline: "2023.08.20", status: "거절")
+        ApplyProjectResponseDTO(projectID: 1, title: "지원 탭에서 보내는 두 번째 모집글입니다.", description: "기획부터 앱 출시까지 함께하실 팀원을 모집중입니다", deadline: "2023.08.20", status: "거절"),
+        ApplyProjectResponseDTO(projectID: 2, title: "지원 탭에서 보내는 세 번째 모집글입니다.", description: "기획부", deadline: "2023.08.20", status: "대기중"),
+        ApplyProjectResponseDTO(projectID: 3, title: "지원 탭에서 보내는 네 번째 모집글입니다.", description: "기획", deadline: "2023.08.20", status: "대기중"),
+        ApplyProjectResponseDTO(projectID: 4, title: "다섯 번째 모집글입니다.", description: "기획부터 앱 출시까지 함께하실 팀원을 모집중입니다", deadline: "2023.08.20", status: "수락"),
+        ApplyProjectResponseDTO(projectID: 5, title: "여섯 번째.", description: "기획부터 앱 출시까지", deadline: "2023.08.20", status: "거절")
     ]
 }

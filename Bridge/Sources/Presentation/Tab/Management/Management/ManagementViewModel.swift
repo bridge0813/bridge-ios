@@ -20,6 +20,7 @@ final class ManagementViewModel: ViewModelType {
     struct Output {
         let projects: Driver<[ProjectPreview]>
         let selectedTap: Driver<ManagementTapType>
+        let filterOption: Driver<String>
     }
 
     // MARK: - Property
@@ -47,12 +48,11 @@ final class ManagementViewModel: ViewModelType {
         let projects = BehaviorRelay<[ProjectPreview]>(value: [])
         let selectedTap = BehaviorRelay<ManagementTapType>(value: .apply)    // 현재 선택된 탭(지원 or 모집)
         
-        // 1. 지원 or 모집 탭 구분에 따라 데이터 가져오기
-        // 2. 성공 or 실패에 따라 처리
-        // 3. 성공일 경우, 현재 선택된 필터옵션에 따라 가져온 모집글 필터링.
+        // viewWillAppear 시점 데이터 가져오기
         input.viewWillAppear
             .withUnretained(self)
             .flatMapLatest { owner, _ -> Observable<Result<[ProjectPreview], Error>> in
+                // 1. 지원 or 모집 탭 구분에 따라 데이터 가져오기
                 if selectedTap.value == .apply {
                     return owner.fetchApplyProjectsUseCase.fetchProjects().toResult()
                 } else {
@@ -92,8 +92,8 @@ final class ManagementViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 switch result {
-                case .success(let projectPreviews):
-                    projects.accept(projectPreviews)
+                case .success(let projectList):
+                    projects.accept(projectList)
                 
                 case .failure(let error):
                     projects.accept([])
@@ -106,23 +106,18 @@ final class ManagementViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         
-        input.filterMenuTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, filterMenu in
-                switch filterMenu {
-                case "전체": print("전체")
-                case "결과 대기": print("결과 대기")
-                case "완료": print("완료")
-                case "현재 진행": print("현재 진행")
-                default: print("Error")
-                }
+        let filterOption = input.filterMenuTapped
+            .do(onNext: { [weak self] option in
+                guard let self else { return }
+                
+                self.selectedFilterOption = FilterMenuType(rawValue: option) ?? .all
+                projects.accept(projects.value)
             })
-            .disposed(by: disposeBag)
-        
         
         return Output(
             projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError]),
-            selectedTap: selectedTap.asDriver(onErrorJustReturn: .apply)
+            selectedTap: selectedTap.asDriver(onErrorJustReturn: .apply),
+            filterOption: filterOption.asDriver(onErrorJustReturn: "오류")
         )
     }
 }
