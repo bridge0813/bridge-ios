@@ -23,17 +23,19 @@ final class DefaultStompService: StompService {
     // MARK: - Method
     func connect(_ stompEndpoint: StompEndpoint) {
         let connectFrame = stompEndpoint.toFrame()
-        webSocketService.write(connectFrame)
+        webSocketService.write(connectFrame) {
+            NotificationCenter.default.post(name: .stompDidConnectedNotification, object: nil)
+        }
     }
     
     func disconnect(_ stompEndpoint: StompEndpoint) {
         let disconnectFrame = stompEndpoint.toFrame()
-        webSocketService.write(disconnectFrame)
+        webSocketService.write(disconnectFrame, completion: nil)
     }
     
     func subscribe(_ stompEndpoint: StompEndpoint) -> Observable<Data> {
         let subscribeFrame = stompEndpoint.toFrame()
-        webSocketService.write(subscribeFrame)
+        webSocketService.write(subscribeFrame, completion: nil)
         return updatedData
     }
     
@@ -43,12 +45,12 @@ final class DefaultStompService: StompService {
     
     func unsubscribe(_ stompEndpoint: StompEndpoint) {
         let unsubscribeFrame = stompEndpoint.toFrame()
-        webSocketService.write(unsubscribeFrame)
+        webSocketService.write(unsubscribeFrame, completion: nil)
     }
     
     func send(_ endpoint: StompEndpoint) {
         let frame = endpoint.toFrame()
-        webSocketService.write(frame)
+        webSocketService.write(frame, completion: nil)
     }
 }
 

@@ -122,6 +122,7 @@
 		7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CD42A9F7D38000DAB02 /* BridgeNavigationTitleView.swift */; };
 		7BA36CDA2AA197F8000DAB02 /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA36CD92AA197F8000DAB02 /* ChannelListViewController.swift */; };
 		7BA5336B2B0EED5E00E69BFB /* ObserveMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA5336A2B0EED5E00E69BFB /* ObserveMessageUseCase.swift */; };
+		7BA96EB82B249630000D48AE /* Notification+Stomp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA96EB72B249630000D48AE /* Notification+Stomp.swift */; };
 		7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */; };
 		7BB2C2412A9851B600AA2328 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2402A9851B600AA2328 /* Coordinator.swift */; };
 		7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */; };
@@ -342,6 +343,7 @@
 		7BA36CD42A9F7D38000DAB02 /* BridgeNavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeNavigationTitleView.swift; sourceTree = "<group>"; };
 		7BA36CD92AA197F8000DAB02 /* ChannelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
 		7BA5336A2B0EED5E00E69BFB /* ObserveMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserveMessageUseCase.swift; sourceTree = "<group>"; };
+		7BA96EB72B249630000D48AE /* Notification+Stomp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Stomp.swift"; sourceTree = "<group>"; };
 		7BB2C23E2A98512400AA2328 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		7BB2C2402A9851B600AA2328 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7BB2C2462A98549D00AA2328 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -892,6 +894,7 @@
 			isa = PBXGroup;
 			children = (
 				7B9C31A62B0753EF007E36B2 /* String+Stomp.swift */,
+				7BA96EB72B249630000D48AE /* Notification+Stomp.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1920,6 +1923,7 @@
 				7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
+				7BA96EB82B249630000D48AE /* Notification+Stomp.swift in Sources */,
 				7CA04F432B029B3A007B9191 /* FetchProjectDetailUseCase.swift in Sources */,
 				7C8CC4132AEEB5CC0032F237 /* TechTagCell.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,

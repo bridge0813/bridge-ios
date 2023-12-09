@@ -13,5 +13,5 @@ protocol WebSocketService: AnyObject {
     func connect(to endpoint: Endpoint)
     func disconnect()
     
-    func write(_ frame: WebSocketFrame)
+    func write(_ frame: WebSocketFrame, completion: (() -> Void)?)
 }

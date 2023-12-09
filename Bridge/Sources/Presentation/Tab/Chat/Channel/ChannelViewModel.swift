@@ -58,8 +58,8 @@ final class ChannelViewModel: ViewModelType {
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         let messages = BehaviorRelay<[Message]>(value: [])
-        let willEnterForeground = NotificationCenter.default.rx
-            .notification(UIApplication.willEnterForegroundNotification)
+        let stompDidConnected = NotificationCenter.default.rx
+            .notification(.stompDidConnectedNotification)
             .share()
         let didEnterBackground = NotificationCenter.default.rx
             .notification(UIApplication.didEnterBackgroundNotification)
@@ -81,7 +81,8 @@ final class ChannelViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         // 백그라운드 상태에서 포그라운드로 전환 시 재구독 (view did load 트리거 안되므로)
-        willEnterForeground
+        stompDidConnected
+            .debug()
             .withUnretained(self)
             .flatMapLatest { owner, _ in
                 owner.channelSubscriptionUseCase.subscribe(id: owner.channel.id)
@@ -89,7 +90,7 @@ final class ChannelViewModel: ViewModelType {
             .bind(to: messages)
             .disposed(by: disposeBag)
         
-        willEnterForeground
+        stompDidConnected
             .withUnretained(self)
             .flatMapLatest { owner, _ in
                 owner.observeMessageUseCase.observeMessage()
@@ -102,7 +103,7 @@ final class ChannelViewModel: ViewModelType {
             .bind(to: messages)
             .disposed(by: disposeBag)
         
-        willEnterForeground
+        stompDidConnected
             .withUnretained(self)
             .flatMapLatest { owner, _ in
                 owner.fetchMessagesUseCase.fetchMessages(channelId: owner.channel.id)

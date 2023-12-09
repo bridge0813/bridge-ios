@@ -7,7 +7,7 @@
 
 import Starscream
 
-final class DefaultWebSocketService: WebSocketService {    
+final class DefaultWebSocketService: WebSocketService {
     
     static let shared = DefaultWebSocketService()
     private init() { }
@@ -26,8 +26,8 @@ final class DefaultWebSocketService: WebSocketService {
         socket?.disconnect()
     }
     
-    func write(_ frame: WebSocketFrame) {
-        socket?.write(string: frame)
+    func write(_ frame: WebSocketFrame, completion: (() -> Void)?) {
+        socket?.write(string: frame, completion: completion)
     }
 }
 
