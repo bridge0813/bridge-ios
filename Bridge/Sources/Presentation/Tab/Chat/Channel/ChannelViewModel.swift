@@ -65,11 +65,13 @@ final class ChannelViewModel: ViewModelType {
             .notification(UIApplication.didEnterBackgroundNotification)
             .share()
         
+        // 채널 구독 (stomp 구독 및 읽음 상태 업데이트)
         channelSubscriptionUseCase.subscribe(id: channel.id)
             .take(until: didEnterBackground)
             .bind(to: messages)
             .disposed(by: disposeBag)
         
+        // 메시지 구독 (새로운 메시지 실시간 반영)
         observeMessageUseCase.observeMessage()
             .take(until: didEnterBackground)
             .map { incomingMessage in
@@ -82,7 +84,6 @@ final class ChannelViewModel: ViewModelType {
         
         // 백그라운드 상태에서 포그라운드로 전환 시 재구독 (view did load 트리거 안되므로)
         stompDidConnected
-            .debug()
             .withUnretained(self)
             .flatMapLatest { owner, _ in
                 owner.channelSubscriptionUseCase.subscribe(id: owner.channel.id)
@@ -118,6 +119,7 @@ final class ChannelViewModel: ViewModelType {
             .bind(to: messages)
             .disposed(by: disposeBag)
         
+        // 기존 메시지 불러옴
         input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
