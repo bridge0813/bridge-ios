@@ -65,7 +65,7 @@
 
 ## 🤝 협업
 ### 🎙️ 의사소통
-- 디스코드를 사용해 화상회의 및 의사소통 플랫폼 통일
+- 디스코드를 사용해 화상회의 및 의사소통 플랫폼 일원화
 - 파트별 채널 분리를 통해 불필요한 의사소통 비용 제거
 - 깃허브 웹훅을 사용하여 개발 상황 실시간 공유
 <img src="https://github.com/bridge0813/bridge-ios/assets/65343417/f8e49ee1-921c-4767-a6a6-cf3afba68a24">
@@ -84,7 +84,6 @@
 - [스타일 가이드](https://hoyunjung.notion.site/Swift-Style-Guide-e5aba08128de4571a006d84bf3716f2f?pvs=4)
 - [커밋, PR, 이슈 컨벤션](https://hoyunjung.notion.site/GitHub-Conventions-bb47b76884c24b21847181c76d562c7d?pvs=4)
 - [브랜치 관리 전략](https://hoyunjung.notion.site/3fb05482da58416ab8984ff8420a67d8?pvs=4)
-- [코드 리뷰](https://hoyunjung.notion.site/e7fb35cf50de454ca4ea6646d7c41095?pvs=4)
 
 </br>
 
