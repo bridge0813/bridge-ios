@@ -67,7 +67,7 @@ extension BridgePlaceholderView {
     enum PlaceholderType {
         case needSignIn
         case error
-        case emptyChatRoom
+        case emptyChannel
         
         case comingSoon
         case emptyProject
@@ -90,7 +90,7 @@ extension BridgePlaceholderView {
             titleLabel.text = "오류가 발생했습니다."
             descriptionLabel.text = "잠시 후 다시 시도해 주세요."
             
-        case .emptyChatRoom:
+        case .emptyChannel:
             emojiImageView.image = UIImage(named: "graphic_chat")
             titleLabel.text = "현재 채팅이 없어요!"
             descriptionLabel.text = "예비 팀원과 새로운 채팅을 시작해보세요."
