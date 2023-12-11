@@ -114,14 +114,15 @@ final class MemberRequirementInputViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-    // MARK: - Configuration
-    override func configureAttributes() {
-        configureNavigationUI()
-        enableKeyboardHiding()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNoShadowNavigationBarAppearance()
     }
     
-    private func configureNavigationUI() {
+    // MARK: - Configuration
+    override func configureAttributes() {
         navigationItem.title = "모집글 작성"
+        enableKeyboardHiding()
     }
     
     // MARK: - Layout
@@ -166,13 +167,12 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         contentContainer.pin.all()
         contentContainer.flex.layout(mode: .adjustHeight)
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentContainer.frame.height)
+        scrollView.contentSize = contentContainer.frame.size
     }
     
     // MARK: - Bind
     override func bind() {
         let input = MemberRequirementInputViewModel.Input(
-            viewDidLoad: .just(()),
             recruitNumber: setRecruitmentNumberView.completeButtonTapped,
             techTags: addTechTagPopUpView.completeButtonTapped,
             requirementText: requirementTextView.resultText,
@@ -212,7 +212,6 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         // 모집인원 선택 팝업 뷰 보여주기
         setRecruitNumberButton.rx.tap
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.setRecruitmentNumberView.show()
@@ -221,7 +220,6 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         // 기술태그 추가 팝업 뷰 보여주기
         addTechStackButton.rx.tap
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.addTechTagPopUpView.show()
@@ -237,7 +235,6 @@ final class MemberRequirementInputViewController: BaseViewController {
         scrollView.rx.contentOffset
             .map { $0.y > 0 }
             .distinctUntilChanged()
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, shouldHidden in
                 owner.dividerView.isHidden = !shouldHidden

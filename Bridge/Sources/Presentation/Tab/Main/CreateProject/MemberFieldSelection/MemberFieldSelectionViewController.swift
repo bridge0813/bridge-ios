@@ -84,16 +84,16 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.standardAppearance.shadowColor = nil
-        navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = nil
+        configureNoShadowNavigationBarAppearance()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        configureDefaultNavigationBarAppearance()
     }
     
     // MARK: - Configuration
     override func configureAttributes() {
-        configureNavigationUI()
-    }
-    
-    private func configureNavigationUI() {
         navigationItem.leftBarButtonItem = dismissButton
         navigationItem.title = "모집글 작성"
     }
@@ -111,15 +111,15 @@ final class MemberFieldSelectionViewController: BaseViewController {
             flex.addItem().grow(1)  // ScrollView의 사이즈만큼 빈 공간.
             
             // grow(1)로 레이아웃을 배치하면, height가 원활하게 잡히지 않고 화면 밖을 벗어나는 문제가 발생.(디바이스)
-            flex.addItem(scrollView).position(.absolute).width(100%).top(35).bottom(84).marginHorizontal(16)
+            flex.addItem(scrollView).position(.absolute).width(100%).top(35).bottom(84)
             
             flex.addItem(nextButton).height(52).marginBottom(24).marginHorizontal(16)
         }
         
-        contentContainer.flex.define { flex in
+        contentContainer.flex.paddingHorizontal(16).define { flex in
             flex.addItem(descriptionLabel).width(148).height(60).marginTop(16)
             flex.addItem(tipMessageBox).height(38).marginTop(16)
-            flex.addItem(setFieldView).height(396).marginTop(40)
+            flex.addItem(setFieldView).height(396).marginTop(40).marginBottom(15)
         }
     }
     
@@ -129,18 +129,13 @@ final class MemberFieldSelectionViewController: BaseViewController {
         
         contentContainer.pin.all()
         contentContainer.flex.layout(mode: .adjustHeight)
-        
-        // 130은 스크롤 뷰의 스크롤이 가장 아래로 내려갔을 때, padding 값(피그마 스크롤 처리 참고).
-        scrollView.contentSize = CGSize(
-            width: scrollView.frame.width,
-            height: contentContainer.frame.height + 130
-        )
+        scrollView.contentSize = contentContainer.frame.size
     }
     
     // MARK: - Binding
     override func bind() {
         let input = MemberFieldSelectionViewModel.Input(
-            dismissButtonTapped: dismissButton.rx.tap.asObservable(),
+            dismissButtonTapped: dismissButton.rx.tap,
             fieldTagButtonTapped: setFieldView.fieldTagButtonTapped,
             nextButtonTapped: nextButton.rx.tap.asObservable()
         )
@@ -157,7 +152,6 @@ final class MemberFieldSelectionViewController: BaseViewController {
         scrollView.rx.contentOffset
             .map { $0.y > 0 }
             .distinctUntilChanged()
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, shouldHidden in
                 owner.dividerView.isHidden = !shouldHidden

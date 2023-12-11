@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 // 출처: https://github.com/AssistoLab/DropDown
 final class DropDown: BaseView {
@@ -57,8 +58,8 @@ final class DropDown: BaseView {
     
     // MARK: - 액션
     let itemSelected = PublishSubject<DropdownItem>()  // 드롭다운 항목을 선택했을 경우
-    let willShow = PublishSubject<Void>()              // 드롭다운이 보일 때
-    let willHide = PublishSubject<Void>()              // 드롭다운이 사라질 때
+    let willShow = PublishRelay<Void>()                // 드롭다운이 보일 때
+    let willHide = PublishRelay<Void>()                // 드롭다운이 사라질 때
     
     
     // MARK: - Property
@@ -399,7 +400,7 @@ extension DropDown {
     
     func show() {
         
-        willShow.onNext(())
+        willShow.accept(())
 
         // 계산된 레이아웃이 화면에 표시될 수 없는 경우
         if !(canBeDisplayed ?? false) {
@@ -452,7 +453,7 @@ extension DropDown {
             }
         )
         
-        willHide.onNext(())
+        willHide.accept(())
     }
 }
 

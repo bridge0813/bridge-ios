@@ -11,7 +11,7 @@ import RxCocoa
 final class MemberFieldSelectionViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        let dismissButtonTapped: Observable<Void>
+        let dismissButtonTapped: ControlEvent<Void>
         let fieldTagButtonTapped: Observable<String>
         let nextButtonTapped: Observable<Void>
     }

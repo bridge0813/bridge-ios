@@ -178,7 +178,7 @@
 		7C55E65C2AE961250018FA5D /* AddedTechTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */; };
 		7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift */; };
 		7C55E6632AEBBCBF0018FA5D /* AddTechTagPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6622AEBBCBF0018FA5D /* AddTechTagPopUpView.swift */; };
-		7C569CF32A9F67C60063D362 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF22A9F67C60063D362 /* Project.swift */; };
+		7C569CF32A9F67C60063D362 /* ProjectPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF22A9F67C60063D362 /* ProjectPreview.swift */; };
 		7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */; };
 		7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */; };
 		7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D022A9F72320063D362 /* ProjectDTO.swift */; };
@@ -212,11 +212,17 @@
 		7CA04F432B029B3A007B9191 /* FetchProjectDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F422B029B3A007B9191 /* FetchProjectDetailUseCase.swift */; };
 		7CA04F452B029B7C007B9191 /* RecruitFieldDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F442B029B7C007B9191 /* RecruitFieldDetailViewController.swift */; };
 		7CA04F4B2B03D5DE007B9191 /* ProjectDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F4A2B03D5DE007B9191 /* ProjectDetailHeaderView.swift */; };
-		7CA04F4E2B04A6CA007B9191 /* ProjectDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F4D2B04A6CA007B9191 /* ProjectDetail.swift */; };
+		7CA04F4E2B04A6CA007B9191 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F4D2B04A6CA007B9191 /* Project.swift */; };
 		7CA04F512B04AAB3007B9191 /* ProjectDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F502B04AAB2007B9191 /* ProjectDetailDTO.swift */; };
 		7CA04F532B04B6E7007B9191 /* MemberRequirementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F522B04B6E7007B9191 /* MemberRequirementDTO.swift */; };
 		7CA04F552B04D88E007B9191 /* ProjectManagementMenuPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F542B04D88E007B9191 /* ProjectManagementMenuPopUpView.swift */; };
 		7CA04F572B05D50E007B9191 /* ProjectDetailTechTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F562B05D50E007B9191 /* ProjectDetailTechTag.swift */; };
+		7CA04F5E2B0A029A007B9191 /* CreateProjectRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F5D2B0A029A007B9191 /* CreateProjectRequestDTO.swift */; };
+		7CA04F652B0A6148007B9191 /* ProjectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */; };
+		7CA04F692B0A6F02007B9191 /* CreateProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */; };
+		7CA04F6C2B0C5D29007B9191 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA04F6B2B0C5D29007B9191 /* Lottie */; };
+		7CA04F712B0C5FFE007B9191 /* firecracker.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CA04F702B0C5FFE007B9191 /* firecracker.json */; };
+		7CA04F732B0E675B007B9191 /* CreateProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F722B0E675B007B9191 /* CreateProjectResponseDTO.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -399,7 +405,7 @@
 		7C55E65B2AE961250018FA5D /* AddedTechTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedTechTagView.swift; sourceTree = "<group>"; };
 		7C55E6602AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRecruitmentNumberPopUpView.swift; sourceTree = "<group>"; };
 		7C55E6622AEBBCBF0018FA5D /* AddTechTagPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTechTagPopUpView.swift; sourceTree = "<group>"; };
-		7C569CF22A9F67C60063D362 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		7C569CF22A9F67C60063D362 /* ProjectPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPreview.swift; sourceTree = "<group>"; };
 		7C569CF92A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
 		7C569D022A9F72320063D362 /* ProjectDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDTO.swift; sourceTree = "<group>"; };
@@ -433,11 +439,16 @@
 		7CA04F422B029B3A007B9191 /* FetchProjectDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProjectDetailUseCase.swift; sourceTree = "<group>"; };
 		7CA04F442B029B7C007B9191 /* RecruitFieldDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitFieldDetailViewController.swift; sourceTree = "<group>"; };
 		7CA04F4A2B03D5DE007B9191 /* ProjectDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailHeaderView.swift; sourceTree = "<group>"; };
-		7CA04F4D2B04A6CA007B9191 /* ProjectDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetail.swift; sourceTree = "<group>"; };
+		7CA04F4D2B04A6CA007B9191 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7CA04F502B04AAB2007B9191 /* ProjectDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailDTO.swift; sourceTree = "<group>"; };
 		7CA04F522B04B6E7007B9191 /* MemberRequirementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRequirementDTO.swift; sourceTree = "<group>"; };
 		7CA04F542B04D88E007B9191 /* ProjectManagementMenuPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectManagementMenuPopUpView.swift; sourceTree = "<group>"; };
 		7CA04F562B05D50E007B9191 /* ProjectDetailTechTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailTechTag.swift; sourceTree = "<group>"; };
+		7CA04F5D2B0A029A007B9191 /* CreateProjectRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectRequestDTO.swift; sourceTree = "<group>"; };
+		7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEndpoint.swift; sourceTree = "<group>"; };
+		7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectUseCase.swift; sourceTree = "<group>"; };
+		7CA04F702B0C5FFE007B9191 /* firecracker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firecracker.json; sourceTree = "<group>"; };
+		7CA04F722B0E675B007B9191 /* CreateProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectResponseDTO.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -464,6 +475,7 @@
 				7B71E75F2A933C18001B5D2C /* FlexLayout in Frameworks */,
 				7B71E7632A933C18001B5D2C /* FlexLayoutYogaKit in Frameworks */,
 				7B71E75C2A933BF5001B5D2C /* RxSwift in Frameworks */,
+				7CA04F6C2B0C5D29007B9191 /* Lottie in Frameworks */,
 				7B71E7562A933BF5001B5D2C /* RxBlocking in Frameworks */,
 				7B71E7662A933C25001B5D2C /* PinLayout in Frameworks */,
 				7B71E7612A933C18001B5D2C /* FlexLayoutYoga in Frameworks */,
@@ -820,6 +832,7 @@
 			isa = PBXGroup;
 			children = (
 				7B6123702AC15D0F006E72C1 /* Font */,
+				7CA04F6D2B0C5F27007B9191 /* Lottie */,
 				7B71E74B2A9330C7001B5D2C /* LaunchScreen.storyboard */,
 				7B71E7492A9330C7001B5D2C /* Assets.xcassets */,
 				7B71E74E2A9330C7001B5D2C /* Info.plist */,
@@ -952,8 +965,7 @@
 			children = (
 				7B14DB2C2AB1D950009A00EB /* Auth */,
 				7B14DB292AB1625D009A00EB /* User */,
-				7CA04F4C2B04A6B4007B9191 /* ProjectDetail */,
-				7C569CF12A9F67860063D362 /* Main */,
+				7CA04F5F2B0A4AE6007B9191 /* Project */,
 				7BA36C992A9C5081000DAB02 /* Chat */,
 				7CA04F0D2AF8F852007B9191 /* TechStack */,
 			);
@@ -964,7 +976,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB2F2AB1DAC3009A00EB /* Auth */,
-				7C569CFB2A9F6F8A0063D362 /* Main */,
+				7C569CFB2A9F6F8A0063D362 /* Project */,
 				7BA36CA52A9C6878000DAB02 /* Chat */,
 			);
 			path = RepositoryInterfaces;
@@ -974,8 +986,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB262AB15E69009A00EB /* Auth */,
-				7CA04F3F2B022D69007B9191 /* ProjectDetail */,
-				7C569CF82A9F6D360063D362 /* Main */,
+				7CA04F662B0A6EA5007B9191 /* Project */,
 				7BA36C952A9C4D0F000DAB02 /* Chat */,
 			);
 			path = UseCases;
@@ -1013,7 +1024,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB322AB1DBEC009A00EB /* Auth */,
-				7C569D072A9F7E060063D362 /* Main */,
+				7C569D072A9F7E060063D362 /* Project */,
 				7BA36CA22A9C681B000DAB02 /* Chat */,
 			);
 			path = Repositories;
@@ -1053,8 +1064,7 @@
 			isa = PBXGroup;
 			children = (
 				7B61235C2ABD9C9E006E72C1 /* Auth */,
-				7CA04F4F2B04AA52007B9191 /* ProjectDetail */,
-				7C569D012A9F720B0063D362 /* Main */,
+				7CA04F5B2B0A0254007B9191 /* Project */,
 				7BA36CAF2A9D960E000DAB02 /* Chat */,
 				7B9420562B05AC6E00FEE058 /* Extensions */,
 			);
@@ -1079,6 +1089,7 @@
 				7B9C31B12B0788D1007E36B2 /* Type */,
 				7B9C31B02B0788C0007E36B2 /* Protocols */,
 				7B153C092AD64E2A00618280 /* Auth */,
+				7CA04F632B0A6134007B9191 /* Project */,
 				7B153C0A2AD64E3200618280 /* Chat */,
 				7B9C31AD2B07756F007E36B2 /* WebSocket */,
 			);
@@ -1152,7 +1163,6 @@
 				7B61236B2AC158B0006E72C1 /* DesignSystem */,
 				7BA36C8C2A9C4B20000DAB02 /* Common */,
 				7B2D76E92AA993AF00E5907B /* Auth */,
-				7CA04F102AFDF645007B9191 /* ProjectDetail */,
 				7BB2C2452A98546400AA2328 /* Tab */,
 			);
 			path = Presentation;
@@ -1171,6 +1181,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB2C2442A98542700AA2328 /* Coordinator */,
+				7CA04F102AFDF645007B9191 /* ProjectDetail */,
 				7CF93E012A9C64EB0013EBD6 /* Main */,
 				7BB2C24A2A985A0400AA2328 /* Chat */,
 				7B6C20432AF8869C005689F5 /* MyPage */,
@@ -1293,14 +1304,6 @@
 			path = PlaceholderView;
 			sourceTree = "<group>";
 		};
-		7C569CF12A9F67860063D362 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				7C569CF22A9F67C60063D362 /* Project.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
 		7C569CF82A9F6D360063D362 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -1310,12 +1313,12 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		7C569CFB2A9F6F8A0063D362 /* Main */ = {
+		7C569CFB2A9F6F8A0063D362 /* Project */ = {
 			isa = PBXGroup;
 			children = (
 				7C569CFC2A9F6F9E0063D362 /* ProjectRepository.swift */,
 			);
-			path = Main;
+			path = Project;
 			sourceTree = "<group>";
 		};
 		7C569D012A9F720B0063D362 /* Main */ = {
@@ -1334,13 +1337,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		7C569D072A9F7E060063D362 /* Main */ = {
+		7C569D072A9F7E060063D362 /* Project */ = {
 			isa = PBXGroup;
 			children = (
 				7C569D082A9F7E160063D362 /* DefaultProjectRepository.swift */,
 				7C55E63A2ADEA2A40018FA5D /* MockProjectRepository.swift */,
 			);
-			path = Main;
+			path = Project;
 			sourceTree = "<group>";
 		};
 		7C8B822C2AC8498C00F7B889 /* ButtonGroup */ = {
@@ -1469,35 +1472,90 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		7CA04F3F2B022D69007B9191 /* ProjectDetail */ = {
+		7CA04F3F2B022D69007B9191 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
 				7CA04F422B029B3A007B9191 /* FetchProjectDetailUseCase.swift */,
 			);
-			path = ProjectDetail;
+			path = Detail;
 			sourceTree = "<group>";
 		};
-		7CA04F4C2B04A6B4007B9191 /* ProjectDetail */ = {
-			isa = PBXGroup;
-			children = (
-				7CA04F4D2B04A6CA007B9191 /* ProjectDetail.swift */,
-				7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */,
-			);
-			path = ProjectDetail;
-			sourceTree = "<group>";
-		};
-		7CA04F4F2B04AA52007B9191 /* ProjectDetail */ = {
+		7CA04F4F2B04AA52007B9191 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
 				7CA04F502B04AAB2007B9191 /* ProjectDetailDTO.swift */,
 				7CA04F522B04B6E7007B9191 /* MemberRequirementDTO.swift */,
 			);
-			path = ProjectDetail;
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		7CA04F5B2B0A0254007B9191 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F5C2B0A027A007B9191 /* Create */,
+				7C569D012A9F720B0063D362 /* Main */,
+				7CA04F4F2B04AA52007B9191 /* Detail */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		7CA04F5C2B0A027A007B9191 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F5D2B0A029A007B9191 /* CreateProjectRequestDTO.swift */,
+				7CA04F722B0E675B007B9191 /* CreateProjectResponseDTO.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		7CA04F5F2B0A4AE6007B9191 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F4D2B04A6CA007B9191 /* Project.swift */,
+				7C569CF22A9F67C60063D362 /* ProjectPreview.swift */,
+				7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		7CA04F632B0A6134007B9191 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		7CA04F662B0A6EA5007B9191 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F672B0A6EC7007B9191 /* Create */,
+				7C569CF82A9F6D360063D362 /* Main */,
+				7CA04F3F2B022D69007B9191 /* Detail */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		7CA04F672B0A6EC7007B9191 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		7CA04F6D2B0C5F27007B9191 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				7CA04F702B0C5FFE007B9191 /* firecracker.json */,
+			);
+			path = Lottie;
 			sourceTree = "<group>";
 		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
+				7C2400472AB7D45500D9D5F1 /* DataStorage */,
 				7CC9F6C82AAF087A00685EA9 /* MemberFieldSelection */,
 				7CC9F6C92AAF0E1500685EA9 /* MemberDetailInput */,
 				7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */,
@@ -1577,7 +1635,6 @@
 		7CF93E012A9C64EB0013EBD6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				7C2400472AB7D45500D9D5F1 /* DataStorage */,
 				7CF93E022A9C65040013EBD6 /* Coordinator */,
 				7CF93E032A9C650D0013EBD6 /* Main */,
 				7CC9F6C12AAEE9E800685EA9 /* CreateProject */,
@@ -1637,6 +1694,7 @@
 				7B71E7622A933C18001B5D2C /* FlexLayoutYogaKit */,
 				7B71E7652A933C25001B5D2C /* PinLayout */,
 				7B1D9FB42ADE11A9005F42D9 /* Starscream */,
+				7CA04F6B2B0C5D29007B9191 /* Lottie */,
 			);
 			productName = Bridge;
 			productReference = 7B71E73D2A9330C6001B5D2C /* Bridge.app */;
@@ -1671,6 +1729,7 @@
 				7B71E75D2A933C18001B5D2C /* XCRemoteSwiftPackageReference "FlexLayout" */,
 				7B71E7642A933C25001B5D2C /* XCRemoteSwiftPackageReference "PinLayout" */,
 				7B1D9FB32ADE11A9005F42D9 /* XCRemoteSwiftPackageReference "Starscream" */,
+				7CA04F6A2B0C5D29007B9191 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 7B71E73E2A9330C6001B5D2C /* Products */;
 			projectDirPath = "";
@@ -1689,6 +1748,7 @@
 				7B6123812AC15D2E006E72C1 /* Pretendard-SemiBold.otf in Resources */,
 				7B61237F2AC15D2E006E72C1 /* Pretendard-ExtraLight.otf in Resources */,
 				7B6123802AC15D2E006E72C1 /* Pretendard-Bold.otf in Resources */,
+				7CA04F712B0C5FFE007B9191 /* firecracker.json in Resources */,
 				7B6123822AC15D2E006E72C1 /* Pretendard-Thin.otf in Resources */,
 				7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */,
 				7B71E74D2A9330C7001B5D2C /* LaunchScreen.storyboard in Resources */,
@@ -1739,6 +1799,7 @@
 				7B9420542B04F46F00FEE058 /* StompMessageResponseDTO.swift in Sources */,
 				7B6C20482AF88707005689F5 /* MyPageCoordinator.swift in Sources */,
 				7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */,
+				7CA04F5E2B0A029A007B9191 /* CreateProjectRequestDTO.swift in Sources */,
 				7B1742F42AFA46A7004F0953 /* AccessTokenResponseDTO.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7CA04F2C2B01F822007B9191 /* ProjectDetailMenuBar.swift in Sources */,
@@ -1757,7 +1818,7 @@
 				7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */,
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
 				7BBD662A2AFB98D2001644D1 /* ObservableType+.swift in Sources */,
-				7CA04F4E2B04A6CA007B9191 /* ProjectDetail.swift in Sources */,
+				7CA04F4E2B04A6CA007B9191 /* Project.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
 				7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */,
 				7B153C082AD64A6B00618280 /* MockChannelRepository.swift in Sources */,
@@ -1844,6 +1905,7 @@
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
 				7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */,
+				7CA04F732B0E675B007B9191 /* CreateProjectResponseDTO.swift in Sources */,
 				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
 				7C569D032A9F72320063D362 /* ProjectDTO.swift in Sources */,
 				7CA04F2E2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift in Sources */,
@@ -1898,10 +1960,11 @@
 				7CA04F572B05D50E007B9191 /* ProjectDetailTechTag.swift in Sources */,
 				7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */,
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,
-				7C569CF32A9F67C60063D362 /* Project.swift in Sources */,
+				7C569CF32A9F67C60063D362 /* ProjectPreview.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
 				7B1E5ABC2ADCFD790053E9B3 /* ChannelViewController.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChannelUseCase.swift in Sources */,
+				7CA04F692B0A6F02007B9191 /* CreateProjectUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
 				7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */,
@@ -1928,6 +1991,7 @@
 				7C8CC4132AEEB5CC0032F237 /* TechTagCell.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
+				7CA04F652B0A6148007B9191 /* ProjectEndpoint.swift in Sources */,
 				7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */,
 				7C1366422AC27F9100EB415D /* BridgeSendMessageButton.swift in Sources */,
 				7B9420582B05AC8900FEE058 /* String+DateFormat.swift in Sources */,
@@ -2193,6 +2257,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		7CA04F6A2B0C5D29007B9191 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2240,6 +2312,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7B71E7642A933C25001B5D2C /* XCRemoteSwiftPackageReference "PinLayout" */;
 			productName = PinLayout;
+		};
+		7CA04F6B2B0C5D29007B9191 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CA04F6A2B0C5D29007B9191 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
