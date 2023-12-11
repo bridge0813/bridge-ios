@@ -15,9 +15,9 @@ final class ManagementViewModel: ViewModelType {
         let viewWillAppear: Observable<Bool>
         let managementTabButtonTapped: Observable<ManagementTabType>
         let filterActionTapped: Observable<String>
-        let goToDetailButtonTapped: Observable<Int>
-        let goToApplicantListButtonTapped: Observable<Int>
-        let deleteButtonTapped: Observable<Int>
+        let goToDetailButtonTapped: Observable<ProjectID>
+        let goToApplicantListButtonTapped: Observable<ProjectID>
+        let deleteButtonTapped: Observable<ProjectID>
     }
     
     struct Output {
@@ -33,6 +33,7 @@ final class ManagementViewModel: ViewModelType {
     
     private let fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase
     private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
+    private let deleteProjectUseCase: DeleteProjectUseCase
     
     var selectedFilterOption: FilterMenuType = .all // 현재 선택된 필터링 옵션
     
@@ -40,11 +41,13 @@ final class ManagementViewModel: ViewModelType {
     init(
         coordinator: ManagementCoordinator,
         fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase,
-        fetchMyProjectsUseCase: FetchMyProjectsUseCase
+        fetchMyProjectsUseCase: FetchMyProjectsUseCase,
+        deleteProjectUseCase: DeleteProjectUseCase
     ) {
         self.coordinator = coordinator
         self.fetchAppliedProjectsUseCase = fetchAppliedProjectsUseCase
         self.fetchMyProjectsUseCase = fetchMyProjectsUseCase
+        self.deleteProjectUseCase = deleteProjectUseCase
     }
     
     // MARK: - Transformation
@@ -107,6 +110,7 @@ final class ManagementViewModel: ViewModelType {
                 projects.accept(projects.value)
             })
         
+        // 모집글 상세 이동 처리
         input.goToDetailButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, projectID in
@@ -114,6 +118,7 @@ final class ManagementViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 지원자 목록 이동 처리
         input.goToApplicantListButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, projectID in
@@ -121,10 +126,40 @@ final class ManagementViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 모집글 삭제 처리
         input.deleteButtonTapped
+            .flatMap { projectID -> Maybe<ProjectID> in
+                // 삭제 Alert을 보여주고, 유저가 "삭제하기" 를 클릭했을 경우 이벤트를 전달.
+                Maybe<ProjectID>.create { [weak self] maybe in
+                    guard let self else {
+                        maybe(.completed)
+                        return Disposables.create()
+                    }
+                    
+                    self.coordinator?.showAlert(
+                        configuration: .deleteProject,
+                        primaryAction: {
+                            maybe(.success(projectID))
+                        },
+                        cancelAction: {
+                            maybe(.completed)
+                        }
+                    )
+                    
+                    return Disposables.create()
+                }
+            }
             .withUnretained(self)
-            .subscribe(onNext: { owner, projectID in
-                owner.coordinator?.showAlert(configuration: .deleteProject)
+            .flatMap { owner, projectID -> Observable<Result<ProjectID, Error>> in
+                owner.deleteProjectUseCase.delete(projectID: projectID).toResult()  // 삭제 진행
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                owner.handleDeleteProjectResult(
+                    for: result,
+                    projects: projects,
+                    viewState: viewState
+                )
             })
             .disposed(by: disposeBag)
         
@@ -155,7 +190,7 @@ extension ManagementViewModel {
         }
     }
     
-    // View state handling
+    /// 네트워킹에 실패했을 경우, 보여줄 뷰의 상태 처리
     private func handleError(_ error: Error, viewState: BehaviorRelay<ViewState>) {
         switch error as? NetworkError {
         case .statusCode(let statusCode):
@@ -165,10 +200,37 @@ extension ManagementViewModel {
             viewState.accept(.error)
         }
     }
+    
+    /// 모집글 삭제  결과 처리
+    private func handleDeleteProjectResult(
+        for result: Result<ProjectID, Error>,
+        projects: BehaviorRelay<[ProjectPreview]>,
+        viewState: BehaviorRelay<ViewState>
+    ) {
+        switch result {
+        case .success(let projectID):
+            var currentProjectList = projects.value
+            
+            if let deletedProjectIndex = currentProjectList.firstIndex(where: { $0.projectID == projectID }) {
+                currentProjectList.remove(at: deletedProjectIndex)
+                viewState.accept(currentProjectList.isEmpty ? .empty : .general)
+                projects.accept(currentProjectList)
+            }
+            
+        case .failure(let error):
+            coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                title: "모집글 삭제에 실패했습니다.",
+                description: error.localizedDescription
+            ))
+            
+        }
+    }
 }
 
 // MARK: - Data source
 extension ManagementViewModel {
+    typealias ProjectID = Int
+    
     enum Section: CaseIterable {
         case main
     }

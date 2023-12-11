@@ -17,6 +17,7 @@ final class ManagementCoordinator: Coordinator {
     
     private let fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase
     private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
+    private let deleteProjectUseCase: DeleteProjectUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -28,6 +29,7 @@ final class ManagementCoordinator: Coordinator {
 
         fetchAppliedProjectsUseCase = DefaultFetchAppliedProjectsUseCase(projectRepository: projectRepository)
         fetchMyProjectsUseCase = DefaultFetchMyProjectsUseCase(projectRepository: projectRepository)
+        deleteProjectUseCase = DefaultDeleteProjectUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Methods
@@ -42,7 +44,8 @@ extension ManagementCoordinator {
         let viewModel = ManagementViewModel(
             coordinator: self,
             fetchAppliedProjectsUseCase: fetchAppliedProjectsUseCase,
-            fetchMyProjectsUseCase: fetchMyProjectsUseCase
+            fetchMyProjectsUseCase: fetchMyProjectsUseCase,
+            deleteProjectUseCase: deleteProjectUseCase
         )
         
         let vc = ManagementViewController(viewModel: viewModel)

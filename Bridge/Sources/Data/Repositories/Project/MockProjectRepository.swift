@@ -44,4 +44,8 @@ final class MockProjectRepository: ProjectRepository {
     func bookmark(projectID: Int) -> Observable<Int> {
         .just(projectID)
     }
+    
+    func delete(projectID: Int) -> Observable<Int> {
+        .just(projectID)
+    }
 }

@@ -94,6 +94,11 @@ final class DefaultProjectRepository: ProjectRepository {
         return networkService.request(to: bookmarkEndpoint, interceptor: AuthInterceptor())
             .map { _ in projectID }
     }
+    
+    // MARK: - Delete
+    func delete(projectID: Int) -> Observable<Int> {
+        .just(projectID)
+    }
 }
 
 private extension DefaultProjectRepository {

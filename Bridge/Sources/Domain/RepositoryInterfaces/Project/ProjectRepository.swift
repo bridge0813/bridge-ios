@@ -23,4 +23,7 @@ protocol ProjectRepository {
     
     // MARK: - Bookmark
     func bookmark(projectID: Int) -> Observable<Int>
+    
+    // MARK: - Delete
+    func delete(projectID: Int) -> Observable<Int>
 }
