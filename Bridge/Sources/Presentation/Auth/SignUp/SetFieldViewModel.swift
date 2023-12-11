@@ -59,7 +59,7 @@ final class SetFieldViewModel: ViewModelType {
                     owner.coordinator?.finish()
                 },
                 onError: { owner, _ in
-                    owner.coordinator?.showErrorAlert(configuration: .networkError) {
+                    owner.coordinator?.showErrorAlert(configuration: .defaultError) {
                         owner.coordinator?.finish()
                     }
                 }

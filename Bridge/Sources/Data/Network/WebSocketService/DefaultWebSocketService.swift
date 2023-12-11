@@ -5,17 +5,18 @@
 //  Created by 정호윤 on 10/18/23.
 //
 
-import Foundation
 import Starscream
 
-// TODO: 방식 자체 고민해보기...
 final class DefaultWebSocketService: WebSocketService {
     
+    static let shared = DefaultWebSocketService()
+    private init() { }
+    
+    weak var delegate: WebSocketServiceDelegate?
     private var socket: WebSocket?
     
-    func connect(_ endpoint: WebSocketEndpoint) {
+    func connect(to endpoint: Endpoint) {
         guard let request = endpoint.toURLRequest() else { return }
-        
         socket = WebSocket(request: request)
         socket?.delegate = self
         socket?.connect()
@@ -25,8 +26,8 @@ final class DefaultWebSocketService: WebSocketService {
         socket?.disconnect()
     }
     
-    func write() {
-        
+    func write(_ frame: WebSocketFrame, completion: (() -> Void)?) {
+        socket?.write(string: frame, completion: completion)
     }
 }
 
@@ -34,35 +35,42 @@ extension DefaultWebSocketService: WebSocketDelegate {
     func didReceive(event: WebSocketEvent, client: WebSocketClient) {
         switch event {
         case .viabilityChanged:
-            print("viabilityChanged")
+            print("[Websocket] Viability changed")
             
-        case .connected(let headers):
-            client.write(string: "정호윤")
-            print("websocket connected: \(headers)")
+        case .connected:
+            print("[WebSocket] Connected")
+            delegate?.webSocketDidConnect()
             
         case .disconnected(let reason, let code):
-            print("websocket disconnected: \(reason) with code: \(code)")
+            print("[Websocket] Disconnected")
+            print("\(reason) with code \(code)")
+            delegate?.webSocketDidDisconnect()
             
         case .text(let text):
-            print("Received string: \(text)")
+            print("[Websocket] Received string")
+            print(text)
+            delegate?.webSocketDidReceive(text: text)
             
         case .binary(let data):
-            print("Received binary data: \(data.count)")
-            
-        case .ping, .pong:
-            break
+            print("[Websocket] Received binary data")
+            print("\(data)")
+            delegate?.webSocketDidReceive(data: data)
             
         case .reconnectSuggested:
-            print("reconnectSuggested")
+            print("[Websocket] Reconnect suggested")
             
         case .peerClosed:
-            print("peer closed")
+            print("[Websocket] Peer closed")
             
         case .cancelled:
-            print("websocket canclled")
+            print("[WebSocket] Cancelled")
             
         case .error(let error):
-            print("websocket error: \(String(describing: error))")
+            print("[WebSocket] Error")
+            print(String(describing: error))
+            
+        default:
+            print("[WebSocket] Did receive something")
         }
     }
 }

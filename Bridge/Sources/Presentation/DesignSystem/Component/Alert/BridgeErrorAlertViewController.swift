@@ -65,11 +65,11 @@ final class BridgeErrorAlertViewController: BaseViewController {
         super.viewDidAppear(animated)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
-            if let primaryAction = self?.primaryAction {
-                primaryAction()
+            self?.dismiss(animated: true) {
+                if let primaryAction = self?.primaryAction {
+                    primaryAction()
+                }
             }
-            
-            self?.dismiss(animated: true)
         }
     }
     
@@ -77,11 +77,11 @@ final class BridgeErrorAlertViewController: BaseViewController {
         let location = sender.location(in: view)
         
         if backgroundView.frame.contains(location) {
-            if let primaryAction {
-                primaryAction()
+            dismiss(animated: true) { [weak self] in
+                if let primaryAction = self?.primaryAction {
+                    primaryAction()
+                }
             }
-            
-            dismiss(animated: true)
         }
     }
     
@@ -89,8 +89,8 @@ final class BridgeErrorAlertViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
-        rootFlexContainer.flex.justifyContent(.end).alignItems(.center).define { flex in
-            flex.addItem(backgroundView).padding(20, 16).marginBottom(34).width(343).define { flex in
+        rootFlexContainer.flex.justifyContent(.center).alignItems(.center).define { flex in
+            flex.addItem(backgroundView).width(92%).padding(20, 16).define { flex in
                 flex.addItem(titleLabel)
                 flex.addItem(descriptionLabel).marginTop(6).isIncludedInLayout(descriptionLabel.text?.isEmpty != nil)
             }

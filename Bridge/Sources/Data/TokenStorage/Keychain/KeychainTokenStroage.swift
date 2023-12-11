@@ -9,7 +9,7 @@ import Foundation
 
 struct KeychainTokenStorage: TokenStorage {
     // MARK: - Fetch
-    func get(_ key: KeychainAccount) -> Token? {
+    func get(_ key: KeychainAccount) -> Token {
         let searchQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key.rawValue,
@@ -21,12 +21,12 @@ struct KeychainTokenStorage: TokenStorage {
         var item: CFTypeRef?
         let status = SecItemCopyMatching(searchQuery as CFDictionary, &item)  // 일치하는 항목 있으면 item에 할당
         
-        guard status == errSecSuccess else { return nil }
+        guard status == errSecSuccess else { return invalidToken }
         
         guard let existingItem = item as? [String: Any],
               let data = existingItem[kSecValueData as String] as? Data,
               let token = String(data: data, encoding: .utf8)
-        else { return nil }
+        else { return invalidToken }
         
         return token
     }

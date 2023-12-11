@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 struct AuthInterceptor: Interceptor {
     
@@ -17,20 +18,12 @@ struct AuthInterceptor: Interceptor {
     }
     
     func adapt(_ request: inout URLRequest) {
-        let accessToken = tokenStorage.get(.accessToken) ?? invalidToken
+        let accessToken = tokenStorage.get(.accessToken)
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
     }
     
-    func shouldRetry(_ request: URLRequest, httpResponse: HTTPURLResponse, data: Data) -> Observable<Data> {
-        if httpResponse.statusCode == 401 {
-            return retry(request, data: data)
-        } else {
-            return .just(data)
-        }
-    }
-    
-    private func retry(_ request: URLRequest, data: Data) -> Observable<Data> {
-        let refreshToken = tokenStorage.get(.refreshToken) ?? invalidToken
+    func retry(_ request: URLRequest, data: Data) -> Observable<Data> {
+        let refreshToken = tokenStorage.get(.refreshToken)
         
         var request = request
         request.setValue("Bearer \(refreshToken)", forHTTPHeaderField: "Authorization-refresh")
@@ -39,10 +32,20 @@ struct AuthInterceptor: Interceptor {
             .flatMap { data in
                 let accessTokenResponseDTO = try? JSONDecoder().decode(AccessTokenResponseDTO.self, from: data)
                 let accessToken = accessTokenResponseDTO?.accessToken ?? invalidToken
+                
                 tokenStorage.save(accessToken, for: .accessToken)
+                
                 request.setValue(nil, forHTTPHeaderField: "Authorization-refresh")  // 헤더 제거
                 request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+                
                 return URLSession.shared.rx.data(request: request)
+            }
+            .catch { error in
+                if let rxCocoaError = error as? RxCocoaURLError {
+                    return .error(rxCocoaError.toNetworkError())
+                } else {
+                    return .error(NetworkError.underlying(error))
+                }
             }
     }
 }
