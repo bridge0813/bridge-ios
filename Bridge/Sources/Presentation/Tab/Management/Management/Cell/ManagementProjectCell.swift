@@ -133,7 +133,7 @@ final class ManagementProjectCell: BaseCollectionViewCell {
         contentView.layer.masksToBounds = false
     }
     
-    func configureCell(with data: ProjectPreview, selectedTap: ManagementTapType) {
+    func configureCell(with data: ProjectPreview, selectedTab: ManagementTabType) {
         // 상태 라벨
         let statusType = ProjectStatusType(rawValue: data.status) ?? .onGoing
         statusLabel.text = statusType.rawValue
@@ -146,8 +146,8 @@ final class ManagementProjectCell: BaseCollectionViewCell {
         descriptionLabel.text = data.description
         deadlineLabel.text = data.deadline
         
-        goToDetailButton.isHidden = selectedTap == .recruitment
-        menuButtonGroup.isHidden = selectedTap == .apply
+        goToDetailButton.isHidden = selectedTab == .recruitment
+        menuButtonGroup.isHidden = selectedTab == .apply
         statusLabel.flex.width(statusLabel.intrinsicContentSize.width).height(26).markDirty()
     }
     
@@ -208,7 +208,7 @@ extension ManagementProjectCell {
         }
     }
     
-    enum ManagementTapType {
+    enum ManagementTabType {
         case apply
         case recruitment
     }

@@ -13,8 +13,8 @@ final class ManagementViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
-        let managementTabButtonTapped: Observable<ManagementTapType>
-        let filterMenuTapped: Observable<String>
+        let managementTabButtonTapped: Observable<ManagementTabType>
+        let filterActionTapped: Observable<String>
         let goToDetailButtonTapped: Observable<Int>
         let goToApplicantListButtonTapped: Observable<Int>
         let deleteButtonTapped: Observable<Int>
@@ -22,7 +22,7 @@ final class ManagementViewModel: ViewModelType {
     
     struct Output {
         let projects: Driver<[ProjectPreview]>
-        let selectedTap: Driver<ManagementTapType>
+        let selectedTab: Driver<ManagementTabType>
         let filterOption: Driver<String>
     }
 
@@ -30,7 +30,7 @@ final class ManagementViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: ManagementCoordinator?
     
-    private let fetchApplyProjectsUseCase: FetchApplyProjectsUseCase
+    private let fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase
     private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
     
     var selectedFilterOption: FilterMenuType = .all // 현재 선택된 필터링 옵션
@@ -38,26 +38,26 @@ final class ManagementViewModel: ViewModelType {
     // MARK: - Init
     init(
         coordinator: ManagementCoordinator,
-        fetchApplyProjectsUseCase: FetchApplyProjectsUseCase,
+        fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase,
         fetchMyProjectsUseCase: FetchMyProjectsUseCase
     ) {
         self.coordinator = coordinator
-        self.fetchApplyProjectsUseCase = fetchApplyProjectsUseCase
+        self.fetchAppliedProjectsUseCase = fetchAppliedProjectsUseCase
         self.fetchMyProjectsUseCase = fetchMyProjectsUseCase
     }
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         let projects = BehaviorRelay<[ProjectPreview]>(value: [])
-        let selectedTap = BehaviorRelay<ManagementTapType>(value: .apply)    // 현재 선택된 탭(지원 or 모집)
+        let selectedTab = BehaviorRelay<ManagementTabType>(value: .apply)    // 현재 선택된 탭(지원 or 모집)
         
         // viewWillAppear 시점 데이터 가져오기
         input.viewWillAppear
             .withUnretained(self)
             .flatMapLatest { owner, _ -> Observable<Result<[ProjectPreview], Error>> in
                 // 1. 지원 or 모집 탭 구분에 따라 데이터 가져오기
-                if selectedTap.value == .apply {
-                    return owner.fetchApplyProjectsUseCase.fetchProjects().toResult()
+                if selectedTab.value == .apply {
+                    return owner.fetchAppliedProjectsUseCase.fetchProjects().toResult()
                 } else {
                     return owner.fetchMyProjectsUseCase.fetchProjects().toResult()
                 }
@@ -82,12 +82,12 @@ final class ManagementViewModel: ViewModelType {
         // 지원 or 모집 탭 버튼 클릭
         input.managementTabButtonTapped
             .withUnretained(self)
-            .flatMapLatest { owner, tapType -> Observable<Result<[ProjectPreview], Error>> in
+            .flatMapLatest { owner, tabType -> Observable<Result<[ProjectPreview], Error>> in
                 owner.selectedFilterOption = .all // 탭 전환 시 기본값으로 변경
-                selectedTap.accept(tapType)
+                selectedTab.accept(tabType)
                 
-                if tapType == .apply {
-                    return owner.fetchApplyProjectsUseCase.fetchProjects().toResult()
+                if tabType == .apply {
+                    return owner.fetchAppliedProjectsUseCase.fetchProjects().toResult()
                 } else {
                     return owner.fetchMyProjectsUseCase.fetchProjects().toResult()
                 }
@@ -109,7 +109,7 @@ final class ManagementViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         // 필터 선택 처리
-        let filterOption = input.filterMenuTapped
+        let filterOption = input.filterActionTapped
             .do(onNext: { [weak self] option in
                 guard let self else { return }
                 
@@ -140,7 +140,7 @@ final class ManagementViewModel: ViewModelType {
         
         return Output(
             projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError]),
-            selectedTap: selectedTap.asDriver(onErrorJustReturn: .apply),
+            selectedTab: selectedTab.asDriver(onErrorJustReturn: .apply),
             filterOption: filterOption.asDriver(onErrorJustReturn: "오류")
         )
     }
@@ -157,7 +157,7 @@ extension ManagementViewModel {
         case main
     }
     
-    enum ManagementTapType {
+    enum ManagementTabType {
         case apply
         case recruitment
     }

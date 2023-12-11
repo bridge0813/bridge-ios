@@ -12,7 +12,7 @@ final class ProjectDetailViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let goToDetailButtonTapped: Observable<Void>
-        let menuTapped: Observable<String>
+        let editProjectActionTapped: Observable<String>
         let applyButtonTapped: Observable<Void>
         let bookmarkButtonTapped: Observable<Bool>
     }
@@ -47,7 +47,7 @@ final class ProjectDetailViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        input.menuTapped
+        input.editProjectActionTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, menu in
                 switch menu {

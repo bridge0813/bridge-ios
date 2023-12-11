@@ -15,7 +15,7 @@ protocol ProjectRepository {
     func fetchDeadlineProjects() -> Observable<[ProjectPreview]>
     func fetchProjectDetail(with projectID: Int) -> Observable<Project>
     
-    func fetchApplyProjects() -> Observable<[ProjectPreview]>
+    func fetchAppliedProjects() -> Observable<[ProjectPreview]>
     func fetchMyProjects() -> Observable<[ProjectPreview]>
     
     // MARK: - Create

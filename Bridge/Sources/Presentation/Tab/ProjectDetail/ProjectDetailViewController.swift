@@ -26,7 +26,10 @@ final class ProjectDetailViewController: BaseViewController {
         action: nil
     )
     
-    private let menuPopUpView = MenuPopUpView(titles: ("수정하기", "마감하기", "삭제하기"), isCheckmarked: false)
+    private let editProjectActionSheet = BridgeActionSheet(
+        titles: ("수정하기", "마감하기", "삭제하기"),
+        isCheckmarked: false
+    )
     
     private let dividerView: UIView = {
         let divider = UIView()
@@ -122,7 +125,7 @@ final class ProjectDetailViewController: BaseViewController {
     override func bind() {
         let input = ProjectDetailViewModel.Input(
             goToDetailButtonTapped: goToDetailButtonTapped.asObservable(),
-            menuTapped: menuPopUpView.menuTapped,
+            editProjectActionTapped: editProjectActionSheet.actionButtonTapped,
             applyButtonTapped: menuBar.applyButtonTapped,
             bookmarkButtonTapped: menuBar.bookmarkButtonTapped
         )
@@ -152,7 +155,7 @@ final class ProjectDetailViewController: BaseViewController {
         menuButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.menuPopUpView.show()
+                owner.editProjectActionSheet.show()
             })
             .disposed(by: disposeBag)
     }

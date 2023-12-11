@@ -15,15 +15,15 @@ final class ManagementViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
-    private let applyTapButton: ManagementTapButton = {
-        let button = ManagementTapButton("지원")
+    private let applyTabButton: ManagementTabButton = {
+        let button = ManagementTabButton("지원")
         button.isSelected = true
         button.configuration?.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         return button
     }()
-    private let recruitmentTapButton: ManagementTapButton = {
-        let button = ManagementTapButton("모집")
+    private let recruitmentTabButton: ManagementTabButton = {
+        let button = ManagementTabButton("모집")
         button.configuration?.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 0)
         return button
         
@@ -56,7 +56,7 @@ final class ManagementViewController: BaseViewController {
         
         return view ?? UICollectionReusableView()
     }()
-    private let filterMenuPopUpView = MenuPopUpView(titles: ("전체", "결과 대기", "완료"), isCheckmarked: true)
+    private let filterProjectActionSheet = BridgeActionSheet(titles: ("전체", "결과 대기", "완료"), isCheckmarked: true)
     
     // MARK: - Property
     private let viewModel: ManagementViewModel
@@ -94,8 +94,8 @@ final class ManagementViewController: BaseViewController {
     // MARK: - Configuration
     override func configureAttributes() {
         navigationItem.leftBarButtonItems = [
-            UIBarButtonItem(customView: applyTapButton),
-            UIBarButtonItem(customView: recruitmentTapButton)
+            UIBarButtonItem(customView: applyTabButton),
+            UIBarButtonItem(customView: recruitmentTabButton)
         ]
     }
     
@@ -118,10 +118,10 @@ final class ManagementViewController: BaseViewController {
         let input = ManagementViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(), 
             managementTabButtonTapped: Observable.merge(
-                applyTapButton.rx.tap.map { .apply },
-                recruitmentTapButton.rx.tap.map { .recruitment }
+                applyTabButton.rx.tap.map { .apply },
+                recruitmentTabButton.rx.tap.map { .recruitment }
             ),
-            filterMenuTapped: filterMenuPopUpView.menuTapped,
+            filterActionTapped: filterProjectActionSheet.actionButtonTapped,
             goToDetailButtonTapped: goToDetailButtonTapped,
             goToApplicantListButtonTapped: goToApplicantListButtonTapped,
             deleteButtonTapped: deleteButtonTapped
@@ -157,21 +157,21 @@ final class ManagementViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         // 탭 전환
-        output.selectedTap
+        output.selectedTab
             .skip(1)
-            .drive(onNext: { [weak self] tapType in
+            .drive(onNext: { [weak self] tabType in
                 guard let self else { return }
                
-                switch tapType {
+                switch tabType {
                 case .apply: 
-                    recruitmentTapButton.isSelected = false
-                    applyTapButton.isSelected = true
-                    self.filterMenuPopUpView.titles = ("전체", "결과 대기", "완료")  // 필터링 메뉴 변경
+                    recruitmentTabButton.isSelected = false
+                    applyTabButton.isSelected = true
+                    self.filterProjectActionSheet.titles = ("전체", "결과 대기", "완료")  // 필터링 메뉴 변경
                     
                 case .recruitment:
-                    applyTapButton.isSelected = false
-                    recruitmentTapButton.isSelected = true
-                    self.filterMenuPopUpView.titles = ("전체", "현재 진행", "완료")
+                    applyTabButton.isSelected = false
+                    recruitmentTabButton.isSelected = true
+                    self.filterProjectActionSheet.titles = ("전체", "현재 진행", "완료")
                 }
                 
                 // 탭 전환 시 "전체"로 초기화
@@ -238,7 +238,7 @@ extension ManagementViewController {
             guard let self else { return UICollectionViewCell() }
            
             // Cell 구성
-            cell.configureCell(with: project, selectedTap: self.applyTapButton.isSelected ? .apply : .recruitment)
+            cell.configureCell(with: project, selectedTab: self.applyTabButton.isSelected ? .apply : .recruitment)
             
             // 지원자 목록 or 프로젝트 상세
             cell.buttonGroupTapped
@@ -286,13 +286,13 @@ extension ManagementViewController {
            
             headerView.configureHeaderView(
                 projects: projects,
-                selectedTap: self.applyTapButton.isSelected ? .apply : .recruitment
+                selectedTab: self.applyTabButton.isSelected ? .apply : .recruitment
             )
             
             headerView.filterButtonTapped
                 .withUnretained(self)
                 .subscribe(onNext: { owner, _ in
-                    owner.filterMenuPopUpView.show()
+                    owner.filterProjectActionSheet.show()
                 })
                 .disposed(by: headerView.disposeBag)
             

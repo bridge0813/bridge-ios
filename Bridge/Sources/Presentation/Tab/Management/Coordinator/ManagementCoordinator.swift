@@ -15,7 +15,7 @@ final class ManagementCoordinator: Coordinator {
     
     private let projectRepository: ProjectRepository
     
-    private let fetchApplyProjectsUseCase: FetchApplyProjectsUseCase
+    private let fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase
     private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
     
     // MARK: - Init
@@ -26,7 +26,7 @@ final class ManagementCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
         projectRepository = MockProjectRepository()
 
-        fetchApplyProjectsUseCase = DefaultFetchApplyProjectsUseCase(projectRepository: projectRepository)
+        fetchAppliedProjectsUseCase = DefaultFetchAppliedProjectsUseCase(projectRepository: projectRepository)
         fetchMyProjectsUseCase = DefaultFetchMyProjectsUseCase(projectRepository: projectRepository)
     }
     
@@ -41,7 +41,7 @@ extension ManagementCoordinator {
     func showManagementViewController() {
         let viewModel = ManagementViewModel(
             coordinator: self,
-            fetchApplyProjectsUseCase: fetchApplyProjectsUseCase,
+            fetchAppliedProjectsUseCase: fetchAppliedProjectsUseCase,
             fetchMyProjectsUseCase: fetchMyProjectsUseCase
         )
         
