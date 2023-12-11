@@ -70,7 +70,10 @@ extension BridgePlaceholderView {
         case emptyChannel
         
         case comingSoon
-        case emptyProject
+        case emptyProject         // Main에서 보여주는 모집글이 없을 경우
+        
+        case emptyAppliedProject  // 지원한 모집글이 없을 경우
+        case emptyMyProject       // 작성한 모집글이 없을 경우
     }
     
     struct PlaceholderConfiguration {
@@ -104,6 +107,16 @@ extension BridgePlaceholderView {
             emojiImageView.image = UIImage(named: "graphic_search")
             titleLabel.text = "올라온 모집글이 없어요!"
             descriptionLabel.text = "조금만 기달려 주세요."
+            
+        case .emptyAppliedProject:
+            emojiImageView.image = UIImage(named: "graphic_support")
+            titleLabel.text = "프로젝트에 지원해보세요!"
+            descriptionLabel.text = "팀원들이 당신을 기다리고 있어요."
+            
+        case .emptyMyProject:
+            emojiImageView.image = UIImage(named: "graphic_recruitment")
+            titleLabel.text = "프로젝트 모집하셨나요?"
+            descriptionLabel.text = "브릿지에서 간편하게 모집글 올리고\n함께할 팀원을 찾아보세요."
         }
         
         if let configuration {

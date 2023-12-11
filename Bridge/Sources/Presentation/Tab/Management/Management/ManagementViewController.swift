@@ -29,12 +29,7 @@ final class ManagementViewController: BaseViewController {
         
     }()
     
-    private let placeholderView: BridgePlaceholderView = {
-        let view = BridgePlaceholderView()
-        view.isHidden = true
-        
-        return view
-    }()
+    private let placeholderView = BridgePlaceholderView()
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
@@ -49,13 +44,7 @@ final class ManagementViewController: BaseViewController {
         
         return collectionView
     }()
-    private lazy var headerView: UICollectionReusableView = {
-        let view = self.collectionView.supplementaryView(
-        forElementKind: UICollectionView.elementKindSectionHeader,
-        at: IndexPath(item: 0, section: 0)) as? ManagementHeaderView
-        
-        return view ?? UICollectionReusableView()
-    }()
+    
     private let filterProjectActionSheet = BridgeActionSheet(titles: ("전체", "결과 대기", "완료"), isCheckmarked: true)
     
     // MARK: - Property
@@ -81,11 +70,6 @@ final class ManagementViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        configureNoShadowNavigationBarAppearance()
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         configureDefaultNavigationBarAppearance()
@@ -104,6 +88,7 @@ final class ManagementViewController: BaseViewController {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.define { flex in
             flex.addItem(collectionView).grow(1)
+            flex.addItem(placeholderView).position(.absolute).all(0)
         }
     }
     
@@ -179,11 +164,20 @@ final class ManagementViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        // 모집글 필터옵션 변경
         output.filterOption
             .drive(onNext: { [weak self] option in
                 guard let self else { return }
                 self.updateFilterButtonTitleInHeaderView(option)
             })
+            .disposed(by: disposeBag)
+        
+        // 뷰 상태 전환
+        output.viewState
+            .drive { [weak self] viewState in
+                guard let self else { return }
+                self.handleViewState(viewState)
+            }
             .disposed(by: disposeBag)
     }
 }
@@ -207,7 +201,7 @@ extension ManagementViewController {
         
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(150)
+            heightDimension: .absolute(150)
         )
         
         let header = NSCollectionLayoutBoundarySupplementaryItem(
@@ -316,5 +310,52 @@ extension ManagementViewController {
         ) as? ManagementHeaderView {
             headerView.filterButtonTitle = title
         }
+    }
+}
+
+// MARK: - View state handling
+private extension ManagementViewController {
+    /// 뷰의 상태에 따라 화면에 표시되는 컴포넌트를 설정하는 함수
+    func handleViewState(_ viewState: ManagementViewModel.ViewState) {
+        collectionView.isScrollEnabled = true
+        collectionView.isHidden = true
+        placeholderView.isHidden = false
+        var placeholderTopMargin: CGFloat = 0  // 플레이스 홀더 뷰의 탑 마진(뷰의 상태에 따라 변경됨)
+        
+        switch viewState {
+        case .general:
+            configureNoShadowNavigationBarAppearance()
+            collectionView.isHidden = false
+            placeholderView.isHidden = true
+            
+        case .signInNeeded:
+            configureDefaultNavigationBarAppearance()
+            placeholderView.configurePlaceholderView(
+                for: .needSignIn,
+                configuration: BridgePlaceholderView.PlaceholderConfiguration(
+                    title: "로그인 후 사용 가능해요!",
+                    description: "프로젝트를 관리해 보세요."
+                )
+            )
+            
+        case .empty:
+            configureNoShadowNavigationBarAppearance()
+            collectionView.isScrollEnabled = false
+            collectionView.isHidden = false
+            
+            placeholderView.configurePlaceholderView(
+                // 지원탭 버튼이 선택되어 있으면, 지원한 모집글이 없다는 플레이스 홀더 보여주기.
+                // 모집탭 버튼이 선택되어 있으면, 작성한 모집글이 없다는 플레이스 홀더 보여주기.
+                for: applyTabButton.isSelected ? .emptyAppliedProject : .emptyMyProject
+            )
+            placeholderTopMargin = 150
+            
+        case .error:
+            configureDefaultNavigationBarAppearance()
+            placeholderView.configurePlaceholderView(for: .error)
+        }
+        
+        placeholderView.flex.top(placeholderTopMargin)
+        rootFlexContainer.flex.layout()
     }
 }
