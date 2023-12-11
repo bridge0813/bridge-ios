@@ -19,17 +19,19 @@ final class DefaultAuthRepository: AuthRepository {
     }
     
     func signInWithApple(credentials: UserCredentials) -> Observable<Bool> {
-        if !credentials.name.isEmpty {  // 이름은 2번째 로그인부터 빈 문자열이 리턴되므로, 빈 문자열 저장하지 않도록 처리
-            tokenStorage.save(credentials.name, for: .userName)
+        // 이름은 2번째 로그인부터 nil이 리턴되므로, nil을 저장하지 않도록 처리
+        if let userName = credentials.userName,
+           let givenName = credentials.givenName {
+            tokenStorage.save(userName + givenName, for: .userName)
         }
         
         let signInWithAppleRequestDTO = SignInWithAppleRequestDTO(
-            userName: tokenStorage.get(.userName) ?? invalidToken,
+            userName: tokenStorage.get(.userName),
             identityToken: credentials.identityToken ?? invalidToken
         )
         let authEndpoint = AuthEndpoint.signInWithApple(requestDTO: signInWithAppleRequestDTO)
         
-        return networkService.request(authEndpoint, interceptor: nil)
+        return networkService.request(to: authEndpoint, interceptor: nil)
             .decode(type: SignInWithAppleResponseDTO.self, decoder: JSONDecoder())
             .map { [weak self] signInWithAppleResponseDTO in
                 self?.tokenStorage.save(String(signInWithAppleResponseDTO.userID), for: .userID)
@@ -41,11 +43,11 @@ final class DefaultAuthRepository: AuthRepository {
     }
     
     func signUp(selectedFields: [String]) -> Observable<Void> {
-        let userID = Int(tokenStorage.get(.userID) ?? invalidToken)
+        let userID = Int(tokenStorage.get(.userID))
         let signUpRequestDTO = SignUpRequestDTO(userID: userID, selectedFields: selectedFields)
         let authEndpoint = AuthEndpoint.signUp(requestDTO: signUpRequestDTO)
         
-        return networkService.request(authEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: authEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
     }
 }

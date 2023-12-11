@@ -143,7 +143,6 @@ private extension TabBarCoordinator {
 
 // MARK: - Coordinator delegate
 extension TabBarCoordinator: CoordinatorDelegate {
-    // AuthCoordinator에 의해 호출됨
     func didFinish(childCoordinator: Coordinator) {
         navigationController.dismiss(animated: true)
         
@@ -152,7 +151,6 @@ extension TabBarCoordinator: CoordinatorDelegate {
         }
     }
     
-    // MARK: - Auth
     func showSignInViewController() {
         let authCoordinator = AuthCoordinator(navigationController: navigationController)
         authCoordinator.start()

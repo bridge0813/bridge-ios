@@ -12,8 +12,8 @@ let invalidToken = "-1"
 protocol TokenStorage {
     /// 저장소에서 주어진 키에 대한 토큰을 가져옵니다.
     /// - Parameter key: 토큰을 가져올 키입니다.
-    /// - Returns: 토큰이 존재하는 경우 토큰을, 그렇지 않으면 `nil`을 반환합니다.
-    func get(_ key: KeychainAccount) -> Token?
+    /// - Returns: 토큰이 존재하는 경우 토큰을, 그렇지 않으면 `invalidToken`을 반환합니다.
+    func get(_ key: KeychainAccount) -> Token
     
     /// 주어진 키에 대한 토큰이 존재하지 않는다면 저장소에 저장하고, 존재한다면 업데이트 합니다.
     /// - Parameters:
