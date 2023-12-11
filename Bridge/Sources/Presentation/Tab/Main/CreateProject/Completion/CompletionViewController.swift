@@ -10,10 +10,19 @@ import FlexLayout
 import PinLayout
 import RxCocoa
 import RxSwift
+import Lottie
 
 final class CompletionViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
+    
+    private let animationView: LottieAnimationView = {
+        let animationView = LottieAnimationView(name: "firecracker")
+        animationView.play()
+        animationView.contentMode = .scaleAspectFill
+        
+        return animationView
+    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -75,10 +84,6 @@ final class CompletionViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        configureNavigationUI()
-    }
-    
-    private func configureNavigationUI() {
         navigationItem.title = "모집글 작성"
     }
     
@@ -86,12 +91,14 @@ final class CompletionViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
-        rootFlexContainer.flex.alignItems(.center).define { flex in
-            flex.addItem(titleLabel).width(210).height(60).marginTop(56)
-            flex.addItem(subTitleLabel).width(180).height(20).marginTop(8)
-            flex.addItem(castleImageView).size(200).marginTop(114)
-            flex.addItem().grow(1)
-            flex.addItem(completeButton).alignSelf(.stretch).height(52).marginHorizontal(16).marginBottom(24)
+        rootFlexContainer.flex.define { flex in
+            flex.addItem(animationView).alignItems(.center).grow(1).define({ flex in
+                flex.addItem(titleLabel).width(210).height(60).marginTop(56)
+                flex.addItem(subTitleLabel).width(180).height(20).marginTop(8)
+                flex.addItem(castleImageView).size(200).marginTop(114)
+                flex.addItem().grow(1)
+                flex.addItem(completeButton).alignSelf(.stretch).height(52).marginHorizontal(16).marginBottom(24)
+            })
         }
     }
     
@@ -103,8 +110,8 @@ final class CompletionViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = CompletionViewModel.Input(
-            completeButtonTapped: completeButton.rx.tap.asObservable()
+            completeButtonTapped: completeButton.rx.tap
         )
-        let _ = viewModel.transform(input: input)
+        _ = viewModel.transform(input: input)
     }
 }

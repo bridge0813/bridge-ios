@@ -25,23 +25,41 @@ final class ProjectDescriptionInputViewModel: ViewModelType {
     private weak var coordinator: CreateProjectCoordinator?
     
     private let dataStorage: ProjectDataStorage
+    private let createProjectUseCase: CreateProjectUseCase
     
     // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator,
-        dataStorage: ProjectDataStorage
+        dataStorage: ProjectDataStorage,
+        createProjectUseCase: CreateProjectUseCase
     ) {
         self.coordinator = coordinator
         self.dataStorage = dataStorage
+        self.createProjectUseCase = createProjectUseCase
     }
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         input.nextButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                // 네트워킹 로직 구현...
-                owner.coordinator?.showCompletionViewController()
+            .flatMap { owner, _ in
+                return owner.createProjectUseCase.create(with: owner.dataStorage.currentProject).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projectID):
+                    owner.coordinator?.showCompletionViewController(with: projectID)
+                    
+                case .failure(let error):
+                    let errorMessage = (error as? NetworkError)?.errorDescription ?? error.localizedDescription
+                    
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "모집글 작성에 실패했습니다.",
+                        description: errorMessage
+                    ))
+                }
             })
             .disposed(by: disposeBag)
         

@@ -16,6 +16,11 @@ final class ProjectDescriptionInputViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
+    private let progressViewContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = BridgeColor.gray10
+        return view
+    }()
     private let progressView = BridgeProgressView(1)
     
     private let contentContainer = UIView()  // 키보드에 반응하여 컨텐츠들을 위로 올려주는 역할의 뷰
@@ -107,48 +112,40 @@ final class ProjectDescriptionInputViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        configureNavigationUI()
-        enableKeyboardHiding()
-    }
-    
-    private func configureNavigationUI() {
         navigationItem.title = "모집글 작성"
+        enableKeyboardHiding()
     }
     
     // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         
-        rootFlexContainer.flex.justifyContent(.spaceBetween).paddingHorizontal(16).define { flex in
-            // 뷰 계층 상 progressView가 상단에 위치할 수 있도록
-            flex.addItem(contentContainer)
-                .position(.absolute)
-                .width(100%)
-                .height(470)
-                .top(26)
-                .marginHorizontal(16)
-            
-            flex.addItem().backgroundColor(BridgeColor.gray10).height(16).justifyContent(.end).define { flex in
+        rootFlexContainer.flex.paddingHorizontal(16).define { flex in
+            flex.addItem(progressViewContainer).justifyContent(.end).height(16).define { flex in
                 flex.addItem(progressView).height(6)
             }
             
+            flex.addItem(contentContainer).height(470).define { flex in
+                flex.addItem(descriptionLabel).width(143).height(60).marginTop(40)
+                
+                flex.addItem(titleLabel).width(28).height(24).marginTop(40)
+                flex.addItem(titleTextField).height(52).marginTop(14)
+                
+                flex.addItem(descriptionTitleLabel).width(28).height(24).marginTop(32)
+                flex.addItem(descriptionTextView).height(155).marginTop(14)
+            }
+            
+            flex.addItem().grow(1)
             flex.addItem(nextButton).height(52).marginBottom(24)
-        }
-        
-        contentContainer.flex.define { flex in
-            flex.addItem(descriptionLabel).width(143).height(60).marginTop(40)
-            
-            flex.addItem(titleLabel).width(28).height(24).marginTop(40)
-            flex.addItem(titleTextField).height(52).marginTop(14)
-            
-            flex.addItem(descriptionTitleLabel).width(28).height(24).marginTop(32)
-            flex.addItem(descriptionTextView).height(155).marginTop(14)
         }
     }
     
     override func viewDidLayoutSubviews() {
         rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
+        
+        // 뷰 계층 상 progressView가 상단에 위치할 수 있도록
+        rootFlexContainer.bringSubviewToFront(progressViewContainer)
     }
     
     // MARK: - Bind
@@ -173,7 +170,6 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         
         // TextView 플레이스홀더 구현
         descriptionTextView.rx.didBeginEditing
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 if owner.descriptionTextView.text == "프로젝트에 대해 소개해 주세요." {
@@ -185,7 +181,6 @@ final class ProjectDescriptionInputViewController: BaseViewController {
         
         
         descriptionTextView.rx.didEndEditing
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 if owner.descriptionTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {

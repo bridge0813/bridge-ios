@@ -23,6 +23,7 @@ class BridgeBasePopUpView: BaseView {
     
     let dragHandleBar: UIView = {
         let view = UIView()
+        view.flex.width(25).height(5)
         view.backgroundColor = BridgeColor.gray08
         view.clipsToBounds = true
         view.layer.cornerRadius = 2.5

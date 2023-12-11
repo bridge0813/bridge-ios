@@ -108,10 +108,6 @@ final class ProjectDatePickerViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        configureNavigationUI()
-    }
-    
-    private func configureNavigationUI() {
         navigationItem.title = "모집글 작성"
     }
     
@@ -153,7 +149,7 @@ final class ProjectDatePickerViewController: BaseViewController {
         
         contentContainer.pin.all()
         contentContainer.flex.layout(mode: .adjustHeight)
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentContainer.frame.height)
+        scrollView.contentSize = contentContainer.frame.size
     }
     
     // MARK: - Bind
@@ -184,7 +180,6 @@ final class ProjectDatePickerViewController: BaseViewController {
         
         // 모집 마감일 선택 팝업 뷰 보여주기
         setDeadlineButton.rx.tap
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.datePickerPopUpView.setDateType = .deadline
@@ -193,7 +188,6 @@ final class ProjectDatePickerViewController: BaseViewController {
         
         // 시작일 선택 팝업 뷰 보여주기
         setStartDateButton.rx.tap
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.datePickerPopUpView.setDateType = .start
@@ -202,7 +196,6 @@ final class ProjectDatePickerViewController: BaseViewController {
         
         // 완료일 선택 팝업 뷰 보여주기
         setEndDateButton.rx.tap
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.datePickerPopUpView.setDateType = .end
@@ -213,7 +206,6 @@ final class ProjectDatePickerViewController: BaseViewController {
         scrollView.rx.contentOffset
             .map { $0.y > 0 }
             .distinctUntilChanged()
-            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, shouldHidden in
                 owner.dividerView.isHidden = !shouldHidden

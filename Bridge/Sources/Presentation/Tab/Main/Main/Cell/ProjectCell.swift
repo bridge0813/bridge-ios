@@ -47,7 +47,7 @@ final class ProjectCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let scrapButton = MainBookmarkButton()
+    private let bookmarkButton = MainBookmarkButton()
     
     private let recruitNumberLabel: UILabel = {
         let label = UILabel()
@@ -71,7 +71,7 @@ final class ProjectCell: BaseCollectionViewCell {
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.column).height(149).define { flex in
-            flex.addItem(scrapButton).position(.absolute).size(24).top(19).right(18)
+            flex.addItem(bookmarkButton).position(.absolute).size(24).top(19).right(18)
             
             flex.addItem(dDayLabel).marginTop(19).marginLeft(18)
             
