@@ -36,7 +36,7 @@ final class DefaultProjectRepository: ProjectRepository {
         let createProjectDTO = convertToDTO(from: project)
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)
         
-        return networkService.request(createProjectEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: createProjectEndpoint, interceptor: AuthInterceptor())
             .decode(type: CreateProjectResponseDTO.self, decoder: JSONDecoder())
             .map { dto in
                 return dto.projectId
