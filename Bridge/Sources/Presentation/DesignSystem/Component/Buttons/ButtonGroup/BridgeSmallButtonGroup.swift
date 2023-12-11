@@ -21,7 +21,7 @@ final class BridgeSmallButtonGroup: BaseView {
     // MARK: - Property
     var buttonGroupTapped: Observable<String> {
         Observable.merge(
-            leftButton.rx.tap.map { [weak self] in self?.leftButton.titleLabel?.text ?? ""},
+            leftButton.rx.tap.map { [weak self] in self?.leftButton.titleLabel?.text ?? "" },
             rightButton.rx.tap.map { [weak self] in self?.rightButton.titleLabel?.text ?? "" }
         )
     }

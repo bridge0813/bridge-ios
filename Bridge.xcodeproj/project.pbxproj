@@ -230,7 +230,6 @@
 		7CA04F4E2B04A6CA007B9191 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F4D2B04A6CA007B9191 /* Project.swift */; };
 		7CA04F512B04AAB3007B9191 /* ProjectDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F502B04AAB2007B9191 /* ProjectDetailDTO.swift */; };
 		7CA04F532B04B6E7007B9191 /* MemberRequirementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F522B04B6E7007B9191 /* MemberRequirementDTO.swift */; };
-		7CA04F552B04D88E007B9191 /* ProjectManagementMenuPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F542B04D88E007B9191 /* ProjectManagementMenuPopUpView.swift */; };
 		7CA04F572B05D50E007B9191 /* ProjectDetailTechTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F562B05D50E007B9191 /* ProjectDetailTechTag.swift */; };
 		7CA04F5E2B0A029A007B9191 /* CreateProjectRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F5D2B0A029A007B9191 /* CreateProjectRequestDTO.swift */; };
 		7CA04F652B0A6148007B9191 /* ProjectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */; };
@@ -485,7 +484,6 @@
 		7CA04F4D2B04A6CA007B9191 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7CA04F502B04AAB2007B9191 /* ProjectDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailDTO.swift; sourceTree = "<group>"; };
 		7CA04F522B04B6E7007B9191 /* MemberRequirementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRequirementDTO.swift; sourceTree = "<group>"; };
-		7CA04F542B04D88E007B9191 /* ProjectManagementMenuPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectManagementMenuPopUpView.swift; sourceTree = "<group>"; };
 		7CA04F562B05D50E007B9191 /* ProjectDetailTechTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailTechTag.swift; sourceTree = "<group>"; };
 		7CA04F5D2B0A029A007B9191 /* CreateProjectRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectRequestDTO.swift; sourceTree = "<group>"; };
 		7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEndpoint.swift; sourceTree = "<group>"; };
@@ -1576,7 +1574,6 @@
 				7CA04F4A2B03D5DE007B9191 /* ProjectDetailHeaderView.swift */,
 				7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */,
 				7CA04F2B2B01F822007B9191 /* ProjectDetailMenuBar.swift */,
-				7CA04F542B04D88E007B9191 /* ProjectManagementMenuPopUpView.swift */,
 				7CA04F2A2AFFDF70007B9191 /* RecruitFieldDetail */,
 			);
 			path = ProjectDetail;
@@ -2031,7 +2028,6 @@
 				7B9C31A72B0753EF007E36B2 /* String+Stomp.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
 				7CA04F322B020B94007B9191 /* ProjectDetailCoordinator.swift in Sources */,
-				7CA04F552B04D88E007B9191 /* ProjectManagementMenuPopUpView.swift in Sources */,
 				7CDFB6262B22CADC00272F77 /* MenuButton.swift in Sources */,
 				7C87EE162B1D83FB0066691D /* MockProfileRepository.swift in Sources */,
 				7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift in Sources */,
@@ -2078,7 +2074,6 @@
 				7C87EE142B1C55C20066691D /* FilterPopUpView.swift in Sources */,
 				7B1E5ABE2ADCFD880053E9B3 /* ChannelViewModel.swift in Sources */,
 				7C8B82402ACE91C500F7B889 /* ChannelDropdownMenuCell.swift in Sources */,
-				7C55E6502AE50D9E0018FA5D /* PlaceholderView.swift in Sources */,
 				7B1742EC2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift in Sources */,
 				7BFECA222AEBEC0B009B4C7D /* BaseChatCell.swift in Sources */,
 				7C569D092A9F7E160063D362 /* DefaultProjectRepository.swift in Sources */,

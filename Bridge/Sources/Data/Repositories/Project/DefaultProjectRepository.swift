@@ -22,7 +22,7 @@ final class DefaultProjectRepository: ProjectRepository {
     // MARK: - Fetch
     // 전체 모집글 목록 가져오기
     func fetchAllProjects() -> Observable<[ProjectPreview]> {
-        return networkService.request(ProjectEndpoint.fetchAllProjects, interceptor: nil)
+        return networkService.request(to: ProjectEndpoint.fetchAllProjects, interceptor: nil)
             .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
             .map { projectPreviewDTOs in
                 projectPreviewDTOs.map { $0.toEntity() }
@@ -34,7 +34,7 @@ final class DefaultProjectRepository: ProjectRepository {
         let fieldRequestDTO = FieldRequestDTO(field: field)
         let fetchProjectsEndPoint = ProjectEndpoint.fetchProjectsByField(requestDTO: fieldRequestDTO)
         
-        return networkService.request(fetchProjectsEndPoint, interceptor: nil)
+        return networkService.request(to: fetchProjectsEndPoint, interceptor: nil)
             .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
             .map { projectPreviewDTOs in
                 projectPreviewDTOs.map { $0.toEntity() }
@@ -43,7 +43,7 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // 인기 모집글 목록 가져오기
     func fetchHotProjects() -> Observable<[ProjectPreview]> {
-        return networkService.request(ProjectEndpoint.fetchHotProjects, interceptor: nil)
+        return networkService.request(to: ProjectEndpoint.fetchHotProjects, interceptor: nil)
             .decode(type: [HotProjectResponseDTO].self, decoder: JSONDecoder())
             .map { hotProjectDTOs in
                 hotProjectDTOs.map { $0.toEntity() }
@@ -52,7 +52,7 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // 마감임박 모집글 목록 가져오기
     func fetchDeadlineProjects() -> Observable<[ProjectPreview]> {
-        return networkService.request(ProjectEndpoint.fetchDeadlineProjects, interceptor: nil)
+        return networkService.request(to: ProjectEndpoint.fetchDeadlineProjects, interceptor: nil)
             .decode(type: [DeadlineProjectResponseDTO].self, decoder: JSONDecoder())
             .map { deadlineProjectDTOs in
                 deadlineProjectDTOs.map { $0.toEntity() }
@@ -87,18 +87,18 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // MARK: - Bookmark
     func bookmark(projectID: Int) -> Observable<Int> {
-        let userID = tokenStorage.get(.userID) ?? invalidToken
+        let userID = tokenStorage.get(.userID) 
         let bookmarkDTO = BookmarkRequestDTO(projectID: projectID)
         let bookmarkEndpoint = ProjectEndpoint.bookmark(requestDTO: bookmarkDTO, userID: userID)
         
-        return networkService.request(bookmarkEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: bookmarkEndpoint, interceptor: AuthInterceptor())
             .map { _ in projectID }
     }
 }
 
 private extension DefaultProjectRepository {
     func convertToDTO(from project: Project) -> CreateProjectRequestDTO {
-        let userID = Int(tokenStorage.get(.userID) ?? invalidToken) ?? 0
+        let userID = Int(tokenStorage.get(.userID)) ?? 0
         
         let memberRequirementsDTO = project.memberRequirements.map { requirement -> MemberRequirementDTO in
             MemberRequirementDTO(

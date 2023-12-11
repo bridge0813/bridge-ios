@@ -148,7 +148,7 @@ private extension ChannelListViewController {
             )
             
         case .empty:
-            placeholderView.configurePlaceholderView(for: .empty)
+            placeholderView.configurePlaceholderView(for: .emptyChatRoom)
             
         case .error:
             placeholderView.configurePlaceholderView(for: .error)
