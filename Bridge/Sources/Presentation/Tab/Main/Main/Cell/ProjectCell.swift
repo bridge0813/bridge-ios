@@ -8,6 +8,8 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
+import RxCocoa
 
 /// 기본적인 모집글을 나타내는 Cell
 final class ProjectCell: BaseCollectionViewCell {
@@ -30,7 +32,6 @@ final class ProjectCell: BaseCollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.configureTextWithLineHeight(text: "실제 상업용 여행사 웹사이트 개발할 백엔드 개발자 구합니다.", lineHeight: 24)
         label.textColor = BridgeColor.gray01
         label.font = BridgeFont.subtitle3Long.font
         label.numberOfLines = 2
@@ -40,7 +41,6 @@ final class ProjectCell: BaseCollectionViewCell {
     
     private let dDayLabel: UILabel = {
         let label = UILabel()
-        label.text = "D-28"
         label.textColor = BridgeColor.secondary1
         label.font = BridgeFont.body3.font
         
@@ -51,7 +51,6 @@ final class ProjectCell: BaseCollectionViewCell {
     
     private let recruitNumberLabel: UILabel = {
         let label = UILabel()
-        label.text = "1명 모집"
         label.textColor = BridgeColor.gray03
         label.font = BridgeFont.body4.font
         
@@ -60,31 +59,51 @@ final class ProjectCell: BaseCollectionViewCell {
     
     private let deadlineLabel: UILabel = {
         let label = UILabel()
-        label.text = "2023.8.20 모집 마감"
         label.textColor = BridgeColor.gray03
         label.font = BridgeFont.body4.font
         
         return label
     }()
     
+    // MARK: - Property
+    weak var delegate: ProjectCellDelegate?
+    private var projectID = 0
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+        bind()
+    }
+    
+    // MARK: - Configuration
+    override func configureAttributes() {
+        rootFlexContainer.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(containerTapped))
+        )
+    }
+    
+    @objc private func containerTapped(_ sender: UITapGestureRecognizer) {
+        delegate?.itemSelected(projectID: projectID)
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.column).height(149).define { flex in
-            flex.addItem(bookmarkButton).position(.absolute).size(24).top(19).right(18)
+        rootFlexContainer.flex.paddingHorizontal(18).define { flex in
             
-            flex.addItem(dDayLabel).marginTop(19).marginLeft(18)
+            flex.addItem().direction(.row).marginTop(19).define { flex in
+                flex.addItem().width(200).height(68).define { flex in
+                    flex.addItem(dDayLabel)
+                    flex.addItem(titleLabel).marginTop(6)
+                }
+                flex.addItem().grow(1)
+                flex.addItem(bookmarkButton).size(24).marginRight(0)
+            }
             
-            flex.addItem(titleLabel).marginTop(5.8).marginLeft(18).marginBottom(24.2).marginRight(129)
+            flex.addItem().backgroundColor(BridgeColor.gray08).height(1).marginTop(24)
             
-            flex.addItem()
-                .height(1)
-                .backgroundColor(BridgeColor.gray08)
-                .marginHorizontal(18)
-                .marginBottom(11)
-            
-            flex.addItem().direction(.row).alignItems(.center).define { flex in
-                flex.addItem(recruitNumberLabel).height(14).marginLeft(18)
+            flex.addItem().direction(.row).alignItems(.center).marginTop(11).define { flex in
+                flex.addItem(recruitNumberLabel).height(14)
                 flex.addItem(deadlineLabel).height(14).marginLeft(16)
             }
         }
@@ -101,7 +120,27 @@ final class ProjectCell: BaseCollectionViewCell {
         ).cgPath
     }
     
-    func configureCell() {
-       
+    // MARK: - Binding
+    override func bind() {
+        bookmarkButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.bookmarkButton.isSelected.toggle()
+                owner.delegate?.bookmarkButtonTapped(projectID: owner.projectID)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func configureCell(with data: ProjectPreview) {
+        titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 24)
+        dDayLabel.text = "D-\(data.dDays)"
+        recruitNumberLabel.text = "\(data.totalRecruitNumber)명 모집"
+        deadlineLabel.text = "\(data.deadline) 모집 마감"
+        bookmarkButton.isBookmarked = data.isBookmarked
+        projectID = data.projectID
+        
+        titleLabel.flex.markDirty()
+        recruitNumberLabel.flex.markDirty()
+        deadlineLabel.flex.markDirty()
     }
 }

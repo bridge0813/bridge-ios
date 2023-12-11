@@ -26,7 +26,7 @@ final class ProjectDetailViewController: BaseViewController {
         action: nil
     )
     
-    private let menuPopUpView = ProjectManagementMenuPopUpView()
+    private let menuPopUpView = MenuPopUpView(titles: ("수정하기", "마감하기", "삭제하기"), isCheckmarked: false)
     
     private let dividerView: UIView = {
         let divider = UIView()

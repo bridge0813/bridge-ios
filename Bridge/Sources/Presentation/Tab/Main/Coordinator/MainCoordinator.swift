@@ -13,19 +13,33 @@ final class MainCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
+    private let profileRepository: ProfileRepository
     private let projectRepository: ProjectRepository
-    private let fetchProjectsUseCase: FetchAllProjectsUseCase
+    
+    private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+    private let fetchAllProjectsUseCase: FetchAllProjectsUseCase
+    private let fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
+    private let fetchDeadlineProjectsUseCase: FetchDeadlineProjectsUseCase
+    private let bookmarkUseCase: BookmarkUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []
 
-//        let networkService = DefaultNetworkService()
+        let networkService = DefaultNetworkService()
+        profileRepository = MockProfileRepository()
+//        DefaultProfileRepository(networkService: networkService)  // 프로필
         projectRepository = MockProjectRepository()
-        fetchProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
+//        DefaultProjectRepository(networkService: networkService)  // 모집글
+        
+        fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(profileRepository: profileRepository)
+        fetchAllProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
+        fetchProjectsByFieldUseCase = DefaultFetchProjectsByFieldUseCase(projectRepository: projectRepository)
         fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
+        fetchDeadlineProjectsUseCase = DefaultFetchDeadlineProjectsUseCase(projectRepository: projectRepository)
+        bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Methods
@@ -39,15 +53,23 @@ extension MainCoordinator {
     func showMainViewController() {
         let mainViewModel = MainViewModel(
             coordinator: self,
-            fetchProjectsUseCase: fetchProjectsUseCase,
-            fetchHotProjectsUseCase: fetchHotProjectsUseCase
+            fetchProfilePreviewUseCase: fetchProfilePreviewUseCase,
+            fetchAllProjectsUseCase: fetchAllProjectsUseCase,
+            fetchProjectsByFieldUseCase: fetchProjectsByFieldUseCase,
+            fetchHotProjectsUseCase: fetchHotProjectsUseCase,
+            fetchDeadlineProjectsUseCase: fetchDeadlineProjectsUseCase,
+            bookmarkUseCase: bookmarkUseCase
         )
         
         let mainVC = MainViewController(viewModel: mainViewModel)
         navigationController.pushViewController(mainVC, animated: true)
     }
     
-    // MARK: - ConnectCoordinator
+    func showSignInViewController() {
+        delegate?.showSignInViewController()
+    }
+    
+    // MARK: - Connect
     func connectToNotificationFlow() {
         print("알림 뷰 이동")
     }
@@ -56,11 +78,11 @@ extension MainCoordinator {
         print("필터 뷰 이동")
     }
     
-    func connectToProjectSearchFlow(with query: String) {
-        print(query)
+    func connectToProjectSearchFlow() {
+        print("검색 뷰 이동")
     }
     
-    func connectToProjectDetailFlow(with id: String) {
+    func connectToProjectDetailFlow(with projectID: Int) {
         // TODO: - 연결된 코디네이터 제거 작업
         let coordinator = ProjectDetailCoordinator(navigationController: navigationController)
         coordinator.start()

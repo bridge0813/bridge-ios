@@ -74,7 +74,20 @@ final class DropDown: BaseView {
     
     private var bottomOffset: CGPoint
     
-    var dataSource: [String]
+    private var tableViewContainerTopConstraint: NSLayoutConstraint?
+    private var tableViewContainerHeightConstraint: NSLayoutConstraint?
+    
+    var dataSource: [String] {
+        didSet {
+            // 기존 레이아웃 비활성화
+            tableViewContainerTopConstraint?.isActive = false
+            tableViewContainerHeightConstraint?.isActive = false
+            
+            // 레이아웃 재계산
+            setNeedsUpdateConstraints()
+        }
+    }
+    
     var selectedItemIndexRow: IndexRow? {
         didSet {
             tableView.reloadData()
@@ -207,24 +220,26 @@ extension DropDown {
         
         addSubview(tableViewContainer)
         
+        tableViewContainerTopConstraint = tableViewContainer.topAnchor.constraint(
+            equalTo: self.topAnchor,
+            constant: yConstant ?? .zero
+        )
+        tableViewContainerTopConstraint?.isActive = true
+
+        tableViewContainerHeightConstraint = tableViewContainer.heightAnchor.constraint(
+            equalToConstant: heightConstant ?? .zero
+        )
+        tableViewContainerHeightConstraint?.isActive = true
+        
         tableViewContainer.leadingAnchor.constraint(
             equalTo: self.leadingAnchor,
             constant: xConstant ?? .zero
-        ).isActive = true
-
-        tableViewContainer.topAnchor.constraint(
-            equalTo: self.topAnchor,
-            constant: yConstant ?? .zero
         ).isActive = true
 
         tableViewContainer.widthAnchor.constraint(
             equalToConstant: widthConstant ?? .zero
         ).isActive = true
 
-        tableViewContainer.heightAnchor.constraint(
-            equalToConstant: heightConstant ?? .zero
-        ).isActive = true
-        
         setTableViewConstraints()
     }
     

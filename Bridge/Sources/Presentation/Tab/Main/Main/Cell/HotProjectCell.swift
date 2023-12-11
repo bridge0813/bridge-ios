@@ -8,6 +8,8 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
+import RxCocoa
 
 /// 인기 모집글을 나타내는 Cell
 final class HotProjectCell: BaseCollectionViewCell {
@@ -23,7 +25,6 @@ final class HotProjectCell: BaseCollectionViewCell {
     
     private let rankingLabel: UILabel = {
         let label = UILabel()
-        label.text = "1"
         label.textAlignment = .center
         label.textColor = BridgeColor.secondary2
         label.backgroundColor = BridgeColor.secondary3
@@ -34,7 +35,6 @@ final class HotProjectCell: BaseCollectionViewCell {
     
     private let dDayLabel: UILabel = {
         let label = UILabel()
-        label.text = "D-24"
         label.textColor = BridgeColor.secondary1
         label.font = BridgeFont.body3.font
         
@@ -43,7 +43,6 @@ final class HotProjectCell: BaseCollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.configureTextWithLineHeight(text: "사이드 프젝으로 IOS앱을 같이 구현할 \n팀원을 구하고 있어요~", lineHeight: 21)
         label.textColor = BridgeColor.gray01
         label.font = BridgeFont.body2.font
         label.numberOfLines = 2
@@ -53,15 +52,36 @@ final class HotProjectCell: BaseCollectionViewCell {
     
     private let bookmarkButton = MainBookmarkButton()
     
+    // MARK: - Property
+    weak var delegate: ProjectCellDelegate?
+    private var projectID = 0
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+        bind()
+    }
+    
+    // MARK: - Configuration
+    override func configureAttributes() {
+        rootFlexContainer.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(containerTapped))
+        )
+    }
+    
+    @objc private func containerTapped(_ sender: UITapGestureRecognizer) {
+        delegate?.itemSelected(projectID: projectID)
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.row).height(100).alignItems(.center).define { flex in
-            flex.addItem(rankingLabel).width(48).height(100).marginRight(18)
+        rootFlexContainer.flex.direction(.row).alignItems(.center).define { flex in
+            flex.addItem(rankingLabel).width(48).height(100)
             
-            flex.addItem().direction(.column).marginTop(19).marginBottom(19).define { flex in
-                flex.addItem(dDayLabel).marginBottom(6)
-                flex.addItem(titleLabel).width(206).height(42)
+            flex.addItem().width(206).height(62).marginLeft(18).define { flex in
+                flex.addItem(dDayLabel).height(14)
+                flex.addItem(titleLabel).marginTop(6)
             }
             
             flex.addItem().grow(1)
@@ -76,7 +96,23 @@ final class HotProjectCell: BaseCollectionViewCell {
         rootFlexContainer.flex.layout()
     }
     
-    func configureCell() {
-       
+    // MARK: - Binding
+    override func bind() {
+        bookmarkButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.delegate?.bookmarkButtonTapped(projectID: owner.projectID)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func configureCell(with data: ProjectPreview) {
+        titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 21)
+        dDayLabel.text = "D-\(data.dDays)"
+        rankingLabel.text = String(data.rank)
+        bookmarkButton.isBookmarked = data.isBookmarked
+        projectID = data.projectID
+        
+        titleLabel.flex.markDirty()
     }
 }

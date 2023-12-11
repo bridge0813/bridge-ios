@@ -8,9 +8,19 @@
 import RxSwift
 
 protocol ProjectRepository {
+    // MARK: - Fetch
     func fetchAllProjects() -> Observable<[ProjectPreview]>
+    func fetchProjectsByField(for field: String) -> Observable<[ProjectPreview]>
     func fetchHotProjects() -> Observable<[ProjectPreview]>
+    func fetchDeadlineProjects() -> Observable<[ProjectPreview]>
     func fetchProjectDetail(with projectID: Int) -> Observable<Project>
     
-    func create(with project: Project) -> Observable<Int>
+    func fetchApplyProjects() -> Observable<[ProjectPreview]>
+    func fetchMyProjects() -> Observable<[ProjectPreview]>
+    
+    // MARK: - Create
+    func create(project: Project) -> Observable<Int>
+    
+    // MARK: - Bookmark
+    func bookmark(projectID: Int) -> Observable<Int>
 }

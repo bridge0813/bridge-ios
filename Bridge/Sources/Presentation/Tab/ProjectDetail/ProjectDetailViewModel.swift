@@ -51,9 +51,9 @@ final class ProjectDetailViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, menu in
                 switch menu {
-                case "수정": owner.coordinator?.showAlert(configuration: .editProject)
-                case "마감": owner.coordinator?.showAlert(configuration: .closeProject)
-                case "삭제": owner.coordinator?.showAlert(configuration: .deleteProject)
+                case "수정하기": owner.coordinator?.showAlert(configuration: .editProject)
+                case "마감하기": owner.coordinator?.showAlert(configuration: .closeProject)
+                case "삭제하기": owner.coordinator?.showAlert(configuration: .deleteProject)
                 default: print("Error")
                 }
             })

@@ -21,15 +21,15 @@ final class CompletionViewModel: ViewModelType {
     // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: CreateProjectCoordinator?
-    private let projectId: Int  // 작성한 모집글을 확인할 때, 전달
+    private let projectID: Int  // 작성한 모집글을 확인할 때, 전달
     
     // MARK: - Init
     init(
         coordinator: CreateProjectCoordinator,
-        projectId: Int
+        projectID: Int
     ) {
         self.coordinator = coordinator
-        self.projectId = projectId
+        self.projectID = projectID
     }
     
     // MARK: - Transformation

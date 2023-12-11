@@ -6,5 +6,9 @@
 //
 
 struct CreateProjectResponseDTO: Decodable {
-    let projectId: Int
+    let projectID: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case projectID = "projectId"
+    }
 }

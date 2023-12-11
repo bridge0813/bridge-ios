@@ -19,7 +19,7 @@ struct CompositionalLayoutConfiguration {
         )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 7.8, leading: 16, bottom: 0, trailing: 16)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
         
         return item
     }
@@ -48,6 +48,7 @@ struct CompositionalLayoutConfiguration {
     func configureSectionLayout() -> NSCollectionLayoutSection {
         let section = NSCollectionLayoutSection(group: configureGroupLayout())
         section.contentInsets = sectionContentInsets
+        section.interGroupSpacing = 8
         
         if let headerHeight {
             section.boundarySupplementaryItems = [configureHeaderLayout(height: headerHeight)]

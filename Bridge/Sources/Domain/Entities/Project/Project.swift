@@ -1,5 +1,5 @@
 //
-//  ProjectDetail.swift
+//  Project.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/11/15.
@@ -25,24 +25,22 @@ struct Project {
 }
 
 extension Project {
-    static var onError: Self {
-        Project(
-            title: "",
-            description: "",
-            dDays: 0,
-            deadline: Date(),
-            startDate: nil,
-            endDate: nil,
-            memberRequirements: [],
-            applicantRestrictions: [],
-            progressMethod: "",
-            progressStep: "",
-            userName: "",
-            isBookmarked: false,
-            isMyProject: false,
-            totalRecruitNumber: 0
-        )
-    }
+    static let onError = Project(
+        title: "모집글을 불러올 수 없습니다.",
+        description: "",
+        dDays: 0,
+        deadline: Date(),
+        startDate: nil,
+        endDate: nil,
+        memberRequirements: [],
+        applicantRestrictions: [],
+        progressMethod: "",
+        progressStep: "",
+        userName: "",
+        isBookmarked: false,
+        isMyProject: false,
+        totalRecruitNumber: 0
+    )
 }
 
 extension Project: Hashable { }

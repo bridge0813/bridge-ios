@@ -19,34 +19,86 @@ final class DefaultProjectRepository: ProjectRepository {
         self.tokenStorage = tokenStorage
     }
     
-    // MARK: - Methods
+    // MARK: - Fetch
+    // 전체 모집글 목록 가져오기
     func fetchAllProjects() -> Observable<[ProjectPreview]> {
-        .just(ProjectPreviewDTO.projectTestArray.compactMap { $0.toEntity() })
+        return networkService.request(to: ProjectEndpoint.fetchAllProjects, interceptor: nil)
+            .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
+            .map { projectPreviewDTOs in
+                projectPreviewDTOs.map { $0.toEntity() }
+            }
     }
     
+    // 특정 분야에 맞는 모집글 목록 가져오기
+    func fetchProjectsByField(for field: String) -> Observable<[ProjectPreview]> {
+        let fieldRequestDTO = FieldRequestDTO(field: field)
+        let fetchProjectsEndPoint = ProjectEndpoint.fetchProjectsByField(requestDTO: fieldRequestDTO)
+        
+        return networkService.request(to: fetchProjectsEndPoint, interceptor: nil)
+            .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
+            .map { projectPreviewDTOs in
+                projectPreviewDTOs.map { $0.toEntity() }
+            }
+    }
+    
+    // 인기 모집글 목록 가져오기
     func fetchHotProjects() -> Observable<[ProjectPreview]> {
-        .just(ProjectPreviewDTO.projectTestArray.compactMap { $0.toEntity() })
+        return networkService.request(to: ProjectEndpoint.fetchHotProjects, interceptor: nil)
+            .decode(type: [HotProjectResponseDTO].self, decoder: JSONDecoder())
+            .map { hotProjectDTOs in
+                hotProjectDTOs.map { $0.toEntity() }
+            }
     }
     
+    // 마감임박 모집글 목록 가져오기
+    func fetchDeadlineProjects() -> Observable<[ProjectPreview]> {
+        return networkService.request(to: ProjectEndpoint.fetchDeadlineProjects, interceptor: nil)
+            .decode(type: [DeadlineProjectResponseDTO].self, decoder: JSONDecoder())
+            .map { deadlineProjectDTOs in
+                deadlineProjectDTOs.map { $0.toEntity() }
+            }
+    }
+    
+    // 모집글 상세정보 가져오기
     func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
         .just(ProjectDetailDTO.projectDetailTest.toEntity())
     }
     
-    func create(with project: Project) -> Observable<Int> {
+    // 지원한 모집글 목록 가져오기
+    func fetchApplyProjects() -> Observable<[ProjectPreview]> {
+        .just(ApplyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+    }
+    
+    func fetchMyProjects() -> Observable<[ProjectPreview]> {
+        .just(MyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+    }
+    
+    // MARK: - Create
+    func create(project: Project) -> Observable<Int> {
         let createProjectDTO = convertToDTO(from: project)
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)
         
         return networkService.request(to: createProjectEndpoint, interceptor: AuthInterceptor())
             .decode(type: CreateProjectResponseDTO.self, decoder: JSONDecoder())
             .map { dto in
-                return dto.projectId
+                return dto.projectID
             }
+    }
+    
+    // MARK: - Bookmark
+    func bookmark(projectID: Int) -> Observable<Int> {
+        let userID = tokenStorage.get(.userID) 
+        let bookmarkDTO = BookmarkRequestDTO(projectID: projectID)
+        let bookmarkEndpoint = ProjectEndpoint.bookmark(requestDTO: bookmarkDTO, userID: userID)
+        
+        return networkService.request(to: bookmarkEndpoint, interceptor: AuthInterceptor())
+            .map { _ in projectID }
     }
 }
 
 private extension DefaultProjectRepository {
     func convertToDTO(from project: Project) -> CreateProjectRequestDTO {
-        let userID = Int(tokenStorage.get(.userID) ?? invalidToken)
+        let userID = Int(tokenStorage.get(.userID)) ?? 0
         
         let memberRequirementsDTO = project.memberRequirements.map { requirement -> MemberRequirementDTO in
             MemberRequirementDTO(
@@ -67,7 +119,7 @@ private extension DefaultProjectRepository {
             applicantRestrictions: project.applicantRestrictions,
             progressMethod: project.progressMethod,
             progressStep: project.progressStep,
-            userId: userID
+            userID: userID
         )
     }
 }

@@ -26,7 +26,7 @@ final class ProjectCountHeaderView: BaseCollectionReusableView {
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.direction(.row).alignItems(.end).define { flex in
-            flex.addItem(projectCountLabel).marginLeft(16)
+            flex.addItem(projectCountLabel).width(200).height(14).marginLeft(16)
         }
     }
     
@@ -41,8 +41,7 @@ extension ProjectCountHeaderView {
     func configureCountLabel(with count: String) {
         projectCountLabel.highlightedTextColor(
             text: "\(count)개의 프로젝트",
-            highlightedText: String(count),
-            hignlightedTextColor: BridgeColor.secondary1
+            highlightedText: count
         )
     }
 }
