@@ -66,8 +66,8 @@ final class ManagementViewController: BaseViewController {
     
     private var dataSource: DataSource?
     
-    private let goToDetailTapped = PublishSubject<Int>()
-    private let goToApplyListTapped = PublishSubject<Int>()
+    private let goToDetailButtonTapped = PublishSubject<Int>()
+    private let goToApplicantListButtonTapped = PublishSubject<Int>()
     private let deleteButtonTapped = PublishSubject<Int>()
 
     // MARK: - Init
@@ -121,7 +121,10 @@ final class ManagementViewController: BaseViewController {
                 applyTapButton.rx.tap.map { .apply },
                 recruitmentTapButton.rx.tap.map { .recruitment }
             ),
-            filterMenuTapped: filterMenuPopUpView.menuTapped
+            filterMenuTapped: filterMenuPopUpView.menuTapped,
+            goToDetailButtonTapped: goToDetailButtonTapped,
+            goToApplicantListButtonTapped: goToApplicantListButtonTapped,
+            deleteButtonTapped: deleteButtonTapped
         )
         let output = viewModel.transform(input: input)
         
@@ -243,10 +246,10 @@ extension ManagementViewController {
                 .subscribe(onNext: { owner, data in
                     let (title, projectID) = data
                     
-                    if let title, title == "프로젝트 상세" {
-                        owner.goToDetailTapped.onNext(projectID)
+                    if title == "프로젝트 상세" {
+                        owner.goToDetailButtonTapped.onNext(projectID)
                     } else {
-                        owner.goToApplyListTapped.onNext(projectID)
+                        owner.goToApplicantListButtonTapped.onNext(projectID)
                     }
                 })
                 .disposed(by: cell.disposeBag)
@@ -263,7 +266,7 @@ extension ManagementViewController {
             cell.detailButtonTapped
                 .withUnretained(self)
                 .subscribe(onNext: { owner, projectID in
-                    owner.goToDetailTapped.onNext(projectID)
+                    owner.goToDetailButtonTapped.onNext(projectID)
                 })
                 .disposed(by: cell.disposeBag)
             

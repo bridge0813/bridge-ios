@@ -15,6 +15,9 @@ final class ManagementViewModel: ViewModelType {
         let viewWillAppear: Observable<Bool>
         let managementTabButtonTapped: Observable<ManagementTapType>
         let filterMenuTapped: Observable<String>
+        let goToDetailButtonTapped: Observable<Int>
+        let goToApplicantListButtonTapped: Observable<Int>
+        let deleteButtonTapped: Observable<Int>
     }
     
     struct Output {
@@ -105,7 +108,7 @@ final class ManagementViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        
+        // 필터 선택 처리
         let filterOption = input.filterMenuTapped
             .do(onNext: { [weak self] option in
                 guard let self else { return }
@@ -113,6 +116,27 @@ final class ManagementViewModel: ViewModelType {
                 self.selectedFilterOption = FilterMenuType(rawValue: option) ?? .all
                 projects.accept(projects.value)
             })
+        
+        input.goToDetailButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, projectID in
+                owner.coordinator?.connectToProjectDetailFlow(with: projectID)
+            })
+            .disposed(by: disposeBag)
+        
+        input.goToApplicantListButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, projectID in
+                owner.coordinator?.showApplicantListViewController(with: projectID)
+            })
+            .disposed(by: disposeBag)
+        
+        input.deleteButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, projectID in
+                owner.coordinator?.showAlert(configuration: .deleteProject)
+            })
+            .disposed(by: disposeBag)
         
         return Output(
             projects: projects.asDriver(onErrorJustReturn: [ProjectPreview.onError]),

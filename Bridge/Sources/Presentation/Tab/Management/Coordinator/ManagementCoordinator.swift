@@ -49,6 +49,10 @@ extension ManagementCoordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
+    func showApplicantListViewController(with projectID: Int) {
+        print(projectID)
+    }
+    
     // MARK: - Connect
     func connectToProjectDetailFlow(with projectID: Int) {
         // TODO: - 연결된 코디네이터 제거 작업

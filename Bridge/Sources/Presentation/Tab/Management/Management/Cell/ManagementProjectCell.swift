@@ -93,7 +93,7 @@ final class ManagementProjectCell: BaseCollectionViewCell {
     private var projectID = 0
     
     /// 지원자 목록 or 프로젝트 상세
-    var buttonGroupTapped: Observable<(String?, Int)> {
+    var buttonGroupTapped: Observable<(String, Int)> {
         return menuButtonGroup.buttonGroupTapped
             .withUnretained(self)
             .map { owner, title in
@@ -156,7 +156,7 @@ final class ManagementProjectCell: BaseCollectionViewCell {
         contentView.flex.padding(0, 18, 24, 18).define { flex in
             flex.addItem().direction(.row).justifyContent(.spaceBetween).define { flex in
                 flex.addItem(statusLabel).marginTop(24)
-                flex.addItem(deleteButton).marginTop(20)
+                flex.addItem(deleteButton).marginTop(20).marginRight(-4)
             }
             
             flex.addItem(titleLabel).marginTop(8)
