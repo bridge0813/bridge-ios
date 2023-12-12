@@ -12,6 +12,12 @@ import RxSwift
 
 final class SetFieldViewController: BaseViewController {
     // MARK: - UI
+    private let contentScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = true
+        return scrollView
+    }()
+    
     private let rootFlexContainer = UIView()
     
     private let descriptionLabel: UILabel = {
@@ -65,25 +71,23 @@ final class SetFieldViewController: BaseViewController {
     }
     
     override func configureLayouts() {
-        view.addSubview(rootFlexContainer)
+        view.addSubview(contentScrollView)
+        contentScrollView.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.paddingHorizontal(16).define { flex in
             flex.addItem(descriptionLabel).marginTop(32).marginBottom(16)
-            
             flex.addItem(tipMessageBox).marginBottom(40)
-            
-            flex.addItem(setFieldView)
-            
-            flex.addItem().grow(1)  // spacer
-            
+            flex.addItem(setFieldView).marginBottom(35)
             flex.addItem(completeButton).height(52).marginBottom(24)
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
+        contentScrollView.pin.all(view.pin.safeArea)
+        rootFlexContainer.pin.top().left().right()
+        rootFlexContainer.flex.layout(mode: .adjustHeight)
+        contentScrollView.contentSize = rootFlexContainer.frame.size
     }
     
     // MARK: - Binding

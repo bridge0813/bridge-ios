@@ -24,6 +24,7 @@ final class AuthCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
         let tokenStorage = KeychainTokenStorage()
         authRepository = DefaultAuthRepository(networkService: networkService, tokenStorage: tokenStorage)
+//        authRepository = MockAuthRepository()
         signInUseCase = DefaultSignInUseCase(authRepository: authRepository)
         signUpUseCase = DefaultSignUpUseCase(authRepository: authRepository)
     }
@@ -44,11 +45,11 @@ extension AuthCoordinator {
     
     // 회원가입 플로우
     func showSetFieldViewController() {
-        let selectFieldViewModel = SetFieldViewModel(coordinator: self, signUpUseCase: signUpUseCase)
-        let selectFieldViewController = SetFieldViewController(viewModel: selectFieldViewModel)
+        let setFieldViewModel = SetFieldViewModel(coordinator: self, signUpUseCase: signUpUseCase)
+        let setFieldViewController = SetFieldViewController(viewModel: setFieldViewModel)
         
-        if let signInNavController = navigationController.presentedViewController as? UINavigationController {
-            signInNavController.pushViewController(selectFieldViewController, animated: true)
+        if let signInNavigationController = navigationController.presentedViewController as? UINavigationController {
+            signInNavigationController.pushViewController(setFieldViewController, animated: true)
         }
     }
 }

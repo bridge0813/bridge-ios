@@ -66,6 +66,8 @@ final class SetFieldViewModel: ViewModelType {
             )
             .disposed(by: disposeBag)
         
-        return Output(isCompleteButtonEnabled: completeButtonEnabled.asDriver(onErrorJustReturn: true))
+        return Output(
+            isCompleteButtonEnabled: completeButtonEnabled.asDriver(onErrorJustReturn: true)
+        )
     }
 }
