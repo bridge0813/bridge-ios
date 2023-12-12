@@ -17,7 +17,7 @@ final class ApplicantListViewModel: ViewModelType {
     }
     
     struct Output {
-        
+        let applicantList: Driver<[ApplicantProfile]>
     }
 
     // MARK: - Property
@@ -25,39 +25,59 @@ final class ApplicantListViewModel: ViewModelType {
     private weak var coordinator: ManagementCoordinator?
     
     private let projectID: Int
+    private let fetchApplicantListUseCase: FetchApplicantListUseCase
     
     // MARK: - Init
     init(
         coordinator: ManagementCoordinator,
-        projectID: Int
+        projectID: Int,
+        fetchApplicantListUseCase: FetchApplicantListUseCase
     ) {
         self.coordinator = coordinator
         self.projectID = projectID
+        self.fetchApplicantListUseCase = fetchApplicantListUseCase
     }
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        // viewWillAppear 시점 데이터 가져오기
-//        input.viewWillAppear
-//            .withUnretained(self)
-//            .flatMapLatest { owner, _ in
-//                
-//            }
-//            .withUnretained(self)
-//            .subscribe(onNext: { owner, result in
-//               
-//            })
-//            .disposed(by: disposeBag)
-//        
+        let applicantList = BehaviorRelay<[ApplicantProfile]>(value: [])
+        
+        input.viewWillAppear
+            .withUnretained(self)
+            .flatMapLatest { owner, _ in
+                owner.fetchApplicantListUseCase.fetchApplicantList(projectID: owner.projectID).toResult()
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                owner.handleFetchApplicantListResult(for: result, applicantList: applicantList)
+            })
+            .disposed(by: disposeBag)
+        
         return Output(
-            
+            applicantList: applicantList.asDriver()
         )
     }
 }
 
 // MARK: - 네트워킹 결과처리
 extension ApplicantListViewModel {
-   
+    /// 지원자 목록 조회 결과 처리
+    func handleFetchApplicantListResult(
+        for result: Result<[ApplicantProfile], Error>,
+        applicantList: BehaviorRelay<[ApplicantProfile]>
+    ) {
+        switch result {
+        case .success(let list):
+            applicantList.accept(list)
+            
+        case .failure(let error):
+            applicantList.accept([])
+            coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                title: "지원자 목록을 조회하는데 실패했습니다",
+                description: error.localizedDescription
+            ))
+        }
+    }
 }
 
 // MARK: - Data source

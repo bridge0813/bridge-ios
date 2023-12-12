@@ -28,4 +28,8 @@ final class DefaultProfileRepository: ProfileRepository {
                 dto.toEntity()
             }
     }
+    
+    func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]> {
+        .just(ApplicantProfileResponseDTO.testArray.compactMap { $0.toEntity() })
+    }
 }

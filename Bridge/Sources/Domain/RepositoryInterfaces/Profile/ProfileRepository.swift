@@ -9,4 +9,5 @@ import RxSwift
 
 protocol ProfileRepository {
     func fetchProfilePreview() -> Observable<ProfilePreview>
+    func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]>
 }

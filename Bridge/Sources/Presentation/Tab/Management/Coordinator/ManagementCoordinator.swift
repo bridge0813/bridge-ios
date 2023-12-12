@@ -14,10 +14,13 @@ final class ManagementCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     
     private let projectRepository: ProjectRepository
+    private let profileRepository: ProfileRepository
     
     private let fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase
     private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
     private let deleteProjectUseCase: DeleteProjectUseCase
+    
+    private let fetchApplicantListUseCase: FetchApplicantListUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -26,10 +29,12 @@ final class ManagementCoordinator: Coordinator {
 
         let networkService = DefaultNetworkService()
         projectRepository = MockProjectRepository()
+        profileRepository = MockProfileRepository()
 
         fetchAppliedProjectsUseCase = DefaultFetchAppliedProjectsUseCase(projectRepository: projectRepository)
         fetchMyProjectsUseCase = DefaultFetchMyProjectsUseCase(projectRepository: projectRepository)
         deleteProjectUseCase = DefaultDeleteProjectUseCase(projectRepository: projectRepository)
+        fetchApplicantListUseCase = DefaultFetchApplicantListUseCase(profileRepository: profileRepository)
     }
     
     // MARK: - Methods
@@ -55,7 +60,8 @@ extension ManagementCoordinator {
     func showApplicantListViewController(with projectID: Int) {
         let viewModel = ApplicantListViewModel(
             coordinator: self,
-            projectID: projectID
+            projectID: projectID, 
+            fetchApplicantListUseCase: fetchApplicantListUseCase
         )
         
         let vc = ApplicantListViewController(viewModel: viewModel)

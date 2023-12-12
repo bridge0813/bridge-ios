@@ -244,6 +244,8 @@
 		7CC719F02B27781100CFA827 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719EF2B27781100CFA827 /* Typealias.swift */; };
 		7CC719F22B277A3500CFA827 /* ApplicantProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F12B277A3500CFA827 /* ApplicantProfile.swift */; };
 		7CC719F52B281CC600CFA827 /* ApplicantNumberHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F42B281CC600CFA827 /* ApplicantNumberHeaderView.swift */; };
+		7CC719F72B2838C300CFA827 /* FetchApplicantListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F62B2838C300CFA827 /* FetchApplicantListUseCase.swift */; };
+		7CC719F92B2839E300CFA827 /* ApplicantProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F82B2839E300CFA827 /* ApplicantProfileResponseDTO.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -504,6 +506,8 @@
 		7CC719EF2B27781100CFA827 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		7CC719F12B277A3500CFA827 /* ApplicantProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantProfile.swift; sourceTree = "<group>"; };
 		7CC719F42B281CC600CFA827 /* ApplicantNumberHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantNumberHeaderView.swift; sourceTree = "<group>"; };
+		7CC719F62B2838C300CFA827 /* FetchApplicantListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchApplicantListUseCase.swift; sourceTree = "<group>"; };
+		7CC719F82B2839E300CFA827 /* ApplicantProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantProfileResponseDTO.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -1428,6 +1432,7 @@
 			isa = PBXGroup;
 			children = (
 				7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */,
+				7CC719F82B2839E300CFA827 /* ApplicantProfileResponseDTO.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1453,6 +1458,7 @@
 			isa = PBXGroup;
 			children = (
 				7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */,
+				7CC719F62B2838C300CFA827 /* FetchApplicantListUseCase.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2155,6 +2161,7 @@
 				7BA36CCE2A9E185A000DAB02 /* ChannelCell.swift in Sources */,
 				7B153C0C2AD64E5800618280 /* ChannelEndpoint.swift in Sources */,
 				7C569D062A9F776B0063D362 /* Date+.swift in Sources */,
+				7CC719F72B2838C300CFA827 /* FetchApplicantListUseCase.swift in Sources */,
 				7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */,
 				7C87EE0C2B1B6B020066691D /* BookmarkRequestDTO.swift in Sources */,
 				7CDFB6202B204D4F00272F77 /* ManagementProjectCell.swift in Sources */,
@@ -2210,6 +2217,7 @@
 				7B1922D12AE166E600EBDD2E /* UIViewController+Keyboard.swift in Sources */,
 				7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */,
 				7C87EE112B1C4B180066691D /* ProjectCellDelegate.swift in Sources */,
+				7CC719F92B2839E300CFA827 /* ApplicantProfileResponseDTO.swift in Sources */,
 				7BA36CA42A9C6849000DAB02 /* DefaultChannelRepository.swift in Sources */,
 				7C8CC4182AF4091D0032F237 /* BridgeProgressView.swift in Sources */,
 				7B3B373E2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift in Sources */,

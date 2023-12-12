@@ -11,4 +11,8 @@ final class MockProfileRepository: ProfileRepository {
     func fetchProfilePreview() -> Observable<ProfilePreview> {
         .just(ProfilePreviewResponseDTO.testData.toEntity())
     }
+    
+    func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]> {
+        .just(ApplicantProfileResponseDTO.testArray.compactMap { $0.toEntity() })
+    }
 }

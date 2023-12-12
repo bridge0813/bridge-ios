@@ -85,30 +85,24 @@ final class ApplicantListViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
-        // test
-        let testArray: [ApplicantProfile] = [
-            ApplicantProfile(userID: 0, name: "엄지호", fields: ["iOS", "UIUX"], career: "취준생"),
-            ApplicantProfile(userID: 1, name: "정호윤", fields: ["iOS", "UIUX"], career: "학생"),
-            ApplicantProfile(userID: 2, name: "고경", fields: ["영상/모션", "UIUX"], career: "취준생"),
-            ApplicantProfile(userID: 3, name: "김교연", fields: ["BIBX", "UIUX"], career: "취준생"),
-            ApplicantProfile(userID: 4, name: "이지민", fields: ["백엔드", "PM"], career: "학생"),
-            ApplicantProfile(userID: 5, name: "이규현", fields: ["프론트엔드", "백엔드"], career: "취준생")
-        ]
-        
-        configureDataSource()
-        configureSupplementaryView(with: testArray.count)
-        applySectionSnapshot(with: testArray)
+        // 가져온 모집글에 맞게 DataSource 적용 및 UI 업데이트
+        output.applicantList
+            .drive(onNext: { [weak self] applicantList in
+                guard let self else { return }
+                
+                // 빈 데이터일 경우 플레이스홀더 보여주기
+                self.collectionView.flex.isIncludedInLayout(!applicantList.isEmpty).markDirty()
+                self.placeholderView.flex.isIncludedInLayout(applicantList.isEmpty).markDirty()
+                self.placeholderView.isHidden = !applicantList.isEmpty
+                self.rootFlexContainer.flex.layout()
+                
+                // CollectionView Configure
+                self.configureDataSource()
+                self.configureSupplementaryView(with: applicantList.count)
+                self.applySectionSnapshot(with: applicantList)
+            })
+            .disposed(by: disposeBag)
 
-//        self.collectionView.flex.isIncludedInLayout(false).markDirty()
-//        self.placeholderView.flex.isIncludedInLayout(true).markDirty()
-//        self.placeholderView.isHidden = false
-//        self.rootFlexContainer.flex.layout()
-//
-//
-//        self.collectionView.flex.isIncludedInLayout(true).markDirty()
-//        self.placeholderView.flex.isIncludedInLayout(false).markDirty()
-//        self.placeholderView.isHidden = true
-//        self.rootFlexContainer.flex.layout()
     }
 }
 
