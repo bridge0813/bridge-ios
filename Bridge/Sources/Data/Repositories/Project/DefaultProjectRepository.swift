@@ -99,6 +99,11 @@ final class DefaultProjectRepository: ProjectRepository {
     func delete(projectID: Int) -> Observable<Int> {
         .just(projectID)
     }
+    
+    // MARK: - Accept
+    func accept(projectID: Int, userID: Int) -> Observable<Int> {
+        .just(userID)
+    }
 }
 
 private extension DefaultProjectRepository {

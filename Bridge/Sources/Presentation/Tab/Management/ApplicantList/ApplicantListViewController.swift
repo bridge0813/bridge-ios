@@ -81,7 +81,10 @@ final class ApplicantListViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = ApplicantListViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asObservable()
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            startChatButtonTapped: startChatButtonTapped,
+            acceptButtonTapped: acceptButtonTapped,
+            rejectButtonTapped: rejectButtonTapped
         )
         let output = viewModel.transform(input: input)
         

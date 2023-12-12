@@ -246,6 +246,7 @@
 		7CC719F52B281CC600CFA827 /* ApplicantNumberHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F42B281CC600CFA827 /* ApplicantNumberHeaderView.swift */; };
 		7CC719F72B2838C300CFA827 /* FetchApplicantListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F62B2838C300CFA827 /* FetchApplicantListUseCase.swift */; };
 		7CC719F92B2839E300CFA827 /* ApplicantProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F82B2839E300CFA827 /* ApplicantProfileResponseDTO.swift */; };
+		7CC719FC2B2848EC00CFA827 /* AcceptApplicantUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719FB2B2848EC00CFA827 /* AcceptApplicantUseCase.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -508,6 +509,7 @@
 		7CC719F42B281CC600CFA827 /* ApplicantNumberHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantNumberHeaderView.swift; sourceTree = "<group>"; };
 		7CC719F62B2838C300CFA827 /* FetchApplicantListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchApplicantListUseCase.swift; sourceTree = "<group>"; };
 		7CC719F82B2839E300CFA827 /* ApplicantProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantProfileResponseDTO.swift; sourceTree = "<group>"; };
+		7CC719FB2B2848EC00CFA827 /* AcceptApplicantUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptApplicantUseCase.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -1693,6 +1695,7 @@
 				7CA04F3F2B022D69007B9191 /* Detail */,
 				7C87EE0D2B1B72070066691D /* Bookmark */,
 				7CC719E22B27115600CFA827 /* Delete */,
+				7CC719FA2B28471800CFA827 /* Accept */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -1754,6 +1757,14 @@
 				7CC719F42B281CC600CFA827 /* ApplicantNumberHeaderView.swift */,
 			);
 			path = HeaderView;
+			sourceTree = "<group>";
+		};
+		7CC719FA2B28471800CFA827 /* Accept */ = {
+			isa = PBXGroup;
+			children = (
+				7CC719FB2B2848EC00CFA827 /* AcceptApplicantUseCase.swift */,
+			);
+			path = Accept;
 			sourceTree = "<group>";
 		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
@@ -2190,6 +2201,7 @@
 				7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */,
 				7CA04F732B0E675B007B9191 /* CreateProjectResponseDTO.swift in Sources */,
 				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
+				7CC719FC2B2848EC00CFA827 /* AcceptApplicantUseCase.swift in Sources */,
 				7C569D032A9F72320063D362 /* ProjectPreviewResponseDTO.swift in Sources */,
 				7CA04F2E2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift in Sources */,
 				7C55E64E2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift in Sources */,

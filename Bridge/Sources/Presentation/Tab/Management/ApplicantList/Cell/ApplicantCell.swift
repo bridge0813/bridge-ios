@@ -25,7 +25,6 @@ final class ApplicantCell: BaseCollectionViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "홍길동"
         label.font = BridgeFont.subtitle1.font
         label.textColor = BridgeColor.gray01
         return label
@@ -33,7 +32,6 @@ final class ApplicantCell: BaseCollectionViewCell {
     
     private let informationLabel: UILabel = {
         let label = UILabel()
-        label.text = "취준생, UIUX"
         label.font = BridgeFont.body2.font
         label.textColor = BridgeColor.secondary1
         label.lineBreakMode = .byTruncatingTail
@@ -93,7 +91,7 @@ final class ApplicantCell: BaseCollectionViewCell {
             flex.addItem().direction(.row).height(44).define { flex in
                 flex.addItem(profileImageView)
                 
-                flex.addItem().marginLeft(16).define { flex in
+                flex.addItem().grow(1).marginLeft(16).define { flex in
                     flex.addItem(nameLabel)
                     flex.addItem(informationLabel).marginTop(4)
                 }
