@@ -104,6 +104,11 @@ final class DefaultProjectRepository: ProjectRepository {
     func accept(projectID: Int, userID: Int) -> Observable<Int> {
         .just(userID)
     }
+    
+    // MARK: - Reject
+    func reject(projectID: Int, userID: Int) -> Observable<Int> {
+        .just(userID)
+    }
 }
 
 private extension DefaultProjectRepository {

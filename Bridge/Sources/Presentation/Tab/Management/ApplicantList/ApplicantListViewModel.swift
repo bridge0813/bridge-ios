@@ -29,18 +29,21 @@ final class ApplicantListViewModel: ViewModelType {
     private let projectID: Int
     private let fetchApplicantListUseCase: FetchApplicantListUseCase
     private let acceptApplicantUseCase: AcceptApplicantUseCase
+    private let rejectApplicantUseCase: RejectApplicantUseCase
     
     // MARK: - Init
     init(
         coordinator: ManagementCoordinator,
         projectID: Int,
         fetchApplicantListUseCase: FetchApplicantListUseCase,
-        acceptApplicantUseCase: AcceptApplicantUseCase
+        acceptApplicantUseCase: AcceptApplicantUseCase,
+        rejectApplicantUseCase: RejectApplicantUseCase
     ) {
         self.coordinator = coordinator
         self.projectID = projectID
         self.fetchApplicantListUseCase = fetchApplicantListUseCase
         self.acceptApplicantUseCase = acceptApplicantUseCase
+        self.rejectApplicantUseCase = rejectApplicantUseCase
     }
     
     // MARK: - Transformation
@@ -70,6 +73,27 @@ final class ApplicantListViewModel: ViewModelType {
             .flatMap { owner, userID -> Observable<Result<UserID, Error>> in
                 // 수락 진행
                 owner.acceptApplicantUseCase.accept(projectID: owner.projectID, userID: userID).toResult()
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                owner.handleApplicationResult(
+                    for: result,
+                    applicantList: applicantList
+                )
+            })
+            .disposed(by: disposeBag)
+        
+        // 거절 처리
+        input.rejectButtonTapped
+            .withUnretained(self)
+            .flatMap { owner, userID -> Maybe<UserID> in
+                // 거절 Alert을 보여주고, 유저가 "거절하기" 를 클릭했을 경우 이벤트를 전달.
+                owner.confirmActionWithAlert(userID: userID, alertConfiguration: .refuse)
+            }
+            .withUnretained(self)
+            .flatMap { owner, userID -> Observable<Result<UserID, Error>> in
+                // 거절 진행
+                owner.rejectApplicantUseCase.reject(projectID: owner.projectID, userID: userID).toResult()
             }
             .withUnretained(self)
             .subscribe(onNext: { owner, result in

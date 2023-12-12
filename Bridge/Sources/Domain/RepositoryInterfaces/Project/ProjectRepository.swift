@@ -29,4 +29,7 @@ protocol ProjectRepository {
     
     // MARK: - Accept
     func accept(projectID: Int, userID: Int) -> Observable<Int>
+    
+    // MARK: - Reject
+    func reject(projectID: Int, userID: Int) -> Observable<Int>
 }

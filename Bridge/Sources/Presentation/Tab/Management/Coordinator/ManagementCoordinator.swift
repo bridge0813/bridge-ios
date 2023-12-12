@@ -22,6 +22,7 @@ final class ManagementCoordinator: Coordinator {
     
     private let fetchApplicantListUseCase: FetchApplicantListUseCase
     private let acceptApplicantUseCase: AcceptApplicantUseCase
+    private let rejectApplicantUseCase: RejectApplicantUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -36,7 +37,8 @@ final class ManagementCoordinator: Coordinator {
         fetchMyProjectsUseCase = DefaultFetchMyProjectsUseCase(projectRepository: projectRepository)
         deleteProjectUseCase = DefaultDeleteProjectUseCase(projectRepository: projectRepository)
         fetchApplicantListUseCase = DefaultFetchApplicantListUseCase(profileRepository: profileRepository)
-        acceptApplicantUseCase = DefaultAcceptApplicantUseCasee(projectRepository: projectRepository)
+        acceptApplicantUseCase = DefaultAcceptApplicantUseCase(projectRepository: projectRepository)
+        rejectApplicantUseCase = DefaultRejectApplicantUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Methods
@@ -64,7 +66,8 @@ extension ManagementCoordinator {
             coordinator: self,
             projectID: projectID, 
             fetchApplicantListUseCase: fetchApplicantListUseCase, 
-            acceptApplicantUseCase: acceptApplicantUseCase
+            acceptApplicantUseCase: acceptApplicantUseCase,
+            rejectApplicantUseCase: rejectApplicantUseCase
         )
         
         let vc = ApplicantListViewController(viewModel: viewModel)

@@ -12,7 +12,7 @@ protocol AcceptApplicantUseCase {
     func accept(projectID: Int, userID: Int) -> Observable<Int>
 }
 
-final class DefaultAcceptApplicantUseCasee: AcceptApplicantUseCase {
+final class DefaultAcceptApplicantUseCase: AcceptApplicantUseCase {
     
     private let projectRepository: ProjectRepository
     

@@ -237,6 +237,7 @@
 		7CA04F6C2B0C5D29007B9191 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA04F6B2B0C5D29007B9191 /* Lottie */; };
 		7CA04F712B0C5FFE007B9191 /* firecracker.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CA04F702B0C5FFE007B9191 /* firecracker.json */; };
 		7CA04F732B0E675B007B9191 /* CreateProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F722B0E675B007B9191 /* CreateProjectResponseDTO.swift */; };
+		7CA73D952B285A0F007D88FB /* RejectApplicantUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D942B285A0F007D88FB /* RejectApplicantUseCase.swift */; };
 		7CC719E42B27117800CFA827 /* DeleteProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */; };
 		7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */; };
 		7CC719EA2B276C2C00CFA827 /* ApplicantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */; };
@@ -500,6 +501,7 @@
 		7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectUseCase.swift; sourceTree = "<group>"; };
 		7CA04F702B0C5FFE007B9191 /* firecracker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firecracker.json; sourceTree = "<group>"; };
 		7CA04F722B0E675B007B9191 /* CreateProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectResponseDTO.swift; sourceTree = "<group>"; };
+		7CA73D942B285A0F007D88FB /* RejectApplicantUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectApplicantUseCase.swift; sourceTree = "<group>"; };
 		7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProjectUseCase.swift; sourceTree = "<group>"; };
 		7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewController.swift; sourceTree = "<group>"; };
 		7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewModel.swift; sourceTree = "<group>"; };
@@ -1696,6 +1698,7 @@
 				7C87EE0D2B1B72070066691D /* Bookmark */,
 				7CC719E22B27115600CFA827 /* Delete */,
 				7CC719FA2B28471800CFA827 /* Accept */,
+				7CA73D932B2859F1007D88FB /* Reject */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -1714,6 +1717,14 @@
 				7CA04F702B0C5FFE007B9191 /* firecracker.json */,
 			);
 			path = Lottie;
+			sourceTree = "<group>";
+		};
+		7CA73D932B2859F1007D88FB /* Reject */ = {
+			isa = PBXGroup;
+			children = (
+				7CA73D942B285A0F007D88FB /* RejectApplicantUseCase.swift */,
+			);
+			path = Reject;
 			sourceTree = "<group>";
 		};
 		7CC719E22B27115600CFA827 /* Delete */ = {
@@ -2257,6 +2268,7 @@
 				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
 				7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */,
 				7B9142E02B01D4EB006EA52F /* MessageDTO.swift in Sources */,
+				7CA73D952B285A0F007D88FB /* RejectApplicantUseCase.swift in Sources */,
 				7B02A6672ADFFCD900C8D4A1 /* DefaultWebSocketService.swift in Sources */,
 				7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */,
 				7B153C112AD6D0E100618280 /* AuthInterceptor.swift in Sources */,
