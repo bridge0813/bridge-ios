@@ -8,6 +8,7 @@
 import RxSwift
 
 protocol SignOutUseCase {
+    @discardableResult
     func signOut() -> Observable<Void>
 }
 
