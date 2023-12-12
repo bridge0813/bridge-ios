@@ -12,13 +12,15 @@ import RxSwift
 
 final class SetFieldViewController: BaseViewController {
     // MARK: - UI
-    private let contentScrollView: UIScrollView = {
+    private let rootFlexContainer = UIView()
+    
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
         return scrollView
     }()
     
-    private let rootFlexContainer = UIView()
+    private let contentView = UIView()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
@@ -69,25 +71,31 @@ final class SetFieldViewController: BaseViewController {
         navigationItem.hidesBackButton = true
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false  // 밀어서 뒤로가기 제한
     }
-    
+    // Junghoyun2510
     override func configureLayouts() {
-        view.addSubview(contentScrollView)
-        contentScrollView.addSubview(rootFlexContainer)
+        view.addSubview(rootFlexContainer)
+        rootFlexContainer.addSubview(scrollView)
+        rootFlexContainer.addSubview(completeButton)
+        scrollView.addSubview(contentView)
         
-        rootFlexContainer.flex.paddingHorizontal(16).define { flex in
+        contentView.flex.paddingHorizontal(16).define { flex in
             flex.addItem(descriptionLabel).marginTop(32).marginBottom(16)
             flex.addItem(tipMessageBox).marginBottom(40)
             flex.addItem(setFieldView).marginBottom(35)
-            flex.addItem(completeButton).height(52).marginBottom(24)
+            flex.addItem().size(50)
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        contentScrollView.pin.all(view.pin.safeArea)
-        rootFlexContainer.pin.top().left().right()
-        rootFlexContainer.flex.layout(mode: .adjustHeight)
-        contentScrollView.contentSize = rootFlexContainer.frame.size
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        completeButton.pin.horizontally(16).bottom(view.pin.safeArea + 24).height(52)
+        scrollView.pin.all()
+        
+        contentView.pin.top().horizontally()
+        contentView.flex.layout(mode: .adjustHeight)
+        
+        scrollView.contentSize = contentView.frame.size
     }
     
     // MARK: - Binding
