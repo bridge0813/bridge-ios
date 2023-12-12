@@ -238,6 +238,12 @@
 		7CA04F712B0C5FFE007B9191 /* firecracker.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CA04F702B0C5FFE007B9191 /* firecracker.json */; };
 		7CA04F732B0E675B007B9191 /* CreateProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F722B0E675B007B9191 /* CreateProjectResponseDTO.swift */; };
 		7CC719E42B27117800CFA827 /* DeleteProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */; };
+		7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */; };
+		7CC719EA2B276C2C00CFA827 /* ApplicantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */; };
+		7CC719EC2B27729F00CFA827 /* ApplicantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719EB2B27729F00CFA827 /* ApplicantCell.swift */; };
+		7CC719F02B27781100CFA827 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719EF2B27781100CFA827 /* Typealias.swift */; };
+		7CC719F22B277A3500CFA827 /* ApplicantProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F12B277A3500CFA827 /* ApplicantProfile.swift */; };
+		7CC719F52B281CC600CFA827 /* ApplicantNumberHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F42B281CC600CFA827 /* ApplicantNumberHeaderView.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
@@ -492,6 +498,12 @@
 		7CA04F702B0C5FFE007B9191 /* firecracker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firecracker.json; sourceTree = "<group>"; };
 		7CA04F722B0E675B007B9191 /* CreateProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectResponseDTO.swift; sourceTree = "<group>"; };
 		7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProjectUseCase.swift; sourceTree = "<group>"; };
+		7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewController.swift; sourceTree = "<group>"; };
+		7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewModel.swift; sourceTree = "<group>"; };
+		7CC719EB2B27729F00CFA827 /* ApplicantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantCell.swift; sourceTree = "<group>"; };
+		7CC719EF2B27781100CFA827 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
+		7CC719F12B277A3500CFA827 /* ApplicantProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantProfile.swift; sourceTree = "<group>"; };
+		7CC719F42B281CC600CFA827 /* ApplicantNumberHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantNumberHeaderView.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
@@ -1002,6 +1014,7 @@
 				7BA36CC22A9E10FA000DAB02 /* Bases */,
 				7BA36CC52A9E148C000DAB02 /* Extensions */,
 				7B0CFB8A2AD3D19500EA9C0D /* RxExtensions */,
+				7CC719EE2B2777F800CFA827 /* Typealias */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1431,6 +1444,7 @@
 			isa = PBXGroup;
 			children = (
 				7C56E1612B10FF8300454F5E /* ProfilePreview.swift */,
+				7CC719F12B277A3500CFA827 /* ApplicantProfile.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1701,6 +1715,41 @@
 			path = Delete;
 			sourceTree = "<group>";
 		};
+		7CC719E62B276B5C00CFA827 /* ApplicantList */ = {
+			isa = PBXGroup;
+			children = (
+				7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */,
+				7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */,
+				7CC719ED2B2772C100CFA827 /* Cell */,
+				7CC719F32B281C6D00CFA827 /* HeaderView */,
+			);
+			path = ApplicantList;
+			sourceTree = "<group>";
+		};
+		7CC719ED2B2772C100CFA827 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7CC719EB2B27729F00CFA827 /* ApplicantCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		7CC719EE2B2777F800CFA827 /* Typealias */ = {
+			isa = PBXGroup;
+			children = (
+				7CC719EF2B27781100CFA827 /* Typealias.swift */,
+			);
+			path = Typealias;
+			sourceTree = "<group>";
+		};
+		7CC719F32B281C6D00CFA827 /* HeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				7CC719F42B281CC600CFA827 /* ApplicantNumberHeaderView.swift */,
+			);
+			path = HeaderView;
+			sourceTree = "<group>";
+		};
 		7CC9F6C12AAEE9E800685EA9 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -1778,6 +1827,7 @@
 			children = (
 				7CDFB60F2B20115D00272F77 /* Coordinator */,
 				7CDFB6102B20116500272F77 /* Management */,
+				7CC719E62B276B5C00CFA827 /* ApplicantList */,
 			);
 			path = Management;
 			sourceTree = "<group>";
@@ -2051,6 +2101,7 @@
 				7B93AAA32B2012D800650EA5 /* StompMessageRequestDTO.swift in Sources */,
 				7B9C31AB2B07752C007E36B2 /* StompService.swift in Sources */,
 				7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */,
+				7CC719F02B27781100CFA827 /* Typealias.swift in Sources */,
 				7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */,
 				7CA04F0F2AF8F867007B9191 /* TechStack.swift in Sources */,
 				7CDFB61D2B202C7A00272F77 /* ProjectCountView.swift in Sources */,
@@ -2058,7 +2109,9 @@
 				7B61236A2ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift in Sources */,
 				7CDFB62A2B230ED500272F77 /* FetchAppliedProjectsUseCase.swift in Sources */,
 				7C55E6562AE811660018FA5D /* BridgeSetDisplayButton.swift in Sources */,
+				7CC719EA2B276C2C00CFA827 /* ApplicantListViewModel.swift in Sources */,
 				7BA36CC72A9E14BD000DAB02 /* UITableView+.swift in Sources */,
+				7CC719EC2B27729F00CFA827 /* ApplicantCell.swift in Sources */,
 				7C55E6292AD7EFEF0018FA5D /* MainCategoryButton.swift in Sources */,
 				7C56E15C2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChannelsUseCase.swift in Sources */,
@@ -2081,6 +2134,7 @@
 				7CA04F512B04AAB3007B9191 /* ProjectDetailDTO.swift in Sources */,
 				7BB5C77C2AFCE8220021BEC5 /* MenuCell.swift in Sources */,
 				7CDFB61B2B2028B700272F77 /* ManagementHeaderView.swift in Sources */,
+				7CC719F52B281CC600CFA827 /* ApplicantNumberHeaderView.swift in Sources */,
 				7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */,
 				7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */,
 				7C87EE142B1C55C20066691D /* FilterPopUpView.swift in Sources */,
@@ -2143,6 +2197,7 @@
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,
 				7CA04F4B2B03D5DE007B9191 /* ProjectDetailHeaderView.swift in Sources */,
 				7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */,
+				7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */,
 				7B61238B2AC2D03E006E72C1 /* BridgeTipMessageBox.swift in Sources */,
 				7B1922D52AE287C900EBDD2E /* MessageCell.swift in Sources */,
 				7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */,
@@ -2196,6 +2251,7 @@
 				7B1E5ABC2ADCFD790053E9B3 /* ChannelViewController.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChannelUseCase.swift in Sources */,
 				7CA04F692B0A6F02007B9191 /* CreateProjectUseCase.swift in Sources */,
+				7CC719F22B277A3500CFA827 /* ApplicantProfile.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
 				7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */,

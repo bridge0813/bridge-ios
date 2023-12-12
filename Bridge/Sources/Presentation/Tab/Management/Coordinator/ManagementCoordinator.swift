@@ -53,7 +53,13 @@ extension ManagementCoordinator {
     }
     
     func showApplicantListViewController(with projectID: Int) {
-        print(projectID)
+        let viewModel = ApplicantListViewModel(
+            coordinator: self,
+            projectID: projectID
+        )
+        
+        let vc = ApplicantListViewController(viewModel: viewModel)
+        navigationController.pushViewController(vc, animated: true)
     }
     
     // MARK: - Connect

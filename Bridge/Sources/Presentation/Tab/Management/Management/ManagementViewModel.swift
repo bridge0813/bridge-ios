@@ -229,8 +229,6 @@ extension ManagementViewModel {
 
 // MARK: - Data source
 extension ManagementViewModel {
-    typealias ProjectID = Int
-    
     enum Section: CaseIterable {
         case main
     }
@@ -255,5 +253,4 @@ extension ManagementViewModel {
         case signInNeeded
         case error
     }
-    
 }
