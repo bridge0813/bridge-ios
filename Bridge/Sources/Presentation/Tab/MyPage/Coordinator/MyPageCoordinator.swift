@@ -15,6 +15,9 @@ final class MyPageCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     
     private let authRepository: AuthRepository
+    private let profileRepository: ProfileRepository
+    
+    private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -23,6 +26,10 @@ final class MyPageCoordinator: Coordinator {
         
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
+        profileRepository = DefaultProfileRepository(networkService: networkService)
+//        profileRepository = MockProfileRepository()
+        
+        fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(profileRepository: profileRepository)
     }
     
     // MARK: - Start
@@ -34,7 +41,7 @@ final class MyPageCoordinator: Coordinator {
 // MARK: - My page
 extension MyPageCoordinator {
     private func showMyPageViewController() {
-        let myPageViewModel = MyPageViewModel(coordinator: self)
+        let myPageViewModel = MyPageViewModel(coordinator: self, fetchProfilePreviewUseCase: fetchProfilePreviewUseCase)
         let myPageViewController = MyPageViewController(viewModel: myPageViewModel)
         navigationController.pushViewController(myPageViewController, animated: false)
     }

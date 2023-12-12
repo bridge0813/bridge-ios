@@ -73,16 +73,16 @@ final class MyPageViewController: BaseViewController {
     // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        
-        rootFlexContainer.flex.define { flex in
-            flex.addItem(myPageTableView).grow(1)
-        }
+        rootFlexContainer.addSubview(myPageTableView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         rootFlexContainer.pin.all(view.pin.safeArea)
         rootFlexContainer.flex.layout()
+        
+        myPageTableView.pin.all()
+        myPageTableView.flex.layout()
     }
     
     // MARK: - Binding
@@ -102,6 +102,12 @@ final class MyPageViewController: BaseViewController {
                 cellType: MenuCell.self
             )) { _, element, cell in
                 cell.configure(with: element)
+            }
+            .disposed(by: disposeBag)
+        
+        output.viewState
+            .drive { [weak self] viewState in
+                self?.profileHeaderView.configure(with: viewState)
             }
             .disposed(by: disposeBag)
     }

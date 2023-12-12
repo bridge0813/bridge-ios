@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxCocoa
 import RxSwift
 
 final class MyPageViewModel: ViewModelType {
@@ -18,27 +19,46 @@ final class MyPageViewModel: ViewModelType {
         let itemSelected: Observable<Int>
     }
     
-    struct Output { 
-        let menus: Observable<[String]>
+    struct Output {
+        let viewState: Driver<ViewState>
+        let menus: BehaviorRelay<[String]>
     }
     
     // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: MyPageCoordinator?
+    private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+    
+    private let viewState = BehaviorRelay<ViewState>(value: .unauthorized)
+    private let menus = BehaviorRelay<[String]>(value: Menu.unauthorizedCases.map { $0.rawValue })
     
     // MARK: - Init
-    init(coordinator: MyPageCoordinator) {
+    init(
+        coordinator: MyPageCoordinator,
+        fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+    ) {
         self.coordinator = coordinator
+        self.fetchProfilePreviewUseCase = fetchProfilePreviewUseCase
     }
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        var menus = Menu.allCases.map { $0.rawValue }
-        
         input.viewWillAppear
             .withUnretained(self)
-            .subscribe(onNext: { _, _ in
-                
+            .flatMap { owner, _ in
+                owner.fetchProfilePreviewUseCase.fetchProfilePreview().toResult()
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let profilePreview):
+                    owner.viewState.accept(.authorized(profilePreview))
+                    owner.updateMenus(for: .authorized(profilePreview))
+                    
+                case .failure:
+                    owner.viewState.accept(.unauthorized)
+                    owner.updateMenus(for: .unauthorized)
+                }
             })
             .disposed(by: disposeBag)
         
@@ -64,14 +84,34 @@ final class MyPageViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         input.itemSelected
-            .map { Menu.allCases[$0] }
+            .withUnretained(self)
+            .map { owner, index in
+                switch owner.viewState.value {
+                case .unauthorized:
+                    return Menu.unauthorizedCases[index]
+                    
+                case .authorized:
+                    return Menu.authorizedCases[index]
+                }
+            }
             .withUnretained(self)
             .subscribe(onNext: { owner, menu in
                 owner.handleMenuSelection(menu)
             })
             .disposed(by: disposeBag)
         
-        return Output(menus: .just(menus))
+        return Output(
+            viewState: viewState.asDriver(onErrorJustReturn: .unauthorized),
+            menus: menus
+        )
+    }
+}
+
+// MARK: - View state
+extension MyPageViewModel {
+    enum ViewState {
+        case unauthorized
+        case authorized(ProfilePreview)
     }
 }
 
@@ -85,9 +125,30 @@ private extension MyPageViewModel {
         case versionInfo = "버전정보 1.0.0"
         case openSourceLicense = "오픈소스 라이선스"
         case withdrawal = "회원탈퇴"
+        
+        // 비로그인 상태일 때의 메뉴
+        static var unauthorizedCases: [Menu] {
+            [.signIn, .notification, .privacyPolicy, .versionInfo, .openSourceLicense]
+        }
+        
+        // 로그인 상태일 때의 메뉴
+        static var authorizedCases: [Menu] {
+            [.notification, .privacyPolicy, .versionInfo, .openSourceLicense, .signOut, .withdrawal]
+        }
+    }
+    
+    func updateMenus(for viewState: ViewState) {
+        switch viewState {
+        case .unauthorized:
+            menus.accept(Menu.unauthorizedCases.map { $0.rawValue })
+            
+        case .authorized:
+            menus.accept(Menu.authorizedCases.map { $0.rawValue })
+        }
     }
     
     func handleMenuSelection(_ menu: Menu) {
+        
         switch menu {
         case .signIn:
             coordinator?.showSignInViewController()
