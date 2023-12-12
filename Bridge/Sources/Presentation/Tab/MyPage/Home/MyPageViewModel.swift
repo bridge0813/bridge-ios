@@ -28,6 +28,8 @@ final class MyPageViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: MyPageCoordinator?
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+    private let signOutUseCase: SignOutUseCase
+    private let withdrawUseCase: WithdrawUseCase
     
     private let viewState = BehaviorRelay<ViewState>(value: .unauthorized)
     private let menus = BehaviorRelay<[String]>(value: Menu.unauthorizedCases.map { $0.rawValue })
@@ -35,10 +37,14 @@ final class MyPageViewModel: ViewModelType {
     // MARK: - Init
     init(
         coordinator: MyPageCoordinator,
-        fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+        fetchProfilePreviewUseCase: FetchProfilePreviewUseCase,
+        signOutUseCase: SignOutUseCase,
+        withdrawUseCase: WithdrawUseCase
     ) {
         self.coordinator = coordinator
         self.fetchProfilePreviewUseCase = fetchProfilePreviewUseCase
+        self.signOutUseCase = signOutUseCase
+        self.withdrawUseCase = withdrawUseCase
     }
     
     // MARK: - Transformation
@@ -153,7 +159,9 @@ private extension MyPageViewModel {
             coordinator?.showSignInViewController()
             
         case .signOut:
-            coordinator?.showAlert(configuration: .signOut)
+            coordinator?.showAlert(configuration: .signOut, primaryAction: { [weak self] in
+                self?.signOutUseCase.signOut()
+            })
             
         case .notification:
             coordinator?.openSettings()
@@ -162,13 +170,15 @@ private extension MyPageViewModel {
             coordinator?.showPrivacyPolicy()
             
         case .versionInfo:
-            break
+            return
             
         case .openSourceLicense:
             coordinator?.showOpenSourceLicense()
             
         case .withdrawal:
-            coordinator?.showAlert(configuration: .withdrawal)
+            coordinator?.showAlert(configuration: .withdrawal, primaryAction: { [weak self] in
+                self?.withdrawUseCase.withdraw()
+            })
         }
     }
 }

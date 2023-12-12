@@ -16,6 +16,8 @@ final class MyPageCoordinator: Coordinator {
     
     private let authRepository: AuthRepository
     private let userRepository: UserRepository
+    private let signOutUseCase: SignOutUseCase
+    private let withdrawUseCase: WithdrawUseCase
     
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
     
@@ -30,6 +32,8 @@ final class MyPageCoordinator: Coordinator {
         userRepository = MockUserRepository()
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
+        signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
+        withdrawUseCase = DefaultWithdrawUseCase(authRepository: authRepository)
     }
     
     // MARK: - Start
@@ -41,7 +45,12 @@ final class MyPageCoordinator: Coordinator {
 // MARK: - My page
 extension MyPageCoordinator {
     private func showMyPageViewController() {
-        let myPageViewModel = MyPageViewModel(coordinator: self, fetchProfilePreviewUseCase: fetchProfilePreviewUseCase)
+        let myPageViewModel = MyPageViewModel(
+            coordinator: self,
+            fetchProfilePreviewUseCase: fetchProfilePreviewUseCase,
+            signOutUseCase: signOutUseCase,
+            withdrawUseCase: withdrawUseCase
+        )
         let myPageViewController = MyPageViewController(viewModel: myPageViewModel)
         navigationController.pushViewController(myPageViewController, animated: false)
     }

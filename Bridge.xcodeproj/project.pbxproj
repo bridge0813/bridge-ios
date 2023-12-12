@@ -45,6 +45,8 @@
 		7B3B373C2B038FE400C2F8AD /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3B373B2B038FE400C2F8AD /* SendMessageUseCase.swift */; };
 		7B3B373E2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3B373D2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift */; };
 		7B4EA4812B08C867004663BC /* WebSocketServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4EA4802B08C867004663BC /* WebSocketServiceDelegate.swift */; };
+		7B5752B12B287DF600B1A2DC /* SignOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5752B02B287DF600B1A2DC /* SignOutUseCase.swift */; };
+		7B5752B32B287E2A00B1A2DC /* WithdrawUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5752B22B287E2900B1A2DC /* WithdrawUseCase.swift */; };
 		7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */; };
 		7B61236A2ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123692ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift */; };
 		7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61236E2AC15905006E72C1 /* BridgeFont.swift */; };
@@ -305,6 +307,8 @@
 		7B3B373B2B038FE400C2F8AD /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
 		7B3B373D2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSubscriptionUseCase.swift; sourceTree = "<group>"; };
 		7B4EA4802B08C867004663BC /* WebSocketServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketServiceDelegate.swift; sourceTree = "<group>"; };
+		7B5752B02B287DF600B1A2DC /* SignOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutUseCase.swift; sourceTree = "<group>"; };
+		7B5752B22B287E2900B1A2DC /* WithdrawUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawUseCase.swift; sourceTree = "<group>"; };
 		7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleRequestDTO.swift; sourceTree = "<group>"; };
 		7B6123692ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleResponseDTO.swift; sourceTree = "<group>"; };
 		7B61236E2AC15905006E72C1 /* BridgeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFont.swift; sourceTree = "<group>"; };
@@ -587,6 +591,8 @@
 			children = (
 				7B14DB272AB15E7E009A00EB /* SignInUseCase.swift */,
 				7B922CFB2AD02EE400F3A336 /* SignUpUseCase.swift */,
+				7B5752B02B287DF600B1A2DC /* SignOutUseCase.swift */,
+				7B5752B22B287E2900B1A2DC /* WithdrawUseCase.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1044,7 +1050,7 @@
 				7B14DB262AB15E69009A00EB /* Auth */,
 				7CA04F662B0A6EA5007B9191 /* Project */,
 				7BA36C952A9C4D0F000DAB02 /* Chat */,
-				7C56E1632B11025300454F5E /* Profile */,
+				7C56E1632B11025300454F5E /* User */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1433,12 +1439,12 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		7C56E1632B11025300454F5E /* Profile */ = {
+		7C56E1632B11025300454F5E /* User */ = {
 			isa = PBXGroup;
 			children = (
 				7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */,
 			);
-			path = Profile;
+			path = User;
 			sourceTree = "<group>";
 		};
 		7C56E1662B11031E00454F5E /* Profile */ = {
@@ -1995,6 +2001,7 @@
 				7CA04F5E2B0A029A007B9191 /* CreateProjectRequestDTO.swift in Sources */,
 				7B1742F42AFA46A7004F0953 /* AccessTokenResponseDTO.swift in Sources */,
 				7CDFB6232B2236AB00272F77 /* MenuPopUpView.swift in Sources */,
+				7B5752B12B287DF600B1A2DC /* SignOutUseCase.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7CA04F2C2B01F822007B9191 /* ProjectDetailMenuBar.swift in Sources */,
 				7C8CC4152AF024060032F237 /* DatePickerPopUpView.swift in Sources */,
@@ -2133,6 +2140,7 @@
 				7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */,
 				7B61238B2AC2D03E006E72C1 /* BridgeTipMessageBox.swift in Sources */,
 				7B1922D52AE287C900EBDD2E /* MessageCell.swift in Sources */,
+				7B5752B32B287E2A00B1A2DC /* WithdrawUseCase.swift in Sources */,
 				7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */,
 				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
 				7CA04F532B04B6E7007B9191 /* MemberRequirementDTO.swift in Sources */,
