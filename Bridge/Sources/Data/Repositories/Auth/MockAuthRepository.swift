@@ -15,4 +15,12 @@ final class MockAuthRepository: AuthRepository {
     func signUp(selectedFields: [String]) -> Observable<Void> {
         .just(())
     }
+    
+    func signOut() -> Observable<Void> {
+        .just(())
+    }
+    
+    func withdraw() -> Observable<Void> {
+        .just(())
+    }
 }

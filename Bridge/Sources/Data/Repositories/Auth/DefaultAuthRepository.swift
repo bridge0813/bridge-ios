@@ -18,7 +18,6 @@ final class DefaultAuthRepository: AuthRepository {
         self.tokenStorage = tokenStorage
     }
     
-    // 애플 로그인
     func signInWithApple(credentials: UserCredentials) -> Observable<Bool> {
         // 이름은 2번째 로그인부터 nil이 리턴되므로, nil을 저장하지 않도록 처리
         if let userName = credentials.userName,
@@ -43,7 +42,6 @@ final class DefaultAuthRepository: AuthRepository {
             }
     }
     
-    // 회원가입
     func signUp(selectedFields: [String]) -> Observable<Void> {
         let userID = Int(tokenStorage.get(.userID))
         let signUpRequestDTO = SignUpRequestDTO(userID: userID, selectedFields: selectedFields)
@@ -53,6 +51,19 @@ final class DefaultAuthRepository: AuthRepository {
             .map { _ in }
     }
     
-    // 로그아웃
+    func signOut() -> Observable<Void> {
+        let userID = tokenStorage.get(.userID)
+        let authEndpoint = AuthEndpoint.signOut(userID: userID)
+        
+        return networkService.request(to: authEndpoint, interceptor: nil)
+            .map { _ in }
+    }
     
+    func withdraw() -> Observable<Void> {
+        let userID = tokenStorage.get(.userID)
+        let authEndpoint = AuthEndpoint.withdrawal(userID: userID)
+        
+        return networkService.request(to: authEndpoint, interceptor: nil)
+            .map { _ in }
+    }
 }
