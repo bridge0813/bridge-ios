@@ -71,7 +71,7 @@ final class SetFieldViewController: BaseViewController {
         navigationItem.hidesBackButton = true
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false  // 밀어서 뒤로가기 제한
     }
-    // Junghoyun2510
+    
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.addSubview(scrollView)
@@ -82,7 +82,7 @@ final class SetFieldViewController: BaseViewController {
             flex.addItem(descriptionLabel).marginTop(32).marginBottom(16)
             flex.addItem(tipMessageBox).marginBottom(40)
             flex.addItem(setFieldView).marginBottom(35)
-            flex.addItem().size(50)
+            flex.addItem().size(60)
         }
     }
     
