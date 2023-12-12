@@ -15,7 +15,7 @@ final class MyPageCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     
     private let authRepository: AuthRepository
-    private let profileRepository: ProfileRepository
+    private let userRepository: UserRepository
     
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
     
@@ -26,10 +26,10 @@ final class MyPageCoordinator: Coordinator {
         
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
-        profileRepository = DefaultProfileRepository(networkService: networkService)
-//        profileRepository = MockProfileRepository()
+//        userRepository = DefaultUserRepository(networkService: networkService)
+        userRepository = MockUserRepository()
         
-        fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(profileRepository: profileRepository)
+        fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
     }
     
     // MARK: - Start

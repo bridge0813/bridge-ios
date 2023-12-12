@@ -148,7 +148,6 @@ private extension MyPageViewModel {
     }
     
     func handleMenuSelection(_ menu: Menu) {
-        
         switch menu {
         case .signIn:
             coordinator?.showSignInViewController()
