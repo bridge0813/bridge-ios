@@ -240,6 +240,7 @@
 		7CA73D952B285A0F007D88FB /* RejectApplicantUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D942B285A0F007D88FB /* RejectApplicantUseCase.swift */; };
 		7CA73D972B28AC1B007D88FB /* CreateChannelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D962B28AC1B007D88FB /* CreateChannelUseCase.swift */; };
 		7CA73D992B28B481007D88FB /* CreateChannelResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D982B28B481007D88FB /* CreateChannelResponseDTO.swift */; };
+		7CA73D9C2B28C944007D88FB /* CancelApplicationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D9B2B28C944007D88FB /* CancelApplicationUseCase.swift */; };
 		7CC719E42B27117800CFA827 /* DeleteProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */; };
 		7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */; };
 		7CC719EA2B276C2C00CFA827 /* ApplicantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */; };
@@ -506,6 +507,7 @@
 		7CA73D942B285A0F007D88FB /* RejectApplicantUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectApplicantUseCase.swift; sourceTree = "<group>"; };
 		7CA73D962B28AC1B007D88FB /* CreateChannelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelUseCase.swift; sourceTree = "<group>"; };
 		7CA73D982B28B481007D88FB /* CreateChannelResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelResponseDTO.swift; sourceTree = "<group>"; };
+		7CA73D9B2B28C944007D88FB /* CancelApplicationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelApplicationUseCase.swift; sourceTree = "<group>"; };
 		7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProjectUseCase.swift; sourceTree = "<group>"; };
 		7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewController.swift; sourceTree = "<group>"; };
 		7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewModel.swift; sourceTree = "<group>"; };
@@ -1703,6 +1705,7 @@
 				7CA04F3F2B022D69007B9191 /* Detail */,
 				7C87EE0D2B1B72070066691D /* Bookmark */,
 				7CC719E22B27115600CFA827 /* Delete */,
+				7CA73D9A2B28C934007D88FB /* Cancel */,
 				7CC719FA2B28471800CFA827 /* Accept */,
 				7CA73D932B2859F1007D88FB /* Reject */,
 			);
@@ -1731,6 +1734,14 @@
 				7CA73D942B285A0F007D88FB /* RejectApplicantUseCase.swift */,
 			);
 			path = Reject;
+			sourceTree = "<group>";
+		};
+		7CA73D9A2B28C934007D88FB /* Cancel */ = {
+			isa = PBXGroup;
+			children = (
+				7CA73D9B2B28C944007D88FB /* CancelApplicationUseCase.swift */,
+			);
+			path = Cancel;
 			sourceTree = "<group>";
 		};
 		7CC719E22B27115600CFA827 /* Delete */ = {
@@ -2106,6 +2117,7 @@
 				7B1922CC2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift in Sources */,
 				7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */,
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
+				7CA73D9C2B28C944007D88FB /* CancelApplicationUseCase.swift in Sources */,
 				7BBD662A2AFB98D2001644D1 /* ObservableType+.swift in Sources */,
 				7CA04F4E2B04A6CA007B9191 /* Project.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,

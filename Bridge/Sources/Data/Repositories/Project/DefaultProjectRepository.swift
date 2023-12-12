@@ -100,6 +100,11 @@ final class DefaultProjectRepository: ProjectRepository {
         .just(projectID)
     }
     
+    // MARK: - CancelApplication
+    func cancel(projectID: Int) -> Observable<Int> {
+        .just(projectID)
+    }
+    
     // MARK: - Accept
     func accept(projectID: Int, userID: Int) -> Observable<Int> {
         .just(userID)

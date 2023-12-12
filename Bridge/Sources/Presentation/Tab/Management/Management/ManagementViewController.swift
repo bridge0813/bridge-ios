@@ -55,9 +55,10 @@ final class ManagementViewController: BaseViewController {
     
     private var dataSource: DataSource?
     
-    private let goToDetailButtonTapped = PublishSubject<Int>()
-    private let goToApplicantListButtonTapped = PublishSubject<Int>()
-    private let deleteButtonTapped = PublishSubject<Int>()
+    private let goToDetailButtonTapped = PublishSubject<ProjectID>()
+    private let goToApplicantListButtonTapped = PublishSubject<ProjectID>()
+    private let deleteButtonTapped = PublishSubject<ProjectID>()
+    private let cancelApplicationButtonTapped = PublishSubject<ProjectID>()
 
     // MARK: - Init
     init(viewModel: ManagementViewModel) {
@@ -109,7 +110,8 @@ final class ManagementViewController: BaseViewController {
             filterActionTapped: filterProjectActionSheet.actionButtonTapped,
             goToDetailButtonTapped: goToDetailButtonTapped,
             goToApplicantListButtonTapped: goToApplicantListButtonTapped,
-            deleteButtonTapped: deleteButtonTapped
+            deleteButtonTapped: deleteButtonTapped, 
+            cancelApplicationButtonTapped: cancelApplicationButtonTapped
         )
         let output = viewModel.transform(input: input)
         
@@ -248,11 +250,17 @@ extension ManagementViewController {
                 })
                 .disposed(by: cell.disposeBag)
             
-            // 프로젝트 삭제
+            // 프로젝트 삭제 or 지원 취소
             cell.deleteButtonTapped
                 .withUnretained(self)
                 .subscribe(onNext: { owner, projectID in
-                    owner.deleteButtonTapped.onNext(projectID)
+                    // 지원 탭에서 삭제 버튼이 클릭되었다면 -> 지원취소
+                    // 모집 탭에서 삭제 버튼이 클릭되었다면 -> 모집글 삭제
+                    if self.applyTabButton.isSelected {
+                        owner.cancelApplicationButtonTapped.onNext(projectID)
+                    } else {
+                        owner.deleteButtonTapped.onNext(projectID)
+                    }
                 })
                 .disposed(by: cell.disposeBag)
             

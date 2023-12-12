@@ -81,7 +81,7 @@ final class ApplicantListViewModel: ViewModelType {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
-                owner.handleApplicationResult(
+                owner.handleApplicationDecisionResult(
                     for: result,
                     applicantList: applicantList
                 )
@@ -103,7 +103,7 @@ final class ApplicantListViewModel: ViewModelType {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
-                owner.handleApplicationResult(
+                owner.handleApplicationDecisionResult(
                     for: result,
                     applicantList: applicantList
                 )
@@ -158,8 +158,8 @@ extension ApplicantListViewModel {
         }
     }
     
-    /// 지원자 수락 or 거절  결과 처리
-    private func handleApplicationResult(
+    /// 지원에 대한 수락 or 거절(의사 결정)의 결과 처리
+    private func handleApplicationDecisionResult(
         for result: Result<UserID, Error>,
         applicantList: BehaviorRelay<[ApplicantProfile]>
     ) {
@@ -182,7 +182,7 @@ extension ApplicantListViewModel {
     }
 }
 
-// MARK: - Alert 처리
+// MARK: - Alert 대응 처리
 extension ApplicantListViewModel {
     /// 특정 작업의 수행을 확인하는 Alert을 보여주고, 유저의 액션에 따라 이벤트의 전달여부를 결정
     private func confirmActionWithAlert(userID: Int, alertConfiguration: AlertConfiguration) -> Maybe<UserID> {

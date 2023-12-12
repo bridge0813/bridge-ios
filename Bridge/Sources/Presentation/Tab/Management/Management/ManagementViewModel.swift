@@ -18,6 +18,7 @@ final class ManagementViewModel: ViewModelType {
         let goToDetailButtonTapped: Observable<ProjectID>
         let goToApplicantListButtonTapped: Observable<ProjectID>
         let deleteButtonTapped: Observable<ProjectID>
+        let cancelApplicationButtonTapped: Observable<ProjectID>
     }
     
     struct Output {
@@ -34,6 +35,7 @@ final class ManagementViewModel: ViewModelType {
     private let fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase
     private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
     private let deleteProjectUseCase: DeleteProjectUseCase
+    private let cancelApplicationUseCase: CancelApplicationUseCase
     
     var selectedFilterOption: FilterMenuType = .all // 현재 선택된 필터링 옵션
     
@@ -42,12 +44,14 @@ final class ManagementViewModel: ViewModelType {
         coordinator: ManagementCoordinator,
         fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase,
         fetchMyProjectsUseCase: FetchMyProjectsUseCase,
-        deleteProjectUseCase: DeleteProjectUseCase
+        deleteProjectUseCase: DeleteProjectUseCase,
+        cancelApplicationUseCase: CancelApplicationUseCase
     ) {
         self.coordinator = coordinator
         self.fetchAppliedProjectsUseCase = fetchAppliedProjectsUseCase
         self.fetchMyProjectsUseCase = fetchMyProjectsUseCase
         self.deleteProjectUseCase = deleteProjectUseCase
+        self.cancelApplicationUseCase = cancelApplicationUseCase
     }
     
     // MARK: - Transformation
@@ -130,26 +134,10 @@ final class ManagementViewModel: ViewModelType {
         
         // 모집글 삭제 처리
         input.deleteButtonTapped
-            .flatMap { projectID -> Maybe<ProjectID> in
+            .withUnretained(self)
+            .flatMap { owner, projectID -> Maybe<ProjectID> in
                 // 삭제 Alert을 보여주고, 유저가 "삭제하기" 를 클릭했을 경우 이벤트를 전달.
-                Maybe<ProjectID>.create { [weak self] maybe in
-                    guard let self else {
-                        maybe(.completed)
-                        return Disposables.create()
-                    }
-                    
-                    self.coordinator?.showAlert(
-                        configuration: .deleteProject,
-                        primaryAction: {
-                            maybe(.success(projectID))
-                        },
-                        cancelAction: {
-                            maybe(.completed)
-                        }
-                    )
-                    
-                    return Disposables.create()
-                }
+                owner.confirmActionWithAlert(projectID: projectID, alertConfiguration: .deleteProject)
             }
             .withUnretained(self)
             .flatMap { owner, projectID -> Observable<Result<ProjectID, Error>> in
@@ -158,7 +146,29 @@ final class ManagementViewModel: ViewModelType {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
-                owner.handleDeleteProjectResult(
+                owner.handleProjectActionResult(
+                    for: result,
+                    projects: projects,
+                    viewState: viewState
+                )
+            })
+            .disposed(by: disposeBag)
+        
+        // 지원취소 처리
+        input.cancelApplicationButtonTapped
+            .withUnretained(self)
+            .flatMap { owner, projectID -> Maybe<ProjectID> in
+                // 지원취소 Alert을 보여주고, 유저가 "취소하기" 를 클릭했을 경우 이벤트를 전달.
+                owner.confirmActionWithAlert(projectID: projectID, alertConfiguration: .cancel)
+            }
+            .withUnretained(self)
+            .flatMap { owner, projectID -> Observable<Result<ProjectID, Error>> in
+                owner.cancelApplicationUseCase.cancel(projectID: projectID).toResult()  // 지원취소 진행
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                owner.handleProjectActionResult(
                     for: result,
                     projects: projects,
                     viewState: viewState
@@ -177,7 +187,7 @@ final class ManagementViewModel: ViewModelType {
 
 // MARK: - 네트워킹 결과처리
 extension ManagementViewModel {
-    /// 모집글 네트워킹의 결과를 받아 처리
+    /// 모집글 조회의 결과 처리
     private func handleFetchProjectsResult(
         for result: Result<[ProjectPreview], Error>,
         projects: BehaviorRelay<[ProjectPreview]>,
@@ -204,8 +214,8 @@ extension ManagementViewModel {
         }
     }
     
-    /// 모집글 삭제  결과 처리
-    private func handleDeleteProjectResult(
+    /// 모집글 삭제 or 모집글의 지원취소 등 모집글과 관련된 작업 결과 처리
+    private func handleProjectActionResult(
         for result: Result<ProjectID, Error>,
         projects: BehaviorRelay<[ProjectPreview]>,
         viewState: BehaviorRelay<ViewState>
@@ -222,10 +232,35 @@ extension ManagementViewModel {
             
         case .failure(let error):
             coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                title: "모집글 삭제에 실패했습니다.",
+                title: "오류",
                 description: error.localizedDescription
             ))
             
+        }
+    }
+}
+
+// MARK: - Alert 대응 처리
+extension ManagementViewModel {
+    /// 특정 작업의 수행을 확인하는 Alert을 보여주고, 유저의 액션에 따라 이벤트의 전달여부를 결정
+    private func confirmActionWithAlert(projectID: Int, alertConfiguration: AlertConfiguration) -> Maybe<ProjectID> {
+        Maybe<ProjectID>.create { [weak self] maybe in
+            guard let self else {
+                maybe(.completed)
+                return Disposables.create()
+            }
+            
+            self.coordinator?.showAlert(
+                configuration: alertConfiguration,
+                primaryAction: {
+                    maybe(.success(projectID))
+                },
+                cancelAction: {
+                    maybe(.completed)
+                }
+            )
+            
+            return Disposables.create()
         }
     }
 }

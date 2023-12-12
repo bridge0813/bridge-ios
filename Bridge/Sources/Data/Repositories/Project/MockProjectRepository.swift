@@ -49,6 +49,10 @@ final class MockProjectRepository: ProjectRepository {
         .just(projectID)
     }
     
+    func cancel(projectID: Int) -> Observable<Int> {
+        .just(projectID)
+    }
+    
     func accept(projectID: Int, userID: Int) -> Observable<Int> {
         .just(userID)
     }

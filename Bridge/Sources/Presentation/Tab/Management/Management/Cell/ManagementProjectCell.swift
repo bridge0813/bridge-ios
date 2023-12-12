@@ -93,7 +93,7 @@ final class ManagementProjectCell: BaseCollectionViewCell {
     private var projectID = 0
     
     /// 지원자 목록 or 프로젝트 상세
-    var buttonGroupTapped: Observable<(String, Int)> {
+    var buttonGroupTapped: Observable<(String, ProjectID)> {
         return menuButtonGroup.buttonGroupTapped
             .withUnretained(self)
             .map { owner, title in
@@ -102,7 +102,7 @@ final class ManagementProjectCell: BaseCollectionViewCell {
     }
     
     /// 프로젝트 삭제
-    var deleteButtonTapped: Observable<Int> {
+    var deleteButtonTapped: Observable<ProjectID> {
         return deleteButton.rx.tap
             .withUnretained(self)
             .map { owner, _ in
@@ -111,7 +111,7 @@ final class ManagementProjectCell: BaseCollectionViewCell {
     }
     
     /// 프로젝트 상세
-    var detailButtonTapped: Observable<Int> {
+    var detailButtonTapped: Observable<ProjectID> {
         return goToDetailButton.rx.tap
             .withUnretained(self)
             .map { owner, _ in

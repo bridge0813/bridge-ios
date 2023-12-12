@@ -21,6 +21,7 @@ final class ManagementCoordinator: Coordinator {
     private let fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase
     private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
     private let deleteProjectUseCase: DeleteProjectUseCase
+    private let cancelApplicationUseCase: CancelApplicationUseCase
     
     private let fetchApplicantListUseCase: FetchApplicantListUseCase
     private let acceptApplicantUseCase: AcceptApplicantUseCase
@@ -52,9 +53,10 @@ final class ManagementCoordinator: Coordinator {
         fetchAppliedProjectsUseCase = DefaultFetchAppliedProjectsUseCase(projectRepository: projectRepository)
         fetchMyProjectsUseCase = DefaultFetchMyProjectsUseCase(projectRepository: projectRepository)
         deleteProjectUseCase = DefaultDeleteProjectUseCase(projectRepository: projectRepository)
-        fetchApplicantListUseCase = DefaultFetchApplicantListUseCase(profileRepository: profileRepository)
+        cancelApplicationUseCase = DefaultCancelApplicationUseCase(projectRepository: projectRepository)
         
         // 지원자 목록(수락, 거절)
+        fetchApplicantListUseCase = DefaultFetchApplicantListUseCase(profileRepository: profileRepository)
         acceptApplicantUseCase = DefaultAcceptApplicantUseCase(projectRepository: projectRepository)
         rejectApplicantUseCase = DefaultRejectApplicantUseCase(projectRepository: projectRepository)
         
@@ -80,7 +82,8 @@ extension ManagementCoordinator {
             coordinator: self,
             fetchAppliedProjectsUseCase: fetchAppliedProjectsUseCase,
             fetchMyProjectsUseCase: fetchMyProjectsUseCase,
-            deleteProjectUseCase: deleteProjectUseCase
+            deleteProjectUseCase: deleteProjectUseCase,
+            cancelApplicationUseCase: cancelApplicationUseCase
         )
         
         let vc = ManagementViewController(viewModel: viewModel)

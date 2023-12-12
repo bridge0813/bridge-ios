@@ -105,7 +105,6 @@ final class ApplicantListViewController: BaseViewController {
                 self.applySectionSnapshot(with: applicantList)
             })
             .disposed(by: disposeBag)
-
     }
 }
 
