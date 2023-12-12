@@ -67,6 +67,7 @@ final class ManagementViewModel: ViewModelType {
                     return owner.fetchMyProjectsUseCase.fetchProjects().toResult()
                 }
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 owner.handleFetchProjectsResult(
@@ -91,6 +92,7 @@ final class ManagementViewModel: ViewModelType {
                     return owner.fetchMyProjectsUseCase.fetchProjects().toResult()
                 }
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 owner.handleFetchProjectsResult(
@@ -153,6 +155,7 @@ final class ManagementViewModel: ViewModelType {
             .flatMap { owner, projectID -> Observable<Result<ProjectID, Error>> in
                 owner.deleteProjectUseCase.delete(projectID: projectID).toResult()  // 삭제 진행
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 owner.handleDeleteProjectResult(

@@ -42,6 +42,10 @@ final class DefaultChannelRepository: ChannelRepository {
             .map { _ in id }
     }
     
+    func createChannel(applicantID: Int) -> Observable<Channel> {
+        .just(CreateChannelResponseDTO.testData.toEntity())
+    }
+    
     func subscribeChannel(id: String) -> Observable<[Message]> {
         let userID = tokenStorage.get(.userID)
         

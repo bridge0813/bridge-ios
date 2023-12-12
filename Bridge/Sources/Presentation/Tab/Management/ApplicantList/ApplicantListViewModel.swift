@@ -30,6 +30,7 @@ final class ApplicantListViewModel: ViewModelType {
     private let fetchApplicantListUseCase: FetchApplicantListUseCase
     private let acceptApplicantUseCase: AcceptApplicantUseCase
     private let rejectApplicantUseCase: RejectApplicantUseCase
+    private let createChannelUseCase: CreateChannelUseCase
     
     // MARK: - Init
     init(
@@ -37,13 +38,15 @@ final class ApplicantListViewModel: ViewModelType {
         projectID: Int,
         fetchApplicantListUseCase: FetchApplicantListUseCase,
         acceptApplicantUseCase: AcceptApplicantUseCase,
-        rejectApplicantUseCase: RejectApplicantUseCase
+        rejectApplicantUseCase: RejectApplicantUseCase,
+        createChannelUseCase: CreateChannelUseCase
     ) {
         self.coordinator = coordinator
         self.projectID = projectID
         self.fetchApplicantListUseCase = fetchApplicantListUseCase
         self.acceptApplicantUseCase = acceptApplicantUseCase
         self.rejectApplicantUseCase = rejectApplicantUseCase
+        self.createChannelUseCase = createChannelUseCase
     }
     
     // MARK: - Transformation
@@ -56,6 +59,7 @@ final class ApplicantListViewModel: ViewModelType {
             .flatMapLatest { owner, _ in
                 return owner.fetchApplicantListUseCase.fetchApplicantList(projectID: owner.projectID).toResult()
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 owner.handleFetchApplicantListResult(for: result, applicantList: applicantList)
@@ -74,6 +78,7 @@ final class ApplicantListViewModel: ViewModelType {
                 // 수락 진행
                 owner.acceptApplicantUseCase.accept(projectID: owner.projectID, userID: userID).toResult()
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 owner.handleApplicationResult(
@@ -95,12 +100,35 @@ final class ApplicantListViewModel: ViewModelType {
                 // 거절 진행
                 owner.rejectApplicantUseCase.reject(projectID: owner.projectID, userID: userID).toResult()
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 owner.handleApplicationResult(
                     for: result,
                     applicantList: applicantList
                 )
+            })
+            .disposed(by: disposeBag)
+        
+        // 채팅방 개설 후 채팅방 이동
+        input.startChatButtonTapped
+            .withUnretained(self)
+            .flatMapLatest { owner, userID in
+                owner.createChannelUseCase.create(applicantID: userID).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let channel):
+                    owner.coordinator?.showChannelViewController(of: channel)
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "채팅방 개설에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
             })
             .disposed(by: disposeBag)
         

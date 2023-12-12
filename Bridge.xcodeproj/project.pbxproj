@@ -238,6 +238,8 @@
 		7CA04F712B0C5FFE007B9191 /* firecracker.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CA04F702B0C5FFE007B9191 /* firecracker.json */; };
 		7CA04F732B0E675B007B9191 /* CreateProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F722B0E675B007B9191 /* CreateProjectResponseDTO.swift */; };
 		7CA73D952B285A0F007D88FB /* RejectApplicantUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D942B285A0F007D88FB /* RejectApplicantUseCase.swift */; };
+		7CA73D972B28AC1B007D88FB /* CreateChannelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D962B28AC1B007D88FB /* CreateChannelUseCase.swift */; };
+		7CA73D992B28B481007D88FB /* CreateChannelResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D982B28B481007D88FB /* CreateChannelResponseDTO.swift */; };
 		7CC719E42B27117800CFA827 /* DeleteProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */; };
 		7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */; };
 		7CC719EA2B276C2C00CFA827 /* ApplicantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */; };
@@ -502,6 +504,8 @@
 		7CA04F702B0C5FFE007B9191 /* firecracker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firecracker.json; sourceTree = "<group>"; };
 		7CA04F722B0E675B007B9191 /* CreateProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectResponseDTO.swift; sourceTree = "<group>"; };
 		7CA73D942B285A0F007D88FB /* RejectApplicantUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectApplicantUseCase.swift; sourceTree = "<group>"; };
+		7CA73D962B28AC1B007D88FB /* CreateChannelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelUseCase.swift; sourceTree = "<group>"; };
+		7CA73D982B28B481007D88FB /* CreateChannelResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelResponseDTO.swift; sourceTree = "<group>"; };
 		7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProjectUseCase.swift; sourceTree = "<group>"; };
 		7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewController.swift; sourceTree = "<group>"; };
 		7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewModel.swift; sourceTree = "<group>"; };
@@ -771,6 +775,7 @@
 				7BA36C972A9C503C000DAB02 /* FetchChannelsUseCase.swift */,
 				7BA36C9E2A9C6229000DAB02 /* LeaveChannelUseCase.swift */,
 				7B3B373D2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift */,
+				7CA73D962B28AC1B007D88FB /* CreateChannelUseCase.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -1157,6 +1162,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA36CB12A9D961F000DAB02 /* ChannelDTO.swift */,
+				7CA73D982B28B481007D88FB /* CreateChannelResponseDTO.swift */,
 				7B9142DF2B01D4EB006EA52F /* MessageDTO.swift */,
 				7B93AAA22B2012D800650EA5 /* StompMessageRequestDTO.swift */,
 				7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */,
@@ -2273,6 +2279,7 @@
 				7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */,
 				7B153C112AD6D0E100618280 /* AuthInterceptor.swift in Sources */,
 				7B9142DA2B01CF61006EA52F /* MockMessageRepository.swift in Sources */,
+				7CA73D972B28AC1B007D88FB /* CreateChannelUseCase.swift in Sources */,
 				7BA36CDA2AA197F8000DAB02 /* ChannelListViewController.swift in Sources */,
 				7CA04F572B05D50E007B9191 /* ProjectDetailTechTag.swift in Sources */,
 				7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */,
@@ -2299,6 +2306,7 @@
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7C55E6632AEBBCBF0018FA5D /* AddTechTagPopUpView.swift in Sources */,
 				7BFECA242AECE632009B4C7D /* ApplicationResultCell.swift in Sources */,
+				7CA73D992B28B481007D88FB /* CreateChannelResponseDTO.swift in Sources */,
 				7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
