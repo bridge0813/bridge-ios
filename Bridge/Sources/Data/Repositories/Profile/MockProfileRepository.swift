@@ -10,5 +10,6 @@ import RxSwift
 final class MockProfileRepository: ProfileRepository {
     func fetchProfilePreview() -> Observable<ProfilePreview> {
         .just(ProfilePreviewResponseDTO.testData.toEntity())
+//        .error(NetworkError.statusCode(401))
     }
 }
