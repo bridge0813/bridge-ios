@@ -1130,7 +1130,7 @@
 				7B61235C2ABD9C9E006E72C1 /* Auth */,
 				7CA04F5B2B0A0254007B9191 /* Project */,
 				7BA36CAF2A9D960E000DAB02 /* Chat */,
-				7C56E15A2B10EF3700454F5E /* Profile */,
+				7C56E15A2B10EF3700454F5E /* User */,
 				7B9420562B05AC6E00FEE058 /* Extensions */,
 			);
 			path = DTOs;
@@ -1415,12 +1415,12 @@
 			path = Project;
 			sourceTree = "<group>";
 		};
-		7C56E15A2B10EF3700454F5E /* Profile */ = {
+		7C56E15A2B10EF3700454F5E /* User */ = {
 			isa = PBXGroup;
 			children = (
 				7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */,
 			);
-			path = Profile;
+			path = User;
 			sourceTree = "<group>";
 		};
 		7C56E15D2B10F8CD00454F5E /* User */ = {

@@ -3,9 +3,9 @@
 //  Bridge
 //
 //  Created by 엄지호 on 2023/11/24.
-//
+//  Edited by 정호윤 on 2023/12/13.
 
-/// MyPage를 조회할 때 사용되는 Response Body
+/// 마이페이지를 조회할 때 사용
 struct ProfilePreviewResponseDTO: Decodable {
     let profileImage: String?
     let name: String
