@@ -67,8 +67,8 @@ final class ApplicantListViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.define { flex in
-            flex.addItem(collectionView).grow(1).isIncludedInLayout(true)
-            flex.addItem(placeholderView).grow(1).isIncludedInLayout(false)
+            flex.addItem(collectionView).grow(1).display(.flex)
+            flex.addItem(placeholderView).grow(1).display(.none)
         }
     }
     
@@ -94,8 +94,8 @@ final class ApplicantListViewController: BaseViewController {
                 guard let self else { return }
                 
                 // 빈 데이터일 경우 플레이스홀더 보여주기
-                self.collectionView.flex.isIncludedInLayout(!applicantList.isEmpty).markDirty()
-                self.placeholderView.flex.isIncludedInLayout(applicantList.isEmpty).markDirty()
+                self.collectionView.flex.display(applicantList.isEmpty ? .none : .flex)
+                self.placeholderView.flex.display(applicantList.isEmpty ? .flex : .none)
                 self.placeholderView.isHidden = !applicantList.isEmpty
                 self.rootFlexContainer.flex.layout()
                 
