@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCUnsfDRXdcG4ZZVb7ELchmNCwgSjbbYLs</string>
+	<string>AIzaSyANF28GtRCXU7mUk1O7ygX8qXTXClIuOWI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1027768572540</string>
+	<string>170325673933</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.bridge.project</string>
 	<key>PROJECT_ID</key>
-	<string>bridge-dbecf</string>
+	<string>bridge-79c01</string>
 	<key>STORAGE_BUCKET</key>
-	<string>bridge-dbecf.appspot.com</string>
+	<string>bridge-79c01.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1027768572540:ios:7c7d837f82e16d3b4e47f9</string>
+	<string>1:170325673933:ios:d7f1139c8dbb38cf556684</string>
 </dict>
 </plist>

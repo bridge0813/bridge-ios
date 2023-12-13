@@ -45,9 +45,7 @@ extension AppDelegate: MessagingDelegate {
             print("fcm token is nil")
             return
         }
-        
         print(fcmToken)
-        
         tokenStorage.save(fcmToken, for: .fcmToken)
     }
 }

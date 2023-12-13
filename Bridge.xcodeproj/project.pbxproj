@@ -45,7 +45,6 @@
 		7B3B373C2B038FE400C2F8AD /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3B373B2B038FE400C2F8AD /* SendMessageUseCase.swift */; };
 		7B3B373E2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3B373D2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift */; };
 		7B4EA4812B08C867004663BC /* WebSocketServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4EA4802B08C867004663BC /* WebSocketServiceDelegate.swift */; };
-		7B5752B52B288D9700B1A2DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B5752B42B288D9700B1A2DC /* GoogleService-Info.plist */; };
 		7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */; };
 		7B61236A2ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123692ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift */; };
 		7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61236E2AC15905006E72C1 /* BridgeFont.swift */; };
@@ -163,6 +162,7 @@
 		7BBD662A2AFB98D2001644D1 /* ObservableType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD66292AFB98D2001644D1 /* ObservableType+.swift */; };
 		7BCA18072AFDCC0F00257B04 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */; };
 		7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */; };
+		7BEA737F2B29E44100CECF44 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA737E2B29E44100CECF44 /* GoogleService-Info.plist */; };
 		7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */; };
 		7BFECA222AEBEC0B009B4C7D /* BaseChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA212AEBEC0B009B4C7D /* BaseChatCell.swift */; };
 		7BFECA242AECE632009B4C7D /* ApplicationResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */; };
@@ -333,7 +333,6 @@
 		7B3B373B2B038FE400C2F8AD /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
 		7B3B373D2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSubscriptionUseCase.swift; sourceTree = "<group>"; };
 		7B4EA4802B08C867004663BC /* WebSocketServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketServiceDelegate.swift; sourceTree = "<group>"; };
-		7B5752B42B288D9700B1A2DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleRequestDTO.swift; sourceTree = "<group>"; };
 		7B6123692ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleResponseDTO.swift; sourceTree = "<group>"; };
 		7B61236E2AC15905006E72C1 /* BridgeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFont.swift; sourceTree = "<group>"; };
@@ -418,6 +417,7 @@
 		7BBD66292AFB98D2001644D1 /* ObservableType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+.swift"; sourceTree = "<group>"; };
 		7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSetFieldView.swift; sourceTree = "<group>"; };
+		7BEA737E2B29E44100CECF44 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthRepository.swift; sourceTree = "<group>"; };
 		7BFECA212AEBEC0B009B4C7D /* BaseChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatCell.swift; sourceTree = "<group>"; };
 		7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationResultCell.swift; sourceTree = "<group>"; };
@@ -946,7 +946,7 @@
 				7B71E74B2A9330C7001B5D2C /* LaunchScreen.storyboard */,
 				7B71E7492A9330C7001B5D2C /* Assets.xcassets */,
 				7B71E74E2A9330C7001B5D2C /* Info.plist */,
-				7B5752B42B288D9700B1A2DC /* GoogleService-Info.plist */,
+				7BEA737E2B29E44100CECF44 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2036,7 +2036,7 @@
 				7B61237D2AC15D2E006E72C1 /* Pretendard-Light.otf in Resources */,
 				7B61237A2AC15D2E006E72C1 /* Pretendard-Black.otf in Resources */,
 				7B71E74A2A9330C7001B5D2C /* Assets.xcassets in Resources */,
-				7B5752B52B288D9700B1A2DC /* GoogleService-Info.plist in Resources */,
+				7BEA737F2B29E44100CECF44 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
