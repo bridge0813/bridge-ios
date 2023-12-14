@@ -137,6 +137,14 @@
 		7BBD662A2AFB98D2001644D1 /* ObservableType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD66292AFB98D2001644D1 /* ObservableType+.swift */; };
 		7BCA18072AFDCC0F00257B04 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */; };
 		7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */; };
+		7BEA73832B2B2B7400CECF44 /* BookmarkedProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA73822B2B2B7400CECF44 /* BookmarkedProjectViewModel.swift */; };
+		7BEA73872B2B2C1C00CECF44 /* BookmarkedProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA73862B2B2C1C00CECF44 /* BookmarkedProjectViewController.swift */; };
+		7BEA738D2B2B2DF100CECF44 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA738C2B2B2DF100CECF44 /* ProfileViewModel.swift */; };
+		7BEA738F2B2B2E0E00CECF44 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA738E2B2B2E0E00CECF44 /* ProfileViewController.swift */; };
+		7BEA73932B2B2F1300CECF44 /* MyFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA73922B2B2F1300CECF44 /* MyFieldViewController.swift */; };
+		7BEA73952B2B2F3F00CECF44 /* MyFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA73942B2B2F3F00CECF44 /* MyFieldViewModel.swift */; };
+		7BEA73982B2B2FB000CECF44 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA73972B2B2FB000CECF44 /* AlertViewModel.swift */; };
+		7BEA739A2B2B2FC500CECF44 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA73992B2B2FC500CECF44 /* AlertViewController.swift */; };
 		7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */; };
 		7BFECA222AEBEC0B009B4C7D /* BaseChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA212AEBEC0B009B4C7D /* BaseChatCell.swift */; };
 		7BFECA242AECE632009B4C7D /* ApplicationResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */; };
@@ -393,6 +401,14 @@
 		7BBD66292AFB98D2001644D1 /* ObservableType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+.swift"; sourceTree = "<group>"; };
 		7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSetFieldView.swift; sourceTree = "<group>"; };
+		7BEA73822B2B2B7400CECF44 /* BookmarkedProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedProjectViewModel.swift; sourceTree = "<group>"; };
+		7BEA73862B2B2C1C00CECF44 /* BookmarkedProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedProjectViewController.swift; sourceTree = "<group>"; };
+		7BEA738C2B2B2DF100CECF44 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		7BEA738E2B2B2E0E00CECF44 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7BEA73922B2B2F1300CECF44 /* MyFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFieldViewController.swift; sourceTree = "<group>"; };
+		7BEA73942B2B2F3F00CECF44 /* MyFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFieldViewModel.swift; sourceTree = "<group>"; };
+		7BEA73972B2B2FB000CECF44 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
+		7BEA73992B2B2FC500CECF44 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthRepository.swift; sourceTree = "<group>"; };
 		7BFECA212AEBEC0B009B4C7D /* BaseChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatCell.swift; sourceTree = "<group>"; };
 		7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationResultCell.swift; sourceTree = "<group>"; };
@@ -839,6 +855,7 @@
 			children = (
 				7B6C20462AF886EF005689F5 /* Coordinator */,
 				7B0171C22AFE507E00AC121F /* Home */,
+				7BEA73802B2B2B5100CECF44 /* Detail */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1282,6 +1299,53 @@
 				7B93AAA42B2198E600650EA5 /* Cell */,
 			);
 			path = ChannelList;
+			sourceTree = "<group>";
+		};
+		7BEA73802B2B2B5100CECF44 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				7BEA73962B2B2FA200CECF44 /* Alert */,
+				7BEA738B2B2B2DCD00CECF44 /* Profile */,
+				7BEA73912B2B2E3600CECF44 /* Field */,
+				7BEA73812B2B2B5E00CECF44 /* Bookmark */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		7BEA73812B2B2B5E00CECF44 /* Bookmark */ = {
+			isa = PBXGroup;
+			children = (
+				7BEA73822B2B2B7400CECF44 /* BookmarkedProjectViewModel.swift */,
+				7BEA73862B2B2C1C00CECF44 /* BookmarkedProjectViewController.swift */,
+			);
+			path = Bookmark;
+			sourceTree = "<group>";
+		};
+		7BEA738B2B2B2DCD00CECF44 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7BEA738C2B2B2DF100CECF44 /* ProfileViewModel.swift */,
+				7BEA738E2B2B2E0E00CECF44 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7BEA73912B2B2E3600CECF44 /* Field */ = {
+			isa = PBXGroup;
+			children = (
+				7BEA73942B2B2F3F00CECF44 /* MyFieldViewModel.swift */,
+				7BEA73922B2B2F1300CECF44 /* MyFieldViewController.swift */,
+			);
+			path = Field;
+			sourceTree = "<group>";
+		};
+		7BEA73962B2B2FA200CECF44 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				7BEA73972B2B2FB000CECF44 /* AlertViewModel.swift */,
+				7BEA73992B2B2FC500CECF44 /* AlertViewController.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		7BFECA202AEBEBE4009B4C7D /* Cells */ = {
@@ -1992,6 +2056,7 @@
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
 				7CA04F212AFE772C007B9191 /* BaseLabel.swift in Sources */,
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
+				7BEA73982B2B2FB000CECF44 /* AlertViewModel.swift in Sources */,
 				7B3289352ADE55DA009DF3C2 /* BridgeMessageInputBar.swift in Sources */,
 				7B9420502B04DAAB00FEE058 /* StompEndpoint.swift in Sources */,
 				7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */,
@@ -2002,6 +2067,7 @@
 				7B1742F42AFA46A7004F0953 /* AccessTokenResponseDTO.swift in Sources */,
 				7CDFB6232B2236AB00272F77 /* MenuPopUpView.swift in Sources */,
 				7B5752B12B287DF600B1A2DC /* SignOutUseCase.swift in Sources */,
+				7BEA73872B2B2C1C00CECF44 /* BookmarkedProjectViewController.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7CA04F2C2B01F822007B9191 /* ProjectDetailMenuBar.swift in Sources */,
 				7C8CC4152AF024060032F237 /* DatePickerPopUpView.swift in Sources */,
@@ -2090,6 +2156,7 @@
 				7BA36C9B2A9C5091000DAB02 /* Channel.swift in Sources */,
 				7B8DE8112B034E6B003EA34A /* Stomp.swift in Sources */,
 				7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */,
+				7BEA738F2B2B2E0E00CECF44 /* ProfileViewController.swift in Sources */,
 				7B92B7E32AE501CD00B0E954 /* FetchMessagesUseCase.swift in Sources */,
 				7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */,
 				7CDFB62E2B23AAE400272F77 /* FetchMyProjectsUseCase.swift in Sources */,
@@ -2113,10 +2180,12 @@
 				7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */,
 				7C40CBC82AC69447000F4C9F /* BridgeSmallButtonGroup.swift in Sources */,
 				7C56E1622B10FF8300454F5E /* ProfilePreview.swift in Sources */,
+				7BEA739A2B2B2FC500CECF44 /* AlertViewController.swift in Sources */,
 				7B153C0F2AD6CF0D00618280 /* Interceptor.swift in Sources */,
 				7C56E1752B14917900454F5E /* FetchDeadlineProjectsUseCase.swift in Sources */,
 				7C56E1652B11027000454F5E /* FetchProfilePreviewUseCase.swift in Sources */,
 				7B14DB4F2AB8659E009A00EB /* KeychainTokenStroage.swift in Sources */,
+				7BEA738D2B2B2DF100CECF44 /* ProfileViewModel.swift in Sources */,
 				7CDFB6282B23093800272F77 /* ApplyProjectResponseDTO.swift in Sources */,
 				7C55E6582AE811A20018FA5D /* AddTechStackButton.swift in Sources */,
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
@@ -2145,6 +2214,7 @@
 				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
 				7CA04F532B04B6E7007B9191 /* MemberRequirementDTO.swift in Sources */,
 				7B16F3282B21E1BF00A50B2F /* StompMessageUpdateDTO.swift in Sources */,
+				7BEA73832B2B2B7400CECF44 /* BookmarkedProjectViewModel.swift in Sources */,
 				7B6C20452AF886BD005689F5 /* MyPageViewController.swift in Sources */,
 				7C55E65C2AE961250018FA5D /* AddedTechTagView.swift in Sources */,
 				7BB2C24D2A985A4200AA2328 /* ChatCoordinator.swift in Sources */,
@@ -2194,6 +2264,7 @@
 				7CA04F692B0A6F02007B9191 /* CreateProjectUseCase.swift in Sources */,
 				7C4270162AA377C9009BE6AF /* MainViewController.swift in Sources */,
 				7BA36CC42A9E1134000DAB02 /* BaseViewController.swift in Sources */,
+				7BEA73952B2B2F3F00CECF44 /* MyFieldViewModel.swift in Sources */,
 				7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */,
 				7C40CBCA2AC6B597000F4C9F /* BridgeCreateProjectButton.swift in Sources */,
 				7B9C31AF2B07761C007E36B2 /* DefaultStompService.swift in Sources */,
@@ -2211,6 +2282,7 @@
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */,
+				7BEA73932B2B2F1300CECF44 /* MyFieldViewController.swift in Sources */,
 				7CDFB6182B201A7E00272F77 /* ManagementTapButton.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
