@@ -28,11 +28,6 @@ final class ManagementCoordinator: Coordinator {
     private let rejectApplicantUseCase: RejectApplicantUseCase
     
     private let createChannelUseCase: CreateChannelUseCase
-    private let leaveChannelUseCase: LeaveChannelUseCase
-    private let channelSubscriptionUseCase: ChannelSubscriptionUseCase
-    private let observeMessageUseCase: ObserveMessageUseCase
-    private let fetchMessagesUseCase: FetchMessagesUseCase
-    private let sendMessageUseCase: SendMessageUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -60,13 +55,8 @@ final class ManagementCoordinator: Coordinator {
         acceptApplicantUseCase = DefaultAcceptApplicantUseCase(projectRepository: projectRepository)
         rejectApplicantUseCase = DefaultRejectApplicantUseCase(projectRepository: projectRepository)
         
-        // 채팅(채팅방 개설 및 이동)
+        // 채팅방 개설
         createChannelUseCase = DefaultCreateChannelUseCase(channelRepository: channelRepository)
-        leaveChannelUseCase = DefaultLeaveChannelUseCase(channelRepository: channelRepository)
-        channelSubscriptionUseCase = DefaultChannelSubscriptionUseCase(channelRepository: channelRepository)
-        observeMessageUseCase = DefaultObserveMessageUseCase(messageRepository: messageRepository)
-        fetchMessagesUseCase = DefaultFetchMessagesUseCase(messageRepository: messageRepository)
-        sendMessageUseCase = DefaultSendMessageUseCase(messageRepository: messageRepository)
     }
     
     // MARK: - Methods
@@ -107,27 +97,20 @@ extension ManagementCoordinator {
     
     // 채팅방 이동
     func showChannelViewController(of channel: Channel) {
-        // TODO: - 코디네이터 처리 논의
-        print(channel)
-//        let channelViewModel = ChannelViewModel(
-//            coordinator: self,
-//            channel: channel,
-//            leaveChannelUseCase: leaveChannelUseCase,
-//            channelSubscriptionUseCase: channelSubscriptionUseCase,
-//            observeMessageUseCase: observeMessageUseCase,
-//            fetchMessagesUseCase: fetchMessagesUseCase,
-//            sendMessageUseCase: sendMessageUseCase
-//        )
-//        let channelViewController = ChannelViewController(viewModel: channelViewModel)
-//        navigationController.pushViewController(channelViewController, animated: true)
+        delegate?.showChannelViewController(of: channel, navigationController: navigationController)
     }
     
     // MARK: - Connect
     func connectToProjectDetailFlow(with projectID: Int) {
-        // TODO: - 연결된 코디네이터 제거 작업
-        let coordinator = ProjectDetailCoordinator(navigationController: navigationController)
-        coordinator.start()
-        childCoordinators.append(coordinator)
+        let detailCoordinator = ProjectDetailCoordinator(navigationController: navigationController)
+        detailCoordinator.start()
+        detailCoordinator.didFinishEventClosure = { [weak self] in
+            guard let self else { return }
+            if let index = self.childCoordinators.firstIndex(where: { $0 === detailCoordinator }) {
+                self.childCoordinators.remove(at: index)
+            }
+        }
+        childCoordinators.append(detailCoordinator)
     }
 }
 

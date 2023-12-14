@@ -127,7 +127,8 @@ final class ProjectDetailViewController: BaseViewController {
             goToDetailButtonTapped: goToDetailButtonTapped.asObservable(),
             editProjectActionTapped: editProjectActionSheet.actionButtonTapped,
             applyButtonTapped: menuBar.applyButtonTapped,
-            bookmarkButtonTapped: menuBar.bookmarkButtonTapped
+            bookmarkButtonTapped: menuBar.bookmarkButtonTapped,
+            viewDidDisappear: self.rx.viewDidDisappear.asObservable()
         )
         let output = viewModel.transform(input: input)
         

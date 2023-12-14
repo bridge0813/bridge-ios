@@ -15,6 +15,7 @@ final class ProjectDetailViewModel: ViewModelType {
         let editProjectActionTapped: Observable<String>
         let applyButtonTapped: Observable<Void>
         let bookmarkButtonTapped: Observable<Bool>
+        let viewDidDisappear: Observable<Bool>
     }
     
     struct Output {
@@ -73,6 +74,15 @@ final class ProjectDetailViewModel: ViewModelType {
                     // 스크랩
                 } else {
                     // 스크랩 취소
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        input.viewDidDisappear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                if let didFinish = owner.coordinator?.didFinishEventClosure {
+                    didFinish()
                 }
             })
             .disposed(by: disposeBag)
