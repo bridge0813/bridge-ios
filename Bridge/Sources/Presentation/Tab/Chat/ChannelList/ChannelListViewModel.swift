@@ -40,8 +40,8 @@ final class ChannelListViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        let channels = BehaviorRelay<[Channel]>(value: [])
         let viewState = BehaviorRelay<ViewState>(value: .general)
+        let channels = BehaviorRelay<[Channel]>(value: [])
         
         input.viewWillAppear
             .withUnretained(self)

@@ -18,16 +18,10 @@ final class MenuCell: BaseTableViewCell {
         return label
     }()
     
-    // MARK: - Preparation
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        menuLabel.text = nil
-    }
-    
     // MARK: - Layout
     override func configureLayouts() {
-        contentView.flex.direction(.row).paddingHorizontal(16).define { flex in
-            flex.addItem(menuLabel)
+        contentView.flex.paddingHorizontal(16).define { flex in
+            flex.addItem(menuLabel).grow(1)
         }
     }
     

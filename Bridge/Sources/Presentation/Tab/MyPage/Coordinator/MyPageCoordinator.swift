@@ -5,8 +5,8 @@
 //  Created by 정호윤 on 11/6/23.
 //
 
-import UIKit
 import SafariServices
+import UIKit
 
 final class MyPageCoordinator: Coordinator {
     // MARK: - Property
@@ -15,6 +15,11 @@ final class MyPageCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     
     private let authRepository: AuthRepository
+    private let userRepository: UserRepository
+    
+    private let signOutUseCase: SignOutUseCase
+    private let withdrawUseCase: WithdrawUseCase
+    private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -23,6 +28,13 @@ final class MyPageCoordinator: Coordinator {
         
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
+        userRepository = DefaultUserRepository(networkService: networkService)
+//        authRepository = MockAuthRepository()
+//        userRepository = MockUserRepository()
+        
+        fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
+        signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
+        withdrawUseCase = DefaultWithdrawUseCase(authRepository: authRepository)
     }
     
     // MARK: - Start
@@ -34,7 +46,12 @@ final class MyPageCoordinator: Coordinator {
 // MARK: - My page
 extension MyPageCoordinator {
     private func showMyPageViewController() {
-        let myPageViewModel = MyPageViewModel(coordinator: self)
+        let myPageViewModel = MyPageViewModel(
+            coordinator: self,
+            fetchProfilePreviewUseCase: fetchProfilePreviewUseCase,
+            signOutUseCase: signOutUseCase,
+            withdrawUseCase: withdrawUseCase
+        )
         let myPageViewController = MyPageViewController(viewModel: myPageViewModel)
         navigationController.pushViewController(myPageViewController, animated: false)
     }

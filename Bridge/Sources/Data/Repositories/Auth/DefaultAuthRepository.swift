@@ -51,4 +51,20 @@ final class DefaultAuthRepository: AuthRepository {
         return networkService.request(to: authEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
     }
+    
+    func signOut() -> Observable<Void> {
+        let userID = tokenStorage.get(.userID)
+        let authEndpoint = AuthEndpoint.signOut(userID: userID)
+        
+        return networkService.request(to: authEndpoint, interceptor: nil)
+            .map { _ in }
+    }
+    
+    func withdraw() -> Observable<Void> {
+        let userID = tokenStorage.get(.userID)
+        let authEndpoint = AuthEndpoint.withdrawal(userID: userID)
+        
+        return networkService.request(to: authEndpoint, interceptor: nil)
+            .map { _ in }
+    }
 }
