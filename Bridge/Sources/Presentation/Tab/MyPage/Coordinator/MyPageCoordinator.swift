@@ -57,15 +57,21 @@ extension MyPageCoordinator {
     }
     
     func showPushAlertViewController() {
-        
+        let alertViewModel = AlertViewModel()
+        let alertViewController = AlertViewController(viewModel: alertViewModel)
+        navigationController.pushViewController(alertViewController, animated: true)
     }
     
-    func showSetInterestedFieldViewController() {
-        
+    func showMyFieldViewController() {
+        let myFieldViewModel = MyFieldViewModel()
+        let myFieldViewController = MyFieldViewController(viewModel: myFieldViewModel)
+        navigationController.pushViewController(myFieldViewController, animated: true)
     }
     
-    func showBookmarkedProjectsViewController() {
-        
+    func showBookmarkedProjectViewController() {
+        let bookmarkedProjectViewModel = BookmarkedProjectViewModel()
+        let bookmarkedProjectViewController = BookmarkedProjectViewController(viewModel: bookmarkedProjectViewModel)
+        navigationController.pushViewController(bookmarkedProjectViewController, animated: true)
     }
 }
 
