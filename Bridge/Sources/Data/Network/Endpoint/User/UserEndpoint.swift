@@ -1,5 +1,5 @@
 //
-//  ProfileEndpoint.swift
+//  UserEndpoint.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/11/25.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum ProfileEndpoint {
+enum UserEndpoint {
     case fetchProfilePreview(userID: String)
 }
 
-extension ProfileEndpoint: Endpoint {
+extension UserEndpoint: Endpoint {
     var path: String {
         switch self {
         case .fetchProfilePreview:

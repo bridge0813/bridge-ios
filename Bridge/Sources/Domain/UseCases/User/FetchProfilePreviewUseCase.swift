@@ -13,9 +13,9 @@ protocol FetchProfilePreviewUseCase {
 
 final class DefaultFetchProfilePreviewUseCase: FetchProfilePreviewUseCase {
     
-    private let profileRepository: ProfileRepository
+    private let profileRepository: UserRepository
     
-    init(profileRepository: ProfileRepository) {
+    init(profileRepository: UserRepository) {
         self.profileRepository = profileRepository
     }
     
