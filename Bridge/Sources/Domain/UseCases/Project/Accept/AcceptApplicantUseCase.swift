@@ -9,7 +9,7 @@ import RxSwift
 
 /// 모집글의 지원을 수락하는 UseCase
 protocol AcceptApplicantUseCase {
-    func accept(projectID: Int, userID: Int) -> Observable<Int>
+    func accept(projectID: Int, applicantID: Int) -> Observable<Int>
 }
 
 final class DefaultAcceptApplicantUseCase: AcceptApplicantUseCase {
@@ -20,7 +20,7 @@ final class DefaultAcceptApplicantUseCase: AcceptApplicantUseCase {
         self.projectRepository = projectRepository
     }
     
-    func accept(projectID: Int, userID: Int) -> Observable<Int> {
-        projectRepository.accept(projectID: projectID, userID: userID)
+    func accept(projectID: Int, applicantID: Int) -> Observable<Int> {
+        projectRepository.accept(projectID: projectID, applicantID: applicantID)
     }
 }

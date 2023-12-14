@@ -31,8 +31,8 @@ protocol ProjectRepository {
     func cancel(projectID: Int) -> Observable<Int>
     
     // MARK: - Accept
-    func accept(projectID: Int, userID: Int) -> Observable<Int>
+    func accept(projectID: Int, applicantID: Int) -> Observable<Int>
     
     // MARK: - Reject
-    func reject(projectID: Int, userID: Int) -> Observable<Int>
+    func reject(projectID: Int, applicantID: Int) -> Observable<Int>
 }

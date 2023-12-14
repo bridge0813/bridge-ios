@@ -52,14 +52,14 @@ final class ApplicantCell: BaseCollectionViewCell {
     }
     
     // MARK: - Property
-    private var userID = 0
+    private var applicantID = 0
     
     /// 지원자 목록 or 프로젝트 상세
-    var buttonGroupTapped: Observable<(String, UserID)> {
+    var buttonGroupTapped: Observable<(String, ApplicantID)> {
         return menuButtonGroup.buttonGroupTapped
             .withUnretained(self)
             .map { owner, title in
-                return (title, owner.userID)
+                return (title, owner.applicantID)
             }
     }
     
@@ -82,7 +82,7 @@ final class ApplicantCell: BaseCollectionViewCell {
         informationLabel.text = "\(data.career), \(fieldsText)"
         nameLabel.text = data.name
         
-        userID = data.userID
+        applicantID = data.userID
     }
     
     // MARK: - Layout

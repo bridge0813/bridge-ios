@@ -43,9 +43,9 @@ final class ApplicantListViewController: BaseViewController {
     
     private var dataSource: DataSource?
     
-    private let startChatButtonTapped = PublishSubject<UserID>()
-    private let acceptButtonTapped = PublishSubject<UserID>()
-    private let rejectButtonTapped = PublishSubject<UserID>()
+    private let startChatButtonTapped = PublishSubject<ApplicantID>()
+    private let acceptButtonTapped = PublishSubject<ApplicantID>()
+    private let rejectButtonTapped = PublishSubject<ApplicantID>()
     
     // MARK: - Init
     init(viewModel: ApplicantListViewModel) {
@@ -164,12 +164,12 @@ extension ApplicantListViewController {
             cell.buttonGroupTapped
                 .withUnretained(self)
                 .subscribe(onNext: { owner, data in
-                    let (title, userID) = data
+                    let (title, applicantID) = data
                     
                     switch title {
-                    case "채팅하기": owner.startChatButtonTapped.onNext(userID)
-                    case "수락하기": owner.acceptButtonTapped.onNext(userID)
-                    case "거절하기": owner.rejectButtonTapped.onNext(userID)
+                    case "채팅하기": owner.startChatButtonTapped.onNext(applicantID)
+                    case "수락하기": owner.acceptButtonTapped.onNext(applicantID)
+                    case "거절하기": owner.rejectButtonTapped.onNext(applicantID)
                     default: print("Error")
                     }
                 })

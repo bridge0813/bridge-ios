@@ -13,9 +13,9 @@ final class ApplicantListViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
-        let startChatButtonTapped: Observable<UserID>
-        let acceptButtonTapped: Observable<UserID>
-        let rejectButtonTapped: Observable<UserID>
+        let startChatButtonTapped: Observable<ApplicantID>
+        let acceptButtonTapped: Observable<ApplicantID>
+        let rejectButtonTapped: Observable<ApplicantID>
     }
     
     struct Output {
@@ -69,14 +69,14 @@ final class ApplicantListViewModel: ViewModelType {
         // 수락 처리
         input.acceptButtonTapped
             .withUnretained(self)
-            .flatMap { owner, userID -> Maybe<UserID> in
+            .flatMap { owner, applicantID -> Maybe<ApplicantID> in
                 // 수락 Alert을 보여주고, 유저가 "수락하기" 를 클릭했을 경우 이벤트를 전달.
-                owner.confirmActionWithAlert(userID: userID, alertConfiguration: .accept)
+                owner.confirmActionWithAlert(applicantID: applicantID, alertConfiguration: .accept)
             }
             .withUnretained(self)
-            .flatMap { owner, userID -> Observable<Result<UserID, Error>> in
+            .flatMap { owner, applicantID -> Observable<Result<ApplicantID, Error>> in
                 // 수락 진행
-                owner.acceptApplicantUseCase.accept(projectID: owner.projectID, userID: userID).toResult()
+                owner.acceptApplicantUseCase.accept(projectID: owner.projectID, applicantID: applicantID).toResult()
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -91,14 +91,14 @@ final class ApplicantListViewModel: ViewModelType {
         // 거절 처리
         input.rejectButtonTapped
             .withUnretained(self)
-            .flatMap { owner, userID -> Maybe<UserID> in
+            .flatMap { owner, applicantID -> Maybe<ApplicantID> in
                 // 거절 Alert을 보여주고, 유저가 "거절하기" 를 클릭했을 경우 이벤트를 전달.
-                owner.confirmActionWithAlert(userID: userID, alertConfiguration: .refuse)
+                owner.confirmActionWithAlert(applicantID: applicantID, alertConfiguration: .refuse)
             }
             .withUnretained(self)
-            .flatMap { owner, userID -> Observable<Result<UserID, Error>> in
+            .flatMap { owner, applicantID -> Observable<Result<ApplicantID, Error>> in
                 // 거절 진행
-                owner.rejectApplicantUseCase.reject(projectID: owner.projectID, userID: userID).toResult()
+                owner.rejectApplicantUseCase.reject(projectID: owner.projectID, applicantID: applicantID).toResult()
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -113,8 +113,8 @@ final class ApplicantListViewModel: ViewModelType {
         // 채팅방 개설 후 채팅방 이동
         input.startChatButtonTapped
             .withUnretained(self)
-            .flatMapLatest { owner, userID in
-                owner.createChannelUseCase.create(applicantID: userID).toResult()
+            .flatMapLatest { owner, applicantID in
+                owner.createChannelUseCase.create(applicantID: applicantID).toResult()
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -160,14 +160,14 @@ extension ApplicantListViewModel {
     
     /// 지원에 대한 수락 or 거절(의사 결정)의 결과 처리
     private func handleApplicationDecisionResult(
-        for result: Result<UserID, Error>,
+        for result: Result<ApplicantID, Error>,
         applicantList: BehaviorRelay<[ApplicantProfile]>
     ) {
         switch result {
-        case .success(let userID):
+        case .success(let applicantID):
             var currentApplicantList = applicantList.value
             
-            if let deletedIndex = currentApplicantList.firstIndex(where: { $0.userID == userID }) {
+            if let deletedIndex = currentApplicantList.firstIndex(where: { $0.userID == applicantID }) {
                 currentApplicantList.remove(at: deletedIndex)
                 applicantList.accept(currentApplicantList)
             }
@@ -185,8 +185,8 @@ extension ApplicantListViewModel {
 // MARK: - Alert 대응 처리
 extension ApplicantListViewModel {
     /// 특정 작업의 수행을 확인하는 Alert을 보여주고, 유저의 액션에 따라 이벤트의 전달여부를 결정
-    private func confirmActionWithAlert(userID: Int, alertConfiguration: AlertConfiguration) -> Maybe<UserID> {
-        Maybe<UserID>.create { [weak self] maybe in
+    private func confirmActionWithAlert(applicantID: Int, alertConfiguration: AlertConfiguration) -> Maybe<ApplicantID> {
+        Maybe<ApplicantID>.create { [weak self] maybe in
             guard let self else {
                 maybe(.completed)
                 return Disposables.create()
@@ -195,7 +195,7 @@ extension ApplicantListViewModel {
             self.coordinator?.showAlert(
                 configuration: alertConfiguration,
                 primaryAction: {
-                    maybe(.success(userID))
+                    maybe(.success(applicantID))
                 },
                 cancelAction: {
                     maybe(.completed)
