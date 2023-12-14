@@ -24,6 +24,11 @@ final class BookmarkedProjectViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        navigationItem.title = "관심공고"
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         

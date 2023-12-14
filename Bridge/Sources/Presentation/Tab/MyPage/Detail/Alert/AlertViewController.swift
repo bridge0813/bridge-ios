@@ -10,6 +10,7 @@ import UIKit
 final class AlertViewController: BaseViewController {
     // MARK: - UI
     
+    
     // MARK: - Property
     private let viewModel: AlertViewModel
     
@@ -22,6 +23,11 @@ final class AlertViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // MARK: - Configuration
+    override func configureAttributes() {
+        navigationItem.title = "알림"
     }
     
     // MARK: - Layout

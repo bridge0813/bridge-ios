@@ -24,6 +24,11 @@ final class MyFieldViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        navigationItem.title = "관심분야"
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         

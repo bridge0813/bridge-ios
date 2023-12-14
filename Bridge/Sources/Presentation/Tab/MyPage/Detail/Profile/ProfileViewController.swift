@@ -24,6 +24,11 @@ final class ProfileViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        navigationItem.title = "프로필"
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         
