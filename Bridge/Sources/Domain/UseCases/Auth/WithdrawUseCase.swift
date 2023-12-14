@@ -8,7 +8,6 @@
 import RxSwift
 
 protocol WithdrawUseCase {
-    @discardableResult
     func withdraw() -> Observable<Void>
 }
 

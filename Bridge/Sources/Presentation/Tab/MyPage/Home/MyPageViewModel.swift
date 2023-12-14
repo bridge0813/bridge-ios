@@ -132,12 +132,12 @@ private extension MyPageViewModel {
         case openSourceLicense = "오픈소스 라이선스"
         case withdrawal = "회원탈퇴"
         
-        // 비로그인 상태일 때의 메뉴
+        // 비로그인 상태의 메뉴
         static var unauthorizedCases: [Menu] {
             [.signIn, .notification, .privacyPolicy, .versionInfo, .openSourceLicense]
         }
         
-        // 로그인 상태일 때의 메뉴
+        // 로그인 상태의 메뉴
         static var authorizedCases: [Menu] {
             [.notification, .privacyPolicy, .versionInfo, .openSourceLicense, .signOut, .withdrawal]
         }
@@ -160,7 +160,14 @@ private extension MyPageViewModel {
             
         case .signOut:
             coordinator?.showAlert(configuration: .signOut, primaryAction: { [weak self] in
-                self?.signOutUseCase.signOut()
+                guard let self else { return }
+                
+                self.signOutUseCase.signOut()
+                    .withUnretained(self)
+                    .subscribe(onNext: { owner, _ in
+                        owner.viewState.accept(.unauthorized)
+                    })
+                    .disposed(by: disposeBag)
             })
             
         case .notification:
@@ -177,7 +184,14 @@ private extension MyPageViewModel {
             
         case .withdrawal:
             coordinator?.showAlert(configuration: .withdrawal, primaryAction: { [weak self] in
-                self?.withdrawUseCase.withdraw()
+                guard let self else { return }
+                
+                self.withdrawUseCase.withdraw()
+                    .withUnretained(self)
+                    .subscribe(onNext: { owner, _ in
+                        owner.viewState.accept(.unauthorized)
+                    })
+                    .disposed(by: disposeBag)
             })
         }
     }

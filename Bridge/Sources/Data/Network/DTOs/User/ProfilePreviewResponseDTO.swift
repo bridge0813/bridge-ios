@@ -5,7 +5,7 @@
 //  Created by 엄지호 on 2023/11/24.
 //  Edited by 정호윤 on 2023/12/13.
 
-/// 마이페이지를 조회할 때 사용
+/// 마이페이지 조회할 때 사용
 struct ProfilePreviewResponseDTO: Decodable {
     let profileImage: String?
     let name: String

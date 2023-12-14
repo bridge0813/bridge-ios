@@ -5,8 +5,8 @@
 //  Created by 정호윤 on 11/6/23.
 //
 
-import UIKit
 import SafariServices
+import UIKit
 
 final class MyPageCoordinator: Coordinator {
     // MARK: - Property
@@ -16,9 +16,9 @@ final class MyPageCoordinator: Coordinator {
     
     private let authRepository: AuthRepository
     private let userRepository: UserRepository
+    
     private let signOutUseCase: SignOutUseCase
     private let withdrawUseCase: WithdrawUseCase
-    
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
     
     // MARK: - Init
@@ -28,8 +28,9 @@ final class MyPageCoordinator: Coordinator {
         
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
-//        userRepository = DefaultUserRepository(networkService: networkService)
-        userRepository = MockUserRepository()
+        userRepository = DefaultUserRepository(networkService: networkService)
+//        authRepository = MockAuthRepository()
+//        userRepository = MockUserRepository()
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
