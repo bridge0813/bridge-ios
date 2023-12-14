@@ -14,7 +14,7 @@ final class ManagementCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     
     private let projectRepository: ProjectRepository
-    private let profileRepository: ProfileRepository
+    private let userRepository: UserRepository
     private let channelRepository: ChannelRepository
     private let messageRepository: MessageRepository
     
@@ -40,7 +40,7 @@ final class ManagementCoordinator: Coordinator {
         
         // 리포지토리
         projectRepository = MockProjectRepository()
-        profileRepository = MockProfileRepository()
+        userRepository = MockUserRepository()
         channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
         messageRepository = DefaultMessageRepository(networkService: networkService, stompService: stompService)
 
@@ -51,7 +51,7 @@ final class ManagementCoordinator: Coordinator {
         cancelApplicationUseCase = DefaultCancelApplicationUseCase(projectRepository: projectRepository)
         
         // 지원자 목록(수락, 거절)
-        fetchApplicantListUseCase = DefaultFetchApplicantListUseCase(profileRepository: profileRepository)
+        fetchApplicantListUseCase = DefaultFetchApplicantListUseCase(userRepository: userRepository)
         acceptApplicantUseCase = DefaultAcceptApplicantUseCase(projectRepository: projectRepository)
         rejectApplicantUseCase = DefaultRejectApplicantUseCase(projectRepository: projectRepository)
         

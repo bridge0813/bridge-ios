@@ -26,4 +26,8 @@ final class DefaultUserRepository: UserRepository {
             .decode(type: ProfilePreviewResponseDTO.self, decoder: JSONDecoder())
             .map { $0.toEntity() }
     }
+    
+    func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]> {
+        .just(ApplicantProfileResponseDTO.testArray.compactMap { $0.toEntity() })
+    }
 }

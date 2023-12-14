@@ -12,4 +12,8 @@ final class MockUserRepository: UserRepository {
         .just(ProfilePreviewResponseDTO.testData.toEntity())
 //        .error(NetworkError.statusCode(401))
     }
+    
+    func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]> {
+        .just(ApplicantProfileResponseDTO.testArray.compactMap { $0.toEntity() })
+    }
 }

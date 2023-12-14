@@ -13,13 +13,13 @@ protocol FetchApplicantListUseCase {
 
 final class DefaultFetchApplicantListUseCase: FetchApplicantListUseCase {
     
-    private let profileRepository: UserRepository
+    private let userRepository: UserRepository
     
-    init(profileRepository: UserRepository) {
-        self.profileRepository = profileRepository
+    init(userRepository: UserRepository) {
+        self.userRepository = userRepository
     }
     
     func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]> {
-        profileRepository.fetchApplicantList(projectID: projectID)
+        userRepository.fetchApplicantList(projectID: projectID)
     }
 }
