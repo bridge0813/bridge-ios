@@ -166,6 +166,7 @@ private extension MyPageViewModel {
                     .withUnretained(self)
                     .subscribe(onNext: { owner, _ in
                         owner.viewState.accept(.unauthorized)
+                        owner.updateMenus(for: .unauthorized)
                     })
                     .disposed(by: disposeBag)
             })
@@ -190,6 +191,7 @@ private extension MyPageViewModel {
                     .withUnretained(self)
                     .subscribe(onNext: { owner, _ in
                         owner.viewState.accept(.unauthorized)
+                        owner.updateMenus(for: .unauthorized)
                     })
                     .disposed(by: disposeBag)
             })
