@@ -22,12 +22,9 @@ final class ProfileHeaderView: BaseView {
         return imageView
     }()
     
-    // TODO: 로그인 여부에 따라 바뀌어야하므로 기본값 뭐로 할지 결정 (없애던가)
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "홍길동"
         label.font = BridgeFont.headline1.font
-        label.textColor = BridgeColor.gray01
         return label
     }()
     
@@ -136,8 +133,44 @@ final class ProfileHeaderView: BaseView {
 
 // MARK: - Configuration
 extension ProfileHeaderView {
-    func configure() {
+    func configure(with viewState: MyPageViewModel.ViewState) {
+        switch viewState {
+        case .unauthorized:
+            nameLabel.text = "로그인 후 사용해주세요."
+            nameLabel.textColor = BridgeColor.gray03
+            manageProfileButton.flex.display(.none)
+            
+            
+        case .authorized(let profilePreview):
+            nameLabel.text = "\(profilePreview.name) 님"
+            nameLabel.textColor = BridgeColor.gray01
+            manageProfileButton.flex.display(.flex)
+            updateInterestedFieldButton(subtitle: profilePreview.fields.first ?? "미설정")
+            updateBookmarkedProjectButton(subtitle: "총 \(profilePreview.bookmarkedProjectCount)개")
+        }
         
+        nameLabel.flex.markDirty()
+        manageProfileButton.flex.markDirty()
+        interestedFieldButton.flex.markDirty()
+        bookmarkedProjectButton.flex.markDirty()
+        rootFlexContainer.flex.layout()
+    }
+    
+    private func updateInterestedFieldButton(subtitle: String) {
+        var configuration = interestedFieldButton.configuration
+        configuration?.attributedSubtitle = AttributedString(
+            subtitle,
+            attributes: AttributeContainer([.font: BridgeFont.caption1.font, .foregroundColor: BridgeColor.primary1])
+        )
+        interestedFieldButton.configuration = configuration
+    }
+    
+    private func updateBookmarkedProjectButton(subtitle: String) {
+        var configuration = bookmarkedProjectButton.configuration
+        configuration?.attributedSubtitle = AttributedString(
+            subtitle,
+            attributes: AttributeContainer([.font: BridgeFont.caption1.font, .foregroundColor: BridgeColor.primary1]))
+        bookmarkedProjectButton.configuration = configuration
     }
 }
 

@@ -1,14 +1,14 @@
 //
-//  DefaultProfileRepository.swift
+//  DefaultUserRepository.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/11/25.
-//
+//  Edited by 정호윤 on 2023/12/12.
 
 import Foundation
 import RxSwift
 
-final class DefaultProfileRepository: ProfileRepository {
+final class DefaultUserRepository: UserRepository {
     
     private let networkService: NetworkService
     private let tokenStorage: TokenStorage
@@ -20,12 +20,10 @@ final class DefaultProfileRepository: ProfileRepository {
     
     func fetchProfilePreview() -> Observable<ProfilePreview> {
         let userID = tokenStorage.get(.userID) 
-        let profilePreviewEndpoint = ProfileEndpoint.fetchProfilePreview(userID: userID)
+        let userEndpoint = UserEndpoint.fetchProfilePreview(userID: userID)
         
-        return networkService.request(to: profilePreviewEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: userEndpoint, interceptor: AuthInterceptor())
             .decode(type: ProfilePreviewResponseDTO.self, decoder: JSONDecoder())
-            .map { dto in
-                dto.toEntity()
-            }
+            .map { $0.toEntity() }
     }
 }

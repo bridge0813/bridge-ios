@@ -33,14 +33,14 @@ final class SetFieldViewModel: ViewModelType {
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         let completeButtonEnabled = BehaviorSubject<Bool>(value: false)
-        var selectedFields: Set<String> = []
+        var selectedFields: [String] = []
         
         input.fieldTagButtonTapped
             .subscribe(onNext: { field in
-                if selectedFields.contains(field) {
-                    selectedFields.remove(field)
+                if let index = selectedFields.firstIndex(of: field) {
+                    selectedFields.remove(at: index)
                 } else {
-                    selectedFields.insert(field)
+                    selectedFields.append(field)
                 }
                 
                 completeButtonEnabled.onNext(!selectedFields.isEmpty)
@@ -66,6 +66,8 @@ final class SetFieldViewModel: ViewModelType {
             )
             .disposed(by: disposeBag)
         
-        return Output(isCompleteButtonEnabled: completeButtonEnabled.asDriver(onErrorJustReturn: true))
+        return Output(
+            isCompleteButtonEnabled: completeButtonEnabled.asDriver(onErrorJustReturn: true)
+        )
     }
 }

@@ -45,6 +45,8 @@
 		7B3B373C2B038FE400C2F8AD /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3B373B2B038FE400C2F8AD /* SendMessageUseCase.swift */; };
 		7B3B373E2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3B373D2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift */; };
 		7B4EA4812B08C867004663BC /* WebSocketServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4EA4802B08C867004663BC /* WebSocketServiceDelegate.swift */; };
+		7B5752B12B287DF600B1A2DC /* SignOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5752B02B287DF600B1A2DC /* SignOutUseCase.swift */; };
+		7B5752B32B287E2A00B1A2DC /* WithdrawUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5752B22B287E2900B1A2DC /* WithdrawUseCase.swift */; };
 		7B61235E2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */; };
 		7B61236A2ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6123692ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift */; };
 		7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B61236E2AC15905006E72C1 /* BridgeFont.swift */; };
@@ -186,11 +188,11 @@
 		7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */; };
 		7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */; };
 		7C56E15C2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */; };
-		7C56E15F2B10F8E300454F5E /* ProfileEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E15E2B10F8E300454F5E /* ProfileEndpoint.swift */; };
+		7C56E15F2B10F8E300454F5E /* UserEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E15E2B10F8E300454F5E /* UserEndpoint.swift */; };
 		7C56E1622B10FF8300454F5E /* ProfilePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1612B10FF8300454F5E /* ProfilePreview.swift */; };
 		7C56E1652B11027000454F5E /* FetchProfilePreviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */; };
-		7C56E1682B11034300454F5E /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1672B11034300454F5E /* ProfileRepository.swift */; };
-		7C56E16B2B11043400454F5E /* DefaultProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E16A2B11043400454F5E /* DefaultProfileRepository.swift */; };
+		7C56E1682B11034300454F5E /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1672B11034300454F5E /* UserRepository.swift */; };
+		7C56E16B2B11043400454F5E /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E16A2B11043400454F5E /* DefaultUserRepository.swift */; };
 		7C56E16D2B13256E00454F5E /* FetchProjectsByFieldUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E16C2B13256E00454F5E /* FetchProjectsByFieldUseCase.swift */; };
 		7C56E16F2B145E3000454F5E /* FieldRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E16E2B145E3000454F5E /* FieldRequestDTO.swift */; };
 		7C56E1712B14860100454F5E /* HotProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1702B14860100454F5E /* HotProjectResponseDTO.swift */; };
@@ -202,7 +204,7 @@
 		7C87EE0F2B1B72290066691D /* BookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */; };
 		7C87EE112B1C4B180066691D /* ProjectCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE102B1C4B180066691D /* ProjectCellDelegate.swift */; };
 		7C87EE142B1C55C20066691D /* FilterPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE132B1C55C20066691D /* FilterPopUpView.swift */; };
-		7C87EE162B1D83FB0066691D /* MockProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE152B1D83FB0066691D /* MockProfileRepository.swift */; };
+		7C87EE162B1D83FB0066691D /* MockUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE152B1D83FB0066691D /* MockUserRepository.swift */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
 		7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */; };
@@ -305,6 +307,8 @@
 		7B3B373B2B038FE400C2F8AD /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
 		7B3B373D2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSubscriptionUseCase.swift; sourceTree = "<group>"; };
 		7B4EA4802B08C867004663BC /* WebSocketServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketServiceDelegate.swift; sourceTree = "<group>"; };
+		7B5752B02B287DF600B1A2DC /* SignOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutUseCase.swift; sourceTree = "<group>"; };
+		7B5752B22B287E2900B1A2DC /* WithdrawUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawUseCase.swift; sourceTree = "<group>"; };
 		7B61235D2ABD9CBC006E72C1 /* SignInWithAppleRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleRequestDTO.swift; sourceTree = "<group>"; };
 		7B6123692ABF05B6006E72C1 /* SignInWithAppleResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleResponseDTO.swift; sourceTree = "<group>"; };
 		7B61236E2AC15905006E72C1 /* BridgeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFont.swift; sourceTree = "<group>"; };
@@ -440,11 +444,11 @@
 		7C569D0C2AA0AACC0063D362 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C569D0E2AA0AFD50063D362 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePreviewResponseDTO.swift; sourceTree = "<group>"; };
-		7C56E15E2B10F8E300454F5E /* ProfileEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEndpoint.swift; sourceTree = "<group>"; };
+		7C56E15E2B10F8E300454F5E /* UserEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndpoint.swift; sourceTree = "<group>"; };
 		7C56E1612B10FF8300454F5E /* ProfilePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePreview.swift; sourceTree = "<group>"; };
 		7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProfilePreviewUseCase.swift; sourceTree = "<group>"; };
-		7C56E1672B11034300454F5E /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
-		7C56E16A2B11043400454F5E /* DefaultProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileRepository.swift; sourceTree = "<group>"; };
+		7C56E1672B11034300454F5E /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		7C56E16A2B11043400454F5E /* DefaultUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserRepository.swift; sourceTree = "<group>"; };
 		7C56E16C2B13256E00454F5E /* FetchProjectsByFieldUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProjectsByFieldUseCase.swift; sourceTree = "<group>"; };
 		7C56E16E2B145E3000454F5E /* FieldRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldRequestDTO.swift; sourceTree = "<group>"; };
 		7C56E1702B14860100454F5E /* HotProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectResponseDTO.swift; sourceTree = "<group>"; };
@@ -456,7 +460,7 @@
 		7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkUseCase.swift; sourceTree = "<group>"; };
 		7C87EE102B1C4B180066691D /* ProjectCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCellDelegate.swift; sourceTree = "<group>"; };
 		7C87EE132B1C55C20066691D /* FilterPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPopUpView.swift; sourceTree = "<group>"; };
-		7C87EE152B1D83FB0066691D /* MockProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProfileRepository.swift; sourceTree = "<group>"; };
+		7C87EE152B1D83FB0066691D /* MockUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserRepository.swift; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorView.swift; sourceTree = "<group>"; };
@@ -587,6 +591,8 @@
 			children = (
 				7B14DB272AB15E7E009A00EB /* SignInUseCase.swift */,
 				7B922CFB2AD02EE400F3A336 /* SignUpUseCase.swift */,
+				7B5752B02B287DF600B1A2DC /* SignOutUseCase.swift */,
+				7B5752B22B287E2900B1A2DC /* WithdrawUseCase.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1044,7 +1050,7 @@
 				7B14DB262AB15E69009A00EB /* Auth */,
 				7CA04F662B0A6EA5007B9191 /* Project */,
 				7BA36C952A9C4D0F000DAB02 /* Chat */,
-				7C56E1632B11025300454F5E /* Profile */,
+				7C56E1632B11025300454F5E /* User */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1083,7 +1089,7 @@
 				7B14DB322AB1DBEC009A00EB /* Auth */,
 				7C569D072A9F7E060063D362 /* Project */,
 				7BA36CA22A9C681B000DAB02 /* Chat */,
-				7C56E1692B1103F900454F5E /* Profile */,
+				7C56E1692B1103F900454F5E /* User */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1124,7 +1130,7 @@
 				7B61235C2ABD9C9E006E72C1 /* Auth */,
 				7CA04F5B2B0A0254007B9191 /* Project */,
 				7BA36CAF2A9D960E000DAB02 /* Chat */,
-				7C56E15A2B10EF3700454F5E /* Profile */,
+				7C56E15A2B10EF3700454F5E /* User */,
 				7B9420562B05AC6E00FEE058 /* Extensions */,
 			);
 			path = DTOs;
@@ -1150,7 +1156,7 @@
 				7B153C092AD64E2A00618280 /* Auth */,
 				7CA04F632B0A6134007B9191 /* Project */,
 				7B153C0A2AD64E3200618280 /* Chat */,
-				7C56E15D2B10F8CD00454F5E /* Profile */,
+				7C56E15D2B10F8CD00454F5E /* User */,
 				7B9C31AD2B07756F007E36B2 /* WebSocket */,
 			);
 			path = Endpoint;
@@ -1409,20 +1415,20 @@
 			path = Project;
 			sourceTree = "<group>";
 		};
-		7C56E15A2B10EF3700454F5E /* Profile */ = {
+		7C56E15A2B10EF3700454F5E /* User */ = {
 			isa = PBXGroup;
 			children = (
 				7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */,
 			);
-			path = Profile;
+			path = User;
 			sourceTree = "<group>";
 		};
-		7C56E15D2B10F8CD00454F5E /* Profile */ = {
+		7C56E15D2B10F8CD00454F5E /* User */ = {
 			isa = PBXGroup;
 			children = (
-				7C56E15E2B10F8E300454F5E /* ProfileEndpoint.swift */,
+				7C56E15E2B10F8E300454F5E /* UserEndpoint.swift */,
 			);
-			path = Profile;
+			path = User;
 			sourceTree = "<group>";
 		};
 		7C56E1602B10FF6200454F5E /* Profile */ = {
@@ -1433,29 +1439,29 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		7C56E1632B11025300454F5E /* Profile */ = {
+		7C56E1632B11025300454F5E /* User */ = {
 			isa = PBXGroup;
 			children = (
 				7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */,
 			);
-			path = Profile;
+			path = User;
 			sourceTree = "<group>";
 		};
 		7C56E1662B11031E00454F5E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				7C56E1672B11034300454F5E /* ProfileRepository.swift */,
+				7C56E1672B11034300454F5E /* UserRepository.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		7C56E1692B1103F900454F5E /* Profile */ = {
+		7C56E1692B1103F900454F5E /* User */ = {
 			isa = PBXGroup;
 			children = (
-				7C56E16A2B11043400454F5E /* DefaultProfileRepository.swift */,
-				7C87EE152B1D83FB0066691D /* MockProfileRepository.swift */,
+				7C56E16A2B11043400454F5E /* DefaultUserRepository.swift */,
+				7C87EE152B1D83FB0066691D /* MockUserRepository.swift */,
 			);
-			path = Profile;
+			path = User;
 			sourceTree = "<group>";
 		};
 		7C87EE0A2B1B68960066691D /* Bookmark */ = {
@@ -1995,6 +2001,7 @@
 				7CA04F5E2B0A029A007B9191 /* CreateProjectRequestDTO.swift in Sources */,
 				7B1742F42AFA46A7004F0953 /* AccessTokenResponseDTO.swift in Sources */,
 				7CDFB6232B2236AB00272F77 /* MenuPopUpView.swift in Sources */,
+				7B5752B12B287DF600B1A2DC /* SignOutUseCase.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7CA04F2C2B01F822007B9191 /* ProjectDetailMenuBar.swift in Sources */,
 				7C8CC4152AF024060032F237 /* DatePickerPopUpView.swift in Sources */,
@@ -2029,12 +2036,12 @@
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
 				7CA04F322B020B94007B9191 /* ProjectDetailCoordinator.swift in Sources */,
 				7CDFB6262B22CADC00272F77 /* MenuButton.swift in Sources */,
-				7C87EE162B1D83FB0066691D /* MockProfileRepository.swift in Sources */,
+				7C87EE162B1D83FB0066691D /* MockUserRepository.swift in Sources */,
 				7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift in Sources */,
 				7C8CC41A2AF40A100032F237 /* BaseProgressView.swift in Sources */,
 				7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */,
 				7C56E1712B14860100454F5E /* HotProjectResponseDTO.swift in Sources */,
-				7C56E16B2B11043400454F5E /* DefaultProfileRepository.swift in Sources */,
+				7C56E16B2B11043400454F5E /* DefaultUserRepository.swift in Sources */,
 				7B9142D62B01CE8B006EA52F /* MessageRepository.swift in Sources */,
 				7B93AAA32B2012D800650EA5 /* StompMessageRequestDTO.swift in Sources */,
 				7B9C31AB2B07752C007E36B2 /* StompService.swift in Sources */,
@@ -2101,7 +2108,7 @@
 				7B6123842AC1A65F006E72C1 /* BridgeColor.swift in Sources */,
 				7BA36CC12A9DE219000DAB02 /* DefaultNetworkService.swift in Sources */,
 				7B02A66A2AE000DE00C8D4A1 /* WebSocketEndpoint.swift in Sources */,
-				7C56E1682B11034300454F5E /* ProfileRepository.swift in Sources */,
+				7C56E1682B11034300454F5E /* UserRepository.swift in Sources */,
 				7C569CFD2A9F6F9E0063D362 /* ProjectRepository.swift in Sources */,
 				7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */,
 				7C40CBC82AC69447000F4C9F /* BridgeSmallButtonGroup.swift in Sources */,
@@ -2133,6 +2140,7 @@
 				7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */,
 				7B61238B2AC2D03E006E72C1 /* BridgeTipMessageBox.swift in Sources */,
 				7B1922D52AE287C900EBDD2E /* MessageCell.swift in Sources */,
+				7B5752B32B287E2A00B1A2DC /* WithdrawUseCase.swift in Sources */,
 				7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */,
 				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
 				7CA04F532B04B6E7007B9191 /* MemberRequirementDTO.swift in Sources */,
@@ -2160,7 +2168,7 @@
 				7B9142D82B01CF31006EA52F /* DefaultMessageRepository.swift in Sources */,
 				7BB2C2492A98560E00AA2328 /* TabBarPageType.swift in Sources */,
 				7BB8C51F2AE7CA2800B264C3 /* ErrorAlertConfiguration.swift in Sources */,
-				7C56E15F2B10F8E300454F5E /* ProfileEndpoint.swift in Sources */,
+				7C56E15F2B10F8E300454F5E /* UserEndpoint.swift in Sources */,
 				7CDFB6302B2422F600272F77 /* MyProjectResponseDTO.swift in Sources */,
 				7CA04F122AFDF694007B9191 /* ProjectDetailViewController.swift in Sources */,
 				7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */,
