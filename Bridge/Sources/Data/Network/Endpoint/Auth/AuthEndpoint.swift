@@ -8,6 +8,8 @@
 enum AuthEndpoint {
     case signInWithApple(requestDTO: SignInWithAppleRequestDTO)
     case signUp(requestDTO: SignUpRequestDTO)
+    case signOut(userID: String)
+    case withdrawal(userID: String)
 }
 
 extension AuthEndpoint: Endpoint {
@@ -18,6 +20,12 @@ extension AuthEndpoint: Endpoint {
             
         case .signUp:
             return "/signup"
+            
+        case .signOut:
+            return "/logout"
+            
+        case .withdrawal(let userID):
+            return "/users/\(userID)"
         }
     }
     
@@ -28,6 +36,12 @@ extension AuthEndpoint: Endpoint {
             
         case .signUp:
             return nil
+            
+        case .signOut(let userID):
+            return ["userId": userID]
+            
+        case .withdrawal(userID: let userID):
+            return ["userId": userID]
         }
     }
     
@@ -38,6 +52,12 @@ extension AuthEndpoint: Endpoint {
             
         case .signUp:
             return .post
+            
+        case .signOut:
+            return .post
+            
+        case .withdrawal:
+            return .delete
         }
     }
     
@@ -48,6 +68,12 @@ extension AuthEndpoint: Endpoint {
             
         case .signUp(let requestDTO):
             return requestDTO
+            
+        case .signOut:
+            return nil
+            
+        case .withdrawal:
+            return nil
         }
     }
 }

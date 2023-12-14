@@ -14,6 +14,14 @@ final class SetFieldViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = true
+        return scrollView
+    }()
+    
+    private let contentView = UIView()
+    
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.configureTextWithLineHeight(text: "당신의 관심 프로젝트는\n어떤 분야인가요?", lineHeight: 30)
@@ -66,24 +74,28 @@ final class SetFieldViewController: BaseViewController {
     
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
+        rootFlexContainer.addSubview(scrollView)
+        rootFlexContainer.addSubview(completeButton)
+        scrollView.addSubview(contentView)
         
-        rootFlexContainer.flex.paddingHorizontal(16).define { flex in
+        contentView.flex.paddingHorizontal(16).define { flex in
             flex.addItem(descriptionLabel).marginTop(32).marginBottom(16)
-            
             flex.addItem(tipMessageBox).marginBottom(40)
-            
-            flex.addItem(setFieldView)
-            
-            flex.addItem().grow(1)  // spacer
-            
-            flex.addItem(completeButton).height(52).marginBottom(24)
+            flex.addItem(setFieldView).marginBottom(35)
+            flex.addItem().size(60)
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
+        completeButton.pin.horizontally(16).bottom(view.pin.safeArea + 24).height(52)
+        scrollView.pin.all()
+        
+        contentView.pin.top().horizontally()
+        contentView.flex.layout(mode: .adjustHeight)
+        
+        scrollView.contentSize = contentView.frame.size
     }
     
     // MARK: - Binding

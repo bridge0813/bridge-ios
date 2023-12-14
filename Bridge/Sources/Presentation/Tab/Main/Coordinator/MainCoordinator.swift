@@ -13,7 +13,7 @@ final class MainCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
-    private let profileRepository: ProfileRepository
+    private let userRepository: UserRepository
     private let projectRepository: ProjectRepository
     
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
@@ -29,12 +29,12 @@ final class MainCoordinator: Coordinator {
         self.childCoordinators = []
 
         let networkService = DefaultNetworkService()
-        profileRepository = MockProfileRepository()
-//        DefaultProfileRepository(networkService: networkService)  // 프로필
+        userRepository = MockUserRepository()
+//        DefaultUserRepository(networkService: networkService)  // 프로필
         projectRepository = MockProjectRepository()
-//        DefaultProjectRepository(networkService: networkService)  // 모집글
+//        DefaultUserRepository(networkService: networkService)  // 모집글
         
-        fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(profileRepository: profileRepository)
+        fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         fetchAllProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
         fetchProjectsByFieldUseCase = DefaultFetchProjectsByFieldUseCase(projectRepository: projectRepository)
         fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
