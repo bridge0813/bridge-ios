@@ -42,7 +42,7 @@ final class DefaultChannelRepository: ChannelRepository {
             .map { _ in id }
     }
     
-    func createChannel(applicantID: Int) -> Observable<Channel> {
+    func createChannel(opponentID: Int) -> Observable<Channel> {
         .just(CreateChannelResponseDTO.testData.toEntity())
     }
     

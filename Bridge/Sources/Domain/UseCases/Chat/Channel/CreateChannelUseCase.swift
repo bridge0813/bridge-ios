@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol CreateChannelUseCase {
-    func create(applicantID: Int) -> Observable<Channel>
+    func create(opponentID: Int) -> Observable<Channel>
 }
 
 final class DefaultCreateChannelUseCase: CreateChannelUseCase {
@@ -19,7 +19,7 @@ final class DefaultCreateChannelUseCase: CreateChannelUseCase {
         self.channelRepository = channelRepository
     }
     
-    func create(applicantID: Int) -> Observable<Channel> {
-        channelRepository.createChannel(applicantID: applicantID)
+    func create(opponentID: Int) -> Observable<Channel> {
+        channelRepository.createChannel(opponentID: opponentID)
     }
 }

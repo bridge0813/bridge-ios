@@ -114,7 +114,7 @@ final class ApplicantListViewModel: ViewModelType {
         input.startChatButtonTapped
             .withUnretained(self)
             .flatMapLatest { owner, applicantID in
-                owner.createChannelUseCase.create(applicantID: applicantID).toResult()
+                owner.createChannelUseCase.create(opponentID: applicantID).toResult()
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
