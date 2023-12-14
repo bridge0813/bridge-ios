@@ -159,7 +159,7 @@ final class ManagementViewModel: ViewModelType {
             .withUnretained(self)
             .flatMap { owner, projectID -> Maybe<ProjectID> in
                 // 지원취소 Alert을 보여주고, 유저가 "취소하기" 를 클릭했을 경우 이벤트를 전달.
-                owner.confirmActionWithAlert(projectID: projectID, alertConfiguration: .cancel)
+                owner.confirmActionWithAlert(projectID: projectID, alertConfiguration: .cancelApplication)
             }
             .withUnretained(self)
             .flatMap { owner, projectID -> Observable<Result<ProjectID, Error>> in

@@ -93,8 +93,8 @@ extension AlertConfiguration {
         rightButtonTitle: "수락하기"
     )
     
-    static let cancel = AlertConfiguration(
-        title: "프로젝트에 지원을 취소할까요?",
+    static let cancelApplication = AlertConfiguration(
+        title: "프로젝트 지원을 취소할까요?",
         description: nil,
         leftButtonTitle: "아니오",
         rightButtonTitle: "취소하기"
