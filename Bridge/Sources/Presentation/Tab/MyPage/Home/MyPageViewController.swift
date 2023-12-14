@@ -24,8 +24,6 @@ final class MyPageViewController: BaseViewController {
         return button
     }()
     
-    private let rootFlexContainer = UIView()
-    
     private let profileHeaderView = ProfileHeaderView()
     
     private lazy var myPageTableView: UITableView = {
@@ -72,16 +70,12 @@ final class MyPageViewController: BaseViewController {
     
     // MARK: - Layout
     override func configureLayouts() {
-        view.addSubview(rootFlexContainer)
-        rootFlexContainer.addSubview(myPageTableView)
+        view.addSubview(myPageTableView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
-        
-        myPageTableView.pin.all()
+        myPageTableView.pin.all(view.pin.safeArea)
         myPageTableView.flex.layout()
     }
     
