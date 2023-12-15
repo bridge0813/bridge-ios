@@ -65,13 +65,10 @@ final class DefaultProjectRepository: ProjectRepository {
         let projectIDDTO = ProjectIDDTO(projectID: projectID)  // 조회 할 모집글의 request DTO
         let fetchProjectDetailEndpoint = ProjectEndpoint.fetchProjectDetail(requestDTO: projectIDDTO, userID: userID)
         
-        // TODO: - 로그인 상태 체크 로직 추가. 토큰 or userID
-        let signInNeeded = userID.isEmpty
-        
         return networkService.request(to: fetchProjectDetailEndpoint, interceptor: nil)
             .decode(type: ProjectDetailDTO.self, decoder: JSONDecoder())
             .map { dto in
-                return (dto.toEntity(), signInNeeded)
+                return (dto.toEntity(), userID.isEmpty)
             }
     }
     
