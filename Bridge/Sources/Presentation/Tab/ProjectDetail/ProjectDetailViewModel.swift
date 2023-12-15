@@ -42,7 +42,31 @@ final class ProjectDetailViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        let project = projectDetailUseCase.fetchProjectDetail(with: 0)  // ID 받아서 처리
+        let project = PublishRelay<Project>()
+        var signInNeeded = false  // 로그인 체크
+        
+        projectDetailUseCase.fetchProjectDetail(with: projectID).toResult()
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let data):
+                    project.accept(data.0)
+                    signInNeeded = data.1
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(
+                        configuration: ErrorAlertConfiguration(
+                            title: "오류",
+                            description: error.localizedDescription
+                        ),
+                        primaryAction: {
+                            owner.coordinator?.pop()
+                        }
+                    )
+                }
+            })
+            .disposed(by: disposeBag)
         
         input.goToDetailButtonTapped
             .withLatestFrom(project)

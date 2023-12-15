@@ -12,8 +12,9 @@ enum ProjectEndpoint {
     case fetchProjectsByField(requestDTO: FieldRequestDTO)
     case fetchHotProjects
     case fetchDeadlineProjects
+    case fetchProjectDetail(requestDTO: ProjectIDDTO, userID: String)
     
-    case bookmark(requestDTO: ProjectIDDTO, userID: String)
+    case bookmark(requestDTO: ProjectIDDTO)
 }
 
 extension ProjectEndpoint: Endpoint {
@@ -33,6 +34,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .fetchDeadlineProjects:
             return "/projects/imminent"
+            
+        case .fetchProjectDetail:
+            return "/project"
             
         case .bookmark:
             return "/project/scrap"
@@ -56,8 +60,11 @@ extension ProjectEndpoint: Endpoint {
         case .fetchDeadlineProjects:
             return nil
             
-        case .bookmark(_, userID: let userID):
+        case .fetchProjectDetail(_, userID: let userID):
             return ["userId": userID]
+            
+        case .bookmark:
+            return nil
         }
     }
     
@@ -76,6 +83,9 @@ extension ProjectEndpoint: Endpoint {
             return .get
             
         case .fetchDeadlineProjects:
+            return .get
+            
+        case .fetchProjectDetail:
             return .get
             
         case .bookmark:
@@ -100,7 +110,10 @@ extension ProjectEndpoint: Endpoint {
         case .fetchDeadlineProjects:
             return nil
             
-        case .bookmark(requestDTO: let projectID, _):
+        case .fetchProjectDetail(requestDTO: let projectID, _):
+            return projectID
+            
+        case .bookmark(requestDTO: let projectID):
             return projectID
         }
     }

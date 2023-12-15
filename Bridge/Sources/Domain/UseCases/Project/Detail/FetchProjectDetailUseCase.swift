@@ -7,8 +7,11 @@
 
 import RxSwift
 
+/// 지원자의 고유 ID로 식별을 위해 사용됨
+typealias SignInNeeded = Bool
+
 protocol FetchProjectDetailUseCase {
-    func fetchProjectDetail(with projectID: Int) -> Observable<Project>
+    func fetchProjectDetail(with projectID: Int) -> Observable<(Project, SignInNeeded)>
 }
 
 final class DefaultFetchProjectDetailUseCase: FetchProjectDetailUseCase {
@@ -19,7 +22,7 @@ final class DefaultFetchProjectDetailUseCase: FetchProjectDetailUseCase {
         self.projectRepository = projectRepository
     }
     
-    func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
+    func fetchProjectDetail(with projectID: Int) -> Observable<(Project, SignInNeeded)> {
         projectRepository.fetchProjectDetail(with: projectID)
     }
 }

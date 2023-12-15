@@ -21,7 +21,10 @@ final class ProjectDetailCoordinator: Coordinator {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         
+        let networkService = DefaultNetworkService()
         projectRepository = MockProjectRepository()
+//        DefaultProjectRepository(networkService: networkService)
+        
         projectDetailUseCase = DefaultFetchProjectDetailUseCase(projectRepository: projectRepository)
     }
     

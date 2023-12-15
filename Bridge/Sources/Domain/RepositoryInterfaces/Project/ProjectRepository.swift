@@ -13,7 +13,7 @@ protocol ProjectRepository {
     func fetchProjectsByField(for field: String) -> Observable<[ProjectPreview]>
     func fetchHotProjects() -> Observable<[ProjectPreview]>
     func fetchDeadlineProjects() -> Observable<[ProjectPreview]>
-    func fetchProjectDetail(with projectID: Int) -> Observable<Project>
+    func fetchProjectDetail(with projectID: Int) -> Observable<(Project, SignInNeeded)>
     
     func fetchAppliedProjects() -> Observable<[ProjectPreview]>
     func fetchMyProjects() -> Observable<[ProjectPreview]>

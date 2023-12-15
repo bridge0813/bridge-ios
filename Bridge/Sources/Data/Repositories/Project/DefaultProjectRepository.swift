@@ -60,8 +60,19 @@ final class DefaultProjectRepository: ProjectRepository {
     }
     
     // 모집글 상세정보 가져오기
-    func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
-        .just(ProjectDetailDTO.projectDetailTest.toEntity())
+    func fetchProjectDetail(with projectID: Int) -> Observable<(Project, SignInNeeded)> {
+        let userID = tokenStorage.get(.userID)
+        let projectIDDTO = ProjectIDDTO(projectID: projectID)  // 조회 할 모집글의 request DTO
+        let fetchProjectDetailEndpoint = ProjectEndpoint.fetchProjectDetail(requestDTO: projectIDDTO, userID: userID)
+        
+        // TODO: - 로그인 상태 체크 로직 추가. 토큰 or userID
+        let signInNeeded = userID.isEmpty
+        
+        return networkService.request(to: fetchProjectDetailEndpoint, interceptor: nil)
+            .decode(type: ProjectDetailDTO.self, decoder: JSONDecoder())
+            .map { dto in
+                return (dto.toEntity(), signInNeeded)
+            }
     }
     
     // 지원한 모집글 목록 가져오기
@@ -87,9 +98,8 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // MARK: - Bookmark
     func bookmark(projectID: Int) -> Observable<Int> {
-        let userID = tokenStorage.get(.userID) 
         let projectIDDTO = ProjectIDDTO(projectID: projectID)  // 북마크 할 모집글의 ID
-        let bookmarkEndpoint = ProjectEndpoint.bookmark(requestDTO: projectIDDTO, userID: userID)
+        let bookmarkEndpoint = ProjectEndpoint.bookmark(requestDTO: projectIDDTO)
         
         return networkService.request(to: bookmarkEndpoint, interceptor: AuthInterceptor())
             .map { _ in projectID }

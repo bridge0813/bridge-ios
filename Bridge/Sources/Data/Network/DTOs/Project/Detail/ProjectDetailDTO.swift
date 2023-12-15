@@ -22,7 +22,7 @@ struct ProjectDetailDTO: Codable {
     let isMyProject: Bool
     
     enum CodingKeys: String, CodingKey {
-        case title, startDate, endDate, userName
+        case title, startDate, endDate, userName, isMyProject
         case description = "overview"
         case deadline = "dueDate"
         case memberRequirements = "recruit"
@@ -30,7 +30,6 @@ struct ProjectDetailDTO: Codable {
         case progressMethod = "meetingWay"
         case progressStep = "stage"
         case isBookmarked = "scrap"
-        case isMyProject = "myProject"
     }
 }
 
@@ -67,7 +66,7 @@ extension String {
 }
 
 extension ProjectDetailDTO {
-    static var projectDetailTest = ProjectDetailDTO(
+    static var testData = ProjectDetailDTO(
         title: "사이드 프젝으로 IOS앱을 같이 구현할 팀원을 구하고 있어요~",
         description: "안녕하세요 기획부터 앱 출시까지 함께하실 팀원을 모집합니다! 현재 인원은 총 3명입니다. 저희는 개발자, 디자이너, 기횟들이 프로젝트나 스터디 모집을 쉽고 효과적으로 할 수 있게 돕는 IOS앱입니다. 현재는 다른 플랫폼과 차별화된 기능에 대한 기획정도만 마쳐진 상황이며, 추가적으로 더 진행될 예정입니다!",
         deadline: "2023-11-27T21:37:19",

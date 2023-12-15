@@ -25,8 +25,8 @@ final class MockProjectRepository: ProjectRepository {
         .just(DeadlineProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
-    func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
-        .just(ProjectDetailDTO.projectDetailTest.toEntity())
+    func fetchProjectDetail(with projectID: Int) -> Observable<(Project, SignInNeeded)> {
+        .just((ProjectDetailDTO.testData.toEntity(), true))
     }
     
     func fetchAppliedProjects() -> Observable<[ProjectPreview]> {
