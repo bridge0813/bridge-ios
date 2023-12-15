@@ -10,6 +10,7 @@ import RxSwift
 protocol ChannelRepository {
     func fetchChannels() -> Observable<[Channel]>
     func leaveChannel(id: String) -> Observable<String>
+    func createChannel(opponentID: Int) -> Observable<Channel>
     
     func subscribeChannel(id: String) -> Observable<[Message]>
     func unsubscribeChannel(id: String)

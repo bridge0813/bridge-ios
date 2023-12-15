@@ -92,6 +92,13 @@ extension AlertConfiguration {
         description: "수락하면 되돌릴 수 없습니다.\n신중하게 결정해주세요.",
         rightButtonTitle: "수락하기"
     )
+    
+    static let cancelApplication = AlertConfiguration(
+        title: "프로젝트 지원을 취소할까요?",
+        description: nil,
+        leftButtonTitle: "아니오",
+        rightButtonTitle: "취소하기"
+    )
 }
  
 // MARK: - Chat

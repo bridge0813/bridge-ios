@@ -7,8 +7,8 @@
 
 import UIKit
 
-/// Menu 팝업 뷰에서 사용되는 버튼.
-final class MenuButton: BaseButton {
+/// BridgeActionSheet에서 사용되는 버튼.
+final class BridgeActionSheetButton: BaseButton {
     
     var title = "" {
         didSet {

@@ -12,6 +12,7 @@ final class ChatCoordinator: Coordinator {
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
+    var didFinishEventClosure: (() -> Void)?  // disAppear 시점에 자식 코디네이터에서 할당을 제거하기 위함.
     
     private let authRepository: AuthRepository
     private let channelRepository: ChannelRepository

@@ -12,9 +12,10 @@ final class ProjectDetailViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let goToDetailButtonTapped: Observable<Void>
-        let menuTapped: Observable<String>
+        let editProjectActionTapped: Observable<String>
         let applyButtonTapped: Observable<Void>
         let bookmarkButtonTapped: Observable<Bool>
+        let viewDidDisappear: Observable<Bool>
     }
     
     struct Output {
@@ -47,7 +48,7 @@ final class ProjectDetailViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        input.menuTapped
+        input.editProjectActionTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, menu in
                 switch menu {
@@ -73,6 +74,15 @@ final class ProjectDetailViewModel: ViewModelType {
                     // 스크랩
                 } else {
                     // 스크랩 취소
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        input.viewDidDisappear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                if let didFinish = owner.coordinator?.didFinishEventClosure {
+                    didFinish()
                 }
             })
             .disposed(by: disposeBag)

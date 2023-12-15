@@ -29,8 +29,8 @@ final class MockProjectRepository: ProjectRepository {
         .just(ProjectDetailDTO.projectDetailTest.toEntity())
     }
     
-    func fetchApplyProjects() -> Observable<[ProjectPreview]> {
-        .just(ApplyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+    func fetchAppliedProjects() -> Observable<[ProjectPreview]> {
+        .just(AppliedProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
     func fetchMyProjects() -> Observable<[ProjectPreview]> {
@@ -43,5 +43,21 @@ final class MockProjectRepository: ProjectRepository {
     
     func bookmark(projectID: Int) -> Observable<Int> {
         .just(projectID)
+    }
+    
+    func delete(projectID: Int) -> Observable<Int> {
+        .just(projectID)
+    }
+    
+    func cancel(projectID: Int) -> Observable<Int> {
+        .just(projectID)
+    }
+    
+    func accept(projectID: Int, applicantID: Int) -> Observable<Int> {
+        .just(applicantID)
+    }
+    
+    func reject(projectID: Int, applicantID: Int) -> Observable<Int> {
+        .just(applicantID)
     }
 }

@@ -64,7 +64,7 @@ final class ManagementHeaderView: BaseCollectionReusableView {
     }
     
     // MARK: - Configuration
-    func configureHeaderView(projects: [ProjectPreview], selectedTap: ManagementTapType) {
+    func configureHeaderView(projects: [ProjectPreview], selectedTab: ManagementTabType) {
         allProjectsCountView.count = projects.count
         dynamicProjectsCountView.count = projects.filter {
             $0.status == "결과 대기중" || $0.status == "현재 진행중"
@@ -74,7 +74,7 @@ final class ManagementHeaderView: BaseCollectionReusableView {
             $0.status == "모집완료" || $0.status == "수락" || $0.status == "거절"
         }.count
         
-        dynamicProjectsCountView.title = selectedTap == .apply ? "결과 대기" : "현재 진행"
+        dynamicProjectsCountView.title = selectedTab == .apply ? "결과 대기" : "현재 진행"
     }
     
     private func updateFilterButtonTitle() {
@@ -111,7 +111,7 @@ final class ManagementHeaderView: BaseCollectionReusableView {
 
 // MARK: - Data Source
 extension ManagementHeaderView {
-    enum ManagementTapType {
+    enum ManagementTabType {
         case apply
         case recruitment
     }

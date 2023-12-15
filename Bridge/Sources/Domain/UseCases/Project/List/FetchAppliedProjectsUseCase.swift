@@ -1,5 +1,5 @@
 //
-//  FetchApplyProjectsUseCase.swift
+//  FetchAppliedProjectsUseCase.swift
 //  Bridge
 //
 //  Created by 엄지호 on 12/8/23.
@@ -7,11 +7,11 @@
 
 import RxSwift
 
-protocol FetchApplyProjectsUseCase {
+protocol FetchAppliedProjectsUseCase {
     func fetchProjects() -> Observable<[ProjectPreview]>
 }
 
-final class DefaultFetchApplyProjectsUseCase: FetchApplyProjectsUseCase {
+final class DefaultFetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase {
     private let projectRepository: ProjectRepository
     
     init(projectRepository: ProjectRepository) {
@@ -19,6 +19,6 @@ final class DefaultFetchApplyProjectsUseCase: FetchApplyProjectsUseCase {
     }
     
     func fetchProjects() -> Observable<[ProjectPreview]> {
-        projectRepository.fetchApplyProjects()
+        projectRepository.fetchAppliedProjects()
     }
 }

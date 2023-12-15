@@ -65,8 +65,8 @@ final class DefaultProjectRepository: ProjectRepository {
     }
     
     // 지원한 모집글 목록 가져오기
-    func fetchApplyProjects() -> Observable<[ProjectPreview]> {
-        .just(ApplyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+    func fetchAppliedProjects() -> Observable<[ProjectPreview]> {
+        .just(AppliedProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
     func fetchMyProjects() -> Observable<[ProjectPreview]> {
@@ -93,6 +93,26 @@ final class DefaultProjectRepository: ProjectRepository {
         
         return networkService.request(to: bookmarkEndpoint, interceptor: AuthInterceptor())
             .map { _ in projectID }
+    }
+    
+    // MARK: - Delete
+    func delete(projectID: Int) -> Observable<Int> {
+        .just(projectID)
+    }
+    
+    // MARK: - CancelApplication
+    func cancel(projectID: Int) -> Observable<Int> {
+        .just(projectID)
+    }
+    
+    // MARK: - Accept
+    func accept(projectID: Int, applicantID: Int) -> Observable<Int> {
+        .just(applicantID)
+    }
+    
+    // MARK: - Reject
+    func reject(projectID: Int, applicantID: Int) -> Observable<Int> {
+        .just(applicantID)
     }
 }
 

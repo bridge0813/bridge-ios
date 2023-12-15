@@ -13,7 +13,14 @@ import RxCocoa
 
 // 2개의 버튼이 붙어있는 뷰
 final class BridgeSmallButtonGroup: BaseView {
-    private let rootFlexContainer = UIView()
+    private let rootFlexContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = BridgeColor.primary1
+        view.layer.cornerRadius = 4
+        view.clipsToBounds = true
+        
+        return view
+    }()
     
     private let leftButton: BridgeButton
     private let rightButton: BridgeButton
@@ -34,13 +41,14 @@ final class BridgeSmallButtonGroup: BaseView {
         super.init(frame: .zero)
     }
     
+    // MARK: - Layout
     override func configureLayouts() {
-        rootFlexContainer.backgroundColor = BridgeColor.primary1
-
+        let dividerColor = BridgeColor.gray10.withAlphaComponent(0.4)
+        
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.direction(.row).cornerRadius(4).define { flex in
+        rootFlexContainer.flex.direction(.row).define { flex in
             flex.addItem(leftButton).grow(1)
-            flex.addItem().alignSelf(.center).backgroundColor(BridgeColor.gray10).width(0.4).height(20)
+            flex.addItem().alignSelf(.center).backgroundColor(dividerColor).width(0.4).height(20)
             flex.addItem(rightButton).grow(1)
         }
     }
