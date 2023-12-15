@@ -19,7 +19,7 @@ struct Project {
     var progressMethod: String
     var progressStep: String
     let userName: String
-    let isBookmarked: Bool
+    var isBookmarked: Bool
     let isMyProject: Bool
     let totalRecruitNumber: Int
 }

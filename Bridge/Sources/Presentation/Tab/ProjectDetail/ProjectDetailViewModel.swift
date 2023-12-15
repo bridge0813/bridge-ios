@@ -15,7 +15,7 @@ final class ProjectDetailViewModel: ViewModelType {
         let goToDetailButtonTapped: Observable<Void>
         let editProjectActionTapped: Observable<String>
         let applyButtonTapped: Observable<Void>
-        let bookmarkButtonTapped: Observable<Bool>
+        let bookmarkButtonTapped: Observable<Void>
         let viewDidDisappear: Observable<Bool>
     }
     
@@ -29,16 +29,19 @@ final class ProjectDetailViewModel: ViewModelType {
     
     private let projectID: Int
     private let projectDetailUseCase: FetchProjectDetailUseCase
+    private let bookmarkUseCase: BookmarkUseCase
     
     // MARK: - Init
     init(
         coordinator: ProjectDetailCoordinator,
         projectID: Int,
-        projectDetailUseCase: FetchProjectDetailUseCase
+        projectDetailUseCase: FetchProjectDetailUseCase,
+        bookmarkUseCase: BookmarkUseCase
     ) {
         self.coordinator = coordinator
         self.projectID = projectID
         self.projectDetailUseCase = projectDetailUseCase
+        self.bookmarkUseCase = bookmarkUseCase
     }
     
     // MARK: - Transformation
@@ -100,13 +103,36 @@ final class ProjectDetailViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 북마크 처리
         input.bookmarkButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, isSelected in
-                if isSelected {
-                    // 스크랩
-                } else {
-                    // 스크랩 취소
+            .flatMap { owner, _ -> Observable<Result<Int, Error>> in
+                // 로그인이 되어 있지 않다면, Alert 보여주기
+                guard signInNeeded else {
+                    owner.coordinator?.showAlert(configuration: .signIn, primaryAction: {
+                        owner.coordinator?.showSignInViewController()
+                    })
+                    return .empty()
+                }
+                
+                // 로그인이 되어 있다면, 북마크 수행
+                return owner.bookmarkUseCase.bookmark(projectID: owner.projectID).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success:
+                    // 북마크 상태 변경
+                    var currentProject = project.value
+                    currentProject.isBookmarked.toggle()
+                    project.accept(currentProject)
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "오류",
+                        description: error.localizedDescription
+                    ))
                 }
             })
             .disposed(by: disposeBag)

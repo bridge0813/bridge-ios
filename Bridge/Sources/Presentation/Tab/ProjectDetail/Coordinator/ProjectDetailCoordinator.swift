@@ -16,6 +16,7 @@ final class ProjectDetailCoordinator: Coordinator {
     
     private let projectRepository: ProjectRepository
     private let projectDetailUseCase: FetchProjectDetailUseCase
+    private let bookmarkUseCase: BookmarkUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -26,6 +27,7 @@ final class ProjectDetailCoordinator: Coordinator {
 //        DefaultProjectRepository(networkService: networkService)
         
         projectDetailUseCase = DefaultFetchProjectDetailUseCase(projectRepository: projectRepository)
+        bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Methods
@@ -38,7 +40,8 @@ extension ProjectDetailCoordinator {
         let viewModel = ProjectDetailViewModel(
             coordinator: self, 
             projectID: projectID,
-            projectDetailUseCase: projectDetailUseCase
+            projectDetailUseCase: projectDetailUseCase,
+            bookmarkUseCase: bookmarkUseCase
         )
         
         let vc = ProjectDetailViewController(viewModel: viewModel)
@@ -53,5 +56,9 @@ extension ProjectDetailCoordinator {
         
         let vc = RecruitFieldDetailViewController(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showSignInViewController() {
+        delegate?.showSignInViewController()
     }
 }
