@@ -100,7 +100,7 @@ final class ProjectDetailViewController: BaseViewController {
     
     /// MenuBar의 컨텐츠 설정 및 해당 모집글이 자신의 글인지 여부에 따라 MenuBar의 유무를 결정
     private func configureMenuBar(with data: Project) {
-        menuBar.configureContents(with: data)
+        menuBar.isBookmarked = data.isBookmarked
         menuBar.flex.display(data.isMyProject ? .none : .flex)
         menuBar.isHidden = data.isMyProject
     }
