@@ -153,6 +153,11 @@ final class ProjectDetailHeaderView: BaseCollectionReusableView {
         return button
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
+    
     // MARK: - Property
     var goToDetailButtonTapped: ControlEvent<Void> {
         return goToDetailButton.rx.tap

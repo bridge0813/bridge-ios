@@ -82,6 +82,6 @@ extension ProjectDetailDTO {
         progressStep: "기획 중이에요",
         userName: "",
         isBookmarked: true,
-        isMyProject: true
+        isMyProject: false
     )
 }

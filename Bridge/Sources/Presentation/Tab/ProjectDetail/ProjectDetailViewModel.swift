@@ -11,6 +11,7 @@ import RxCocoa
 final class ProjectDetailViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
+        let viewWillAppear: Observable<Bool>
         let goToDetailButtonTapped: Observable<Void>
         let editProjectActionTapped: Observable<String>
         let applyButtonTapped: Observable<Void>
@@ -42,10 +43,14 @@ final class ProjectDetailViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
-        let project = PublishRelay<Project>()
+        let project = BehaviorRelay<Project>(value: Project.onError)
         var signInNeeded = false  // 로그인 체크
         
-        projectDetailUseCase.fetchProjectDetail(with: projectID).toResult()
+        input.viewWillAppear
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.projectDetailUseCase.fetchProjectDetail(with: owner.projectID).toResult()
+            }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in

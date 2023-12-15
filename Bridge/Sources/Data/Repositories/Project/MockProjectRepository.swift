@@ -27,6 +27,7 @@ final class MockProjectRepository: ProjectRepository {
     
     func fetchProjectDetail(with projectID: Int) -> Observable<(Project, SignInNeeded)> {
         .just((ProjectDetailDTO.testData.toEntity(), true))
+//        .error(NetworkError.unknown)
     }
     
     func fetchAppliedProjects() -> Observable<[ProjectPreview]> {
