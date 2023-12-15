@@ -56,6 +56,12 @@ final class DefaultAuthRepository: AuthRepository {
         let authEndpoint = AuthEndpoint.signOut(userID: userID)
         
         return networkService.request(to: authEndpoint, interceptor: nil)
+            .withUnretained(self)
+            .do(onNext: { owner, _ in
+                owner.tokenStorage.delete(.userID)
+                owner.tokenStorage.delete(.accessToken)
+                owner.tokenStorage.delete(.refreshToken)
+            })
             .map { _ in }
     }
     
@@ -64,6 +70,13 @@ final class DefaultAuthRepository: AuthRepository {
         let authEndpoint = AuthEndpoint.withdrawal(userID: userID)
         
         return networkService.request(to: authEndpoint, interceptor: nil)
+            .withUnretained(self)
+            .do(onNext: { owner, _ in
+                owner.tokenStorage.delete(.userID)
+                owner.tokenStorage.delete(.userName)
+                owner.tokenStorage.delete(.accessToken)
+                owner.tokenStorage.delete(.refreshToken)
+            })
             .map { _ in }
     }
 }
