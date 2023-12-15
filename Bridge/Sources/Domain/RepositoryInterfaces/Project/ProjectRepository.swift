@@ -15,7 +15,7 @@ protocol ProjectRepository {
     func fetchDeadlineProjects() -> Observable<[ProjectPreview]>
     func fetchProjectDetail(with projectID: Int) -> Observable<Project>
     
-    func fetchApplyProjects() -> Observable<[ProjectPreview]>
+    func fetchAppliedProjects() -> Observable<[ProjectPreview]>
     func fetchMyProjects() -> Observable<[ProjectPreview]>
     
     // MARK: - Create
@@ -23,4 +23,16 @@ protocol ProjectRepository {
     
     // MARK: - Bookmark
     func bookmark(projectID: Int) -> Observable<Int>
+    
+    // MARK: - Delete
+    func delete(projectID: Int) -> Observable<Int>
+    
+    // MARK: - CancelApplication
+    func cancel(projectID: Int) -> Observable<Int>
+    
+    // MARK: - Accept
+    func accept(projectID: Int, applicantID: Int) -> Observable<Int>
+    
+    // MARK: - Reject
+    func reject(projectID: Int, applicantID: Int) -> Observable<Int>
 }

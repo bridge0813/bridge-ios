@@ -18,6 +18,10 @@ final class MockChannelRepository: ChannelRepository {
         .just("")
     }
     
+    func createChannel(opponentID: Int) -> Observable<Channel> {
+        .just(CreateChannelResponseDTO.testData.toEntity())
+    }
+    
     func subscribeChannel(id: String) -> Observable<[Message]> {
         .just([])
         

@@ -14,20 +14,49 @@ final class ManagementCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     
     private let projectRepository: ProjectRepository
+    private let userRepository: UserRepository
+    private let channelRepository: ChannelRepository
+    private let messageRepository: MessageRepository
     
-    private let fetchApplyProjectsUseCase: FetchApplyProjectsUseCase
+    private let fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase
     private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
+    private let deleteProjectUseCase: DeleteProjectUseCase
+    private let cancelApplicationUseCase: CancelApplicationUseCase
+    
+    private let fetchApplicantListUseCase: FetchApplicantListUseCase
+    private let acceptApplicantUseCase: AcceptApplicantUseCase
+    private let rejectApplicantUseCase: RejectApplicantUseCase
+    
+    private let createChannelUseCase: CreateChannelUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []
 
+        // 네트워크 서비스
         let networkService = DefaultNetworkService()
+        let stompService = DefaultStompService(webSocketService: DefaultWebSocketService.shared)
+        
+        // 리포지토리
         projectRepository = MockProjectRepository()
+        userRepository = MockUserRepository()
+        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
+        messageRepository = DefaultMessageRepository(networkService: networkService, stompService: stompService)
 
-        fetchApplyProjectsUseCase = DefaultFetchApplyProjectsUseCase(projectRepository: projectRepository)
+        // 관리
+        fetchAppliedProjectsUseCase = DefaultFetchAppliedProjectsUseCase(projectRepository: projectRepository)
         fetchMyProjectsUseCase = DefaultFetchMyProjectsUseCase(projectRepository: projectRepository)
+        deleteProjectUseCase = DefaultDeleteProjectUseCase(projectRepository: projectRepository)
+        cancelApplicationUseCase = DefaultCancelApplicationUseCase(projectRepository: projectRepository)
+        
+        // 지원자 목록(수락, 거절)
+        fetchApplicantListUseCase = DefaultFetchApplicantListUseCase(userRepository: userRepository)
+        acceptApplicantUseCase = DefaultAcceptApplicantUseCase(projectRepository: projectRepository)
+        rejectApplicantUseCase = DefaultRejectApplicantUseCase(projectRepository: projectRepository)
+        
+        // 채팅방 개설
+        createChannelUseCase = DefaultCreateChannelUseCase(channelRepository: channelRepository)
     }
     
     // MARK: - Methods
@@ -41,24 +70,47 @@ extension ManagementCoordinator {
     func showManagementViewController() {
         let viewModel = ManagementViewModel(
             coordinator: self,
-            fetchApplyProjectsUseCase: fetchApplyProjectsUseCase,
-            fetchMyProjectsUseCase: fetchMyProjectsUseCase
+            fetchAppliedProjectsUseCase: fetchAppliedProjectsUseCase,
+            fetchMyProjectsUseCase: fetchMyProjectsUseCase,
+            deleteProjectUseCase: deleteProjectUseCase,
+            cancelApplicationUseCase: cancelApplicationUseCase
         )
         
         let vc = ManagementViewController(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: true)
     }
     
+    // 지원자 목록 이동
     func showApplicantListViewController(with projectID: Int) {
-        print(projectID)
+        let viewModel = ApplicantListViewModel(
+            coordinator: self,
+            projectID: projectID, 
+            fetchApplicantListUseCase: fetchApplicantListUseCase, 
+            acceptApplicantUseCase: acceptApplicantUseCase,
+            rejectApplicantUseCase: rejectApplicantUseCase,
+            createChannelUseCase: createChannelUseCase
+        )
+        
+        let vc = ApplicantListViewController(viewModel: viewModel)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    // 채팅방 이동
+    func showChannelViewController(of channel: Channel) {
+        delegate?.showChannelViewController(of: channel, navigationController: navigationController)
     }
     
     // MARK: - Connect
     func connectToProjectDetailFlow(with projectID: Int) {
-        // TODO: - 연결된 코디네이터 제거 작업
-        let coordinator = ProjectDetailCoordinator(navigationController: navigationController)
-        coordinator.start()
-        childCoordinators.append(coordinator)
+        let detailCoordinator = ProjectDetailCoordinator(navigationController: navigationController)
+        detailCoordinator.start()
+        detailCoordinator.didFinishEventClosure = { [weak self] in
+            guard let self else { return }
+            if let index = self.childCoordinators.firstIndex(where: { $0 === detailCoordinator }) {
+                self.childCoordinators.remove(at: index)
+            }
+        }
+        childCoordinators.append(detailCoordinator)
     }
 }
 

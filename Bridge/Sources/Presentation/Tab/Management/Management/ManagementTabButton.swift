@@ -8,7 +8,7 @@
 import UIKit
 
 /// 관리 탭의 '지원', '모집' 에 사용되는 전환용 버튼
-final class ManagementTapButton: BaseButton {
+final class ManagementTabButton: BaseButton {
     
     private var title: String
     

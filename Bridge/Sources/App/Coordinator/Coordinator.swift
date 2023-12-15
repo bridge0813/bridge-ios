@@ -11,10 +11,12 @@ protocol CoordinatorDelegate: AnyObject {
     func didFinish(childCoordinator: Coordinator)
     
     func showSignInViewController()
+    func showChannelViewController(of channel: Channel, navigationController: UINavigationController)
 }
 
 extension CoordinatorDelegate {
     func showSignInViewController() { }
+    func showChannelViewController(of channel: Channel, navigationController: UINavigationController) { }
 }
 
 protocol Coordinator: AnyObject, Alertable {

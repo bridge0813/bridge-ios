@@ -170,6 +170,9 @@ final class ChannelViewModel: ViewModelType {
         input.viewDidDisappear
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                if let didFinish = owner.coordinator?.didFinishEventClosure {
+                    didFinish()
+                }
                 owner.channelSubscriptionUseCase.unsubscribe(id: owner.channel.id)
             })
             .disposed(by: disposeBag)

@@ -163,4 +163,17 @@ extension TabBarCoordinator: CoordinatorDelegate {
         authCoordinator.delegate = self
         childCoordinators.append(authCoordinator)
     }
+    
+    func showChannelViewController(of channel: Channel, navigationController: UINavigationController) {
+        let chatCoordinator = ChatCoordinator(navigationController: navigationController)
+        chatCoordinator.showChannelViewController(of: channel)
+        chatCoordinator.delegate = self
+        chatCoordinator.didFinishEventClosure = { [weak self] in
+            guard let self else { return }
+            if let index = self.childCoordinators.firstIndex(where: { $0 === chatCoordinator }) {
+                self.childCoordinators.remove(at: index)
+            }
+        }
+        childCoordinators.append(chatCoordinator)
+    }
 }
