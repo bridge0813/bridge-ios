@@ -13,7 +13,7 @@ enum ProjectEndpoint {
     case fetchHotProjects
     case fetchDeadlineProjects
     
-    case bookmark(requestDTO: BookmarkRequestDTO, userID: String)
+    case bookmark(requestDTO: ProjectIDDTO, userID: String)
 }
 
 extension ProjectEndpoint: Endpoint {

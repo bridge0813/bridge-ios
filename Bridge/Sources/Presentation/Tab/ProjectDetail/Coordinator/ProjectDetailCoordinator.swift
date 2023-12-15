@@ -26,16 +26,15 @@ final class ProjectDetailCoordinator: Coordinator {
     }
     
     // MARK: - Methods
-    func start() {
-        showProjectDetailViewController()
-    }
+    func start() { }
 }
 
 extension ProjectDetailCoordinator {
     // MARK: - Show
-    func showProjectDetailViewController() {
+    func showProjectDetailViewController(projectID: Int) {
         let viewModel = ProjectDetailViewModel(
-            coordinator: self,
+            coordinator: self, 
+            projectID: projectID,
             projectDetailUseCase: projectDetailUseCase
         )
         

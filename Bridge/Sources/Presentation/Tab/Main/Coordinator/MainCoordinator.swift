@@ -83,10 +83,15 @@ extension MainCoordinator {
     }
     
     func connectToProjectDetailFlow(with projectID: Int) {
-        // TODO: - 연결된 코디네이터 제거 작업
-        let coordinator = ProjectDetailCoordinator(navigationController: navigationController)
-        coordinator.start()
-        childCoordinators.append(coordinator)
+        let detailCoordinator = ProjectDetailCoordinator(navigationController: navigationController)
+        detailCoordinator.showProjectDetailViewController(projectID: projectID)
+        detailCoordinator.didFinishEventClosure = { [weak self] in
+            guard let self else { return }
+            if let index = self.childCoordinators.firstIndex(where: { $0 === detailCoordinator }) {
+                self.childCoordinators.remove(at: index)
+            }
+        }
+        childCoordinators.append(detailCoordinator)
     }
     
     func connectToCreateProjectFlow() {

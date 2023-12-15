@@ -25,14 +25,18 @@ final class ProjectDetailViewModel: ViewModelType {
     // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: ProjectDetailCoordinator?
+    
+    private let projectID: Int
     private let projectDetailUseCase: FetchProjectDetailUseCase
     
     // MARK: - Init
     init(
         coordinator: ProjectDetailCoordinator,
+        projectID: Int,
         projectDetailUseCase: FetchProjectDetailUseCase
     ) {
         self.coordinator = coordinator
+        self.projectID = projectID
         self.projectDetailUseCase = projectDetailUseCase
     }
     
