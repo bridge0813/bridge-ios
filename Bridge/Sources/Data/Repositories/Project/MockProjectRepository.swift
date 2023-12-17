@@ -65,4 +65,8 @@ final class MockProjectRepository: ProjectRepository {
     func apply(projectID: Int) -> Observable<Void> {
         .just(())
     }
+    
+    func close(projectID: Int) -> Observable<Void> {
+        .just(())
+    }
 }

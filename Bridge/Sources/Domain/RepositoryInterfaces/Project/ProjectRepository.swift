@@ -38,4 +38,7 @@ protocol ProjectRepository {
     
     // MARK: - Apply
     func apply(projectID: Int) -> Observable<Void>
+    
+    // MARK: - Close
+    func close(projectID: Int) -> Observable<Void>
 }

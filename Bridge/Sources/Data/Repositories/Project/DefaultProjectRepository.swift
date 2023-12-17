@@ -134,6 +134,15 @@ final class DefaultProjectRepository: ProjectRepository {
         return networkService.request(to: applyEndpoint, interceptor: nil)
             .map { _ in }
     }
+    
+    // MARK: - Close
+    func close(projectID: Int) -> Observable<Void> {
+        let projectIDDTO = ProjectIDDTO(projectID: projectID)  // 마감 할 모집글의 ID
+        let closeEndpoint = ProjectEndpoint.close(requestDTO: projectIDDTO)
+        
+        return networkService.request(to: closeEndpoint, interceptor: nil)
+            .map { _ in }
+    }
 }
 
 private extension DefaultProjectRepository {

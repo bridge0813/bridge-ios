@@ -263,6 +263,7 @@
 		7CD023BE2B2C158300F55648 /* ProjectIDDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023BD2B2C158300F55648 /* ProjectIDDTO.swift */; };
 		7CD023C12B2EB8E200F55648 /* ApplyProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023C02B2EB8E200F55648 /* ApplyProjectUseCase.swift */; };
 		7CD023C42B2F10AB00F55648 /* UserIDDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023C32B2F10AB00F55648 /* UserIDDTO.swift */; };
+		7CD023C72B2F197A00F55648 /* CloseProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023C62B2F197A00F55648 /* CloseProjectUseCase.swift */; };
 		7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */; };
 		7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */; };
 		7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */; };
@@ -533,6 +534,7 @@
 		7CD023BD2B2C158300F55648 /* ProjectIDDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectIDDTO.swift; sourceTree = "<group>"; };
 		7CD023C02B2EB8E200F55648 /* ApplyProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProjectUseCase.swift; sourceTree = "<group>"; };
 		7CD023C32B2F10AB00F55648 /* UserIDDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIDDTO.swift; sourceTree = "<group>"; };
+		7CD023C62B2F197A00F55648 /* CloseProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseProjectUseCase.swift; sourceTree = "<group>"; };
 		7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
 		7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
@@ -1709,6 +1711,7 @@
 				7CC719FA2B28471800CFA827 /* Accept */,
 				7CA73D932B2859F1007D88FB /* Reject */,
 				7CD023BF2B2EB8C500F55648 /* Apply */,
+				7CD023C52B2F196400F55648 /* Close */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -1890,6 +1893,14 @@
 				7CD023C32B2F10AB00F55648 /* UserIDDTO.swift */,
 			);
 			path = UserID;
+			sourceTree = "<group>";
+		};
+		7CD023C52B2F196400F55648 /* Close */ = {
+			isa = PBXGroup;
+			children = (
+				7CD023C62B2F197A00F55648 /* CloseProjectUseCase.swift */,
+			);
+			path = Close;
 			sourceTree = "<group>";
 		};
 		7CDFB60E2B20113200272F77 /* Management */ = {
@@ -2320,6 +2331,7 @@
 				7B9142DA2B01CF61006EA52F /* MockMessageRepository.swift in Sources */,
 				7CA73D972B28AC1B007D88FB /* CreateChannelUseCase.swift in Sources */,
 				7BA36CDA2AA197F8000DAB02 /* ChannelListViewController.swift in Sources */,
+				7CD023C72B2F197A00F55648 /* CloseProjectUseCase.swift in Sources */,
 				7CA04F572B05D50E007B9191 /* ProjectDetailTechTag.swift in Sources */,
 				7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */,
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,

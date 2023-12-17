@@ -7,7 +7,7 @@
 
 import RxSwift
 
-/// 모집글의 지원을 거절하는 UseCase
+/// 모집글 지원
 protocol ApplyProjectUseCase {
     func apply(projectID: Int) -> Observable<Void>
 }
