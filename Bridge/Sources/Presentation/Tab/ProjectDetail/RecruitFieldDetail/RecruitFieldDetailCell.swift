@@ -98,16 +98,10 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
             flex.addItem(blueContainer).height(95).paddingLeft(16).define { flex in
                 flex.addItem(tagLabel).width(tagLabel.intrinsicContentSize.width).height(22).marginTop(24)
                 
-                flex.addItem(flexContainer)
-                    .direction(.row)
-                    .justifyContent(.spaceBetween)
-                    .alignItems(.center)
-                    .height(22)
-                    .marginTop(15)
-                    .define { flex in
-                        flex.addItem(fieldLabel)
-                        flex.addItem(recruitNumberLabel).height(14).marginRight(18)
-                    }
+                flex.addItem(flexContainer).direction(.row).alignItems(.center).marginTop(15).define { flex in
+                    flex.addItem(fieldLabel).grow(1).height(22)
+                    flex.addItem(recruitNumberLabel).height(14).marginRight(18)
+                }
             }
             
             flex.addItem(requirementTitleLabel).width(52).height(18).marginTop(20).marginLeft(16)
@@ -155,7 +149,7 @@ extension RecruitFieldDetailCell {
     
     enum FieldType: String {
         case ios
-        case android
+        case aos
         case frontend
         case backend
         case uiux
@@ -166,7 +160,7 @@ extension RecruitFieldDetailCell {
         var style: FieldStyle {
             switch self {
             case .ios: return FieldStyle(tag: "개발", field: "iOS")
-            case .android: return FieldStyle(tag: "개발", field: "안드로이드")
+            case .aos: return FieldStyle(tag: "개발", field: "안드로이드")
             case .frontend: return FieldStyle(tag: "개발", field: "프론트엔드")
             case .backend: return FieldStyle(tag: "개발", field: "백엔드")
             case .uiux: return FieldStyle(tag: "디자인", field: "UI/UX")

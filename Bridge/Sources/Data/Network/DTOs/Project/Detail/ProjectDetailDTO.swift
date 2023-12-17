@@ -73,9 +73,14 @@ extension ProjectDetailDTO {
         startDate: "2023-12-01T21:37:19",
         endDate: "2024-04-01T21:37:19",
         memberRequirements: [
-            MemberRequirementDTO(field: "ios", recruitNumber: 2, requiredSkills: ["Swift", "UIKit", "SwiftUI", "RxSwift", "RxCocoa"], requirementText: "스위프트 사용에 익숙하신 분이었으면 좋겠습니다."),
-            MemberRequirementDTO(field: "uiux", recruitNumber: 2, requiredSkills: ["photoshop", "Figma", "illustrator"], requirementText: "피그마 사용에 능숙했으면 좋겠습니다."),
-            MemberRequirementDTO(field: "pm", recruitNumber: 2, requiredSkills: ["Notion", "Jira", "Slack"], requirementText: "노션 사용에 능숙했으면 좋겠습니다.")
+            MemberRequirementDTO(field: "IOS", recruitNumber: 2, requiredSkills: ["Swift", "UIKit", "SwiftUI", "RxSwift", "RxCocoa"], requirementText: "스위프트 사용에 익숙하신 분이었으면 좋겠습니다."),
+            MemberRequirementDTO(field: "AOS", recruitNumber: 6, requiredSkills: ["Kotlin", "Java", "Compose", "RxJava"], requirementText: "Kotilin카카카카카카카카카키키키키키키키키키키키키키키키키키키니니니니니니니니닌니니니니니로로로로로로로"),
+            MemberRequirementDTO(field: "FRONTEND", recruitNumber: 3, requiredSkills: ["Javascript", "TypeScript"], requirementText: "Javascript 사용에 능숙했으면 좋겠습니다."),
+            MemberRequirementDTO(field: "BACKEND", recruitNumber: 4, requiredSkills: ["Hibernate", "WebRTC", "MongoDB"], requirementText: "Hibernate, WebRTC, MongoDB 사용에 능숙했으면 좋겠습니다."),
+            MemberRequirementDTO(field: "UIUX", recruitNumber: 4, requiredSkills: ["photoshop", "Figma", "illustrator"], requirementText: "피그마 사용에 능숙했으면 좋겠습니다."),
+            MemberRequirementDTO(field: "BIBX", recruitNumber: 6, requiredSkills: ["photoshop", "Figma"], requirementText: "피그마 사용에 능숙했으면 좋겠습니다."),
+            MemberRequirementDTO(field: "VIDEOMOTION", recruitNumber: 7, requiredSkills: ["photoshop"], requirementText: "photoshop 사용에 능숙했으면 좋겠습니다."),
+            MemberRequirementDTO(field: "PM", recruitNumber: 9, requiredSkills: ["Notion", "Jira", "Slack"], requirementText: "노션 사용에 능숙했으면 좋겠습니다.")
         ],
         applicantRestrictions: ["학생", "취준생"],
         progressMethod: "온라인",

@@ -24,7 +24,7 @@ struct MemberRequirementDTO: Codable {
 extension MemberRequirementDTO {
     func toEntity() -> MemberRequirement {
         MemberRequirement(
-            field: field,
+            field: field.lowercased(),
             recruitNumber: recruitNumber,
             requiredSkills: requiredSkills,
             requirementText: requirementText
