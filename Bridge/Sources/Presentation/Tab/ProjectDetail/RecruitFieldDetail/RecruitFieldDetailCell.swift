@@ -64,7 +64,7 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
         return view
     }()
     
-    private let techStackLabel: UILabel = {
+    private let techStackTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "스택"
         label.textColor = BridgeColor.gray01
@@ -105,11 +105,11 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
             }
             
             flex.addItem(requirementTitleLabel).width(52).height(18).marginTop(20).marginLeft(16)
-            flex.addItem(requirementLabel).marginTop(12).marginHorizontal(16)
+            flex.addItem(requirementLabel).marginTop(12).marginHorizontal(16).markDirty()
             
             flex.addItem(dividerView).height(1).marginTop(14).marginHorizontal(16)
             
-            flex.addItem(techStackLabel).width(25).height(18).marginTop(14).marginLeft(16)
+            flex.addItem(techStackTitleLabel).width(25).height(18).marginTop(14).marginLeft(16)
             
             flex.addItem(tagContainer)
                 .direction(.row)
@@ -149,7 +149,7 @@ extension RecruitFieldDetailCell {
     
     enum FieldType: String {
         case ios
-        case aos
+        case android
         case frontend
         case backend
         case uiux
@@ -160,7 +160,7 @@ extension RecruitFieldDetailCell {
         var style: FieldStyle {
             switch self {
             case .ios: return FieldStyle(tag: "개발", field: "iOS")
-            case .aos: return FieldStyle(tag: "개발", field: "안드로이드")
+            case .android: return FieldStyle(tag: "개발", field: "안드로이드")
             case .frontend: return FieldStyle(tag: "개발", field: "프론트엔드")
             case .backend: return FieldStyle(tag: "개발", field: "백엔드")
             case .uiux: return FieldStyle(tag: "디자인", field: "UI/UX")

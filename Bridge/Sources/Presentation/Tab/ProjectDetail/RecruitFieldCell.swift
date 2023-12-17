@@ -76,7 +76,7 @@ extension RecruitFieldCell {
     
     enum FieldType: String {
         case ios
-        case aos
+        case android
         case frontend
         case backend
         case uiux
@@ -87,7 +87,7 @@ extension RecruitFieldCell {
         var style: FieldStyle {
             switch self {
             case .ios: return FieldStyle(tag: "개발", field: "iOS", imageName: "field_ios")
-            case .aos: return FieldStyle(tag: "개발", field: "안드로이드", imageName: "field_android")
+            case .android: return FieldStyle(tag: "개발", field: "안드로이드", imageName: "field_android")
             case .frontend: return FieldStyle(tag: "개발", field: "프론트엔드", imageName: "field_frontend")
             case .backend: return FieldStyle(tag: "개발", field: "백엔드", imageName: "field_backend")
             case .uiux: return FieldStyle(tag: "디자인", field: "UI/UX", imageName: "field_uiux")
