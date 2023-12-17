@@ -77,6 +77,7 @@ final class DefaultProjectRepository: ProjectRepository {
         .just(AppliedProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
+    // 내가 작성한 모집글 목록 가져오기
     func fetchMyProjects() -> Observable<[ProjectPreview]> {
         .just(MyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
