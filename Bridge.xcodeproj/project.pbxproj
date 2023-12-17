@@ -1584,7 +1584,7 @@
 			isa = PBXGroup;
 			children = (
 				7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */,
-				7CDFB6242B22CABF00272F77 /* Menu */,
+				7CDFB6242B22CABF00272F77 /* ActionSheet */,
 			);
 			path = PopUp;
 			sourceTree = "<group>";
@@ -1928,13 +1928,13 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		7CDFB6242B22CABF00272F77 /* Menu */ = {
+		7CDFB6242B22CABF00272F77 /* ActionSheet */ = {
 			isa = PBXGroup;
 			children = (
 				7CDFB6222B2236AB00272F77 /* BridgeActionSheet.swift */,
 				7CDFB6252B22CADC00272F77 /* BridgeActionSheetButton.swift */,
 			);
-			path = Menu;
+			path = ActionSheet;
 			sourceTree = "<group>";
 		};
 		7CE080432ACF155000230C86 /* RestrictionDropdown */ = {
