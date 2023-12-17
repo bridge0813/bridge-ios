@@ -22,7 +22,7 @@ struct ProjectDetailDTO: Codable {
     let isMyProject: Bool
     
     enum CodingKeys: String, CodingKey {
-        case title, startDate, endDate, userName, isMyProject
+        case title, startDate, endDate, userName
         case description = "overview"
         case deadline = "dueDate"
         case memberRequirements = "recruit"
@@ -30,6 +30,7 @@ struct ProjectDetailDTO: Codable {
         case progressMethod = "meetingWay"
         case progressStep = "stage"
         case isBookmarked = "scrap"
+        case isMyProject = "myProject"
     }
 }
 
@@ -38,10 +39,10 @@ extension ProjectDetailDTO {
         Project(
             title: title,
             description: description,
-            dDays: Date().calculateDDay(to: deadline.toDate(with: "yyyy-MM-dd'T'HH:mm:ss")),
-            deadline: deadline.toDate(with: "yyyy-MM-dd'T'HH:mm:ss"),
-            startDate: startDate?.toDate(with: "yyyy-MM-dd'T'HH:mm:ss"),
-            endDate: endDate?.toDate(with: "yyyy-MM-dd'T'HH:mm:ss"),
+            dDays: Date().calculateDDay(to: deadline.toDateType() ?? Date()),
+            deadline: deadline.toDateType() ?? Date(),
+            startDate: startDate?.toDateType(),
+            endDate: endDate?.toDateType(),
             memberRequirements: memberRequirements.map { $0.toEntity() },
             applicantRestrictions: applicantRestrictions,
             progressMethod: progressMethod,
@@ -53,15 +54,6 @@ extension ProjectDetailDTO {
                 return partialResult + requirement.recruitNumber
             }
         )
-    }
-}
-
-extension String {
-    func toDate(with format: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        
-        return dateFormatter.date(from: self) ?? Date()
     }
 }
 

@@ -58,4 +58,31 @@ extension String {
         
         return dateFormatter.string(from: date)
     }
+    
+    /// ISO 8601 형식의 문자열을 원하는 포맷 형태로 변환하는 함수
+    func toDate(format: String) -> String? {
+        var isoString = self
+        isoString.append("+09:00")  // 표준 시간대 추가
+        
+        // ISO 8601 형식의 문자열을 Date 객체로 변환
+        let isoFormatter = ISO8601DateFormatter()
+        guard let date = isoFormatter.date(from: isoString) else { return nil }
+        
+        // Date 객체를 "yyyy년 MM월 dd일" 형태로 변환
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = format
+        
+        return dateFormatter.string(from: date)
+    }
+    
+    /// ISO 8601 형식의 문자열 -> Date 타입으로 변환하는 함수
+    func toDateType() -> Date? {
+        var isoString = self
+        isoString.append("+09:00")  // 표준 시간대 추가
+        
+        // ISO 8601 형식의 문자열을 Date 객체로 변환
+        let isoFormatter = ISO8601DateFormatter()
+        return isoFormatter.date(from: isoString)
+    }
 }

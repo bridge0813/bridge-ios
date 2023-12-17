@@ -60,7 +60,6 @@ class BridgeBasePopUpView: BaseView {
     // MARK: - Configuration
     override func configureAttributes() {
         backgroundColor = BridgeColor.backgroundBlur
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
         rootFlexContainer.addGestureRecognizer(panGesture)
@@ -78,15 +77,6 @@ class BridgeBasePopUpView: BaseView {
     }
     
     // MARK: - HandleGesture
-    @objc 
-    private func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        let location = sender.location(in: self)
-        
-        if !rootFlexContainer.frame.contains(location) {
-            hide()
-        }
-    }
-    
     @objc
     private func handlePanGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: rootFlexContainer)

@@ -62,8 +62,10 @@ final class DefaultProjectRepository: ProjectRepository {
     // 모집글 상세정보 가져오기
     func fetchProjectDetail(with projectID: Int) -> Observable<(Project, SignInNeeded)> {
         let userID = tokenStorage.get(.userID)
-        let projectIDDTO = ProjectIDDTO(projectID: projectID)  // 조회 할 모집글의 request DTO
-        let fetchProjectDetailEndpoint = ProjectEndpoint.fetchProjectDetail(requestDTO: projectIDDTO, userID: userID)
+        let fetchProjectDetailEndpoint = ProjectEndpoint.fetchProjectDetail(
+            userID: userID,
+            projectID: String(projectID)
+        )
         
         return networkService.request(to: fetchProjectDetailEndpoint, interceptor: nil)
             .decode(type: ProjectDetailDTO.self, decoder: JSONDecoder())
