@@ -103,6 +103,7 @@ final class ProjectDetailViewController: BaseViewController {
         menuBar.isBookmarked = data.isBookmarked
         menuBar.flex.display(data.isMyProject ? .none : .flex)
         menuBar.isHidden = data.isMyProject
+        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Layout

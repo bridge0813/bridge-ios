@@ -171,7 +171,7 @@ final class ProjectDetailHeaderView: BaseCollectionReusableView {
             // 모집글의 제목과 소개(구분선을 기준으로 첫 번째 섹션)
             flex.addItem().backgroundColor(BridgeColor.gray10).paddingHorizontal(16).define { flex in
                 flex.addItem(dDayLabel).marginTop(24)
-                flex.addItem(titleLabel).height(60).marginTop(16).marginRight(49)
+                flex.addItem(titleLabel).marginTop(16).marginRight(49)
                 flex.addItem(descriptionLabel).marginTop(8).marginBottom(32)
             }
             
@@ -269,6 +269,8 @@ extension ProjectDetailHeaderView {
             highlightedText: "\(data.totalRecruitNumber)명"
         )
         
+        titleLabel.flex.markDirty()
+        descriptionLabel.flex.markDirty()
         dDayLabel.flex.width(dDayLabel.intrinsicContentSize.width).height(22)
         dDayLabel.flex.markDirty()
         setNeedsLayout()
