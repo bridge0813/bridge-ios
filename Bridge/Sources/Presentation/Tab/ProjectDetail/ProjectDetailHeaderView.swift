@@ -243,7 +243,7 @@ final class ProjectDetailHeaderView: BaseCollectionReusableView {
 // MARK: - Configuration
 extension ProjectDetailHeaderView {
     func configureContents(with data: Project) {
-        dDayLabel.text = "D-\(String(data.dDays))"
+        dDayLabel.text = "D-\(data.dDays)"
         titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 30)
         descriptionLabel.configureTextWithLineHeight(text: data.description, lineHeight: 20)
         

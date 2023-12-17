@@ -47,7 +47,7 @@ final class ProjectDetailViewModel: ViewModelType {
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         let project = BehaviorRelay<Project>(value: Project.onError)
-        var signInNeeded = false  // 로그인 체크
+        var signInNeeded = true  // 로그인 체크
         
         input.viewWillAppear
             .withUnretained(self)
