@@ -15,8 +15,10 @@ final class ProjectDetailCoordinator: Coordinator {
     var didFinishEventClosure: (() -> Void)?  // disAppear 시점에 자식 코디네이터에서 할당을 제거하기 위함.
     
     private let projectRepository: ProjectRepository
+    
     private let projectDetailUseCase: FetchProjectDetailUseCase
     private let bookmarkUseCase: BookmarkUseCase
+    private let applyUseCase: ApplyProjectUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -28,6 +30,7 @@ final class ProjectDetailCoordinator: Coordinator {
         
         projectDetailUseCase = DefaultFetchProjectDetailUseCase(projectRepository: projectRepository)
         bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
+        applyUseCase = DefaultApplyProjectUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Methods
@@ -41,7 +44,8 @@ extension ProjectDetailCoordinator {
             coordinator: self, 
             projectID: projectID,
             projectDetailUseCase: projectDetailUseCase,
-            bookmarkUseCase: bookmarkUseCase
+            bookmarkUseCase: bookmarkUseCase,
+            applyUseCase: applyUseCase
         )
         
         let vc = ProjectDetailViewController(viewModel: viewModel)

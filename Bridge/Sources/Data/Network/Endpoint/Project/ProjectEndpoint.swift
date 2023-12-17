@@ -15,6 +15,7 @@ enum ProjectEndpoint {
     case fetchProjectDetail(requestDTO: ProjectIDDTO, userID: String)
     
     case bookmark(requestDTO: ProjectIDDTO)
+    case apply(userID: String, projectID: String)
 }
 
 extension ProjectEndpoint: Endpoint {
@@ -40,6 +41,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .bookmark:
             return "/project/scrap"
+            
+        case .apply:
+            return "/project/apply"
         }
     }
     
@@ -65,6 +69,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .bookmark:
             return nil
+            
+        case .apply(let userID, let projectID):
+            return ["userId": userID, "projectId": projectID]
         }
     }
     
@@ -89,6 +96,9 @@ extension ProjectEndpoint: Endpoint {
             return .get
             
         case .bookmark:
+            return .post
+            
+        case .apply:
             return .post
         }
     }
@@ -115,6 +125,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .bookmark(requestDTO: let projectID):
             return projectID
+            
+        case .apply:
+            return nil
         }
     }
 }

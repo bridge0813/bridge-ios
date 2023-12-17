@@ -121,6 +121,15 @@ final class DefaultProjectRepository: ProjectRepository {
     func reject(projectID: Int, applicantID: Int) -> Observable<Int> {
         .just(applicantID)
     }
+    
+    // MARK: - Apply
+    func apply(projectID: Int) -> Observable<Void> {
+        let userID = tokenStorage.get(.userID)
+        let applyEndpoint = ProjectEndpoint.apply(userID: userID, projectID: String(projectID))
+        
+        return networkService.request(to: applyEndpoint, interceptor: nil)
+            .map { _ in }
+    }
 }
 
 private extension DefaultProjectRepository {

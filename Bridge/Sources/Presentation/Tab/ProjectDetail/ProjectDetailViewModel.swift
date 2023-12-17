@@ -30,18 +30,21 @@ final class ProjectDetailViewModel: ViewModelType {
     private let projectID: Int
     private let projectDetailUseCase: FetchProjectDetailUseCase
     private let bookmarkUseCase: BookmarkUseCase
+    private let applyUseCase: ApplyProjectUseCase
     
     // MARK: - Init
     init(
         coordinator: ProjectDetailCoordinator,
         projectID: Int,
         projectDetailUseCase: FetchProjectDetailUseCase,
-        bookmarkUseCase: BookmarkUseCase
+        bookmarkUseCase: BookmarkUseCase,
+        applyUseCase: ApplyProjectUseCase
     ) {
         self.coordinator = coordinator
         self.projectID = projectID
         self.projectDetailUseCase = projectDetailUseCase
         self.bookmarkUseCase = bookmarkUseCase
+        self.applyUseCase = applyUseCase
     }
     
     // MARK: - Transformation
@@ -49,6 +52,7 @@ final class ProjectDetailViewModel: ViewModelType {
         let project = BehaviorRelay<Project>(value: Project.onError)
         var signInNeeded = true  // 로그인 체크
         
+        // 모집글 상세 가져오기
         input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
@@ -76,6 +80,7 @@ final class ProjectDetailViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 모집하는 분야 상세보기 이동
         input.goToDetailButtonTapped
             .withLatestFrom(project)
             .withUnretained(self)
@@ -84,6 +89,7 @@ final class ProjectDetailViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 모집글 편집기능
         input.editProjectActionTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, menu in
@@ -96,19 +102,54 @@ final class ProjectDetailViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 지원하기
         input.applyButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showAlert(configuration: .apply)
+            .flatMap { owner, _ -> Observable<Void> in
+                // 로그인이 되어있지 않다면 Alert을 보여주고 시퀸스 종료.
+                guard !signInNeeded else {
+                    owner.coordinator?.showAlert(configuration: .signIn, primaryAction: {
+                        owner.coordinator?.showSignInViewController()
+                    })
+                    return .empty()
+                }
+                
+                return .just(())
+            }
+            .withUnretained(self)
+            .flatMap { owner, _ -> Maybe<Void> in
+                // 지원하기 Alert을 보여주고, 유저가 "지원하기" 를 클릭했을 경우 다음 시퀸스로 이동.
+                owner.confirmActionWithAlert(alertConfiguration: .apply)
+            }
+            .withUnretained(self)
+            .flatMap { owner, _ -> Observable<Result<Void, Error>> in
+                owner.applyUseCase.apply(projectID: owner.projectID).toResult()  // 지원하기 진행
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success:
+                    owner.coordinator?.showErrorAlert(
+                        configuration: ErrorAlertConfiguration(title: "프로젝트 지원이 정상적으로 처리되었습니다.")
+                    )
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "오류",
+                        description: error.localizedDescription
+                    ))
+                }
             })
             .disposed(by: disposeBag)
+        
         
         // 북마크 처리
         input.bookmarkButtonTapped
             .withUnretained(self)
             .flatMap { owner, _ -> Observable<Result<Int, Error>> in
                 // 로그인이 되어 있지 않다면, Alert 보여주기
-                guard signInNeeded else {
+                guard !signInNeeded else {
                     owner.coordinator?.showAlert(configuration: .signIn, primaryAction: {
                         owner.coordinator?.showSignInViewController()
                     })
@@ -137,6 +178,7 @@ final class ProjectDetailViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 뷰가 Disappear 될 때, 코디네이터 할당제거
         input.viewDidDisappear
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
@@ -147,6 +189,31 @@ final class ProjectDetailViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(project: project.asDriver(onErrorJustReturn: Project.onError))
+    }
+}
+
+// MARK: - Alert 대응 처리
+extension ProjectDetailViewModel {
+    /// 특정 작업의 수행을 확인하는 Alert을 보여주고, 유저의 액션에 따라 이벤트의 전달여부를 결정
+    private func confirmActionWithAlert(alertConfiguration: AlertConfiguration) -> Maybe<Void> {
+        Maybe<Void>.create { [weak self] maybe in
+            guard let self else {
+                maybe(.completed)
+                return Disposables.create()
+            }
+            
+            self.coordinator?.showAlert(
+                configuration: alertConfiguration,
+                primaryAction: {
+                    maybe(.success(()))
+                },
+                cancelAction: {
+                    maybe(.completed)
+                }
+            )
+            
+            return Disposables.create()
+        }
     }
 }
 
