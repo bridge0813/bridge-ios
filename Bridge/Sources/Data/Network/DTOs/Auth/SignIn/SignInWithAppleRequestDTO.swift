@@ -13,6 +13,6 @@ struct SignInWithAppleRequestDTO: Encodable {
     enum CodingKeys: String, CodingKey {
         case userName = "name"
         case identityToken = "idToken"
-        case fcmToken
+        case fcmToken = "deviceToken"
     }
 }
