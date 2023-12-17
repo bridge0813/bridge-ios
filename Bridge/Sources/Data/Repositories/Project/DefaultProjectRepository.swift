@@ -104,7 +104,11 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // MARK: - Delete
     func delete(projectID: Int) -> Observable<Int> {
-        .just(projectID)
+        let userIDDTO = UserIDDTO(userID: Int(tokenStorage.get(.userID)) ?? 0)
+        let deleteEndpoint = ProjectEndpoint.delete(requestDTO: userIDDTO, projectID: String(projectID))
+        
+        return networkService.request(to: deleteEndpoint, interceptor: nil)
+            .map { _ in projectID }
     }
     
     // MARK: - CancelApplication

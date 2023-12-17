@@ -6,14 +6,14 @@
 //
 
 enum ProjectEndpoint {
-    case create(requestDTO: CreateProjectRequestDTO)
-    
     case fetchAllProjects
     case fetchProjectsByField(requestDTO: FieldRequestDTO)
     case fetchHotProjects
     case fetchDeadlineProjects
     case fetchProjectDetail(requestDTO: ProjectIDDTO, userID: String)
     
+    case create(requestDTO: CreateProjectRequestDTO)
+    case delete(requestDTO: UserIDDTO, projectID: String)
     case bookmark(requestDTO: ProjectIDDTO)
     case apply(userID: String, projectID: String)
 }
@@ -21,9 +21,6 @@ enum ProjectEndpoint {
 extension ProjectEndpoint: Endpoint {
     var path: String {
         switch self {
-        case .create:
-            return "/project"
-            
         case .fetchAllProjects:
             return "/projects/all"
             
@@ -39,6 +36,12 @@ extension ProjectEndpoint: Endpoint {
         case .fetchProjectDetail:
             return "/project"
             
+        case .create:
+            return "/project"
+            
+        case .delete:
+            return "/project"
+            
         case .bookmark:
             return "/project/scrap"
             
@@ -49,9 +52,6 @@ extension ProjectEndpoint: Endpoint {
     
     var queryParameters: QueryParameters? {
         switch self {
-        case .create:
-            return nil
-            
         case .fetchAllProjects:
             return nil
             
@@ -64,8 +64,14 @@ extension ProjectEndpoint: Endpoint {
         case .fetchDeadlineProjects:
             return nil
             
-        case .fetchProjectDetail(_, userID: let userID):
+        case .fetchProjectDetail(_, let userID):
             return ["userId": userID]
+            
+        case .create:
+            return nil
+            
+        case .delete(_, let projectID):
+            return ["projectId": projectID]
             
         case .bookmark:
             return nil
@@ -77,9 +83,6 @@ extension ProjectEndpoint: Endpoint {
     
     var method: HTTPMethod {
         switch self {
-        case .create:
-            return .post
-            
         case .fetchAllProjects:
             return .get
             
@@ -95,6 +98,12 @@ extension ProjectEndpoint: Endpoint {
         case .fetchProjectDetail:
             return .get
             
+        case .create:
+            return .post
+            
+        case .delete:
+            return .delete
+            
         case .bookmark:
             return .post
             
@@ -105,14 +114,11 @@ extension ProjectEndpoint: Endpoint {
     
     var body: Encodable? {
         switch self {
-        case .create(let requestDTO):
-            return requestDTO
-            
         case .fetchAllProjects:
             return nil
             
-        case .fetchProjectsByField(let field):
-            return field
+        case .fetchProjectsByField(let requestDTO):
+            return requestDTO
             
         case .fetchHotProjects:
             return nil
@@ -120,11 +126,17 @@ extension ProjectEndpoint: Endpoint {
         case .fetchDeadlineProjects:
             return nil
             
-        case .fetchProjectDetail(requestDTO: let projectID, _):
-            return projectID
+        case .fetchProjectDetail(let requestDTO, _):
+            return requestDTO
             
-        case .bookmark(requestDTO: let projectID):
-            return projectID
+        case .create(let requestDTO):
+            return requestDTO
+            
+        case .delete(let requestDTO, _):
+            return requestDTO
+            
+        case .bookmark(let requestDTO):
+            return requestDTO
             
         case .apply:
             return nil

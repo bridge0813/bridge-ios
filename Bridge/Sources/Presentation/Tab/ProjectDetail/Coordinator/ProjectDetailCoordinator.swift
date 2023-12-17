@@ -19,6 +19,7 @@ final class ProjectDetailCoordinator: Coordinator {
     private let projectDetailUseCase: FetchProjectDetailUseCase
     private let bookmarkUseCase: BookmarkUseCase
     private let applyUseCase: ApplyProjectUseCase
+    private let deleteUseCase: DeleteProjectUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -31,6 +32,7 @@ final class ProjectDetailCoordinator: Coordinator {
         projectDetailUseCase = DefaultFetchProjectDetailUseCase(projectRepository: projectRepository)
         bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
         applyUseCase = DefaultApplyProjectUseCase(projectRepository: projectRepository)
+        deleteUseCase = DefaultDeleteProjectUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Methods
@@ -45,7 +47,8 @@ extension ProjectDetailCoordinator {
             projectID: projectID,
             projectDetailUseCase: projectDetailUseCase,
             bookmarkUseCase: bookmarkUseCase,
-            applyUseCase: applyUseCase
+            applyUseCase: applyUseCase,
+            deleteUseCase: deleteUseCase
         )
         
         let vc = ProjectDetailViewController(viewModel: viewModel)

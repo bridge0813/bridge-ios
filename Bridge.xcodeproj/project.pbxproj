@@ -260,8 +260,9 @@
 		7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */; };
 		7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */; };
 		7CD023BB2B2B486400F55648 /* ApplicantProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023BA2B2B486400F55648 /* ApplicantProfileResponseDTO.swift */; };
-		7CD023BE2B2C158300F55648 /* ProjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023BD2B2C158300F55648 /* ProjectID.swift */; };
+		7CD023BE2B2C158300F55648 /* ProjectIDDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023BD2B2C158300F55648 /* ProjectIDDTO.swift */; };
 		7CD023C12B2EB8E200F55648 /* ApplyProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023C02B2EB8E200F55648 /* ApplyProjectUseCase.swift */; };
+		7CD023C42B2F10AB00F55648 /* UserIDDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023C32B2F10AB00F55648 /* UserIDDTO.swift */; };
 		7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */; };
 		7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */; };
 		7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */; };
@@ -529,8 +530,9 @@
 		7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewController.swift; sourceTree = "<group>"; };
 		7CD023BA2B2B486400F55648 /* ApplicantProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantProfileResponseDTO.swift; sourceTree = "<group>"; };
-		7CD023BD2B2C158300F55648 /* ProjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectID.swift; sourceTree = "<group>"; };
+		7CD023BD2B2C158300F55648 /* ProjectIDDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectIDDTO.swift; sourceTree = "<group>"; };
 		7CD023C02B2EB8E200F55648 /* ApplyProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProjectUseCase.swift; sourceTree = "<group>"; };
+		7CD023C32B2F10AB00F55648 /* UserIDDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIDDTO.swift; sourceTree = "<group>"; };
 		7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
 		7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
@@ -1449,6 +1451,7 @@
 		7C56E15A2B10EF3700454F5E /* User */ = {
 			isa = PBXGroup;
 			children = (
+				7CD023C22B2F109C00F55648 /* UserID */,
 				7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */,
 				7CD023BA2B2B486400F55648 /* ApplicantProfileResponseDTO.swift */,
 			);
@@ -1868,7 +1871,7 @@
 		7CD023BC2B2C157600F55648 /* ProjectID */ = {
 			isa = PBXGroup;
 			children = (
-				7CD023BD2B2C158300F55648 /* ProjectID.swift */,
+				7CD023BD2B2C158300F55648 /* ProjectIDDTO.swift */,
 			);
 			path = ProjectID;
 			sourceTree = "<group>";
@@ -1879,6 +1882,14 @@
 				7CD023C02B2EB8E200F55648 /* ApplyProjectUseCase.swift */,
 			);
 			path = Apply;
+			sourceTree = "<group>";
+		};
+		7CD023C22B2F109C00F55648 /* UserID */ = {
+			isa = PBXGroup;
+			children = (
+				7CD023C32B2F10AB00F55648 /* UserIDDTO.swift */,
+			);
+			path = UserID;
 			sourceTree = "<group>";
 		};
 		7CDFB60E2B20113200272F77 /* Management */ = {
@@ -2132,6 +2143,7 @@
 				7B1922CC2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift in Sources */,
 				7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */,
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
+				7CD023C42B2F10AB00F55648 /* UserIDDTO.swift in Sources */,
 				7CA73D9C2B28C944007D88FB /* CancelApplicationUseCase.swift in Sources */,
 				7BBD662A2AFB98D2001644D1 /* ObservableType+.swift in Sources */,
 				7CA04F4E2B04A6CA007B9191 /* Project.swift in Sources */,
@@ -2188,7 +2200,7 @@
 				7BA36CB22A9D961F000DAB02 /* ChannelDTO.swift in Sources */,
 				7BCA18072AFDCC0F00257B04 /* ProfileHeaderView.swift in Sources */,
 				7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */,
-				7CD023BE2B2C158300F55648 /* ProjectID.swift in Sources */,
+				7CD023BE2B2C158300F55648 /* ProjectIDDTO.swift in Sources */,
 				7B61236F2AC15905006E72C1 /* BridgeFont.swift in Sources */,
 				7BA36CB92A9D9A29000DAB02 /* HTTP.swift in Sources */,
 				7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */,

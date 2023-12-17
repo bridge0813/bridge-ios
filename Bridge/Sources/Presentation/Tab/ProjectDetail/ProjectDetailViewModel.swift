@@ -31,6 +31,7 @@ final class ProjectDetailViewModel: ViewModelType {
     private let projectDetailUseCase: FetchProjectDetailUseCase
     private let bookmarkUseCase: BookmarkUseCase
     private let applyUseCase: ApplyProjectUseCase
+    private let deleteUseCase: DeleteProjectUseCase
     
     // MARK: - Init
     init(
@@ -38,13 +39,15 @@ final class ProjectDetailViewModel: ViewModelType {
         projectID: Int,
         projectDetailUseCase: FetchProjectDetailUseCase,
         bookmarkUseCase: BookmarkUseCase,
-        applyUseCase: ApplyProjectUseCase
+        applyUseCase: ApplyProjectUseCase,
+        deleteUseCase: DeleteProjectUseCase
     ) {
         self.coordinator = coordinator
         self.projectID = projectID
         self.projectDetailUseCase = projectDetailUseCase
         self.bookmarkUseCase = bookmarkUseCase
         self.applyUseCase = applyUseCase
+        self.deleteUseCase = deleteUseCase
     }
     
     // MARK: - Transformation
