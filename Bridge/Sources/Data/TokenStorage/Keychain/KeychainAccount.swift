@@ -13,4 +13,5 @@ enum KeychainAccount: String {
     case userID = "com.bridge.userID"
     case accessToken = "com.bridge.accessToken"
     case refreshToken = "com.bridge.refreshToken"
+    case fcmToken = "com.bridge.fcmToken"
 }
