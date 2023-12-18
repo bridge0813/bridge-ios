@@ -15,7 +15,7 @@ enum ProjectEndpoint {
     case create(requestDTO: CreateProjectRequestDTO)
     case delete(requestDTO: UserIDDTO, projectID: String)
     case bookmark(requestDTO: ProjectIDDTO)
-    case apply(userID: String, projectID: String)
+    case apply(projectID: String)
     case close(requestDTO: ProjectIDDTO)
 }
 
@@ -47,7 +47,7 @@ extension ProjectEndpoint: Endpoint {
             return "/project/scrap"
             
         case .apply:
-            return "/project/apply"
+            return "/projects/apply"
             
         case .close:
             return "/project/deadline"
@@ -80,8 +80,8 @@ extension ProjectEndpoint: Endpoint {
         case .bookmark:
             return nil
             
-        case .apply(let userID, let projectID):
-            return ["userId": userID, "projectId": projectID]
+        case .apply(let projectID):
+            return ["projectId": projectID]
             
         case .close:
             return nil

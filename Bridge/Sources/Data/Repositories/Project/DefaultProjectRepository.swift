@@ -131,10 +131,9 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // MARK: - Apply
     func apply(projectID: Int) -> Observable<Void> {
-        let userID = tokenStorage.get(.userID)
-        let applyEndpoint = ProjectEndpoint.apply(userID: userID, projectID: String(projectID))
+        let applyEndpoint = ProjectEndpoint.apply(projectID: String(projectID))
         
-        return networkService.request(to: applyEndpoint, interceptor: nil)
+        return networkService.request(to: applyEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
     }
     

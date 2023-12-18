@@ -52,9 +52,9 @@ extension ProjectPreviewResponseDTO {
     ]
     
     static var projectByFieldTestArray: [ProjectPreviewResponseDTO] = [
-        ProjectPreviewResponseDTO(projectID: 16, title: "iOS 개발자만 구합니데이", deadline: "2024-02-27T21:37:19", totalRecruitNumber: 6, isBookmarked: true),
-        ProjectPreviewResponseDTO(projectID: 15, title: "백엔드 개발자만 구합니데이다라라아아리어로에장;나아니ㅏㅁ마아", deadline: "2024-02-27T21:37:19", totalRecruitNumber: 5, isBookmarked: true),
-        ProjectPreviewResponseDTO(projectID: 17, title: "디자이너만 구합니다요", deadline: "2024-02-27T21:37:19", totalRecruitNumber: 3, isBookmarked: true),
+        ProjectPreviewResponseDTO(projectID: 19, title: "iOS 개발자만 구합니데이", deadline: "2024-02-27T21:37:19", totalRecruitNumber: 6, isBookmarked: true),
+        ProjectPreviewResponseDTO(projectID: 20, title: "백엔드 개발자만 구합니데이다라라아아리어로에장;나아니ㅏㅁ마아", deadline: "2024-02-27T21:37:19", totalRecruitNumber: 5, isBookmarked: true),
+        ProjectPreviewResponseDTO(projectID: 21, title: "디자이너만 구합니다요", deadline: "2024-02-27T21:37:19", totalRecruitNumber: 3, isBookmarked: true),
         ProjectPreviewResponseDTO(projectID: 18, title: "기획자, 기획자, 아이오에스 개발자, 안드로이드 개발자, 프론트엔드 개발자 구합니다.", deadline: "2024-02-27T21:37:19", totalRecruitNumber: 3, isBookmarked: true),
         ProjectPreviewResponseDTO(projectID: 4, title: "네 번째", deadline: "2024-02-27T21:37:19", totalRecruitNumber: 3, isBookmarked: true),
         ProjectPreviewResponseDTO(projectID: 5, title: "다섯 번째", deadline: "2024-02-27T21:37:19", totalRecruitNumber: 3, isBookmarked: true)
