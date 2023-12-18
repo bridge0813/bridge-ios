@@ -13,7 +13,7 @@ final class ProjectDetailViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>
         let goToDetailButtonTapped: Observable<Void>
-        let editProjectActionTapped: Observable<String>
+        let projectManagementActionTapped: Observable<String>
         let applyButtonTapped: Observable<Void>
         let bookmarkButtonTapped: Observable<Void>
         let viewDidDisappear: Observable<Bool>
@@ -57,6 +57,7 @@ final class ProjectDetailViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let project = BehaviorRelay<Project>(value: Project.onError)
         var signInNeeded = true  // 로그인 체크
+        let projectManagementAction = PublishSubject<ProjectManagementType>()  // 모집글 관리 액션
         
         // 모집글 상세 가져오기
         input.viewWillAppear
@@ -86,24 +87,61 @@ final class ProjectDetailViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        // 모집하는 분야 상세보기 이동
-        input.goToDetailButtonTapped
-            .withLatestFrom(project)
+        // 모집글 편집 메뉴 클릭.
+        input.projectManagementActionTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, project in
-                owner.coordinator?.showRecruitFieldDetailViewController(with: project)
+            .subscribe(onNext: { owner, option in
+                let managementType = ProjectManagementType(rawValue: option) ?? .edit
+                
+                switch managementType {
+                case .edit:
+                    // TODO: - 수정하기 구현 후 이동
+                    owner.coordinator?.showAlert(
+                        configuration: .editProject
+                    )
+                    
+                case .close:
+                    owner.coordinator?.showAlert(
+                        configuration: .closeProject,
+                        primaryAction: { projectManagementAction.onNext(.close) }
+                    )
+                    
+                case .delete:
+                    owner.coordinator?.showAlert(
+                        configuration: .deleteProject,
+                        primaryAction: { projectManagementAction.onNext(.delete) }
+                    )
+                }
             })
             .disposed(by: disposeBag)
         
-        // 모집글 편집기능
-        input.editProjectActionTapped
+        // 모집글 마감 혹은 삭제 처리
+        projectManagementAction
             .withUnretained(self)
-            .subscribe(onNext: { owner, menu in
-                switch menu {
-                case "수정하기": owner.coordinator?.showAlert(configuration: .editProject)
-                case "마감하기": owner.coordinator?.showAlert(configuration: .closeProject)
-                case "삭제하기": owner.coordinator?.showAlert(configuration: .deleteProject)
-                default: print("Error")
+            .flatMap { owner, managementType -> Observable<Result<ProjectID, Error>> in
+                switch managementType {
+                case .close:
+                    return owner.closeUseCase.close(projectID: owner.projectID).toResult()    // 마감하기 진행
+                    
+                case .delete:
+                    return owner.deleteUseCase.delete(projectID: owner.projectID).toResult()  // 삭제하기 진행
+                    
+                default:
+                    return .just(Result.success(0))
+                }
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success:
+                    owner.coordinator?.pop()
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "오류",
+                        description: error.localizedDescription
+                    ))
                 }
             })
             .disposed(by: disposeBag)
@@ -149,7 +187,6 @@ final class ProjectDetailViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        
         // 북마크 처리
         input.bookmarkButtonTapped
             .withUnretained(self)
@@ -181,6 +218,15 @@ final class ProjectDetailViewModel: ViewModelType {
                         description: error.localizedDescription
                     ))
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        // 모집하는 분야 상세보기 이동
+        input.goToDetailButtonTapped
+            .withLatestFrom(project)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, project in
+                owner.coordinator?.showRecruitFieldDetailViewController(with: project)
             })
             .disposed(by: disposeBag)
         
@@ -227,5 +273,12 @@ extension ProjectDetailViewModel {
 extension ProjectDetailViewModel {
     enum Section: CaseIterable {
         case main
+    }
+    
+    /// 프로젝트 관리 메뉴 타입
+    enum ProjectManagementType: String {
+        case edit = "수정하기"
+        case close = "마감하기"
+        case delete = "삭제하기"
     }
 }

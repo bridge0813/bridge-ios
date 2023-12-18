@@ -26,7 +26,8 @@ final class ProjectDetailViewController: BaseViewController {
         action: nil
     )
     
-    private let editProjectActionSheet = BridgeActionSheet(
+    /// 프로젝트 관리 메뉴
+    private let projectManagementActionSheet = BridgeActionSheet(
         titles: ("수정하기", "마감하기", "삭제하기"),
         isCheckmarked: false
     )
@@ -126,7 +127,7 @@ final class ProjectDetailViewController: BaseViewController {
         let input = ProjectDetailViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             goToDetailButtonTapped: goToDetailButtonTapped.asObservable(),
-            editProjectActionTapped: editProjectActionSheet.actionButtonTapped,
+            projectManagementActionTapped: projectManagementActionSheet.actionButtonTapped,
             applyButtonTapped: menuBar.applyButtonTapped,
             bookmarkButtonTapped: menuBar.bookmarkButtonTapped,
             viewDidDisappear: self.rx.viewDidDisappear.asObservable()
@@ -158,7 +159,7 @@ final class ProjectDetailViewController: BaseViewController {
         menuButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.editProjectActionSheet.show()
+                owner.projectManagementActionSheet.show()
             })
             .disposed(by: disposeBag)
     }

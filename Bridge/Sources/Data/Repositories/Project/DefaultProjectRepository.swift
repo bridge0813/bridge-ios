@@ -139,12 +139,12 @@ final class DefaultProjectRepository: ProjectRepository {
     }
     
     // MARK: - Close
-    func close(projectID: Int) -> Observable<Void> {
+    func close(projectID: Int) -> Observable<Int> {
         let projectIDDTO = ProjectIDDTO(projectID: projectID)  // 마감 할 모집글의 ID
         let closeEndpoint = ProjectEndpoint.close(requestDTO: projectIDDTO)
         
         return networkService.request(to: closeEndpoint, interceptor: nil)
-            .map { _ in }
+            .map { _ in projectID }
     }
 }
 

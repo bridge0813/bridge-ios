@@ -40,5 +40,5 @@ protocol ProjectRepository {
     func apply(projectID: Int) -> Observable<Void>
     
     // MARK: - Close
-    func close(projectID: Int) -> Observable<Void>
+    func close(projectID: Int) -> Observable<Int>
 }

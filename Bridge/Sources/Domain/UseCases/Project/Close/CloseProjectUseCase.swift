@@ -9,7 +9,7 @@ import RxSwift
 
 /// 모집글 마감
 protocol CloseProjectUseCase {
-    func close(projectID: Int) -> Observable<Void>
+    func close(projectID: Int) -> Observable<Int>
 }
 
 final class DefaultCloseProjectUseCase: CloseProjectUseCase {
@@ -20,7 +20,7 @@ final class DefaultCloseProjectUseCase: CloseProjectUseCase {
         self.projectRepository = projectRepository
     }
     
-    func close(projectID: Int) -> Observable<Void> {
+    func close(projectID: Int) -> Observable<Int> {
         projectRepository.close(projectID: projectID)
     }
 }
