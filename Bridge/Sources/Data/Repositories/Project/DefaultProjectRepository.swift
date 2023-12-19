@@ -60,7 +60,7 @@ final class DefaultProjectRepository: ProjectRepository {
     }
     
     // 모집글 상세정보 가져오기
-    func fetchProjectDetail(with projectID: Int) -> Observable<(Project, SignInNeeded)> {
+    func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
         let userID = tokenStorage.get(.userID)
         let fetchProjectDetailEndpoint = ProjectEndpoint.fetchProjectDetail(
             userID: userID,
@@ -70,7 +70,7 @@ final class DefaultProjectRepository: ProjectRepository {
         return networkService.request(to: fetchProjectDetailEndpoint, interceptor: nil)
             .decode(type: ProjectDetailDTO.self, decoder: JSONDecoder())
             .map { dto in
-                return (dto.toEntity(), userID.isEmpty)
+                return dto.toEntity()
             }
     }
     

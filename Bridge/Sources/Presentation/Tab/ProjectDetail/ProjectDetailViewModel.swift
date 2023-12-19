@@ -56,7 +56,6 @@ final class ProjectDetailViewModel: ViewModelType {
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         let project = BehaviorRelay<Project>(value: Project.onError)
-        var signInNeeded = true  // 로그인 체크
         let projectManagementAction = PublishSubject<ProjectManagementType>()  // 모집글 관리 액션
         
         // 모집글 상세 가져오기
@@ -70,8 +69,7 @@ final class ProjectDetailViewModel: ViewModelType {
             .subscribe(onNext: { owner, result in
                 switch result {
                 case .success(let data):
-                    project.accept(data.0)
-                    signInNeeded = data.1
+                    project.accept(data)
                     
                 case .failure(let error):
                     owner.coordinator?.showErrorAlert(
@@ -149,18 +147,6 @@ final class ProjectDetailViewModel: ViewModelType {
         // 지원하기
         input.applyButtonTapped
             .withUnretained(self)
-            .flatMap { owner, _ -> Observable<Void> in
-                // 로그인이 되어있지 않다면 Alert을 보여주고 시퀸스 종료.
-                guard !signInNeeded else {
-                    owner.coordinator?.showAlert(configuration: .signIn, primaryAction: {
-                        owner.coordinator?.showSignInViewController()
-                    })
-                    return .empty()
-                }
-                
-                return .just(())
-            }
-            .withUnretained(self)
             .flatMap { owner, _ -> Maybe<Void> in
                 // 지원하기 Alert을 보여주고, 유저가 "지원하기" 를 클릭했을 경우 다음 시퀸스로 이동.
                 owner.confirmActionWithAlert(alertConfiguration: .apply)
@@ -179,10 +165,7 @@ final class ProjectDetailViewModel: ViewModelType {
                     )
                     
                 case .failure(let error):
-                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                        title: "오류",
-                        description: error.localizedDescription
-                    ))
+                    owner.handleNetworkError(error)
                 }
             })
             .disposed(by: disposeBag)
@@ -190,16 +173,7 @@ final class ProjectDetailViewModel: ViewModelType {
         // 북마크 처리
         input.bookmarkButtonTapped
             .withUnretained(self)
-            .flatMap { owner, _ -> Observable<Result<Int, Error>> in
-                // 로그인이 되어 있지 않다면, Alert 보여주기
-                guard !signInNeeded else {
-                    owner.coordinator?.showAlert(configuration: .signIn, primaryAction: {
-                        owner.coordinator?.showSignInViewController()
-                    })
-                    return .empty()
-                }
-                
-                // 로그인이 되어 있다면, 북마크 수행
+            .flatMap { owner, _ -> Observable<Result<ProjectID, Error>> in
                 return owner.bookmarkUseCase.bookmark(projectID: owner.projectID).toResult()
             }
             .observe(on: MainScheduler.instance)
@@ -213,10 +187,7 @@ final class ProjectDetailViewModel: ViewModelType {
                     project.accept(currentProject)
                     
                 case .failure(let error):
-                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                        title: "오류",
-                        description: error.localizedDescription
-                    ))
+                    owner.handleNetworkError(error)
                 }
             })
             .disposed(by: disposeBag)
@@ -241,6 +212,26 @@ final class ProjectDetailViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(project: project.asDriver(onErrorJustReturn: Project.onError))
+    }
+}
+
+// MARK: - 네트워킹 결과처리
+extension ProjectDetailViewModel {
+    private func handleNetworkError(_ error: Error) {
+        // 네트워크 에러가 401일 경우 로그인 Alert을 보여주고, 나머지 경우에는 Error Alert
+        if let networkError = error as? NetworkError, case .statusCode(401) = networkError {
+            coordinator?.showAlert(
+                configuration: .signIn,
+                primaryAction: { [weak self] in
+                    self?.coordinator?.showSignInViewController()
+                }
+            )
+        } else {
+            coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                title: "오류",
+                description: error.localizedDescription
+            ))
+        }
     }
 }
 
