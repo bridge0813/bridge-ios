@@ -56,7 +56,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
             
         let techTags = input.techTags
             .do(onNext: { tags in
-                requirement.requiredSkills = tags.map { $0.uppercased() }
+                requirement.requiredSkills = tags
             })
             
         input.requirementText
