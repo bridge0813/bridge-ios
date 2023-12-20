@@ -35,6 +35,7 @@ final class CreateProjectCoordinator: Coordinator {
     }
 }
 
+// MARK: - Show
 extension CreateProjectCoordinator {
     private func showMemberFieldSelectionViewController() {
         let viewModel = MemberFieldSelectionViewModel(
@@ -112,5 +113,31 @@ extension CreateProjectCoordinator {
         
         let viewController = CompletionViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+// MARK: - Connect
+extension CreateProjectCoordinator {
+    func connectToProjectDetailFlow(with projectID: Int) {
+        let detailCoordinator = ProjectDetailCoordinator(
+            navigationController: createProjectNavigationController ?? navigationController
+        )
+        detailCoordinator.delegate = self
+        detailCoordinator.showProjectDetailViewController(projectID: projectID)
+        detailCoordinator.didFinishEventClosure = { [weak self] in
+            self?.didFinish(childCoordinator: detailCoordinator)
+        }
+        childCoordinators.append(detailCoordinator)
+    }
+}
+
+// MARK: - CoordinatorDelegate
+extension CreateProjectCoordinator: CoordinatorDelegate {
+    func didFinish(childCoordinator: Coordinator) {
+        navigationController.dismiss(animated: true)
+        
+        if let index = childCoordinators.firstIndex(where: { $0 === childCoordinator }) {
+            childCoordinators.remove(at: index)
+        }
     }
 }

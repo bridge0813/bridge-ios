@@ -20,13 +20,13 @@ enum TechStack: String {
     
     var techStacks: [String] {
         switch self {
-        case .ios: return ["Swift", "Objective-C", "UIKit", "SwiftUI", "RxSwift", "Combine", "XCTest", "Tuist", "React Native", "Flutter"]
+        case .ios: return ["Swift", "Objective_C", "UIKit", "SwiftUI", "RxSwift", "Combine", "XCTest", "Tuist", "React Native", "Flutter"]
             
         case .android: return ["Kotlin", "Java", "Compose", "RxJava", "Coroutine", "Flutter", "React Native"]
             
         case .frontend: return ["Javascript", "TypeScript", "HTML", "CSS", "React", "React Native", "Vue", "Angular", "Svelte", "Jquery", "Backbone", "Pinia"]
             
-        case .backend: return ["Java", "Javascript", "Python", "TypeScript", "C", "C++", "Kotlin", "Spring", "Springboot", "Nodejs", "Django", "Hibernate", "WebRTC", "MongoDB", "MySQL", "PostgreSQL", "Redis", "Maria DB", "H2"]
+        case .backend: return ["Java", "Javascript", "Python", "TypeScript", "C", "C++", "Kotlin", "Spring", "Springboot", "Nodejs", "Django", "Hibernate", "WebRTC", "MongoDB", "MySQL", "PostgreSQL", "Redis", "Maria DB"]
             
         case .uiux: return ["photoshop", "illustrator", "indesign", "adobe XD", "Figma", "Sketch", "Adobe flash"]
             
