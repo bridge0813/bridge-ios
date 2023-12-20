@@ -30,7 +30,7 @@ extension AppliedProjectResponseDTO {
             title: title,
             description: description,
             dDays: 0,
-            deadline: deadline.toDate(with: "yyyy-MM-dd'T'HH:mm:ss").toString(format: "yyyy.MM.dd"),
+            deadline: deadline.toDate(format: "yyyy.MM.dd") ?? "",
             totalRecruitNumber: 0,
             rank: 0,
             deadlineRank: 0,
@@ -49,11 +49,11 @@ extension AppliedProjectResponseDTO {
 
 extension AppliedProjectResponseDTO {
     static var projectTestArray: [AppliedProjectResponseDTO] = [
-        AppliedProjectResponseDTO(projectID: 0, title: "지원 탭에서 보내는 첫 번째 모집글입니다. 아라라라라라라라라라라리리리리리요요요라라라라", description: "기획부터 앱 출시까지 함께하실 팀원을 모집중입니다.....ㅇㅋㅋㅋㅋ가나다라마바사가나다라마바사", deadline: "2023.08.20", status: "수락"),
-        AppliedProjectResponseDTO(projectID: 1, title: "지원 탭에서 보내는 두 번째 모집글입니다.", description: "기획부터 앱 출시까지 함께하실 팀원을 모집중입니다", deadline: "2023.08.20", status: "거절"),
-        AppliedProjectResponseDTO(projectID: 2, title: "지원 탭에서 보내는 세 번째 모집글입니다.", description: "기획부", deadline: "2023.08.20", status: "대기중"),
-        AppliedProjectResponseDTO(projectID: 3, title: "지원 탭에서 보내는 네 번째 모집글입니다.", description: "기획", deadline: "2023.08.20", status: "대기중"),
-        AppliedProjectResponseDTO(projectID: 4, title: "다섯 번째 모집글입니다.", description: "기획부터 앱 출시까지 함께하실 팀원을 모집중입니다", deadline: "2023.08.20", status: "수락"),
-        AppliedProjectResponseDTO(projectID: 5, title: "여섯 번째.", description: "기획부터 앱 출시까지", deadline: "2023.08.20", status: "거절")
+        AppliedProjectResponseDTO(projectID: 0, title: "지원 탭에서 보내는 첫 번째 모집글입니다. 아라라라라라라라라라라리리리리리요요요라라라라", description: "기획부터 앱 출시까지 함께하실 팀원을 모집중입니다.....ㅇㅋㅋㅋㅋ가나다라마바사가나다라마바사", deadline: "2023-12-25T21:37:19", status: "수락"),
+        AppliedProjectResponseDTO(projectID: 1, title: "지원 탭에서 보내는 두 번째 모집글입니다.", description: "기획부터 앱 출시까지 함께하실 팀원을 모집중입니다", deadline: "2024-01-01T21:37:19", status: "거절"),
+        AppliedProjectResponseDTO(projectID: 2, title: "지원 탭에서 보내는 세 번째 모집글입니다.", description: "기획부", deadline: "2024-02-27T21:37:19", status: "대기중"),
+        AppliedProjectResponseDTO(projectID: 3, title: "지원 탭에서 보내는 네 번째 모집글입니다.", description: "기획", deadline: "2024-02-27T21:37:19", status: "대기중"),
+        AppliedProjectResponseDTO(projectID: 4, title: "다섯 번째 모집글입니다.", description: "기획부터 앱 출시까지 함께하실 팀원을 모집중입니다", deadline: "2024-05-01T21:37:19", status: "수락"),
+        AppliedProjectResponseDTO(projectID: 5, title: "여섯 번째.", description: "기획부터 앱 출시까지", deadline: "2024-02-27T21:37:19", status: "거절")
     ]
 }

@@ -26,7 +26,8 @@ final class MockProjectRepository: ProjectRepository {
     }
     
     func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
-        .just(ProjectDetailDTO.projectDetailTest.toEntity())
+        .just(ProjectDetailDTO.testData.toEntity())
+//        .error(NetworkError.unknown)
     }
     
     func fetchAppliedProjects() -> Observable<[ProjectPreview]> {
@@ -59,5 +60,13 @@ final class MockProjectRepository: ProjectRepository {
     
     func reject(projectID: Int, applicantID: Int) -> Observable<Int> {
         .just(applicantID)
+    }
+    
+    func apply(projectID: Int) -> Observable<Void> {
+        .just(())
+    }
+    
+    func close(projectID: Int) -> Observable<Int> {
+        .just(projectID)
     }
 }

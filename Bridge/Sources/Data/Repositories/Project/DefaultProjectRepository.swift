@@ -61,7 +61,17 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // 모집글 상세정보 가져오기
     func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
-        .just(ProjectDetailDTO.projectDetailTest.toEntity())
+        let userID = tokenStorage.get(.userID)
+        let fetchProjectDetailEndpoint = ProjectEndpoint.fetchProjectDetail(
+            userID: userID,
+            projectID: String(projectID)
+        )
+        
+        return networkService.request(to: fetchProjectDetailEndpoint, interceptor: nil)
+            .decode(type: ProjectDetailDTO.self, decoder: JSONDecoder())
+            .map { dto in
+                return dto.toEntity()
+            }
     }
     
     // 지원한 모집글 목록 가져오기
@@ -69,6 +79,7 @@ final class DefaultProjectRepository: ProjectRepository {
         .just(AppliedProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
+    // 내가 작성한 모집글 목록 가져오기
     func fetchMyProjects() -> Observable<[ProjectPreview]> {
         .just(MyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
@@ -79,7 +90,7 @@ final class DefaultProjectRepository: ProjectRepository {
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)
         
         return networkService.request(to: createProjectEndpoint, interceptor: AuthInterceptor())
-            .decode(type: CreateProjectResponseDTO.self, decoder: JSONDecoder())
+            .decode(type: ProjectIDDTO.self, decoder: JSONDecoder())
             .map { dto in
                 return dto.projectID
             }
@@ -87,9 +98,8 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // MARK: - Bookmark
     func bookmark(projectID: Int) -> Observable<Int> {
-        let userID = tokenStorage.get(.userID) 
-        let bookmarkDTO = BookmarkRequestDTO(projectID: projectID)
-        let bookmarkEndpoint = ProjectEndpoint.bookmark(requestDTO: bookmarkDTO, userID: userID)
+        let projectIDDTO = ProjectIDDTO(projectID: projectID)  // 북마크 할 모집글의 ID
+        let bookmarkEndpoint = ProjectEndpoint.bookmark(requestDTO: projectIDDTO)
         
         return networkService.request(to: bookmarkEndpoint, interceptor: AuthInterceptor())
             .map { _ in projectID }
@@ -97,7 +107,11 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // MARK: - Delete
     func delete(projectID: Int) -> Observable<Int> {
-        .just(projectID)
+        let userIDDTO = UserIDDTO(userID: Int(tokenStorage.get(.userID)) ?? 0)
+        let deleteEndpoint = ProjectEndpoint.delete(requestDTO: userIDDTO, projectID: String(projectID))
+        
+        return networkService.request(to: deleteEndpoint, interceptor: nil)
+            .map { _ in projectID }
     }
     
     // MARK: - CancelApplication
@@ -113,6 +127,23 @@ final class DefaultProjectRepository: ProjectRepository {
     // MARK: - Reject
     func reject(projectID: Int, applicantID: Int) -> Observable<Int> {
         .just(applicantID)
+    }
+    
+    // MARK: - Apply
+    func apply(projectID: Int) -> Observable<Void> {
+        let applyEndpoint = ProjectEndpoint.apply(projectID: String(projectID))
+        
+        return networkService.request(to: applyEndpoint, interceptor: AuthInterceptor())
+            .map { _ in }
+    }
+    
+    // MARK: - Close
+    func close(projectID: Int) -> Observable<Int> {
+        let projectIDDTO = ProjectIDDTO(projectID: projectID)  // 마감 할 모집글의 ID
+        let closeEndpoint = ProjectEndpoint.close(requestDTO: projectIDDTO)
+        
+        return networkService.request(to: closeEndpoint, interceptor: nil)
+            .map { _ in projectID }
     }
 }
 

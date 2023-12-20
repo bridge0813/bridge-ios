@@ -26,7 +26,8 @@ final class ProjectDetailViewController: BaseViewController {
         action: nil
     )
     
-    private let editProjectActionSheet = BridgeActionSheet(
+    /// 프로젝트 관리 메뉴
+    private let projectManagementActionSheet = BridgeActionSheet(
         titles: ("수정하기", "마감하기", "삭제하기"),
         isCheckmarked: false
     )
@@ -54,13 +55,13 @@ final class ProjectDetailViewController: BaseViewController {
     private let menuBar = ProjectDetailMenuBar()
     
     // MARK: - Property
+    private let viewModel: ProjectDetailViewModel
+    
     private typealias DataSource = UICollectionViewDiffableDataSource<ProjectDetailViewModel.Section, MemberRequirement>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<ProjectDetailViewModel.Section, MemberRequirement>
+    private typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<MemberRequirement>
     private var dataSource: DataSource?
     
     private var goToDetailButtonTapped = PublishRelay<Void>()
-    
-    private let viewModel: ProjectDetailViewModel
     
     // MARK: - Init
     init(viewModel: ProjectDetailViewModel) {
@@ -95,20 +96,20 @@ final class ProjectDetailViewController: BaseViewController {
         collectionView.collectionViewLayout = configureLayout(with: data.isMyProject)
         configureDataSource()
         configureSupplementaryView(with: data)
-        applySnapshot(with: data.memberRequirements)
+        applySectionSnapshot(with: data.memberRequirements)
     }
     
     /// MenuBar의 컨텐츠 설정 및 해당 모집글이 자신의 글인지 여부에 따라 MenuBar의 유무를 결정
     private func configureMenuBar(with data: Project) {
-        menuBar.configureContents(with: data)
-        menuBar.flex.isIncludedInLayout(!data.isMyProject).markDirty()
+        menuBar.isBookmarked = data.isBookmarked
+        menuBar.flex.display(data.isMyProject ? .none : .flex)
         menuBar.isHidden = data.isMyProject
+        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
-        
         rootFlexContainer.flex.define { flex in
             flex.addItem(dividerView).height(1)
             flex.addItem(collectionView).grow(1)
@@ -124,8 +125,9 @@ final class ProjectDetailViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = ProjectDetailViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
             goToDetailButtonTapped: goToDetailButtonTapped.asObservable(),
-            editProjectActionTapped: editProjectActionSheet.actionButtonTapped,
+            projectManagementActionTapped: projectManagementActionSheet.actionButtonTapped,
             applyButtonTapped: menuBar.applyButtonTapped,
             bookmarkButtonTapped: menuBar.bookmarkButtonTapped,
             viewDidDisappear: self.rx.viewDidDisappear.asObservable()
@@ -133,9 +135,10 @@ final class ProjectDetailViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.project
+            .skip(1)
             .drive(onNext: { [weak self] project in
                 guard let self else { return }
-                
+
                 self.navigationItem.rightBarButtonItem = project.isMyProject ? menuButton : nil
                 self.configureMenuBar(with: project)
                 self.configureCollectionView(with: project)
@@ -156,7 +159,7 @@ final class ProjectDetailViewController: BaseViewController {
         menuButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.editProjectActionSheet.show()
+                owner.projectManagementActionSheet.show()
             })
             .disposed(by: disposeBag)
     }
@@ -230,16 +233,15 @@ extension ProjectDetailViewController {
             headerView.configureContents(with: project)
             headerView.goToDetailButtonTapped
                 .bind(to: self.goToDetailButtonTapped)
-                .disposed(by: self.disposeBag)
+                .disposed(by: headerView.disposeBag)
             
             return headerView
         }
     }
     
-    private func applySnapshot(with requirements: [MemberRequirement]) {
-        var snapshot = Snapshot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(requirements)
-        dataSource?.apply(snapshot)
+    private func applySectionSnapshot(with requirements: [MemberRequirement]) {
+        var snapshot = SectionSnapshot()
+        snapshot.append(requirements)
+        dataSource?.apply(snapshot, to: .main)
     }
 }

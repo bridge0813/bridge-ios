@@ -153,6 +153,11 @@ final class ProjectDetailHeaderView: BaseCollectionReusableView {
         return button
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
+    
     // MARK: - Property
     var goToDetailButtonTapped: ControlEvent<Void> {
         return goToDetailButton.rx.tap
@@ -166,7 +171,7 @@ final class ProjectDetailHeaderView: BaseCollectionReusableView {
             // 모집글의 제목과 소개(구분선을 기준으로 첫 번째 섹션)
             flex.addItem().backgroundColor(BridgeColor.gray10).paddingHorizontal(16).define { flex in
                 flex.addItem(dDayLabel).marginTop(24)
-                flex.addItem(titleLabel).height(60).marginTop(16).marginRight(49)
+                flex.addItem(titleLabel).marginTop(16).marginRight(49)
                 flex.addItem(descriptionLabel).marginTop(8).marginBottom(32)
             }
             
@@ -238,7 +243,7 @@ final class ProjectDetailHeaderView: BaseCollectionReusableView {
 // MARK: - Configuration
 extension ProjectDetailHeaderView {
     func configureContents(with data: Project) {
-        dDayLabel.text = "D-\(String(data.dDays))"
+        dDayLabel.text = "D-\(data.dDays)"
         titleLabel.configureTextWithLineHeight(text: data.title, lineHeight: 30)
         descriptionLabel.configureTextWithLineHeight(text: data.description, lineHeight: 20)
         
@@ -264,6 +269,8 @@ extension ProjectDetailHeaderView {
             highlightedText: "\(data.totalRecruitNumber)명"
         )
         
+        titleLabel.flex.markDirty()
+        descriptionLabel.flex.markDirty()
         dDayLabel.flex.width(dDayLabel.intrinsicContentSize.width).height(22)
         dDayLabel.flex.markDirty()
         setNeedsLayout()

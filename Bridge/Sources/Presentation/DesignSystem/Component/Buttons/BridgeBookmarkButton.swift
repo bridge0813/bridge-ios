@@ -8,6 +8,13 @@
 import UIKit
 
 final class BridgeBookmarkButton: BaseButton {
+    
+    var isBookmarked: Bool = false {
+        didSet {
+            updateButtonState()
+        }
+    }
+    
     override func configureAttributes() {
         let buttonImage = UIImage(named: "bookmark.fill")?
             .resize(to: CGSize(width: 24, height: 24))
@@ -20,15 +27,15 @@ final class BridgeBookmarkButton: BaseButton {
         
         layer.cornerRadius = 4
         self.configuration = configuration
-        changesSelectionAsPrimaryAction = true
-        configurationUpdateHandler = { button in
-            let tintColor: UIColor = button.state == .selected ? BridgeColor.primary1 : BridgeColor.gray10
-            let backgroundColor: UIColor = button.state == .selected ? BridgeColor.primary3 : BridgeColor.gray04
+    }
 
-            var updatedConfiguration = button.configuration
-            updatedConfiguration?.baseForegroundColor = tintColor
-            updatedConfiguration?.baseBackgroundColor = backgroundColor
-            button.configuration = updatedConfiguration
-        }
+    private func updateButtonState() {
+        let tintColor = isBookmarked ? BridgeColor.primary1 : BridgeColor.gray10
+        let backgroundColor = isBookmarked ? BridgeColor.primary3 : BridgeColor.gray04
+
+        var updatedConfiguration = configuration
+        updatedConfiguration?.baseForegroundColor = tintColor
+        updatedConfiguration?.baseBackgroundColor = backgroundColor
+        configuration = updatedConfiguration
     }
 }
