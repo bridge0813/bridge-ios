@@ -34,7 +34,7 @@ final class DefaultProjectRepository: ProjectRepository {
         let fieldRequestDTO = FieldRequestDTO(field: field)
         let fetchProjectsEndPoint = ProjectEndpoint.fetchProjectsByField(requestDTO: fieldRequestDTO)
         
-        return networkService.request(to: fetchProjectsEndPoint, interceptor: nil)
+        return networkService.request(to: fetchProjectsEndPoint, interceptor: AuthInterceptor())
             .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
             .map { projectPreviewDTOs in
                 projectPreviewDTOs.map { $0.toEntity() }

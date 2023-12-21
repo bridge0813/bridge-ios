@@ -30,9 +30,8 @@ final class MainCoordinator: Coordinator {
 
         let networkService = DefaultNetworkService()
         userRepository = MockUserRepository()
-//        DefaultUserRepository(networkService: networkService)  // 프로필
-        projectRepository = MockProjectRepository()
-//        DefaultUserRepository(networkService: networkService)  // 모집글
+//        DefaultUserRepository(networkService: networkService)  // 프로필 리포지토리
+        projectRepository = DefaultProjectRepository(networkService: networkService)  // 모집글 리포지토리
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         fetchAllProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
