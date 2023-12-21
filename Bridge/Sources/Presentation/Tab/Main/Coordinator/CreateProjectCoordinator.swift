@@ -125,7 +125,10 @@ extension CreateProjectCoordinator {
         detailCoordinator.delegate = self
         detailCoordinator.showProjectDetailViewController(projectID: projectID)
         detailCoordinator.didFinishEventClosure = { [weak self] in
-            self?.didFinish(childCoordinator: detailCoordinator)
+            guard let self else { return }
+            if let index = self.childCoordinators.firstIndex(where: { $0 === detailCoordinator }) {
+                self.childCoordinators.remove(at: index)
+            }
         }
         childCoordinators.append(detailCoordinator)
     }
