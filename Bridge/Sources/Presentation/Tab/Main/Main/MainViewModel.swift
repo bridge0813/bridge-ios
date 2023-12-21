@@ -160,16 +160,6 @@ final class MainViewModel: ViewModelType {
         input.bookmarkButtonTapped
             .withUnretained(self)
             .flatMap { owner, projectID -> Observable<Result<Int, Error>> in
-        
-                // 로그인이 되어 있지 않다면, Alert 보여주기
-                guard !fields.value.isEmpty else {
-                    owner.coordinator?.showAlert(configuration: .signIn, primaryAction: {
-                        owner.coordinator?.showSignInViewController()
-                    })
-                    return .empty()
-                }
-                
-                // 로그인이 되어 있다면, 북마크 수행
                 return owner.bookmarkUseCase.bookmark(projectID: projectID).toResult()
             }
             .observe(on: MainScheduler.instance)
@@ -180,10 +170,7 @@ final class MainViewModel: ViewModelType {
                     bookmarkedProjectID.accept(projectID)
                     
                 case .failure(let error):
-                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                        title: "오류",
-                        description: error.localizedDescription
-                    ))
+                    owner.handleNetworkError(error)
                 }
             })
             .disposed(by: disposeBag)
@@ -236,6 +223,20 @@ private extension MainViewModel {
             
         case .failure(let error):
             projects.accept([])
+            handleNetworkError(error)
+        }
+    }
+    
+    /// 네트워크 에러가 401일 경우 로그인 Alert을 보여주고, 나머지 경우에는 Error Alert
+    private func handleNetworkError(_ error: Error) {
+        if let networkError = error as? NetworkError, case .statusCode(401) = networkError {
+            coordinator?.showAlert(
+                configuration: .signIn,
+                primaryAction: { [weak self] in
+                    self?.coordinator?.showSignInViewController()
+                }
+            )
+        } else {
             coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
                 title: "오류",
                 description: error.localizedDescription
