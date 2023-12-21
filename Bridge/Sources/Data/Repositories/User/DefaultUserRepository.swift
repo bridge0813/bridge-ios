@@ -22,7 +22,7 @@ final class DefaultUserRepository: UserRepository {
         let userID = tokenStorage.get(.userID) 
         let userEndpoint = UserEndpoint.fetchProfilePreview(userID: userID)
         
-        return networkService.request(to: userEndpoint, interceptor: nil)
+        return networkService.request(to: userEndpoint, interceptor: AuthInterceptor())
             .decode(type: ProfilePreviewResponseDTO.self, decoder: JSONDecoder())
             .map { $0.toEntity() }
     }
