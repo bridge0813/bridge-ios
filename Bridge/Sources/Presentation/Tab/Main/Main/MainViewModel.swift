@@ -13,7 +13,6 @@ final class MainViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
-        let searchButtonTapped: ControlEvent<Void>
         let createButtonTapped: ControlEvent<Void>
         let itemSelected: Observable<Int>
         let bookmarkButtonTapped: Observable<Int>
@@ -172,14 +171,6 @@ final class MainViewModel: ViewModelType {
                 case .failure(let error):
                     owner.handleNetworkError(error)
                 }
-            })
-            .disposed(by: disposeBag)
-        
-        // 검색 이동
-        input.searchButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.connectToProjectSearchFlow()
             })
             .disposed(by: disposeBag)
         
