@@ -113,14 +113,14 @@ extension MemberRequirementInputViewModel {
         
         init(from type: String) {
             switch type {
-            case "ios": self = .ios
-            case "android": self = .android
-            case "frontend": self = .frontend
-            case "backend": self = .backend
-            case "uiux": self = .uiux
-            case "bibx": self = .bibx
-            case "videomotion": self = .videomotion
-            case "pm": self = .pm
+            case "IOS": self = .ios
+            case "AOS": self = .android
+            case "FRONTEND": self = .frontend
+            case "BACKEND": self = .backend
+            case "UIUX": self = .uiux
+            case "BIBX": self = .bibx
+            case "VIDEOMOTION": self = .videomotion
+            case "PM": self = .pm
             default: self = .ios
             }
         }

@@ -75,14 +75,14 @@ extension RecruitFieldCell {
     }
     
     enum FieldType: String {
-        case ios
-        case android
-        case frontend
-        case backend
-        case uiux
-        case bibx
-        case videomotion
-        case pm
+        case ios = "IOS"
+        case android = "AOS"
+        case frontend = "FRONTEND"
+        case backend = "BACKEND"
+        case uiux = "UIUX"
+        case bibx = "BIBX"
+        case videomotion = "VIDEOMOTION"
+        case pm = "PM"
         
         var style: FieldStyle {
             switch self {

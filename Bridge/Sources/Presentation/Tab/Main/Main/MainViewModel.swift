@@ -95,13 +95,7 @@ final class MainViewModel: ViewModelType {
             .flatMap { owner, _ -> Observable<Result<[ProjectPreview], Error>> in
                 // 로그인 상태가 아닌경우 -> 관심분야가 없음 -> 전체 모집글 조회
                 // else 가장 첫 번째 관심분야에 맞는 모집글 조회
-                if selectedField.value == "전체" {
-                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
-                    
-                } else {
-                    let requestField = String(describing: FieldType(rawValue: selectedField.value) ?? .ios)
-                    return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
-                }
+                owner.fetchProjectsForSelectedField(selectedField.value)
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -255,7 +249,7 @@ private extension MainViewModel {
         if field == "전체" {
             return fetchAllProjectsUseCase.fetchProjects().toResult()
         } else {
-            let requestField = String(describing: FieldType(rawValue: field) ?? .ios)
+            let requestField = FieldType(from: field).rawValue
             return fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
         }
     }
@@ -276,26 +270,27 @@ extension MainViewModel {
         case comingSoon2
     }
     
-    enum FieldType: String, CustomStringConvertible {
-        case ios = "iOS"
-        case android = "안드로이드"
-        case frontend = "프론트엔드"
-        case backend = "백엔드"
-        case uiux = "UI/UX"
-        case bibx = "BI/BX"
-        case videomotion = "영상/모션"
+    enum FieldType: String {
+        case ios = "IOS"
+        case android = "AOS"
+        case frontend = "FRONTEND"
+        case backend = "BACKEND"
+        case uiux = "UIUX"
+        case bibx = "BIBX"
+        case videomotion = "VIDEOMOTION"
         case pm = "PM"
         
-        var description: String {
-            switch self {
-            case .ios: return "IOS"
-            case .android: return "AOS"
-            case .frontend: return "FRONTEND"
-            case .backend: return "BACKEND"
-            case .uiux: return "UIUX"
-            case .bibx: return "BIBX"
-            case .videomotion: return "VIDEOMOTION"
-            case .pm: return "PM"
+        init(from type: String) {
+            switch type {
+            case "iOS": self = .ios
+            case "안드로이드": self = .android
+            case "프론트엔드": self = .frontend
+            case "백엔드": self = .backend
+            case "UI/UX": self = .uiux
+            case "BI/BX": self = .bibx
+            case "영상/모션": self = .videomotion
+            case "PM": self = .pm
+            default: self = .ios
             }
         }
     }
