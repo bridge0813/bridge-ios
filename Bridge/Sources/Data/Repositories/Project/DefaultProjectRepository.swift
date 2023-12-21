@@ -22,7 +22,10 @@ final class DefaultProjectRepository: ProjectRepository {
     // MARK: - Fetch
     // 전체 모집글 목록 가져오기
     func fetchAllProjects() -> Observable<[ProjectPreview]> {
-        return networkService.request(to: ProjectEndpoint.fetchAllProjects, interceptor: nil)
+        let userID = tokenStorage.get(.userID)
+        let fetchAllProjectsEndpoint = ProjectEndpoint.fetchAllProjects(userID: userID)
+        
+        return networkService.request(to: fetchAllProjectsEndpoint, interceptor: nil)
             .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
             .map { projectPreviewDTOs in
                 projectPreviewDTOs.map { $0.toEntity() }

@@ -6,7 +6,7 @@
 //
 
 enum ProjectEndpoint {
-    case fetchAllProjects
+    case fetchAllProjects(userID: String)
     case fetchProjectsByField(requestDTO: FieldRequestDTO)
     case fetchHotProjects
     case fetchDeadlineProjects
@@ -56,8 +56,8 @@ extension ProjectEndpoint: Endpoint {
     
     var queryParameters: QueryParameters? {
         switch self {
-        case .fetchAllProjects:
-            return nil
+        case .fetchAllProjects(let userID):
+            return ["userId": userID]
             
         case .fetchProjectsByField:
             return nil
