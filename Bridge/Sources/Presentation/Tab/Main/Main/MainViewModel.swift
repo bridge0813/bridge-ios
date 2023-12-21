@@ -249,8 +249,7 @@ private extension MainViewModel {
         if field == "전체" {
             return fetchAllProjectsUseCase.fetchProjects().toResult()
         } else {
-            let requestField = FieldType(from: field).rawValue
-            return fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
+            return fetchProjectsByFieldUseCase.fetchProjects(for: field).toResult()
         }
     }
 }
@@ -268,30 +267,5 @@ extension MainViewModel {
         case deadline
         case comingSoon
         case comingSoon2
-    }
-    
-    enum FieldType: String {
-        case ios = "IOS"
-        case android = "AOS"
-        case frontend = "FRONTEND"
-        case backend = "BACKEND"
-        case uiux = "UIUX"
-        case bibx = "BIBX"
-        case videomotion = "VIDEOMOTION"
-        case pm = "PM"
-        
-        init(from type: String) {
-            switch type {
-            case "iOS": self = .ios
-            case "안드로이드": self = .android
-            case "프론트엔드": self = .frontend
-            case "백엔드": self = .backend
-            case "UI/UX": self = .uiux
-            case "BI/BX": self = .bibx
-            case "영상/모션": self = .videomotion
-            case "PM": self = .pm
-            default: self = .ios
-            }
-        }
     }
 }

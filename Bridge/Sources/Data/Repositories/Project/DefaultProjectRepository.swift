@@ -34,7 +34,7 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // 특정 분야에 맞는 모집글 목록 가져오기
     func fetchProjectsByField(for field: String) -> Observable<[ProjectPreview]> {
-        let fieldRequestDTO = FieldRequestDTO(field: field)
+        let fieldRequestDTO = convertToFieldDTO(from: field)
         let fetchProjectsEndPoint = ProjectEndpoint.fetchProjectsByField(requestDTO: fieldRequestDTO)
         
         return networkService.request(to: fetchProjectsEndPoint, interceptor: AuthInterceptor())
@@ -89,7 +89,7 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // MARK: - Create
     func create(project: Project) -> Observable<Int> {
-        let createProjectDTO = convertToDTO(from: project)
+        let createProjectDTO = convertToCreateDTO(from: project)
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)
         
         return networkService.request(to: createProjectEndpoint, interceptor: AuthInterceptor())
@@ -150,8 +150,10 @@ final class DefaultProjectRepository: ProjectRepository {
     }
 }
 
+// MARK: - Methods
 private extension DefaultProjectRepository {
-    func convertToDTO(from project: Project) -> CreateProjectRequestDTO {
+    /// '모집글 작성'의 네트워킹을 위한 DTO를 만들어주는 메서드.
+    func convertToCreateDTO(from project: Project) -> CreateProjectRequestDTO {
         let userID = Int(tokenStorage.get(.userID)) ?? 0
         
         let memberRequirementsDTO = project.memberRequirements.map { requirement -> MemberRequirementDTO in
@@ -179,5 +181,22 @@ private extension DefaultProjectRepository {
             progressStep: project.progressStep,
             userID: userID
         )
+    }
+    
+    /// '특정 분야에 맞는 모집글 조회'의 네트워킹을 위한 DTO를 만들어주는 메서드.
+    func convertToFieldDTO(from field: String) -> FieldRequestDTO {
+        let requestfield = String(describing: FieldType(rawValue: field) ?? .ios).uppercased()
+        return FieldRequestDTO(field: requestfield)
+    }
+    
+    enum FieldType: String {
+        case ios = "iOS"
+        case aos = "안드로이드"
+        case frontend = "프론트엔드"
+        case backend = "백엔드"
+        case uiux = "UI/UX"
+        case bibx = "BI/BX"
+        case videomotion = "영상/모션"
+        case pm = "PM"
     }
 }
