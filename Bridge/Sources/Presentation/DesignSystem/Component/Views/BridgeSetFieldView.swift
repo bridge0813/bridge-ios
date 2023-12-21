@@ -119,7 +119,7 @@ final class BridgeSetFieldView: BaseView {
 extension BridgeSetFieldView {
     enum FieldTagButtonType: String {
         case ios = "IOS"
-        case android = "AOS"
+        case android = "ANDROID"
         case frontend = "FRONTEND"
         case backend = "BACKEND"
         case uiux = "UIUX"

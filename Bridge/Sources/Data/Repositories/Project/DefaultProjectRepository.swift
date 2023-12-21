@@ -191,7 +191,7 @@ private extension DefaultProjectRepository {
     
     enum FieldType: String {
         case ios = "iOS"
-        case aos = "안드로이드"
+        case android = "안드로이드"
         case frontend = "프론트엔드"
         case backend = "백엔드"
         case uiux = "UI/UX"

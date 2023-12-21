@@ -149,7 +149,7 @@ extension RecruitFieldDetailCell {
     
     enum FieldType: String {
         case ios = "IOS"
-        case android = "AOS"
+        case android = "ANDROID"
         case frontend = "FRONTEND"
         case backend = "BACKEND"
         case uiux = "UIUX"

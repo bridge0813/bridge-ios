@@ -114,7 +114,7 @@ extension MemberRequirementInputViewModel {
         init(from type: String) {
             switch type {
             case "IOS": self = .ios
-            case "AOS": self = .android
+            case "ANDROID": self = .android
             case "FRONTEND": self = .frontend
             case "BACKEND": self = .backend
             case "UIUX": self = .uiux
