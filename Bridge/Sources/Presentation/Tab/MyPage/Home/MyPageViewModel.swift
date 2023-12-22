@@ -78,14 +78,14 @@ final class MyPageViewModel: ViewModelType {
         input.interestedFieldButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showSetInterestedFieldViewController()
+                owner.coordinator?.showMyFieldViewController()
             })
             .disposed(by: disposeBag)
         
         input.bookmarkedProjectButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showBookmarkedProjectsViewController()
+                owner.coordinator?.showBookmarkedProjectViewController()
             })
             .disposed(by: disposeBag)
         
