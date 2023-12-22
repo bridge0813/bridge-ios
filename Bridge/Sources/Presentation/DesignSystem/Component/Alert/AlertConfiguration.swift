@@ -144,3 +144,12 @@ extension AlertConfiguration {
         rightButtonTitle: "지원하기"
     )
 }
+
+// MARK: - User
+extension AlertConfiguration {
+    static let fieldChanged = AlertConfiguration(
+        title: "관심분야 변경 완료",
+        description: "관심분야 변경이 완료되었어요.",
+        rightButtonTitle: "확인하기"
+    )
+}
