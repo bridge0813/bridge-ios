@@ -93,6 +93,7 @@
 		7B92B7E32AE501CD00B0E954 /* FetchMessagesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B92B7E22AE501CD00B0E954 /* FetchMessagesUseCase.swift */; };
 		7B93AAA32B2012D800650EA5 /* StompMessageRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93AAA22B2012D800650EA5 /* StompMessageRequestDTO.swift */; };
 		7B93AAA82B21997300650EA5 /* UnreadMessageCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93AAA72B21997300650EA5 /* UnreadMessageCountView.swift */; };
+		7B93B3A42B352C9C00912202 /* AlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3A32B352C9C00912202 /* AlertCell.swift */; };
 		7B9420502B04DAAB00FEE058 /* StompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */; };
 		7B9420522B04DD9100FEE058 /* MessageStompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */; };
 		7B9420542B04F46F00FEE058 /* StompMessageResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */; };
@@ -371,6 +372,7 @@
 		7B92B7E22AE501CD00B0E954 /* FetchMessagesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMessagesUseCase.swift; sourceTree = "<group>"; };
 		7B93AAA22B2012D800650EA5 /* StompMessageRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompMessageRequestDTO.swift; sourceTree = "<group>"; };
 		7B93AAA72B21997300650EA5 /* UnreadMessageCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadMessageCountView.swift; sourceTree = "<group>"; };
+		7B93B3A32B352C9C00912202 /* AlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCell.swift; sourceTree = "<group>"; };
 		7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompMessageResponseDTO.swift; sourceTree = "<group>"; };
@@ -1375,6 +1377,7 @@
 			children = (
 				7BEA73972B2B2FB000CECF44 /* AlertViewModel.swift */,
 				7BEA73992B2B2FC500CECF44 /* AlertViewController.swift */,
+				7B93B3A32B352C9C00912202 /* AlertCell.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -2187,6 +2190,7 @@
 				7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */,
 				7BA36CBF2A9DA44F000DAB02 /* NetworkError.swift in Sources */,
 				7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */,
+				7B93B3A42B352C9C00912202 /* AlertCell.swift in Sources */,
 				7B1922CC2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift in Sources */,
 				7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */,
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
