@@ -11,6 +11,7 @@ enum ProjectEndpoint {
     case fetchHotProjects
     case fetchDeadlineProjects
     case fetchAppliedProjects
+    case fetchMyProjects
     case fetchProjectDetail(userID: String, projectID: String)
     
     case create(requestDTO: CreateProjectRequestDTO)
@@ -37,6 +38,9 @@ extension ProjectEndpoint: Endpoint {
             
         case .fetchAppliedProjects:
             return "/projects/apply"
+            
+        case .fetchMyProjects:
+            return "/projects"
             
         case .fetchProjectDetail:
             return "/project"
@@ -73,6 +77,9 @@ extension ProjectEndpoint: Endpoint {
             return nil
             
         case .fetchAppliedProjects:
+            return nil
+            
+        case .fetchMyProjects:
             return nil
             
         case .fetchProjectDetail(let userID, let projectID):
@@ -112,6 +119,9 @@ extension ProjectEndpoint: Endpoint {
         case .fetchAppliedProjects:
             return .get
             
+        case .fetchMyProjects:
+            return .get
+            
         case .fetchProjectDetail:
             return .get
             
@@ -147,6 +157,9 @@ extension ProjectEndpoint: Endpoint {
             return nil
             
         case .fetchAppliedProjects:
+            return nil
+            
+        case .fetchMyProjects:
             return nil
             
         case .fetchProjectDetail:

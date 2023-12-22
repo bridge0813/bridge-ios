@@ -73,7 +73,11 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // 내가 작성한 모집글 목록 가져오기
     func fetchMyProjects() -> Observable<[ProjectPreview]> {
-        .just(MyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+        return networkService.request(to: ProjectEndpoint.fetchMyProjects, interceptor: AuthInterceptor())
+            .decode(type: [MyProjectResponseDTO].self, decoder: JSONDecoder())
+            .map { myProjectDTOs in
+                myProjectDTOs.map { $0.toEntity() }
+            }
     }
     
     // 모집글 상세정보 가져오기
