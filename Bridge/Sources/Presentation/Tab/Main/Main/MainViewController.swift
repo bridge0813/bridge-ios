@@ -22,7 +22,11 @@ final class MainViewController: BaseViewController {
         return view
     }()
     
-    private let fieldCategoryAnchorButton = FieldCategoryAnchorButton()
+    private let fieldCategoryAnchorButton: FieldCategoryAnchorButton = {
+        let button = FieldCategoryAnchorButton()
+        button.frame = CGRect(x: 0, y: 0, width: 150, height: 20)
+        return button
+    }()
     private lazy var fieldDropdown = DropDown(
         anchorView: fieldCategoryAnchorButton,
         bottomOffset: CGPoint(x: 0, y: 10),
@@ -204,7 +208,6 @@ final class MainViewController: BaseViewController {
                 
                 // 로그인 유무에 따라 이미지가 표시될지 결정
                 self.fieldCategoryAnchorButton.isImageVisible = !fields.isEmpty
-                self.fieldCategoryAnchorButton.sizeToFit()
             })
             .disposed(by: disposeBag)
         
@@ -219,7 +222,6 @@ final class MainViewController: BaseViewController {
                 self.fieldDropdown.selectedItemIndexRow = selectedIndex
                 
                 self.fieldCategoryAnchorButton.title = field
-                self.fieldCategoryAnchorButton.sizeToFit()
             })
             .disposed(by: disposeBag)
         
