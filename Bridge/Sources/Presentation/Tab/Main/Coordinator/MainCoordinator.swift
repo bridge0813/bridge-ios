@@ -29,10 +29,10 @@ final class MainCoordinator: Coordinator {
         self.childCoordinators = []
 
         let networkService = DefaultNetworkService()
-        userRepository = MockUserRepository()
-//        DefaultUserRepository(networkService: networkService)  // 프로필
-        projectRepository = MockProjectRepository()
-//        DefaultUserRepository(networkService: networkService)  // 모집글
+        userRepository = DefaultUserRepository(networkService: networkService)  // 프로필 리포지토리
+        projectRepository = DefaultProjectRepository(networkService: networkService)  // 모집글 리포지토리
+//        userRepository = MockUserRepository()
+//        projectRepository = MockProjectRepository()
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         fetchAllProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
@@ -83,10 +83,16 @@ extension MainCoordinator {
     }
     
     func connectToProjectDetailFlow(with projectID: Int) {
-        // TODO: - 연결된 코디네이터 제거 작업
-        let coordinator = ProjectDetailCoordinator(navigationController: navigationController)
-        coordinator.start()
-        childCoordinators.append(coordinator)
+        let detailCoordinator = ProjectDetailCoordinator(navigationController: navigationController)
+        detailCoordinator.delegate = self
+        detailCoordinator.showProjectDetailViewController(projectID: projectID)
+        detailCoordinator.didFinishEventClosure = { [weak self] in
+            guard let self else { return }
+            if let index = self.childCoordinators.firstIndex(where: { $0 === detailCoordinator }) {
+                self.childCoordinators.remove(at: index)
+            }
+        }
+        childCoordinators.append(detailCoordinator)
     }
     
     func connectToCreateProjectFlow() {

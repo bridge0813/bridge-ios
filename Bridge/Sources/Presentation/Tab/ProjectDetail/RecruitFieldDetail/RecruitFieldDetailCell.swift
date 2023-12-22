@@ -64,7 +64,7 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
         return view
     }()
     
-    private let techStackLabel: UILabel = {
+    private let techStackTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "스택"
         label.textColor = BridgeColor.gray01
@@ -98,24 +98,18 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
             flex.addItem(blueContainer).height(95).paddingLeft(16).define { flex in
                 flex.addItem(tagLabel).width(tagLabel.intrinsicContentSize.width).height(22).marginTop(24)
                 
-                flex.addItem(flexContainer)
-                    .direction(.row)
-                    .justifyContent(.spaceBetween)
-                    .alignItems(.center)
-                    .height(22)
-                    .marginTop(15)
-                    .define { flex in
-                        flex.addItem(fieldLabel)
-                        flex.addItem(recruitNumberLabel).height(14).marginRight(18)
-                    }
+                flex.addItem(flexContainer).direction(.row).alignItems(.center).marginTop(15).define { flex in
+                    flex.addItem(fieldLabel).grow(1).height(22)
+                    flex.addItem(recruitNumberLabel).height(14).marginRight(18)
+                }
             }
             
             flex.addItem(requirementTitleLabel).width(52).height(18).marginTop(20).marginLeft(16)
-            flex.addItem(requirementLabel).marginTop(12).marginHorizontal(16)
+            flex.addItem(requirementLabel).marginTop(12).marginHorizontal(16).markDirty()
             
             flex.addItem(dividerView).height(1).marginTop(14).marginHorizontal(16)
             
-            flex.addItem(techStackLabel).width(25).height(18).marginTop(14).marginLeft(16)
+            flex.addItem(techStackTitleLabel).width(25).height(18).marginTop(14).marginLeft(16)
             
             flex.addItem(tagContainer)
                 .direction(.row)
@@ -154,14 +148,14 @@ extension RecruitFieldDetailCell {
     }
     
     enum FieldType: String {
-        case ios
-        case android
-        case frontend
-        case backend
-        case uiux
-        case bibx
-        case videomotion
-        case pm
+        case ios = "IOS"
+        case android = "ANDROID"
+        case frontend = "FRONTEND"
+        case backend = "BACKEND"
+        case uiux = "UIUX"
+        case bibx = "BIBX"
+        case videomotion = "VIDEOMOTION"
+        case pm = "PM"
         
         var style: FieldStyle {
             switch self {

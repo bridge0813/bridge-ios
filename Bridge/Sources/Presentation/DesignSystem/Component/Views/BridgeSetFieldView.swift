@@ -118,14 +118,14 @@ final class BridgeSetFieldView: BaseView {
 // MARK: - Button tap observalbe
 extension BridgeSetFieldView {
     enum FieldTagButtonType: String {
-        case ios
-        case android
-        case frontend
-        case backend
-        case uiux
-        case bibx
-        case videomotion
-        case pm
+        case ios = "IOS"
+        case android = "ANDROID"
+        case frontend = "FRONTEND"
+        case backend = "BACKEND"
+        case uiux = "UIUX"
+        case bibx = "BIBX"
+        case videomotion = "VIDEOMOTION"
+        case pm = "PM"
     }
     
     var fieldTagButtonTapped: Observable<String> {

@@ -27,7 +27,8 @@ final class DefaultAuthRepository: AuthRepository {
         
         let signInWithAppleRequestDTO = SignInWithAppleRequestDTO(
             userName: tokenStorage.get(.userName),
-            identityToken: credentials.identityToken ?? invalidToken
+            identityToken: credentials.identityToken ?? invalidToken,
+            fcmToken: tokenStorage.get(.fcmToken)
         )
         let authEndpoint = AuthEndpoint.signInWithApple(requestDTO: signInWithAppleRequestDTO)
         

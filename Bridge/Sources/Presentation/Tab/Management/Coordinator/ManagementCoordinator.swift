@@ -103,7 +103,7 @@ extension ManagementCoordinator {
     // MARK: - Connect
     func connectToProjectDetailFlow(with projectID: Int) {
         let detailCoordinator = ProjectDetailCoordinator(navigationController: navigationController)
-        detailCoordinator.start()
+        detailCoordinator.showProjectDetailViewController(projectID: projectID)
         detailCoordinator.didFinishEventClosure = { [weak self] in
             guard let self else { return }
             if let index = self.childCoordinators.firstIndex(where: { $0 === detailCoordinator }) {

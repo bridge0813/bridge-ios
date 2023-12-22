@@ -6,7 +6,7 @@
 //
 
 typealias Token = String
-let invalidToken = "-1"
+let invalidToken = ""
 
 /// 토큰 저장소
 protocol TokenStorage {

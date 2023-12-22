@@ -12,15 +12,6 @@ import PinLayout
 /// 모집하는 분야를 나타내는 Cell
 final class RecruitFieldCell: BaseCollectionViewCell {
     // MARK: - UI
-    private let rootFlexContainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = BridgeColor.gray09
-        view.layer.cornerRadius = 8
-        view.clipsToBounds = true
-        
-        return view
-    }()
-    
     private let tagLabel = BridgeFilledChip(backgroundColor: BridgeColor.primary1, type: .short)
     
     private let fieldLabel: UILabel = {
@@ -45,15 +36,20 @@ final class RecruitFieldCell: BaseCollectionViewCell {
         return imageView
     }()
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        contentView.backgroundColor = BridgeColor.gray09
+        contentView.layer.cornerRadius = 8
+        contentView.clipsToBounds = true
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
-        contentView.addSubview(rootFlexContainer)
-        
-        rootFlexContainer.flex.paddingLeft(14).define { flex in
+        contentView.flex.paddingLeft(14).define { flex in
             flex.addItem(tagLabel).marginTop(14)
             
             flex.addItem().direction(.row).justifyContent(.spaceBetween).marginTop(31).define { flex in
-                flex.addItem().define { flex in
+                flex.addItem().grow(1).define { flex in
                     flex.addItem(fieldLabel).height(24)
                     flex.addItem(recruitNumberLabel).height(14).marginTop(4)
                 }
@@ -65,8 +61,8 @@ final class RecruitFieldCell: BaseCollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.all()
-        rootFlexContainer.flex.layout()
+        contentView.pin.all()
+        contentView.flex.layout()
     }
 }
 
@@ -79,14 +75,14 @@ extension RecruitFieldCell {
     }
     
     enum FieldType: String {
-        case ios
-        case android
-        case frontend
-        case backend
-        case uiux
-        case bibx
-        case videomotion
-        case pm
+        case ios = "IOS"
+        case android = "ANDROID"
+        case frontend = "FRONTEND"
+        case backend = "BACKEND"
+        case uiux = "UIUX"
+        case bibx = "BIBX"
+        case videomotion = "VIDEOMOTION"
+        case pm = "PM"
         
         var style: FieldStyle {
             switch self {

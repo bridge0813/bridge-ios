@@ -40,12 +40,15 @@ final class ProjectDetailMenuBar: BaseView {
     }()
     
     // MARK: - Property
-    var bookmarkButtonTapped: Observable<Bool> {
-        return bookmarkButton.rx.tap
-            .withUnretained(self)
-            .map { owner, _ in
-                return owner.bookmarkButton.isSelected
-            }
+    /// 북마크 버튼의 북마크 표시 여부
+    var isBookmarked = false {
+        didSet {
+            bookmarkButton.isBookmarked = isBookmarked
+        }
+    }
+    
+    var bookmarkButtonTapped: Observable<Void> {
+        return bookmarkButton.rx.tap.asObservable()
     }
     
     var applyButtonTapped: Observable<Void> {
@@ -68,12 +71,5 @@ final class ProjectDetailMenuBar: BaseView {
         
         let shadowPath = UIBezierPath(rect: rootFlexContainer.bounds)
         rootFlexContainer.layer.shadowPath = shadowPath.cgPath
-    }
-}
-
-// MARK: - Configuration
-extension ProjectDetailMenuBar {
-    func configureContents(with data: Project) {
-        bookmarkButton.isSelected = data.isBookmarked
     }
 }

@@ -15,28 +15,42 @@ final class ProjectDetailCoordinator: Coordinator {
     var didFinishEventClosure: (() -> Void)?  // disAppear 시점에 자식 코디네이터에서 할당을 제거하기 위함.
     
     private let projectRepository: ProjectRepository
+    
     private let projectDetailUseCase: FetchProjectDetailUseCase
+    private let bookmarkUseCase: BookmarkUseCase
+    private let applyUseCase: ApplyProjectUseCase
+    private let deleteUseCase: DeleteProjectUseCase
+    private let closeUseCase: CloseProjectUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         
-        projectRepository = MockProjectRepository()
+        let networkService = DefaultNetworkService()
+        projectRepository = DefaultProjectRepository(networkService: networkService)
+        
         projectDetailUseCase = DefaultFetchProjectDetailUseCase(projectRepository: projectRepository)
+        bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
+        applyUseCase = DefaultApplyProjectUseCase(projectRepository: projectRepository)
+        deleteUseCase = DefaultDeleteProjectUseCase(projectRepository: projectRepository)
+        closeUseCase = DefaultCloseProjectUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Methods
-    func start() {
-        showProjectDetailViewController()
-    }
+    func start() { }
 }
 
 extension ProjectDetailCoordinator {
     // MARK: - Show
-    func showProjectDetailViewController() {
+    func showProjectDetailViewController(projectID: Int) {
         let viewModel = ProjectDetailViewModel(
-            coordinator: self,
-            projectDetailUseCase: projectDetailUseCase
+            coordinator: self, 
+            projectID: projectID,
+            projectDetailUseCase: projectDetailUseCase,
+            bookmarkUseCase: bookmarkUseCase,
+            applyUseCase: applyUseCase,
+            deleteUseCase: deleteUseCase,
+            closeUseCase: closeUseCase
         )
         
         let vc = ProjectDetailViewController(viewModel: viewModel)
@@ -51,5 +65,9 @@ extension ProjectDetailCoordinator {
         
         let vc = RecruitFieldDetailViewController(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showSignInViewController() {
+        delegate?.showSignInViewController()
     }
 }
