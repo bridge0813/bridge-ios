@@ -102,6 +102,8 @@
 		7B93B3B42B353A9400912202 /* MockAlertRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3B32B353A9400912202 /* MockAlertRepository.swift */; };
 		7B93B3B72B353B1100912202 /* AlertEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3B62B353B1100912202 /* AlertEndpoint.swift */; };
 		7B93B3BA2B353CC700912202 /* BridgeAlertResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3B92B353CC700912202 /* BridgeAlertResponseDTO.swift */; };
+		7B93B3BC2B35591600912202 /* ChangeFieldRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3BB2B35591600912202 /* ChangeFieldRequestDTO.swift */; };
+		7B93B3BE2B355A5C00912202 /* ChangeFieldUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3BD2B355A5C00912202 /* ChangeFieldUseCase.swift */; };
 		7B9420502B04DAAB00FEE058 /* StompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */; };
 		7B9420522B04DD9100FEE058 /* MessageStompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */; };
 		7B9420542B04F46F00FEE058 /* StompMessageResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */; };
@@ -173,6 +175,7 @@
 		7BBD662A2AFB98D2001644D1 /* ObservableType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD66292AFB98D2001644D1 /* ObservableType+.swift */; };
 		7BCA18072AFDCC0F00257B04 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */; };
 		7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */; };
+		7BEA737F2B29E44100CECF44 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA737E2B29E44100CECF44 /* GoogleService-Info.plist */; };
 		7BEA73832B2B2B7400CECF44 /* BookmarkedProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA73822B2B2B7400CECF44 /* BookmarkedProjectViewModel.swift */; };
 		7BEA73872B2B2C1C00CECF44 /* BookmarkedProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA73862B2B2C1C00CECF44 /* BookmarkedProjectViewController.swift */; };
 		7BEA738D2B2B2DF100CECF44 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA738C2B2B2DF100CECF44 /* ProfileViewModel.swift */; };
@@ -181,7 +184,6 @@
 		7BEA73952B2B2F3F00CECF44 /* MyFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA73942B2B2F3F00CECF44 /* MyFieldViewModel.swift */; };
 		7BEA73982B2B2FB000CECF44 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA73972B2B2FB000CECF44 /* AlertViewModel.swift */; };
 		7BEA739A2B2B2FC500CECF44 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA73992B2B2FC500CECF44 /* AlertViewController.swift */; };
-		7BEA737F2B29E44100CECF44 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA737E2B29E44100CECF44 /* GoogleService-Info.plist */; };
 		7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */; };
 		7BFECA222AEBEC0B009B4C7D /* BaseChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA212AEBEC0B009B4C7D /* BaseChatCell.swift */; };
 		7BFECA242AECE632009B4C7D /* ApplicationResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */; };
@@ -419,6 +421,8 @@
 		7B93B3B32B353A9400912202 /* MockAlertRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlertRepository.swift; sourceTree = "<group>"; };
 		7B93B3B62B353B1100912202 /* AlertEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertEndpoint.swift; sourceTree = "<group>"; };
 		7B93B3B92B353CC700912202 /* BridgeAlertResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAlertResponseDTO.swift; sourceTree = "<group>"; };
+		7B93B3BB2B35591600912202 /* ChangeFieldRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFieldRequestDTO.swift; sourceTree = "<group>"; };
+		7B93B3BD2B355A5C00912202 /* ChangeFieldUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFieldUseCase.swift; sourceTree = "<group>"; };
 		7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompMessageResponseDTO.swift; sourceTree = "<group>"; };
@@ -463,6 +467,7 @@
 		7BBD66292AFB98D2001644D1 /* ObservableType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+.swift"; sourceTree = "<group>"; };
 		7BCA18062AFDCC0F00257B04 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		7BE1C6D72ACE852C00C7B730 /* BridgeSetFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSetFieldView.swift; sourceTree = "<group>"; };
+		7BEA737E2B29E44100CECF44 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7BEA73822B2B2B7400CECF44 /* BookmarkedProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedProjectViewModel.swift; sourceTree = "<group>"; };
 		7BEA73862B2B2C1C00CECF44 /* BookmarkedProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedProjectViewController.swift; sourceTree = "<group>"; };
 		7BEA738C2B2B2DF100CECF44 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -471,7 +476,6 @@
 		7BEA73942B2B2F3F00CECF44 /* MyFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFieldViewModel.swift; sourceTree = "<group>"; };
 		7BEA73972B2B2FB000CECF44 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		7BEA73992B2B2FC500CECF44 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		7BEA737E2B29E44100CECF44 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7BFA13162AD2AF5900EF4112 /* MockAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthRepository.swift; sourceTree = "<group>"; };
 		7BFECA212AEBEC0B009B4C7D /* BaseChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatCell.swift; sourceTree = "<group>"; };
 		7BFECA232AECE632009B4C7D /* ApplicationResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationResultCell.swift; sourceTree = "<group>"; };
@@ -1652,6 +1656,7 @@
 				7CD023C22B2F109C00F55648 /* UserID */,
 				7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */,
 				7CD023BA2B2B486400F55648 /* ApplicantProfileResponseDTO.swift */,
+				7B93B3BB2B35591600912202 /* ChangeFieldRequestDTO.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1678,6 +1683,7 @@
 			children = (
 				7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */,
 				7CC719F62B2838C300CFA827 /* FetchApplicantListUseCase.swift */,
+				7B93B3BD2B355A5C00912202 /* ChangeFieldUseCase.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -2378,6 +2384,7 @@
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
 				7CA04F1E2AFE4B0F007B9191 /* RecruitFieldCell.swift in Sources */,
 				7BA36C9D2A9C5105000DAB02 /* Message.swift in Sources */,
+				7B93B3BE2B355A5C00912202 /* ChangeFieldUseCase.swift in Sources */,
 				7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */,
 				7BA36CBF2A9DA44F000DAB02 /* NetworkError.swift in Sources */,
 				7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */,
@@ -2402,6 +2409,7 @@
 				7B9C31A92B0772B8007E36B2 /* WebSocketService.swift in Sources */,
 				7B6123942AC4345B006E72C1 /* BridgeAlertViewController.swift in Sources */,
 				7B9C31A72B0753EF007E36B2 /* String+Stomp.swift in Sources */,
+				7B93B3BC2B35591600912202 /* ChangeFieldRequestDTO.swift in Sources */,
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
 				7CA04F322B020B94007B9191 /* ProjectDetailCoordinator.swift in Sources */,
 				7CDFB6262B22CADC00272F77 /* BridgeActionSheetButton.swift in Sources */,

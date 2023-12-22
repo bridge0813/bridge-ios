@@ -16,4 +16,8 @@ final class MockUserRepository: UserRepository {
     func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]> {
         .just(ApplicantProfileResponseDTO.testArray.compactMap { $0.toEntity() })
     }
+    
+    func changeField(selectedFields: [String]) -> Observable<Void> {
+        .just(())
+    }
 }

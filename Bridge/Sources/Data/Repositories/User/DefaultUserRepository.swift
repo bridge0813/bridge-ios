@@ -30,4 +30,14 @@ final class DefaultUserRepository: UserRepository {
     func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]> {
         .just(ApplicantProfileResponseDTO.testArray.compactMap { $0.toEntity() })
     }
+    
+    func changeField(selectedFields: [String]) -> Observable<Void> {
+        let userID = tokenStorage.get(.userID)
+        let userEndpoint = UserEndpoint.changeField(
+            requestDTO: ChangeFieldRequestDTO(userID: Int(userID) ?? -1, selectedFields: selectedFields)
+        )
+        
+        return networkService.request(to: userEndpoint, interceptor: nil)
+            .map { _ in }
+    }
 }
