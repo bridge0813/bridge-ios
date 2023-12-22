@@ -16,7 +16,6 @@ final class ManagementCoordinator: Coordinator {
     private let projectRepository: ProjectRepository
     private let userRepository: UserRepository
     private let channelRepository: ChannelRepository
-    private let messageRepository: MessageRepository
     
     private let fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase
     private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
@@ -39,10 +38,9 @@ final class ManagementCoordinator: Coordinator {
         let stompService = DefaultStompService(webSocketService: DefaultWebSocketService.shared)
         
         // 리포지토리
-        projectRepository = MockProjectRepository()
-        userRepository = MockUserRepository()
+        projectRepository = DefaultProjectRepository(networkService: networkService)
+        userRepository = DefaultUserRepository(networkService: networkService)
         channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
-        messageRepository = DefaultMessageRepository(networkService: networkService, stompService: stompService)
 
         // 관리
         fetchAppliedProjectsUseCase = DefaultFetchAppliedProjectsUseCase(projectRepository: projectRepository)

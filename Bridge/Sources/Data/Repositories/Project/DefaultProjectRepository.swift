@@ -62,6 +62,20 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
+    // 지원한 모집글 목록 가져오기
+    func fetchAppliedProjects() -> Observable<[ProjectPreview]> {
+        return networkService.request(to: ProjectEndpoint.fetchAppliedProjects, interceptor: AuthInterceptor())
+            .decode(type: [AppliedProjectResponseDTO].self, decoder: JSONDecoder())
+            .map { appliedProjectDTOs in
+                appliedProjectDTOs.map { $0.toEntity() }
+            }
+    }
+    
+    // 내가 작성한 모집글 목록 가져오기
+    func fetchMyProjects() -> Observable<[ProjectPreview]> {
+        .just(MyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+    }
+    
     // 모집글 상세정보 가져오기
     func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
         let userID = tokenStorage.get(.userID)
@@ -75,16 +89,6 @@ final class DefaultProjectRepository: ProjectRepository {
             .map { dto in
                 return dto.toEntity()
             }
-    }
-    
-    // 지원한 모집글 목록 가져오기
-    func fetchAppliedProjects() -> Observable<[ProjectPreview]> {
-        .just(AppliedProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
-    }
-    
-    // 내가 작성한 모집글 목록 가져오기
-    func fetchMyProjects() -> Observable<[ProjectPreview]> {
-        .just(MyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
     // MARK: - Create
