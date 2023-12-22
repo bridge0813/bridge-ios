@@ -25,6 +25,8 @@ final class MyPageCoordinator: Coordinator {
     private let fetchAlertsUseCase: FetchAlertsUseCase
     private let removeAlertUseCase: RemoveAlertUseCase
     
+    private let changeFieldUseCase: ChangeFieldUseCase
+    
     // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -44,6 +46,8 @@ final class MyPageCoordinator: Coordinator {
         
         fetchAlertsUseCase = DefaultFetchAlertsUseCase(alertRepository: alertRepository)
         removeAlertUseCase = DefaultRemoveAlertUseCase(alertRepository: alertRepository)
+        
+        changeFieldUseCase = DefaultChangeFieldUseCase(userRepository: userRepository)
     }
     
     // MARK: - Start
@@ -76,7 +80,10 @@ extension MyPageCoordinator {
     }
     
     func showMyFieldViewController() {
-        let myFieldViewModel = MyFieldViewModel()
+        let myFieldViewModel = MyFieldViewModel(
+            coordinator: self,
+            changeFieldUseCase: changeFieldUseCase
+        )
         let myFieldViewController = MyFieldViewController(viewModel: myFieldViewModel)
         navigationController.pushViewController(myFieldViewController, animated: true)
     }
