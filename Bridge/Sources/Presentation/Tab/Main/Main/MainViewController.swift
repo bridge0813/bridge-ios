@@ -35,26 +35,27 @@ final class MainViewController: BaseViewController {
         cornerRadius: 4
     )
     
-    private lazy var filterButton = UIBarButtonItem(
-        image: UIImage(named: "hamburger")?
-            .resize(to: CGSize(width: 24, height: 24))
-            .withRenderingMode(.alwaysTemplate)
-            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 0)),
-        style: .plain,
-        target: self,
-        action: nil
-    )
-    private let filterPopUpView = FilterPopUpView()
-    
-    private lazy var searchButton = UIBarButtonItem(
-        image: UIImage(named: "magnifyingglass")?
-            .resize(to: CGSize(width: 24, height: 24))
-            .withRenderingMode(.alwaysTemplate)
-            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)),
-        style: .plain,
-        target: self,
-        action: nil
-    )
+    // TODO: - 출시 후 구현
+//    private lazy var filterButton = UIBarButtonItem(
+//        image: UIImage(named: "hamburger")?
+//            .resize(to: CGSize(width: 24, height: 24))
+//            .withRenderingMode(.alwaysTemplate)
+//            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 0)),
+//        style: .plain,
+//        target: self,
+//        action: nil
+//    )
+//    private let filterPopUpView = FilterPopUpView()
+//    
+//    private lazy var searchButton = UIBarButtonItem(
+//        image: UIImage(named: "magnifyingglass")?
+//            .resize(to: CGSize(width: 24, height: 24))
+//            .withRenderingMode(.alwaysTemplate)
+//            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)),
+//        style: .plain,
+//        target: self,
+//        action: nil
+//    )
     
     private let dividerView: UIView = {
         let divider = UIView()
@@ -128,7 +129,7 @@ final class MainViewController: BaseViewController {
     // MARK: - Configuration
     override func configureAttributes() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: fieldCategoryAnchorButton)
-        navigationItem.rightBarButtonItems = [searchButton, filterButton]
+//        navigationItem.rightBarButtonItems = [searchButton, filterButton]
     }
     
     // MARK: - Layout
@@ -155,7 +156,6 @@ final class MainViewController: BaseViewController {
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            searchButtonTapped: searchButton.rx.tap,
             createButtonTapped: createProjectButton.rx.tap,
             itemSelected: itemSelected,
             bookmarkButtonTapped: bookmarkButtonTapped,
@@ -267,12 +267,12 @@ final class MainViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         // 필터뷰 Show
-        filterButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.filterPopUpView.show()
-            })
-            .disposed(by: disposeBag)
+//        filterButton.rx.tap
+//            .withUnretained(self)
+//            .subscribe(onNext: { owner, _ in
+//                owner.filterPopUpView.show()
+//            })
+//            .disposed(by: disposeBag)
     }
 }
 

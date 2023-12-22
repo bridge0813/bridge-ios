@@ -13,7 +13,6 @@ final class MainViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
-        let searchButtonTapped: ControlEvent<Void>
         let createButtonTapped: ControlEvent<Void>
         let itemSelected: Observable<Int>
         let bookmarkButtonTapped: Observable<Int>
@@ -95,13 +94,7 @@ final class MainViewModel: ViewModelType {
             .flatMap { owner, _ -> Observable<Result<[ProjectPreview], Error>> in
                 // 로그인 상태가 아닌경우 -> 관심분야가 없음 -> 전체 모집글 조회
                 // else 가장 첫 번째 관심분야에 맞는 모집글 조회
-                if selectedField.value == "전체" {
-                    return owner.fetchAllProjectsUseCase.fetchProjects().toResult()
-                    
-                } else {
-                    let requestField = String(describing: FieldType(rawValue: selectedField.value) ?? .ios)
-                    return owner.fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
-                }
+                owner.fetchProjectsForSelectedField(selectedField.value)
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -166,16 +159,6 @@ final class MainViewModel: ViewModelType {
         input.bookmarkButtonTapped
             .withUnretained(self)
             .flatMap { owner, projectID -> Observable<Result<Int, Error>> in
-        
-                // 로그인이 되어 있지 않다면, Alert 보여주기
-                guard !fields.value.isEmpty else {
-                    owner.coordinator?.showAlert(configuration: .signIn, primaryAction: {
-                        owner.coordinator?.showSignInViewController()
-                    })
-                    return .empty()
-                }
-                
-                // 로그인이 되어 있다면, 북마크 수행
                 return owner.bookmarkUseCase.bookmark(projectID: projectID).toResult()
             }
             .observe(on: MainScheduler.instance)
@@ -186,19 +169,8 @@ final class MainViewModel: ViewModelType {
                     bookmarkedProjectID.accept(projectID)
                     
                 case .failure(let error):
-                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                        title: "오류",
-                        description: error.localizedDescription
-                    ))
+                    owner.handleNetworkError(error)
                 }
-            })
-            .disposed(by: disposeBag)
-        
-        // 검색 이동
-        input.searchButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.connectToProjectSearchFlow()
             })
             .disposed(by: disposeBag)
         
@@ -242,6 +214,20 @@ private extension MainViewModel {
             
         case .failure(let error):
             projects.accept([])
+            handleNetworkError(error)
+        }
+    }
+    
+    /// 네트워크 에러가 401일 경우 로그인 Alert을 보여주고, 나머지 경우에는 Error Alert
+    private func handleNetworkError(_ error: Error) {
+        if let networkError = error as? NetworkError, case .statusCode(401) = networkError {
+            coordinator?.showAlert(
+                configuration: .signIn,
+                primaryAction: { [weak self] in
+                    self?.coordinator?.showSignInViewController()
+                }
+            )
+        } else {
             coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
                 title: "오류",
                 description: error.localizedDescription
@@ -255,8 +241,7 @@ private extension MainViewModel {
         if field == "전체" {
             return fetchAllProjectsUseCase.fetchProjects().toResult()
         } else {
-            let requestField = String(describing: FieldType(rawValue: field) ?? .ios)
-            return fetchProjectsByFieldUseCase.fetchProjects(for: requestField).toResult()
+            return fetchProjectsByFieldUseCase.fetchProjects(for: field).toResult()
         }
     }
 }
@@ -274,29 +259,5 @@ extension MainViewModel {
         case deadline
         case comingSoon
         case comingSoon2
-    }
-    
-    enum FieldType: String, CustomStringConvertible {
-        case ios = "iOS"
-        case android = "안드로이드"
-        case frontend = "프론트엔드"
-        case backend = "백엔드"
-        case uiux = "UI/UX"
-        case bibx = "BI/BX"
-        case videomotion = "영상/모션"
-        case pm = "PM"
-        
-        var description: String {
-            switch self {
-            case .ios: return "IOS"
-            case .android: return "AOS"
-            case .frontend: return "FRONTEND"
-            case .backend: return "BACKEND"
-            case .uiux: return "UIUX"
-            case .bibx: return "BIBX"
-            case .videomotion: return "VIDEOMOTION"
-            case .pm: return "PM"
-            }
-        }
     }
 }

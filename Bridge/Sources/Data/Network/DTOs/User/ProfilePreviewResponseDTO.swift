@@ -35,7 +35,7 @@ extension ProfilePreviewResponseDTO {
     static let testData = ProfilePreviewResponseDTO(
         profileImage: "",
         name: "정호윤",
-        fields: ["iOS", "UI/UX"],
+        fields: ["iOS", "안드로이드", "프론트엔드", "백엔드", "UI/UX", "BI/BX", "영상/모션", "PM"],
         bookmarkedProjectCount: 10
     )
 }
