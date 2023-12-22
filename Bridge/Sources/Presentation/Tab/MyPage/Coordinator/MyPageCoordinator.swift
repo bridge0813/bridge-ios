@@ -23,7 +23,7 @@ final class MyPageCoordinator: Coordinator {
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
     
     private let fetchAlertsUseCase: FetchAlertsUseCase
-    private let removeAlertsUseCase: RemoveAlertUseCase
+    private let removeAlertUseCase: RemoveAlertUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -33,17 +33,17 @@ final class MyPageCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
         userRepository = DefaultUserRepository(networkService: networkService)
-        alertRepository = DefaultAlertRepository(networkService: networkService)
+//        alertRepository = DefaultAlertRepository(networkService: networkService)
 //        authRepository = MockAuthRepository()
 //        userRepository = MockUserRepository()
-//        alertRepository = MockAlertRepository()
+        alertRepository = MockAlertRepository()
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
         withdrawUseCase = DefaultWithdrawUseCase(authRepository: authRepository)
         
         fetchAlertsUseCase = DefaultFetchAlertsUseCase(alertRepository: alertRepository)
-        removeAlertsUseCase = DefaultRemoveAlertUseCase(alertRepository: alertRepository)
+        removeAlertUseCase = DefaultRemoveAlertUseCase(alertRepository: alertRepository)
     }
     
     // MARK: - Start
@@ -69,7 +69,7 @@ extension MyPageCoordinator {
         let alertViewModel = AlertViewModel(
             coordinator: self,
             fetchAlertsUseCase: fetchAlertsUseCase,
-            removeAlertsUseCase: removeAlertsUseCase
+            removeAlertUseCase: removeAlertUseCase
         )
         let alertViewController = AlertViewController(viewModel: alertViewModel)
         navigationController.pushViewController(alertViewController, animated: true)

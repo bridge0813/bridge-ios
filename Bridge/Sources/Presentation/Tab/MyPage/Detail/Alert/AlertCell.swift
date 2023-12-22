@@ -22,6 +22,7 @@ final class AlertCell: BaseTableViewCell {
         let label = UILabel()
         label.font = BridgeFont.body2Long.font
         label.textColor = BridgeColor.gray02
+        label.numberOfLines = 0
         return label
     }()
     
@@ -46,9 +47,9 @@ final class AlertCell: BaseTableViewCell {
     }
     
     override func configureLayouts() {
-        contentView.flex.padding(20, 16).define { flex in
+        contentView.flex.justifyContent(.center).padding(20, 16).define { flex in
             flex.addItem(titleLabel)
-            flex.addItem(descriptionLabel).marginVertical(4)
+            flex.addItem(descriptionLabel).width(260).marginVertical(4)
             flex.addItem(dateLabel)
         }
     }

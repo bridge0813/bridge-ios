@@ -75,8 +75,13 @@ final class AlertViewController: BaseViewController {
     
     // MARK: - Binding
     override func bind() {
+        alertListTableView.rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
+        
         let input = AlertViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            removeAllAlert: removeAllButton.rx.tap.asObservable(),
             removeAlert: removeAlert.asObservable()
         )
         
