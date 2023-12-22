@@ -56,7 +56,15 @@ final class AlertCell: BaseTableViewCell {
 
 // MARK: - Configuration
 extension AlertCell {
-    func configure() {
+    func configure(with alert: BridgeAlert) {
+        titleLabel.text = alert.title
+        descriptionLabel.text = alert.description
+        dateLabel.text = alert.date
         
+        titleLabel.flex.markDirty()
+        descriptionLabel.flex.markDirty()
+        dateLabel.flex.markDirty()
+        
+        contentView.flex.layout()
     }
 }

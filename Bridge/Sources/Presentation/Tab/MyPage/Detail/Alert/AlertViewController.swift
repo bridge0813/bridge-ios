@@ -23,7 +23,7 @@ final class AlertViewController: BaseViewController {
     
     private lazy var alertListTableView: UITableView = {
         let tableView = UITableView()
-//        tableView.register()
+        tableView.register(AlertCell.self)
         tableView.rowHeight = 120
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = .zero
@@ -75,8 +75,21 @@ final class AlertViewController: BaseViewController {
     
     // MARK: - Binding
     override func bind() {
-        let input = AlertViewModel.Input()
+        let input = AlertViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            removeAlert: removeAlert.asObservable()
+        )
+        
         let output = viewModel.transform(input: input)
+        
+        output.alerts
+            .bind(to: alertListTableView.rx.items(
+                cellIdentifier: AlertCell.reuseIdentifier,
+                cellType: AlertCell.self) 
+            ) { _, element, cell in
+                cell.configure(with: element)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
