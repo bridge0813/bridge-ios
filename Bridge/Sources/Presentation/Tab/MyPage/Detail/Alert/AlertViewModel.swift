@@ -22,8 +22,19 @@ final class AlertViewModel: ViewModelType {
     // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: MyPageCoordinator?
+    private let fetchAlertsUseCase: FetchAlertsUseCase
+    private let removeAlertsUseCase: RemoveAlertUseCase
     
     // MARK: - Init
+    init(
+        coordinator: MyPageCoordinator?,
+        fetchAlertsUseCase: FetchAlertsUseCase,
+        removeAlertsUseCase: RemoveAlertUseCase
+    ) {
+        self.coordinator = coordinator
+        self.fetchAlertsUseCase = fetchAlertsUseCase
+        self.removeAlertsUseCase = removeAlertsUseCase
+    }
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {

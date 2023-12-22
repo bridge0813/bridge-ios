@@ -16,10 +16,14 @@ final class MyPageCoordinator: Coordinator {
     
     private let authRepository: AuthRepository
     private let userRepository: UserRepository
+    private let alertRepository: AlertRepository
     
     private let signOutUseCase: SignOutUseCase
     private let withdrawUseCase: WithdrawUseCase
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+    
+    private let fetchAlertsUseCase: FetchAlertsUseCase
+    private let removeAlertsUseCase: RemoveAlertUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -29,12 +33,17 @@ final class MyPageCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
         userRepository = DefaultUserRepository(networkService: networkService)
+        alertRepository = DefaultAlertRepository(networkService: networkService)
 //        authRepository = MockAuthRepository()
 //        userRepository = MockUserRepository()
+//        alertRepository = MockAlertRepository()
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
         withdrawUseCase = DefaultWithdrawUseCase(authRepository: authRepository)
+        
+        fetchAlertsUseCase = DefaultFetchAlertsUseCase(alertRepository: alertRepository)
+        removeAlertsUseCase = DefaultRemoveAlertUseCase(alertRepository: alertRepository)
     }
     
     // MARK: - Start
@@ -57,7 +66,11 @@ extension MyPageCoordinator {
     }
     
     func showPushAlertViewController() {
-        let alertViewModel = AlertViewModel()
+        let alertViewModel = AlertViewModel(
+            coordinator: self,
+            fetchAlertsUseCase: fetchAlertsUseCase,
+            removeAlertsUseCase: removeAlertsUseCase
+        )
         let alertViewController = AlertViewController(viewModel: alertViewModel)
         navigationController.pushViewController(alertViewController, animated: true)
     }

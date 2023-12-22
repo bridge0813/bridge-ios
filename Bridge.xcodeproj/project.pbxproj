@@ -95,6 +95,13 @@
 		7B93AAA82B21997300650EA5 /* UnreadMessageCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93AAA72B21997300650EA5 /* UnreadMessageCountView.swift */; };
 		7B93B3A42B352C9C00912202 /* AlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3A32B352C9C00912202 /* AlertCell.swift */; };
 		7B93B3A72B352E8D00912202 /* BridgeAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3A62B352E8D00912202 /* BridgeAlert.swift */; };
+		7B93B3AA2B35372F00912202 /* FetchAlertsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3A92B35372F00912202 /* FetchAlertsUseCase.swift */; };
+		7B93B3AC2B35378600912202 /* RemoveAlertUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3AB2B35378600912202 /* RemoveAlertUseCase.swift */; };
+		7B93B3AF2B35396300912202 /* AlertRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3AE2B35396300912202 /* AlertRepository.swift */; };
+		7B93B3B22B353A8700912202 /* DefaultAlertRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3B12B353A8700912202 /* DefaultAlertRepository.swift */; };
+		7B93B3B42B353A9400912202 /* MockAlertRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3B32B353A9400912202 /* MockAlertRepository.swift */; };
+		7B93B3B72B353B1100912202 /* AlertEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3B62B353B1100912202 /* AlertEndpoint.swift */; };
+		7B93B3BA2B353CC700912202 /* BridgeAlertResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3B92B353CC700912202 /* BridgeAlertResponseDTO.swift */; };
 		7B9420502B04DAAB00FEE058 /* StompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */; };
 		7B9420522B04DD9100FEE058 /* MessageStompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */; };
 		7B9420542B04F46F00FEE058 /* StompMessageResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */; };
@@ -375,6 +382,13 @@
 		7B93AAA72B21997300650EA5 /* UnreadMessageCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadMessageCountView.swift; sourceTree = "<group>"; };
 		7B93B3A32B352C9C00912202 /* AlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCell.swift; sourceTree = "<group>"; };
 		7B93B3A62B352E8D00912202 /* BridgeAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAlert.swift; sourceTree = "<group>"; };
+		7B93B3A92B35372F00912202 /* FetchAlertsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAlertsUseCase.swift; sourceTree = "<group>"; };
+		7B93B3AB2B35378600912202 /* RemoveAlertUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAlertUseCase.swift; sourceTree = "<group>"; };
+		7B93B3AE2B35396300912202 /* AlertRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertRepository.swift; sourceTree = "<group>"; };
+		7B93B3B12B353A8700912202 /* DefaultAlertRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlertRepository.swift; sourceTree = "<group>"; };
+		7B93B3B32B353A9400912202 /* MockAlertRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlertRepository.swift; sourceTree = "<group>"; };
+		7B93B3B62B353B1100912202 /* AlertEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertEndpoint.swift; sourceTree = "<group>"; };
+		7B93B3B92B353CC700912202 /* BridgeAlertResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAlertResponseDTO.swift; sourceTree = "<group>"; };
 		7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompMessageResponseDTO.swift; sourceTree = "<group>"; };
@@ -1013,6 +1027,48 @@
 			path = Alert;
 			sourceTree = "<group>";
 		};
+		7B93B3A82B35371C00912202 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				7B93B3A92B35372F00912202 /* FetchAlertsUseCase.swift */,
+				7B93B3AB2B35378600912202 /* RemoveAlertUseCase.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		7B93B3AD2B35395500912202 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				7B93B3AE2B35396300912202 /* AlertRepository.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		7B93B3B02B353A6C00912202 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				7B93B3B12B353A8700912202 /* DefaultAlertRepository.swift */,
+				7B93B3B32B353A9400912202 /* MockAlertRepository.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		7B93B3B52B353B0000912202 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				7B93B3B62B353B1100912202 /* AlertEndpoint.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		7B93B3B82B353CBB00912202 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				7B93B3B92B353CC700912202 /* BridgeAlertResponseDTO.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
 		7B9420562B05AC6E00FEE058 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1100,6 +1156,7 @@
 				7C569CFB2A9F6F8A0063D362 /* Project */,
 				7BA36CA52A9C6878000DAB02 /* Chat */,
 				7C56E1662B11031E00454F5E /* Profile */,
+				7B93B3AD2B35395500912202 /* Alert */,
 			);
 			path = RepositoryInterfaces;
 			sourceTree = "<group>";
@@ -1111,6 +1168,7 @@
 				7CA04F662B0A6EA5007B9191 /* Project */,
 				7BA36C952A9C4D0F000DAB02 /* Chat */,
 				7C56E1632B11025300454F5E /* User */,
+				7B93B3A82B35371C00912202 /* Alert */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1150,6 +1208,7 @@
 				7C569D072A9F7E060063D362 /* Project */,
 				7BA36CA22A9C681B000DAB02 /* Chat */,
 				7C56E1692B1103F900454F5E /* User */,
+				7B93B3B02B353A6C00912202 /* Alert */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1191,6 +1250,7 @@
 				7CA04F5B2B0A0254007B9191 /* Project */,
 				7BA36CAF2A9D960E000DAB02 /* Chat */,
 				7C56E15A2B10EF3700454F5E /* User */,
+				7B93B3B82B353CBB00912202 /* Alert */,
 				7B9420562B05AC6E00FEE058 /* Extensions */,
 			);
 			path = DTOs;
@@ -1219,6 +1279,7 @@
 				7B153C0A2AD64E3200618280 /* Chat */,
 				7C56E15D2B10F8CD00454F5E /* User */,
 				7B9C31AD2B07756F007E36B2 /* WebSocket */,
+				7B93B3B52B353B0000912202 /* Alert */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -2174,6 +2235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
+				7B93B3B72B353B1100912202 /* AlertEndpoint.swift in Sources */,
 				7CA04F212AFE772C007B9191 /* BaseLabel.swift in Sources */,
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
 				7BEA73982B2B2FB000CECF44 /* AlertViewModel.swift in Sources */,
@@ -2189,6 +2251,7 @@
 				7CDFB6232B2236AB00272F77 /* BridgeActionSheet.swift in Sources */,
 				7B5752B12B287DF600B1A2DC /* SignOutUseCase.swift in Sources */,
 				7BEA73872B2B2C1C00CECF44 /* BookmarkedProjectViewController.swift in Sources */,
+				7B93B3B42B353A9400912202 /* MockAlertRepository.swift in Sources */,
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7CA04F2C2B01F822007B9191 /* ProjectDetailMenuBar.swift in Sources */,
 				7C8CC4152AF024060032F237 /* DatePickerPopUpView.swift in Sources */,
@@ -2253,6 +2316,7 @@
 				7B93AAA82B21997300650EA5 /* UnreadMessageCountView.swift in Sources */,
 				7CE080492AD79ADD00230C86 /* FieldCategoryAnchorButton.swift in Sources */,
 				7CA04F252AFE7B6E007B9191 /* BridgeLinedChip.swift in Sources */,
+				7B93B3AC2B35378600912202 /* RemoveAlertUseCase.swift in Sources */,
 				7C55E6312ADBF6AA0018FA5D /* ProjectCountHeaderView.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
 				7C40CBA32AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift in Sources */,
@@ -2267,6 +2331,7 @@
 				7B14DB342AB1DBFD009A00EB /* DefaultAuthRepository.swift in Sources */,
 				7B9420522B04DD9100FEE058 /* MessageStompEndpoint.swift in Sources */,
 				7CA04F512B04AAB3007B9191 /* ProjectDetailDTO.swift in Sources */,
+				7B93B3BA2B353CC700912202 /* BridgeAlertResponseDTO.swift in Sources */,
 				7BB5C77C2AFCE8220021BEC5 /* MenuCell.swift in Sources */,
 				7CDFB61B2B2028B700272F77 /* ManagementHeaderView.swift in Sources */,
 				7CC719F52B281CC600CFA827 /* ApplicantNumberHeaderView.swift in Sources */,
@@ -2281,6 +2346,7 @@
 				7BA36CC92A9E1640000DAB02 /* Reusable.swift in Sources */,
 				7B9142DE2B01D080006EA52F /* MessageEndpoint.swift in Sources */,
 				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,
+				7B93B3AA2B35372F00912202 /* FetchAlertsUseCase.swift in Sources */,
 				7BA36C9B2A9C5091000DAB02 /* Channel.swift in Sources */,
 				7B8DE8112B034E6B003EA34A /* Stomp.swift in Sources */,
 				7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */,
@@ -2335,6 +2401,7 @@
 				7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */,
 				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,
+				7B93B3B22B353A8700912202 /* DefaultAlertRepository.swift in Sources */,
 				7CA04F4B2B03D5DE007B9191 /* ProjectDetailHeaderView.swift in Sources */,
 				7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */,
 				7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */,
@@ -2387,6 +2454,7 @@
 				7CA73D972B28AC1B007D88FB /* CreateChannelUseCase.swift in Sources */,
 				7BA36CDA2AA197F8000DAB02 /* ChannelListViewController.swift in Sources */,
 				7CA04F572B05D50E007B9191 /* ProjectDetailTechTag.swift in Sources */,
+				7B93B3AF2B35396300912202 /* AlertRepository.swift in Sources */,
 				7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */,
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,
 				7C569CF32A9F67C60063D362 /* ProjectPreview.swift in Sources */,
