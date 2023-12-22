@@ -127,7 +127,10 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // MARK: - CancelApplication
     func cancel(projectID: Int) -> Observable<Int> {
-        .just(projectID)
+        let cancelEndpoint = ProjectEndpoint.cancel(projectID: String(projectID))
+        
+        return networkService.request(to: cancelEndpoint, interceptor: AuthInterceptor())
+            .map { _ in projectID }
     }
     
     // MARK: - Accept
