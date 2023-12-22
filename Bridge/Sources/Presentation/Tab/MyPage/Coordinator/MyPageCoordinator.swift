@@ -33,10 +33,10 @@ final class MyPageCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
         authRepository = DefaultAuthRepository(networkService: networkService)
         userRepository = DefaultUserRepository(networkService: networkService)
-//        alertRepository = DefaultAlertRepository(networkService: networkService)
+        alertRepository = DefaultAlertRepository(networkService: networkService)
 //        authRepository = MockAuthRepository()
 //        userRepository = MockUserRepository()
-        alertRepository = MockAlertRepository()
+//        alertRepository = MockAlertRepository()
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
