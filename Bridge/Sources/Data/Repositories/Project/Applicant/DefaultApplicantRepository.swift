@@ -31,12 +31,24 @@ final class DefaultApplicantRepository: ApplicantRepository {
     
     // MARK: - Accept
     func accept(projectID: Int, applicantID: Int) -> Observable<Int> {
-        .just(applicantID)
+        let acceptEndpoint = ApplicantEndpoint.accept(
+            userID: String(applicantID),
+            projectID: String(projectID)
+        )
+        
+        return networkService.request(to: acceptEndpoint, interceptor: nil)
+            .map { _ in applicantID }
     }
     
     // MARK: - Reject
     func reject(projectID: Int, applicantID: Int) -> Observable<Int> {
-        .just(applicantID)
+        let rejectEndpoint = ApplicantEndpoint.reject(
+            userID: String(applicantID),
+            projectID: String(projectID)
+        )
+        
+        return networkService.request(to: rejectEndpoint, interceptor: nil)
+            .map { _ in applicantID }
     }
     
     // MARK: - CancelApplication

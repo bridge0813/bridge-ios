@@ -10,8 +10,10 @@ import Foundation
 /// 모집글의 지원자 수락, 거절, 리스트 등 지원자에 관한 작업
 enum ApplicantEndpoint {
     case fetchApplicantList(projectID: String)
-    case cancel(projectID: String)
+    case accept(userID: String, projectID: String)
+    case reject(userID: String, projectID: String)
     case apply(projectID: String)
+    case cancel(projectID: String)
 }
 
 extension ApplicantEndpoint: Endpoint {
@@ -19,6 +21,12 @@ extension ApplicantEndpoint: Endpoint {
         switch self {
         case .fetchApplicantList:
             return "/projects/apply/users"
+            
+        case .accept:
+            return "/projects/accept"
+           
+        case .reject:
+            return "/projects/reject"
             
         case .apply:
             return "/projects/apply"
@@ -33,6 +41,12 @@ extension ApplicantEndpoint: Endpoint {
         case .fetchApplicantList(let projectID):
             return ["projectId": projectID]
             
+        case .accept(let userID, let projectID):
+            return ["userId": userID, "projectId": projectID]
+            
+        case .reject(let userID, let projectID):
+            return ["userId": userID, "projectId": projectID]
+            
         case .apply(let projectID):
             return ["projectId": projectID]
             
@@ -45,6 +59,12 @@ extension ApplicantEndpoint: Endpoint {
         switch self {
         case .fetchApplicantList:
             return .get
+            
+        case .accept:
+            return .put
+            
+        case .reject:
+            return .put
             
         case .apply:
             return .post
