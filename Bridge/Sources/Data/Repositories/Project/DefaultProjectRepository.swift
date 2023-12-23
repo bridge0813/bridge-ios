@@ -46,7 +46,10 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // 인기 모집글 목록 가져오기
     func fetchHotProjects() -> Observable<[ProjectPreview]> {
-        return networkService.request(to: ProjectEndpoint.fetchHotProjects, interceptor: nil)
+        let userID = tokenStorage.get(.userID)
+        let fetchHotProjectsEndpoint = ProjectEndpoint.fetchHotProjects(userID: userID)
+        
+        return networkService.request(to: fetchHotProjectsEndpoint, interceptor: nil)
             .decode(type: [HotProjectResponseDTO].self, decoder: JSONDecoder())
             .map { hotProjectDTOs in
                 hotProjectDTOs.map { $0.toEntity() }
@@ -55,7 +58,10 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // 마감임박 모집글 목록 가져오기
     func fetchDeadlineProjects() -> Observable<[ProjectPreview]> {
-        return networkService.request(to: ProjectEndpoint.fetchDeadlineProjects, interceptor: nil)
+        let userID = tokenStorage.get(.userID)
+        let fetchDeadlineProjectsEndpoint = ProjectEndpoint.fetchDeadlineProjects(userID: userID)
+        
+        return networkService.request(to: fetchDeadlineProjectsEndpoint, interceptor: nil)
             .decode(type: [DeadlineProjectResponseDTO].self, decoder: JSONDecoder())
             .map { deadlineProjectDTOs in
                 deadlineProjectDTOs.map { $0.toEntity() }

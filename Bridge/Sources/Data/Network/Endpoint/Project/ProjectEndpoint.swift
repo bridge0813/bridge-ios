@@ -8,8 +8,8 @@
 enum ProjectEndpoint {
     case fetchAllProjects(userID: String)
     case fetchProjectsByField(requestDTO: FieldRequestDTO)
-    case fetchHotProjects
-    case fetchDeadlineProjects
+    case fetchHotProjects(userID: String)
+    case fetchDeadlineProjects(userID: String)
     case fetchAppliedProjects
     case fetchMyProjects
     case fetchProjectDetail(userID: String, projectID: String)
@@ -74,11 +74,11 @@ extension ProjectEndpoint: Endpoint {
         case .fetchProjectsByField:
             return nil
             
-        case .fetchHotProjects:
-            return nil
+        case .fetchHotProjects(let userID):
+            return ["userId": userID]
             
-        case .fetchDeadlineProjects:
-            return nil
+        case .fetchDeadlineProjects(let userID):
+            return ["userId": userID]
             
         case .fetchAppliedProjects:
             return nil
