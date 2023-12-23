@@ -20,7 +20,13 @@ final class DefaultApplicantRepository: ApplicantRepository {
     
     // MARK: - ApplicantList
     func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]> {
-        .just(ApplicantProfileResponseDTO.testArray.compactMap { $0.toEntity() })
+        let fetchApplicantListEndpoint = ApplicantEndpoint.fetchApplicantList(projectID: String(projectID))
+        
+        return networkService.request(to: fetchApplicantListEndpoint, interceptor: nil)
+            .decode(type: [ApplicantProfileResponseDTO].self, decoder: JSONDecoder())
+            .map { applicantListDTOs in
+                applicantListDTOs.map { $0.toEntity() }
+            }
     }
     
     // MARK: - Accept

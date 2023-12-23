@@ -42,6 +42,9 @@ final class ManagementCoordinator: Coordinator {
         applicantRepository = DefaultApplicantRepository(networkService: networkService)
         channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
 
+//        projectRepository = MockProjectRepository()
+//        applicantRepository = MockApplicantRepository()
+        
         // 관리
         fetchAppliedProjectsUseCase = DefaultFetchAppliedProjectsUseCase(projectRepository: projectRepository)
         fetchMyProjectsUseCase = DefaultFetchMyProjectsUseCase(projectRepository: projectRepository)
