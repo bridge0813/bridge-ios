@@ -36,7 +36,10 @@ final class BookmarkedProjectViewController: BaseViewController {
     
     // MARK: - Binding
     override func bind() {
-        let input = BookmarkedProjectViewModel.Input()
+        let input = BookmarkedProjectViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asObservable()
+        )
+        
         let output = viewModel.transform(input: input)
     }
 }

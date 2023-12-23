@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol FetchBookmarkedProjectsUseCase {
-    func fetchBookmarkedProjects() -> Observable<[BookmarkedProject]>
+    func fetch() -> Observable<[BookmarkedProject]>
 }
 
 final class DefaultFetchBookmarkedProjectsUseCase: FetchBookmarkedProjectsUseCase {
@@ -19,7 +19,7 @@ final class DefaultFetchBookmarkedProjectsUseCase: FetchBookmarkedProjectsUseCas
         self.userRepository = userRepository
     }
     
-    func fetchBookmarkedProjects() -> Observable<[BookmarkedProject]> {
+    func fetch() -> Observable<[BookmarkedProject]> {
         userRepository.fetchBookmarkedProjects()
     }
 }

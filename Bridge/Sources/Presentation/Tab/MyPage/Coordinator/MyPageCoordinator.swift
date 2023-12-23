@@ -26,6 +26,7 @@ final class MyPageCoordinator: Coordinator {
     private let removeAlertUseCase: RemoveAlertUseCase
     
     private let changeFieldUseCase: ChangeFieldUseCase
+    private let fetchBookmarkedProjectUseCase: FetchBookmarkedProjectsUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -48,6 +49,7 @@ final class MyPageCoordinator: Coordinator {
         removeAlertUseCase = DefaultRemoveAlertUseCase(alertRepository: alertRepository)
         
         changeFieldUseCase = DefaultChangeFieldUseCase(userRepository: userRepository)
+        fetchBookmarkedProjectUseCase = DefaultFetchBookmarkedProjectsUseCase(userRepository: userRepository)
     }
     
     // MARK: - Start
@@ -89,7 +91,10 @@ extension MyPageCoordinator {
     }
     
     func showBookmarkedProjectViewController() {
-        let bookmarkedProjectViewModel = BookmarkedProjectViewModel()
+        let bookmarkedProjectViewModel = BookmarkedProjectViewModel(
+            coordinator: self,
+            fetchBookmarkedProjectUseCase: fetchBookmarkedProjectUseCase
+        )
         let bookmarkedProjectViewController = BookmarkedProjectViewController(viewModel: bookmarkedProjectViewModel)
         navigationController.pushViewController(bookmarkedProjectViewController, animated: true)
     }
