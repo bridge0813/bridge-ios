@@ -23,6 +23,7 @@ final class BookmarkedProjectViewController: BaseViewController {
     
     // MARK: - Property
     private let viewModel: BookmarkedProjectViewModel
+    private let bookmarkButtonTapped = PublishRelay<Int>()
     
     // MARK: - Init
     init(viewModel: BookmarkedProjectViewModel) {
@@ -54,7 +55,8 @@ final class BookmarkedProjectViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = BookmarkedProjectViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asObservable()
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            bookmarkButtonTapped: bookmarkButtonTapped.asObservable()
         )
         
         let output = viewModel.transform(input: input)
@@ -63,8 +65,15 @@ final class BookmarkedProjectViewController: BaseViewController {
             .bind(to: bookmarkedProjectCollectionView.rx.items(
                 cellIdentifier: BookmarkedProjectCell.reuseIdentifier,
                 cellType: BookmarkedProjectCell.self)
-            ) { _, element, cell in
+            ) { [weak self] _, element, cell in
+                guard let self else { return }
+                
                 cell.configure(with: element)
+                
+                cell.bookmarkButtonTapped
+                    .map { element.id }
+                    .bind(to: self.bookmarkButtonTapped)
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
     }

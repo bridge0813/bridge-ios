@@ -8,6 +8,7 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
 
 final class BookmarkedProjectCell: BaseCollectionViewCell {
     // MARK: - UI
@@ -46,6 +47,12 @@ final class BookmarkedProjectCell: BaseCollectionViewCell {
         label.textColor = BridgeColor.gray03
         return label
     }()
+    
+    // MARK: - Preparation
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
     
     // MARK: - Configuration
     override func configureAttributes() {
@@ -96,5 +103,12 @@ extension BookmarkedProjectCell {
         dateLabel.flex.markDirty()
         
         contentView.flex.layout()
+    }
+}
+
+// MARK: - Observable
+extension BookmarkedProjectCell {
+    var bookmarkButtonTapped: Observable<Void> {
+        bookmarkButton.rx.tap.asObservable()
     }
 }

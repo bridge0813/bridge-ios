@@ -17,6 +17,7 @@ final class MyPageCoordinator: Coordinator {
     private let authRepository: AuthRepository
     private let userRepository: UserRepository
     private let alertRepository: AlertRepository
+    private let projectRepository: ProjectRepository
     
     private let signOutUseCase: SignOutUseCase
     private let withdrawUseCase: WithdrawUseCase
@@ -27,6 +28,7 @@ final class MyPageCoordinator: Coordinator {
     
     private let changeFieldUseCase: ChangeFieldUseCase
     private let fetchBookmarkedProjectUseCase: FetchBookmarkedProjectsUseCase
+    private let bookmarkUseCase: BookmarkUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -37,9 +39,11 @@ final class MyPageCoordinator: Coordinator {
         authRepository = DefaultAuthRepository(networkService: networkService)
         userRepository = DefaultUserRepository(networkService: networkService)
         alertRepository = DefaultAlertRepository(networkService: networkService)
+        projectRepository = DefaultProjectRepository(networkService: networkService)
 //        authRepository = MockAuthRepository()
 //        userRepository = MockUserRepository()
 //        alertRepository = MockAlertRepository()
+//        projectRepository = MockProjectRepository()
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
@@ -50,6 +54,7 @@ final class MyPageCoordinator: Coordinator {
         
         changeFieldUseCase = DefaultChangeFieldUseCase(userRepository: userRepository)
         fetchBookmarkedProjectUseCase = DefaultFetchBookmarkedProjectsUseCase(userRepository: userRepository)
+        bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
     }
     
     // MARK: - Start
@@ -93,7 +98,8 @@ extension MyPageCoordinator {
     func showBookmarkedProjectViewController() {
         let bookmarkedProjectViewModel = BookmarkedProjectViewModel(
             coordinator: self,
-            fetchBookmarkedProjectUseCase: fetchBookmarkedProjectUseCase
+            fetchBookmarkedProjectUseCase: fetchBookmarkedProjectUseCase,
+            bookmarkUseCase: bookmarkUseCase
         )
         let bookmarkedProjectViewController = BookmarkedProjectViewController(viewModel: bookmarkedProjectViewModel)
         navigationController.pushViewController(bookmarkedProjectViewController, animated: true)

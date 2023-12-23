@@ -12,6 +12,7 @@ final class BookmarkedProjectViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
+        let bookmarkButtonTapped: Observable<Int>
     }
     
     struct Output {
@@ -22,11 +23,17 @@ final class BookmarkedProjectViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: MyPageCoordinator?
     private let fetchBookmarkedProjectUseCase: FetchBookmarkedProjectsUseCase
+    private let bookmarkUseCase: BookmarkUseCase
     
     // MARK: - Init
-    init(coordinator: MyPageCoordinator?, fetchBookmarkedProjectUseCase: FetchBookmarkedProjectsUseCase) {
+    init(
+        coordinator: MyPageCoordinator?,
+        fetchBookmarkedProjectUseCase: FetchBookmarkedProjectsUseCase,
+        bookmarkUseCase: BookmarkUseCase
+    ) {
         self.coordinator = coordinator
         self.fetchBookmarkedProjectUseCase = fetchBookmarkedProjectUseCase
+        self.bookmarkUseCase = bookmarkUseCase
     }
     
     // MARK: - Transformation
@@ -34,6 +41,19 @@ final class BookmarkedProjectViewModel: ViewModelType {
         let bookmarkedProjects = BehaviorRelay<[BookmarkedProject]>(value: [])
         
         input.viewWillAppear
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.fetchBookmarkedProjectUseCase.fetch()
+            }
+            .bind(to: bookmarkedProjects)
+            .disposed(by: disposeBag)
+        
+        input.bookmarkButtonTapped
+            .debug()
+            .withUnretained(self)
+            .flatMap { owner, projectID in
+                owner.bookmarkUseCase.bookmark(projectID: projectID)
+            }
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.fetchBookmarkedProjectUseCase.fetch()
