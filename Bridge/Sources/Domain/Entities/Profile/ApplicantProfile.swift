@@ -10,7 +10,7 @@ struct ApplicantProfile {
     let userID: Int
     let name: String
     let fields: [String]
-    let career: String
+    let career: String?
 }
 
 extension ApplicantProfile {

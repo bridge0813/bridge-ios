@@ -79,9 +79,15 @@ final class ApplicantCell: BaseCollectionViewCell {
     
     func configureCell(with data: ApplicantProfile) {
         let fieldsText = data.fields.joined(separator: ", ")
-        informationLabel.text = "\(data.career), \(fieldsText)"
-        nameLabel.text = data.name
         
+        // 설정해둔 직업이 있으면 보여주기.
+        if let career = data.career {
+            informationLabel.text = "\(career), \(fieldsText)"
+        } else {
+            informationLabel.text = fieldsText
+        }
+    
+        nameLabel.text = data.name
         applicantID = data.userID
     }
     

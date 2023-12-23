@@ -10,7 +10,7 @@ struct ApplicantProfileResponseDTO: Decodable {
     let userID: Int
     let name: String
     let fields: [String]
-    let career: String
+    let career: String?
     
     enum CodingKeys: String, CodingKey {
         case userID = "userId"
