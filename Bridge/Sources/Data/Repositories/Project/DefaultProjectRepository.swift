@@ -19,8 +19,7 @@ final class DefaultProjectRepository: ProjectRepository {
         self.tokenStorage = tokenStorage
     }
     
-    // MARK: - Fetch
-    // 전체 모집글 목록 가져오기
+    // MARK: - FetchAllProjects
     func fetchAllProjects() -> Observable<[ProjectPreview]> {
         let userID = tokenStorage.get(.userID)
         let fetchAllProjectsEndpoint = ProjectEndpoint.fetchAllProjects(userID: userID)
@@ -32,7 +31,7 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
-    // 특정 분야에 맞는 모집글 목록 가져오기
+    // MARK: - FetchProjectsByField
     func fetchProjectsByField(for field: String) -> Observable<[ProjectPreview]> {
         let fieldRequestDTO = convertToFieldDTO(from: field)
         let fetchProjectsEndPoint = ProjectEndpoint.fetchProjectsByField(requestDTO: fieldRequestDTO)
@@ -44,7 +43,7 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
-    // 인기 모집글 목록 가져오기
+    // MARK: - FetchHotProjects
     func fetchHotProjects() -> Observable<[ProjectPreview]> {
         let userID = tokenStorage.get(.userID)
         let fetchHotProjectsEndpoint = ProjectEndpoint.fetchHotProjects(userID: userID)
@@ -56,7 +55,7 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
-    // 마감임박 모집글 목록 가져오기
+    // MARK: - FetchDeadlineProjects
     func fetchDeadlineProjects() -> Observable<[ProjectPreview]> {
         let userID = tokenStorage.get(.userID)
         let fetchDeadlineProjectsEndpoint = ProjectEndpoint.fetchDeadlineProjects(userID: userID)
@@ -68,7 +67,7 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
-    // 지원한 모집글 목록 가져오기
+    // MARK: - FetchAppliedProjects
     func fetchAppliedProjects() -> Observable<[ProjectPreview]> {
         return networkService.request(to: ProjectEndpoint.fetchAppliedProjects, interceptor: AuthInterceptor())
             .decode(type: [AppliedProjectResponseDTO].self, decoder: JSONDecoder())
@@ -77,7 +76,7 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
-    // 내가 작성한 모집글 목록 가져오기
+    // MARK: - FetchMyProjects
     func fetchMyProjects() -> Observable<[ProjectPreview]> {
         return networkService.request(to: ProjectEndpoint.fetchMyProjects, interceptor: AuthInterceptor())
             .decode(type: [MyProjectResponseDTO].self, decoder: JSONDecoder())
@@ -86,7 +85,7 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
-    // 모집글 상세정보 가져오기
+    // MARK: - FetchProjectDetail
     func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
         let userID = tokenStorage.get(.userID)
         let fetchProjectDetailEndpoint = ProjectEndpoint.fetchProjectDetail(
@@ -129,32 +128,6 @@ final class DefaultProjectRepository: ProjectRepository {
         
         return networkService.request(to: deleteEndpoint, interceptor: nil)
             .map { _ in projectID }
-    }
-    
-    // MARK: - CancelApplication
-    func cancel(projectID: Int) -> Observable<Int> {
-        let cancelEndpoint = ProjectEndpoint.cancel(projectID: String(projectID))
-        
-        return networkService.request(to: cancelEndpoint, interceptor: AuthInterceptor())
-            .map { _ in projectID }
-    }
-    
-    // MARK: - Accept
-    func accept(projectID: Int, applicantID: Int) -> Observable<Int> {
-        .just(applicantID)
-    }
-    
-    // MARK: - Reject
-    func reject(projectID: Int, applicantID: Int) -> Observable<Int> {
-        .just(applicantID)
-    }
-    
-    // MARK: - Apply
-    func apply(projectID: Int) -> Observable<Void> {
-        let applyEndpoint = ProjectEndpoint.apply(projectID: String(projectID))
-        
-        return networkService.request(to: applyEndpoint, interceptor: AuthInterceptor())
-            .map { _ in }
     }
     
     // MARK: - Close

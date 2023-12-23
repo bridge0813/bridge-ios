@@ -27,18 +27,6 @@ protocol ProjectRepository {
     // MARK: - Delete
     func delete(projectID: Int) -> Observable<Int>
     
-    // MARK: - CancelApplication
-    func cancel(projectID: Int) -> Observable<Int>
-    
-    // MARK: - Accept
-    func accept(projectID: Int, applicantID: Int) -> Observable<Int>
-    
-    // MARK: - Reject
-    func reject(projectID: Int, applicantID: Int) -> Observable<Int>
-    
-    // MARK: - Apply
-    func apply(projectID: Int) -> Observable<Void>
-    
     // MARK: - Close
     func close(projectID: Int) -> Observable<Int>
 }

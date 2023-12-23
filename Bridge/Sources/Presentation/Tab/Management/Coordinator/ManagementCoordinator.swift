@@ -14,7 +14,7 @@ final class ManagementCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     
     private let projectRepository: ProjectRepository
-    private let userRepository: UserRepository
+    private let applicantRepository: ApplicantRepository
     private let channelRepository: ChannelRepository
     
     private let fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase
@@ -39,19 +39,19 @@ final class ManagementCoordinator: Coordinator {
         
         // 리포지토리
         projectRepository = DefaultProjectRepository(networkService: networkService)
-        userRepository = DefaultUserRepository(networkService: networkService)
+        applicantRepository = DefaultApplicantRepository(networkService: networkService)
         channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
 
         // 관리
         fetchAppliedProjectsUseCase = DefaultFetchAppliedProjectsUseCase(projectRepository: projectRepository)
         fetchMyProjectsUseCase = DefaultFetchMyProjectsUseCase(projectRepository: projectRepository)
         deleteProjectUseCase = DefaultDeleteProjectUseCase(projectRepository: projectRepository)
-        cancelApplicationUseCase = DefaultCancelApplicationUseCase(projectRepository: projectRepository)
         
-        // 지원자 목록(수락, 거절)
-        fetchApplicantListUseCase = DefaultFetchApplicantListUseCase(userRepository: userRepository)
-        acceptApplicantUseCase = DefaultAcceptApplicantUseCase(projectRepository: projectRepository)
-        rejectApplicantUseCase = DefaultRejectApplicantUseCase(projectRepository: projectRepository)
+        // 지원자 목록, 수락, 거절, 지원취소
+        fetchApplicantListUseCase = DefaultFetchApplicantListUseCase(applicantRepository: applicantRepository)
+        acceptApplicantUseCase = DefaultAcceptApplicantUseCase(applicantRepository: applicantRepository)
+        rejectApplicantUseCase = DefaultRejectApplicantUseCase(applicantRepository: applicantRepository)
+        cancelApplicationUseCase = DefaultCancelApplicationUseCase(applicantRepository: applicantRepository)
         
         // 채팅방 개설
         createChannelUseCase = DefaultCreateChannelUseCase(channelRepository: channelRepository)

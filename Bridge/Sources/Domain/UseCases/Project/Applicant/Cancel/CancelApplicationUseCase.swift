@@ -14,13 +14,13 @@ protocol CancelApplicationUseCase {
 
 final class DefaultCancelApplicationUseCase: CancelApplicationUseCase {
     
-    private let projectRepository: ProjectRepository
+    private let applicantRepository: ApplicantRepository
     
-    init(projectRepository: ProjectRepository) {
-        self.projectRepository = projectRepository
+    init(applicantRepository: ApplicantRepository) {
+        self.applicantRepository = applicantRepository
     }
     
     func cancel(projectID: Int) -> Observable<Int> {
-        projectRepository.cancel(projectID: projectID)
+        applicantRepository.cancel(projectID: projectID)
     }
 }

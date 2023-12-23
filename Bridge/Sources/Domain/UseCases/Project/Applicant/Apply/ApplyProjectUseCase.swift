@@ -14,13 +14,13 @@ protocol ApplyProjectUseCase {
 
 final class DefaultApplyProjectUseCase: ApplyProjectUseCase {
     
-    private let projectRepository: ProjectRepository
+    private let applicantRepository: ApplicantRepository
     
-    init(projectRepository: ProjectRepository) {
-        self.projectRepository = projectRepository
+    init(applicantRepository: ApplicantRepository) {
+        self.applicantRepository = applicantRepository
     }
     
     func apply(projectID: Int) -> Observable<Void> {
-        projectRepository.apply(projectID: projectID)
+        applicantRepository.apply(projectID: projectID)
     }
 }
