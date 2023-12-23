@@ -81,7 +81,7 @@ extension BookmarkedProjectViewController {
         let cellWidth = availableWidth / 2
         
         layout.itemSize = CGSize(width: cellWidth, height: cellWidth * 1.1)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
+        layout.sectionInset = UIEdgeInsets(top: 24, left: padding, bottom: 0, right: padding)
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = minimumItemSpacing
         
