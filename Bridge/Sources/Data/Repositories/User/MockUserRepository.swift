@@ -8,6 +8,7 @@
 import RxSwift
 
 final class MockUserRepository: UserRepository {
+
     func fetchProfilePreview() -> Observable<ProfilePreview> {
         .just(ProfilePreviewResponseDTO.testData.toEntity())
 //        .error(NetworkError.statusCode(401))
@@ -19,5 +20,9 @@ final class MockUserRepository: UserRepository {
     
     func changeField(selectedFields: [String]) -> Observable<Void> {
         .just(())
+    }
+    
+    func fetchBookmarkedProjects() -> Observable<[BookmarkedProject]> {
+        .just(BookmarkedProjectResponseDTO.testData.map { $0.toEntity() })
     }
 }

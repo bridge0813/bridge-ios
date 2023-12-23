@@ -10,6 +10,7 @@ import Foundation
 enum UserEndpoint {
     case fetchProfilePreview(userID: String)
     case changeField(requestDTO: ChangeFieldRequestDTO)
+    case fetchBookmarkedProjects(userID: String)
 }
 
 extension UserEndpoint: Endpoint {
@@ -20,6 +21,9 @@ extension UserEndpoint: Endpoint {
             
         case .changeField:
             return "/users/field"
+            
+        case .fetchBookmarkedProjects:
+            return "/users/bookmark"
         }
     }
     
@@ -30,6 +34,9 @@ extension UserEndpoint: Endpoint {
             
         case .changeField:
             return nil
+            
+        case .fetchBookmarkedProjects(let userID):
+            return ["userId": userID]
         }
     }
     
@@ -40,6 +47,9 @@ extension UserEndpoint: Endpoint {
             
         case .changeField:
             return .put
+            
+        case .fetchBookmarkedProjects:
+            return .get
         }
     }
     
@@ -50,6 +60,9 @@ extension UserEndpoint: Endpoint {
             
         case .changeField(let requestDTO):
             return requestDTO
+            
+        case .fetchBookmarkedProjects:
+            return nil
         }
     }
 }

@@ -40,4 +40,15 @@ final class DefaultUserRepository: UserRepository {
         return networkService.request(to: userEndpoint, interceptor: nil)
             .map { _ in }
     }
+    
+    func fetchBookmarkedProjects() -> Observable<[BookmarkedProject]> {
+        let userID = tokenStorage.get(.userID)
+        let userEndpoint = UserEndpoint.fetchBookmarkedProjects(userID: userID)
+        
+        return networkService.request(to: userEndpoint, interceptor: nil)
+            .decode(type: [BookmarkedProjectResponseDTO].self, decoder: JSONDecoder())
+            .map { dtos in
+                dtos.map { $0.toEntity() }
+            }
+    }
 }

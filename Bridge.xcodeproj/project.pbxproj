@@ -104,6 +104,8 @@
 		7B93B3BA2B353CC700912202 /* BridgeAlertResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3B92B353CC700912202 /* BridgeAlertResponseDTO.swift */; };
 		7B93B3BC2B35591600912202 /* ChangeFieldRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3BB2B35591600912202 /* ChangeFieldRequestDTO.swift */; };
 		7B93B3BE2B355A5C00912202 /* ChangeFieldUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3BD2B355A5C00912202 /* ChangeFieldUseCase.swift */; };
+		7B93B3C02B36AA6400912202 /* BookmarkedProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3BF2B36AA6400912202 /* BookmarkedProjectResponseDTO.swift */; };
+		7B93B3C22B36AB0900912202 /* BookmarkedProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3C12B36AB0900912202 /* BookmarkedProject.swift */; };
 		7B9420502B04DAAB00FEE058 /* StompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */; };
 		7B9420522B04DD9100FEE058 /* MessageStompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */; };
 		7B9420542B04F46F00FEE058 /* StompMessageResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */; };
@@ -423,6 +425,8 @@
 		7B93B3B92B353CC700912202 /* BridgeAlertResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAlertResponseDTO.swift; sourceTree = "<group>"; };
 		7B93B3BB2B35591600912202 /* ChangeFieldRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFieldRequestDTO.swift; sourceTree = "<group>"; };
 		7B93B3BD2B355A5C00912202 /* ChangeFieldUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFieldUseCase.swift; sourceTree = "<group>"; };
+		7B93B3BF2B36AA6400912202 /* BookmarkedProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedProjectResponseDTO.swift; sourceTree = "<group>"; };
+		7B93B3C12B36AB0900912202 /* BookmarkedProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedProject.swift; sourceTree = "<group>"; };
 		7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompMessageResponseDTO.swift; sourceTree = "<group>"; };
@@ -727,6 +731,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB2A2AB16272009A00EB /* UserCredentials.swift */,
+				7B93B3C12B36AB0900912202 /* BookmarkedProject.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1220,7 +1225,7 @@
 				7B14DB2F2AB1DAC3009A00EB /* Auth */,
 				7C569CFB2A9F6F8A0063D362 /* Project */,
 				7BA36CA52A9C6878000DAB02 /* Chat */,
-				7C56E1662B11031E00454F5E /* Profile */,
+				7C56E1662B11031E00454F5E /* User */,
 				7B93B3AD2B35395500912202 /* Alert */,
 			);
 			path = RepositoryInterfaces;
@@ -1657,6 +1662,7 @@
 				7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */,
 				7CD023BA2B2B486400F55648 /* ApplicantProfileResponseDTO.swift */,
 				7B93B3BB2B35591600912202 /* ChangeFieldRequestDTO.swift */,
+				7B93B3BF2B36AA6400912202 /* BookmarkedProjectResponseDTO.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1688,12 +1694,12 @@
 			path = User;
 			sourceTree = "<group>";
 		};
-		7C56E1662B11031E00454F5E /* Profile */ = {
+		7C56E1662B11031E00454F5E /* User */ = {
 			isa = PBXGroup;
 			children = (
 				7C56E1672B11034300454F5E /* UserRepository.swift */,
 			);
-			path = Profile;
+			path = User;
 			sourceTree = "<group>";
 		};
 		7C56E1692B1103F900454F5E /* User */ = {
@@ -2382,6 +2388,7 @@
 				7BA36CA72A9C688C000DAB02 /* ChannelRepository.swift in Sources */,
 				7CA04F232AFE77AB007B9191 /* BridgeFilledChip.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
+				7B93B3C22B36AB0900912202 /* BookmarkedProject.swift in Sources */,
 				7CA04F1E2AFE4B0F007B9191 /* RecruitFieldCell.swift in Sources */,
 				7BA36C9D2A9C5105000DAB02 /* Message.swift in Sources */,
 				7B93B3BE2B355A5C00912202 /* ChangeFieldUseCase.swift in Sources */,
@@ -2449,6 +2456,7 @@
 				7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */,
 				7C55E63B2ADEA2A40018FA5D /* MockProjectRepository.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChannelDTO.swift in Sources */,
+				7B93B3C02B36AA6400912202 /* BookmarkedProjectResponseDTO.swift in Sources */,
 				7BCA18072AFDCC0F00257B04 /* ProfileHeaderView.swift in Sources */,
 				7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */,
 				7CD023BE2B2C158300F55648 /* ProjectIDDTO.swift in Sources */,

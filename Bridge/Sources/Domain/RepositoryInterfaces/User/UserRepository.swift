@@ -12,4 +12,5 @@ protocol UserRepository {
     func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]>
     
     func changeField(selectedFields: [String]) -> Observable<Void>
+    func fetchBookmarkedProjects() -> Observable<[BookmarkedProject]>
 }
