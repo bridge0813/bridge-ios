@@ -21,7 +21,7 @@ struct MyProjectResponseDTO: Decodable {
         case description = "overview"
         case deadline = "dueDate"
         case totalRecruitNumber = "recruitTotalNum"
-        case status = "stage"
+        case status
     }
 }
 
@@ -37,7 +37,7 @@ extension MyProjectResponseDTO {
             rank: 0,
             deadlineRank: 0,
             isBookmarked: false,
-            status: formatProjectStatusText(status: status)
+            status: status
         )
     }
     
