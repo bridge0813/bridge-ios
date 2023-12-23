@@ -40,14 +40,6 @@ extension MyProjectResponseDTO {
             status: status
         )
     }
-    
-    private func formatProjectStatusText(status: String) -> String {
-        switch status {
-        case "현재 모집중": return "현재 진행중"
-        case "마감": return "모집완료"
-        default: return status
-        }
-    }
 }
 
 extension MyProjectResponseDTO {
