@@ -8,6 +8,7 @@
 enum ChannelEndpoint {
     case fetchChannels(userID: String)
     case leaveChannel(id: String)
+    case createChannel(requestDTO: CreateChannelRequestDTO)
 }
 
 extension ChannelEndpoint: Endpoint {
@@ -17,6 +18,9 @@ extension ChannelEndpoint: Endpoint {
             return "/chat/\(userID)"
             
         case .leaveChannel:
+            return "/chat"
+            
+        case .createChannel:
             return "/chat"
         }
     }
@@ -28,6 +32,9 @@ extension ChannelEndpoint: Endpoint {
             
         case .leaveChannel(let id):
             return ["chatRoomId": id]
+            
+        case .createChannel:
+            return nil
         }
     }
     
@@ -38,8 +45,22 @@ extension ChannelEndpoint: Endpoint {
             
         case .leaveChannel:
             return .delete
+            
+        case .createChannel:
+            return .post
         }
     }
     
-    var body: Encodable? { nil }
+    var body: Encodable? {
+        switch self {
+        case .fetchChannels:
+            return nil
+            
+        case .leaveChannel:
+            return nil
+            
+        case .createChannel(let requestDTO):
+            return requestDTO
+        }
+    }
 }

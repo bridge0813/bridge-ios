@@ -209,6 +209,7 @@
 		7C42701C2AA394EF009BE6AF /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C42701B2AA394EF009BE6AF /* UILabel+.swift */; };
 		7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C42701D2AA4540C009BE6AF /* BaseCollectionReusableView.swift */; };
 		7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */; };
+		7C50EC062B3717A300A69F12 /* CreateChannelRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C50EC052B3717A300A69F12 /* CreateChannelRequestDTO.swift */; };
 		7C55E6292AD7EFEF0018FA5D /* MainCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */; };
 		7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */; };
 		7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62C2AD867010018FA5D /* ProjectCell.swift */; };
@@ -503,6 +504,7 @@
 		7C42701B2AA394EF009BE6AF /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		7C42701D2AA4540C009BE6AF /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHotProjectsUseCase.swift; sourceTree = "<group>"; };
+		7C50EC052B3717A300A69F12 /* CreateChannelRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelRequestDTO.swift; sourceTree = "<group>"; };
 		7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryButton.swift; sourceTree = "<group>"; };
 		7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryView.swift; sourceTree = "<group>"; };
 		7C55E62C2AD867010018FA5D /* ProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
@@ -1329,6 +1331,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA36CB12A9D961F000DAB02 /* ChannelDTO.swift */,
+				7C50EC052B3717A300A69F12 /* CreateChannelRequestDTO.swift */,
 				7CA73D982B28B481007D88FB /* CreateChannelResponseDTO.swift */,
 				7B9142DF2B01D4EB006EA52F /* MessageDTO.swift */,
 				7B93AAA22B2012D800650EA5 /* StompMessageRequestDTO.swift */,
@@ -2675,6 +2678,7 @@
 				7CD023BB2B2B486400F55648 /* ApplicantProfileResponseDTO.swift in Sources */,
 				7CA04F432B029B3A007B9191 /* FetchProjectDetailUseCase.swift in Sources */,
 				7C8CC4132AEEB5CC0032F237 /* TechTagCell.swift in Sources */,
+				7C50EC062B3717A300A69F12 /* CreateChannelRequestDTO.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,
 				7CA04F652B0A6148007B9191 /* ProjectEndpoint.swift in Sources */,
