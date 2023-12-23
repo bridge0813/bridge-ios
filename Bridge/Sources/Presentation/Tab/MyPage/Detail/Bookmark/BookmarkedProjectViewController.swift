@@ -6,9 +6,20 @@
 //
 
 import UIKit
+import FlexLayout
+import PinLayout
+import RxCocoa
+import RxSwift
 
 final class BookmarkedProjectViewController: BaseViewController {
     // MARK: - UI
+    private lazy var bookmarkedProjectCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.backgroundColor = BridgeColor.gray09
+        collectionView.alwaysBounceVertical = true
+        collectionView.register(BookmarkedProjectCell.self)
+        return collectionView
+    }()
     
     // MARK: - Property
     private let viewModel: BookmarkedProjectViewModel
@@ -31,7 +42,13 @@ final class BookmarkedProjectViewController: BaseViewController {
     
     // MARK: - Layout
     override func configureLayouts() {
-        
+        view.addSubview(bookmarkedProjectCollectionView)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        bookmarkedProjectCollectionView.pin.all()
+        bookmarkedProjectCollectionView.flex.layout()
     }
     
     // MARK: - Binding
@@ -41,5 +58,33 @@ final class BookmarkedProjectViewController: BaseViewController {
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.bookmarkedProjects
+            .bind(to: bookmarkedProjectCollectionView.rx.items(
+                cellIdentifier: BookmarkedProjectCell.reuseIdentifier,
+                cellType: BookmarkedProjectCell.self)
+            ) { _, element, cell in
+                cell.configure(with: element)
+            }
+            .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - Layout
+extension BookmarkedProjectViewController {
+    func createLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        
+        let padding: CGFloat = 16
+        let minimumItemSpacing: CGFloat = 9
+        let availableWidth = view.bounds.width - (padding * 2) - minimumItemSpacing
+        let cellWidth = availableWidth / 2
+        
+        layout.itemSize = CGSize(width: cellWidth, height: cellWidth * 1.1)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = minimumItemSpacing
+        
+        return layout
     }
 }

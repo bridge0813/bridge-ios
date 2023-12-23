@@ -107,6 +107,7 @@
 		7B93B3C02B36AA6400912202 /* BookmarkedProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3BF2B36AA6400912202 /* BookmarkedProjectResponseDTO.swift */; };
 		7B93B3C22B36AB0900912202 /* BookmarkedProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3C12B36AB0900912202 /* BookmarkedProject.swift */; };
 		7B93B3C42B36AF5000912202 /* FetchBookmarkedProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3C32B36AF5000912202 /* FetchBookmarkedProjectsUseCase.swift */; };
+		7B93B3C62B36B32B00912202 /* BookmarkedProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3C52B36B32B00912202 /* BookmarkedProjectCell.swift */; };
 		7B9420502B04DAAB00FEE058 /* StompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */; };
 		7B9420522B04DD9100FEE058 /* MessageStompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */; };
 		7B9420542B04F46F00FEE058 /* StompMessageResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */; };
@@ -429,6 +430,7 @@
 		7B93B3BF2B36AA6400912202 /* BookmarkedProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedProjectResponseDTO.swift; sourceTree = "<group>"; };
 		7B93B3C12B36AB0900912202 /* BookmarkedProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedProject.swift; sourceTree = "<group>"; };
 		7B93B3C32B36AF5000912202 /* FetchBookmarkedProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBookmarkedProjectsUseCase.swift; sourceTree = "<group>"; };
+		7B93B3C52B36B32B00912202 /* BookmarkedProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedProjectCell.swift; sourceTree = "<group>"; };
 		7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompMessageResponseDTO.swift; sourceTree = "<group>"; };
@@ -1494,6 +1496,7 @@
 			children = (
 				7BEA73822B2B2B7400CECF44 /* BookmarkedProjectViewModel.swift */,
 				7BEA73862B2B2C1C00CECF44 /* BookmarkedProjectViewController.swift */,
+				7B93B3C52B36B32B00912202 /* BookmarkedProjectCell.swift */,
 			);
 			path = Bookmark;
 			sourceTree = "<group>";
@@ -2558,6 +2561,7 @@
 				7BA36CA42A9C6849000DAB02 /* DefaultChannelRepository.swift in Sources */,
 				7C8CC4182AF4091D0032F237 /* BridgeProgressView.swift in Sources */,
 				7B3B373E2B03931C00C2F8AD /* ChannelSubscriptionUseCase.swift in Sources */,
+				7B93B3C62B36B32B00912202 /* BookmarkedProjectCell.swift in Sources */,
 				7B14DB2E2AB1DA39009A00EB /* SignInResult.swift in Sources */,
 				7CA04F292AFFDF6A007B9191 /* RecruitFieldDetailCell.swift in Sources */,
 				7CE0803C2ACF142400230C86 /* BaseDropdownCell.swift in Sources */,
