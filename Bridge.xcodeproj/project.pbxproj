@@ -106,6 +106,7 @@
 		7B93B3BE2B355A5C00912202 /* ChangeFieldUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3BD2B355A5C00912202 /* ChangeFieldUseCase.swift */; };
 		7B93B3C02B36AA6400912202 /* BookmarkedProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3BF2B36AA6400912202 /* BookmarkedProjectResponseDTO.swift */; };
 		7B93B3C22B36AB0900912202 /* BookmarkedProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3C12B36AB0900912202 /* BookmarkedProject.swift */; };
+		7B93B3C42B36AF5000912202 /* FetchBookmarkedProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93B3C32B36AF5000912202 /* FetchBookmarkedProjectsUseCase.swift */; };
 		7B9420502B04DAAB00FEE058 /* StompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */; };
 		7B9420522B04DD9100FEE058 /* MessageStompEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */; };
 		7B9420542B04F46F00FEE058 /* StompMessageResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */; };
@@ -427,6 +428,7 @@
 		7B93B3BD2B355A5C00912202 /* ChangeFieldUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFieldUseCase.swift; sourceTree = "<group>"; };
 		7B93B3BF2B36AA6400912202 /* BookmarkedProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedProjectResponseDTO.swift; sourceTree = "<group>"; };
 		7B93B3C12B36AB0900912202 /* BookmarkedProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedProject.swift; sourceTree = "<group>"; };
+		7B93B3C32B36AF5000912202 /* FetchBookmarkedProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBookmarkedProjectsUseCase.swift; sourceTree = "<group>"; };
 		7B94204F2B04DAAB00FEE058 /* StompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420512B04DD9100FEE058 /* MessageStompEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStompEndpoint.swift; sourceTree = "<group>"; };
 		7B9420532B04F46F00FEE058 /* StompMessageResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompMessageResponseDTO.swift; sourceTree = "<group>"; };
@@ -1690,6 +1692,7 @@
 				7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */,
 				7CC719F62B2838C300CFA827 /* FetchApplicantListUseCase.swift */,
 				7B93B3BD2B355A5C00912202 /* ChangeFieldUseCase.swift */,
+				7B93B3C32B36AF5000912202 /* FetchBookmarkedProjectsUseCase.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -2563,6 +2566,7 @@
 				7CA04F452B029B7C007B9191 /* RecruitFieldDetailViewController.swift in Sources */,
 				7C42701C2AA394EF009BE6AF /* UILabel+.swift in Sources */,
 				7BA36CB52A9D9828000DAB02 /* Endpoint.swift in Sources */,
+				7B93B3C42B36AF5000912202 /* FetchBookmarkedProjectsUseCase.swift in Sources */,
 				7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */,
 				7C40CBC22AC5C2BF000F4C9F /* BridgeMediumButtonGroup.swift in Sources */,
 				7C55E65A2AE8DEC70018FA5D /* BridgeTextView.swift in Sources */,
