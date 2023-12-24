@@ -8,6 +8,8 @@
 struct BookmarkedProject {
     let id: Int
     let title: String
-    let dueDate: String
+    let dDay: Int
+    let startDate: String
+    let endDate: String
     let totalRecruitNumber: Int
 }
