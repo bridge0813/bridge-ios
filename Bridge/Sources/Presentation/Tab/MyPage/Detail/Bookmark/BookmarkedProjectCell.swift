@@ -92,10 +92,21 @@ final class BookmarkedProjectCell: BaseCollectionViewCell {
 // MARK: - Configuration
 extension BookmarkedProjectCell {
     func configure(with bookmarkedProject: BookmarkedProject) {
-        dueDateLabel.text = "D - \(bookmarkedProject.dDay)"
+        if let dDay = bookmarkedProject.dDay {
+            dueDateLabel.text = "D - \(dDay)"
+        } else {
+            dueDateLabel.text = "날짜미정"
+        }
+        
         titleLabel.text = bookmarkedProject.title
         totalRecruitNumberLabel.text = "\(bookmarkedProject.totalRecruitNumber)명 모집"
-        dateLabel.text = "\(bookmarkedProject.startDate) - \(bookmarkedProject.endDate)"
+        
+        if let startDate = bookmarkedProject.startDate,
+           let endDate = bookmarkedProject.endDate {
+            dateLabel.text = "\(startDate) - \(endDate)"
+        } else {
+            dateLabel.text = "날짜미정"
+        }
         
         dueDateLabel.flex.markDirty()
         titleLabel.flex.markDirty()
