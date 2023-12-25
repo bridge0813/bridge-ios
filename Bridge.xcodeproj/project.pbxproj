@@ -216,6 +216,8 @@
 		7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C42701D2AA4540C009BE6AF /* BaseCollectionReusableView.swift */; };
 		7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */; };
 		7C50EC062B3717A300A69F12 /* CreateChannelRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C50EC052B3717A300A69F12 /* CreateChannelRequestDTO.swift */; };
+		7C50EC082B39D90800A69F12 /* ApplicantProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C50EC072B39D90800A69F12 /* ApplicantProfileResponseDTO.swift */; };
+		7C50EC0A2B39D9B300A69F12 /* FetchApplicantListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C50EC092B39D9B300A69F12 /* FetchApplicantListUseCase.swift */; };
 		7C55E6292AD7EFEF0018FA5D /* MainCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */; };
 		7C55E62B2AD7F0390018FA5D /* MainCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */; };
 		7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55E62C2AD867010018FA5D /* ProjectCell.swift */; };
@@ -300,7 +302,6 @@
 		7CC719F02B27781100CFA827 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719EF2B27781100CFA827 /* Typealias.swift */; };
 		7CC719F22B277A3500CFA827 /* ApplicantProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F12B277A3500CFA827 /* ApplicantProfile.swift */; };
 		7CC719F52B281CC600CFA827 /* ApplicantNumberHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F42B281CC600CFA827 /* ApplicantNumberHeaderView.swift */; };
-		7CC719F72B2838C300CFA827 /* FetchApplicantListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719F62B2838C300CFA827 /* FetchApplicantListUseCase.swift */; };
 		7CC719FC2B2848EC00CFA827 /* AcceptApplicantUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719FB2B2848EC00CFA827 /* AcceptApplicantUseCase.swift */; };
 		7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */; };
 		7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */; };
@@ -311,7 +312,6 @@
 		7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */; };
 		7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */; };
 		7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */; };
-		7CD023BB2B2B486400F55648 /* ApplicantProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023BA2B2B486400F55648 /* ApplicantProfileResponseDTO.swift */; };
 		7CD023BE2B2C158300F55648 /* ProjectIDDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023BD2B2C158300F55648 /* ProjectIDDTO.swift */; };
 		7CD023C12B2EB8E200F55648 /* ApplyProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023C02B2EB8E200F55648 /* ApplyProjectUseCase.swift */; };
 		7CD023C42B2F10AB00F55648 /* UserIDDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023C32B2F10AB00F55648 /* UserIDDTO.swift */; };
@@ -517,6 +517,8 @@
 		7C42701D2AA4540C009BE6AF /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		7C4270232AA4D434009BE6AF /* FetchHotProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHotProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C50EC052B3717A300A69F12 /* CreateChannelRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelRequestDTO.swift; sourceTree = "<group>"; };
+		7C50EC072B39D90800A69F12 /* ApplicantProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantProfileResponseDTO.swift; sourceTree = "<group>"; };
+		7C50EC092B39D9B300A69F12 /* FetchApplicantListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchApplicantListUseCase.swift; sourceTree = "<group>"; };
 		7C55E6282AD7EFEF0018FA5D /* MainCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryButton.swift; sourceTree = "<group>"; };
 		7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryView.swift; sourceTree = "<group>"; };
 		7C55E62C2AD867010018FA5D /* ProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
@@ -600,7 +602,6 @@
 		7CC719EF2B27781100CFA827 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		7CC719F12B277A3500CFA827 /* ApplicantProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantProfile.swift; sourceTree = "<group>"; };
 		7CC719F42B281CC600CFA827 /* ApplicantNumberHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantNumberHeaderView.swift; sourceTree = "<group>"; };
-		7CC719F62B2838C300CFA827 /* FetchApplicantListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchApplicantListUseCase.swift; sourceTree = "<group>"; };
 		7CC719FB2B2848EC00CFA827 /* AcceptApplicantUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptApplicantUseCase.swift; sourceTree = "<group>"; };
 		7CC9F6C22AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewController.swift; sourceTree = "<group>"; };
 		7CC9F6C42AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberFieldSelectionViewModel.swift; sourceTree = "<group>"; };
@@ -611,7 +612,6 @@
 		7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDatePickerViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewController.swift; sourceTree = "<group>"; };
-		7CD023BA2B2B486400F55648 /* ApplicantProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantProfileResponseDTO.swift; sourceTree = "<group>"; };
 		7CD023BD2B2C158300F55648 /* ProjectIDDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectIDDTO.swift; sourceTree = "<group>"; };
 		7CD023C02B2EB8E200F55648 /* ApplyProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProjectUseCase.swift; sourceTree = "<group>"; };
 		7CD023C32B2F10AB00F55648 /* UserIDDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIDDTO.swift; sourceTree = "<group>"; };
@@ -1678,7 +1678,6 @@
 			children = (
 				7CD023C22B2F109C00F55648 /* UserID */,
 				7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */,
-				7CD023BA2B2B486400F55648 /* ApplicantProfileResponseDTO.swift */,
 				7B93B3BB2B35591600912202 /* ChangeFieldRequestDTO.swift */,
 				7B93B3BF2B36AA6400912202 /* BookmarkedProjectResponseDTO.swift */,
 			);
@@ -1706,7 +1705,6 @@
 			isa = PBXGroup;
 			children = (
 				7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */,
-				7CC719F62B2838C300CFA827 /* FetchApplicantListUseCase.swift */,
 				7B93B3BD2B355A5C00912202 /* ChangeFieldUseCase.swift */,
 				7B93B3C32B36AF5000912202 /* FetchBookmarkedProjectsUseCase.swift */,
 			);
@@ -2172,7 +2170,7 @@
 		7CECB7912B369A8900D903D7 /* Applicant */ = {
 			isa = PBXGroup;
 			children = (
-				7CD023BA2B2B486400F55648 /* ApplicantProfileResponseDTO.swift */,
+				7C50EC072B39D90800A69F12 /* ApplicantProfileResponseDTO.swift */,
 			);
 			path = Applicant;
 			sourceTree = "<group>";
@@ -2209,7 +2207,7 @@
 		7CECB79D2B36B6D800D903D7 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				7CC719F62B2838C300CFA827 /* FetchApplicantListUseCase.swift */,
+				7C50EC092B39D9B300A69F12 /* FetchApplicantListUseCase.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -2502,6 +2500,7 @@
 				7CC719E42B27117800CFA827 /* DeleteProjectUseCase.swift in Sources */,
 				7B9142D62B01CE8B006EA52F /* MessageRepository.swift in Sources */,
 				7B93AAA32B2012D800650EA5 /* StompMessageRequestDTO.swift in Sources */,
+				7C50EC0A2B39D9B300A69F12 /* FetchApplicantListUseCase.swift in Sources */,
 				7B9C31AB2B07752C007E36B2 /* StompService.swift in Sources */,
 				7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */,
 				7CC719F02B27781100CFA827 /* Typealias.swift in Sources */,
@@ -2566,7 +2565,6 @@
 				7BA36CCE2A9E185A000DAB02 /* ChannelCell.swift in Sources */,
 				7B153C0C2AD64E5800618280 /* ChannelEndpoint.swift in Sources */,
 				7C569D062A9F776B0063D362 /* Date+.swift in Sources */,
-				7CC719F72B2838C300CFA827 /* FetchApplicantListUseCase.swift in Sources */,
 				7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */,
 				7CDFB6202B204D4F00272F77 /* ManagementProjectCell.swift in Sources */,
 				7CC9F6CB2AAF0EEC00685EA9 /* MemberRequirementInputViewModel.swift in Sources */,
@@ -2662,6 +2660,7 @@
 				7B153C112AD6D0E100618280 /* AuthInterceptor.swift in Sources */,
 				7B9142DA2B01CF61006EA52F /* MockMessageRepository.swift in Sources */,
 				7CA73D972B28AC1B007D88FB /* CreateChannelUseCase.swift in Sources */,
+				7C50EC082B39D90800A69F12 /* ApplicantProfileResponseDTO.swift in Sources */,
 				7BA36CDA2AA197F8000DAB02 /* ChannelListViewController.swift in Sources */,
 				7CD023C72B2F197A00F55648 /* CloseProjectUseCase.swift in Sources */,
 				7CA04F572B05D50E007B9191 /* ProjectDetailTechTag.swift in Sources */,
@@ -2701,7 +2700,6 @@
 				7B14DB252AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
 				7BA96EB82B249630000D48AE /* Notification+Stomp.swift in Sources */,
-				7CD023BB2B2B486400F55648 /* ApplicantProfileResponseDTO.swift in Sources */,
 				7CA04F432B029B3A007B9191 /* FetchProjectDetailUseCase.swift in Sources */,
 				7C8CC4132AEEB5CC0032F237 /* TechTagCell.swift in Sources */,
 				7C50EC062B3717A300A69F12 /* CreateChannelRequestDTO.swift in Sources */,

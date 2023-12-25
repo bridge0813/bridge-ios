@@ -14,10 +14,6 @@ final class MockUserRepository: UserRepository {
 //        .error(NetworkError.statusCode(401))
     }
     
-    func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]> {
-        .just(ApplicantProfileResponseDTO.testArray.compactMap { $0.toEntity() })
-    }
-    
     func changeField(selectedFields: [String]) -> Observable<Void> {
         .just(())
     }

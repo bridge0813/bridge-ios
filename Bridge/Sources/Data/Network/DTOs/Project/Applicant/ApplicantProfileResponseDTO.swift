@@ -2,7 +2,7 @@
 //  ApplicantProfileResponseDTO.swift
 //  Bridge
 //
-//  Created by 엄지호 on 12/12/23.
+//  Created by 엄지호 on 12/26/23.
 //
 
 /// 지원자 목록을 조회할 때 사용되는 DTO

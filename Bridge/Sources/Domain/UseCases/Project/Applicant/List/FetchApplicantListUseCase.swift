@@ -12,13 +12,13 @@ protocol FetchApplicantListUseCase {
 }
 
 final class DefaultFetchApplicantListUseCase: FetchApplicantListUseCase {
-    
+
     private let applicantRepository: ApplicantRepository
     
     init(applicantRepository: ApplicantRepository) {
         self.applicantRepository = applicantRepository
     }
-    
+
     func fetch(projectID: Int) -> Observable<[ApplicantProfile]> {
         applicantRepository.fetchApplicantList(projectID: projectID)
     }
