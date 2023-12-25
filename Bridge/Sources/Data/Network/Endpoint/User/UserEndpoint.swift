@@ -9,6 +9,8 @@ import Foundation
 
 enum UserEndpoint {
     case fetchProfilePreview(userID: String)
+    case changeField(requestDTO: ChangeFieldRequestDTO)
+    case fetchBookmarkedProjects(userID: String)
 }
 
 extension UserEndpoint: Endpoint {
@@ -16,12 +18,24 @@ extension UserEndpoint: Endpoint {
         switch self {
         case .fetchProfilePreview:
             return "/users/mypage"
+            
+        case .changeField:
+            return "/users/field"
+            
+        case .fetchBookmarkedProjects:
+            return "/users/bookmark"
         }
     }
     
     var queryParameters: QueryParameters? {
         switch self {
         case .fetchProfilePreview(let userID):
+            return ["userId": userID]
+            
+        case .changeField:
+            return nil
+            
+        case .fetchBookmarkedProjects(let userID):
             return ["userId": userID]
         }
     }
@@ -30,8 +44,25 @@ extension UserEndpoint: Endpoint {
         switch self {
         case .fetchProfilePreview:
             return .get
+            
+        case .changeField:
+            return .put
+            
+        case .fetchBookmarkedProjects:
+            return .get
         }
     }
     
-    var body: Encodable? { nil }
+    var body: Encodable? {
+        switch self {
+        case .fetchProfilePreview:
+            return nil
+            
+        case .changeField(let requestDTO):
+            return requestDTO
+            
+        case .fetchBookmarkedProjects:
+            return nil
+        }
+    }
 }
