@@ -43,7 +43,15 @@ final class DefaultChannelRepository: ChannelRepository {
     }
     
     func createChannel(opponentID: Int) -> Observable<Channel> {
-        .just(CreateChannelResponseDTO.testData.toEntity())
+        let myID = Int(tokenStorage.get(.userID)) ?? 0
+        let createChannelDTO = CreateChannelRequestDTO(myID: myID, opponentID: opponentID)
+        let createChannelEndpoint = ChannelEndpoint.createChannel(requestDTO: createChannelDTO)
+        
+        return networkService.request(to: createChannelEndpoint, interceptor: nil)
+            .decode(type: CreateChannelResponseDTO.self, decoder: JSONDecoder())
+            .map { createChannelDTO in
+                createChannelDTO.toEntity()
+            }
     }
     
     func subscribeChannel(id: String) -> Observable<[Message]> {

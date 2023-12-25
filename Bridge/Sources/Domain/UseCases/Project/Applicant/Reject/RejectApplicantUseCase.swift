@@ -14,13 +14,13 @@ protocol RejectApplicantUseCase {
 
 final class DefaultRejectApplicantUseCase: RejectApplicantUseCase {
     
-    private let projectRepository: ProjectRepository
+    private let applicantRepository: ApplicantRepository
     
-    init(projectRepository: ProjectRepository) {
-        self.projectRepository = projectRepository
+    init(applicantRepository: ApplicantRepository) {
+        self.applicantRepository = applicantRepository
     }
     
     func reject(projectID: Int, applicantID: Int) -> Observable<Int> {
-        projectRepository.reject(projectID: projectID, applicantID: applicantID)
+        applicantRepository.reject(projectID: projectID, applicantID: applicantID)
     }
 }

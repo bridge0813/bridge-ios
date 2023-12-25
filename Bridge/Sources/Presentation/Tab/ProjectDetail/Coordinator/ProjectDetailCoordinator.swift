@@ -15,6 +15,7 @@ final class ProjectDetailCoordinator: Coordinator {
     var didFinishEventClosure: (() -> Void)?  // disAppear 시점에 자식 코디네이터에서 할당을 제거하기 위함.
     
     private let projectRepository: ProjectRepository
+    private let applicantRepository: ApplicantRepository
     
     private let projectDetailUseCase: FetchProjectDetailUseCase
     private let bookmarkUseCase: BookmarkUseCase
@@ -28,10 +29,11 @@ final class ProjectDetailCoordinator: Coordinator {
         
         let networkService = DefaultNetworkService()
         projectRepository = DefaultProjectRepository(networkService: networkService)
+        applicantRepository = DefaultApplicantRepository(networkService: networkService)
         
         projectDetailUseCase = DefaultFetchProjectDetailUseCase(projectRepository: projectRepository)
         bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
-        applyUseCase = DefaultApplyProjectUseCase(projectRepository: projectRepository)
+        applyUseCase = DefaultApplyProjectUseCase(applicantRepository: applicantRepository)
         deleteUseCase = DefaultDeleteProjectUseCase(projectRepository: projectRepository)
         closeUseCase = DefaultCloseProjectUseCase(projectRepository: projectRepository)
     }

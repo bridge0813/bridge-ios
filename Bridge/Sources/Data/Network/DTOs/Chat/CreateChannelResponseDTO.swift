@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CreateChannelResponseDTO: Codable {
+struct CreateChannelResponseDTO: Decodable {
     let channelID: String
     let myID: Int
     let opponentID: Int

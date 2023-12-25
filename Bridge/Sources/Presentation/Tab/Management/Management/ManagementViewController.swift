@@ -129,7 +129,7 @@ final class ManagementViewController: BaseViewController {
                     resultProjects = projects.filter { $0.status == "결과 대기중" }
                     
                 case .onGoing:
-                    resultProjects = projects.filter { $0.status == "현재 진행중" }
+                    resultProjects = projects.filter { $0.status == "현재 모집중" }
                     
                 case .complete:
                     resultProjects = projects.filter {

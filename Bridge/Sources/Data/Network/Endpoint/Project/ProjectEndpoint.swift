@@ -8,14 +8,15 @@
 enum ProjectEndpoint {
     case fetchAllProjects(userID: String)
     case fetchProjectsByField(requestDTO: FieldRequestDTO)
-    case fetchHotProjects
-    case fetchDeadlineProjects
+    case fetchHotProjects(userID: String)
+    case fetchDeadlineProjects(userID: String)
+    case fetchAppliedProjects
+    case fetchMyProjects
     case fetchProjectDetail(userID: String, projectID: String)
     
     case create(requestDTO: CreateProjectRequestDTO)
     case delete(requestDTO: UserIDDTO, projectID: String)
     case bookmark(requestDTO: ProjectIDDTO)
-    case apply(projectID: String)
     case close(requestDTO: ProjectIDDTO)
 }
 
@@ -34,6 +35,12 @@ extension ProjectEndpoint: Endpoint {
         case .fetchDeadlineProjects:
             return "/projects/imminent"
             
+        case .fetchAppliedProjects:
+            return "/projects/apply"
+            
+        case .fetchMyProjects:
+            return "/projects"
+            
         case .fetchProjectDetail:
             return "/project"
             
@@ -45,9 +52,6 @@ extension ProjectEndpoint: Endpoint {
             
         case .bookmark:
             return "/project/scrap"
-            
-        case .apply:
-            return "/projects/apply"
             
         case .close:
             return "/project/deadline"
@@ -62,10 +66,16 @@ extension ProjectEndpoint: Endpoint {
         case .fetchProjectsByField:
             return nil
             
-        case .fetchHotProjects:
+        case .fetchHotProjects(let userID):
+            return ["userId": userID]
+            
+        case .fetchDeadlineProjects(let userID):
+            return ["userId": userID]
+            
+        case .fetchAppliedProjects:
             return nil
             
-        case .fetchDeadlineProjects:
+        case .fetchMyProjects:
             return nil
             
         case .fetchProjectDetail(let userID, let projectID):
@@ -79,9 +89,6 @@ extension ProjectEndpoint: Endpoint {
             
         case .bookmark:
             return nil
-            
-        case .apply(let projectID):
-            return ["projectId": projectID]
             
         case .close:
             return nil
@@ -102,6 +109,12 @@ extension ProjectEndpoint: Endpoint {
         case .fetchDeadlineProjects:
             return .get
             
+        case .fetchAppliedProjects:
+            return .get
+            
+        case .fetchMyProjects:
+            return .get
+            
         case .fetchProjectDetail:
             return .get
             
@@ -112,9 +125,6 @@ extension ProjectEndpoint: Endpoint {
             return .delete
             
         case .bookmark:
-            return .post
-            
-        case .apply:
             return .post
             
         case .close:
@@ -136,6 +146,12 @@ extension ProjectEndpoint: Endpoint {
         case .fetchDeadlineProjects:
             return nil
             
+        case .fetchAppliedProjects:
+            return nil
+            
+        case .fetchMyProjects:
+            return nil
+            
         case .fetchProjectDetail:
             return nil
             
@@ -147,9 +163,6 @@ extension ProjectEndpoint: Endpoint {
             
         case .bookmark(let requestDTO):
             return requestDTO
-            
-        case .apply:
-            return nil
             
         case .close(let requestDTO):
             return requestDTO

@@ -67,7 +67,7 @@ final class ManagementHeaderView: BaseCollectionReusableView {
     func configureHeaderView(projects: [ProjectPreview], selectedTab: ManagementTabType) {
         allProjectsCountView.count = projects.count
         dynamicProjectsCountView.count = projects.filter {
-            $0.status == "결과 대기중" || $0.status == "현재 진행중"
+            $0.status == "결과 대기중" || $0.status == "현재 모집중"
         }.count
         
         completedProjectsCountView.count = projects.filter {

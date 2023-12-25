@@ -57,7 +57,7 @@ final class ApplicantListViewModel: ViewModelType {
         input.viewWillAppear
             .withUnretained(self)
             .flatMapLatest { owner, _ in
-                return owner.fetchApplicantListUseCase.fetchApplicantList(projectID: owner.projectID).toResult()
+                return owner.fetchApplicantListUseCase.fetch(projectID: owner.projectID).toResult()
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)

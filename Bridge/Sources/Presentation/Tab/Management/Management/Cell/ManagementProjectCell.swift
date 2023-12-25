@@ -196,7 +196,7 @@ extension ManagementProjectCell {
         case accept = "수락"
         case refuse = "거절"
         case pendingResult = "결과 대기중"
-        case onGoing = "현재 진행중"
+        case onGoing = "현재 모집중"
         case complete = "모집완료"
         
         var statusColor: UIColor {
