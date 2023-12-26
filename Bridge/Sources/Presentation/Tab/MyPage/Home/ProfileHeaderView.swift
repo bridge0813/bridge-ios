@@ -183,4 +183,8 @@ extension ProfileHeaderView {
     var bookmarkedProjectButtonTapped: Observable<Void> {
         bookmarkedProjectButton.rx.tap.asObservable()
     }
+    
+    var manageProfileButtonTapped: Observable<Void> {
+        manageProfileButton.rx.tap.asObservable()
+    }
 }

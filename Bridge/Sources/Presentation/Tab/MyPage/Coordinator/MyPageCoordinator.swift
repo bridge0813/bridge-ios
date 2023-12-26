@@ -104,6 +104,14 @@ extension MyPageCoordinator {
         let bookmarkedProjectViewController = BookmarkedProjectViewController(viewModel: bookmarkedProjectViewModel)
         navigationController.pushViewController(bookmarkedProjectViewController, animated: true)
     }
+    
+    func showProfileViewController() {
+        let profileViewModel = ProfileViewModel(
+            coordinator: self
+        )
+        let profileViewController = ProfileViewController(viewModel: profileViewModel)
+        navigationController.pushViewController(profileViewController, animated: true)
+    }
 }
 
 // MARK: - Auth

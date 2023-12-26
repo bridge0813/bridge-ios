@@ -86,6 +86,7 @@ final class MyPageViewController: BaseViewController {
             bellButtonTapped: bellButton.rx.tap.asObservable(),
             interestedFieldButtonTapped: profileHeaderView.interestedFieldButtonTapped,
             bookmarkedProjectButtonTapped: profileHeaderView.bookmarkedProjectButtonTapped,
+            manageProfileButtonTapped: profileHeaderView.manageProfileButtonTapped,
             itemSelected: myPageTableView.rx.itemSelected.map { $0.row }
         )
         let output = viewModel.transform(input: input)

@@ -16,6 +16,7 @@ final class MyPageViewModel: ViewModelType {
         let bellButtonTapped: Observable<Void>
         let interestedFieldButtonTapped: Observable<Void>
         let bookmarkedProjectButtonTapped: Observable<Void>
+        let manageProfileButtonTapped: Observable<Void>
         let itemSelected: Observable<Int>
     }
     
@@ -86,6 +87,13 @@ final class MyPageViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.showBookmarkedProjectViewController()
+            })
+            .disposed(by: disposeBag)
+        
+        input.manageProfileButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showProfileViewController()
             })
             .disposed(by: disposeBag)
         

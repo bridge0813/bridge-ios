@@ -90,7 +90,7 @@ final class MyFieldViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         rootFlexContainer.pin.all(view.pin.safeArea)
-        completeButton.pin.horizontally(16).bottom(view.pin.safeArea).height(52)
+        completeButton.pin.horizontally(16).bottom(view.pin.safeArea + 24).height(52)
         scrollView.pin.all()
         
         contentView.pin.top().horizontally()

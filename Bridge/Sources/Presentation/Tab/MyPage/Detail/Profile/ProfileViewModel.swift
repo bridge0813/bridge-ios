@@ -19,8 +19,14 @@ final class ProfileViewModel: ViewModelType {
     
     // MARK: - Property
     let disposeBag = DisposeBag()
+    private weak var coordinator: MyPageCoordinator?
     
     // MARK: - Init
+    init(
+        coordinator: MyPageCoordinator
+    ) {
+        self.coordinator = coordinator
+    }
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
