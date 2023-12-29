@@ -6,9 +6,113 @@
 //
 
 import UIKit
+import FlexLayout
+import PinLayout
+import RxCocoa
+import RxSwift
 
 final class ProfileViewController: BaseViewController {
     // MARK: - UI
+    private let editProfileButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("수정", for: .normal)
+        button.setTitleColor(BridgeColor.gray01, for: .normal)
+        button.titleLabel?.font = BridgeFont.body2.font
+        
+        return button
+    }()
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.bounces = false
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
+    
+    private let contentContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = BridgeColor.primary3
+        return view
+    }()
+    
+    private let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.flex.width(155).height(153)
+        imageView.backgroundColor = BridgeColor.gray10
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 20
+        imageView.contentMode = .center
+        return imageView
+    }()
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.flex.width(150).height(24)
+        label.font = BridgeFont.headline1.font
+        return label
+    }()
+    
+    private let carrerLabel: BridgeFilledChip = {
+        let label = BridgeFilledChip(
+            backgroundColor: BridgeColor.primary2,
+            type: .custom(padding: .init(top: 8, left: 14, bottom: 8, right: 14), radius: 15)
+        )
+        label.textColor = BridgeColor.primary1
+        return label
+    }()
+    
+    private let fieldsLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = BridgeColor.primary1
+        label.font = BridgeFont.body2.font
+        return label
+    }()
+    
+    /// 배경이 white 컬러인 컨테이너(자기소개, 스택 등의 컨텐츠를 보여주고 있음).
+    private let whiteContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = BridgeColor.gray10
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 12
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        return view
+    }()
+    
+    private let introductionTitleLabel: UILabel = {
+        let label = UILabel()
+        label.flex.width(56).height(22)
+        label.text = "자기소개"
+        label.textColor = BridgeColor.gray01
+        label.font = BridgeFont.subtitle2.font
+        return label
+    }()
+    
+    private let introductionLabelContainer: UIView = {
+        let view = UIView()
+        view.layer.borderWidth = 1
+        view.layer.borderColor = BridgeColor.gray06.cgColor
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    private let introductionLabel: UILabel = {
+        let label = UILabel()
+        label.font = BridgeFont.body2.font
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let techStackTitleLabel: UILabel = {
+        let label = UILabel()
+        label.flex.width(28).height(24)
+        label.text = "스택"
+        label.textColor = BridgeColor.gray01
+        label.font = BridgeFont.subtitle2.font
+        return label
+    }()
+    
+    private let techStackView = ProfileTechStackView()
     
     // MARK: - Property
     private let viewModel: ProfileViewModel
@@ -24,19 +128,129 @@ final class ProfileViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNoShadowNavigationBarAppearance(with: BridgeColor.primary3)
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        configureDefaultNavigationBarAppearance()
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: - Configuration
     override func configureAttributes() {
         navigationItem.title = "프로필"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editProfileButton)
     }
     
     // MARK: - Layout
     override func configureLayouts() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentContainer)
         
+        contentContainer.flex.define { flex in
+            flex.addItem(profileImageView).alignSelf(.center).marginTop(52)
+            flex.addItem(nameLabel).marginTop(38).marginLeft(16)
+            flex.addItem().direction(.row).alignItems(.center).marginTop(12).marginHorizontal(16).define { flex in
+                flex.addItem(carrerLabel).marginRight(12)
+                flex.addItem(fieldsLabel)
+            }
+            
+            flex.addItem(whiteContainer).marginTop(20).paddingHorizontal(16).define { flex in
+                flex.addItem(introductionTitleLabel).marginTop(40)
+                flex.addItem(introductionLabelContainer).padding(17, 16, 17, 16).marginTop(14).define { flex in
+                    flex.addItem(introductionLabel)
+                }
+                
+                flex.addItem(techStackTitleLabel).marginTop(14)
+                flex.addItem(techStackView).marginTop(14)
+                flex.addItem().height(50)
+            }
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.pin.all(view.pin.safeArea)
+        contentContainer.pin.top().horizontally()
+        contentContainer.flex.layout(mode: .adjustHeight)
+        
+        scrollView.contentSize = contentContainer.frame.size
     }
     
     // MARK: - Binding
     override func bind() {
         let input = ProfileViewModel.Input()
         let output = viewModel.transform(input: input)
+        
+        let profile = Profile(
+            imageURL: nil,
+            name: "엄지호",
+            introduction: "책임감과 성실함을 겸비한 준비된 인재입니다. 사이드 프로젝트는 15번정도 한 경험이 있구요. 하하",
+            fields: ["백엔드", "안드로이드", "iOS"],
+            fieldTechStacks: [
+                FieldTechStack(field: "iOS", techStacks: ["Swift", "Objective_C", "UIKit", "SwiftUI", "RxSwift"]),
+                FieldTechStack(field: "안드로이드", techStacks: ["Kotlin", "Java", "Compose"]),
+                FieldTechStack(field: "UI/UX", techStacks: ["photoshop", "illustrator", "photoshop", "illustrator", "photoshop", "illustrator"]),
+                FieldTechStack(field: "BI/BX", techStacks: ["photoshop"]),
+                FieldTechStack(field: "PM", techStacks: ["Notion", "Jira", "Slack"])
+            ],
+            carrer: "취준생",
+            links: [],
+            files: []
+        )
+        
+        configure(with: profile)
+    }
+}
+
+extension ProfileViewController {
+    private func configure(with profile: Profile) {
+        // 프로필 이미지 설정
+        if let imageURL = profile.imageURL {
+            // TODO: - 이미지 설정
+        } else {
+            profileImageView.tintColor = BridgeColor.gray04
+            profileImageView.image = UIImage(named: "person.fill")?.resize(to: CGSize(width: 50, height: 50)).withRenderingMode(.alwaysTemplate)
+        }
+        
+        // 이름 설정
+        nameLabel.text = "\(profile.name) 님"
+        
+        // 직업 설정
+        if let carrer = profile.carrer {
+            carrerLabel.text = carrer
+            carrerLabel.text = "취준생"
+            carrerLabel.flex.width(carrerLabel.intrinsicContentSize.width).height(30)
+        } else {
+            carrerLabel.flex.display(.none)
+        }
+        
+        // 관심분야 설정
+        fieldsLabel.text = profile.fields.joined(separator: ", ")
+        
+        // 자기소개 설정
+        if let introduction = profile.introduction {
+            introductionLabel.configureTextWithLineHeight(
+                text: introduction,
+                lineHeight: 20
+            )
+            introductionLabel.textColor = BridgeColor.gray01
+        } else {
+            introductionLabel.text = "나를 소개해보세요."
+            introductionLabel.textColor = BridgeColor.gray04
+        }
+        
+        introductionLabel.flex.markDirty()
+        
+        // 기술스택 설정
+        techStackView.fieldTechStacks = profile.fieldTechStacks
+        techStackView.flex.markDirty()
+        whiteContainer.flex.markDirty()
+        
+        view.setNeedsLayout()
     }
 }

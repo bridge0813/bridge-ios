@@ -1,5 +1,5 @@
 //
-//  ProjectDetailTechTag.swift
+//  TechStackTag.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/11/16.
@@ -9,7 +9,8 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class ProjectDetailTechTag: BaseView {
+/// 기술스택을 보여주는 태그
+final class TechStackTag: BaseView {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()
@@ -22,16 +23,15 @@ final class ProjectDetailTechTag: BaseView {
     
     private let tagLabel: UILabel = {
         let label = UILabel()
-        label.textColor = BridgeColor.gray02
         label.font = BridgeFont.tag1.font
-        
         return label
     }()
     
     // MARK: - init
-    init(_ tagName: String) {
+    init(tagName: String, textColor: UIColor) {
         super.init(frame: .zero)
         tagLabel.text = tagName
+        tagLabel.textColor = textColor
     }
     
     // MARK: - Layout

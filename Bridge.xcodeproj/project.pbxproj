@@ -267,6 +267,9 @@
 		7C8CC4182AF4091D0032F237 /* BridgeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC4172AF4091D0032F237 /* BridgeProgressView.swift */; };
 		7C8CC41A2AF40A100032F237 /* BaseProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC4192AF40A100032F237 /* BaseProgressView.swift */; };
 		7C8CC41C2AF522A10032F237 /* BridgeBasePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */; };
+		7C91C9732B3BD53B002E5ABF /* ProfileTechStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C91C9722B3BD53B002E5ABF /* ProfileTechStackView.swift */; };
+		7C91C9752B3BDAF2002E5ABF /* ProfileTechStackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C91C9742B3BDAF2002E5ABF /* ProfileTechStackCell.swift */; };
+		7C91C9772B3C3B9C002E5ABF /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C91C9762B3C3B9C002E5ABF /* Profile.swift */; };
 		7CA04F0F2AF8F867007B9191 /* TechStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F0E2AF8F867007B9191 /* TechStack.swift */; };
 		7CA04F122AFDF694007B9191 /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */; };
 		7CA04F1A2AFDFE4B007B9191 /* ProjectDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */; };
@@ -285,7 +288,7 @@
 		7CA04F4E2B04A6CA007B9191 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F4D2B04A6CA007B9191 /* Project.swift */; };
 		7CA04F512B04AAB3007B9191 /* ProjectDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F502B04AAB2007B9191 /* ProjectDetailDTO.swift */; };
 		7CA04F532B04B6E7007B9191 /* MemberRequirementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F522B04B6E7007B9191 /* MemberRequirementDTO.swift */; };
-		7CA04F572B05D50E007B9191 /* ProjectDetailTechTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F562B05D50E007B9191 /* ProjectDetailTechTag.swift */; };
+		7CA04F572B05D50E007B9191 /* TechStackTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F562B05D50E007B9191 /* TechStackTag.swift */; };
 		7CA04F5E2B0A029A007B9191 /* CreateProjectRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F5D2B0A029A007B9191 /* CreateProjectRequestDTO.swift */; };
 		7CA04F652B0A6148007B9191 /* ProjectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */; };
 		7CA04F692B0A6F02007B9191 /* CreateProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */; };
@@ -295,6 +298,7 @@
 		7CA73D972B28AC1B007D88FB /* CreateChannelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D962B28AC1B007D88FB /* CreateChannelUseCase.swift */; };
 		7CA73D992B28B481007D88FB /* CreateChannelResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D982B28B481007D88FB /* CreateChannelResponseDTO.swift */; };
 		7CA73D9C2B28C944007D88FB /* CancelApplicationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D9B2B28C944007D88FB /* CancelApplicationUseCase.swift */; };
+		7CBDE25C2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE25B2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift */; };
 		7CC719E42B27117800CFA827 /* DeleteProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */; };
 		7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */; };
 		7CC719EA2B276C2C00CFA827 /* ApplicantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */; };
@@ -568,6 +572,9 @@
 		7C8CC4172AF4091D0032F237 /* BridgeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeProgressView.swift; sourceTree = "<group>"; };
 		7C8CC4192AF40A100032F237 /* BaseProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProgressView.swift; sourceTree = "<group>"; };
 		7C8CC41B2AF522A10032F237 /* BridgeBasePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBasePopUpView.swift; sourceTree = "<group>"; };
+		7C91C9722B3BD53B002E5ABF /* ProfileTechStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTechStackView.swift; sourceTree = "<group>"; };
+		7C91C9742B3BDAF2002E5ABF /* ProfileTechStackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTechStackCell.swift; sourceTree = "<group>"; };
+		7C91C9762B3C3B9C002E5ABF /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		7CA04F0E2AF8F867007B9191 /* TechStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechStack.swift; sourceTree = "<group>"; };
 		7CA04F112AFDF694007B9191 /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
 		7CA04F192AFDFE4B007B9191 /* ProjectDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewModel.swift; sourceTree = "<group>"; };
@@ -586,7 +593,7 @@
 		7CA04F4D2B04A6CA007B9191 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7CA04F502B04AAB2007B9191 /* ProjectDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailDTO.swift; sourceTree = "<group>"; };
 		7CA04F522B04B6E7007B9191 /* MemberRequirementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRequirementDTO.swift; sourceTree = "<group>"; };
-		7CA04F562B05D50E007B9191 /* ProjectDetailTechTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailTechTag.swift; sourceTree = "<group>"; };
+		7CA04F562B05D50E007B9191 /* TechStackTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechStackTag.swift; sourceTree = "<group>"; };
 		7CA04F5D2B0A029A007B9191 /* CreateProjectRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectRequestDTO.swift; sourceTree = "<group>"; };
 		7CA04F642B0A6148007B9191 /* ProjectEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEndpoint.swift; sourceTree = "<group>"; };
 		7CA04F682B0A6F02007B9191 /* CreateProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectUseCase.swift; sourceTree = "<group>"; };
@@ -595,6 +602,7 @@
 		7CA73D962B28AC1B007D88FB /* CreateChannelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelUseCase.swift; sourceTree = "<group>"; };
 		7CA73D982B28B481007D88FB /* CreateChannelResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelResponseDTO.swift; sourceTree = "<group>"; };
 		7CA73D9B2B28C944007D88FB /* CancelApplicationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelApplicationUseCase.swift; sourceTree = "<group>"; };
+		7CBDE25B2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReferenceLinkView.swift; sourceTree = "<group>"; };
 		7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProjectUseCase.swift; sourceTree = "<group>"; };
 		7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewController.swift; sourceTree = "<group>"; };
 		7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewModel.swift; sourceTree = "<group>"; };
@@ -1517,6 +1525,7 @@
 			children = (
 				7BEA738C2B2B2DF100CECF44 /* ProfileViewModel.swift */,
 				7BEA738E2B2B2E0E00CECF44 /* ProfileViewController.swift */,
+				7C91C9712B3BD4F3002E5ABF /* Views */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1695,6 +1704,7 @@
 		7C56E1602B10FF6200454F5E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				7C91C9762B3C3B9C002E5ABF /* Profile.swift */,
 				7C56E1612B10FF8300454F5E /* ProfilePreview.swift */,
 				7CC719F12B277A3500CFA827 /* ApplicantProfile.swift */,
 			);
@@ -1810,6 +1820,15 @@
 			path = ProgressView;
 			sourceTree = "<group>";
 		};
+		7C91C9712B3BD4F3002E5ABF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7CBDE25D2B3DE2A900518AA9 /* TechStack */,
+				7CBDE25E2B3DE2BD00518AA9 /* Link */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7CA04F0C2AF8F740007B9191 /* PopUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1857,7 +1876,7 @@
 				7CA04F442B029B7C007B9191 /* RecruitFieldDetailViewController.swift */,
 				7CA04F282AFFDF6A007B9191 /* RecruitFieldDetailCell.swift */,
 				7CA04F2D2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift */,
-				7CA04F562B05D50E007B9191 /* ProjectDetailTechTag.swift */,
+				7CA04F562B05D50E007B9191 /* TechStackTag.swift */,
 			);
 			path = RecruitFieldDetail;
 			sourceTree = "<group>";
@@ -1954,6 +1973,23 @@
 				7CA04F702B0C5FFE007B9191 /* firecracker.json */,
 			);
 			path = Lottie;
+			sourceTree = "<group>";
+		};
+		7CBDE25D2B3DE2A900518AA9 /* TechStack */ = {
+			isa = PBXGroup;
+			children = (
+				7C91C9722B3BD53B002E5ABF /* ProfileTechStackView.swift */,
+				7C91C9742B3BDAF2002E5ABF /* ProfileTechStackCell.swift */,
+			);
+			path = TechStack;
+			sourceTree = "<group>";
+		};
+		7CBDE25E2B3DE2BD00518AA9 /* Link */ = {
+			isa = PBXGroup;
+			children = (
+				7CBDE25B2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift */,
+			);
+			path = Link;
 			sourceTree = "<group>";
 		};
 		7CC719E22B27115600CFA827 /* Delete */ = {
@@ -2467,6 +2503,7 @@
 				7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */,
 				7B93B3A42B352C9C00912202 /* AlertCell.swift in Sources */,
 				7B1922CC2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift in Sources */,
+				7C91C9772B3C3B9C002E5ABF /* Profile.swift in Sources */,
 				7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */,
 				7B2D76E82AA86A2400E5907B /* UIViewController+Rx.swift in Sources */,
 				7CD023C42B2F10AB00F55648 /* UserIDDTO.swift in Sources */,
@@ -2517,6 +2554,7 @@
 				7C55E6292AD7EFEF0018FA5D /* MainCategoryButton.swift in Sources */,
 				7C56E15C2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift in Sources */,
 				7BA36C982A9C503C000DAB02 /* FetchChannelsUseCase.swift in Sources */,
+				7C91C9752B3BDAF2002E5ABF /* ProfileTechStackCell.swift in Sources */,
 				7B93AAA82B21997300650EA5 /* UnreadMessageCountView.swift in Sources */,
 				7CE080492AD79ADD00230C86 /* FieldCategoryAnchorButton.swift in Sources */,
 				7CA04F252AFE7B6E007B9191 /* BridgeLinedChip.swift in Sources */,
@@ -2559,6 +2597,7 @@
 				7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */,
 				7BEA738F2B2B2E0E00CECF44 /* ProfileViewController.swift in Sources */,
 				7B92B7E32AE501CD00B0E954 /* FetchMessagesUseCase.swift in Sources */,
+				7CBDE25C2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift in Sources */,
 				7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */,
 				7CDFB62E2B23AAE400272F77 /* FetchMyProjectsUseCase.swift in Sources */,
 				7CECB7962B36B27300D903D7 /* DefaultApplicantRepository.swift in Sources */,
@@ -2612,6 +2651,7 @@
 				7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */,
 				7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */,
 				7B61238B2AC2D03E006E72C1 /* BridgeTipMessageBox.swift in Sources */,
+				7C91C9732B3BD53B002E5ABF /* ProfileTechStackView.swift in Sources */,
 				7B1922D52AE287C900EBDD2E /* MessageCell.swift in Sources */,
 				7B5752B32B287E2A00B1A2DC /* WithdrawUseCase.swift in Sources */,
 				7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */,
@@ -2663,7 +2703,7 @@
 				7C50EC082B39D90800A69F12 /* ApplicantProfileResponseDTO.swift in Sources */,
 				7BA36CDA2AA197F8000DAB02 /* ChannelListViewController.swift in Sources */,
 				7CD023C72B2F197A00F55648 /* CloseProjectUseCase.swift in Sources */,
-				7CA04F572B05D50E007B9191 /* ProjectDetailTechTag.swift in Sources */,
+				7CA04F572B05D50E007B9191 /* TechStackTag.swift in Sources */,
 				7B93B3AF2B35396300912202 /* AlertRepository.swift in Sources */,
 				7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */,
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,
