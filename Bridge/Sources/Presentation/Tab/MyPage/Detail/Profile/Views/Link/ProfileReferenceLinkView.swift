@@ -18,40 +18,30 @@ final class ProfileReferenceLinkView: BaseView {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(ProfileTechStackCell.self)
-        tableView.estimatedRowHeight = 0
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.separatorInset = .init(top: 0, left: 16, bottom: 0, right: 16)
-        tableView.backgroundColor = BridgeColor.gray09
-        tableView.layer.borderWidth = 1
-        tableView.layer.cornerRadius = 8
-        tableView.clipsToBounds = true
+        tableView.register(ReferenceLinkCell.self)
+        tableView.rowHeight = 60
+        tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
         return tableView
     }()
     
     // MARK: - Property
-    var fieldTechStacks: [FieldTechStack] = [] {
+    var links: [String] = [] {
         didSet {
-            // 유저가 설정한 기술 스택 정보가 있을 경우
-            if !fieldTechStacks.isEmpty {
-                tableView.backgroundColor = .clear
-                tableView.layer.borderColor = BridgeColor.gray06.cgColor
-                
-                Observable.of(fieldTechStacks)
-                    .bind(to: tableView.rx.items(
-                        cellIdentifier: ProfileTechStackCell.reuseIdentifier,
-                        cellType: ProfileTechStackCell.self
-                    )) { _, element, cell in
-                        cell.configure(with: element)
-                    }
-                    .disposed(by: disposeBag)
-                
-                
-                print("컨텐츠 사이즈 \(tableView.contentSize.height)")
-                tableView.flex.height(tableView.contentSize.height).markDirty()
-                rootFlexContainer.flex.layout()
-            }
+            // 보여줄 링크가 없을 경우, 플레이스홀더 텍스트
+            let emptyPlaceholder = ["직무 경험과 관련하여 참고할 수 있는 링크를 입력하세요."]
+            
+            Observable.of(links.isEmpty ? emptyPlaceholder : links)
+                .bind(to: tableView.rx.items(
+                    cellIdentifier: ReferenceLinkCell.reuseIdentifier,
+                    cellType: ReferenceLinkCell.self
+                )) { _, element, cell in
+                    cell.configure(with: element)
+                }
+                .disposed(by: disposeBag)
+            
+            tableView.flex.height(tableView.contentSize.height).markDirty()
+            rootFlexContainer.flex.layout()
         }
     }
     
@@ -59,7 +49,7 @@ final class ProfileReferenceLinkView: BaseView {
     override func configureLayouts() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex.define { flex in
-            flex.addItem(tableView).height(52)
+            flex.addItem(tableView)
         }
     }
     

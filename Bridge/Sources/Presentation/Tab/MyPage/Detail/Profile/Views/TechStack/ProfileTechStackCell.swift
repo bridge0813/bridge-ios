@@ -20,6 +20,7 @@ final class ProfileTechStackCell: BaseTableViewCell {
     private let tagContainer = UIView()
     private var tags: [TechStackTag] = []
     
+    // MARK: - Preparation
     override func prepareForReuse() {
         super.prepareForReuse()
         tags.forEach { tag in

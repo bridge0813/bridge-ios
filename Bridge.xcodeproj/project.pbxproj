@@ -299,6 +299,8 @@
 		7CA73D992B28B481007D88FB /* CreateChannelResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D982B28B481007D88FB /* CreateChannelResponseDTO.swift */; };
 		7CA73D9C2B28C944007D88FB /* CancelApplicationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA73D9B2B28C944007D88FB /* CancelApplicationUseCase.swift */; };
 		7CBDE25C2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE25B2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift */; };
+		7CBDE2602B3E9FCE00518AA9 /* ReferenceLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE25F2B3E9FCE00518AA9 /* ReferenceLinkCell.swift */; };
+		7CBDE2622B3EA0F600518AA9 /* BaseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE2612B3EA0F600518AA9 /* BaseListCell.swift */; };
 		7CC719E42B27117800CFA827 /* DeleteProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */; };
 		7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */; };
 		7CC719EA2B276C2C00CFA827 /* ApplicantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */; };
@@ -603,6 +605,8 @@
 		7CA73D982B28B481007D88FB /* CreateChannelResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelResponseDTO.swift; sourceTree = "<group>"; };
 		7CA73D9B2B28C944007D88FB /* CancelApplicationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelApplicationUseCase.swift; sourceTree = "<group>"; };
 		7CBDE25B2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReferenceLinkView.swift; sourceTree = "<group>"; };
+		7CBDE25F2B3E9FCE00518AA9 /* ReferenceLinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceLinkCell.swift; sourceTree = "<group>"; };
+		7CBDE2612B3EA0F600518AA9 /* BaseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListCell.swift; sourceTree = "<group>"; };
 		7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProjectUseCase.swift; sourceTree = "<group>"; };
 		7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewController.swift; sourceTree = "<group>"; };
 		7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewModel.swift; sourceTree = "<group>"; };
@@ -1988,6 +1992,8 @@
 			isa = PBXGroup;
 			children = (
 				7CBDE25B2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift */,
+				7CBDE2612B3EA0F600518AA9 /* BaseListCell.swift */,
+				7CBDE25F2B3E9FCE00518AA9 /* ReferenceLinkCell.swift */,
 			);
 			path = Link;
 			sourceTree = "<group>";
@@ -2495,6 +2501,7 @@
 				7CA04F232AFE77AB007B9191 /* BridgeFilledChip.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
 				7B93B3C22B36AB0900912202 /* BookmarkedProject.swift in Sources */,
+				7CBDE2622B3EA0F600518AA9 /* BaseListCell.swift in Sources */,
 				7CA04F1E2AFE4B0F007B9191 /* RecruitFieldCell.swift in Sources */,
 				7BA36C9D2A9C5105000DAB02 /* Message.swift in Sources */,
 				7B93B3BE2B355A5C00912202 /* ChangeFieldUseCase.swift in Sources */,
@@ -2633,6 +2640,7 @@
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
 				7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */,
 				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
+				7CBDE2602B3E9FCE00518AA9 /* ReferenceLinkCell.swift in Sources */,
 				7CC719FC2B2848EC00CFA827 /* AcceptApplicantUseCase.swift in Sources */,
 				7C569D032A9F72320063D362 /* ProjectPreviewResponseDTO.swift in Sources */,
 				7CA04F2E2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift in Sources */,

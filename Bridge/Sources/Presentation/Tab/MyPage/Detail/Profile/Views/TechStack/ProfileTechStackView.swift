@@ -20,7 +20,7 @@ final class ProfileTechStackView: BaseView {
         let tableView = UITableView()
         tableView.register(ProfileTechStackCell.self)
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 0
+        tableView.estimatedRowHeight = 140
         tableView.separatorInset = .init(top: 0, left: 16, bottom: 0, right: 16)
         tableView.backgroundColor = BridgeColor.gray09
         tableView.layer.borderWidth = 1

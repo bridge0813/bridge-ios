@@ -114,6 +114,16 @@ final class ProfileViewController: BaseViewController {
     
     private let techStackView = ProfileTechStackView()
     
+    private let linkTitleLabel: UILabel = {
+        let label = UILabel()
+        label.flex.width(60).height(24)
+        label.text = "참고 링크"
+        label.textColor = BridgeColor.gray01
+        label.font = BridgeFont.subtitle2.font
+        return label
+    }()
+    private let linkView = ProfileReferenceLinkView()
+    
     // MARK: - Property
     private let viewModel: ProfileViewModel
     
@@ -167,6 +177,10 @@ final class ProfileViewController: BaseViewController {
                 
                 flex.addItem(techStackTitleLabel).marginTop(14)
                 flex.addItem(techStackView).marginTop(14)
+                
+                flex.addItem(linkTitleLabel).marginTop(24)
+                flex.addItem(linkView).marginTop(14)
+                
                 flex.addItem().height(50)
             }
         }
@@ -193,13 +207,13 @@ final class ProfileViewController: BaseViewController {
             fields: ["백엔드", "안드로이드", "iOS"],
             fieldTechStacks: [
                 FieldTechStack(field: "iOS", techStacks: ["Swift", "Objective_C", "UIKit", "SwiftUI", "RxSwift"]),
-                FieldTechStack(field: "안드로이드", techStacks: ["Kotlin", "Java", "Compose"]),
-                FieldTechStack(field: "UI/UX", techStacks: ["photoshop", "illustrator", "photoshop", "illustrator", "photoshop", "illustrator"]),
-                FieldTechStack(field: "BI/BX", techStacks: ["photoshop"]),
-                FieldTechStack(field: "PM", techStacks: ["Notion", "Jira", "Slack"])
+                FieldTechStack(field: "안드로이드", techStacks: ["Kotlin", "Java", "Compose"])
+//                FieldTechStack(field: "UI/UX", techStacks: ["photoshop", "illustrator", "photoshop", "illustrator", "photoshop", "illustrator"]),
+//                FieldTechStack(field: "BI/BX", techStacks: ["photoshop"]),
+//                FieldTechStack(field: "PM", techStacks: ["Notion", "Jira", "Slack"])
             ],
             carrer: "취준생",
-            links: [],
+            links: ["https://bridge.naver.com", "https://bridge.naver.com", "https://bridge.naver.com"],
             files: []
         )
         
@@ -248,8 +262,9 @@ extension ProfileViewController {
         
         // 기술스택 설정
         techStackView.fieldTechStacks = profile.fieldTechStacks
-        techStackView.flex.markDirty()
-        whiteContainer.flex.markDirty()
+        
+        // 참고링크 설정
+        linkView.links = profile.links
         
         view.setNeedsLayout()
     }
