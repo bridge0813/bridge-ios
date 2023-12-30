@@ -124,6 +124,16 @@ final class ProfileViewController: BaseViewController {
     }()
     private let linkView = ProfileReferenceLinkView()
     
+    private let fileTitleLabel: UILabel = {
+        let label = UILabel()
+        label.flex.width(56).height(24)
+        label.text = "첨부파일"
+        label.textColor = BridgeColor.gray01
+        label.font = BridgeFont.subtitle2.font
+        return label
+    }()
+    private let fileView = ProfileReferenceFileView()
+    
     // MARK: - Property
     private let viewModel: ProfileViewModel
     
@@ -181,6 +191,9 @@ final class ProfileViewController: BaseViewController {
                 flex.addItem(linkTitleLabel).marginTop(24)
                 flex.addItem(linkView).marginTop(14)
                 
+                flex.addItem(fileTitleLabel).marginTop(24)
+                flex.addItem(fileView).marginTop(14)
+                
                 flex.addItem().height(50)
             }
         }
@@ -213,8 +226,8 @@ final class ProfileViewController: BaseViewController {
 //                FieldTechStack(field: "PM", techStacks: ["Notion", "Jira", "Slack"])
             ],
             carrer: "취준생",
-            links: ["https://bridge.naver.com", "https://bridge.naver.com", "https://bridge.naver.com"],
-            files: []
+            links: ["https://bridge.naver.comㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", "https://bridge.naver.com", "https://bridge.naver.com"],
+            files: [ReferenceFile(url: "", fileName: "개인 작업물.pdf"), ReferenceFile(url: "", fileName: "개인 작업물.pdf"), ReferenceFile(url: "", fileName: "개인 작업물ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf")]
         )
         
         configure(with: profile)
@@ -265,6 +278,9 @@ extension ProfileViewController {
         
         // 참고링크 설정
         linkView.links = profile.links
+        
+        // 첨부파일 설정
+        fileView.files = profile.files
         
         view.setNeedsLayout()
     }

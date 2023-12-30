@@ -1,8 +1,8 @@
 //
-//  ProfileListCell.swift
+//  ReferenceFileCell.swift
 //  Bridge
 //
-//  Created by 엄지호 on 12/29/23.
+//  Created by 엄지호 on 12/30/23.
 //
 
 import UIKit
@@ -10,7 +10,7 @@ import FlexLayout
 import PinLayout
 
 /// 프로필에서 참고링크를 보여주는 Cell
-final class ReferenceLinkCell: BaseListCell {
+final class ReferenceFileCell: BaseListCell {
     // MARK: - Layout
     override func configureLayouts() {
         super.configureLayouts()
@@ -28,8 +28,8 @@ final class ReferenceLinkCell: BaseListCell {
 }
 
 // MARK: - Configuration
-extension ReferenceLinkCell {
-    func configure(with urlString: String) {
-        itemLabel.text = urlString
+extension ReferenceFileCell {
+    func configure(with file: ReferenceFile) {
+        itemLabel.text = file.fileName
     }
 }

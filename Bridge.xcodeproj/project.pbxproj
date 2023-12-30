@@ -301,6 +301,8 @@
 		7CBDE25C2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE25B2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift */; };
 		7CBDE2602B3E9FCE00518AA9 /* ReferenceLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE25F2B3E9FCE00518AA9 /* ReferenceLinkCell.swift */; };
 		7CBDE2622B3EA0F600518AA9 /* BaseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE2612B3EA0F600518AA9 /* BaseListCell.swift */; };
+		7CBDE2652B3FDA6E00518AA9 /* ProfileReferenceFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE2642B3FDA6E00518AA9 /* ProfileReferenceFileView.swift */; };
+		7CBDE2672B3FDAB800518AA9 /* ReferenceFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE2662B3FDAB800518AA9 /* ReferenceFileCell.swift */; };
 		7CC719E42B27117800CFA827 /* DeleteProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */; };
 		7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */; };
 		7CC719EA2B276C2C00CFA827 /* ApplicantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */; };
@@ -607,6 +609,8 @@
 		7CBDE25B2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReferenceLinkView.swift; sourceTree = "<group>"; };
 		7CBDE25F2B3E9FCE00518AA9 /* ReferenceLinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceLinkCell.swift; sourceTree = "<group>"; };
 		7CBDE2612B3EA0F600518AA9 /* BaseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListCell.swift; sourceTree = "<group>"; };
+		7CBDE2642B3FDA6E00518AA9 /* ProfileReferenceFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReferenceFileView.swift; sourceTree = "<group>"; };
+		7CBDE2662B3FDAB800518AA9 /* ReferenceFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceFileCell.swift; sourceTree = "<group>"; };
 		7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProjectUseCase.swift; sourceTree = "<group>"; };
 		7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewController.swift; sourceTree = "<group>"; };
 		7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewModel.swift; sourceTree = "<group>"; };
@@ -1829,6 +1833,7 @@
 			children = (
 				7CBDE25D2B3DE2A900518AA9 /* TechStack */,
 				7CBDE25E2B3DE2BD00518AA9 /* Link */,
+				7CBDE2632B3FDA5600518AA9 /* File */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1996,6 +2001,15 @@
 				7CBDE25F2B3E9FCE00518AA9 /* ReferenceLinkCell.swift */,
 			);
 			path = Link;
+			sourceTree = "<group>";
+		};
+		7CBDE2632B3FDA5600518AA9 /* File */ = {
+			isa = PBXGroup;
+			children = (
+				7CBDE2642B3FDA6E00518AA9 /* ProfileReferenceFileView.swift */,
+				7CBDE2662B3FDAB800518AA9 /* ReferenceFileCell.swift */,
+			);
+			path = File;
 			sourceTree = "<group>";
 		};
 		7CC719E22B27115600CFA827 /* Delete */ = {
@@ -2538,6 +2552,7 @@
 				7C87EE162B1D83FB0066691D /* MockUserRepository.swift in Sources */,
 				7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift in Sources */,
 				7C8CC41A2AF40A100032F237 /* BaseProgressView.swift in Sources */,
+				7CBDE2652B3FDA6E00518AA9 /* ProfileReferenceFileView.swift in Sources */,
 				7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */,
 				7C56E1712B14860100454F5E /* HotProjectResponseDTO.swift in Sources */,
 				7C56E16B2B11043400454F5E /* DefaultUserRepository.swift in Sources */,
@@ -2729,6 +2744,7 @@
 				7C40CBCA2AC6B597000F4C9F /* BridgeCreateProjectButton.swift in Sources */,
 				7B9C31AF2B07761C007E36B2 /* DefaultStompService.swift in Sources */,
 				7C8CC41C2AF522A10032F237 /* BridgeBasePopUpView.swift in Sources */,
+				7CBDE2672B3FDAB800518AA9 /* ReferenceFileCell.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
 				7CA04F302B0208FF007B9191 /* RecruitFieldDetailViewModel.swift in Sources */,
 				7C24003D2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift in Sources */,
