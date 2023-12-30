@@ -30,20 +30,22 @@ final class MyPageCoordinator: Coordinator {
     private let fetchBookmarkedProjectUseCase: FetchBookmarkedProjectsUseCase
     private let bookmarkUseCase: BookmarkUseCase
     
+    private let fetchProfileUseCase: FetchProfileUseCase
+    
     // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []
         
         let networkService = DefaultNetworkService()
-        authRepository = DefaultAuthRepository(networkService: networkService)
-        userRepository = DefaultUserRepository(networkService: networkService)
-        alertRepository = DefaultAlertRepository(networkService: networkService)
-        projectRepository = DefaultProjectRepository(networkService: networkService)
-//        authRepository = MockAuthRepository()
-//        userRepository = MockUserRepository()
-//        alertRepository = MockAlertRepository()
-//        projectRepository = MockProjectRepository()
+//        authRepository = DefaultAuthRepository(networkService: networkService)
+//        userRepository = DefaultUserRepository(networkService: networkService)
+//        alertRepository = DefaultAlertRepository(networkService: networkService)
+//        projectRepository = DefaultProjectRepository(networkService: networkService)
+        authRepository = MockAuthRepository()
+        userRepository = MockUserRepository()
+        alertRepository = MockAlertRepository()
+        projectRepository = MockProjectRepository()
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
@@ -55,6 +57,8 @@ final class MyPageCoordinator: Coordinator {
         changeFieldUseCase = DefaultChangeFieldUseCase(userRepository: userRepository)
         fetchBookmarkedProjectUseCase = DefaultFetchBookmarkedProjectsUseCase(userRepository: userRepository)
         bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
+        
+        fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
     }
     
     // MARK: - Start
@@ -107,7 +111,8 @@ extension MyPageCoordinator {
     
     func showProfileViewController() {
         let profileViewModel = ProfileViewModel(
-            coordinator: self
+            coordinator: self,
+            fetchProfileUseCase: fetchProfileUseCase
         )
         let profileViewController = ProfileViewController(viewModel: profileViewModel)
         navigationController.pushViewController(profileViewController, animated: true)

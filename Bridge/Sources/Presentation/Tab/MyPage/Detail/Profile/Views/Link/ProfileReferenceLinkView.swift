@@ -49,6 +49,10 @@ final class ProfileReferenceLinkView: BaseView {
             tableView.flex.display(links.isEmpty ? .none : .flex)
             placeholderContainer.flex.display(links.isEmpty ? .flex : .none)
             
+            // 기존 데이터소스 제거
+            tableView.dataSource = nil
+            
+            // 데이터소스 설정
             Observable.of(links)
                 .bind(to: tableView.rx.items(
                     cellIdentifier: ReferenceLinkCell.reuseIdentifier,
@@ -58,7 +62,9 @@ final class ProfileReferenceLinkView: BaseView {
                 }
                 .disposed(by: disposeBag)
             
-            tableView.flex.height(tableView.contentSize.height).markDirty()
+            // 컨텐츠 크기 직접 계산 및 설정
+            let contentHeight = tableView.rowHeight * CGFloat(links.count)
+            tableView.flex.height(contentHeight).markDirty()
             rootFlexContainer.flex.layout()
         }
     }

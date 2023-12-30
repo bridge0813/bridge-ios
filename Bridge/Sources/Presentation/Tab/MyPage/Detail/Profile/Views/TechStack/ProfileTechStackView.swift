@@ -38,6 +38,8 @@ final class ProfileTechStackView: BaseView {
                 tableView.backgroundColor = .clear
                 tableView.layer.borderColor = BridgeColor.gray06.cgColor
                 
+                tableView.dataSource = nil
+                
                 Observable.of(fieldTechStacks)
                     .bind(to: tableView.rx.items(
                         cellIdentifier: ProfileTechStackCell.reuseIdentifier,

@@ -211,10 +211,18 @@ final class ProfileViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = ProfileViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asObservable()
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            editProfileButtonTapped: editProfileButton.rx.tap
         )
         let output = viewModel.transform(input: input)
         
+        output.profile
+            .skip(1)
+            .drive(onNext: { [weak self] profile in
+                guard let self else { return }
+                self.configure(with: profile)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -259,13 +267,17 @@ extension ProfileViewController {
         
         // 기술스택 설정
         techStackView.fieldTechStacks = profile.fieldTechStacks
+        techStackView.flex.markDirty()
         
         // 참고링크 설정
         linkView.links = profile.links
+        linkView.flex.markDirty()
         
         // 첨부파일 설정
         fileView.files = profile.files
+        fileView.flex.markDirty()
         
+        contentContainer.flex.markDirty()
         view.setNeedsLayout()
     }
 }
