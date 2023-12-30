@@ -8,7 +8,10 @@
 import RxSwift
 
 final class MockUserRepository: UserRepository {
-
+    func fetchProfile() -> Observable<Profile> {
+        return .just(ProfileResponseDTO.testData.toEntity())
+    }
+    
     func fetchProfilePreview() -> Observable<ProfilePreview> {
         .just(ProfilePreviewResponseDTO.testData.toEntity())
 //        .error(NetworkError.statusCode(401))

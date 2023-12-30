@@ -18,6 +18,12 @@ final class DefaultUserRepository: UserRepository {
         self.tokenStorage = tokenStorage
     }
     
+    /// 프로필 조회
+    func fetchProfile() -> Observable<Profile> {
+        return .just(ProfileResponseDTO.testData.toEntity()) 
+    }
+    
+    /// 프로필 간략형 조회(마이페이지)
     func fetchProfilePreview() -> Observable<ProfilePreview> {
         let userID = tokenStorage.get(.userID) 
         let userEndpoint = UserEndpoint.fetchProfilePreview(userID: userID)
@@ -27,6 +33,7 @@ final class DefaultUserRepository: UserRepository {
             .map { $0.toEntity() }
     }
     
+    /// 관심분야 수정
     func changeField(selectedFields: [String]) -> Observable<Void> {
         let userID = tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.changeField(
@@ -37,6 +44,7 @@ final class DefaultUserRepository: UserRepository {
             .map { _ in }
     }
     
+    /// 북마크 모집글 조회
     func fetchBookmarkedProjects() -> Observable<[BookmarkedProject]> {
         let userID = tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.fetchBookmarkedProjects(userID: userID)

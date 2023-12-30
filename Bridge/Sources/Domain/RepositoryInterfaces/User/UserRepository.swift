@@ -8,6 +8,7 @@
 import RxSwift
 
 protocol UserRepository {
+    func fetchProfile() -> Observable<Profile>
     func fetchProfilePreview() -> Observable<ProfilePreview>
     func changeField(selectedFields: [String]) -> Observable<Void>
     func fetchBookmarkedProjects() -> Observable<[BookmarkedProject]>
