@@ -303,6 +303,9 @@
 		7CBDE2622B3EA0F600518AA9 /* BaseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE2612B3EA0F600518AA9 /* BaseListCell.swift */; };
 		7CBDE2652B3FDA6E00518AA9 /* ProfileReferenceFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE2642B3FDA6E00518AA9 /* ProfileReferenceFileView.swift */; };
 		7CBDE2672B3FDAB800518AA9 /* ReferenceFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE2662B3FDAB800518AA9 /* ReferenceFileCell.swift */; };
+		7CBDE2692B3FF7D800518AA9 /* ProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE2682B3FF7D800518AA9 /* ProfileResponseDTO.swift */; };
+		7CBDE26C2B3FFA7100518AA9 /* FieldTechStackDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE26B2B3FFA7100518AA9 /* FieldTechStackDTO.swift */; };
+		7CBDE26E2B3FFC3500518AA9 /* ReferenceFileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE26D2B3FFC3500518AA9 /* ReferenceFileDTO.swift */; };
 		7CC719E42B27117800CFA827 /* DeleteProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */; };
 		7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */; };
 		7CC719EA2B276C2C00CFA827 /* ApplicantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */; };
@@ -611,6 +614,9 @@
 		7CBDE2612B3EA0F600518AA9 /* BaseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListCell.swift; sourceTree = "<group>"; };
 		7CBDE2642B3FDA6E00518AA9 /* ProfileReferenceFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReferenceFileView.swift; sourceTree = "<group>"; };
 		7CBDE2662B3FDAB800518AA9 /* ReferenceFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceFileCell.swift; sourceTree = "<group>"; };
+		7CBDE2682B3FF7D800518AA9 /* ProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseDTO.swift; sourceTree = "<group>"; };
+		7CBDE26B2B3FFA7100518AA9 /* FieldTechStackDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTechStackDTO.swift; sourceTree = "<group>"; };
+		7CBDE26D2B3FFC3500518AA9 /* ReferenceFileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceFileDTO.swift; sourceTree = "<group>"; };
 		7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProjectUseCase.swift; sourceTree = "<group>"; };
 		7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewController.swift; sourceTree = "<group>"; };
 		7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewModel.swift; sourceTree = "<group>"; };
@@ -1694,6 +1700,7 @@
 			isa = PBXGroup;
 			children = (
 				7CD023C22B2F109C00F55648 /* UserID */,
+				7CBDE26A2B3FF87A00518AA9 /* Profile */,
 				7C56E15B2B10F0CF00454F5E /* ProfilePreviewResponseDTO.swift */,
 				7B93B3BB2B35591600912202 /* ChangeFieldRequestDTO.swift */,
 				7B93B3BF2B36AA6400912202 /* BookmarkedProjectResponseDTO.swift */,
@@ -2010,6 +2017,16 @@
 				7CBDE2662B3FDAB800518AA9 /* ReferenceFileCell.swift */,
 			);
 			path = File;
+			sourceTree = "<group>";
+		};
+		7CBDE26A2B3FF87A00518AA9 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7CBDE2682B3FF7D800518AA9 /* ProfileResponseDTO.swift */,
+				7CBDE26B2B3FFA7100518AA9 /* FieldTechStackDTO.swift */,
+				7CBDE26D2B3FFC3500518AA9 /* ReferenceFileDTO.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		7CC719E22B27115600CFA827 /* Delete */ = {
@@ -2512,6 +2529,7 @@
 				7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */,
 				7B4EA4812B08C867004663BC /* WebSocketServiceDelegate.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChannelRepository.swift in Sources */,
+				7CBDE26E2B3FFC3500518AA9 /* ReferenceFileDTO.swift in Sources */,
 				7CA04F232AFE77AB007B9191 /* BridgeFilledChip.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
 				7B93B3C22B36AB0900912202 /* BookmarkedProject.swift in Sources */,
@@ -2532,6 +2550,7 @@
 				7BBD662A2AFB98D2001644D1 /* ObservableType+.swift in Sources */,
 				7CA04F4E2B04A6CA007B9191 /* Project.swift in Sources */,
 				7BB2C23F2A98512400AA2328 /* AppCoordinator.swift in Sources */,
+				7CBDE26C2B3FFA7100518AA9 /* FieldTechStackDTO.swift in Sources */,
 				7B14DB472AB86051009A00EB /* TokenStorage.swift in Sources */,
 				7B153C082AD64A6B00618280 /* MockChannelRepository.swift in Sources */,
 				7B922CF82AD020CC00F3A336 /* SignUpRequestDTO.swift in Sources */,
@@ -2615,6 +2634,7 @@
 				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,
 				7B93B3AA2B35372F00912202 /* FetchAlertsUseCase.swift in Sources */,
 				7BA36C9B2A9C5091000DAB02 /* Channel.swift in Sources */,
+				7CBDE2692B3FF7D800518AA9 /* ProfileResponseDTO.swift in Sources */,
 				7B8DE8112B034E6B003EA34A /* Stomp.swift in Sources */,
 				7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */,
 				7BEA738F2B2B2E0E00CECF44 /* ProfileViewController.swift in Sources */,

@@ -210,27 +210,11 @@ final class ProfileViewController: BaseViewController {
     
     // MARK: - Binding
     override func bind() {
-        let input = ProfileViewModel.Input()
+        let input = ProfileViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asObservable()
+        )
         let output = viewModel.transform(input: input)
         
-        let profile = Profile(
-            imageURL: nil,
-            name: "엄지호",
-            introduction: "책임감과 성실함을 겸비한 준비된 인재입니다. 사이드 프로젝트는 15번정도 한 경험이 있구요. 하하",
-            fields: ["백엔드", "안드로이드", "iOS"],
-            fieldTechStacks: [
-                FieldTechStack(field: "iOS", techStacks: ["Swift", "Objective_C", "UIKit", "SwiftUI", "RxSwift"]),
-                FieldTechStack(field: "안드로이드", techStacks: ["Kotlin", "Java", "Compose"])
-//                FieldTechStack(field: "UI/UX", techStacks: ["photoshop", "illustrator", "photoshop", "illustrator", "photoshop", "illustrator"]),
-//                FieldTechStack(field: "BI/BX", techStacks: ["photoshop"]),
-//                FieldTechStack(field: "PM", techStacks: ["Notion", "Jira", "Slack"])
-            ],
-            carrer: "취준생",
-            links: ["https://bridge.naver.comㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", "https://bridge.naver.com", "https://bridge.naver.com"],
-            files: [ReferenceFile(url: "", fileName: "개인 작업물.pdf"), ReferenceFile(url: "", fileName: "개인 작업물.pdf"), ReferenceFile(url: "", fileName: "개인 작업물ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf")]
-        )
-        
-        configure(with: profile)
     }
 }
 

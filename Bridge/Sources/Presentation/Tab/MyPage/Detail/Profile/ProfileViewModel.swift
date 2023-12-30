@@ -10,7 +10,7 @@ import RxSwift
 final class ProfileViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        
+        let viewWillAppear: Observable<Bool>
     }
     
     struct Output {
