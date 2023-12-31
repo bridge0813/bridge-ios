@@ -64,7 +64,7 @@ final class ProfileViewModel: ViewModelType {
         input.editProfileButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                // 이동
+                owner.coordinator?.showBookmarkedProjectViewController()
             })
             .disposed(by: disposeBag)
         

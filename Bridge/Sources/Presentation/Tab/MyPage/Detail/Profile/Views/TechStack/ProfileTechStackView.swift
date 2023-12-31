@@ -22,21 +22,20 @@ final class ProfileTechStackView: BaseView {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 140
         tableView.separatorInset = .init(top: 0, left: 16, bottom: 0, right: 16)
-        tableView.backgroundColor = BridgeColor.gray09
-        tableView.layer.borderWidth = 1
         tableView.layer.cornerRadius = 8
         tableView.clipsToBounds = true
-        tableView.isScrollEnabled = false
         return tableView
     }()
     
     // MARK: - Property
     var fieldTechStacks: [FieldTechStack] = [] {
         didSet {
+            tableView.backgroundColor = fieldTechStacks.isEmpty ? BridgeColor.gray09 : .clear
+            tableView.layer.borderColor = fieldTechStacks.isEmpty ? nil : BridgeColor.gray06.cgColor
+            tableView.layer.borderWidth = fieldTechStacks.isEmpty ? .zero : 1
+            
             // 유저가 설정한 기술 스택 정보가 있을 경우
             if !fieldTechStacks.isEmpty {
-                tableView.backgroundColor = .clear
-                tableView.layer.borderColor = BridgeColor.gray06.cgColor
                 
                 tableView.dataSource = nil
                 
@@ -49,9 +48,9 @@ final class ProfileTechStackView: BaseView {
                     }
                     .disposed(by: disposeBag)
                 
-                
-//                print("컨텐츠 사이즈 \(tableView.contentSize.height)")
-                tableView.flex.height(tableView.contentSize.height).markDirty()
+                // 컨텐츠 크기 직접 계산 및 설정
+                let contentHeight = tableView.rowHeight * CGFloat(fieldTechStacks.count)
+                tableView.flex.height(contentHeight).markDirty()
                 rootFlexContainer.flex.layout()
             }
         }
