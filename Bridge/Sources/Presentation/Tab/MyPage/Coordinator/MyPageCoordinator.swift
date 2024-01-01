@@ -117,6 +117,15 @@ extension MyPageCoordinator {
         let profileViewController = ProfileViewController(viewModel: profileViewModel)
         navigationController.pushViewController(profileViewController, animated: true)
     }
+    
+    func showEditProfileViewController(with profile: Profile) {
+        let editProfileViewModel = EditProfileViewModel(
+            coordinator: self,
+            profile: profile
+        )
+        let editProfileViewController = EditProfileViewController(viewModel: editProfileViewModel)
+        navigationController.pushViewController(editProfileViewController, animated: true)
+    }
 }
 
 // MARK: - Auth
