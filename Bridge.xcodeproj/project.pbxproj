@@ -328,6 +328,8 @@
 		7CD023C12B2EB8E200F55648 /* ApplyProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023C02B2EB8E200F55648 /* ApplyProjectUseCase.swift */; };
 		7CD023C42B2F10AB00F55648 /* UserIDDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023C32B2F10AB00F55648 /* UserIDDTO.swift */; };
 		7CD023C72B2F197A00F55648 /* CloseProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023C62B2F197A00F55648 /* CloseProjectUseCase.swift */; };
+		7CD5A5382B42711E00343F9F /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD5A5372B42711E00343F9F /* EditProfileViewController.swift */; };
+		7CD5A53A2B42713500343F9F /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD5A5392B42713500343F9F /* EditProfileViewModel.swift */; };
 		7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */; };
 		7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */; };
 		7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */; };
@@ -640,6 +642,8 @@
 		7CD023C02B2EB8E200F55648 /* ApplyProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProjectUseCase.swift; sourceTree = "<group>"; };
 		7CD023C32B2F10AB00F55648 /* UserIDDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIDDTO.swift; sourceTree = "<group>"; };
 		7CD023C62B2F197A00F55648 /* CloseProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseProjectUseCase.swift; sourceTree = "<group>"; };
+		7CD5A5372B42711E00343F9F /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		7CD5A5392B42713500343F9F /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
 		7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
@@ -1542,6 +1546,7 @@
 				7BEA738C2B2B2DF100CECF44 /* ProfileViewModel.swift */,
 				7BEA738E2B2B2E0E00CECF44 /* ProfileViewController.swift */,
 				7C91C9712B3BD4F3002E5ABF /* Views */,
+				7CD5A5362B4270E100343F9F /* EditProfile */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2171,6 +2176,15 @@
 			path = Close;
 			sourceTree = "<group>";
 		};
+		7CD5A5362B4270E100343F9F /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				7CD5A5392B42713500343F9F /* EditProfileViewModel.swift */,
+				7CD5A5372B42711E00343F9F /* EditProfileViewController.swift */,
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
 		7CDFB60E2B20113200272F77 /* Management */ = {
 			isa = PBXGroup;
 			children = (
@@ -2693,6 +2707,7 @@
 				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
 				7C569D0F2AA0AFD50063D362 /* UICollectionView+.swift in Sources */,
 				7B93B3B22B353A8700912202 /* DefaultAlertRepository.swift in Sources */,
+				7CD5A53A2B42713500343F9F /* EditProfileViewModel.swift in Sources */,
 				7CA04F4B2B03D5DE007B9191 /* ProjectDetailHeaderView.swift in Sources */,
 				7B6123862AC1B199006E72C1 /* UIImage+.swift in Sources */,
 				7CBDE2702B4004A000518AA9 /* FetchProfileUseCase.swift in Sources */,
@@ -2753,6 +2768,7 @@
 				7CA04F572B05D50E007B9191 /* TechStackTag.swift in Sources */,
 				7B93B3AF2B35396300912202 /* AlertRepository.swift in Sources */,
 				7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */,
+				7CD5A5382B42711E00343F9F /* EditProfileViewController.swift in Sources */,
 				7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */,
 				7C569CF32A9F67C60063D362 /* ProjectPreview.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
