@@ -1,20 +1,36 @@
 //
-//  ProfileTechStackCell.swift
+//  EditProfileTechStackCell.swift
 //  Bridge
 //
-//  Created by 엄지호 on 12/27/23.
+//  Created by 엄지호 on 1/1/24.
 //
 
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
+import RxCocoa
 
-final class ProfileTechStackCell: BaseTableViewCell {
+final class EditProfileTechStackCell: BaseTableViewCell {
     // MARK: - UI
+    private let rootFlexContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = BridgeColor.gray09
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        return view
+    }()
+    
     private let fieldLabel: UILabel = {
         let label = UILabel()
         label.font = BridgeFont.body2.font
         return label
+    }()
+    
+    private let menuButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "kebab")?.resize(to: CGSize(width: 24, height: 24)), for: .normal)
+        return button
     }()
     
     private let tagContainer = UIView()
@@ -30,19 +46,26 @@ final class ProfileTechStackCell: BaseTableViewCell {
     
     // MARK: - Layout
     private func configureLayout() {
-        contentView.flex.paddingHorizontal(14).define { flex in
-            flex.addItem(fieldLabel).marginTop(20)
-            flex.addItem(tagContainer)
-                .direction(.row)
-                .alignItems(.start)
-                .wrap(.wrap)
-                .marginTop(12)
-                .marginBottom(12)
-                .define { flex in
-                    tags.forEach { tag in
-                        flex.addItem(tag).height(38).marginRight(8).marginBottom(8)
-                    }
+        contentView.flex.define { flex in
+            flex.addItem(rootFlexContainer).padding(17, 14, 18, 14).define { flex in
+                flex.addItem().direction(.row).justifyContent(.spaceBetween).alignItems(.center).define { flex in
+                    flex.addItem(fieldLabel)
+                    flex.addItem(menuButton).marginRight(-8)
                 }
+                
+                flex.addItem(tagContainer)
+                    .direction(.row)
+                    .alignItems(.start)
+                    .wrap(.wrap)
+                    .marginTop(12)
+                    .define { flex in
+                        tags.forEach { tag in
+                            flex.addItem(tag).height(38).marginRight(8).marginBottom(8)
+                        }
+                    }
+            }
+            
+            flex.addItem().height(8)  // Cell Spacing
         }
     }
     
@@ -60,7 +83,7 @@ final class ProfileTechStackCell: BaseTableViewCell {
 }
 
 // MARK: - Configuration
-extension ProfileTechStackCell {
+extension EditProfileTechStackCell {
     func configure(with fieldTeckStack: FieldTechStack) {
         let category = mapFieldToCategory(field: fieldTeckStack.field)
         let field = fieldTeckStack.field
@@ -84,7 +107,11 @@ extension ProfileTechStackCell {
 
         // 태그버튼 생성
         let tags = fieldTeckStack.techStacks.map { tagName in
-            return BridgeTechStackTag(tagName: tagName, textColor: BridgeColor.gray03)
+            return BridgeTechStackTag(
+                tagName: tagName,
+                textColor: BridgeColor.gray02,
+                backgroundColor: BridgeColor.gray10
+            )
         }
         self.tags = tags
         configureLayout()

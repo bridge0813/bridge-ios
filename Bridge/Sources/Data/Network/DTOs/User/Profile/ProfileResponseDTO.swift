@@ -50,8 +50,8 @@ extension ProfileResponseDTO {
         introduction: "책임감과 성실함을 겸비한 준비된 인재입니다. 사이드 프로젝트는 15번정도 한 경험이 있구요.",
         fields: ["백엔드", "안드로이드", "iOS"],
         fieldTechStacks: [
-            FieldTechStackDTO(field: "iOS", techStacks: ["Swift", "Objective_C", "UIKit", "SwiftUI", "RxSwift"])
-//            FieldTechStackDTO(field: "안드로이드", techStacks: ["Kotlin", "Java", "Compose"]),
+            FieldTechStackDTO(field: "iOS", techStacks: ["Swift", "Objective_C", "UIKit", "SwiftUI", "RxSwift"]),
+            FieldTechStackDTO(field: "안드로이드", techStacks: ["Kotlin", "Java", "Compose"])
 //            FieldTechStackDTO(field: "백엔드", techStacks: ["Java", "Javascript", "Python", "TypeScript", "C", "C++", "Kotlin", "Spring"]),
 //            FieldTechStackDTO(field: "UI/UX", techStacks: ["photoshop", "illustrator", "indesign"]),
 //            FieldTechStackDTO(field: "BI/BX", techStacks: ["photoshop"])

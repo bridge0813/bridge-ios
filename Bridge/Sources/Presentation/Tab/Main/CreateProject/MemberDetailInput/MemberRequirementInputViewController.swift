@@ -75,7 +75,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         return label
     }()
-    private let addTechStackButton = AddTechStackButton()
+    private let addTechStackButton = BridgeAddButton(titleFont: BridgeFont.body1.font)
     private let addedTechTagView = AddedTechTagView()
     private let addTechTagPopUpView = AddTechTagPopUpView()
     

@@ -1,8 +1,8 @@
 //
-//  ProfileTechStackView.swift
+//  EditProfileTechStackView.swift
 //  Bridge
 //
-//  Created by 엄지호 on 12/27/23.
+//  Created by 엄지호 on 1/1/24.
 //
 
 import UIKit
@@ -11,17 +11,17 @@ import PinLayout
 import RxSwift
 import RxCocoa
 
-/// 프로필에서 유저의 기술 스택을 보여주는  뷰
-final class ProfileTechStackView: BaseView {
+/// 프로필 수정에서 유저의 기술 스택을 수정하는 뷰
+final class EditProfileTechStackView: BaseView {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(ProfileTechStackCell.self)
+        tableView.register(EditProfileTechStackCell.self)
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 140
-        tableView.separatorInset = .init(top: 0, left: 16, bottom: 0, right: 16)
+        tableView.estimatedRowHeight = 160
+        tableView.separatorStyle = .none
         tableView.layer.cornerRadius = 8
         tableView.clipsToBounds = true
         return tableView
@@ -31,14 +31,12 @@ final class ProfileTechStackView: BaseView {
     var fieldTechStacks: [FieldTechStack] = [] {
         didSet {
             tableView.backgroundColor = fieldTechStacks.isEmpty ? BridgeColor.gray09 : .clear
-            tableView.layer.borderColor = fieldTechStacks.isEmpty ? nil : BridgeColor.gray06.cgColor
-            tableView.layer.borderWidth = fieldTechStacks.isEmpty ? .zero : 1
             tableView.dataSource = nil
-                
+            
             Observable.of(fieldTechStacks)
                 .bind(to: tableView.rx.items(
-                    cellIdentifier: ProfileTechStackCell.reuseIdentifier,
-                    cellType: ProfileTechStackCell.self
+                    cellIdentifier: EditProfileTechStackCell.reuseIdentifier,
+                    cellType: EditProfileTechStackCell.self
                 )) { _, element, cell in
                     cell.configure(with: element)
                 }

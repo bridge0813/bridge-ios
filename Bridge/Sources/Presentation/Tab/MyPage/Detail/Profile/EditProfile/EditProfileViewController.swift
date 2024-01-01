@@ -104,6 +104,18 @@ final class EditProfileViewController: BaseViewController {
         return textView
     }()
     
+    private let techStackTitleLabel: UILabel = {
+        let label = UILabel()
+        label.flex.width(28).height(24)
+        label.text = "스택"
+        label.textColor = BridgeColor.gray01
+        label.font = BridgeFont.subtitle2.font
+        return label
+    }()
+    
+    private let addTechStackButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
+    private let editTechStackView = EditProfileTechStackView()
+    
     // MARK: - Property
     private let viewModel: EditProfileViewModel
     
@@ -162,6 +174,20 @@ final class EditProfileViewController: BaseViewController {
             
             flex.addItem().backgroundColor(BridgeColor.gray09).height(8).marginTop(24).marginHorizontal(-16)
             
+            flex.addItem()
+                .direction(.row)
+                .justifyContent(.spaceBetween)
+                .alignItems(.center)
+                .marginTop(24)
+                .define { flex in
+                    flex.addItem(techStackTitleLabel)
+                    flex.addItem(addTechStackButton).marginRight(0)
+                }
+            flex.addItem(editTechStackView).marginTop(14)
+            
+            flex.addItem().backgroundColor(BridgeColor.gray09).height(8).marginTop(24).marginHorizontal(-16)
+            
+            flex.addItem().height(50)
         }
     }
     
@@ -180,5 +206,46 @@ final class EditProfileViewController: BaseViewController {
             
         )
         let output = viewModel.transform(input: input)
+        
+        output.profile
+            .drive(onNext: { [weak self] profile in
+                guard let self else { return }
+                self.configure(with: profile)
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+extension EditProfileViewController {
+    private func configure(with profile: Profile) {
+        // 프로필 이미지 설정
+        if let imageURL = profile.imageURL {
+            // TODO: - 이미지 설정
+        } else {
+            
+        }
+        
+        // 이름 설정
+        nameTextField.text = profile.name
+        
+        // 직업 설정
+        if let carrer = profile.carrer {
+           
+        } else {
+            
+        }
+        
+        // 자기소개 설정
+        if let introduction = profile.introduction {
+            
+        }
+        
+        // 기술스택 설정
+        editTechStackView.fieldTechStacks = profile.fieldTechStacks
+        editTechStackView.flex.markDirty()
+        
+        
+        contentContainer.flex.markDirty()
+        view.setNeedsLayout()
     }
 }

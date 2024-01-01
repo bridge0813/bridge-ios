@@ -15,14 +15,14 @@ final class EditProfileViewModel: ViewModelType {
     }
     
     struct Output {
-        
+        let profile: Driver<Profile>
     }
     
     // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: MyPageCoordinator?
     
-    private let profile: Profile
+    private var profile: Profile
     
     // MARK: - Init
     init(
@@ -36,6 +36,7 @@ final class EditProfileViewModel: ViewModelType {
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         
-        return Output()
+        
+        return Output(profile: Observable.just(profile).asDriver(onErrorJustReturn: Profile.onError))
     }
 }

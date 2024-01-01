@@ -10,11 +10,10 @@ import FlexLayout
 import PinLayout
 
 /// 기술스택을 보여주는 태그
-final class TechStackTag: BaseView {
+final class BridgeTechStackTag: BaseView {
     // MARK: - UI
     private let rootFlexContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = BridgeColor.gray09
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
         
@@ -28,10 +27,11 @@ final class TechStackTag: BaseView {
     }()
     
     // MARK: - init
-    init(tagName: String, textColor: UIColor) {
+    init(tagName: String, textColor: UIColor, backgroundColor: UIColor = BridgeColor.gray09) {
         super.init(frame: .zero)
         tagLabel.text = tagName
         tagLabel.textColor = textColor
+        rootFlexContainer.backgroundColor = backgroundColor
     }
     
     // MARK: - Layout
