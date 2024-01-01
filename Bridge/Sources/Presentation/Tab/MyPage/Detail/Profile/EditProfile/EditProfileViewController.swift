@@ -23,25 +23,30 @@ final class EditProfileViewController: BaseViewController {
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.bounces = false
         scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
     
-    private let contentContainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = BridgeColor.primary3
-        return view
-    }()
+    private let contentContainer = UIView()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.flex.width(155).height(153)
-        imageView.backgroundColor = BridgeColor.gray10
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 20
-        imageView.contentMode = .center
+        imageView.flex.size(92)
+        imageView.image = UIImage(named: "profile.medium")
+        imageView.contentMode = .scaleAspectFit
         return imageView
+    }()
+    
+    private let addProfileImageButton: UIButton = {
+        let button = UIButton()
+        button.flex.size(28).cornerRadius(14)
+        button.setImage(
+            UIImage(named: "camera")?.resize(to: CGSize(width: 18, height: 18)).withRenderingMode(.alwaysTemplate),
+            for: .normal
+        )
+        button.backgroundColor = BridgeColor.gray04
+        button.tintColor = BridgeColor.gray10
+        return button
     }()
     
     // MARK: - Property
@@ -82,6 +87,12 @@ final class EditProfileViewController: BaseViewController {
         scrollView.addSubview(contentContainer)
         
         contentContainer.flex.define { flex in
+            flex.addItem().direction(.row).justifyContent(.center).alignItems(.center).marginTop(52).define { flex in
+                flex.addItem(profileImageView)
+                flex.addItem(addProfileImageButton).marginTop(64).marginLeft(-22)
+            }
+            
+            
         }
     }
     
