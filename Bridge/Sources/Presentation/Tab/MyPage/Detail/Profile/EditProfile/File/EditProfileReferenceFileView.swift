@@ -1,8 +1,8 @@
 //
-//  ProfileReferenceFileView.swift
+//  EditProfileReferenceFileView.swift
 //  Bridge
 //
-//  Created by 엄지호 on 12/30/23.
+//  Created by 엄지호 on 1/2/24.
 //
 
 import UIKit
@@ -11,8 +11,8 @@ import PinLayout
 import RxSwift
 import RxCocoa
 
-/// 프로필에서 유저의 참고 링크를 보여주는  뷰
-final class ProfileReferenceFileView: BaseView {
+/// 프로필 수정에서 첨부파일을 수정하는  뷰
+final class EditProfileReferenceFileView: BaseView {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
@@ -58,7 +58,7 @@ final class ProfileReferenceFileView: BaseView {
                     cellIdentifier: ReferenceFileCell.reuseIdentifier,
                     cellType: ReferenceFileCell.self
                 )) { _, element, cell in
-                    cell.configure(with: element, isDeletable: false)
+                    cell.configure(with: element, isDeletable: true)
                 }
                 .disposed(by: disposeBag)
             

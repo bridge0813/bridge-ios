@@ -8,6 +8,7 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
 
 /// 프로필에서 리스트(링크, 파일 등)를 보여주는 BaseCell
 class BaseListCell: BaseTableViewCell {
@@ -23,10 +24,30 @@ class BaseListCell: BaseTableViewCell {
     
     let itemLabel: UILabel = {
         let label = UILabel()
+        label.flex.width(230).height(18)
         label.font = BridgeFont.body2.font
         label.textColor = BridgeColor.gray02
         return label
     }()
+    
+    let deleteButton: UIButton = {
+        let button = UIButton()
+        button.flex.size(20)
+        button.setImage(
+            UIImage(named: "delete.circle")?
+                .resize(to: CGSize(width: 20, height: 20))
+                .withRenderingMode(.alwaysTemplate),
+            for: .normal
+        )
+        button.tintColor = BridgeColor.gray04
+        return button
+    }()
+    
+    // MARK: - Preparation
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
     
     // MARK: - Layout
     override func configureLayouts() {

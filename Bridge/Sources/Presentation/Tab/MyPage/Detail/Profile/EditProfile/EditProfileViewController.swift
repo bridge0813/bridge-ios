@@ -120,6 +120,28 @@ final class EditProfileViewController: BaseViewController {
     private let addTechStackButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
     private let editTechStackView = EditProfileTechStackView()
     
+    private let linkTitleLabel: UILabel = {
+        let label = UILabel()
+        label.flex.width(60).height(24)
+        label.text = "참고 링크"
+        label.textColor = BridgeColor.gray01
+        label.font = BridgeFont.subtitle2.font
+        return label
+    }()
+    private let addLinkButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
+    private let editLinkView = EditProfileReferenceLinkView()
+    
+    private let fileTitleLabel: UILabel = {
+        let label = UILabel()
+        label.flex.width(56).height(24)
+        label.text = "첨부파일"
+        label.textColor = BridgeColor.gray01
+        label.font = BridgeFont.subtitle2.font
+        return label
+    }()
+    private let addFileButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
+    private let editFileView = EditProfileReferenceFileView()
+    
     // MARK: - Property
     private let viewModel: EditProfileViewModel
     
@@ -186,11 +208,33 @@ final class EditProfileViewController: BaseViewController {
                 .marginTop(24)
                 .define { flex in
                     flex.addItem(techStackTitleLabel)
-                    flex.addItem(addTechStackButton).marginRight(0)
+                    flex.addItem(addTechStackButton)
                 }
             flex.addItem(editTechStackView).marginTop(14)
             
             flex.addItem().backgroundColor(BridgeColor.gray09).height(8).marginTop(24).marginHorizontal(-16)
+            
+            flex.addItem()
+                .direction(.row)
+                .justifyContent(.spaceBetween)
+                .alignItems(.center)
+                .marginTop(24)
+                .define { flex in
+                    flex.addItem(linkTitleLabel)
+                    flex.addItem(addLinkButton)
+                }
+            flex.addItem(editLinkView).marginTop(14)
+            
+            flex.addItem()
+                .direction(.row)
+                .justifyContent(.spaceBetween)
+                .alignItems(.center)
+                .marginTop(24)
+                .define { flex in
+                    flex.addItem(fileTitleLabel)
+                    flex.addItem(addFileButton)
+                }
+            flex.addItem(editFileView).marginTop(14)
             
             flex.addItem().height(50)
         }
@@ -235,9 +279,12 @@ extension EditProfileViewController {
         
         // 직업 설정
         if let carrer = profile.carrer {
-           
-        } else {
-            
+            switch carrer {
+            case "학생": studentButton.isSelected = true
+            case "취준생": jobSeekerButton.isSelected = true
+            case "현직자": currentEmployeeButton.isSelected = true
+            default: print("Error")
+            }
         }
         
         // 자기소개 설정
@@ -249,6 +296,13 @@ extension EditProfileViewController {
         editTechStackView.fieldTechStacks = profile.fieldTechStacks
         editTechStackView.flex.markDirty()
         
+        // 참고링크 설정
+        editLinkView.links = profile.links
+        editLinkView.flex.markDirty()
+        
+        // 첨부파일 설정
+        editFileView.files = profile.files
+        editFileView.flex.markDirty()
         
         contentContainer.flex.markDirty()
         view.setNeedsLayout()

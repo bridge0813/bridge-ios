@@ -58,7 +58,7 @@ final class ProfileReferenceLinkView: BaseView {
                     cellIdentifier: ReferenceLinkCell.reuseIdentifier,
                     cellType: ReferenceLinkCell.self
                 )) { _, element, cell in
-                    cell.configure(with: element)
+                    cell.configure(with: element, isDeletable: false)
                 }
                 .disposed(by: disposeBag)
             
