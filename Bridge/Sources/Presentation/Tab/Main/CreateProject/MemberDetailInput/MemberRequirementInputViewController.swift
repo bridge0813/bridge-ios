@@ -87,7 +87,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         return label
     }()
-    private let requirementTextView = BridgeTextView(textViewPlaceholder: "이런 팀원이었으면 좋겠어요.", maxCount: 100)
+    private let requirementTextView = BridgeTextView(placeholder: "이런 팀원이었으면 좋겠어요.", maxCount: 100)
     
     private let nextButton: BridgeButton = {
         let button = BridgeButton(

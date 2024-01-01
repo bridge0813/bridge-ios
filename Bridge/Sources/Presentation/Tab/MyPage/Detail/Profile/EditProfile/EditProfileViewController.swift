@@ -99,7 +99,11 @@ final class EditProfileViewController: BaseViewController {
     }()
     
     private let introductionTextView: BridgeTextView = {
-        let textView = BridgeTextView(textViewPlaceholder: "팀원들에게 나를 소개해보세요.", maxCount: 300)
+        let textView = BridgeTextView(
+            placeholder: "팀원들에게 나를 소개해보세요.",
+            maxCount: 300,
+            textColor: BridgeColor.gray02
+        )
         textView.flex.height(106)
         return textView
     }()
@@ -146,6 +150,7 @@ final class EditProfileViewController: BaseViewController {
     override func configureAttributes() {
         navigationItem.title = "프로필 편집"
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completeButton)
+        enableKeyboardHiding()
     }
     
     // MARK: - Layout
@@ -237,7 +242,7 @@ extension EditProfileViewController {
         
         // 자기소개 설정
         if let introduction = profile.introduction {
-            
+            introductionTextView.text = introduction
         }
         
         // 기술스택 설정
