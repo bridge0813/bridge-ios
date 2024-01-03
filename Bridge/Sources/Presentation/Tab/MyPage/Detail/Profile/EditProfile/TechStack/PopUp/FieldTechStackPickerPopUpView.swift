@@ -1,0 +1,275 @@
+//
+//  FieldTechStackPickerPopUpView.swift
+//  Bridge
+//
+//  Created by 엄지호 on 1/2/24.
+//
+
+import UIKit
+import FlexLayout
+import PinLayout
+import RxSwift
+import RxCocoa
+
+/// 분야와 기술스택을 선택하는 뷰
+final class FieldTechStackPickerPopUpView: BridgeBasePopUpView {
+    // MARK: - UI
+    private let fieldTabButton: BridgeTabButton = {
+        let button = BridgeTabButton(title: "분야", titleFont: BridgeFont.subtitle1.font)
+        button.flex.width(32).height(22)
+        button.configuration?.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+        button.isSelected = true
+        return button
+    }()
+    
+    private let stackTabButton: BridgeTabButton = {
+        let button = BridgeTabButton(title: "스택", titleFont: BridgeFont.subtitle1.font)
+        button.flex.width(32).height(22)
+        button.configuration?.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+        return button
+    }()
+    
+    private let underlineBar: UIView = {
+        let view = UIView()
+        view.flex.width(32).height(2)
+        view.backgroundColor = BridgeColor.gray01
+        return view
+    }()
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.flex.height(400)
+        scrollView.isScrollEnabled = false  // 유저가 직접 스크롤하는 것을 방지
+        scrollView.isPagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
+    }()
+    
+    // 분야 선택
+    private let setFieldView: BridgeSetFieldView = {
+        let view = BridgeSetFieldView()
+        view.flex.width(100%).height(100%)
+        return view
+    }()
+    
+    // 스택 선택
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
+        collectionView.flex.width(100%).height(100%)
+        collectionView.backgroundColor = .clear
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.register(TechTagCell.self)
+        return collectionView
+    }()
+    
+    // MARK: - Property
+    override var containerHeight: CGFloat { 576 }
+    override var dismissYPosition: CGFloat { 300 }
+    
+    private var fieldTechStack = FieldTechStack(field: "", techStacks: [])
+    
+    var selectedFieldTechStack: Observable<FieldTechStack> {
+        return completeButton.rx.tap
+            .withUnretained(self)
+            .map { owner, _ in
+                owner.hide()
+                return owner.fieldTechStack
+            }
+    }
+    
+    // MARK: - Configuration
+    override func configureAttributes() {
+        super.configureAttributes()
+        completeButton.isHidden = true
+    }
+    
+    // MARK: - Layout
+    override func configureLayouts() {
+        super.configureLayouts()
+        
+        rootFlexContainer.flex.paddingHorizontal(16).define { flex in
+            flex.addItem(dragHandleBar).alignSelf(.center).marginTop(10)
+            
+            flex.addItem().marginTop(30).height(31).define { flex in
+                flex.addItem().direction(.row).define { flex in
+                    flex.addItem(fieldTabButton)
+                    flex.addItem(stackTabButton).marginLeft(20)
+                }
+                
+                flex.addItem(underlineBar).marginTop(7)
+            }
+            
+            flex.addItem().backgroundColor(BridgeColor.gray08).height(1).marginHorizontal(-16)
+            
+            flex.addItem(scrollView).direction(.row).marginTop(32).define { flex in
+                flex.addItem(setFieldView)
+                flex.addItem(collectionView)
+            }
+            
+            flex.addItem(completeButton).height(52).marginTop(25)
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        scrollView.contentSize.width = scrollView.frame.size.width * 2
+    }
+    
+    // MARK: - Binding
+    override func bind() {
+        fieldTabButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.scrollToFieldTab()
+            })
+            .disposed(by: disposeBag)
+        
+        stackTabButton.rx.tap
+            .withUnretained(self)
+            .filter { owner, _ in !owner.fieldTechStack.field.isEmpty }  // 분야가 선택되지 않았을 경우에는 이동 불가.
+            .subscribe(onNext: { owner, _ in
+                owner.scrollToStackTab()
+            })
+            .disposed(by: disposeBag)
+        
+        // 분야 선택
+        setFieldView.fieldTagButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, field in
+                let fieldName = owner.convertFieldToDisplayName(field: field)
+                
+                owner.fieldTechStack.field = fieldName  // 선택한 분야 저장
+                owner.fieldTechStack.techStacks = []    // 기술스택 초기화
+                
+                // 버튼 선택 상태 업데이트
+                owner.setFieldView.updateButtonState(field)
+                owner.completeButton.isEnabled = false
+                
+                // 기존 DataSource 제거
+                owner.collectionView.dataSource = nil
+                
+                // DataSource 설정
+                owner.configureDataSource(field: fieldName)
+                
+                // 탭 전환
+                owner.scrollToStackTab()
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - Methods
+extension FieldTechStackPickerPopUpView {
+    /// 분야 선택 탭으로 이동
+    private func scrollToFieldTab() {
+        // 탭 전환
+        fieldTabButton.isSelected = true
+        stackTabButton.isSelected = false
+        
+        // 스크롤 이동
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        
+        // 레이아웃 수정
+        scrollView.flex.height(400).markDirty()
+        completeButton.isHidden = true
+        
+        // 언더 바 이동
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            guard let self else { return }
+            self.underlineBar.flex.marginLeft(0).markDirty()
+            self.rootFlexContainer.flex.layout()
+        })
+    }
+    
+    /// 스택 선택 탭으로 이동
+    private func scrollToStackTab() {
+        // 탭 전환
+        fieldTabButton.isSelected = false
+        stackTabButton.isSelected = true
+        
+        // 스크롤 이동
+        let collectionViewOffset = CGPoint(x: scrollView.frame.size.width, y: 0)
+        scrollView.setContentOffset(collectionViewOffset, animated: true)
+        
+        // 레이아웃 수정
+        scrollView.flex.height(350).markDirty()
+        completeButton.isHidden = false
+        
+        // 언더 바 이동
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            guard let self else { return }
+            self.underlineBar.flex.marginLeft(52).markDirty()
+            self.rootFlexContainer.flex.layout()
+        })
+    }
+    
+    /// 유저에게 보여주는 이름으로 전환
+    private func convertFieldToDisplayName(field: String) -> String {
+        switch field {
+        case "IOS": return "iOS"
+        case "ANDROID": return "안드로이드"
+        case "FRONTEND": return "프론트엔드"
+        case "BACKEND": return "백엔드"
+        case "UIUX": return "UI/UX"
+        case "BIBX": return "BI/BX"
+        case "VIDEOMOTION": return "영상/모션"
+        case "PM": return "PM"
+        default: return "Error"
+        }
+    }
+}
+
+// MARK: - CompositionalLayout
+extension FieldTechStackPickerPopUpView {
+    private func configureLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(130),
+            heightDimension: .absolute(38)
+        )
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(38)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.interItemSpacing = .fixed(14)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 14
+        
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+}
+
+// MARK: - DataSource
+extension FieldTechStackPickerPopUpView {
+    private func configureDataSource(field: String) {
+        Observable.of(TechStack(rawValue: field)?.techStacks ?? [])
+            .bind(
+                to: collectionView.rx.items(
+                    cellIdentifier: TechTagCell.reuseIdentifier,
+                    cellType: TechTagCell.self
+                )
+            ) { [weak self] _, element, cell in
+                guard let self else { return }
+                
+                cell.configure(tagName: element, cornerRadius: 4)
+                
+                cell.tagButtonTapped
+                    .withUnretained(self)
+                    .bind(onNext: { owner, tagName in
+                        if let index = owner.fieldTechStack.techStacks.firstIndex(of: tagName) {
+                            owner.fieldTechStack.techStacks.remove(at: index)
+                        } else {
+                            owner.fieldTechStack.techStacks.append(tagName)
+                        }
+                        
+                        owner.completeButton.isEnabled = !owner.fieldTechStack.techStacks.isEmpty
+                    })
+                    .disposed(by: cell.disposeBag)
+            }
+            .disposed(by: disposeBag)
+    }
+}

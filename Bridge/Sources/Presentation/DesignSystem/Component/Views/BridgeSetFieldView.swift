@@ -115,7 +115,7 @@ final class BridgeSetFieldView: BaseView {
     }
 }
 
-// MARK: - Button tap observalbe
+// MARK: - Button tap observable
 extension BridgeSetFieldView {
     enum FieldTagButtonType: String {
         case ios = "IOS"
@@ -139,5 +139,41 @@ extension BridgeSetFieldView {
             videomotionButton.rx.tap.map { FieldTagButtonType.videomotion.rawValue },
             pmButton.rx.tap.map { FieldTagButtonType.pm.rawValue }
         )
+    }
+}
+
+extension BridgeSetFieldView {
+    /// 중복 선택이 불가능하도록 버튼의 선택상태를 업데이트하는 메서드.
+    func updateButtonState(_ selectedField: String) {
+        let allButtons = [iosButton, androidButton, frontendButton, backendButton, uiuxButton, bibxButton, videomotionButton, pmButton]
+        allButtons.forEach { $0.isSelected = false }
+        
+        if let buttonType = FieldTagButtonType(rawValue: selectedField) {
+            switch buttonType {
+            case .ios:
+                iosButton.isSelected = true
+                
+            case .android:
+                androidButton.isSelected = true
+                
+            case .frontend:
+                frontendButton.isSelected = true
+                
+            case .backend:
+                backendButton.isSelected = true
+                
+            case .uiux:
+                uiuxButton.isSelected = true
+                
+            case .bibx:
+                bibxButton.isSelected = true
+                
+            case .videomotion:
+                videomotionButton.isSelected = true
+                
+            case .pm:
+                pmButton.isSelected = true
+            }
+        }
     }
 }

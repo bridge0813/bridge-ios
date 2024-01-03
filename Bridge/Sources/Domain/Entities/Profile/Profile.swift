@@ -10,7 +10,7 @@ struct Profile {
     let name: String
     let introduction: String?
     let fields: [String]
-    let fieldTechStacks: [FieldTechStack]
+    var fieldTechStacks: [FieldTechStack]
     let carrer: String?
     let links: [String]
     let files: [ReferenceFile]
@@ -18,8 +18,8 @@ struct Profile {
 
 /// 분야와 분야에 맞는 기술 스택
 struct FieldTechStack {
-    let field: String
-    let techStacks: [String]
+    var field: String
+    var techStacks: [String]
 }
 
 /// 첨부 파일

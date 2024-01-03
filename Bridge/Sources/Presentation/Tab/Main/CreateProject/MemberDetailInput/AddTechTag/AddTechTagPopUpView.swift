@@ -38,21 +38,18 @@ final class AddTechTagPopUpView: BridgeBasePopUpView {
                         cellIdentifier: TechTagCell.reuseIdentifier,
                         cellType: TechTagCell.self
                     )
-                ) { [weak self] _, tagName, cell in
+                ) { [weak self] _, element, cell in
                     guard let self else { return }
                 
-                    cell.tagButton.updateTitle(with: tagName)
-                    cell.tagButton.layer.cornerRadius = 4
-                    cell.configureLayout()
+                    cell.configure(tagName: element, cornerRadius: 4)
                     
-                    cell.tagButton.rx.tap
-                        .map { cell.tagButton.titleLabel?.text ?? String() }
+                    cell.tagButtonTapped
                         .withUnretained(self)
-                        .bind(onNext: { owner, tag in
-                            if let index = owner.selectedTags.firstIndex(of: tag) {
+                        .bind(onNext: { owner, tagName in
+                            if let index = owner.selectedTags.firstIndex(of: tagName) {
                                 owner.selectedTags.remove(at: index)
                             } else {
-                                owner.selectedTags.append(tag)
+                                owner.selectedTags.append(tagName)
                             }
                             
                             owner.completeButton.isEnabled = !owner.selectedTags.isEmpty

@@ -119,6 +119,7 @@ final class EditProfileViewController: BaseViewController {
     
     private let addTechStackButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
     private let editTechStackView = EditProfileTechStackView()
+    private let fieldTechStackPickerView = FieldTechStackPickerPopUpView()
     
     private let linkTitleLabel: UILabel = {
         let label = UILabel()
@@ -252,14 +253,23 @@ final class EditProfileViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = EditProfileViewModel.Input(
-            
+            selectedFieldTechStack: fieldTechStackPickerView.selectedFieldTechStack
         )
         let output = viewModel.transform(input: input)
         
+        // 기존 설정된 프로필 데이터
         output.profile
             .drive(onNext: { [weak self] profile in
                 guard let self else { return }
                 self.configure(with: profile)
+            })
+            .disposed(by: disposeBag)
+        
+        // Show - 분야 및 스택 선택 뷰
+        addTechStackButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.fieldTechStackPickerView.show()
             })
             .disposed(by: disposeBag)
     }

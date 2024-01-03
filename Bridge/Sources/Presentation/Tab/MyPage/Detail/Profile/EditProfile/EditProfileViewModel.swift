@@ -11,7 +11,7 @@ import RxSwift
 final class EditProfileViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        
+        let selectedFieldTechStack: Observable<FieldTechStack>
     }
     
     struct Output {
@@ -35,8 +35,19 @@ final class EditProfileViewModel: ViewModelType {
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
+        let profileRelay = BehaviorRelay<Profile>(value: profile)
         
+        // 설정된 분야 및 기술 스택 저장
+        input.selectedFieldTechStack
+            .withUnretained(self)
+            .subscribe(onNext: { owner, fieldTechStack in
+                owner.profile.fieldTechStacks.append(fieldTechStack)
+                profileRelay.accept(owner.profile)
+            })
+            .disposed(by: disposeBag)
         
-        return Output(profile: Observable.just(profile).asDriver(onErrorJustReturn: Profile.onError))
+        return Output(
+            profile: profileRelay.asDriver(onErrorJustReturn: .onError)
+        )
     }
 }

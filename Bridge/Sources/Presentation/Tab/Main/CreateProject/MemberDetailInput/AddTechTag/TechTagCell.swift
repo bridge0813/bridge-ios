@@ -11,19 +11,31 @@ import PinLayout
 import RxSwift
 import RxCocoa
 
-/// 기본적인 모집글을 나타내는 Cell
+/// 기술스택을 보여주는 Cell
 final class TechTagCell: BaseCollectionViewCell {
     // MARK: - UI
-    let tagButton = BridgeFieldTagButton("")
+    private let tagButton = BridgeFieldTagButton("")
     
+    // MARK: - Preparation
     override func prepareForReuse() {
         super.prepareForReuse()
+        tagButton.isSelected = false 
         disposeBag = DisposeBag()  // 재사용 셀에 대한 바인딩 초기화.
     }
+    
+    // MARK: - Property
+    private var tagName = ""
+    
+    var tagButtonTapped: Observable<String> {
+        tagButton.rx.tap
+            .withUnretained(self)
+            .map { owner, _ in owner.tagName }
+    }
+    
 
     // MARK: - Layout
-    func configureLayout() {
-        contentView.flex.width(tagButton.intrinsicContentSize.width).define { flex in
+    override func configureLayouts() {
+        contentView.flex.define { flex in
             flex.addItem(tagButton)
         }
     }
@@ -39,5 +51,15 @@ final class TechTagCell: BaseCollectionViewCell {
         super.layoutSubviews()
         contentView.pin.all()
         contentView.flex.layout()
+    }
+}
+
+extension TechTagCell {
+    func configure(tagName: String, changesSelectionAsPrimaryAction: Bool = true, cornerRadius: CGFloat = 8) {
+        self.tagName = tagName
+        tagButton.updateTitle(with: tagName)
+        tagButton.changesSelectionAsPrimaryAction = changesSelectionAsPrimaryAction
+        tagButton.layer.cornerRadius = cornerRadius
+        tagButton.flex.width(tagButton.intrinsicContentSize.width).height(38).markDirty()
     }
 }
