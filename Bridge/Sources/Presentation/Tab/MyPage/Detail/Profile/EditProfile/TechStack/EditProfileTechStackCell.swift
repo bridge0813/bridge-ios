@@ -29,6 +29,7 @@ final class EditProfileTechStackCell: BaseTableViewCell {
     
     private let menuButton: UIButton = {
         let button = UIButton()
+        button.flex.size(24)
         button.setImage(UIImage(named: "kebab")?.resize(to: CGSize(width: 24, height: 24)), for: .normal)
         return button
     }()
@@ -47,11 +48,9 @@ final class EditProfileTechStackCell: BaseTableViewCell {
     // MARK: - Layout
     private func configureLayout() {
         contentView.flex.define { flex in
-            flex.addItem(rootFlexContainer).padding(17, 14, 18, 14).define { flex in
-                flex.addItem().direction(.row).justifyContent(.spaceBetween).alignItems(.center).define { flex in
-                    flex.addItem(fieldLabel)
-                    flex.addItem(menuButton).marginRight(-8)
-                }
+            flex.addItem(rootFlexContainer).padding(17, 14, 18, 14).marginBottom(8).define { flex in
+                flex.addItem(fieldLabel).marginTop(3)
+                flex.addItem(menuButton).position(.absolute).top(17).right(6)
                 
                 flex.addItem(tagContainer)
                     .direction(.row)
@@ -64,8 +63,6 @@ final class EditProfileTechStackCell: BaseTableViewCell {
                         }
                     }
             }
-            
-            flex.addItem().height(8)  // Cell Spacing
         }
     }
     
