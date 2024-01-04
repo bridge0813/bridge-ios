@@ -253,8 +253,9 @@ final class EditProfileViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = EditProfileViewModel.Input(
-            selectedFieldTechStack: fieldTechStackPickerView.selectedFieldTechStack, 
-            deleteFieldTechStack: editTechStackView.deleteFieldTechStack
+            addedFieldTechStack: fieldTechStackPickerView.selectedFieldTechStack, 
+            deletedFieldTechStack: editTechStackView.deletedFieldTechStack,
+            updatedFieldTechStack: editTechStackView.updatedFieldTechStack
         )
         let output = viewModel.transform(input: input)
         

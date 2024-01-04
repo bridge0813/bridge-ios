@@ -11,8 +11,9 @@ import RxSwift
 final class EditProfileViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        let selectedFieldTechStack: Observable<FieldTechStack>  // 추가된 기술스택
-        let deleteFieldTechStack: Observable<IndexRow>          // 기술스택 삭제
+        let addedFieldTechStack: Observable<FieldTechStack>                // 기술스택 추가
+        let deletedFieldTechStack: Observable<IndexRow>                    // 기술스택 삭제
+        let updatedFieldTechStack: Observable<(IndexRow, FieldTechStack)>  // 기술스택 수정
     }
     
     struct Output {
@@ -38,8 +39,8 @@ final class EditProfileViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let profileRelay = BehaviorRelay<Profile>(value: profile)
         
-        // 설정된 분야 및 기술 스택 저장
-        input.selectedFieldTechStack
+        // 분야 및 기술 스택 추가
+        input.addedFieldTechStack
             .withUnretained(self)
             .subscribe(onNext: { owner, fieldTechStack in
                 owner.profile.fieldTechStacks.append(fieldTechStack)
@@ -48,7 +49,7 @@ final class EditProfileViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         // 분야 및 기술 스택 삭제
-        input.deleteFieldTechStack
+        input.deletedFieldTechStack
             .withUnretained(self)
             .subscribe(onNext: { owner, indexRow in
                 owner.profile.fieldTechStacks.remove(at: indexRow)
@@ -56,6 +57,15 @@ final class EditProfileViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 분야 및 기술 스택 수정
+        input.updatedFieldTechStack
+            .withUnretained(self)
+            .subscribe(onNext: { owner, element in
+                let (indexRow, fieldTeckStack) = element
+                owner.profile.fieldTechStacks[indexRow] = fieldTeckStack
+                profileRelay.accept(owner.profile)
+            })
+            .disposed(by: disposeBag)
         
         return Output(
             profile: profileRelay.asDriver(onErrorJustReturn: .onError)

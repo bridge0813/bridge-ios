@@ -27,6 +27,9 @@ final class EditProfileTechStackView: BaseView {
         return tableView
     }()
     
+    // 수정용
+    private let fieldTechStackPickerView = FieldTechStackPickerPopUpView()
+    
     // MARK: - Property
     private let fieldTechStacksUpdated = PublishSubject<[FieldTechStack]>()
     
@@ -42,7 +45,9 @@ final class EditProfileTechStackView: BaseView {
         }
     }
     
-    let deleteFieldTechStack = PublishSubject<IndexRow>()
+    private var indexRow: IndexRow = 0
+    let deletedFieldTechStack = PublishSubject<IndexRow>()                    // 인덱스에 맞는 스택 삭제
+    let updatedFieldTechStack = PublishSubject<(IndexRow, FieldTechStack)>()  // 인덱스에 맞는 스택 수정
     
     // MARK: - Layout
     override func configureLayouts() {
@@ -75,13 +80,22 @@ final class EditProfileTechStackView: BaseView {
                         let (option, indexRow) = item
                         
                         if option == "삭제하기" {
-                            owner.deleteFieldTechStack.onNext(indexRow)
+                            owner.deletedFieldTechStack.onNext(indexRow)
                         } else {
-                            
+                            // 수정하기
+                            owner.indexRow = indexRow
+                            owner.fieldTechStackPickerView.show()
                         }
                     })
                     .disposed(by: cell.disposeBag)
             }
+            .disposed(by: disposeBag)
+        
+        fieldTechStackPickerView.selectedFieldTechStack
+            .withUnretained(self)
+            .subscribe(onNext: { owner, fieldTechStack in
+                owner.updatedFieldTechStack.onNext((owner.indexRow, fieldTechStack))
+            })
             .disposed(by: disposeBag)
     }
 }
