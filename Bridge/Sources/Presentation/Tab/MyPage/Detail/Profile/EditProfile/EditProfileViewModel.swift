@@ -11,7 +11,8 @@ import RxSwift
 final class EditProfileViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        let selectedFieldTechStack: Observable<FieldTechStack>
+        let selectedFieldTechStack: Observable<FieldTechStack>  // 추가된 기술스택
+        let deleteFieldTechStack: Observable<IndexRow>          // 기술스택 삭제
     }
     
     struct Output {
@@ -45,6 +46,16 @@ final class EditProfileViewModel: ViewModelType {
                 profileRelay.accept(owner.profile)
             })
             .disposed(by: disposeBag)
+        
+        // 분야 및 기술 스택 삭제
+        input.deleteFieldTechStack
+            .withUnretained(self)
+            .subscribe(onNext: { owner, indexRow in
+                owner.profile.fieldTechStacks.remove(at: indexRow)
+                profileRelay.accept(owner.profile)
+            })
+            .disposed(by: disposeBag)
+        
         
         return Output(
             profile: profileRelay.asDriver(onErrorJustReturn: .onError)

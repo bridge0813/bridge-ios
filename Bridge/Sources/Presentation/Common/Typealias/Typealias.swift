@@ -10,3 +10,6 @@ typealias ProjectID = Int
 
 /// 지원자의 고유 ID로 식별을 위해 사용됨
 typealias ApplicantID = Int
+
+/// IndexPath의 row
+typealias IndexRow = Int

@@ -42,6 +42,8 @@ final class EditProfileTechStackView: BaseView {
         }
     }
     
+    let deleteFieldTechStack = PublishSubject<IndexRow>()
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
@@ -63,8 +65,22 @@ final class EditProfileTechStackView: BaseView {
             .bind(to: tableView.rx.items(
                 cellIdentifier: EditProfileTechStackCell.reuseIdentifier,
                 cellType: EditProfileTechStackCell.self
-            )) { _, element, cell in
+            )) { indexRow, element, cell in
                 cell.configure(with: element)
+                cell.indexRow = indexRow
+                
+                cell.dropdownItemSelected
+                    .withUnretained(self)
+                    .subscribe(onNext: { owner, item in
+                        let (option, indexRow) = item
+                        
+                        if option == "삭제하기" {
+                            owner.deleteFieldTechStack.onNext(indexRow)
+                        } else {
+                            
+                        }
+                    })
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
     }

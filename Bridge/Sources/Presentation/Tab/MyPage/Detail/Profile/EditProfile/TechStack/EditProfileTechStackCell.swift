@@ -34,15 +34,40 @@ final class EditProfileTechStackCell: BaseTableViewCell {
         return button
     }()
     
+    private lazy var menuDropdown = DropDown(
+        anchorView: menuButton,
+        bottomOffset: CGPoint(x: -80, y: 0),
+        dataSource: ["수정하기", "삭제하기"],
+        cellHeight: 44,
+        itemTextColor: BridgeColor.gray03,
+        itemTextFont: BridgeFont.body2.font,
+        width: 91,
+        cornerRadius: 4
+    )
+    
     private let tagContainer = UIView()
     private var tags: [BridgeTechStackTag] = []
     
     // MARK: - Preparation
     override func prepareForReuse() {
         super.prepareForReuse()
+        disposeBag = DisposeBag()
+        bind()
         tags.forEach { tag in
             tag.removeFromSuperview()
         }
+    }
+    
+    // MARK: - Property
+    var indexRow: IndexRow = 0
+    
+    /// 선택된 옵션과 대상이 되는 Cell의 indexRow
+    var dropdownItemSelected: Observable<(String, IndexRow)> {
+        menuDropdown.itemSelected
+            .withUnretained(self)
+            .map { owner, item in
+                return  (item.title, owner.indexRow)
+            }
     }
     
     // MARK: - Layout
@@ -76,6 +101,23 @@ final class EditProfileTechStackCell: BaseTableViewCell {
         super.layoutSubviews()
         contentView.pin.all()
         contentView.flex.layout()
+    }
+    
+    // MARK: - Binding
+    override func bind() {
+        menuButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                // 드롭다운 레이아웃 재계산(anchorView의 레이아웃 배치 후 드롭다운 위치설정)
+                owner.menuDropdown.updateDropdownLayout()
+                
+                // 기존 배경 레이아웃 제거(스크롤에 의한 충돌방지)
+                owner.menuDropdown.removeConstraints(owner.menuDropdown.constraints)
+                
+                // show(배경 레이아웃을 다시 잡아줌)
+                owner.menuDropdown.show()
+            })
+            .disposed(by: disposeBag)
     }
 }
 
