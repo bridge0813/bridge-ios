@@ -182,6 +182,15 @@ final class FieldTechStackPickerPopUpView: BridgeBasePopUpView {
             }
             .disposed(by: disposeBag)
     }
+    
+    // MARK: - Show
+    override func show() {
+        // 초기화
+        fieldTechStack = FieldTechStack(field: "", techStacks: [])
+        scrollToFieldTab()
+        setFieldView.updateButtonState("")
+        super.show()
+    }
 }
 
 // MARK: - Methods
