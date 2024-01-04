@@ -43,24 +43,15 @@ final class EditProfileReferenceFileView: BaseView {
     }()
     
     // MARK: - Property
+    private let filesUpdated = PublishSubject<[ReferenceFile]>()
+    
     var files: [ReferenceFile] = [] {
         didSet {
             // 보여줄 파일이 없을 경우, 플레이스홀더 보여주기.
             tableView.flex.display(files.isEmpty ? .none : .flex)
             placeholderContainer.flex.display(files.isEmpty ? .flex : .none)
             
-            // 기존 데이터소스 제거
-            tableView.dataSource = nil
-            
-            // 데이터소스 설정
-            Observable.of(files)
-                .bind(to: tableView.rx.items(
-                    cellIdentifier: ReferenceFileCell.reuseIdentifier,
-                    cellType: ReferenceFileCell.self
-                )) { _, element, cell in
-                    cell.configure(with: element, isDeletable: true)
-                }
-                .disposed(by: disposeBag)
+            filesUpdated.onNext(files)
             
             // 컨텐츠 크기 직접 계산 및 설정
             let contentHeight = tableView.rowHeight * CGFloat(files.count)
@@ -84,5 +75,18 @@ final class EditProfileReferenceFileView: BaseView {
         super.layoutSubviews()
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
+    }
+    
+    // MARK: - Binding
+    override func bind() {
+        // 데이터소스 설정
+        filesUpdated
+            .bind(to: tableView.rx.items(
+                cellIdentifier: ReferenceFileCell.reuseIdentifier,
+                cellType: ReferenceFileCell.self
+            )) { _, element, cell in
+                cell.configure(with: element, isDeletable: true)
+            }
+            .disposed(by: disposeBag)
     }
 }

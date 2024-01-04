@@ -132,6 +132,8 @@ final class FieldTechStackPickerPopUpView: BridgeBasePopUpView {
             })
             .disposed(by: disposeBag)
         
+        let fieldUpdated = PublishSubject<[String]>()
+        
         // 분야 선택
         setFieldView.fieldTagButtonTapped
             .withUnretained(self)
@@ -145,15 +147,39 @@ final class FieldTechStackPickerPopUpView: BridgeBasePopUpView {
                 owner.setFieldView.updateButtonState(field)
                 owner.completeButton.isEnabled = false
                 
-                // 기존 DataSource 제거
-                owner.collectionView.dataSource = nil
-                
-                // DataSource 설정
-                owner.configureDataSource(field: fieldName)
+                // data 전달
+                fieldUpdated.onNext(TechStack(rawValue: fieldName)?.techStacks ?? [])
                 
                 // 탭 전환
                 owner.scrollToStackTab()
             })
+            .disposed(by: disposeBag)
+        
+        // DataSource 바인딩
+        fieldUpdated
+            .bind(
+                to: collectionView.rx.items(
+                    cellIdentifier: TechTagCell.reuseIdentifier,
+                    cellType: TechTagCell.self
+                )
+            ) { _, element, cell in
+                
+                cell.configure(tagName: element, cornerRadius: 4)
+                
+                cell.tagButtonTapped
+                    .bind(onNext: { [weak self] tagName in
+                        guard let self else { return }
+                        
+                        if let index = self.fieldTechStack.techStacks.firstIndex(of: tagName) {
+                            self.fieldTechStack.techStacks.remove(at: index)
+                        } else {
+                            self.fieldTechStack.techStacks.append(tagName)
+                        }
+                        
+                        self.completeButton.isEnabled = !self.fieldTechStack.techStacks.isEmpty
+                    })
+                    .disposed(by: cell.disposeBag)
+            }
             .disposed(by: disposeBag)
     }
 }
@@ -240,36 +266,5 @@ extension FieldTechStackPickerPopUpView {
         section.interGroupSpacing = 14
         
         return UICollectionViewCompositionalLayout(section: section)
-    }
-}
-
-// MARK: - DataSource
-extension FieldTechStackPickerPopUpView {
-    private func configureDataSource(field: String) {
-        Observable.of(TechStack(rawValue: field)?.techStacks ?? [])
-            .bind(
-                to: collectionView.rx.items(
-                    cellIdentifier: TechTagCell.reuseIdentifier,
-                    cellType: TechTagCell.self
-                )
-            ) { [weak self] _, element, cell in
-                guard let self else { return }
-                
-                cell.configure(tagName: element, cornerRadius: 4)
-                
-                cell.tagButtonTapped
-                    .withUnretained(self)
-                    .bind(onNext: { owner, tagName in
-                        if let index = owner.fieldTechStack.techStacks.firstIndex(of: tagName) {
-                            owner.fieldTechStack.techStacks.remove(at: index)
-                        } else {
-                            owner.fieldTechStack.techStacks.append(tagName)
-                        }
-                        
-                        owner.completeButton.isEnabled = !owner.fieldTechStack.techStacks.isEmpty
-                    })
-                    .disposed(by: cell.disposeBag)
-            }
-            .disposed(by: disposeBag)
     }
 }

@@ -28,19 +28,12 @@ final class EditProfileTechStackView: BaseView {
     }()
     
     // MARK: - Property
+    private let fieldTechStacksUpdated = PublishSubject<[FieldTechStack]>()
+    
     var fieldTechStacks: [FieldTechStack] = [] {
         didSet {
             tableView.backgroundColor = fieldTechStacks.isEmpty ? BridgeColor.gray09 : .clear
-            tableView.dataSource = nil
-            
-            Observable.of(fieldTechStacks)
-                .bind(to: tableView.rx.items(
-                    cellIdentifier: EditProfileTechStackCell.reuseIdentifier,
-                    cellType: EditProfileTechStackCell.self
-                )) { _, element, cell in
-                    cell.configure(with: element)
-                }
-                .disposed(by: disposeBag)
+            fieldTechStacksUpdated.onNext(fieldTechStacks)
             
             // 컨텐츠 크기 직접 계산 및 설정
             let contentHeight = tableView.rowHeight * CGFloat(fieldTechStacks.count)
@@ -61,5 +54,18 @@ final class EditProfileTechStackView: BaseView {
         super.layoutSubviews()
         rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
+    }
+    
+    // MARK: - Binding
+    override func bind() {
+        // 데이터소스 설정
+        fieldTechStacksUpdated
+            .bind(to: tableView.rx.items(
+                cellIdentifier: EditProfileTechStackCell.reuseIdentifier,
+                cellType: EditProfileTechStackCell.self
+            )) { _, element, cell in
+                cell.configure(with: element)
+            }
+            .disposed(by: disposeBag)
     }
 }

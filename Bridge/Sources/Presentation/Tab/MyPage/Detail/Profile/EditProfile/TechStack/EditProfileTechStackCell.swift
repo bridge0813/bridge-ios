@@ -48,8 +48,8 @@ final class EditProfileTechStackCell: BaseTableViewCell {
     // MARK: - Layout
     private func configureLayout() {
         contentView.flex.define { flex in
-            flex.addItem(rootFlexContainer).padding(17, 14, 18, 14).marginBottom(8).define { flex in
-                flex.addItem(fieldLabel).marginTop(3)
+            flex.addItem(rootFlexContainer).padding(20, 14, 18, 14).marginBottom(8).define { flex in
+                flex.addItem(fieldLabel)
                 flex.addItem(menuButton).position(.absolute).top(17).right(6)
                 
                 flex.addItem(tagContainer)
