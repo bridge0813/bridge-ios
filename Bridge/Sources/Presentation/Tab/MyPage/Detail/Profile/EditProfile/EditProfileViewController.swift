@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import MobileCoreServices
+import UniformTypeIdentifiers
 import FlexLayout
 import PinLayout
 import RxCocoa
@@ -287,6 +289,17 @@ final class EditProfileViewController: BaseViewController {
                 owner.addLinkPopUpView.show()
             })
             .disposed(by: disposeBag)
+        
+        addFileButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                let documentTypes = [UTType.content]
+                let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: documentTypes)
+                documentPicker.delegate = self
+                documentPicker.modalPresentationStyle = .formSheet
+                self.present(documentPicker, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -331,5 +344,14 @@ extension EditProfileViewController {
         
         contentContainer.flex.markDirty()
         view.setNeedsLayout()
+    }
+}
+
+extension EditProfileViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let url = urls.first else { return }
+        
+        let fileName = url.lastPathComponent
+        let file = ReferenceFile(url: url.absoluteString, fileName: fileName)
     }
 }
