@@ -257,7 +257,8 @@ final class EditProfileViewController: BaseViewController {
             addedFieldTechStack: fieldTechStackPickerView.selectedFieldTechStack, 
             deletedFieldTechStack: editTechStackView.deletedFieldTechStack,
             updatedFieldTechStack: editTechStackView.updatedFieldTechStack, 
-            addedLinkURL: addLinkPopUpView.addedLinkURL
+            addedLinkURL: addLinkPopUpView.addedLinkURL, 
+            deletedLinkURL: editLinkView.deletedLinkURL
         )
         let output = viewModel.transform(input: input)
         

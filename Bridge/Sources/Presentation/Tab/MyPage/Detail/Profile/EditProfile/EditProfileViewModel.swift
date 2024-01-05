@@ -15,6 +15,7 @@ final class EditProfileViewModel: ViewModelType {
         let deletedFieldTechStack: Observable<IndexRow>                    // 기술스택 삭제
         let updatedFieldTechStack: Observable<(IndexRow, FieldTechStack)>  // 기술스택 수정
         let addedLinkURL: Observable<String>                               // 링크 추가
+        let deletedLinkURL: Observable<IndexRow>                           // 링크 삭제
     }
     
     struct Output {
@@ -73,6 +74,15 @@ final class EditProfileViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, url in
                 owner.profile.links.append(url)
+                profileRelay.accept(owner.profile)
+            })
+            .disposed(by: disposeBag)
+        
+        // 링크 삭제
+        input.deletedLinkURL
+            .withUnretained(self)
+            .subscribe(onNext: { owner, indexRow in
+                owner.profile.links.remove(at: indexRow)
                 profileRelay.accept(owner.profile)
             })
             .disposed(by: disposeBag)

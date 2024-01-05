@@ -20,7 +20,7 @@ final class AddLinkPopUpView: BridgeBasePopUpView {
         textView.text = "URL형식으로 적어주세요."  // Placeholder
         textView.font = BridgeFont.body2.font
         textView.textColor = BridgeColor.gray04
-        textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        textView.textContainerInset = UIEdgeInsets(top: 16, left: 12, bottom: 16, right: 12)
         textView.layer.borderWidth = 1
         textView.layer.borderColor = BridgeColor.gray06.cgColor
         textView.layer.cornerRadius = 8

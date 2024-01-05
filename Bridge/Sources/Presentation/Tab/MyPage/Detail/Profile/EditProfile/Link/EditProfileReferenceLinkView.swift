@@ -61,6 +61,8 @@ final class EditProfileReferenceLinkView: BaseView {
         }
     }
     
+    let deletedLinkURL = PublishSubject<IndexRow>()
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
@@ -85,8 +87,15 @@ final class EditProfileReferenceLinkView: BaseView {
             .bind(to: tableView.rx.items(
                 cellIdentifier: ReferenceLinkCell.reuseIdentifier,
                 cellType: ReferenceLinkCell.self
-            )) { _, element, cell in
+            )) { indexRow, element, cell in
                 cell.configure(with: element, isDeletable: true)
+                cell.indexRow = indexRow
+                cell.deleteButtonTapped
+                    .withUnretained(self)
+                    .subscribe(onNext: { owner, indexRow in
+                        owner.deletedLinkURL.onNext(indexRow)
+                    })
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
     }

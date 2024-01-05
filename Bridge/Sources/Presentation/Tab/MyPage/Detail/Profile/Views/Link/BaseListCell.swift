@@ -49,6 +49,16 @@ class BaseListCell: BaseTableViewCell {
         disposeBag = DisposeBag()
     }
     
+    // MARK: - Property
+    var indexRow: IndexRow = 0
+    var deleteButtonTapped: Observable<IndexRow> {
+        return deleteButton.rx.tap
+            .withUnretained(self)
+            .map { owner, _ in
+                return owner.indexRow
+            }
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         contentView.addSubview(rootFlexContainer)
