@@ -131,6 +131,7 @@ final class EditProfileViewController: BaseViewController {
     }()
     private let addLinkButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
     private let editLinkView = EditProfileReferenceLinkView()
+    private let addLinkPopUpView = AddLinkPopUpView()
     
     private let fileTitleLabel: UILabel = {
         let label = UILabel()
@@ -255,7 +256,8 @@ final class EditProfileViewController: BaseViewController {
         let input = EditProfileViewModel.Input(
             addedFieldTechStack: fieldTechStackPickerView.selectedFieldTechStack, 
             deletedFieldTechStack: editTechStackView.deletedFieldTechStack,
-            updatedFieldTechStack: editTechStackView.updatedFieldTechStack
+            updatedFieldTechStack: editTechStackView.updatedFieldTechStack, 
+            addedLinkURL: addLinkPopUpView.addedLinkURL
         )
         let output = viewModel.transform(input: input)
         
@@ -267,11 +269,19 @@ final class EditProfileViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        // Show - 분야 및 스택 선택 뷰
+        // Show - 분야 및 스택 추가 뷰
         addTechStackButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.fieldTechStackPickerView.show()
+            })
+            .disposed(by: disposeBag)
+        
+        // Show - 링크 추가 뷰
+        addLinkButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.addLinkPopUpView.show()
             })
             .disposed(by: disposeBag)
     }

@@ -12,7 +12,7 @@ struct Profile {
     let fields: [String]
     var fieldTechStacks: [FieldTechStack]
     let carrer: String?
-    let links: [String]
+    var links: [String]
     let files: [ReferenceFile]
 }
 
