@@ -62,6 +62,9 @@ final class EditProfileReferenceLinkView: BaseView {
     }
     
     let deletedLinkURL = PublishSubject<IndexRow>()
+    var selectedLinkURL: Observable<String> {
+        tableView.rx.modelSelected(String.self).asObservable()
+    }
     
     // MARK: - Layout
     override func configureLayouts() {

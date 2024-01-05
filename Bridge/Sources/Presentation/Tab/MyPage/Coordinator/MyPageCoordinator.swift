@@ -160,4 +160,13 @@ extension MyPageCoordinator {
         let safariViewController = SFSafariViewController(url: url)
         navigationController.present(safariViewController, animated: true)
     }
+    
+    /// 프로필에서 참고링크를 보여주는 메서드.
+    func showReferenceLink(with urlString: String) {
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        let safariViewController = SFSafariViewController(url: url)
+        navigationController.present(safariViewController, animated: true)
+    }
 }

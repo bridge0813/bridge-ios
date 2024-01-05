@@ -174,7 +174,8 @@ final class EditProfileViewController: BaseViewController {
     override func configureAttributes() {
         navigationItem.title = "프로필 편집"
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completeButton)
-        enableKeyboardHiding()
+        
+        enableKeyboardHiding(shouldCancelTouchesInView: false)
     }
     
     // MARK: - Layout
@@ -258,7 +259,8 @@ final class EditProfileViewController: BaseViewController {
             deletedFieldTechStack: editTechStackView.deletedFieldTechStack,
             updatedFieldTechStack: editTechStackView.updatedFieldTechStack, 
             addedLinkURL: addLinkPopUpView.addedLinkURL, 
-            deletedLinkURL: editLinkView.deletedLinkURL
+            deletedLinkURL: editLinkView.deletedLinkURL, 
+            selectedLinkURL: editLinkView.selectedLinkURL
         )
         let output = viewModel.transform(input: input)
         
