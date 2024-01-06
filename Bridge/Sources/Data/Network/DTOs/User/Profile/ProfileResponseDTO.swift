@@ -5,7 +5,7 @@
 //  Created by 엄지호 on 12/30/23.
 //
 
-/// 마이페이지 조회할 때 사용
+/// 프로필 조회에 사용
 struct ProfileResponseDTO: Decodable {
     let imageURL: String?
     let name: String

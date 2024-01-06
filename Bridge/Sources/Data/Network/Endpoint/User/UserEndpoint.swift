@@ -11,6 +11,12 @@ enum UserEndpoint {
     case fetchProfilePreview(userID: String)
     case changeField(requestDTO: ChangeFieldRequestDTO)
     case fetchBookmarkedProjects(userID: String)
+    case updateProfile(requestDTO: UpdateProfileRequestDTO, userID: String)
+    
+    /// Multipart에서 각 데이터의 경계를 나타낼 바운더리
+    var boundaryName: String {
+        return "Boundary-\(UUID().uuidString)"
+    }
 }
 
 extension UserEndpoint: Endpoint {
@@ -24,6 +30,9 @@ extension UserEndpoint: Endpoint {
             
         case .fetchBookmarkedProjects:
             return "/users/bookmark"
+            
+        case .updateProfile:
+            return "/users/profile"
         }
     }
     
@@ -36,6 +45,9 @@ extension UserEndpoint: Endpoint {
             return nil
             
         case .fetchBookmarkedProjects(let userID):
+            return ["userId": userID]
+            
+        case .updateProfile(_, let userID):
             return ["userId": userID]
         }
     }
@@ -50,6 +62,26 @@ extension UserEndpoint: Endpoint {
             
         case .fetchBookmarkedProjects:
             return .get
+            
+        case .updateProfile:
+            return .post
+        }
+    }
+    
+    var headers: HTTPHeaders {
+        switch self {
+        case .fetchProfilePreview:
+            return ["Content-Type": "application/json"]
+            
+        case .changeField:
+            return ["Content-Type": "application/json"]
+            
+        case .fetchBookmarkedProjects:
+            return ["Content-Type": "application/json"]
+            
+        case .updateProfile:
+            let contentType = "multipart/form-data; boundary=\(boundaryName)"
+            return ["Content-Type": contentType]
         }
     }
     
@@ -63,6 +95,11 @@ extension UserEndpoint: Endpoint {
             
         case .fetchBookmarkedProjects:
             return nil
+            
+        case .updateProfile(let requestDTO, _):
+            
+            
+            return requestDTO
         }
     }
 }

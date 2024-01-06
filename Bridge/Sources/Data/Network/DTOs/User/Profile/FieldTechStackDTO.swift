@@ -5,7 +5,7 @@
 //  Created by 엄지호 on 12/30/23.
 //
 
-struct FieldTechStackDTO: Decodable {
+struct FieldTechStackDTO: Codable {
     let field: String
     let techStacks: [String]
 }
