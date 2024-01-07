@@ -163,7 +163,8 @@ extension MyPageCoordinator {
     
     /// 프로필에서 참고링크를 보여주는 메서드.
     func showReferenceLink(with urlString: String) {
-        guard let url = URL(string: urlString) else {
+        // HTTP와 HTTPS URL만 처리할 수 있도록
+        guard let url = URL(string: urlString), ["http", "https"].contains(url.scheme?.lowercased()) else {
             return
         }
         let safariViewController = SFSafariViewController(url: url)
