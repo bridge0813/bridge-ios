@@ -278,7 +278,8 @@ final class EditProfileViewController: BaseViewController {
             addedLinkURL: addLinkPopUpView.addedLinkURL, 
             deletedLinkURL: editLinkView.deletedLinkURL, 
             selectedLinkURL: editLinkView.selectedLinkURL,
-            selectedFileURL: documentPicker.rx.didFinishPicking
+            selectedFile: documentPicker.rx.didFinishPicking,
+            deletedFile: editFileView.deletedFile
         )
         let output = viewModel.transform(input: input)
         

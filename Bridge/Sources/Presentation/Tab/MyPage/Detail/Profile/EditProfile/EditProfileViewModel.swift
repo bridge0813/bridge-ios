@@ -12,14 +12,15 @@ import RxSwift
 final class EditProfileViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        let selectedProfileImage: Observable<UIImage?>                     // 이미지 선택
-        let addedFieldTechStack: Observable<FieldTechStack>                // 기술스택 추가
-        let deletedFieldTechStack: Observable<IndexRow>                    // 기술스택 삭제
-        let updatedFieldTechStack: Observable<(IndexRow, FieldTechStack)>  // 기술스택 수정
-        let addedLinkURL: Observable<String>                               // 링크 추가
-        let deletedLinkURL: Observable<IndexRow>                           // 링크 삭제
-        let selectedLinkURL: Observable<String>                            // 링크 이동
-        let selectedFileURL: Observable<Result<ReferenceFile, FileProcessingError>>  // 파일 추가
+        let selectedProfileImage: Observable<UIImage?>                            // 이미지 선택
+        let addedFieldTechStack: Observable<FieldTechStack>                       // 기술스택 추가
+        let deletedFieldTechStack: Observable<IndexRow>                           // 기술스택 삭제
+        let updatedFieldTechStack: Observable<(IndexRow, FieldTechStack)>         // 기술스택 수정
+        let addedLinkURL: Observable<String>                                      // 링크 추가
+        let deletedLinkURL: Observable<IndexRow>                                  // 링크 삭제
+        let selectedLinkURL: Observable<String>                                   // 링크 이동
+        let selectedFile: Observable<Result<ReferenceFile, FileProcessingError>>  // 파일 추가
+        let deletedFile: Observable<IndexRow>                                     // 파일 삭제
     }
     
     struct Output {
@@ -108,7 +109,8 @@ final class EditProfileViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        input.selectedFileURL
+        // 파일 추가
+        input.selectedFile
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
@@ -123,6 +125,15 @@ final class EditProfileViewModel: ViewModelType {
                         description: error.localizedDescription
                     ))
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        // 파일 삭제
+        input.deletedFile
+            .withUnretained(self)
+            .subscribe(onNext: { owner, indexRow in
+                owner.profile.files.remove(at: indexRow)
+                profileRelay.accept(owner.profile)
             })
             .disposed(by: disposeBag)
         

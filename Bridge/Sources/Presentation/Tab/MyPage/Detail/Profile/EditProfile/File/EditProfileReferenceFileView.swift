@@ -60,6 +60,8 @@ final class EditProfileReferenceFileView: BaseView {
         }
     }
     
+    let deletedFile = PublishSubject<IndexRow>()
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
@@ -84,8 +86,15 @@ final class EditProfileReferenceFileView: BaseView {
             .bind(to: tableView.rx.items(
                 cellIdentifier: ReferenceFileCell.reuseIdentifier,
                 cellType: ReferenceFileCell.self
-            )) { _, element, cell in
+            )) { indexRow, element, cell in
                 cell.configure(with: element, isDeletable: true)
+                cell.indexRow = indexRow
+                cell.deleteButtonTapped
+                    .withUnretained(self)
+                    .subscribe(onNext: { owner, indexRow in
+                        owner.deletedFile.onNext(indexRow)
+                    })
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
     }
