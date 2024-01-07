@@ -16,7 +16,7 @@ struct Profile {
     var fieldTechStacks: [FieldTechStack]
     let carrer: String?
     var links: [String]
-    let files: [ReferenceFile]
+    var files: [ReferenceFile]
 }
 
 /// 분야와 분야에 맞는 기술 스택
@@ -29,6 +29,7 @@ struct FieldTechStack {
 struct ReferenceFile {
     let url: String
     let fileName: String
+    var fileData: Data?
 }
 
 extension Profile {

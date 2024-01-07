@@ -19,6 +19,7 @@ final class EditProfileViewModel: ViewModelType {
         let addedLinkURL: Observable<String>                               // 링크 추가
         let deletedLinkURL: Observable<IndexRow>                           // 링크 삭제
         let selectedLinkURL: Observable<String>                            // 링크 이동
+        let selectedFileURL: Observable<Result<ReferenceFile, FileProcessingError>>  // 파일 추가
     }
     
     struct Output {
@@ -104,6 +105,24 @@ final class EditProfileViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, url in
                 owner.coordinator?.showReferenceLink(with: url)
+            })
+            .disposed(by: disposeBag)
+        
+        input.selectedFileURL
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let file):
+                    owner.profile.files.append(file)
+                    profileRelay.accept(owner.profile)
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "오류",
+                        description: error.localizedDescription
+                    ))
+                }
             })
             .disposed(by: disposeBag)
         

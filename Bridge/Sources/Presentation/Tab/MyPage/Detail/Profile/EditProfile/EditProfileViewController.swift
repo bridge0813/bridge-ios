@@ -146,14 +146,19 @@ final class EditProfileViewController: BaseViewController {
     
     private let fileTitleLabel: UILabel = {
         let label = UILabel()
-        label.flex.width(56).height(24)
-        label.text = "첨부파일"
+        label.flex.width(100).height(24)
+        label.text = "첨부파일(PDF)"
         label.textColor = BridgeColor.gray01
         label.font = BridgeFont.subtitle2.font
         return label
     }()
     private let addFileButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
     private let editFileView = EditProfileReferenceFileView()
+    private let documentPicker: UIDocumentPickerViewController = {
+        let documentTypes = [UTType.pdf]
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: documentTypes)
+        return documentPicker
+    }()
     
     // MARK: - Property
     private let viewModel: EditProfileViewModel
@@ -272,7 +277,8 @@ final class EditProfileViewController: BaseViewController {
             updatedFieldTechStack: editTechStackView.updatedFieldTechStack, 
             addedLinkURL: addLinkPopUpView.addedLinkURL, 
             deletedLinkURL: editLinkView.deletedLinkURL, 
-            selectedLinkURL: editLinkView.selectedLinkURL
+            selectedLinkURL: editLinkView.selectedLinkURL,
+            selectedFileURL: documentPicker.rx.didFinishPicking
         )
         let output = viewModel.transform(input: input)
         
@@ -303,11 +309,7 @@ final class EditProfileViewController: BaseViewController {
         addFileButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                let documentTypes = [UTType.content]
-                let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: documentTypes)
-                documentPicker.delegate = self
-                documentPicker.modalPresentationStyle = .formSheet
-                self.present(documentPicker, animated: true, completion: nil)
+                owner.present(owner.documentPicker, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
         
@@ -324,6 +326,7 @@ extension EditProfileViewController {
     private func configure(with profile: Profile) {
         // 프로필 이미지 설정
         if let imageURL = profile.imageURL {
+            // 유저가 선택한 이미지가 있다면 설정
             if let profileImage = profile.updatedImage {
                 profileImageView.image = profileImage.resize(to: CGSize(width: 92, height: 92))
             } else {
@@ -367,14 +370,5 @@ extension EditProfileViewController {
         
         contentContainer.flex.markDirty()
         view.setNeedsLayout()
-    }
-}
-
-extension EditProfileViewController: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let url = urls.first else { return }
-        
-        let fileName = url.lastPathComponent
-        let file = ReferenceFile(url: url.absoluteString, fileName: fileName)
     }
 }

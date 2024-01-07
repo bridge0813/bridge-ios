@@ -12,6 +12,6 @@ struct ReferenceFileDTO: Codable {
 
 extension ReferenceFileDTO {
     func toEntity() -> ReferenceFile {
-        ReferenceFile(url: url, fileName: fileName)
+        ReferenceFile(url: url, fileName: fileName, fileData: nil)
     }
 }

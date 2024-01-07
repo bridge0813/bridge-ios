@@ -338,6 +338,7 @@
 		7CD5A53A2B42713500343F9F /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD5A5392B42713500343F9F /* EditProfileViewModel.swift */; };
 		7CD5A53D2B429A4F00343F9F /* EditProfileTechStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD5A53C2B429A4F00343F9F /* EditProfileTechStackView.swift */; };
 		7CD5A5422B429E6600343F9F /* EditProfileTechStackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD5A5412B429E6600343F9F /* EditProfileTechStackCell.swift */; };
+		7CD834A72B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834A62B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift */; };
 		7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */; };
 		7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */; };
 		7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */; };
@@ -660,6 +661,7 @@
 		7CD5A5392B42713500343F9F /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		7CD5A53C2B429A4F00343F9F /* EditProfileTechStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTechStackView.swift; sourceTree = "<group>"; };
 		7CD5A5412B429E6600343F9F /* EditProfileTechStackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTechStackCell.swift; sourceTree = "<group>"; };
+		7CD834A62B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDocumentPickerControllerDelegateProxy.swift; sourceTree = "<group>"; };
 		7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
 		7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
@@ -771,6 +773,7 @@
 			children = (
 				7B14DB242AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift */,
 				7CC0B6112B4A8E3C00C5323A /* RxPHPickerControllerDelegateProxy.swift */,
+				7CD834A62B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift */,
 			);
 			path = Proxies;
 			sourceTree = "<group>";
@@ -2832,6 +2835,7 @@
 				7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */,
 				7B2D770A2AAB0FDF00E5907B /* SignInViewModel.swift in Sources */,
 				7CA04F452B029B7C007B9191 /* RecruitFieldDetailViewController.swift in Sources */,
+				7CD834A72B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift in Sources */,
 				7C42701C2AA394EF009BE6AF /* UILabel+.swift in Sources */,
 				7BA36CB52A9D9828000DAB02 /* Endpoint.swift in Sources */,
 				7B93B3C42B36AF5000912202 /* FetchBookmarkedProjectsUseCase.swift in Sources */,
