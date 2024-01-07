@@ -14,10 +14,10 @@ import RxCocoa
 /// 모집인원을 선택하는 뷰
 final class AddLinkPopUpView: BridgeBasePopUpView {
     // MARK: - UI
-    private let textView: UITextView = {
+    private lazy var textView: UITextView = {
         let textView = UITextView()
         textView.flex.height(74)
-        textView.text = "URL형식으로 적어주세요."  // Placeholder
+        textView.text = textViewPlaceholder
         textView.font = BridgeFont.body2.font
         textView.textColor = BridgeColor.gray04
         textView.textContainerInset = UIEdgeInsets(top: 16, left: 12, bottom: 16, right: 12)
@@ -31,6 +31,8 @@ final class AddLinkPopUpView: BridgeBasePopUpView {
     // MARK: - Property
     override var containerHeight: CGFloat { 262 }
     override var dismissYPosition: CGFloat { 130 }
+    
+    private let textViewPlaceholder = "URL형식으로 적어주세요."
     
     private var linkURL = ""
     var addedLinkURL: Observable<String> {
@@ -77,7 +79,7 @@ final class AddLinkPopUpView: BridgeBasePopUpView {
         textView.rx.didBeginEditing
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                if owner.textView.text == "URL형식으로 적어주세요." {
+                if owner.textView.text == owner.textViewPlaceholder {
                     owner.textView.text = nil
                     owner.textView.textColor = BridgeColor.gray01
                 }
@@ -88,7 +90,7 @@ final class AddLinkPopUpView: BridgeBasePopUpView {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 if owner.textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    owner.textView.text = "URL형식으로 적어주세요."
+                    owner.textView.text = owner.textViewPlaceholder
                     owner.textView.textColor = BridgeColor.gray04
                 }
             })
@@ -101,7 +103,7 @@ final class AddLinkPopUpView: BridgeBasePopUpView {
             .subscribe(onNext: { owner, text in
                 owner.linkURL = text
                 // 텍스트가 비어있지 않고 && 플레이스홀더가 아닐 경우에만 활성화
-                owner.completeButton.isEnabled = !text.isEmpty && text != "URL형식으로 적어주세요."
+                owner.completeButton.isEnabled = !text.isEmpty && text != owner.textViewPlaceholder
             })
             .disposed(by: disposeBag)
         
@@ -139,7 +141,7 @@ final class AddLinkPopUpView: BridgeBasePopUpView {
     // MARK: - Hide
     override func show() {
         // 초기화
-        textView.text = "URL형식으로 적어주세요."
+        textView.text = textViewPlaceholder
         textView.textColor = BridgeColor.gray04
         super.show()
     }
