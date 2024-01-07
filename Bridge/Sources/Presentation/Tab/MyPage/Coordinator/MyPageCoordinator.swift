@@ -165,6 +165,10 @@ extension MyPageCoordinator {
     func showReferenceLink(with urlString: String) {
         // HTTP와 HTTPS URL만 처리할 수 있도록
         guard let url = URL(string: urlString), ["http", "https"].contains(url.scheme?.lowercased()) else {
+            showErrorAlert(configuration: ErrorAlertConfiguration(
+                title: "해당 링크를 열 수 없습니다.",
+                description: "URL 형식을 확인해주세요. ex) \"https://bridge.com\""
+            ))
             return
         }
         let safariViewController = SFSafariViewController(url: url)
