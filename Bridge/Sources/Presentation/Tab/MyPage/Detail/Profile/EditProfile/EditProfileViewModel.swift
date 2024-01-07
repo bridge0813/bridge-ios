@@ -5,12 +5,14 @@
 //  Created by 엄지호 on 1/1/24.
 //
 
+import UIKit
 import RxCocoa
 import RxSwift
 
 final class EditProfileViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
+        let selectedProfileImage: Observable<UIImage?>                     // 이미지 선택
         let addedFieldTechStack: Observable<FieldTechStack>                // 기술스택 추가
         let deletedFieldTechStack: Observable<IndexRow>                    // 기술스택 삭제
         let updatedFieldTechStack: Observable<(IndexRow, FieldTechStack)>  // 기술스택 수정
@@ -41,6 +43,15 @@ final class EditProfileViewModel: ViewModelType {
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         let profileRelay = BehaviorRelay<Profile>(value: profile)
+        
+        // 프로필 이미지 설정
+        input.selectedProfileImage
+            .withUnretained(self)
+            .subscribe(onNext: { owner, image in
+                owner.profile.updatedImage = image
+                profileRelay.accept(owner.profile)
+            })
+            .disposed(by: disposeBag)
         
         // 분야 및 기술 스택 추가
         input.addedFieldTechStack

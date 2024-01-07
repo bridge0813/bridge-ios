@@ -312,6 +312,7 @@
 		7CBDE2702B4004A000518AA9 /* FetchProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE26F2B4004A000518AA9 /* FetchProfileUseCase.swift */; };
 		7CC0B5FF2B47A8B600C5323A /* AddLinkPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC0B5FE2B47A8B600C5323A /* AddLinkPopUpView.swift */; };
 		7CC0B60E2B49AF1D00C5323A /* UpdateProfileRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC0B60D2B49AF1D00C5323A /* UpdateProfileRequestDTO.swift */; };
+		7CC0B6122B4A8E3C00C5323A /* RxPHPickerControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC0B6112B4A8E3C00C5323A /* RxPHPickerControllerDelegateProxy.swift */; };
 		7CC719E42B27117800CFA827 /* DeleteProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */; };
 		7CC719E82B276B8300CFA827 /* ApplicantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */; };
 		7CC719EA2B276C2C00CFA827 /* ApplicantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */; };
@@ -633,6 +634,7 @@
 		7CBDE26F2B4004A000518AA9 /* FetchProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProfileUseCase.swift; sourceTree = "<group>"; };
 		7CC0B5FE2B47A8B600C5323A /* AddLinkPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkPopUpView.swift; sourceTree = "<group>"; };
 		7CC0B60D2B49AF1D00C5323A /* UpdateProfileRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileRequestDTO.swift; sourceTree = "<group>"; };
+		7CC0B6112B4A8E3C00C5323A /* RxPHPickerControllerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxPHPickerControllerDelegateProxy.swift; sourceTree = "<group>"; };
 		7CC719E32B27117800CFA827 /* DeleteProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProjectUseCase.swift; sourceTree = "<group>"; };
 		7CC719E72B276B8300CFA827 /* ApplicantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewController.swift; sourceTree = "<group>"; };
 		7CC719E92B276C2C00CFA827 /* ApplicantListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantListViewModel.swift; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 			isa = PBXGroup;
 			children = (
 				7B14DB242AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift */,
+				7CC0B6112B4A8E3C00C5323A /* RxPHPickerControllerDelegateProxy.swift */,
 			);
 			path = Proxies;
 			sourceTree = "<group>";
@@ -2783,6 +2786,7 @@
 				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
 				7CBDE2602B3E9FCE00518AA9 /* ReferenceLinkCell.swift in Sources */,
 				7CC719FC2B2848EC00CFA827 /* AcceptApplicantUseCase.swift in Sources */,
+				7CC0B6122B4A8E3C00C5323A /* RxPHPickerControllerDelegateProxy.swift in Sources */,
 				7C569D032A9F72320063D362 /* ProjectPreviewResponseDTO.swift in Sources */,
 				7CA04F2E2B01F9AE007B9191 /* TotalRecruitNumberHeaderView.swift in Sources */,
 				7C55E64E2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift in Sources */,

@@ -8,6 +8,7 @@
 import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
+import PhotosUI
 import FlexLayout
 import PinLayout
 import RxCocoa
@@ -34,8 +35,10 @@ final class EditProfileViewController: BaseViewController {
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.flex.size(92)
+        imageView.layer.cornerRadius = 92 / 2
+        imageView.clipsToBounds = true
         imageView.image = UIImage(named: "profile.medium")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -49,6 +52,12 @@ final class EditProfileViewController: BaseViewController {
         button.backgroundColor = BridgeColor.gray04
         button.tintColor = BridgeColor.gray10
         return button
+    }()
+    private let imagePicker: PHPickerViewController = {
+        var config = PHPickerConfiguration()
+        config.filter = .images
+        let imagePicker = PHPickerViewController(configuration: config)
+        return imagePicker
     }()
     
     private let nameTitleLabel: UILabel = {
@@ -257,7 +266,8 @@ final class EditProfileViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = EditProfileViewModel.Input(
-            addedFieldTechStack: fieldTechStackPickerView.selectedFieldTechStack, 
+            selectedProfileImage: imagePicker.rx.didFinishPicking, 
+            addedFieldTechStack: fieldTechStackPickerView.selectedFieldTechStack,
             deletedFieldTechStack: editTechStackView.deletedFieldTechStack,
             updatedFieldTechStack: editTechStackView.updatedFieldTechStack, 
             addedLinkURL: addLinkPopUpView.addedLinkURL, 
@@ -300,6 +310,13 @@ final class EditProfileViewController: BaseViewController {
                 self.present(documentPicker, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
+        
+        addProfileImageButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.present(owner.imagePicker, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -307,9 +324,15 @@ extension EditProfileViewController {
     private func configure(with profile: Profile) {
         // 프로필 이미지 설정
         if let imageURL = profile.imageURL {
-            // TODO: - 이미지 설정
+            if let profileImage = profile.updatedImage {
+                profileImageView.image = profileImage.resize(to: CGSize(width: 92, height: 92))
+            } else {
+                // URL을 가지고 이미지 설정.
+            }
         } else {
-            
+            if let profileImage = profile.updatedImage {
+                profileImageView.image = profileImage.resize(to: CGSize(width: 92, height: 92))
+            }
         }
         
         // 이름 설정

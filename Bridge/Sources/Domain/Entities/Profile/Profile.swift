@@ -5,7 +5,10 @@
 //  Created by 엄지호 on 12/27/23.
 //
 
+import UIKit
+
 struct Profile {
+    var updatedImage: UIImage?  // 유저가 수정한 프로필 이미지
     let imageURL: String?
     let name: String
     let introduction: String?
@@ -30,6 +33,7 @@ struct ReferenceFile {
 
 extension Profile {
     static let onError = Profile(
+        updatedImage: nil, 
         imageURL: nil,
         name: "Error",
         introduction: nil,
