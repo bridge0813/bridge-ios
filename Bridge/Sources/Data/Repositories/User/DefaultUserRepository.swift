@@ -69,7 +69,7 @@ extension DefaultUserRepository {
         // 분야 및 스택 DTO
         let fieldTechStacksDTO = profile.fieldTechStacks.map { fieldTechStack -> FieldTechStackDTO in
             FieldTechStackDTO(
-                field: convertFieldName(field: fieldTechStack.field),
+                field: fieldTechStack.field.convertToUpperCaseFormat(),
                 techStacks: fieldTechStack.techStacks.map { stack in
                     // 서버측 워딩에 맞게 수정. 대문자 처리 및 띄어쓰기 제거
                     if stack == "C++" { return "CPP" }
@@ -87,19 +87,5 @@ extension DefaultUserRepository {
             links: profile.links,
             files: profile.files.map { $0.fileData ?? Data() }
         )
-    }
-    
-    private func convertFieldName(field: String) -> String {
-        switch field {
-        case "iOS": return "IOS"
-        case "안드로이드": return "ANDROID"
-        case "프론트엔드": return "FRONTEND"
-        case "백엔드": return "BACKEND"
-        case "UI/UX": return "UIUX"
-        case "BI/BX": return "BIBX"
-        case "영상/모션": return "VIDEOMOTION"
-        case "PM": return "PM"
-        default: return "Error"
-        }
     }
 }

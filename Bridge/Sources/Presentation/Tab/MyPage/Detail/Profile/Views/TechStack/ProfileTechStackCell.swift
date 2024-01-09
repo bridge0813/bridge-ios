@@ -62,7 +62,7 @@ final class ProfileTechStackCell: BaseTableViewCell {
 // MARK: - Configuration
 extension ProfileTechStackCell {
     func configure(with fieldTeckStack: FieldTechStack) {
-        let category = mapFieldToCategory(field: fieldTeckStack.field)
+        let category = fieldTeckStack.field.categoryForField()
         let field = fieldTeckStack.field
         
         // 속성 정의
@@ -88,19 +88,5 @@ extension ProfileTechStackCell {
         }
         self.tags = tags
         configureLayout()
-    }
-    
-    private func mapFieldToCategory(field: String) -> String {
-        switch field {
-        case "iOS": return "개발자"
-        case "안드로이드": return "개발자"
-        case "프론트엔드": return "개발자"
-        case "백엔드": return "개발자"
-        case "UI/UX": return "디자이너"
-        case "BI/BX": return "디자이너"
-        case "영상/모션": return "디자이너"
-        case "PM": return "기획자"
-        default: return "Error"
-        }
     }
 }

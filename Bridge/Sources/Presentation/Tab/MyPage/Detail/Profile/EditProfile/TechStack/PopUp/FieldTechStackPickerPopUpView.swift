@@ -138,7 +138,7 @@ final class FieldTechStackPickerPopUpView: BridgeBasePopUpView {
         setFieldView.fieldTagButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, field in
-                let fieldName = owner.convertFieldToDisplayName(field: field)
+                let fieldName = field.convertToDisplayFormat()
                 
                 owner.fieldTechStack.field = fieldName  // 선택한 분야 저장
                 owner.fieldTechStack.techStacks = []    // 기술스택 초기화
@@ -238,20 +238,7 @@ extension FieldTechStackPickerPopUpView {
         })
     }
     
-    /// 유저에게 보여주는 이름으로 전환
-    private func convertFieldToDisplayName(field: String) -> String {
-        switch field {
-        case "IOS": return "iOS"
-        case "ANDROID": return "안드로이드"
-        case "FRONTEND": return "프론트엔드"
-        case "BACKEND": return "백엔드"
-        case "UIUX": return "UI/UX"
-        case "BIBX": return "BI/BX"
-        case "VIDEOMOTION": return "영상/모션"
-        case "PM": return "PM"
-        default: return "Error"
-        }
-    }
+    
 }
 
 // MARK: - CompositionalLayout
