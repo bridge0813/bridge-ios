@@ -54,7 +54,12 @@ extension RxDocumentPickerControllerDelegateProxy: UIDocumentPickerDelegate {
         DispatchQueue.global().async { [weak self] in
             do {
                 let fileData = try Data(contentsOf: selectedFileURL)
-                let file = ReferenceFile(url: selectedFileURL.absoluteString, fileName: fileName, fileData: fileData)
+                let file = ReferenceFile(
+                    url: selectedFileURL.absoluteString,
+                    name: fileName,
+                    identifier: nil,
+                    data: fileData
+                )
                 self?.didFinishPicking.onNext(.success(file))
                 
             } catch {

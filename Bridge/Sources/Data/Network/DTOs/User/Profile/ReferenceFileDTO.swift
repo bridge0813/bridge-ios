@@ -8,10 +8,11 @@
 struct ReferenceFileDTO: Codable {
     let url: String
     let fileName: String
+    let identifier: String  // 파일 식별자
 }
 
 extension ReferenceFileDTO {
     func toEntity() -> ReferenceFile {
-        ReferenceFile(url: url, fileName: fileName, fileData: nil)
+        ReferenceFile(url: url, name: fileName, identifier: identifier, data: nil)
     }
 }

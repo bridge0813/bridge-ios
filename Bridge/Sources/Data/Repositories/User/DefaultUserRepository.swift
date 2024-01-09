@@ -78,6 +78,12 @@ extension DefaultUserRepository {
             )
         }
         
+        // 식별자가 없는 파일은 기존에 존재하던 파일
+        let originalFiles = profile.files.filter { $0.identifier != nil }.compactMap { $0.identifier }
+        
+        // 데이터가 있는 파일은 새롭게 추가한 파일
+        let newFiles = profile.files.filter { $0.data != nil }.compactMap { $0.data }
+        
         return UpdateProfileRequestDTO(
             imageData: profile.updatedImage?.jpegData(compressionQuality: 1),
             name: profile.name,
@@ -85,7 +91,8 @@ extension DefaultUserRepository {
             fieldTechStacks: fieldTechStacksDTO,
             carrer: profile.carrer,
             links: profile.links,
-            files: profile.files.map { $0.fileData ?? Data() }
+            originalFiles: originalFiles,
+            newfiles: newFiles
         )
     }
 }

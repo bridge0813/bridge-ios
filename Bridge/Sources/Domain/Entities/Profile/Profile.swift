@@ -28,8 +28,9 @@ struct FieldTechStack {
 /// 첨부 파일
 struct ReferenceFile {
     let url: String
-    let fileName: String
-    var fileData: Data?
+    let name: String
+    let identifier: String?
+    var data: Data?
 }
 
 extension Profile {

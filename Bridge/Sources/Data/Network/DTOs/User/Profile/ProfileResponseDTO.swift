@@ -58,6 +58,6 @@ extension ProfileResponseDTO {
         ],
         carrer: "취준생",
         links: ["https://bridge.naver.comㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", "https://bridge.naver.com", "https://bridge.naver.com"],
-        files: [ReferenceFileDTO(url: "", fileName: "개인 작업물.pdf")]
+        files: [ReferenceFileDTO(url: "", fileName: "개인 작업물.pdf", identifier: "")]
     )
 }
