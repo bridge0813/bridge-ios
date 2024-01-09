@@ -339,6 +339,7 @@
 		7CD5A53D2B429A4F00343F9F /* EditProfileTechStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD5A53C2B429A4F00343F9F /* EditProfileTechStackView.swift */; };
 		7CD5A5422B429E6600343F9F /* EditProfileTechStackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD5A5412B429E6600343F9F /* EditProfileTechStackCell.swift */; };
 		7CD834A72B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834A62B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift */; };
+		7CD834A92B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834A82B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift */; };
 		7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */; };
 		7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */; };
 		7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */; };
@@ -662,6 +663,7 @@
 		7CD5A53C2B429A4F00343F9F /* EditProfileTechStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTechStackView.swift; sourceTree = "<group>"; };
 		7CD5A5412B429E6600343F9F /* EditProfileTechStackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTechStackCell.swift; sourceTree = "<group>"; };
 		7CD834A62B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDocumentPickerControllerDelegateProxy.swift; sourceTree = "<group>"; };
+		7CD834A82B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDocumentInteractionControllerDelegateProxy.swift; sourceTree = "<group>"; };
 		7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
 		7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
@@ -774,6 +776,7 @@
 				7B14DB242AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift */,
 				7CC0B6112B4A8E3C00C5323A /* RxPHPickerControllerDelegateProxy.swift */,
 				7CD834A62B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift */,
+				7CD834A82B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift */,
 			);
 			path = Proxies;
 			sourceTree = "<group>";
@@ -2795,6 +2798,7 @@
 				7C55E64E2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift in Sources */,
 				7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */,
 				7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */,
+				7CD834A92B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift in Sources */,
 				7BA5336B2B0EED5E00E69BFB /* ObserveMessageUseCase.swift in Sources */,
 				7C55E64A2AE44B5F0018FA5D /* HotProjectCell.swift in Sources */,
 				7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */,

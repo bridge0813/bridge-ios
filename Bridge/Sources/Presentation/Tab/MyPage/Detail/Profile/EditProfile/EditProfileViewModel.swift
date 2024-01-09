@@ -12,15 +12,16 @@ import RxSwift
 final class EditProfileViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
-        let selectedProfileImage: Observable<UIImage?>                            // 이미지 선택
+        let addedProfileImage: Observable<UIImage?>                               // 이미지 추가
         let addedFieldTechStack: Observable<FieldTechStack>                       // 기술스택 추가
         let deletedFieldTechStack: Observable<IndexRow>                           // 기술스택 삭제
         let updatedFieldTechStack: Observable<(IndexRow, FieldTechStack)>         // 기술스택 수정
         let addedLinkURL: Observable<String>                                      // 링크 추가
         let deletedLinkURL: Observable<IndexRow>                                  // 링크 삭제
         let selectedLinkURL: Observable<String>                                   // 링크 이동
-        let selectedFile: Observable<Result<ReferenceFile, FileProcessingError>>  // 파일 추가
+        let addedFile: Observable<Result<ReferenceFile, FileProcessingError>>     // 파일 추가
         let deletedFile: Observable<IndexRow>                                     // 파일 삭제
+        let selectedFile: Observable<ReferenceFile>                               // 파일 이동
     }
     
     struct Output {
@@ -47,7 +48,7 @@ final class EditProfileViewModel: ViewModelType {
         let profileRelay = BehaviorRelay<Profile>(value: profile)
         
         // 프로필 이미지 설정
-        input.selectedProfileImage
+        input.addedProfileImage
             .withUnretained(self)
             .subscribe(onNext: { owner, image in
                 owner.profile.updatedImage = image
@@ -110,8 +111,8 @@ final class EditProfileViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         // 파일 추가
-        input.selectedFile
-            .observe(on: MainScheduler.instance)
+        input.addedFile
+            .observe(on: MainScheduler.asyncInstance)
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 switch result {
@@ -136,6 +137,7 @@ final class EditProfileViewModel: ViewModelType {
                 profileRelay.accept(owner.profile)
             })
             .disposed(by: disposeBag)
+        
         
         return Output(
             profile: profileRelay.asDriver(onErrorJustReturn: .onError)

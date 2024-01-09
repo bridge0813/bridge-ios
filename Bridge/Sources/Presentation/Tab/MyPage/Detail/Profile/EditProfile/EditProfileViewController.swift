@@ -37,7 +37,6 @@ final class EditProfileViewController: BaseViewController {
         imageView.flex.size(92)
         imageView.layer.cornerRadius = 92 / 2
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "profile.medium")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -159,6 +158,7 @@ final class EditProfileViewController: BaseViewController {
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: documentTypes)
         return documentPicker
     }()
+    private var documentInteraction: UIDocumentInteractionController?
     
     // MARK: - Property
     private let viewModel: EditProfileViewModel
@@ -271,15 +271,16 @@ final class EditProfileViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = EditProfileViewModel.Input(
-            selectedProfileImage: imagePicker.rx.didFinishPicking, 
+            addedProfileImage: imagePicker.rx.didFinishPicking, 
             addedFieldTechStack: fieldTechStackPickerView.selectedFieldTechStack,
             deletedFieldTechStack: editTechStackView.deletedFieldTechStack,
             updatedFieldTechStack: editTechStackView.updatedFieldTechStack, 
             addedLinkURL: addLinkPopUpView.addedLinkURL, 
             deletedLinkURL: editLinkView.deletedLinkURL, 
             selectedLinkURL: editLinkView.selectedLinkURL,
-            selectedFile: documentPicker.rx.didFinishPicking,
-            deletedFile: editFileView.deletedFile
+            addedFile: documentPicker.rx.didFinishPicking,
+            deletedFile: editFileView.deletedFile, 
+            selectedFile: editFileView.selectedFile
         )
         let output = viewModel.transform(input: input)
         
@@ -307,6 +308,7 @@ final class EditProfileViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        // Show - 파일 추가 뷰
         addFileButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
@@ -314,10 +316,26 @@ final class EditProfileViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        // Show - 이미지 추가 뷰
         addProfileImageButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.present(owner.imagePicker, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        // Show - 파일 보여주기
+        editFileView.selectedFile
+            .withUnretained(self)
+            .subscribe(onNext: { owner, file in
+                guard let url = URL(string: file.url) else {
+                    print("Invalid URL string")
+                    return
+                }
+                
+                owner.documentInteraction = UIDocumentInteractionController(url: url)
+                owner.documentInteraction?.rx.setPreviewController(owner)
+                owner.documentInteraction?.presentPreview(animated: true)
             })
             .disposed(by: disposeBag)
     }
@@ -325,17 +343,14 @@ final class EditProfileViewController: BaseViewController {
 
 extension EditProfileViewController {
     private func configure(with profile: Profile) {
-        // 프로필 이미지 설정
-        if let imageURL = profile.imageURL {
-            // 유저가 선택한 이미지가 있다면 설정
-            if let profileImage = profile.updatedImage {
-                profileImageView.image = profileImage.resize(to: CGSize(width: 92, height: 92))
-            } else {
-                // URL을 가지고 이미지 설정.
-            }
+        // 유저가 선택(수정)한 이미지가 있다면 설정
+        if let profileImage = profile.updatedImage {
+            profileImageView.image = profileImage.resize(to: CGSize(width: 92, height: 92))
         } else {
-            if let profileImage = profile.updatedImage {
-                profileImageView.image = profileImage.resize(to: CGSize(width: 92, height: 92))
+            if let imageURL = profile.imageURL {
+                // URL을 가지고 이미지 설정
+            } else {
+                profileImageView.image = UIImage(named: "profile.medium")  // 기본 설정
             }
         }
         
