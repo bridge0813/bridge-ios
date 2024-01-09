@@ -17,6 +17,10 @@ final class MockUserRepository: UserRepository {
 //        .error(NetworkError.statusCode(401))
     }
     
+    func updateProfile(_ profile: Profile) -> Observable<Void> {
+        .just(())
+    }
+    
     func changeField(selectedFields: [String]) -> Observable<Void> {
         .just(())
     }

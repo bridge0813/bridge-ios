@@ -340,6 +340,7 @@
 		7CD5A5422B429E6600343F9F /* EditProfileTechStackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD5A5412B429E6600343F9F /* EditProfileTechStackCell.swift */; };
 		7CD834A72B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834A62B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift */; };
 		7CD834A92B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834A82B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift */; };
+		7CD834AB2B4D34AE00F3EED7 /* UpdateProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834AA2B4D34AE00F3EED7 /* UpdateProfileUseCase.swift */; };
 		7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */; };
 		7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */; };
 		7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */; };
@@ -664,6 +665,7 @@
 		7CD5A5412B429E6600343F9F /* EditProfileTechStackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTechStackCell.swift; sourceTree = "<group>"; };
 		7CD834A62B4AF6FC00F3EED7 /* RxDocumentPickerControllerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDocumentPickerControllerDelegateProxy.swift; sourceTree = "<group>"; };
 		7CD834A82B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDocumentInteractionControllerDelegateProxy.swift; sourceTree = "<group>"; };
+		7CD834AA2B4D34AE00F3EED7 /* UpdateProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileUseCase.swift; sourceTree = "<group>"; };
 		7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
 		7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
@@ -1771,6 +1773,7 @@
 			children = (
 				7CBDE26F2B4004A000518AA9 /* FetchProfileUseCase.swift */,
 				7C56E1642B11027000454F5E /* FetchProfilePreviewUseCase.swift */,
+				7CD834AA2B4D34AE00F3EED7 /* UpdateProfileUseCase.swift */,
 				7B93B3BD2B355A5C00912202 /* ChangeFieldUseCase.swift */,
 				7B93B3C32B36AF5000912202 /* FetchBookmarkedProjectsUseCase.swift */,
 			);
@@ -2616,6 +2619,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
+				7CD834AB2B4D34AE00F3EED7 /* UpdateProfileUseCase.swift in Sources */,
 				7B93B3B72B353B1100912202 /* AlertEndpoint.swift in Sources */,
 				7CA04F212AFE772C007B9191 /* BaseLabel.swift in Sources */,
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,

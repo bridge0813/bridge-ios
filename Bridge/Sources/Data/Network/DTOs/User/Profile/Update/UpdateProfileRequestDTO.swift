@@ -5,17 +5,19 @@
 //  Created by 엄지호 on 1/7/24.
 //
 
+import Foundation
+
 struct UpdateProfileRequestDTO: Encodable {
-    let imageURL: String?
+    let imageData: Data?
     let name: String
     let introduction: String?
     let fieldTechStacks: [FieldTechStackDTO]
     let carrer: String?
     let links: [String]
-    let files: [ReferenceFileDTO]
+    let files: [Data]
     
     enum CodingKeys: String, CodingKey {
-        case imageURL = "profilePhotoURL"
+        case imageData = "photo"
         case name
         case introduction = "selfIntro"
         case fieldTechStacks = "stacks"
@@ -34,11 +36,11 @@ extension UpdateProfileRequestDTO {
         try container.encode(links, forKey: .links)
         try container.encode(files, forKey: .files)
         
-        // imageURL
-        if let imageURL {
-            try container.encode(imageURL, forKey: .imageURL)
+        // imageData
+        if let imageData {
+            try container.encode(imageData, forKey: .imageData)
         } else {
-            try container.encodeNil(forKey: .imageURL)
+            try container.encodeNil(forKey: .imageData)
         }
         
         // introduction
