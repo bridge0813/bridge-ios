@@ -13,6 +13,9 @@ final class EditProfileViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let addedProfileImage: Observable<UIImage?>                               // 이미지 추가
+        let nameChanged: Observable<String>                                       // 이름 변경
+        let selectedCarrer: Observable<String>                                    // 경력 선택
+        let introductionChanged: Observable<String>                               // 소개 변경
         let addedFieldTechStack: Observable<FieldTechStack>                       // 기술스택 추가
         let deletedFieldTechStack: Observable<IndexRow>                           // 기술스택 삭제
         let updatedFieldTechStack: Observable<(IndexRow, FieldTechStack)>         // 기술스택 수정
@@ -22,6 +25,8 @@ final class EditProfileViewModel: ViewModelType {
         let addedFile: Observable<Result<ReferenceFile, FileProcessingError>>     // 파일 추가
         let deletedFile: Observable<IndexRow>                                     // 파일 삭제
         let selectedFile: Observable<ReferenceFile>                               // 파일 이동
+        
+        let completeButtonTapped: Observable<Void>                                // 수정 완료
     }
     
     struct Output {
@@ -53,6 +58,31 @@ final class EditProfileViewModel: ViewModelType {
             .subscribe(onNext: { owner, image in
                 owner.profile.updatedImage = image
                 profileRelay.accept(owner.profile)
+            })
+            .disposed(by: disposeBag)
+        
+        // 이름 설정
+        input.nameChanged
+            .withUnretained(self)
+            .subscribe(onNext: { owner, text in
+                owner.profile.name = text
+            })
+            .disposed(by: disposeBag)
+        
+        // 직업 설정
+        input.selectedCarrer
+            .withUnretained(self)
+            .subscribe(onNext: { owner, carrer in
+                owner.profile.carrer = carrer
+                profileRelay.accept(owner.profile)
+            })
+            .disposed(by: disposeBag)
+        
+        // 소개 설정
+        input.introductionChanged
+            .withUnretained(self)
+            .subscribe(onNext: { owner, text in
+                owner.profile.introduction = text
             })
             .disposed(by: disposeBag)
         
@@ -138,6 +168,13 @@ final class EditProfileViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 수정 완료
+        input.completeButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                // 요청
+            })
+            .disposed(by: disposeBag)
         
         return Output(
             profile: profileRelay.asDriver(onErrorJustReturn: .onError)

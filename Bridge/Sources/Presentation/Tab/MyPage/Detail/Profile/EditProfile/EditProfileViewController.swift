@@ -271,7 +271,12 @@ final class EditProfileViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = EditProfileViewModel.Input(
-            addedProfileImage: imagePicker.rx.didFinishPicking, 
+            addedProfileImage: imagePicker.rx.didFinishPicking,
+            nameChanged: nameTextField.rx.controlEvent(.editingDidEnd)
+                .withLatestFrom(nameTextField.rx.text.orEmpty)
+                .distinctUntilChanged(),
+            selectedCarrer: carrerButtonTapped,
+            introductionChanged: introductionTextView.resultText,
             addedFieldTechStack: fieldTechStackPickerView.selectedFieldTechStack,
             deletedFieldTechStack: editTechStackView.deletedFieldTechStack,
             updatedFieldTechStack: editTechStackView.updatedFieldTechStack, 
@@ -280,7 +285,8 @@ final class EditProfileViewController: BaseViewController {
             selectedLinkURL: editLinkView.selectedLinkURL,
             addedFile: documentPicker.rx.didFinishPicking,
             deletedFile: editFileView.deletedFile, 
-            selectedFile: editFileView.selectedFile
+            selectedFile: editFileView.selectedFile, 
+            completeButtonTapped: completeButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
         
@@ -359,6 +365,10 @@ extension EditProfileViewController {
         
         // 직업 설정
         if let carrer = profile.carrer {
+            // 선택해제
+            let carrerButtons = [studentButton, jobSeekerButton, currentEmployeeButton]
+            carrerButtons.forEach { $0.isSelected = false }
+            
             switch carrer {
             case "학생": studentButton.isSelected = true
             case "취준생": jobSeekerButton.isSelected = true
@@ -386,5 +396,16 @@ extension EditProfileViewController {
         
         contentContainer.flex.markDirty()
         view.setNeedsLayout()
+    }
+}
+
+// MARK: - Observable
+extension EditProfileViewController {
+    private var carrerButtonTapped: Observable<String> {
+        Observable.merge(
+            studentButton.rx.tap.map { "학생" },
+            jobSeekerButton.rx.tap.map { "취준생" },
+            currentEmployeeButton.rx.tap.map { "현직자" }
+        )
     }
 }

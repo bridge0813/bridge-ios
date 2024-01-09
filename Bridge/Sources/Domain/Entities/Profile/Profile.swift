@@ -10,11 +10,11 @@ import UIKit
 struct Profile {
     var updatedImage: UIImage?  // 유저가 수정한 프로필 이미지
     let imageURL: String?
-    let name: String
-    let introduction: String?
+    var name: String
+    var introduction: String?
     let fields: [String]
     var fieldTechStacks: [FieldTechStack]
-    let carrer: String?
+    var carrer: String?
     var links: [String]
     var files: [ReferenceFile]
 }
