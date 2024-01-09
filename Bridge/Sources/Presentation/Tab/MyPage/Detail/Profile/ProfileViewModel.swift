@@ -13,6 +13,8 @@ final class ProfileViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>
         let editProfileButtonTapped: ControlEvent<Void>
+        let selectedLinkURL: Observable<String>      // 링크 이동
+        let selectedFile: Observable<ReferenceFile>  // 파일 이동
     }
     
     struct Output {
@@ -60,11 +62,19 @@ final class ProfileViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        
+        // 프로필 수정 이동
         input.editProfileButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.showEditProfileViewController(with: profile.value)
+            })
+            .disposed(by: disposeBag)
+        
+        // 링크 이동
+        input.selectedLinkURL
+            .withUnretained(self)
+            .subscribe(onNext: { owner, url in
+                owner.coordinator?.showReferenceLink(with: url)
             })
             .disposed(by: disposeBag)
         

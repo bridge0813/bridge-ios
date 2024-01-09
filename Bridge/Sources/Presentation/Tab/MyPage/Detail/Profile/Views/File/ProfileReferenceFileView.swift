@@ -60,6 +60,10 @@ final class ProfileReferenceFileView: BaseView {
         }
     }
     
+    var selectedFile: Observable<ReferenceFile> {
+        tableView.rx.modelSelected(ReferenceFile.self).asObservable()
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)

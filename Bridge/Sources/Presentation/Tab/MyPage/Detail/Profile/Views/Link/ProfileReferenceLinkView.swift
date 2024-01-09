@@ -60,6 +60,10 @@ final class ProfileReferenceLinkView: BaseView {
         }
     }
     
+    var selectedLinkURL: Observable<String> {
+        tableView.rx.modelSelected(String.self).asObservable()
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)

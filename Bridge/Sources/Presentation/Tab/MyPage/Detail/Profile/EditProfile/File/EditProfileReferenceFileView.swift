@@ -61,9 +61,6 @@ final class EditProfileReferenceFileView: BaseView {
     }
     
     let deletedFile = PublishSubject<IndexRow>()
-    var selectedFile: Observable<ReferenceFile> {
-        tableView.rx.modelSelected(ReferenceFile.self).asObservable()
-    }
     
     // MARK: - Layout
     override func configureLayouts() {

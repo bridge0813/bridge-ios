@@ -158,7 +158,6 @@ final class EditProfileViewController: BaseViewController {
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: documentTypes)
         return documentPicker
     }()
-    private var documentInteraction: UIDocumentInteractionController?
     
     // MARK: - Property
     private let viewModel: EditProfileViewModel
@@ -281,11 +280,9 @@ final class EditProfileViewController: BaseViewController {
             deletedFieldTechStack: editTechStackView.deletedFieldTechStack,
             updatedFieldTechStack: editTechStackView.updatedFieldTechStack, 
             addedLinkURL: addLinkPopUpView.addedLinkURL, 
-            deletedLinkURL: editLinkView.deletedLinkURL, 
-            selectedLinkURL: editLinkView.selectedLinkURL,
+            deletedLinkURL: editLinkView.deletedLinkURL,
             addedFile: documentPicker.rx.didFinishPicking,
-            deletedFile: editFileView.deletedFile, 
-            selectedFile: editFileView.selectedFile, 
+            deletedFile: editFileView.deletedFile,
             completeButtonTapped: completeButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
@@ -327,21 +324,6 @@ final class EditProfileViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.present(owner.imagePicker, animated: true)
-            })
-            .disposed(by: disposeBag)
-        
-        // Show - 파일 보여주기
-        editFileView.selectedFile
-            .withUnretained(self)
-            .subscribe(onNext: { owner, file in
-                guard let url = URL(string: file.url) else {
-                    print("Invalid URL string")
-                    return
-                }
-                
-                owner.documentInteraction = UIDocumentInteractionController(url: url)
-                owner.documentInteraction?.rx.setPreviewController(owner)
-                owner.documentInteraction?.presentPreview(animated: true)
             })
             .disposed(by: disposeBag)
     }

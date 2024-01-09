@@ -133,6 +133,7 @@ final class ProfileViewController: BaseViewController {
         return label
     }()
     private let fileView = ProfileReferenceFileView()
+    private var documentInteraction: UIDocumentInteractionController?
     
     // MARK: - Property
     private let viewModel: ProfileViewModel
@@ -212,7 +213,9 @@ final class ProfileViewController: BaseViewController {
     override func bind() {
         let input = ProfileViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            editProfileButtonTapped: editProfileButton.rx.tap
+            editProfileButtonTapped: editProfileButton.rx.tap,
+            selectedLinkURL: linkView.selectedLinkURL,
+            selectedFile: fileView.selectedFile
         )
         let output = viewModel.transform(input: input)
         
@@ -221,6 +224,21 @@ final class ProfileViewController: BaseViewController {
             .drive(onNext: { [weak self] profile in
                 guard let self else { return }
                 self.configure(with: profile)
+            })
+            .disposed(by: disposeBag)
+        
+        // TODO: - 처리 생각
+        fileView.selectedFile
+            .withUnretained(self)
+            .subscribe(onNext: { owner, file in
+                guard let url = URL(string: file.url) else {
+                    print("Invalid URL string")
+                    return
+                }
+
+                owner.documentInteraction = UIDocumentInteractionController(url: url)
+                owner.documentInteraction?.rx.setPreviewController(owner)
+                owner.documentInteraction?.presentPreview(animated: true)
             })
             .disposed(by: disposeBag)
     }
