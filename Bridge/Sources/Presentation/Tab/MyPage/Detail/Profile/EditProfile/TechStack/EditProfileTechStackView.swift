@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 프로필 수정에서 유저의 기술 스택을 수정하는 뷰
-final class EditProfileTechStackView: BaseListView {
+final class EditProfileTechStackListView: BaseListView {
     // MARK: - UI
     private let fieldTechStackPickerView = FieldTechStackPickerPopUpView()  // 수정용
     

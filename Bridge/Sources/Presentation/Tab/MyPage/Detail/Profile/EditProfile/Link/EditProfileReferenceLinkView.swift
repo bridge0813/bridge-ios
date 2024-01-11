@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 프로필 수정에서 참고 링크를 수정하는  뷰
-final class EditProfileReferenceLinkView: BaseListView {
+final class EditProfileLinkListView: BaseListView {
     // MARK: - Property
     private let linksUpdated = PublishSubject<[String]>()
     

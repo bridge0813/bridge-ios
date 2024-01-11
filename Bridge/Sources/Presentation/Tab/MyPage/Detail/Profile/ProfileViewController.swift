@@ -112,7 +112,7 @@ final class ProfileViewController: BaseViewController {
         return label
     }()
     
-    private let techStackView = ProfileTechStackView()
+    private let techStackView = ProfileTechStackListView()
     
     private let linkTitleLabel: UILabel = {
         let label = UILabel()
@@ -122,7 +122,7 @@ final class ProfileViewController: BaseViewController {
         label.font = BridgeFont.subtitle2.font
         return label
     }()
-    private let linkView = ProfileReferenceLinkView()
+    private let linkListView = ProfileLinkListView()
     
     private let fileTitleLabel: UILabel = {
         let label = UILabel()
@@ -132,7 +132,7 @@ final class ProfileViewController: BaseViewController {
         label.font = BridgeFont.subtitle2.font
         return label
     }()
-    private let fileView = ProfileReferenceFileView()
+    private let fileListView = ProfileFileListView()
     private var documentInteraction: UIDocumentInteractionController?
     
     // MARK: - Property
@@ -190,10 +190,10 @@ final class ProfileViewController: BaseViewController {
                 flex.addItem(techStackView).marginTop(14)
                 
                 flex.addItem(linkTitleLabel).marginTop(24)
-                flex.addItem(linkView).marginTop(14)
+                flex.addItem(linkListView).marginTop(14)
                 
                 flex.addItem(fileTitleLabel).marginTop(24)
-                flex.addItem(fileView).marginTop(14)
+                flex.addItem(fileListView).marginTop(14)
                 
                 flex.addItem().height(50)
             }
@@ -214,8 +214,8 @@ final class ProfileViewController: BaseViewController {
         let input = ProfileViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             editProfileButtonTapped: editProfileButton.rx.tap,
-            selectedLinkURL: linkView.selectedLinkURL,
-            selectedFile: fileView.selectedFile
+            selectedLinkURL: linkListView.selectedLinkURL,
+            selectedFile: fileListView.selectedFile
         )
         let output = viewModel.transform(input: input)
         
@@ -227,7 +227,7 @@ final class ProfileViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         // TODO: - 처리 생각
-        fileView.selectedFile
+        fileListView.selectedFile
             .withUnretained(self)
             .subscribe(onNext: { owner, file in
                 guard let url = URL(string: file.url) else {
@@ -287,12 +287,12 @@ extension ProfileViewController {
         techStackView.flex.markDirty()
         
         // 참고링크 설정
-        linkView.links = profile.links
-        linkView.flex.markDirty()
+        linkListView.links = profile.links
+        linkListView.flex.markDirty()
         
         // 첨부파일 설정
-        fileView.files = profile.files
-        fileView.flex.markDirty()
+        fileListView.files = profile.files
+        fileListView.flex.markDirty()
         
         contentContainer.flex.markDirty()
         view.setNeedsLayout()

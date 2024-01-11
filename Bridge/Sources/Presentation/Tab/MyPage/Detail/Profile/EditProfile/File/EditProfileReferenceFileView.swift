@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 프로필 수정에서 첨부파일을 수정하는  뷰
-final class EditProfileReferenceFileView: BaseListView {
+final class EditProfileReferenceFileListView: BaseListView {
     // MARK: - Property
     private let filesUpdated = PublishSubject<[ReferenceFile]>()
     

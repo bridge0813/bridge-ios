@@ -129,7 +129,7 @@ class BaseProfileEditorViewController: BaseViewController {
     }()
     
     private let addTechStackButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
-    private let editTechStackView = EditProfileTechStackView()
+    private let editTechStackListView = EditProfileTechStackListView()
     private let fieldTechStackPickerView = FieldTechStackPickerPopUpView()
     
     private let linkTitleLabel: UILabel = {
@@ -141,7 +141,7 @@ class BaseProfileEditorViewController: BaseViewController {
         return label
     }()
     private let addLinkButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
-    private let editLinkView = EditProfileReferenceLinkView()
+    private let editLinkListView = EditProfileLinkListView()
     private let addLinkPopUpView = AddLinkPopUpView()
     
     private let fileTitleLabel: UILabel = {
@@ -153,7 +153,7 @@ class BaseProfileEditorViewController: BaseViewController {
         return label
     }()
     private let addFileButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
-    private let editFileView = EditProfileReferenceFileView()
+    private let editFileListView = EditProfileReferenceFileListView()
     private let documentPicker: UIDocumentPickerViewController = {
         let documentTypes = [UTType.pdf]
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: documentTypes)
@@ -201,7 +201,7 @@ class BaseProfileEditorViewController: BaseViewController {
                     flex.addItem(techStackTitleLabel)
                     flex.addItem(addTechStackButton)
                 }
-            flex.addItem(editTechStackView).marginTop(14)
+            flex.addItem(editTechStackListView).marginTop(14)
             
             flex.addItem().backgroundColor(BridgeColor.gray09).height(8).marginTop(24).marginHorizontal(-16)
             
@@ -214,7 +214,7 @@ class BaseProfileEditorViewController: BaseViewController {
                     flex.addItem(linkTitleLabel)
                     flex.addItem(addLinkButton)
                 }
-            flex.addItem(editLinkView).marginTop(14)
+            flex.addItem(editLinkListView).marginTop(14)
             
             flex.addItem()
                 .direction(.row)
@@ -225,7 +225,7 @@ class BaseProfileEditorViewController: BaseViewController {
                     flex.addItem(fileTitleLabel)
                     flex.addItem(addFileButton)
                 }
-            flex.addItem(editFileView).marginTop(14)
+            flex.addItem(editFileListView).marginTop(14)
             
             flex.addItem().height(50)
         }
@@ -313,16 +313,16 @@ extension BaseProfileEditorViewController {
         }
         
         // 기술스택 설정
-        editTechStackView.fieldTechStacks = profile.fieldTechStacks
-        editTechStackView.flex.markDirty()
+        editTechStackListView.fieldTechStacks = profile.fieldTechStacks
+        editTechStackListView.flex.markDirty()
         
         // 참고링크 설정
-        editLinkView.links = profile.links
-        editLinkView.flex.markDirty()
+        editLinkListView.links = profile.links
+        editLinkListView.flex.markDirty()
         
         // 첨부파일 설정
-        editFileView.files = profile.files
-        editFileView.flex.markDirty()
+        editFileListView.files = profile.files
+        editFileListView.flex.markDirty()
         
         contentContainer.flex.markDirty()
         view.setNeedsLayout()
@@ -364,12 +364,12 @@ extension BaseProfileEditorViewController {
     
     /// 기술스택 삭제
     var deletedFieldTechStack: Observable<IndexRow> {
-        return editTechStackView.deletedFieldTechStack
+        return editTechStackListView.deletedFieldTechStack
     }
     
     /// 기술스택 수정
     var updatedFieldTechStack: Observable<(IndexRow, FieldTechStack)> {
-        return editTechStackView.updatedFieldTechStack
+        return editTechStackListView.updatedFieldTechStack
     }
     
     /// 링크 추가
@@ -379,7 +379,7 @@ extension BaseProfileEditorViewController {
     
     /// 링크 삭제
     var deletedLinkURL: Observable<IndexRow> {
-        return editLinkView.deletedLinkURL
+        return editLinkListView.deletedLinkURL
     }
     
     /// 파일 추가
@@ -389,7 +389,7 @@ extension BaseProfileEditorViewController {
     
     /// 파일 삭제
     var deletedFile: Observable<IndexRow> {
-        return editFileView.deletedFile
+        return editFileListView.deletedFile
     }
     
     /// 완료 버튼 탭

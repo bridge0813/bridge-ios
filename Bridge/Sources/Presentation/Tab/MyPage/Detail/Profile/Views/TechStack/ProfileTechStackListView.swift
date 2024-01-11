@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 프로필에서 유저의 기술 스택을 보여주는  뷰
-final class ProfileTechStackView: BaseListView {
+final class ProfileTechStackListView: BaseListView {
     // MARK: - Property
     private let fieldTechStacksUpdated = PublishSubject<[FieldTechStack]>()
     
