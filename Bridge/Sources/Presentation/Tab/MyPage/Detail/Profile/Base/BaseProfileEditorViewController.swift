@@ -153,7 +153,7 @@ class BaseProfileEditorViewController: BaseViewController {
         return label
     }()
     private let addFileButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
-    private let editFileListView = EditProfileReferenceFileListView()
+    private let fileListView = ProfileFileListView(isDeletable: true)
     private let documentPicker: UIDocumentPickerViewController = {
         let documentTypes = [UTType.pdf]
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: documentTypes)
@@ -225,7 +225,7 @@ class BaseProfileEditorViewController: BaseViewController {
                     flex.addItem(fileTitleLabel)
                     flex.addItem(addFileButton)
                 }
-            flex.addItem(editFileListView).marginTop(14)
+            flex.addItem(fileListView).marginTop(14)
             
             flex.addItem().height(50)
         }
@@ -321,8 +321,8 @@ extension BaseProfileEditorViewController {
         linkListView.flex.markDirty()
         
         // 첨부파일 설정
-        editFileListView.files = profile.files
-        editFileListView.flex.markDirty()
+        fileListView.files = profile.files
+        fileListView.flex.markDirty()
         
         contentContainer.flex.markDirty()
         view.setNeedsLayout()
@@ -389,7 +389,7 @@ extension BaseProfileEditorViewController {
     
     /// 파일 삭제
     var deletedFile: Observable<IndexRow> {
-        return editFileListView.deletedFile
+        return fileListView.deletedFile
     }
     
     /// 완료 버튼 탭

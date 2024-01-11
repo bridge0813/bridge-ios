@@ -132,7 +132,7 @@ final class ProfileViewController: BaseViewController {
         label.font = BridgeFont.subtitle2.font
         return label
     }()
-    private let fileListView = ProfileFileListView()
+    private let fileListView = ProfileFileListView(isDeletable: false)
     private var documentInteraction: UIDocumentInteractionController?
     
     // MARK: - Property

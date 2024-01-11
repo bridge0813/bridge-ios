@@ -194,7 +194,6 @@
 		7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366342AC15ECF00EB415D /* BridgeBookmarkButton.swift */; };
 		7C1366392AC16C4D00EB415D /* BridgeRemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366382AC16C4D00EB415D /* BridgeRemoveButton.swift */; };
 		7C1366422AC27F9100EB415D /* BridgeSendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */; };
-		7C16F8E02B4332BF00D093A5 /* EditProfileReferenceFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16F8DF2B4332BF00D093A5 /* EditProfileReferenceFileView.swift */; };
 		7C16F8E32B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16F8E22B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift */; };
 		7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */; };
 		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
@@ -524,7 +523,6 @@
 		7C1366342AC15ECF00EB415D /* BridgeBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBookmarkButton.swift; sourceTree = "<group>"; };
 		7C1366382AC16C4D00EB415D /* BridgeRemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeRemoveButton.swift; sourceTree = "<group>"; };
 		7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSendMessageButton.swift; sourceTree = "<group>"; };
-		7C16F8DF2B4332BF00D093A5 /* EditProfileReferenceFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileReferenceFileView.swift; sourceTree = "<group>"; };
 		7C16F8E22B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTechStackPickerPopUpView.swift; sourceTree = "<group>"; };
 		7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
@@ -1656,6 +1654,7 @@
 			isa = PBXGroup;
 			children = (
 				7C16F8E22B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift */,
+				7CC0B5FE2B47A8B600C5323A /* AddLinkPopUpView.swift */,
 			);
 			path = PopUp;
 			sourceTree = "<group>";
@@ -2083,14 +2082,6 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		7CC0B5FD2B47A85D00C5323A /* PopUp */ = {
-			isa = PBXGroup;
-			children = (
-				7CC0B5FE2B47A8B600C5323A /* AddLinkPopUpView.swift */,
-			);
-			path = PopUp;
-			sourceTree = "<group>";
-		};
 		7CC0B60C2B49AEF100C5323A /* Update */ = {
 			isa = PBXGroup;
 			children = (
@@ -2253,8 +2244,7 @@
 				7CD5A5392B42713500343F9F /* EditProfileViewModel.swift */,
 				7CD5A5372B42711E00343F9F /* EditProfileViewController.swift */,
 				7CD5A53E2B429BD700343F9F /* TechStack */,
-				7CD5A53F2B429BDF00343F9F /* Link */,
-				7CD5A5402B429BE400343F9F /* File */,
+				7C16F8E42B44827400D093A5 /* PopUp */,
 			);
 			path = EditProfile;
 			sourceTree = "<group>";
@@ -2264,25 +2254,8 @@
 			children = (
 				7CD5A53C2B429A4F00343F9F /* EditProfileTechStackView.swift */,
 				7CD5A5412B429E6600343F9F /* EditProfileTechStackCell.swift */,
-				7C16F8E42B44827400D093A5 /* PopUp */,
 			);
 			path = TechStack;
-			sourceTree = "<group>";
-		};
-		7CD5A53F2B429BDF00343F9F /* Link */ = {
-			isa = PBXGroup;
-			children = (
-				7CC0B5FD2B47A85D00C5323A /* PopUp */,
-			);
-			path = Link;
-			sourceTree = "<group>";
-		};
-		7CD5A5402B429BE400343F9F /* File */ = {
-			isa = PBXGroup;
-			children = (
-				7C16F8DF2B4332BF00D093A5 /* EditProfileReferenceFileView.swift */,
-			);
-			path = File;
 			sourceTree = "<group>";
 		};
 		7CD5A5432B42B9D200343F9F /* TechStackTag */ = {
@@ -2945,7 +2918,6 @@
 				7BA96EB82B249630000D48AE /* Notification+Stomp.swift in Sources */,
 				7CA04F432B029B3A007B9191 /* FetchProjectDetailUseCase.swift in Sources */,
 				7C8CC4132AEEB5CC0032F237 /* TechTagCell.swift in Sources */,
-				7C16F8E02B4332BF00D093A5 /* EditProfileReferenceFileView.swift in Sources */,
 				7C50EC062B3717A300A69F12 /* CreateChannelRequestDTO.swift in Sources */,
 				7BA36CBC2A9DA2D1000DAB02 /* NetworkService.swift in Sources */,
 				7C4270142AA3779D009BE6AF /* MainViewModel.swift in Sources */,

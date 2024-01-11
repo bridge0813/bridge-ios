@@ -14,6 +14,7 @@ import RxCocoa
 /// 프로필에서 유저의 참고 링크를 보여주는  뷰
 final class ProfileFileListView: BaseListView {
     // MARK: - Property
+    private var isDeletable: Bool
     private let filesUpdated = PublishSubject<[ReferenceFile]>()
     
     var files: [ReferenceFile] = [] {
@@ -31,8 +32,19 @@ final class ProfileFileListView: BaseListView {
         }
     }
     
+    /// 파일 선택(보여주기)
     var selectedFile: Observable<ReferenceFile> {
         tableView.rx.modelSelected(ReferenceFile.self).asObservable()
+    }
+    
+    /// 파일 삭제
+    let deletedFile = PublishSubject<IndexRow>()
+    
+    // MARK: - Init
+    /// - Parameter isDeletable: 파일 삭제 가능에 대한 여부를 나타냅니다.
+    init(isDeletable: Bool) {
+        self.isDeletable = isDeletable
+        super.init(frame: .zero)
     }
     
     // MARK: - Configuration
@@ -57,8 +69,19 @@ final class ProfileFileListView: BaseListView {
             .bind(to: tableView.rx.items(
                 cellIdentifier: ReferenceFileCell.reuseIdentifier,
                 cellType: ReferenceFileCell.self
-            )) { _, element, cell in
-                cell.configure(with: element, isDeletable: false)
+            )) { [weak self] indexRow, element, cell in
+                guard let self else { return }
+                
+                cell.configure(with: element, isDeletable: self.isDeletable)
+                
+                cell.indexRow = indexRow
+                
+                cell.deleteButtonTapped
+                    .withUnretained(self)
+                    .subscribe(onNext: { owner, indexRow in
+                        owner.deletedFile.onNext(indexRow)
+                    })
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
     }
