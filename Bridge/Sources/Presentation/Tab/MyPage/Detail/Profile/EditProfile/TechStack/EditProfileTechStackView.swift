@@ -12,23 +12,9 @@ import RxSwift
 import RxCocoa
 
 /// 프로필 수정에서 유저의 기술 스택을 수정하는 뷰
-final class EditProfileTechStackView: BaseView {
+final class EditProfileTechStackView: BaseListView {
     // MARK: - UI
-    private let rootFlexContainer = UIView()
-    
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(EditProfileTechStackCell.self)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 160
-        tableView.separatorStyle = .none
-        tableView.layer.cornerRadius = 8
-        tableView.clipsToBounds = true
-        return tableView
-    }()
-    
-    // 수정용
-    private let fieldTechStackPickerView = FieldTechStackPickerPopUpView()
+    private let fieldTechStackPickerView = FieldTechStackPickerPopUpView()  // 수정용
     
     // MARK: - Property
     private let fieldTechStacksUpdated = PublishSubject<[FieldTechStack]>()
@@ -49,18 +35,24 @@ final class EditProfileTechStackView: BaseView {
     let deletedFieldTechStack = PublishSubject<IndexRow>()                    // 인덱스에 맞는 스택 삭제
     let updatedFieldTechStack = PublishSubject<(IndexRow, FieldTechStack)>()  // 인덱스에 맞는 스택 수정
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        tableView.register(EditProfileTechStackCell.self)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 160
+        tableView.separatorStyle = .none
+        tableView.layer.cornerRadius = 8
+        tableView.clipsToBounds = true
+        tableView.isScrollEnabled = true
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
-        addSubview(rootFlexContainer)
-        rootFlexContainer.flex.define { flex in
-            flex.addItem(tableView)
-        }
+        super.configureLayouts()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.all()
-        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Binding

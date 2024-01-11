@@ -12,36 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 프로필 수정에서 첨부파일을 수정하는  뷰
-final class EditProfileReferenceFileView: BaseView {
-    // MARK: - UI
-    private let rootFlexContainer = UIView()
-    
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(ReferenceFileCell.self)
-        tableView.rowHeight = 60
-        tableView.separatorStyle = .none
-        tableView.isScrollEnabled = false
-        return tableView
-    }()
-    
-    private let placeholderContainer: UIView = {
-        let view = UIView()
-        view.layer.borderColor = BridgeColor.gray06.cgColor
-        view.layer.borderWidth = 1
-        view.layer.cornerRadius = 8
-        view.clipsToBounds = true
-        return view
-    }()
-    
-    private let placeholderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "직무와 관련한 첨부파일을 추가해보세요."
-        label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray04
-        return label
-    }()
-    
+final class EditProfileReferenceFileView: BaseListView {
     // MARK: - Property
     private let filesUpdated = PublishSubject<[ReferenceFile]>()
     
@@ -62,21 +33,19 @@ final class EditProfileReferenceFileView: BaseView {
     
     let deletedFile = PublishSubject<IndexRow>()
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        tableView.register(ReferenceFileCell.self)
+        placeholderLabel.text = "직무와 관련한 첨부파일을 추가해보세요."
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
-        addSubview(rootFlexContainer)
-        rootFlexContainer.flex.define { flex in
-            flex.addItem(tableView).display(.flex)
-            flex.addItem(placeholderContainer).display(.none).height(52).padding(17, 16, 17, 16).define { flex in
-                flex.addItem(placeholderLabel)
-            }
-        }
+        super.configureLayouts()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.all()
-        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Binding

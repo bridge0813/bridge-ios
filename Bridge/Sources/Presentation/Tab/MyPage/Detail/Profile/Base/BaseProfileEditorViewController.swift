@@ -14,6 +14,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
+/// 프로필 작성을 위한 BaseViewController('프로필 수정'과 '프로필 등록' 에서 사용)
 class BaseProfileEditorViewController: BaseViewController {
     // MARK: - UI
     private let completeButton: UIButton = {

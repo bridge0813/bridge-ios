@@ -12,21 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 프로필에서 유저의 기술 스택을 보여주는  뷰
-final class ProfileTechStackView: BaseView {
-    // MARK: - UI
-    private let rootFlexContainer = UIView()
-    
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(ProfileTechStackCell.self)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 140
-        tableView.separatorInset = .init(top: 0, left: 16, bottom: 0, right: 16)
-        tableView.layer.cornerRadius = 8
-        tableView.clipsToBounds = true
-        return tableView
-    }()
-    
+final class ProfileTechStackView: BaseListView {
     // MARK: - Property
     private let fieldTechStacksUpdated = PublishSubject<[FieldTechStack]>()
     
@@ -45,18 +31,25 @@ final class ProfileTechStackView: BaseView {
         }
     }
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        tableView.register(ProfileTechStackCell.self)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 140
+        tableView.separatorStyle = .singleLine
+        tableView.separatorInset = .init(top: 0, left: 16, bottom: 0, right: 16)
+        tableView.layer.cornerRadius = 8
+        tableView.clipsToBounds = true
+        tableView.isScrollEnabled = true
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
-        addSubview(rootFlexContainer)
-        rootFlexContainer.flex.define { flex in
-            flex.addItem(tableView)
-        }
+        super.configureLayouts()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.all()
-        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Binding

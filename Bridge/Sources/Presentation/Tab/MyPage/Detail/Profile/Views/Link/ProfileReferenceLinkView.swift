@@ -12,36 +12,7 @@ import RxSwift
 import RxCocoa
 
 /// 프로필에서 유저의 참고 링크를 보여주는  뷰
-final class ProfileReferenceLinkView: BaseView {
-    // MARK: - UI
-    private let rootFlexContainer = UIView()
-    
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(ReferenceLinkCell.self)
-        tableView.rowHeight = 60
-        tableView.separatorStyle = .none
-        tableView.isScrollEnabled = false
-        return tableView
-    }()
-    
-    private let placeholderContainer: UIView = {
-        let view = UIView()
-        view.layer.borderColor = BridgeColor.gray06.cgColor
-        view.layer.borderWidth = 1
-        view.layer.cornerRadius = 8
-        view.clipsToBounds = true
-        return view
-    }()
-    
-    private let placeholderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "직무 경험과 관련하여 참고할 수 있는 링크를 입력하세요."
-        label.font = BridgeFont.body2.font
-        label.textColor = BridgeColor.gray04
-        return label
-    }()
-    
+final class ProfileReferenceLinkView: BaseListView {
     // MARK: - Property
     private let linksUpdated = PublishSubject<[String]>()
     
@@ -64,21 +35,19 @@ final class ProfileReferenceLinkView: BaseView {
         tableView.rx.modelSelected(String.self).asObservable()
     }
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        tableView.register(ReferenceLinkCell.self)
+        placeholderLabel.text = "직무 경험과 관련하여 참고할 수 있는 링크를 입력하세요."
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
-        addSubview(rootFlexContainer)
-        rootFlexContainer.flex.define { flex in
-            flex.addItem(tableView).display(.flex)
-            flex.addItem(placeholderContainer).display(.none).height(52).padding(17, 16, 17, 16).define { flex in
-                flex.addItem(placeholderLabel)
-            }
-        }
+        super.configureLayouts()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.all()
-        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Binding
