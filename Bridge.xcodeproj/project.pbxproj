@@ -344,6 +344,7 @@
 		7CD834AF2B4D4AE300F3EED7 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834AE2B4D4AE300F3EED7 /* String+.swift */; };
 		7CD834B12B4ED25100F3EED7 /* ReferenceFileRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834B02B4ED25100F3EED7 /* ReferenceFileRequestDTO.swift */; };
 		7CD834B42B4EFD5B00F3EED7 /* Data+Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834B32B4EFD5B00F3EED7 /* Data+Multipart.swift */; };
+		7CD834B92B4FE50600F3EED7 /* BaseProfileEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834B82B4FE50600F3EED7 /* BaseProfileEditorViewController.swift */; };
 		7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */; };
 		7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */; };
 		7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */; };
@@ -672,6 +673,7 @@
 		7CD834AE2B4D4AE300F3EED7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		7CD834B02B4ED25100F3EED7 /* ReferenceFileRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceFileRequestDTO.swift; sourceTree = "<group>"; };
 		7CD834B32B4EFD5B00F3EED7 /* Data+Multipart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Multipart.swift"; sourceTree = "<group>"; };
+		7CD834B82B4FE50600F3EED7 /* BaseProfileEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileEditorViewController.swift; sourceTree = "<group>"; };
 		7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
 		7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
@@ -2248,6 +2250,7 @@
 		7CD5A5362B4270E100343F9F /* EditProfile */ = {
 			isa = PBXGroup;
 			children = (
+				7CD834B82B4FE50600F3EED7 /* BaseProfileEditorViewController.swift */,
 				7CD5A5392B42713500343F9F /* EditProfileViewModel.swift */,
 				7CD5A5372B42711E00343F9F /* EditProfileViewController.swift */,
 				7CD5A53E2B429BD700343F9F /* TechStack */,
@@ -2891,6 +2894,7 @@
 				7C50EC082B39D90800A69F12 /* ApplicantProfileResponseDTO.swift in Sources */,
 				7BA36CDA2AA197F8000DAB02 /* ChannelListViewController.swift in Sources */,
 				7CD023C72B2F197A00F55648 /* CloseProjectUseCase.swift in Sources */,
+				7CD834B92B4FE50600F3EED7 /* BaseProfileEditorViewController.swift in Sources */,
 				7CA04F572B05D50E007B9191 /* BridgeTechStackTag.swift in Sources */,
 				7B93B3AF2B35396300912202 /* AlertRepository.swift in Sources */,
 				7C4270242AA4D434009BE6AF /* FetchHotProjectsUseCase.swift in Sources */,
