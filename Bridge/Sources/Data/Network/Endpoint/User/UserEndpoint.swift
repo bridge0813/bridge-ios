@@ -64,7 +64,7 @@ extension UserEndpoint: Endpoint {
             return .get
             
         case .updateProfile:
-            return .post
+            return .put
         }
     }
     
@@ -97,9 +97,25 @@ extension UserEndpoint: Endpoint {
             return nil
             
         case .updateProfile(let requestDTO, _):
+            var body = Data()
             
+            // 업로드를 위한 이미지 데이터 추가
+            if let imageData = requestDTO.imageData {
+                body.appendFileDataForMultipart(imageData, fieldName: "photo", fileName: "profileImage.jpg", mimeType: "image/jpeg", boundary: boundaryName)
+            }
             
-            return requestDTO
+            // 업로드를 위한 파일 데이터 추가
+            requestDTO.newFiles.forEach { file in
+                body.appendFileDataForMultipart(
+                    file.data,
+                    fieldName: "refFiles",
+                    fileName: file.name,
+                    mimeType: "application/pdf",
+                    boundary: boundaryName
+                )
+            }
+        
+            return body
         }
     }
 }

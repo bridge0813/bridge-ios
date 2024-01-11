@@ -27,9 +27,9 @@ struct FieldTechStack {
 
 /// 첨부 파일
 struct ReferenceFile {
+    let id: Int?
     let url: String
     let name: String
-    let identifier: String?
     var data: Data?
 }
 

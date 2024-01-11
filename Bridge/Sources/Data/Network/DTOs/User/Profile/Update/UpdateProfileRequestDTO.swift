@@ -14,8 +14,8 @@ struct UpdateProfileRequestDTO: Encodable {
     let fieldTechStacks: [FieldTechStackDTO]
     let carrer: String?
     let links: [String]
-    let originalFiles: [String]
-    let newfiles: [Data]
+    let originalFileIDs: [Int]
+    let newFiles: [ReferenceFileRequestDTO]
     
     enum CodingKeys: String, CodingKey {
         case imageData = "photo"
@@ -24,7 +24,7 @@ struct UpdateProfileRequestDTO: Encodable {
         case fieldTechStacks = "stacks"
         case carrer
         case links = "refLink"
-        case originalFiles
+        case originalFileIDs = "fileIds"
         case newfiles = "refFile"
     }
 }
@@ -36,8 +36,8 @@ extension UpdateProfileRequestDTO {
         try container.encode(name, forKey: .name)
         try container.encode(fieldTechStacks, forKey: .fieldTechStacks)
         try container.encode(links, forKey: .links)
-        try container.encode(originalFiles, forKey: .originalFiles)
-        try container.encode(newfiles, forKey: .newfiles)
+        try container.encode(originalFileIDs, forKey: .originalFileIDs)
+        try container.encode(newFiles, forKey: .newfiles)
         
         // imageData
         if let imageData {

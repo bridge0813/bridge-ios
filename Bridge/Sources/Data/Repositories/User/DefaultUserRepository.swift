@@ -36,6 +36,10 @@ final class DefaultUserRepository: UserRepository {
     /// 프로필 수정
     func updateProfile(_ profile: Profile) -> Observable<Void> {
         let userID = tokenStorage.get(.userID)
+        let userEndpoint = UserEndpoint.updateProfile(
+            requestDTO: convertToUpdateProfileDTO(from: profile),
+            userID: userID
+        )
         return .just(())
     }
     
@@ -79,10 +83,12 @@ extension DefaultUserRepository {
         }
         
         // 식별자가 없는 파일은 기존에 존재하던 파일
-        let originalFiles = profile.files.filter { $0.identifier != nil }.compactMap { $0.identifier }
+        let originalFileIDs = profile.files.filter { $0.id != nil }.compactMap { $0.id }
         
         // 데이터가 있는 파일은 새롭게 추가한 파일
-        let newFiles = profile.files.filter { $0.data != nil }.compactMap { $0.data }
+        let newFiles = profile.files.filter { $0.data != nil }.map { file in
+            return ReferenceFileRequestDTO(url: file.url, name: file.name, data: file.data ?? Data())
+        }
         
         return UpdateProfileRequestDTO(
             imageData: profile.updatedImage?.jpegData(compressionQuality: 1),
@@ -91,8 +97,8 @@ extension DefaultUserRepository {
             fieldTechStacks: fieldTechStacksDTO,
             carrer: profile.carrer,
             links: profile.links,
-            originalFiles: originalFiles,
-            newfiles: newFiles
+            originalFileIDs: originalFileIDs,
+            newFiles: newFiles
         )
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-/// 프로필에서 참고링크를 보여주는 Cell
+/// 프로필에서 첨부 파일을 보여주는 Cell
 final class ReferenceFileCell: BaseListCell {
     // MARK: - Preparation
     override func prepareForReuse() {
@@ -42,7 +42,7 @@ final class ReferenceFileCell: BaseListCell {
 // MARK: - Configuration
 extension ReferenceFileCell {
     func configure(with file: ReferenceFile, isDeletable: Bool) {
-        itemLabel.text = file.fileName
+        itemLabel.text = file.name
         deleteButton.flex.display(isDeletable ? .flex : .none)  // 삭제 버튼을 보여줄 지 결정.
     }
 }

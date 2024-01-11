@@ -308,7 +308,7 @@
 		7CBDE2672B3FDAB800518AA9 /* ReferenceFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE2662B3FDAB800518AA9 /* ReferenceFileCell.swift */; };
 		7CBDE2692B3FF7D800518AA9 /* ProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE2682B3FF7D800518AA9 /* ProfileResponseDTO.swift */; };
 		7CBDE26C2B3FFA7100518AA9 /* FieldTechStackDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE26B2B3FFA7100518AA9 /* FieldTechStackDTO.swift */; };
-		7CBDE26E2B3FFC3500518AA9 /* ReferenceFileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE26D2B3FFC3500518AA9 /* ReferenceFileDTO.swift */; };
+		7CBDE26E2B3FFC3500518AA9 /* ReferenceFileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE26D2B3FFC3500518AA9 /* ReferenceFileResponseDTO.swift */; };
 		7CBDE2702B4004A000518AA9 /* FetchProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDE26F2B4004A000518AA9 /* FetchProfileUseCase.swift */; };
 		7CC0B5FF2B47A8B600C5323A /* AddLinkPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC0B5FE2B47A8B600C5323A /* AddLinkPopUpView.swift */; };
 		7CC0B60E2B49AF1D00C5323A /* UpdateProfileRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC0B60D2B49AF1D00C5323A /* UpdateProfileRequestDTO.swift */; };
@@ -342,6 +342,8 @@
 		7CD834A92B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834A82B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift */; };
 		7CD834AB2B4D34AE00F3EED7 /* UpdateProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834AA2B4D34AE00F3EED7 /* UpdateProfileUseCase.swift */; };
 		7CD834AF2B4D4AE300F3EED7 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834AE2B4D4AE300F3EED7 /* String+.swift */; };
+		7CD834B12B4ED25100F3EED7 /* ReferenceFileRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834B02B4ED25100F3EED7 /* ReferenceFileRequestDTO.swift */; };
+		7CD834B42B4EFD5B00F3EED7 /* Data+Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834B32B4EFD5B00F3EED7 /* Data+Multipart.swift */; };
 		7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */; };
 		7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */; };
 		7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */; };
@@ -634,7 +636,7 @@
 		7CBDE2662B3FDAB800518AA9 /* ReferenceFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceFileCell.swift; sourceTree = "<group>"; };
 		7CBDE2682B3FF7D800518AA9 /* ProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseDTO.swift; sourceTree = "<group>"; };
 		7CBDE26B2B3FFA7100518AA9 /* FieldTechStackDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTechStackDTO.swift; sourceTree = "<group>"; };
-		7CBDE26D2B3FFC3500518AA9 /* ReferenceFileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceFileDTO.swift; sourceTree = "<group>"; };
+		7CBDE26D2B3FFC3500518AA9 /* ReferenceFileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceFileResponseDTO.swift; sourceTree = "<group>"; };
 		7CBDE26F2B4004A000518AA9 /* FetchProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProfileUseCase.swift; sourceTree = "<group>"; };
 		7CC0B5FE2B47A8B600C5323A /* AddLinkPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkPopUpView.swift; sourceTree = "<group>"; };
 		7CC0B60D2B49AF1D00C5323A /* UpdateProfileRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileRequestDTO.swift; sourceTree = "<group>"; };
@@ -668,6 +670,8 @@
 		7CD834A82B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDocumentInteractionControllerDelegateProxy.swift; sourceTree = "<group>"; };
 		7CD834AA2B4D34AE00F3EED7 /* UpdateProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileUseCase.swift; sourceTree = "<group>"; };
 		7CD834AE2B4D4AE300F3EED7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		7CD834B02B4ED25100F3EED7 /* ReferenceFileRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceFileRequestDTO.swift; sourceTree = "<group>"; };
+		7CD834B32B4EFD5B00F3EED7 /* Data+Multipart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Multipart.swift"; sourceTree = "<group>"; };
 		7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
 		7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
@@ -1420,6 +1424,7 @@
 				7C56E15D2B10F8CD00454F5E /* User */,
 				7B9C31AD2B07756F007E36B2 /* WebSocket */,
 				7B93B3B52B353B0000912202 /* Alert */,
+				7CD834B22B4EFD4000F3EED7 /* Extensions */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -2069,7 +2074,7 @@
 			children = (
 				7CBDE2682B3FF7D800518AA9 /* ProfileResponseDTO.swift */,
 				7CBDE26B2B3FFA7100518AA9 /* FieldTechStackDTO.swift */,
-				7CBDE26D2B3FFC3500518AA9 /* ReferenceFileDTO.swift */,
+				7CBDE26D2B3FFC3500518AA9 /* ReferenceFileResponseDTO.swift */,
 				7CC0B6102B49B11400C5323A /* Preview */,
 				7CC0B60C2B49AEF100C5323A /* Update */,
 			);
@@ -2088,6 +2093,7 @@
 			isa = PBXGroup;
 			children = (
 				7CC0B60D2B49AF1D00C5323A /* UpdateProfileRequestDTO.swift */,
+				7CD834B02B4ED25100F3EED7 /* ReferenceFileRequestDTO.swift */,
 			);
 			path = Update;
 			sourceTree = "<group>";
@@ -2284,6 +2290,14 @@
 				7CA04F562B05D50E007B9191 /* BridgeTechStackTag.swift */,
 			);
 			path = TechStackTag;
+			sourceTree = "<group>";
+		};
+		7CD834B22B4EFD4000F3EED7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7CD834B32B4EFD5B00F3EED7 /* Data+Multipart.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7CDFB60E2B20113200272F77 /* Management */ = {
@@ -2648,7 +2662,7 @@
 				7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */,
 				7B4EA4812B08C867004663BC /* WebSocketServiceDelegate.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChannelRepository.swift in Sources */,
-				7CBDE26E2B3FFC3500518AA9 /* ReferenceFileDTO.swift in Sources */,
+				7CBDE26E2B3FFC3500518AA9 /* ReferenceFileResponseDTO.swift in Sources */,
 				7CA04F232AFE77AB007B9191 /* BridgeFilledChip.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
 				7B93B3C22B36AB0900912202 /* BookmarkedProject.swift in Sources */,
@@ -2759,6 +2773,7 @@
 				7B8DE8112B034E6B003EA34A /* Stomp.swift in Sources */,
 				7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */,
 				7BEA738F2B2B2E0E00CECF44 /* ProfileViewController.swift in Sources */,
+				7CD834B42B4EFD5B00F3EED7 /* Data+Multipart.swift in Sources */,
 				7C16F8DE2B42E48600D093A5 /* EditProfileReferenceLinkView.swift in Sources */,
 				7B92B7E32AE501CD00B0E954 /* FetchMessagesUseCase.swift in Sources */,
 				7CBDE25C2B3DE2A100518AA9 /* ProfileReferenceLinkView.swift in Sources */,
@@ -2908,6 +2923,7 @@
 				7CA73D992B28B481007D88FB /* CreateChannelResponseDTO.swift in Sources */,
 				7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
+				7CD834B12B4ED25100F3EED7 /* ReferenceFileRequestDTO.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */,
 				7BEA73932B2B2F1300CECF44 /* MyFieldViewController.swift in Sources */,

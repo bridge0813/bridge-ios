@@ -55,9 +55,9 @@ extension RxDocumentPickerControllerDelegateProxy: UIDocumentPickerDelegate {
             do {
                 let fileData = try Data(contentsOf: selectedFileURL)
                 let file = ReferenceFile(
+                    id: nil,
                     url: selectedFileURL.absoluteString,
                     name: fileName,
-                    identifier: nil,
                     data: fileData
                 )
                 self?.didFinishPicking.onNext(.success(file))

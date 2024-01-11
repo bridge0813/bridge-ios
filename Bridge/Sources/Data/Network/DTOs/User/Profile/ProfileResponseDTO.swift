@@ -14,7 +14,7 @@ struct ProfileResponseDTO: Decodable {
     let fieldTechStacks: [FieldTechStackDTO]
     let carrer: String?
     let links: [String]
-    let files: [ReferenceFileDTO]
+    let files: [ReferenceFileResponseDTO]
     
     enum CodingKeys: String, CodingKey {
         case imageURL = "profilePhotoURL"
@@ -23,8 +23,8 @@ struct ProfileResponseDTO: Decodable {
         case fields
         case fieldTechStacks = "stacks"
         case carrer
-        case links = "refLink"
-        case files = "refFile"
+        case links = "refLinks"
+        case files = "refFiles"
     }
 }
 
@@ -58,6 +58,6 @@ extension ProfileResponseDTO {
         ],
         carrer: "취준생",
         links: ["https://bridge.naver.comㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", "https://bridge.naver.com", "https://bridge.naver.com"],
-        files: [ReferenceFileDTO(url: "", fileName: "개인 작업물.pdf", identifier: "")]
+        files: [ReferenceFileResponseDTO(id: 0, url: "", name: "개인 작업물.pdf")]
     )
 }
