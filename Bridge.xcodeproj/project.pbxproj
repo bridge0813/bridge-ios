@@ -194,7 +194,6 @@
 		7C1366352AC15ECF00EB415D /* BridgeBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366342AC15ECF00EB415D /* BridgeBookmarkButton.swift */; };
 		7C1366392AC16C4D00EB415D /* BridgeRemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366382AC16C4D00EB415D /* BridgeRemoveButton.swift */; };
 		7C1366422AC27F9100EB415D /* BridgeSendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */; };
-		7C16F8DE2B42E48600D093A5 /* EditProfileReferenceLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16F8DD2B42E48600D093A5 /* EditProfileReferenceLinkView.swift */; };
 		7C16F8E02B4332BF00D093A5 /* EditProfileReferenceFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16F8DF2B4332BF00D093A5 /* EditProfileReferenceFileView.swift */; };
 		7C16F8E32B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16F8E22B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift */; };
 		7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */; };
@@ -525,7 +524,6 @@
 		7C1366342AC15ECF00EB415D /* BridgeBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeBookmarkButton.swift; sourceTree = "<group>"; };
 		7C1366382AC16C4D00EB415D /* BridgeRemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeRemoveButton.swift; sourceTree = "<group>"; };
 		7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSendMessageButton.swift; sourceTree = "<group>"; };
-		7C16F8DD2B42E48600D093A5 /* EditProfileReferenceLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileReferenceLinkView.swift; sourceTree = "<group>"; };
 		7C16F8DF2B4332BF00D093A5 /* EditProfileReferenceFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileReferenceFileView.swift; sourceTree = "<group>"; };
 		7C16F8E22B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTechStackPickerPopUpView.swift; sourceTree = "<group>"; };
 		7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
@@ -2274,7 +2272,6 @@
 		7CD5A53F2B429BDF00343F9F /* Link */ = {
 			isa = PBXGroup;
 			children = (
-				7C16F8DD2B42E48600D093A5 /* EditProfileReferenceLinkView.swift */,
 				7CC0B5FD2B47A85D00C5323A /* PopUp */,
 			);
 			path = Link;
@@ -2789,7 +2786,6 @@
 				7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */,
 				7BEA738F2B2B2E0E00CECF44 /* ProfileViewController.swift in Sources */,
 				7CD834B42B4EFD5B00F3EED7 /* Data+Multipart.swift in Sources */,
-				7C16F8DE2B42E48600D093A5 /* EditProfileReferenceLinkView.swift in Sources */,
 				7B92B7E32AE501CD00B0E954 /* FetchMessagesUseCase.swift in Sources */,
 				7CBDE25C2B3DE2A100518AA9 /* ProfileLinkListView.swift in Sources */,
 				7B14DB232AB04B40009A00EB /* SetFieldViewController.swift in Sources */,

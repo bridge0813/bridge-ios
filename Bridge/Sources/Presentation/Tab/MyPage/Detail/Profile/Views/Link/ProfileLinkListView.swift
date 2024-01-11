@@ -14,8 +14,10 @@ import RxCocoa
 /// 프로필에서 유저의 참고 링크를 보여주는  뷰
 final class ProfileLinkListView: BaseListView {
     // MARK: - Property
+    private var isDeletable: Bool
     private let linksUpdated = PublishSubject<[String]>()
     
+    /// 링크 리스트
     var links: [String] = [] {
         didSet {
             // 보여줄 링크가 없을 경우, 플레이스홀더 보여주기.
@@ -31,8 +33,19 @@ final class ProfileLinkListView: BaseListView {
         }
     }
     
+    /// 링크 선택(이동)
     var selectedLinkURL: Observable<String> {
         tableView.rx.modelSelected(String.self).asObservable()
+    }
+    
+    /// 링크 삭제
+    let deletedLinkURL = PublishSubject<IndexRow>()
+    
+    // MARK: - Init
+    /// - Parameter isDeletable: 링크 삭제 가능에 대한 여부를 나타냅니다.
+    init(isDeletable: Bool) {
+        self.isDeletable = isDeletable
+        super.init(frame: .zero)
     }
     
     // MARK: - Configuration
@@ -57,8 +70,19 @@ final class ProfileLinkListView: BaseListView {
             .bind(to: tableView.rx.items(
                 cellIdentifier: ReferenceLinkCell.reuseIdentifier,
                 cellType: ReferenceLinkCell.self
-            )) { _, element, cell in
-                cell.configure(with: element, isDeletable: false)
+            )) { [weak self] indexRow, element, cell in
+                guard let self else { return }
+                
+                cell.configure(with: element, isDeletable: self.isDeletable)
+                
+                cell.indexRow = indexRow
+                
+                cell.deleteButtonTapped
+                    .withUnretained(self)
+                    .subscribe(onNext: { owner, indexRow in
+                        owner.deletedLinkURL.onNext(indexRow)
+                    })
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
     }

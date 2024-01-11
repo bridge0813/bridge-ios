@@ -141,7 +141,7 @@ class BaseProfileEditorViewController: BaseViewController {
         return label
     }()
     private let addLinkButton = BridgeAddButton(titleFont: BridgeFont.body3.font)
-    private let editLinkListView = EditProfileLinkListView()
+    private let linkListView = ProfileLinkListView(isDeletable: true)
     private let addLinkPopUpView = AddLinkPopUpView()
     
     private let fileTitleLabel: UILabel = {
@@ -214,7 +214,7 @@ class BaseProfileEditorViewController: BaseViewController {
                     flex.addItem(linkTitleLabel)
                     flex.addItem(addLinkButton)
                 }
-            flex.addItem(editLinkListView).marginTop(14)
+            flex.addItem(linkListView).marginTop(14)
             
             flex.addItem()
                 .direction(.row)
@@ -317,8 +317,8 @@ extension BaseProfileEditorViewController {
         editTechStackListView.flex.markDirty()
         
         // 참고링크 설정
-        editLinkListView.links = profile.links
-        editLinkListView.flex.markDirty()
+        linkListView.links = profile.links
+        linkListView.flex.markDirty()
         
         // 첨부파일 설정
         editFileListView.files = profile.files
@@ -379,7 +379,7 @@ extension BaseProfileEditorViewController {
     
     /// 링크 삭제
     var deletedLinkURL: Observable<IndexRow> {
-        return editLinkListView.deletedLinkURL
+        return linkListView.deletedLinkURL
     }
     
     /// 파일 추가

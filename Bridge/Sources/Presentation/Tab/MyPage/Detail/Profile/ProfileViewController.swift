@@ -122,7 +122,7 @@ final class ProfileViewController: BaseViewController {
         label.font = BridgeFont.subtitle2.font
         return label
     }()
-    private let linkListView = ProfileLinkListView()
+    private let linkListView = ProfileLinkListView(isDeletable: false)
     
     private let fileTitleLabel: UILabel = {
         let label = UILabel()
