@@ -118,6 +118,10 @@ extension MyPageCoordinator {
         navigationController.pushViewController(profileViewController, animated: true)
     }
     
+    func showCreateProfileViewController() {
+
+    }
+    
     func showEditProfileViewController(with profile: Profile) {
         let editProfileViewModel = EditProfileViewModel(
             coordinator: self,

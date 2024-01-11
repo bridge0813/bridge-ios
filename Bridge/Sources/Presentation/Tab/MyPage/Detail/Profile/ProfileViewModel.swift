@@ -54,10 +54,7 @@ final class ProfileViewModel: ViewModelType {
                     profile.accept(profileData)
                     
                 case .failure(let error):
-                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                        title: "프로필 조회에 실패했습니다.",
-                        description: error.localizedDescription
-                    ))
+                    owner.handleNetworkError(error)
                 }
             })
             .disposed(by: disposeBag)
@@ -80,5 +77,31 @@ final class ProfileViewModel: ViewModelType {
         
         
         return Output(profile: profile.asDriver())
+    }
+}
+
+// MARK: - ErrorHandling
+extension ProfileViewModel {
+    /// 네트워크 에러가 401일 경우 로그인 Alert을 보여주고, 나머지 경우에는 Error Alert
+    private func handleNetworkError(_ error: Error) {
+        if let networkError = error as? NetworkError, case .statusCode(404) = networkError {
+            coordinator?.showAlert(
+                configuration: .createProfile,
+                primaryAction: { [weak self] in
+                    self?.coordinator?.showCreateProfileViewController()
+                },
+                cancelAction: { [weak self] in
+                    self?.coordinator?.pop()
+                }
+            )
+        } else {
+            coordinator?.showErrorAlert(
+                configuration: ErrorAlertConfiguration(
+                    title: "프로필 조회에 실패했습니다.", 
+                    description: error.localizedDescription
+                ),
+                primaryAction: { [weak self] in self?.coordinator?.pop() }
+            )
+        }
     }
 }

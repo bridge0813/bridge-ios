@@ -152,4 +152,10 @@ extension AlertConfiguration {
         description: "관심분야 변경이 완료되었어요.",
         rightButtonTitle: "확인하기"
     )
+    
+    static let createProfile = AlertConfiguration(
+        title: "등록된 프로필이 없습니다.",
+        description: "프로필을 작성하러 가볼까요?",
+        rightButtonTitle: "작성하기"
+    )
 }

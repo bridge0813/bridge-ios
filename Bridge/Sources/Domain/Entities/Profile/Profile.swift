@@ -37,7 +37,7 @@ extension Profile {
     static let onError = Profile(
         updatedImage: nil, 
         imageURL: nil,
-        name: "Error",
+        name: "Bridge",
         introduction: nil,
         fields: [],
         fieldTechStacks: [],

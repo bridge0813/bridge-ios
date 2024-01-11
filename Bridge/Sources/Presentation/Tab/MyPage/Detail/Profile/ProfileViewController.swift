@@ -220,7 +220,6 @@ final class ProfileViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.profile
-            .skip(1)
             .drive(onNext: { [weak self] profile in
                 guard let self else { return }
                 self.configure(with: profile)
