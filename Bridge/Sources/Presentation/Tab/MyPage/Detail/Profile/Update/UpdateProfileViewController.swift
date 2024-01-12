@@ -1,5 +1,5 @@
 //
-//  EditProfileViewController.swift
+//  UpdateProfileViewController.swift
 //  Bridge
 //
 //  Created by 엄지호 on 1/1/24.
@@ -11,12 +11,12 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
-final class EditProfileViewController: BaseProfileEditorViewController {
+final class UpdateProfileViewController: BaseProfileEditorViewController {
     // MARK: - Property
-    private let viewModel: EditProfileViewModel
+    private let viewModel: UpdateProfileViewModel
     
     // MARK: - Init
-    init(viewModel: EditProfileViewModel) {
+    init(viewModel: UpdateProfileViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -53,7 +53,7 @@ final class EditProfileViewController: BaseProfileEditorViewController {
     override func bind() {
         super.bind()
         
-        let input = EditProfileViewModel.Input(
+        let input = UpdateProfileViewModel.Input(
             addedProfileImage: addedProfileImage,
             nameChanged: nameChanged,
             selectedCarrer: carrerButtonTapped,

@@ -1,5 +1,5 @@
 //
-//  EditProfileViewModel.swift
+//  UpdateProfileViewModel.swift
 //  Bridge
 //
 //  Created by 엄지호 on 1/1/24.
@@ -9,7 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-final class EditProfileViewModel: ViewModelType {
+final class UpdateProfileViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let addedProfileImage: Observable<UIImage?>                               // 이미지 추가

@@ -122,13 +122,13 @@ extension MyPageCoordinator {
 
     }
     
-    func showEditProfileViewController(with profile: Profile) {
-        let editProfileViewModel = EditProfileViewModel(
+    func showUpdatProfileViewController(with profile: Profile) {
+        let updateProfileViewModel = UpdateProfileViewModel(
             coordinator: self,
             profile: profile
         )
-        let editProfileViewController = EditProfileViewController(viewModel: editProfileViewModel)
-        navigationController.pushViewController(editProfileViewController, animated: true)
+        let updateProfileViewController = UpdateProfileViewController(viewModel: updateProfileViewModel)
+        navigationController.pushViewController(updateProfileViewController, animated: true)
     }
 }
 

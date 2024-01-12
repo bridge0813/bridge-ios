@@ -63,7 +63,7 @@ final class ProfileViewModel: ViewModelType {
         input.editProfileButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showEditProfileViewController(with: profile.value)
+                owner.coordinator?.showUpdatProfileViewController(with: profile.value)
             })
             .disposed(by: disposeBag)
         
