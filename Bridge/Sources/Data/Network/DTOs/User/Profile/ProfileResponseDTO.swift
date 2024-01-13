@@ -45,7 +45,7 @@ extension ProfileResponseDTO {
 
 extension ProfileResponseDTO {
     static let testData = ProfileResponseDTO(
-        imageURL: nil,
+        imageURL: "https://firebasestorage.googleapis.com/v0/b/cookingproject-5bf82.appspot.com/o/saveImage1677219882.2262769?alt=media&token=12b9aab3-a0b0-498f-bc81-0e8a8858d481",
         name: "엄지호",
         introduction: "책임감과 성실함을 겸비한 준비된 인재입니다. 사이드 프로젝트는 15번정도 한 경험이 있구요.",
         fields: ["백엔드", "안드로이드", "iOS"],

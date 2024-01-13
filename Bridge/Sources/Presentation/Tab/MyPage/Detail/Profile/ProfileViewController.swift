@@ -37,11 +37,10 @@ final class ProfileViewController: BaseViewController {
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.flex.width(155).height(153)
+        imageView.flex.width(155).height(153).cornerRadius(20)
+        imageView.tintColor = BridgeColor.gray04
         imageView.backgroundColor = BridgeColor.gray10
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 20
-        imageView.contentMode = .center
         return imageView
     }()
     
@@ -145,10 +144,6 @@ final class ProfileViewController: BaseViewController {
     }
     
     // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNoShadowNavigationBarAppearance(with: BridgeColor.primary3)
@@ -247,9 +242,11 @@ extension ProfileViewController {
     private func configure(with profile: Profile) {
         // 프로필 이미지 설정
         if let imageURL = profile.imageURL {
-            // TODO: - 이미지 설정
+            profileImageView.contentMode = .scaleAspectFit
+            profileImageView.setImage(with: imageURL, width: 155, height: 153)
+            
         } else {
-            profileImageView.tintColor = BridgeColor.gray04
+            profileImageView.contentMode = .center
             profileImageView.image = UIImage(named: "person.fill")?.resize(to: CGSize(width: 50, height: 50)).withRenderingMode(.alwaysTemplate)
         }
         
@@ -260,7 +257,7 @@ extension ProfileViewController {
         if let carrer = profile.carrer {
             carrerLabel.text = carrer
             carrerLabel.text = "취준생"
-            carrerLabel.flex.width(carrerLabel.intrinsicContentSize.width).height(30)
+            carrerLabel.flex.display(.flex).width(carrerLabel.intrinsicContentSize.width).height(30)
         } else {
             carrerLabel.flex.display(.none)
         }

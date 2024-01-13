@@ -347,6 +347,8 @@
 		7CD834BF2B50F7C500F3EED7 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834BE2B50F7C500F3EED7 /* CreateProfileViewController.swift */; };
 		7CD834C12B50F95400F3EED7 /* CreateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834C02B50F95400F3EED7 /* CreateProfileViewModel.swift */; };
 		7CD834C32B52507F00F3EED7 /* CreateProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834C22B52507F00F3EED7 /* CreateProfileUseCase.swift */; };
+		7CD834C62B52A02F00F3EED7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7CD834C52B52A02F00F3EED7 /* Kingfisher */; };
+		7CD834C82B52A92B00F3EED7 /* UIImageView+KingFisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834C72B52A92B00F3EED7 /* UIImageView+KingFisher.swift */; };
 		7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */; };
 		7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */; };
 		7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */; };
@@ -678,6 +680,7 @@
 		7CD834BE2B50F7C500F3EED7 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		7CD834C02B50F95400F3EED7 /* CreateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewModel.swift; sourceTree = "<group>"; };
 		7CD834C22B52507F00F3EED7 /* CreateProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileUseCase.swift; sourceTree = "<group>"; };
+		7CD834C72B52A92B00F3EED7 /* UIImageView+KingFisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+KingFisher.swift"; sourceTree = "<group>"; };
 		7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
 		7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
@@ -743,6 +746,7 @@
 				7BA96EC12B28140B000D48AE /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				7B71E7612A933C18001B5D2C /* FlexLayoutYoga in Frameworks */,
 				7BA96EC32B28140B000D48AE /* FirebaseAppCheck in Frameworks */,
+				7CD834C62B52A02F00F3EED7 /* Kingfisher in Frameworks */,
 				7B1D9FB52ADE11A9005F42D9 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1470,6 +1474,7 @@
 				7C42701B2AA394EF009BE6AF /* UILabel+.swift */,
 				7C24003F2AB4235800D9D5F1 /* UITextField+.swift */,
 				7B6123852AC1B199006E72C1 /* UIImage+.swift */,
+				7CD834C72B52A92B00F3EED7 /* UIImageView+KingFisher.swift */,
 				7CD834AE2B4D4AE300F3EED7 /* String+.swift */,
 			);
 			path = Extensions;
@@ -2539,6 +2544,7 @@
 				7BA96EEA2B28140B000D48AE /* FirebaseRemoteConfigSwift */,
 				7BA96EEC2B28140B000D48AE /* FirebaseStorage */,
 				7BA96EEE2B28140B000D48AE /* FirebaseStorageCombine-Community */,
+				7CD834C52B52A02F00F3EED7 /* Kingfisher */,
 			);
 			productName = Bridge;
 			productReference = 7B71E73D2A9330C6001B5D2C /* Bridge.app */;
@@ -2575,6 +2581,7 @@
 				7B1D9FB32ADE11A9005F42D9 /* XCRemoteSwiftPackageReference "Starscream" */,
 				7CA04F6A2B0C5D29007B9191 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				7BA96EB92B28140B000D48AE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7CD834C42B52A02E00F3EED7 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 7B71E73E2A9330C6001B5D2C /* Products */;
 			projectDirPath = "";
@@ -2676,6 +2683,7 @@
 				7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */,
 				7BA36CBF2A9DA44F000DAB02 /* NetworkError.swift in Sources */,
 				7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */,
+				7CD834C82B52A92B00F3EED7 /* UIImageView+KingFisher.swift in Sources */,
 				7B93B3A42B352C9C00912202 /* AlertCell.swift in Sources */,
 				7B1922CC2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift in Sources */,
 				7C91C9772B3C3B9C002E5ABF /* Profile.swift in Sources */,
@@ -3225,6 +3233,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		7CD834C42B52A02E00F3EED7 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3412,6 +3428,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7CA04F6A2B0C5D29007B9191 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		7CD834C52B52A02F00F3EED7 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CD834C42B52A02E00F3EED7 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
