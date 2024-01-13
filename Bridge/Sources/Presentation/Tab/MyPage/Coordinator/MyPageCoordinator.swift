@@ -119,7 +119,12 @@ extension MyPageCoordinator {
     }
     
     func showCreateProfileViewController() {
-
+        let createProfileViewModel = CreateProfileViewModel(
+            coordinator: self,
+            fetchProfilePreviewUseCase: fetchProfilePreviewUseCase
+        )
+        let createProfileViewController = CreateProfileViewController(viewModel: createProfileViewModel)
+        navigationController.pushViewController(createProfileViewController, animated: true)
     }
     
     func showUpdatProfileViewController(with profile: Profile) {

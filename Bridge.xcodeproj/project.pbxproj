@@ -344,6 +344,8 @@
 		7CD834B42B4EFD5B00F3EED7 /* Data+Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834B32B4EFD5B00F3EED7 /* Data+Multipart.swift */; };
 		7CD834B92B4FE50600F3EED7 /* BaseProfileEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834B82B4FE50600F3EED7 /* BaseProfileEditorViewController.swift */; };
 		7CD834BC2B504B4600F3EED7 /* BaseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834BB2B504B4600F3EED7 /* BaseListView.swift */; };
+		7CD834BF2B50F7C500F3EED7 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834BE2B50F7C500F3EED7 /* CreateProfileViewController.swift */; };
+		7CD834C12B50F95400F3EED7 /* CreateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834C02B50F95400F3EED7 /* CreateProfileViewModel.swift */; };
 		7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */; };
 		7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */; };
 		7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */; };
@@ -672,6 +674,8 @@
 		7CD834B32B4EFD5B00F3EED7 /* Data+Multipart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Multipart.swift"; sourceTree = "<group>"; };
 		7CD834B82B4FE50600F3EED7 /* BaseProfileEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileEditorViewController.swift; sourceTree = "<group>"; };
 		7CD834BB2B504B4600F3EED7 /* BaseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListView.swift; sourceTree = "<group>"; };
+		7CD834BE2B50F7C500F3EED7 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		7CD834C02B50F95400F3EED7 /* CreateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
 		7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
@@ -1581,6 +1585,7 @@
 				7CD834BA2B50472600F3EED7 /* Base */,
 				7C91C9712B3BD4F3002E5ABF /* Views */,
 				7CD5A5362B4270E100343F9F /* Update */,
+				7CD834BD2B50F7A300F3EED7 /* Create */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2284,6 +2289,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		7CD834BD2B50F7A300F3EED7 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				7CD834C02B50F95400F3EED7 /* CreateProfileViewModel.swift */,
+				7CD834BE2B50F7C500F3EED7 /* CreateProfileViewController.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
 		7CDFB60E2B20113200272F77 /* Management */ = {
 			isa = PBXGroup;
 			children = (
@@ -2644,6 +2658,7 @@
 				7B6123982AC443EC006E72C1 /* Alertable.swift in Sources */,
 				7CA04F2C2B01F822007B9191 /* ProjectDetailMenuBar.swift in Sources */,
 				7C8CC4152AF024060032F237 /* DatePickerPopUpView.swift in Sources */,
+				7CD834BF2B50F7C500F3EED7 /* CreateProfileViewController.swift in Sources */,
 				7BB8C5232AE7DCA300B264C3 /* UIScrollView+RxKeyboard.swift in Sources */,
 				7B4EA4812B08C867004663BC /* WebSocketServiceDelegate.swift in Sources */,
 				7BA36CA72A9C688C000DAB02 /* ChannelRepository.swift in Sources */,
@@ -2686,6 +2701,7 @@
 				7BB2C2472A98549D00AA2328 /* TabBarCoordinator.swift in Sources */,
 				7CA04F322B020B94007B9191 /* ProjectDetailCoordinator.swift in Sources */,
 				7CDFB6262B22CADC00272F77 /* BridgeActionSheetButton.swift in Sources */,
+				7CD834C12B50F95400F3EED7 /* CreateProfileViewModel.swift in Sources */,
 				7C87EE162B1D83FB0066691D /* MockUserRepository.swift in Sources */,
 				7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift in Sources */,
 				7C8CC41A2AF40A100032F237 /* BaseProgressView.swift in Sources */,
