@@ -18,6 +18,11 @@ final class MockUserRepository: UserRepository {
 //        .error(NetworkError.statusCode(401))
     }
     
+    func createProfile(_ profile: Profile) -> Observable<Void> {
+        .just(())
+//        .error(NetworkError.statusCode(401))
+    }
+    
     func updateProfile(_ profile: Profile) -> Observable<Void> {
         .just(())
     }

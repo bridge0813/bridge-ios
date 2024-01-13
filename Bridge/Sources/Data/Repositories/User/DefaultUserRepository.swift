@@ -33,6 +33,16 @@ final class DefaultUserRepository: UserRepository {
             .map { $0.toEntity() }
     }
     
+    /// 프로필 생성
+    func createProfile(_ profile: Profile) -> Observable<Void> {
+        let userID = tokenStorage.get(.userID)
+        let userEndpoint = UserEndpoint.updateProfile(
+            requestDTO: convertToUpdateProfileDTO(from: profile),
+            userID: userID
+        )
+        return .just(())
+    }
+    
     /// 프로필 수정
     func updateProfile(_ profile: Profile) -> Observable<Void> {
         let userID = tokenStorage.get(.userID)

@@ -31,6 +31,7 @@ final class MyPageCoordinator: Coordinator {
     private let bookmarkUseCase: BookmarkUseCase
     
     private let fetchProfileUseCase: FetchProfileUseCase
+    private let createProfileUseCase: CreateProfileUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -59,6 +60,7 @@ final class MyPageCoordinator: Coordinator {
         bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
         
         fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
+        createProfileUseCase = DefaultCreateProfileUseCase(userRepository: userRepository)
     }
     
     // MARK: - Start
@@ -121,7 +123,8 @@ extension MyPageCoordinator {
     func showCreateProfileViewController() {
         let createProfileViewModel = CreateProfileViewModel(
             coordinator: self,
-            fetchProfilePreviewUseCase: fetchProfilePreviewUseCase
+            fetchProfilePreviewUseCase: fetchProfilePreviewUseCase, 
+            createProfileUseCase: createProfileUseCase
         )
         let createProfileViewController = CreateProfileViewController(viewModel: createProfileViewModel)
         navigationController.pushViewController(createProfileViewController, animated: true)

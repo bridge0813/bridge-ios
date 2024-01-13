@@ -35,14 +35,17 @@ final class CreateProfileViewModel: ViewModelType {
     private weak var coordinator: MyPageCoordinator?
     
     private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+    private let createProfileUseCase: CreateProfileUseCase
     
     // MARK: - Init
     init(
         coordinator: MyPageCoordinator,
-        fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+        fetchProfilePreviewUseCase: FetchProfilePreviewUseCase,
+        createProfileUseCase: CreateProfileUseCase
     ) {
         self.coordinator = coordinator
         self.fetchProfilePreviewUseCase = fetchProfilePreviewUseCase
+        self.createProfileUseCase = createProfileUseCase
     }
     
     // MARK: - Transformation
@@ -173,8 +176,22 @@ final class CreateProfileViewModel: ViewModelType {
         // 작성 완료
         input.completeButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                // 요청
+            .flatMapLatest { owner, _ in
+                return owner.createProfileUseCase.create(profileRelay.value).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success:
+                    owner.coordinator?.pop()
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "프로필 등록에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
             })
             .disposed(by: disposeBag)
         
