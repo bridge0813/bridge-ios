@@ -24,14 +24,10 @@ final class UpdateProfileViewController: BaseProfileEditorViewController {
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureNoShadowNavigationBarAppearance()
-        tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        configureDefaultNavigationBarAppearance()
-        tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Configuration
