@@ -82,8 +82,9 @@ final class ProfileViewModel: ViewModelType {
 
 // MARK: - ErrorHandling
 extension ProfileViewModel {
-    /// 네트워크 에러가 401일 경우 로그인 Alert을 보여주고, 나머지 경우에는 Error Alert
+    /// 네트워킹 에러에 대한 핸들링
     private func handleNetworkError(_ error: Error) {
+        // 404일 경우, 프로필 등록 이동
         if let networkError = error as? NetworkError, case .statusCode(404) = networkError {
             coordinator?.showAlert(
                 configuration: .createProfile,
