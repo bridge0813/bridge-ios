@@ -32,4 +32,23 @@ final class DefaultNetworkService: NetworkService {
                 }
             }
     }
+    
+    func download(from urlString: URLString) -> Observable<URL> {
+        guard let url = URL(string: urlString) else { return .error(NetworkError.invalidURL) }
+        let request = URLRequest(url: url)
+        
+        return URLSession.shared.rx.download(request: request)
+            .flatMap { httpResponse, localURL in
+                let statusCode = httpResponse.statusCode
+                
+                switch statusCode {
+                case 200 ..< 300:
+                    return Observable.just(localURL)
+                    
+                default:
+                    return Observable.error(NetworkError.statusCode(statusCode))
+                }
+            }
+    }
+    
 }

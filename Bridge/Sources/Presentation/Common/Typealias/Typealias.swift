@@ -13,3 +13,5 @@ typealias ApplicantID = Int
 
 /// IndexPath의 row
 typealias IndexRow = Int
+
+typealias URLString = String

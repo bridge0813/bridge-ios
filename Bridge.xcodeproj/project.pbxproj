@@ -366,6 +366,7 @@
 		7CE0803E2ACF143A00230C86 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803D2ACF143A00230C86 /* Dropdown.swift */; };
 		7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */; };
 		7CE080492AD79ADD00230C86 /* FieldCategoryAnchorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */; };
+		7CEC06C22B52F7DB00C1700A /* URLSession+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC06C12B52F7DB00C1700A /* URLSession+.swift */; };
 		7CECB7932B369AC300D903D7 /* ApplicantEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CECB7922B369AC300D903D7 /* ApplicantEndpoint.swift */; };
 		7CECB7962B36B27300D903D7 /* DefaultApplicantRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CECB7952B36B27300D903D7 /* DefaultApplicantRepository.swift */; };
 		7CECB7992B36B2C300D903D7 /* ApplicantRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CECB7982B36B2C300D903D7 /* ApplicantRepository.swift */; };
@@ -698,6 +699,7 @@
 		7CE0803D2ACF143A00230C86 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeDropdownAnchorView.swift; sourceTree = "<group>"; };
 		7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldCategoryAnchorButton.swift; sourceTree = "<group>"; };
+		7CEC06C12B52F7DB00C1700A /* URLSession+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+.swift"; sourceTree = "<group>"; };
 		7CECB7922B369AC300D903D7 /* ApplicantEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantEndpoint.swift; sourceTree = "<group>"; };
 		7CECB7952B36B27300D903D7 /* DefaultApplicantRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultApplicantRepository.swift; sourceTree = "<group>"; };
 		7CECB7982B36B2C300D903D7 /* ApplicantRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRepository.swift; sourceTree = "<group>"; };
@@ -1446,6 +1448,7 @@
 				7B0FD3E82ADBC22700C91045 /* RxCocoaURLError+.swift */,
 				7BA36CBB2A9DA2D1000DAB02 /* NetworkService.swift */,
 				7BA36CC02A9DE219000DAB02 /* DefaultNetworkService.swift */,
+				7CEC06C32B54422600C1700A /* Extensions */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -2369,6 +2372,14 @@
 			path = RestrictionDropdown;
 			sourceTree = "<group>";
 		};
+		7CEC06C32B54422600C1700A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7CEC06C12B52F7DB00C1700A /* URLSession+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7CECB7902B369A4700D903D7 /* Applicant */ = {
 			isa = PBXGroup;
 			children = (
@@ -2936,6 +2947,7 @@
 				7CA73D992B28B481007D88FB /* CreateChannelResponseDTO.swift in Sources */,
 				7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */,
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
+				7CEC06C22B52F7DB00C1700A /* URLSession+.swift in Sources */,
 				7CD834B12B4ED25100F3EED7 /* ReferenceFileRequestDTO.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */,
