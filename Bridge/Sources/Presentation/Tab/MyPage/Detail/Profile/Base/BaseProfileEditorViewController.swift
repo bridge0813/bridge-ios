@@ -35,8 +35,7 @@ class BaseProfileEditorViewController: BaseViewController {
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.flex.size(92)
-        imageView.layer.cornerRadius = 92 / 2
+        imageView.flex.size(92).cornerRadius(92 / 2)
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView

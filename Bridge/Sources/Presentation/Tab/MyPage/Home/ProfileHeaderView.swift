@@ -16,7 +16,7 @@ final class ProfileHeaderView: BaseView {
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "profile.small")
+        imageView.flex.size(64).cornerRadius(32)
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -105,7 +105,7 @@ final class ProfileHeaderView: BaseView {
         rootFlexContainer.flex.define { flex in
             flex.addItem().height(185).paddingHorizontal(16).backgroundColor(BridgeColor.primary3).define { flex in
                 flex.addItem().direction(.row).alignItems(.center).marginTop(40).marginBottom(18).define { flex in
-                    flex.addItem(profileImageView).size(64).cornerRadius(32)
+                    flex.addItem(profileImageView)
                     flex.addItem(nameLabel).marginLeft(18)
                     flex.addItem().grow(1)
                     flex.addItem(manageProfileButton).width(83).height(30).cornerRadius(15)
@@ -136,12 +136,20 @@ extension ProfileHeaderView {
     func configure(with viewState: MyPageViewModel.ViewState) {
         switch viewState {
         case .unauthorized:
+            profileImageView.image = UIImage(named: "profile.small")
             nameLabel.text = "로그인 후 사용해주세요."
             nameLabel.textColor = BridgeColor.gray03
             manageProfileButton.flex.display(.none)
             
             
         case .authorized(let profilePreview):
+            if let imageURL = profilePreview.imageURL {
+                profileImageView.setImage(with: imageURL, width: 64, height: 64)
+                
+            } else {
+                profileImageView.image = UIImage(named: "profile.small")
+            }
+            
             nameLabel.text = "\(profilePreview.name) 님"
             nameLabel.textColor = BridgeColor.gray01
             manageProfileButton.flex.display(.flex)

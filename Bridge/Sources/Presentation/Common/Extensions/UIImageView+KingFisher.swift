@@ -26,9 +26,10 @@ extension UIImageView {
         
         // 다운로드 작업이 진행중일 때, 이미지 뷰에 인디케이터 설정.
         self.kf.indicatorType = .activity
-        self.kf.setImage(with: url, options: options) { result in
+        self.kf.setImage(with: url, options: options) { [weak self] result in
             if case .failure(let error) = result {
                 print(error.localizedDescription)
+                self?.image = UIImage(named: "profile.small")
             }
         }
     }
