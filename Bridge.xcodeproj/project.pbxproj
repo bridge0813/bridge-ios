@@ -370,6 +370,7 @@
 		7CEC06C62B544D4900C1700A /* DownloadFileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC06C52B544D4900C1700A /* DownloadFileUseCase.swift */; };
 		7CEC06C92B544DCA00C1700A /* FileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC06C82B544DCA00C1700A /* FileRepository.swift */; };
 		7CEC06CC2B544EA400C1700A /* DefaultFileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC06CB2B544EA400C1700A /* DefaultFileRepository.swift */; };
+		7CEC06CE2B54E54000C1700A /* PDFPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC06CD2B54E54000C1700A /* PDFPopUpView.swift */; };
 		7CECB7932B369AC300D903D7 /* ApplicantEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CECB7922B369AC300D903D7 /* ApplicantEndpoint.swift */; };
 		7CECB7962B36B27300D903D7 /* DefaultApplicantRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CECB7952B36B27300D903D7 /* DefaultApplicantRepository.swift */; };
 		7CECB7992B36B2C300D903D7 /* ApplicantRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CECB7982B36B2C300D903D7 /* ApplicantRepository.swift */; };
@@ -706,6 +707,7 @@
 		7CEC06C52B544D4900C1700A /* DownloadFileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileUseCase.swift; sourceTree = "<group>"; };
 		7CEC06C82B544DCA00C1700A /* FileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepository.swift; sourceTree = "<group>"; };
 		7CEC06CB2B544EA400C1700A /* DefaultFileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFileRepository.swift; sourceTree = "<group>"; };
+		7CEC06CD2B54E54000C1700A /* PDFPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFPopUpView.swift; sourceTree = "<group>"; };
 		7CECB7922B369AC300D903D7 /* ApplicantEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantEndpoint.swift; sourceTree = "<group>"; };
 		7CECB7952B36B27300D903D7 /* DefaultApplicantRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultApplicantRepository.swift; sourceTree = "<group>"; };
 		7CECB7982B36B2C300D903D7 /* ApplicantRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRepository.swift; sourceTree = "<group>"; };
@@ -1919,6 +1921,7 @@
 				7CBDE25D2B3DE2A900518AA9 /* TechStack */,
 				7CBDE25E2B3DE2BD00518AA9 /* Link */,
 				7CBDE2632B3FDA5600518AA9 /* File */,
+				7CEC06CF2B54E60500C1700A /* PDF */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2413,6 +2416,14 @@
 			path = File;
 			sourceTree = "<group>";
 		};
+		7CEC06CF2B54E60500C1700A /* PDF */ = {
+			isa = PBXGroup;
+			children = (
+				7CEC06CD2B54E54000C1700A /* PDFPopUpView.swift */,
+			);
+			path = PDF;
+			sourceTree = "<group>";
+		};
 		7CECB7902B369A4700D903D7 /* Applicant */ = {
 			isa = PBXGroup;
 			children = (
@@ -2794,6 +2805,7 @@
 				7C55E6312ADBF6AA0018FA5D /* ProjectCountHeaderView.swift in Sources */,
 				7CC9F6CD2AAF0EF800685EA9 /* MemberRequirementInputViewController.swift in Sources */,
 				7C40CBA32AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift in Sources */,
+				7CEC06CE2B54E54000C1700A /* PDFPopUpView.swift in Sources */,
 				7B0FD3E92ADBC22700C91045 /* RxCocoaURLError+.swift in Sources */,
 				7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */,
 				7C55E63B2ADEA2A40018FA5D /* MockProjectRepository.swift in Sources */,

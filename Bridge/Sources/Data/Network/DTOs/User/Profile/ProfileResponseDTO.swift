@@ -58,6 +58,8 @@ extension ProfileResponseDTO {
         ],
         carrer: "취준생",
         links: ["https://bridge.naver.comㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", "https://bridge.naver.com", "https://bridge.naver.com"],
-        files: [ReferenceFileResponseDTO(id: 0, url: "", name: "개인 작업물.pdf")]
+        files: [ReferenceFileResponseDTO(id: 0, url: "", name: "개인 작업물.pdf"),
+                ReferenceFileResponseDTO(id: 1, url: "https://www.hackingwithswift.com/files/testing-swift-sample.pdf", name: "TestFile.pdf")]
     )
 }
+

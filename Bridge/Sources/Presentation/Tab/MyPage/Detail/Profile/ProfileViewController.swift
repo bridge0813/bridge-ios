@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PDFKit
 import FlexLayout
 import PinLayout
 import RxCocoa
@@ -133,6 +132,7 @@ final class ProfileViewController: BaseViewController {
         return label
     }()
     private let fileListView = ProfileFileListView(isDeletable: false)
+    private let pdfView = PDFPopUpView()
     
     // MARK: - Property
     private let viewModel: ProfileViewModel
@@ -218,6 +218,14 @@ final class ProfileViewController: BaseViewController {
             .drive(onNext: { [weak self] profile in
                 guard let self else { return }
                 self.configure(with: profile)
+            })
+            .disposed(by: disposeBag)
+        
+        output.downloadedFile
+            .withUnretained(self)
+            .subscribe(onNext: { owner, url in
+                owner.pdfView.url = url
+                owner.pdfView.show()
             })
             .disposed(by: disposeBag)
     }
