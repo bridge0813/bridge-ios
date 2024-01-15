@@ -367,6 +367,9 @@
 		7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */; };
 		7CE080492AD79ADD00230C86 /* FieldCategoryAnchorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */; };
 		7CEC06C22B52F7DB00C1700A /* URLSession+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC06C12B52F7DB00C1700A /* URLSession+.swift */; };
+		7CEC06C62B544D4900C1700A /* DownloadFileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC06C52B544D4900C1700A /* DownloadFileUseCase.swift */; };
+		7CEC06C92B544DCA00C1700A /* FileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC06C82B544DCA00C1700A /* FileRepository.swift */; };
+		7CEC06CC2B544EA400C1700A /* DefaultFileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC06CB2B544EA400C1700A /* DefaultFileRepository.swift */; };
 		7CECB7932B369AC300D903D7 /* ApplicantEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CECB7922B369AC300D903D7 /* ApplicantEndpoint.swift */; };
 		7CECB7962B36B27300D903D7 /* DefaultApplicantRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CECB7952B36B27300D903D7 /* DefaultApplicantRepository.swift */; };
 		7CECB7992B36B2C300D903D7 /* ApplicantRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CECB7982B36B2C300D903D7 /* ApplicantRepository.swift */; };
@@ -700,6 +703,9 @@
 		7CE0803F2ACF147500230C86 /* BridgeDropdownAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeDropdownAnchorView.swift; sourceTree = "<group>"; };
 		7CE080482AD79ADD00230C86 /* FieldCategoryAnchorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldCategoryAnchorButton.swift; sourceTree = "<group>"; };
 		7CEC06C12B52F7DB00C1700A /* URLSession+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+.swift"; sourceTree = "<group>"; };
+		7CEC06C52B544D4900C1700A /* DownloadFileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileUseCase.swift; sourceTree = "<group>"; };
+		7CEC06C82B544DCA00C1700A /* FileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepository.swift; sourceTree = "<group>"; };
+		7CEC06CB2B544EA400C1700A /* DefaultFileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFileRepository.swift; sourceTree = "<group>"; };
 		7CECB7922B369AC300D903D7 /* ApplicantEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantEndpoint.swift; sourceTree = "<group>"; };
 		7CECB7952B36B27300D903D7 /* DefaultApplicantRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultApplicantRepository.swift; sourceTree = "<group>"; };
 		7CECB7982B36B2C300D903D7 /* ApplicantRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRepository.swift; sourceTree = "<group>"; };
@@ -1312,6 +1318,7 @@
 				7BA36CA52A9C6878000DAB02 /* Chat */,
 				7C56E1662B11031E00454F5E /* User */,
 				7B93B3AD2B35395500912202 /* Alert */,
+				7CEC06C72B544DB600C1700A /* File */,
 			);
 			path = RepositoryInterfaces;
 			sourceTree = "<group>";
@@ -1324,6 +1331,7 @@
 				7BA36C952A9C4D0F000DAB02 /* Chat */,
 				7C56E1632B11025300454F5E /* User */,
 				7B93B3A82B35371C00912202 /* Alert */,
+				7CEC06C42B544D2C00C1700A /* File */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1364,6 +1372,7 @@
 				7BA36CA22A9C681B000DAB02 /* Chat */,
 				7C56E1692B1103F900454F5E /* User */,
 				7B93B3B02B353A6C00912202 /* Alert */,
+				7CEC06CA2B544E8E00C1700A /* File */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -2380,6 +2389,30 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7CEC06C42B544D2C00C1700A /* File */ = {
+			isa = PBXGroup;
+			children = (
+				7CEC06C52B544D4900C1700A /* DownloadFileUseCase.swift */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
+		7CEC06C72B544DB600C1700A /* File */ = {
+			isa = PBXGroup;
+			children = (
+				7CEC06C82B544DCA00C1700A /* FileRepository.swift */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
+		7CEC06CA2B544E8E00C1700A /* File */ = {
+			isa = PBXGroup;
+			children = (
+				7CEC06CB2B544EA400C1700A /* DefaultFileRepository.swift */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
 		7CECB7902B369A4700D903D7 /* Applicant */ = {
 			isa = PBXGroup;
 			children = (
@@ -2803,11 +2836,13 @@
 				7CDFB62E2B23AAE400272F77 /* FetchMyProjectsUseCase.swift in Sources */,
 				7CECB7962B36B27300D903D7 /* DefaultApplicantRepository.swift in Sources */,
 				7BA36CCE2A9E185A000DAB02 /* ChannelCell.swift in Sources */,
+				7CEC06C92B544DCA00C1700A /* FileRepository.swift in Sources */,
 				7B153C0C2AD64E5800618280 /* ChannelEndpoint.swift in Sources */,
 				7C569D062A9F776B0063D362 /* Date+.swift in Sources */,
 				7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */,
 				7CDFB6202B204D4F00272F77 /* ManagementProjectCell.swift in Sources */,
 				7CC9F6CB2AAF0EEC00685EA9 /* MemberRequirementInputViewModel.swift in Sources */,
+				7CEC06CC2B544EA400C1700A /* DefaultFileRepository.swift in Sources */,
 				7CD023C12B2EB8E200F55648 /* ApplyProjectUseCase.swift in Sources */,
 				7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */,
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
@@ -2949,6 +2984,7 @@
 				7B14DB522AB86982009A00EB /* KeychainAccount.swift in Sources */,
 				7CEC06C22B52F7DB00C1700A /* URLSession+.swift in Sources */,
 				7CD834B12B4ED25100F3EED7 /* ReferenceFileRequestDTO.swift in Sources */,
+				7CEC06C62B544D4900C1700A /* DownloadFileUseCase.swift in Sources */,
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */,
 				7BEA73932B2B2F1300CECF44 /* MyFieldViewController.swift in Sources */,

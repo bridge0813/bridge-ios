@@ -18,6 +18,7 @@ final class MyPageCoordinator: Coordinator {
     private let userRepository: UserRepository
     private let alertRepository: AlertRepository
     private let projectRepository: ProjectRepository
+    private let fileRepository: FileRepository
     
     private let signOutUseCase: SignOutUseCase
     private let withdrawUseCase: WithdrawUseCase
@@ -32,6 +33,7 @@ final class MyPageCoordinator: Coordinator {
     
     private let fetchProfileUseCase: FetchProfileUseCase
     private let createProfileUseCase: CreateProfileUseCase
+    private let downloadFileUseCase: DownloadFileUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -43,6 +45,7 @@ final class MyPageCoordinator: Coordinator {
 //        userRepository = DefaultUserRepository(networkService: networkService)
 //        alertRepository = DefaultAlertRepository(networkService: networkService)
 //        projectRepository = DefaultProjectRepository(networkService: networkService)
+        fileRepository = DefaultFileRepository(networkService: networkService)
         authRepository = MockAuthRepository()
         userRepository = MockUserRepository()
         alertRepository = MockAlertRepository()
@@ -61,6 +64,7 @@ final class MyPageCoordinator: Coordinator {
         
         fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
         createProfileUseCase = DefaultCreateProfileUseCase(userRepository: userRepository)
+        downloadFileUseCase = DefaultDownloadFileUseCase(fileRepository: fileRepository)
     }
     
     // MARK: - Start
@@ -114,7 +118,8 @@ extension MyPageCoordinator {
     func showProfileViewController() {
         let profileViewModel = ProfileViewModel(
             coordinator: self,
-            fetchProfileUseCase: fetchProfileUseCase
+            fetchProfileUseCase: fetchProfileUseCase, 
+            downloadFileUseCase: downloadFileUseCase
         )
         let profileViewController = ProfileViewController(viewModel: profileViewModel)
         navigationController.pushViewController(profileViewController, animated: true)

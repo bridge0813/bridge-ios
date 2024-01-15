@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PDFKit
 import FlexLayout
 import PinLayout
 import RxCocoa
@@ -132,7 +133,6 @@ final class ProfileViewController: BaseViewController {
         return label
     }()
     private let fileListView = ProfileFileListView(isDeletable: false)
-    private var documentInteraction: UIDocumentInteractionController?
     
     // MARK: - Property
     private let viewModel: ProfileViewModel
@@ -218,21 +218,6 @@ final class ProfileViewController: BaseViewController {
             .drive(onNext: { [weak self] profile in
                 guard let self else { return }
                 self.configure(with: profile)
-            })
-            .disposed(by: disposeBag)
-        
-        // TODO: - 처리 생각
-        fileListView.selectedFile
-            .withUnretained(self)
-            .subscribe(onNext: { owner, file in
-                guard let url = URL(string: file.url) else {
-                    print("Invalid URL string")
-                    return
-                }
-
-                owner.documentInteraction = UIDocumentInteractionController(url: url)
-                owner.documentInteraction?.rx.setPreviewController(owner)
-                owner.documentInteraction?.presentPreview(animated: true)
             })
             .disposed(by: disposeBag)
     }

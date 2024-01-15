@@ -159,3 +159,12 @@ extension AlertConfiguration {
         rightButtonTitle: "작성하기"
     )
 }
+
+// MARK: - download
+extension AlertConfiguration {
+    static let downloadFile = AlertConfiguration(
+        title: "파일 다운로드",
+        description: "선택하신 파일을 다운로드하시겠습니까?",
+        rightButtonTitle: "확인하기"
+    )
+}
