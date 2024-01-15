@@ -13,11 +13,10 @@ final class ChannelCell: BaseTableViewCell {
     // MARK: - UI
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "profile")
-        imageView.layer.cornerRadius = 24
+        imageView.flex.size(48).cornerRadius(24)
         imageView.clipsToBounds = true
         imageView.backgroundColor = BridgeColor.gray09
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -61,7 +60,7 @@ final class ChannelCell: BaseTableViewCell {
     
     override func configureLayouts() {
         contentView.flex.direction(.row).alignItems(.center).paddingHorizontal(16).define { flex in
-            flex.addItem(profileImageView).size(48).marginRight(12)
+            flex.addItem(profileImageView).marginRight(12)
             
             flex.addItem().width(200).define { flex in
                 flex.addItem().direction(.row).marginBottom(4).define { flex in
@@ -82,6 +81,12 @@ final class ChannelCell: BaseTableViewCell {
 // MARK: - Configuration
 extension ChannelCell {
     func configure(with channel: Channel) {
+        profileImageView.setImage(
+            with: channel.imageURL,
+            size: CGSize(width: 48, height: 48),
+            placeholderImage: UIImage(named: "profile")
+        )
+
         nameLabel.text = channel.name
         nameLabel.flex.markDirty()
         

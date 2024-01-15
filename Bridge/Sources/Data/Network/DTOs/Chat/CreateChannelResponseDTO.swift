@@ -25,7 +25,7 @@ extension CreateChannelResponseDTO {
             id: channelID,
             myID: String(myID),
             opponentID: String(opponentID),
-            image: nil,
+            imageURL: nil,
             name: "",
             lastMessage: Channel.LastMessage(
                 receivedTime: "",

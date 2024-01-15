@@ -41,6 +41,7 @@ final class ProfileViewController: BaseViewController {
         imageView.tintColor = BridgeColor.gray04
         imageView.backgroundColor = BridgeColor.gray10
         imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -245,14 +246,7 @@ final class ProfileViewController: BaseViewController {
 extension ProfileViewController {
     private func configure(with profile: Profile) {
         // 프로필 이미지 설정
-        if let imageURL = profile.imageURL {
-            profileImageView.contentMode = .scaleAspectFill
-            profileImageView.setImage(with: imageURL, width: 155, height: 153)
-            
-        } else {
-            profileImageView.contentMode = .center
-            profileImageView.image = UIImage(named: "person.fill")?.resize(to: CGSize(width: 50, height: 50)).withRenderingMode(.alwaysTemplate)
-        }
+        profileImageView.setImage(with: profile.imageURL, size: CGSize(width: 155, height: 153))
         
         // 이름 설정
         nameLabel.text = "\(profile.name) 님"

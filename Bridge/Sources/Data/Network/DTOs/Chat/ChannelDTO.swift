@@ -11,7 +11,7 @@ struct ChannelDTO: Codable {
     let channelID: String
     let myID: Int
     let opponentID: Int
-    let image: String?
+    let imageURL: String?
     let name: String
     let lastMessageReceivedTime: String?
     let lastMessageContent: String?
@@ -21,7 +21,7 @@ struct ChannelDTO: Codable {
         case channelID = "roomId"
         case myID = "makerId"
         case opponentID = "receiverId"
-        case image
+        case imageURL = "image"
         case name = "roomName"
         case lastMessageReceivedTime = "lastTime"
         case lastMessageContent = "lastMessage"
@@ -35,7 +35,7 @@ extension ChannelDTO {
             id: channelID,
             myID: String(myID),
             opponentID: String(opponentID),
-            image: nil,
+            imageURL: imageURL,
             name: name,
             lastMessage: Channel.LastMessage(
                 receivedTime: lastMessageReceivedTime?.toDetailedTime() ?? "",
@@ -52,7 +52,7 @@ extension ChannelDTO {
             channelID: "1",
             myID: 1,
             opponentID: 2,
-            image: "urlString",
+            imageURL: "https://firebasestorage.googleapis.com/v0/b/cookingproject-5bf82.appspot.com/o/saveImage1677219882.2262769?alt=media&token=12b9aab3-a0b0-498f-bc81-0e8a8858d481",
             name: "정호윤",
             lastMessageReceivedTime: "2023-09-05T09:15:30+00:00",
             lastMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
@@ -62,7 +62,7 @@ extension ChannelDTO {
             channelID: "2",
             myID: 1,
             opponentID: 2,
-            image: "urlString",
+            imageURL: nil,
             name: "채팅방 2",
             lastMessageReceivedTime: "2023-09-04T15:45:10+00:00",
             lastMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
@@ -72,7 +72,7 @@ extension ChannelDTO {
             channelID: "3",
             myID: 1,
             opponentID: 2,
-            image: "urlString",
+            imageURL: nil,
             name: "채팅방 이름이 길어진 경우에 대한 테스트입니다.",
             lastMessageReceivedTime: "2023-09-06T11:00:00+00:00",
             lastMessageContent: "이미지가 수신된 경우의 미리보기 메시지입니다.",
@@ -82,7 +82,7 @@ extension ChannelDTO {
             channelID: "4",
             myID: 1,
             opponentID: 2,
-            image: "urlString",
+            imageURL: nil,
             name: "채팅방 4",
             lastMessageReceivedTime: "2023-09-04T19:30:20+00:00",
             lastMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
@@ -92,7 +92,7 @@ extension ChannelDTO {
             channelID: "5",
             myID: 1,
             opponentID: 2,
-            image: "urlString",
+            imageURL: nil,
             name: "채팅방 5",
             lastMessageReceivedTime: "2023-09-04T04:55:55+00:00",
             lastMessageContent: "수신된 가장 최근 메시지를 표시합니다.",
@@ -102,7 +102,7 @@ extension ChannelDTO {
             channelID: "6",
             myID: 1,
             opponentID: 2,
-            image: "urlString",
+            imageURL: nil,
             name: "채팅방 6",
             lastMessageReceivedTime: "2023-09-02T12:34:56+00:00",
             lastMessageContent: "수신된 가장 최근 메시지를 표시합니다.",

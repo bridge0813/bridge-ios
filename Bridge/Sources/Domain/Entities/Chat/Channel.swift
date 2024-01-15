@@ -19,7 +19,7 @@ struct Channel {
     let opponentID: String
     
     /// 채팅방 썸네일 이미지 (수신자 프로필 이미지)
-    var image: URL?
+    var imageURL: URLString?
 
     /// 채팅방 이름 (수신자 이름)
     let name: String
@@ -36,7 +36,7 @@ extension Channel {
         id: UUID().uuidString,
         myID: UUID().uuidString,
         opponentID: UUID().uuidString,
-        image: nil,
+        imageURL: nil,
         name: "채팅방 이름을 불러올 수 없습니다.",
         lastMessage: LastMessage(receivedTime: String(), content: "메시지를 불러올 수 없습니다."),
         unreadMessageCount: 0
