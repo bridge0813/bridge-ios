@@ -214,6 +214,7 @@ final class ProfileViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
+        // 프로필 정보
         output.profile
             .drive(onNext: { [weak self] profile in
                 guard let self else { return }
@@ -221,11 +222,21 @@ final class ProfileViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        // 파일 보여주기
         output.downloadedFile
             .withUnretained(self)
             .subscribe(onNext: { owner, url in
                 owner.pdfView.url = url
                 owner.pdfView.show()
+            })
+            .disposed(by: disposeBag)
+        
+        // 스크롤에 따른 NavigationBar Color 수정
+        scrollView.rx.contentOffset
+            .withUnretained(self)
+            .subscribe(onNext: { owner, offset in
+                if offset.y > 0 { owner.configureDefaultNavigationBarAppearance(with: BridgeColor.gray10)
+                } else { owner.configureNoShadowNavigationBarAppearance(with: BridgeColor.primary3) }
             })
             .disposed(by: disposeBag)
     }
