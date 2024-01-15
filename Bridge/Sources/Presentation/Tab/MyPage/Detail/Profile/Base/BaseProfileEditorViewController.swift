@@ -290,16 +290,18 @@ class BaseProfileEditorViewController: BaseViewController {
 }
 
 extension BaseProfileEditorViewController {
-    /// 프로필 정보에 맞게 
     func configure(with profile: Profile) {
-        // 유저가 선택(수정)한 이미지가 있다면 설정
+        // 1. 유저가 선택(수정)한 이미지가 있다면 설정
         if let profileImage = profile.updatedImage {
             profileImageView.image = profileImage.resize(to: CGSize(width: 92, height: 92))
         } else {
+            // 2. 기존에 설정한 프로필 이미지가 있으면 적용
             if let imageURL = profile.imageURL {
-                // URL을 가지고 이미지 설정
+                profileImageView.setImage(with: imageURL, width: 92, height: 92)
+                
             } else {
-                profileImageView.image = UIImage(named: "profile.medium")  // 기본 설정
+                // 3. 기본 이미지 적용
+                profileImageView.image = UIImage(named: "profile.medium")
             }
         }
         

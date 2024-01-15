@@ -235,7 +235,7 @@ extension ProfileViewController {
     private func configure(with profile: Profile) {
         // 프로필 이미지 설정
         if let imageURL = profile.imageURL {
-            profileImageView.contentMode = .scaleAspectFit
+            profileImageView.contentMode = .scaleAspectFill
             profileImageView.setImage(with: imageURL, width: 155, height: 153)
             
         } else {

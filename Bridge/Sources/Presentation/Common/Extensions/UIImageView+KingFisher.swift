@@ -27,11 +27,7 @@ extension UIImageView {
         // 다운로드 작업이 진행중일 때, 이미지 뷰에 인디케이터 설정.
         self.kf.indicatorType = .activity
         self.kf.setImage(with: url, options: options) { result in
-            switch result {
-            case .success:
-                print("성공")
-                
-            case .failure(let error):
+            if case .failure(let error) = result {
                 print(error.localizedDescription)
             }
         }
