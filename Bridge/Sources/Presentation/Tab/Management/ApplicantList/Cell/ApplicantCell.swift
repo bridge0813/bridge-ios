@@ -15,11 +15,10 @@ final class ApplicantCell: BaseCollectionViewCell {
     // MARK: - UI
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.flex.size(44)
+        imageView.flex.size(44).cornerRadius(22)
         imageView.backgroundColor = BridgeColor.gray06
-        imageView.layer.cornerRadius = 22
         imageView.clipsToBounds = true
-    
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -77,20 +76,6 @@ final class ApplicantCell: BaseCollectionViewCell {
         contentView.layer.masksToBounds = false
     }
     
-    func configureCell(with data: ApplicantProfile) {
-        let fieldsText = data.fields.joined(separator: ", ")
-        
-        // 설정해둔 직업이 있으면 보여주기.
-        if let career = data.career {
-            informationLabel.text = "\(career), \(fieldsText)"
-        } else {
-            informationLabel.text = fieldsText
-        }
-    
-        nameLabel.text = data.name
-        applicantID = data.userID
-    }
-    
     // MARK: - Layout
     override func configureLayouts() {
         contentView.flex.padding(24, 18, 18, 18).define { flex in
@@ -116,5 +101,23 @@ final class ApplicantCell: BaseCollectionViewCell {
             roundedRect: contentView.bounds,
             cornerRadius: 8
         ).cgPath
+    }
+}
+
+extension ApplicantCell {
+    func configureCell(with data: ApplicantProfile) {
+        profileImageView.setImage(with: data.imageURL, size: CGSize(width: 44, height: 44), placeholderImage: nil)
+        
+        let fieldsText = data.fields.joined(separator: ", ")
+        
+        // 설정해둔 직업이 있으면 보여주기.
+        if let career = data.career {
+            informationLabel.text = "\(career), \(fieldsText)"
+        } else {
+            informationLabel.text = fieldsText
+        }
+    
+        nameLabel.text = data.name
+        applicantID = data.userID
     }
 }

@@ -38,12 +38,13 @@ final class ManagementCoordinator: Coordinator {
         let stompService = DefaultStompService(webSocketService: DefaultWebSocketService.shared)
         
         // 리포지토리
-        projectRepository = DefaultProjectRepository(networkService: networkService)
-        applicantRepository = DefaultApplicantRepository(networkService: networkService)
-        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
+//        projectRepository = DefaultProjectRepository(networkService: networkService)
+//        applicantRepository = DefaultApplicantRepository(networkService: networkService)
+//        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
 
-//        projectRepository = MockProjectRepository()
-//        applicantRepository = MockApplicantRepository()
+        projectRepository = MockProjectRepository()
+        applicantRepository = MockApplicantRepository()
+        channelRepository = MockChannelRepository()
         
         // 관리
         fetchAppliedProjectsUseCase = DefaultFetchAppliedProjectsUseCase(projectRepository: projectRepository)
