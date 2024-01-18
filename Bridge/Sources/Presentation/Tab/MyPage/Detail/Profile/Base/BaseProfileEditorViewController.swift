@@ -292,7 +292,7 @@ extension BaseProfileEditorViewController {
     func configure(with profile: Profile) {
         // 유저가 선택(수정)한 이미지가 있다면 설정
         if let profileImage = profile.updatedImage {
-            profileImageView.image = profileImage.resize(to: CGSize(width: 92, height: 92))
+            profileImageView.image = profileImage
         } else {
             profileImageView.setImage(
                 with: profile.imageURL,

@@ -44,8 +44,9 @@ extension RxPHPickerControllerDelegateProxy: PHPickerViewControllerDelegate {
         
         if let itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
-                guard let self else { return }
-                didFinishPicking.onNext(image as? UIImage)
+                guard let self, let image = image as? UIImage else { return }
+                let resizedImage = image.resize(to: CGSize(width: 180, height: 180))
+                didFinishPicking.onNext(resizedImage)
             }
         }
     }
