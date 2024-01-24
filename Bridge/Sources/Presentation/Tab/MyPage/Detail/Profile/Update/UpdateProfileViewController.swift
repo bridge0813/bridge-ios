@@ -52,7 +52,7 @@ final class UpdateProfileViewController: BaseProfileEditorViewController {
         let input = UpdateProfileViewModel.Input(
             addedProfileImage: addedProfileImage,
             nameChanged: nameChanged,
-            selectedCarrer: carrerButtonTapped,
+            selectedCareer: careerButtonTapped,
             introductionChanged: introductionChanged,
             addedFieldTechStack: addedFieldTechStack,
             deletedFieldTechStack: deletedFieldTechStack,

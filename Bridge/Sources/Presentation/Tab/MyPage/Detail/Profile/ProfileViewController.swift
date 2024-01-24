@@ -52,7 +52,7 @@ final class ProfileViewController: BaseViewController {
         return label
     }()
     
-    private let carrerLabel: BridgeFilledChip = {
+    private let careerLabel: BridgeFilledChip = {
         let label = BridgeFilledChip(
             backgroundColor: BridgeColor.primary2,
             type: .custom(padding: .init(top: 8, left: 14, bottom: 8, right: 14), radius: 15)
@@ -172,7 +172,7 @@ final class ProfileViewController: BaseViewController {
             flex.addItem(profileImageView).alignSelf(.center).marginTop(52)
             flex.addItem(nameLabel).marginTop(38).marginLeft(16)
             flex.addItem().direction(.row).alignItems(.center).marginTop(12).marginHorizontal(16).define { flex in
-                flex.addItem(carrerLabel).marginRight(12)
+                flex.addItem(careerLabel).marginRight(12)
                 flex.addItem(fieldsLabel)
             }
             
@@ -252,12 +252,12 @@ extension ProfileViewController {
         nameLabel.text = "\(profile.name) 님"
         
         // 직업 설정
-        if let carrer = profile.carrer {
-            carrerLabel.text = carrer
-            carrerLabel.text = "취준생"
-            carrerLabel.flex.display(.flex).width(carrerLabel.intrinsicContentSize.width).height(30)
+        if let career = profile.career {
+            careerLabel.text = career
+            careerLabel.text = "취준생"
+            careerLabel.flex.display(.flex).width(careerLabel.intrinsicContentSize.width).height(30)
         } else {
-            carrerLabel.flex.display(.none)
+            careerLabel.flex.display(.none)
         }
         
         // 관심분야 설정

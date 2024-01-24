@@ -14,7 +14,7 @@ final class CreateProfileViewModel: ViewModelType {
     struct Input {
         let addedProfileImage: Observable<UIImage?>                               // 이미지 추가
         let nameChanged: Observable<String>                                       // 이름 변경
-        let selectedCarrer: Observable<String>                                    // 경력 선택
+        let selectedCareer: Observable<String>                                    // 경력 선택
         let introductionChanged: Observable<String>                               // 소개 변경
         let addedFieldTechStack: Observable<FieldTechStack>                       // 기술스택 추가
         let deletedFieldTechStack: Observable<IndexRow>                           // 기술스택 삭제
@@ -80,10 +80,10 @@ final class CreateProfileViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         // 직업 설정
-        input.selectedCarrer
-            .subscribe(onNext: { carrer in
+        input.selectedCareer
+            .subscribe(onNext: { career in
                 var profile = profileRelay.value
-                profile.carrer = carrer
+                profile.career = career
                 profileRelay.accept(profile)
             })
             .disposed(by: disposeBag)

@@ -86,7 +86,7 @@ class BaseProfileEditorViewController: BaseViewController {
         return textField
     }()
     
-    private let carrerTitleLabel: UILabel = {
+    private let careerTitleLabel: UILabel = {
         let label = UILabel()
         label.flex.width(56).height(24)
         label.text = "경력사항"
@@ -192,7 +192,7 @@ class BaseProfileEditorViewController: BaseViewController {
             flex.addItem(nameTitleLabel).marginTop(48)
             flex.addItem(nameTextField).marginTop(14)
             
-            flex.addItem(carrerTitleLabel).marginTop(24)
+            flex.addItem(careerTitleLabel).marginTop(24)
             flex.addItem().direction(.row).marginTop(14).define { flex in
                 flex.addItem(studentButton)
                 flex.addItem(jobSeekerButton).marginLeft(12)
@@ -305,12 +305,12 @@ extension BaseProfileEditorViewController {
         nameTextField.text = profile.name
         
         // 직업 설정
-        if let carrer = profile.carrer {
+        if let career = profile.career {
             // 선택해제
-            let carrerButtons = [studentButton, jobSeekerButton, currentEmployeeButton]
-            carrerButtons.forEach { $0.isSelected = false }
+            let careerButtons = [studentButton, jobSeekerButton, currentEmployeeButton]
+            careerButtons.forEach { $0.isSelected = false }
             
-            switch carrer {
+            switch career {
             case "학생": studentButton.isSelected = true
             case "취준생": jobSeekerButton.isSelected = true
             case "현직자": currentEmployeeButton.isSelected = true
@@ -355,7 +355,7 @@ extension BaseProfileEditorViewController {
     }
     
     /// 직업 선택
-    var carrerButtonTapped: Observable<String> {
+    var careerButtonTapped: Observable<String> {
         Observable.merge(
             studentButton.rx.tap.map { "학생" },
             jobSeekerButton.rx.tap.map { "취준생" },

@@ -12,7 +12,7 @@ struct ProfileResponseDTO: Decodable {
     let introduction: String?
     let fields: [String]
     let fieldTechStacks: [FieldTechStackDTO]
-    let carrer: String?
+    let career: String?
     let links: [String]
     let files: [ReferenceFileResponseDTO]
     
@@ -22,7 +22,7 @@ struct ProfileResponseDTO: Decodable {
         case introduction = "selfIntro"
         case fields
         case fieldTechStacks = "stacks"
-        case carrer
+        case career
         case links = "refLinks"
         case files = "refFiles"
     }
@@ -36,7 +36,7 @@ extension ProfileResponseDTO {
             introduction: introduction,
             fields: fields,
             fieldTechStacks: fieldTechStacks.map { $0.toEntity() },
-            carrer: carrer,
+            career: career,
             links: links,
             files: files.map { $0.toEntity() }
         )
@@ -56,7 +56,7 @@ extension ProfileResponseDTO {
 //            FieldTechStackDTO(field: "UI/UX", techStacks: ["photoshop", "illustrator", "indesign"]),
 //            FieldTechStackDTO(field: "BI/BX", techStacks: ["photoshop"])
         ],
-        carrer: "취준생",
+        career: "취준생",
         links: ["https://bridge.naver.comㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", "https://bridge.naver.com", "https://bridge.naver.com"],
         files: [
             ReferenceFileResponseDTO(id: 0, url: "", name: "개인 작업물.pdf"),

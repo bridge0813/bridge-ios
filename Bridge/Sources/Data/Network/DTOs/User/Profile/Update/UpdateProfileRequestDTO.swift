@@ -12,7 +12,7 @@ struct UpdateProfileRequestDTO: Encodable {
     let name: String
     let introduction: String?
     let fieldTechStacks: [FieldTechStackDTO]
-    let carrer: String?
+    let career: String?
     let links: [String]
     let originalFileIDs: [Int]
     let newFiles: [ReferenceFileRequestDTO]
@@ -22,7 +22,7 @@ struct UpdateProfileRequestDTO: Encodable {
         case name
         case introduction = "selfIntro"
         case fieldTechStacks = "stacks"
-        case carrer
+        case career
         case links = "refLink"
         case originalFileIDs = "fileIds"
         case newfiles = "refFile"
@@ -54,10 +54,10 @@ extension UpdateProfileRequestDTO {
         }
         
         // carrer
-        if let carrer {
-            try container.encode(carrer, forKey: .carrer)
+        if let career {
+            try container.encode(career, forKey: .career)
         } else {
-            try container.encodeNil(forKey: .carrer)
+            try container.encodeNil(forKey: .career)
         }
     }
 }

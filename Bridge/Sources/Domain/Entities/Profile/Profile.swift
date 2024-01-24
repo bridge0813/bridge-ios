@@ -14,7 +14,7 @@ struct Profile {
     var introduction: String?
     let fields: [String]
     var fieldTechStacks: [FieldTechStack]
-    var carrer: String?
+    var career: String?
     var links: [String]
     var files: [ReferenceFile]
 }
@@ -41,7 +41,7 @@ extension Profile {
         introduction: nil,
         fields: [],
         fieldTechStacks: [],
-        carrer: nil,
+        career: nil,
         links: [],
         files: []
     )

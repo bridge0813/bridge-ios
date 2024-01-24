@@ -105,7 +105,7 @@ extension DefaultUserRepository {
             name: profile.name,
             introduction: profile.introduction,
             fieldTechStacks: fieldTechStacksDTO,
-            carrer: profile.carrer,
+            career: profile.career,
             links: profile.links,
             originalFileIDs: originalFileIDs,
             newFiles: newFiles
