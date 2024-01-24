@@ -11,6 +11,7 @@ enum UserEndpoint {
     case fetchProfilePreview(userID: String)
     case changeField(requestDTO: ChangeFieldRequestDTO)
     case fetchBookmarkedProjects(userID: String)
+    case createProfile(multipartData: ProfileMultipartData, userID: String)
     case updateProfile(requestDTO: UpdateProfileRequestDTO, userID: String)
     
     /// Multipart에서 각 데이터의 경계를 나타낼 바운더리
@@ -31,6 +32,9 @@ extension UserEndpoint: Endpoint {
         case .fetchBookmarkedProjects:
             return "/users/bookmark"
             
+        case .createProfile:
+            return "/users/profile"
+            
         case .updateProfile:
             return "/users/profile"
         }
@@ -45,6 +49,9 @@ extension UserEndpoint: Endpoint {
             return nil
             
         case .fetchBookmarkedProjects(let userID):
+            return ["userId": userID]
+            
+        case .createProfile(_, let userID):
             return ["userId": userID]
             
         case .updateProfile(_, let userID):
@@ -63,6 +70,9 @@ extension UserEndpoint: Endpoint {
         case .fetchBookmarkedProjects:
             return .get
             
+        case .createProfile:
+            return .post
+            
         case .updateProfile:
             return .put
         }
@@ -78,6 +88,10 @@ extension UserEndpoint: Endpoint {
             
         case .fetchBookmarkedProjects:
             return ["Content-Type": "application/json"]
+            
+        case .createProfile:
+            let contentType = "multipart/form-data; boundary=\(boundaryName)"
+            return ["Content-Type": contentType]
             
         case .updateProfile:
             let contentType = "multipart/form-data; boundary=\(boundaryName)"
@@ -95,6 +109,44 @@ extension UserEndpoint: Endpoint {
             
         case .fetchBookmarkedProjects:
             return nil
+            
+        case .createProfile(let multipartData, _):
+            var body = Data()
+            
+            // 프로필 데이터 추가
+            if let profileFormData = try? JSONEncoder().encode(multipartData.createProfile) {
+                body.appendFileDataForMultipart(
+                    profileFormData,
+                    fieldName: "profile",
+                    fileName: "profile.json",
+                    mimeType: "application/json",
+                    boundary: boundaryName
+                )
+            }
+            
+            // 이미지 데이터 추가
+            if let imageFormData = multipartData.imageData {
+                body.appendFileDataForMultipart(
+                    imageFormData,
+                    fieldName: "photo",
+                    fileName: "profileImage.jpg",
+                    mimeType: "image/jpeg",
+                    boundary: boundaryName
+                )
+            }
+            
+            // 파일 데이터 추가
+            multipartData.files.forEach { file in
+                body.appendFileDataForMultipart(
+                    file.data,
+                    fieldName: "refFiles",
+                    fileName: file.name,
+                    mimeType: "application/pdf",
+                    boundary: boundaryName
+                )
+            }
+        
+            return body
             
         case .updateProfile(let requestDTO, _):
             var body = Data()
