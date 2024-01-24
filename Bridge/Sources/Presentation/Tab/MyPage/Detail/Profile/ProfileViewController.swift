@@ -260,8 +260,8 @@ extension ProfileViewController {
             careerLabel.flex.display(.none)
         }
         
-        // 관심분야 설정
-        fieldsLabel.text = profile.fields.joined(separator: ", ")
+        // 분야 설정(관심분야와 다른 유저의 스택 분야)
+        fieldsLabel.text = profile.fieldTechStacks.map { $0.field }.joined(separator: ", ")
         
         // 자기소개 설정
         if let introduction = profile.introduction {

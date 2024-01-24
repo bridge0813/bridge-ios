@@ -212,7 +212,6 @@ extension CreateProfileViewModel {
             let profile = Profile(
                 imageURL: nil,
                 name: profilePreview.name,
-                fields: profilePreview.fields,
                 fieldTechStacks: [],
                 links: [],
                 files: []

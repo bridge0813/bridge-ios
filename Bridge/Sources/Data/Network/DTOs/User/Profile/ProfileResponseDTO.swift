@@ -10,7 +10,6 @@ struct ProfileResponseDTO: Decodable {
     let imageURL: String?
     let name: String
     let introduction: String?
-    let fields: [String]
     let fieldTechStacks: [FieldTechStackDTO]
     let career: String?
     let links: [String]
@@ -20,8 +19,7 @@ struct ProfileResponseDTO: Decodable {
         case imageURL = "profilePhotoURL"
         case name
         case introduction = "selfIntro"
-        case fields
-        case fieldTechStacks = "stacks"
+        case fieldTechStacks = "fieldAndStacks"
         case career
         case links = "refLinks"
         case files = "refFiles"
@@ -34,7 +32,6 @@ extension ProfileResponseDTO {
             imageURL: imageURL,
             name: name,
             introduction: introduction,
-            fields: fields,
             fieldTechStacks: fieldTechStacks.map { $0.toEntity() },
             career: career,
             links: links,
@@ -48,7 +45,6 @@ extension ProfileResponseDTO {
         imageURL: "https://firebasestorage.googleapis.com/v0/b/cookingproject-5bf82.appspot.com/o/saveImage1677219882.2262769?alt=media&token=12b9aab3-a0b0-498f-bc81-0e8a8858d481",
         name: "엄지호",
         introduction: "책임감과 성실함을 겸비한 준비된 인재입니다. 사이드 프로젝트는 15번정도 한 경험이 있구요.",
-        fields: ["백엔드", "안드로이드", "iOS"],
         fieldTechStacks: [
             FieldTechStackDTO(field: "iOS", techStacks: ["Swift", "Objective_C", "UIKit", "SwiftUI", "RxSwift"]),
             FieldTechStackDTO(field: "안드로이드", techStacks: ["Kotlin", "Java", "Compose"])

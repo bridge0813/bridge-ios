@@ -12,7 +12,6 @@ struct Profile {
     let imageURL: String?
     var name: String
     var introduction: String?
-    let fields: [String]
     var fieldTechStacks: [FieldTechStack]
     var career: String?
     var links: [String]
@@ -39,7 +38,6 @@ extension Profile {
         imageURL: nil,
         name: "Bridge",
         introduction: nil,
-        fields: [],
         fieldTechStacks: [],
         career: nil,
         links: [],
