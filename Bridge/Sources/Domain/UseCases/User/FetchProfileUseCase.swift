@@ -8,7 +8,8 @@
 import RxSwift
 
 protocol FetchProfileUseCase {
-    func fetch() -> Observable<Profile>
+    func fetchMyProfile() -> Observable<Profile>
+    func fetchOtherUserProfile(userID: Int) -> Observable<Profile>
 }
 
 final class DefaultFetchProfileUseCase: FetchProfileUseCase {
@@ -18,7 +19,11 @@ final class DefaultFetchProfileUseCase: FetchProfileUseCase {
         self.userRepository = userRepository
     }
     
-    func fetch() -> Observable<Profile> {
-        userRepository.fetchProfile()
+    func fetchMyProfile() -> Observable<Profile> {
+        userRepository.fetchMyProfile()
+    }
+    
+    func fetchOtherUserProfile(userID: Int) -> Observable<Profile> {
+        userRepository.fetchOtherUserProfile(userID: userID)
     }
 }

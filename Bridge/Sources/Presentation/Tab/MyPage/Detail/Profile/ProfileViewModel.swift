@@ -50,7 +50,7 @@ final class ProfileViewModel: ViewModelType {
         input.viewWillAppear
             .withUnretained(self)
             .flatMapLatest { owner, _ in
-                return owner.fetchProfileUseCase.fetch().toResult()
+                return owner.fetchProfileUseCase.fetchMyProfile().toResult()
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)

@@ -53,7 +53,7 @@ final class OtherUserProfileViewModel: ViewModelType {
         input.viewWillAppear
             .withUnretained(self)
             .flatMapLatest { owner, _ in
-                return owner.fetchProfileUseCase.fetch().toResult()
+                return owner.fetchProfileUseCase.fetchOtherUserProfile(userID: owner.userID).toResult()
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
