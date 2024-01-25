@@ -36,11 +36,13 @@ final class DefaultUserRepository: UserRepository {
     /// 프로필 생성
     func createProfile(_ profile: Profile) -> Observable<Void> {
         let userID = tokenStorage.get(.userID)
-        let userEndpoint = UserEndpoint.updateProfile(
-            requestDTO: convertToUpdateProfileDTO(from: profile),
+        let userEndpoint = UserEndpoint.createProfile(
+            multipartData: createProfileMultipartData(profile: profile),
             userID: userID
         )
-        return .just(())
+        
+        return networkService.request(to: userEndpoint, interceptor: nil)
+            .map { _ in }
     }
     
     /// 프로필 수정
@@ -78,6 +80,35 @@ final class DefaultUserRepository: UserRepository {
 }
 
 extension DefaultUserRepository {
+    /// Multipart/form-data 바디 구성을 위한 데이터 생성
+    private func createProfileMultipartData(profile: Profile) -> ProfileMultipartData {
+        // 분야 및 스택 DTO
+        let fieldTechStacksDTO = profile.fieldTechStacks.map { fieldTechStack -> FieldTechStackDTO in
+            FieldTechStackDTO(
+                field: fieldTechStack.field.convertToUpperCaseFormat(),
+                techStacks: fieldTechStack.techStacks.map { stack in
+                    // 서버측 워딩에 맞게 수정. 대문자 처리 및 띄어쓰기 제거
+                    if stack == "C++" { return "CPP" }
+                    else { return stack.uppercased().replacingOccurrences(of: " ", with: "") }
+                }
+            )
+        }
+        
+        let createProfileDTO = CreateProfileRequestDTO(
+            name: profile.name,
+            introduction: profile.introduction,
+            career: profile.career,
+            fieldTechStacks: fieldTechStacksDTO,
+            links: profile.links
+        )
+        
+        return ProfileMultipartData(
+            createProfile: createProfileDTO,
+            imageData: profile.updatedImage?.jpegData(compressionQuality: 1),
+            files: profile.files
+        )
+    }
+    
     /// 프로필 -> 프로필 수정 DTO 전환 메서드
     private func convertToUpdateProfileDTO(from profile: Profile) -> UpdateProfileRequestDTO {
         // 분야 및 스택 DTO

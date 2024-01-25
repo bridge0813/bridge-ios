@@ -11,5 +11,5 @@ import Foundation
 struct ProfileMultipartData {
     let createProfile: CreateProfileRequestDTO
     let imageData: Data?
-    let files: [ReferenceFileRequestDTO]
+    let files: [ReferenceFile]
 }
