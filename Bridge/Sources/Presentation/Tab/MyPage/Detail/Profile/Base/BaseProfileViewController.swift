@@ -11,6 +11,7 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
+/// 프로필을 보여주기 위한 BaseViewController(내 프로필, 다른 유저의 프로필)
 class BaseProfileViewController: BaseViewController {
     // MARK: - UI
     let editProfileButton: UIButton = {
