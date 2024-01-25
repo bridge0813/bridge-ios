@@ -15,7 +15,6 @@ final class ManagementCoordinator: Coordinator {
     
     private let projectRepository: ProjectRepository
     private let applicantRepository: ApplicantRepository
-    private let channelRepository: ChannelRepository
     
     private let fetchAppliedProjectsUseCase: FetchAppliedProjectsUseCase
     private let fetchMyProjectsUseCase: FetchMyProjectsUseCase
@@ -26,7 +25,15 @@ final class ManagementCoordinator: Coordinator {
     private let acceptApplicantUseCase: AcceptApplicantUseCase
     private let rejectApplicantUseCase: RejectApplicantUseCase
     
+    // 채널방 개설 및 보여주기
     private let createChannelUseCase: CreateChannelUseCase
+    private let channelRepository: ChannelRepository
+    
+    // 다른 유저의 프로필 보여주기
+    private let userRepository: UserRepository
+    private let fileRepository: FileRepository
+    private let fetchProfileUseCase: FetchProfileUseCase
+    private let downloadFileUseCase: DownloadFileUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -37,14 +44,10 @@ final class ManagementCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
         let stompService = DefaultStompService(webSocketService: DefaultWebSocketService.shared)
         
-        // 리포지토리
 //        projectRepository = DefaultProjectRepository(networkService: networkService)
 //        applicantRepository = DefaultApplicantRepository(networkService: networkService)
-//        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
-
         projectRepository = MockProjectRepository()
         applicantRepository = MockApplicantRepository()
-        channelRepository = MockChannelRepository()
         
         // 관리
         fetchAppliedProjectsUseCase = DefaultFetchAppliedProjectsUseCase(projectRepository: projectRepository)
@@ -58,7 +61,16 @@ final class ManagementCoordinator: Coordinator {
         cancelApplicationUseCase = DefaultCancelApplicationUseCase(applicantRepository: applicantRepository)
         
         // 채팅방 개설
+//        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
+        channelRepository = MockChannelRepository()
         createChannelUseCase = DefaultCreateChannelUseCase(channelRepository: channelRepository)
+        
+        // 다른 유저의 프로필 보여주기
+//        userRepository = DefaultUserRepository(networkService: networkService)
+        fileRepository = DefaultFileRepository(networkService: networkService)
+        userRepository = MockUserRepository()
+        fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
+        downloadFileUseCase = DefaultDownloadFileUseCase(fileRepository: fileRepository)
     }
     
     // MARK: - Methods
@@ -100,6 +112,18 @@ extension ManagementCoordinator {
     // 채팅방 이동
     func showChannelViewController(of channel: Channel) {
         delegate?.showChannelViewController(of: channel, navigationController: navigationController)
+    }
+    
+    // 프로필 보여주기
+    func showProfileViewController(of userID: String) {
+        let otherUserProfileViewModel = OtherUserProfileViewModel(
+            coordinator: self,
+            userID: userID,
+            fetchProfileUseCase: fetchProfileUseCase,
+            downloadFileUseCase: downloadFileUseCase
+        )
+        let otherUserProfileViewController = OtherUserProfileViewController(viewModel: otherUserProfileViewModel)
+        navigationController.pushViewController(otherUserProfileViewController, animated: true)
     }
     
     // MARK: - Connect

@@ -43,6 +43,7 @@ final class ApplicantListViewController: BaseViewController {
     
     private var dataSource: DataSource?
     
+    private let nameButtonTapped = PublishSubject<ApplicantID>()
     private let startChatButtonTapped = PublishSubject<ApplicantID>()
     private let acceptButtonTapped = PublishSubject<ApplicantID>()
     private let rejectButtonTapped = PublishSubject<ApplicantID>()
@@ -81,7 +82,8 @@ final class ApplicantListViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = ApplicantListViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            viewWillAppear: self.rx.viewWillAppear.asObservable(), 
+            nameButtonTapped: nameButtonTapped,
             startChatButtonTapped: startChatButtonTapped,
             acceptButtonTapped: acceptButtonTapped,
             rejectButtonTapped: rejectButtonTapped
@@ -159,6 +161,14 @@ extension ApplicantListViewController {
             guard let self else { return UICollectionViewCell() }
            
             cell.configureCell(with: profile)
+            
+            // 이름 버튼 클릭(프로필 이동)
+            cell.nameButtonTapped
+                .withUnretained(self)
+                .subscribe(onNext: { owner, userID in
+                    owner.nameButtonTapped.onNext(userID)
+                })
+                .disposed(by: cell.disposeBag)
             
             // 채팅하기 or 수락하기 or 거절하기
             cell.buttonGroupTapped

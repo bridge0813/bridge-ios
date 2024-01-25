@@ -25,7 +25,7 @@ final class ChatCoordinator: Coordinator {
     private let fetchMessagesUseCase: FetchMessagesUseCase
     private let sendMessageUseCase: SendMessageUseCase
     
-    // 다른 유저의 프로필을 보여줄 경우
+    // 다른 유저의 프로필 보여주기
     private let userRepository: UserRepository
     private let fileRepository: FileRepository
     private let fetchProfileUseCase: FetchProfileUseCase
@@ -40,11 +40,8 @@ final class ChatCoordinator: Coordinator {
         authRepository = DefaultAuthRepository(networkService: networkService)
 //        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
 //        messageRepository = DefaultMessageRepository(networkService: networkService, stompService: stompService)
-//        userRepository = DefaultUserRepository(networkService: networkService)
-        fileRepository = DefaultFileRepository(networkService: networkService)
         channelRepository = MockChannelRepository()
         messageRepository = MockMessageRepository()
-        userRepository = MockUserRepository()
         
         fetchChannelsUseCase = DefaultFetchChannelsUseCase(channelRepository: channelRepository)
         leaveChannelUseCase = DefaultLeaveChannelUseCase(channelRepository: channelRepository)
@@ -53,7 +50,10 @@ final class ChatCoordinator: Coordinator {
         fetchMessagesUseCase = DefaultFetchMessagesUseCase(messageRepository: messageRepository)
         sendMessageUseCase = DefaultSendMessageUseCase(messageRepository: messageRepository)
         
-        // 다른 유저의 프로필을 보여줄 경우
+        // 다른 유저의 프로필 보여주기
+//        userRepository = DefaultUserRepository(networkService: networkService)
+        fileRepository = DefaultFileRepository(networkService: networkService)
+        userRepository = MockUserRepository()
         fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
         downloadFileUseCase = DefaultDownloadFileUseCase(fileRepository: fileRepository)
     }
@@ -88,6 +88,7 @@ extension ChatCoordinator {
         navigationController.pushViewController(channelViewController, animated: true)
     }
     
+    // 프로필 보여주기
     func showProfileViewController(of userID: String) {
         let otherUserProfileViewModel = OtherUserProfileViewModel(
             coordinator: self,

@@ -22,11 +22,11 @@ final class ApplicantCell: BaseCollectionViewCell {
         return imageView
     }()
     
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = BridgeFont.subtitle1.font
-        label.textColor = BridgeColor.gray01
-        return label
+    private let nameButton: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(BridgeColor.gray01, for: .normal)
+        button.titleLabel?.font = BridgeFont.subtitle1.font
+        return button
     }()
     
     private let informationLabel: UILabel = {
@@ -52,6 +52,14 @@ final class ApplicantCell: BaseCollectionViewCell {
     
     // MARK: - Property
     private var applicantID = 0
+    
+    var nameButtonTapped: Observable<ApplicantID> {
+        return nameButton.rx.tap
+            .withUnretained(self)
+            .map { owner, _ in
+                return owner.applicantID
+            }
+    }
     
     /// 지원자 목록 or 프로젝트 상세
     var buttonGroupTapped: Observable<(String, ApplicantID)> {
@@ -83,7 +91,7 @@ final class ApplicantCell: BaseCollectionViewCell {
                 flex.addItem(profileImageView)
                 
                 flex.addItem().grow(1).marginLeft(16).define { flex in
-                    flex.addItem(nameLabel)
+                    flex.addItem(nameButton)
                     flex.addItem(informationLabel).marginTop(4)
                 }
             }
@@ -116,8 +124,9 @@ extension ApplicantCell {
         } else {
             informationLabel.text = fieldsText
         }
-    
-        nameLabel.text = data.name
+        
+        nameButton.setTitle(data.name, for: .normal)
+        nameButton.flex.width(nameButton.intrinsicContentSize.width).height(22).markDirty()
         applicantID = data.userID
     }
 }
