@@ -72,8 +72,7 @@ final class MyPageViewModel: ViewModelType {
         input.bellButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                // TODO: - 임시
-                owner.coordinator?.showProfileViewController()
+                owner.coordinator?.showPushAlertViewController()
             })
             .disposed(by: disposeBag)
         
