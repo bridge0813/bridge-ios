@@ -27,14 +27,14 @@ final class OtherUserProfileViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: MyPageCoordinator?
     
-    private let userID: Int
+    private let userID: String
     private let fetchProfileUseCase: FetchProfileUseCase
     private let downloadFileUseCase: DownloadFileUseCase
     
     // MARK: - Init
     init(
         coordinator: MyPageCoordinator,
-        userID: Int,
+        userID: String,
         fetchProfileUseCase: FetchProfileUseCase,
         downloadFileUseCase: DownloadFileUseCase
     ) {

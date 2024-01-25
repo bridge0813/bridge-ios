@@ -74,13 +74,15 @@ extension ChatCoordinator {
         let channelViewController = ChannelViewController(viewModel: channelViewModel)
         navigationController.pushViewController(channelViewController, animated: true)
     }
-    
-    func showProfileViewController(of userID: String) { }
 }
 
 // MARK: - Auth
 extension ChatCoordinator {
     func showSignInViewController() {
         delegate?.showSignInViewController()
+    }
+    
+    func showProfileViewController(of userID: String) {
+        delegate?.showProfileViewController(of: userID, navigationController: navigationController)
     }
 }

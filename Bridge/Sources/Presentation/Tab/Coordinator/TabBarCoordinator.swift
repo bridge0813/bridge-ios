@@ -177,7 +177,7 @@ extension TabBarCoordinator: CoordinatorDelegate {
         childCoordinators.append(chatCoordinator)
     }
     
-    func showOtherUserProfileViewController(_ userID: Int, navigationController: UINavigationController) {
+    func showProfileViewController(of userID: String, navigationController: UINavigationController) {
         let myPageCoordinator = MyPageCoordinator(navigationController: navigationController)
         myPageCoordinator.showOtherUserProfileViewController(userID: userID)
         myPageCoordinator.delegate = self

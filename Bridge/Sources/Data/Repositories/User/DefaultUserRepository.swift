@@ -29,8 +29,8 @@ final class DefaultUserRepository: UserRepository {
     }
     
     /// 프로필 조회
-    func fetchOtherUserProfile(userID: Int) -> Observable<Profile> {
-        let userEndpoint = UserEndpoint.fetchProfile(userID: String(userID))
+    func fetchOtherUserProfile(userID: String) -> Observable<Profile> {
+        let userEndpoint = UserEndpoint.fetchProfile(userID: userID)
         
         return networkService.request(to: userEndpoint, interceptor: nil)
             .decode(type: ProfileResponseDTO.self, decoder: JSONDecoder())

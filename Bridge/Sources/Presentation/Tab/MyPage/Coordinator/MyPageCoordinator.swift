@@ -127,7 +127,7 @@ extension MyPageCoordinator {
         navigationController.pushViewController(profileViewController, animated: true)
     }
     
-    func showOtherUserProfileViewController(userID: Int) {
+    func showOtherUserProfileViewController(userID: String) {
         let otherUserProfileViewModel = OtherUserProfileViewModel(
             coordinator: self,
             userID: userID,
