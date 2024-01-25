@@ -160,7 +160,6 @@ final class ProfileViewController: BaseViewController {
     // MARK: - Configuration
     override func configureAttributes() {
         navigationItem.title = "프로필"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editProfileButton)
     }
     
     // MARK: - Layout
@@ -220,6 +219,18 @@ final class ProfileViewController: BaseViewController {
             .drive(onNext: { [weak self] profile in
                 guard let self else { return }
                 self.configure(with: profile)
+            })
+            .disposed(by: disposeBag)
+        
+        output.profileOwner
+            .drive(onNext: { [weak self] owner in
+                guard let self else { return }
+                switch owner {
+                case .me:
+                    navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editProfileButton)
+                case .other(_):
+                    navigationItem.rightBarButtonItem = nil
+                }
             })
             .disposed(by: disposeBag)
         

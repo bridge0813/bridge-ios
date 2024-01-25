@@ -118,10 +118,11 @@ extension MyPageCoordinator {
         navigationController.pushViewController(bookmarkedProjectViewController, animated: true)
     }
     
-    func showProfileViewController() {
+    func showProfileViewController(with profileOwner: ProfileViewModel.ProfileOwner) {
         let profileViewModel = ProfileViewModel(
-            coordinator: self,
-            fetchProfileUseCase: fetchProfileUseCase, 
+            coordinator: self, 
+            profileOwner: profileOwner,
+            fetchProfileUseCase: fetchProfileUseCase,
             downloadFileUseCase: downloadFileUseCase
         )
         let profileViewController = ProfileViewController(viewModel: profileViewModel)
