@@ -28,7 +28,7 @@ final class MyPageViewModel: ViewModelType {
     // MARK: - Property
     let disposeBag = DisposeBag()
     private weak var coordinator: MyPageCoordinator?
-    private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+    private let fetchProfileUseCase: FetchProfileUseCase
     private let signOutUseCase: SignOutUseCase
     private let withdrawUseCase: WithdrawUseCase
     
@@ -38,12 +38,12 @@ final class MyPageViewModel: ViewModelType {
     // MARK: - Init
     init(
         coordinator: MyPageCoordinator,
-        fetchProfilePreviewUseCase: FetchProfilePreviewUseCase,
+        fetchProfileUseCase: FetchProfileUseCase,
         signOutUseCase: SignOutUseCase,
         withdrawUseCase: WithdrawUseCase
     ) {
         self.coordinator = coordinator
-        self.fetchProfilePreviewUseCase = fetchProfilePreviewUseCase
+        self.fetchProfileUseCase = fetchProfileUseCase
         self.signOutUseCase = signOutUseCase
         self.withdrawUseCase = withdrawUseCase
     }
@@ -53,7 +53,7 @@ final class MyPageViewModel: ViewModelType {
         input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
-                owner.fetchProfilePreviewUseCase.fetchProfilePreview().toResult()
+                owner.fetchProfileUseCase.fetchProfilePreview().toResult()
             }
             .withUnretained(self)
             .subscribe(onNext: { owner, result in

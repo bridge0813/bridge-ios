@@ -10,6 +10,7 @@ import RxSwift
 protocol FetchProfileUseCase {
     func fetchMyProfile() -> Observable<Profile>
     func fetchOtherUserProfile(userID: Int) -> Observable<Profile>
+    func fetchProfilePreview() -> Observable<ProfilePreview>
 }
 
 final class DefaultFetchProfileUseCase: FetchProfileUseCase {
@@ -25,5 +26,9 @@ final class DefaultFetchProfileUseCase: FetchProfileUseCase {
     
     func fetchOtherUserProfile(userID: Int) -> Observable<Profile> {
         userRepository.fetchOtherUserProfile(userID: userID)
+    }
+    
+    func fetchProfilePreview() -> Observable<ProfilePreview> {
+        userRepository.fetchProfilePreview()
     }
 }

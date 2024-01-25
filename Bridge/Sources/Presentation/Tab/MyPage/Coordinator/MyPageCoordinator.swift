@@ -23,7 +23,6 @@ final class MyPageCoordinator: Coordinator {
     
     private let signOutUseCase: SignOutUseCase
     private let withdrawUseCase: WithdrawUseCase
-    private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
     
     private let fetchAlertsUseCase: FetchAlertsUseCase
     private let removeAlertUseCase: RemoveAlertUseCase
@@ -53,7 +52,6 @@ final class MyPageCoordinator: Coordinator {
         alertRepository = MockAlertRepository()
         projectRepository = MockProjectRepository()
         
-        fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
         withdrawUseCase = DefaultWithdrawUseCase(authRepository: authRepository)
         
@@ -82,7 +80,7 @@ extension MyPageCoordinator {
     private func showMyPageViewController() {
         let myPageViewModel = MyPageViewModel(
             coordinator: self,
-            fetchProfilePreviewUseCase: fetchProfilePreviewUseCase,
+            fetchProfileUseCase: fetchProfileUseCase,
             signOutUseCase: signOutUseCase,
             withdrawUseCase: withdrawUseCase
         )
@@ -143,7 +141,7 @@ extension MyPageCoordinator {
     func showCreateProfileViewController() {
         let createProfileViewModel = CreateProfileViewModel(
             coordinator: self,
-            fetchProfilePreviewUseCase: fetchProfilePreviewUseCase, 
+            fetchProfileUseCase: fetchProfileUseCase, 
             createProfileUseCase: createProfileUseCase
         )
         let createProfileViewController = CreateProfileViewController(viewModel: createProfileViewModel)

@@ -34,17 +34,17 @@ final class CreateProfileViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: MyPageCoordinator?
     
-    private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+    private let fetchProfileUseCase: FetchProfileUseCase
     private let createProfileUseCase: CreateProfileUseCase
     
     // MARK: - Init
     init(
         coordinator: MyPageCoordinator,
-        fetchProfilePreviewUseCase: FetchProfilePreviewUseCase,
+        fetchProfileUseCase: FetchProfileUseCase,
         createProfileUseCase: CreateProfileUseCase
     ) {
         self.coordinator = coordinator
-        self.fetchProfilePreviewUseCase = fetchProfilePreviewUseCase
+        self.fetchProfileUseCase = fetchProfileUseCase
         self.createProfileUseCase = createProfileUseCase
     }
     
@@ -53,7 +53,7 @@ final class CreateProfileViewModel: ViewModelType {
         let profileRelay = BehaviorRelay<Profile>(value: Profile.onError)
         
         // 유저의 간략 정보 조회(이름, 관심분야)
-        fetchProfilePreviewUseCase.fetchProfilePreview()
+        fetchProfileUseCase.fetchProfilePreview()
             .toResult()
             .withUnretained(self)
             .subscribe(onNext: { owner, result in

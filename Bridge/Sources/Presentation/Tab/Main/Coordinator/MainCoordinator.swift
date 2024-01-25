@@ -16,7 +16,7 @@ final class MainCoordinator: Coordinator {
     private let userRepository: UserRepository
     private let projectRepository: ProjectRepository
     
-    private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+    private let fetchProfileUseCase: FetchProfileUseCase
     private let fetchAllProjectsUseCase: FetchAllProjectsUseCase
     private let fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
@@ -34,7 +34,7 @@ final class MainCoordinator: Coordinator {
 //        userRepository = MockUserRepository()
 //        projectRepository = MockProjectRepository()
         
-        fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
+        fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
         fetchAllProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
         fetchProjectsByFieldUseCase = DefaultFetchProjectsByFieldUseCase(projectRepository: projectRepository)
         fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
@@ -53,7 +53,7 @@ extension MainCoordinator {
     func showMainViewController() {
         let mainViewModel = MainViewModel(
             coordinator: self,
-            fetchProfilePreviewUseCase: fetchProfilePreviewUseCase,
+            fetchProfileUseCase: fetchProfileUseCase,
             fetchAllProjectsUseCase: fetchAllProjectsUseCase,
             fetchProjectsByFieldUseCase: fetchProjectsByFieldUseCase,
             fetchHotProjectsUseCase: fetchHotProjectsUseCase,
