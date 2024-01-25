@@ -20,7 +20,12 @@ final class DefaultUserRepository: UserRepository {
     
     /// 프로필 조회
     func fetchProfile() -> Observable<Profile> {
-        return .just(ProfileResponseDTO.testData.toEntity()) 
+        let userID = tokenStorage.get(.userID)
+        let userEndpoint = UserEndpoint.fetchProfile(userID: userID)
+        
+        return networkService.request(to: userEndpoint, interceptor: nil)
+            .decode(type: ProfileResponseDTO.self, decoder: JSONDecoder())
+            .map { $0.toEntity() }
     }
     
     /// 프로필 간략형 조회(마이페이지)

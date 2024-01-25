@@ -11,6 +11,8 @@ enum UserEndpoint {
     case fetchProfilePreview(userID: String)
     case changeField(requestDTO: ChangeFieldRequestDTO)
     case fetchBookmarkedProjects(userID: String)
+    
+    case fetchProfile(userID: String)
     case createProfile(multipartData: ProfileMultipartData, userID: String)
     case updateProfile(multipartData: ProfileMultipartData, userID: String)
     
@@ -32,6 +34,9 @@ extension UserEndpoint: Endpoint {
         case .fetchBookmarkedProjects:
             return "/users/bookmark"
             
+        case .fetchProfile:
+            return "/users/profile"
+            
         case .createProfile:
             return "/users/profile"
             
@@ -49,6 +54,9 @@ extension UserEndpoint: Endpoint {
             return nil
             
         case .fetchBookmarkedProjects(let userID):
+            return ["userId": userID]
+            
+        case .fetchProfile(let userID):
             return ["userId": userID]
             
         case .createProfile(_, let userID):
@@ -70,6 +78,9 @@ extension UserEndpoint: Endpoint {
         case .fetchBookmarkedProjects:
             return .get
             
+        case .fetchProfile:
+            return .get
+            
         case .createProfile:
             return .post
             
@@ -87,6 +98,9 @@ extension UserEndpoint: Endpoint {
             return ["Content-Type": "application/json"]
             
         case .fetchBookmarkedProjects:
+            return ["Content-Type": "application/json"]
+            
+        case .fetchProfile:
             return ["Content-Type": "application/json"]
             
         case .createProfile:
@@ -118,6 +132,9 @@ extension UserEndpoint: Endpoint {
             return requestDTO
             
         case .fetchBookmarkedProjects:
+            return nil
+            
+        case .fetchProfile:
             return nil
             
         case .createProfile(let multipartData, _):
