@@ -50,8 +50,7 @@ final class OtherUserProfileViewController: BaseProfileViewController {
         let input = OtherUserProfileViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             selectedLinkURL: selectedLinkURL,
-            selectedFile: selectedFile,
-            viewDidDisappear: self.rx.viewDidDisappear.asObservable()
+            selectedFile: selectedFile
         )
         let output = viewModel.transform(input: input)
         

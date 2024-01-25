@@ -5,7 +5,7 @@
 //  Created by 엄지호 on 1/25/24.
 //
 
-import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 
@@ -15,7 +15,6 @@ final class OtherUserProfileViewModel: ViewModelType {
         let viewWillAppear: Observable<Bool>
         let selectedLinkURL: Observable<String>      // 링크 이동
         let selectedFile: Observable<ReferenceFile>  // 파일 이동
-        let viewDidDisappear: Observable<Bool>
     }
     
     struct Output {
@@ -25,7 +24,7 @@ final class OtherUserProfileViewModel: ViewModelType {
     
     // MARK: - Property
     let disposeBag = DisposeBag()
-    private weak var coordinator: MyPageCoordinator?
+    private weak var coordinator: Coordinator?
     
     private let userID: String
     private let fetchProfileUseCase: FetchProfileUseCase
@@ -33,7 +32,7 @@ final class OtherUserProfileViewModel: ViewModelType {
     
     // MARK: - Init
     init(
-        coordinator: MyPageCoordinator,
+        coordinator: Coordinator,
         userID: String,
         fetchProfileUseCase: FetchProfileUseCase,
         downloadFileUseCase: DownloadFileUseCase
@@ -77,8 +76,11 @@ final class OtherUserProfileViewModel: ViewModelType {
         // 링크 이동
         input.selectedLinkURL
             .withUnretained(self)
-            .subscribe(onNext: { owner, url in
-                owner.coordinator?.showReferenceLink(with: url)
+            .subscribe(onNext: { owner, urlString in
+                owner.coordinator?.delegate?.showWebPage(
+                    with: urlString,
+                    navigationController: owner.coordinator?.navigationController
+                )
             })
             .disposed(by: disposeBag)
         
@@ -104,16 +106,6 @@ final class OtherUserProfileViewModel: ViewModelType {
                         title: "파일 다운로드에 실패했습니다.",
                         description: error.localizedDescription
                     ))
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        // 뷰가 Disappear 될 때, 코디네이터 할당제거
-        input.viewDidDisappear
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                if let didFinish = owner.coordinator?.didFinishEventClosure {
-                    didFinish()
                 }
             })
             .disposed(by: disposeBag)

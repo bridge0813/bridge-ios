@@ -25,6 +25,12 @@ final class ChatCoordinator: Coordinator {
     private let fetchMessagesUseCase: FetchMessagesUseCase
     private let sendMessageUseCase: SendMessageUseCase
     
+    // 다른 유저의 프로필을 보여줄 경우
+    private let userRepository: UserRepository
+    private let fileRepository: FileRepository
+    private let fetchProfileUseCase: FetchProfileUseCase
+    private let downloadFileUseCase: DownloadFileUseCase
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []
@@ -34,8 +40,11 @@ final class ChatCoordinator: Coordinator {
         authRepository = DefaultAuthRepository(networkService: networkService)
 //        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
 //        messageRepository = DefaultMessageRepository(networkService: networkService, stompService: stompService)
+//        userRepository = DefaultUserRepository(networkService: networkService)
+        fileRepository = DefaultFileRepository(networkService: networkService)
         channelRepository = MockChannelRepository()
         messageRepository = MockMessageRepository()
+        userRepository = MockUserRepository()
         
         fetchChannelsUseCase = DefaultFetchChannelsUseCase(channelRepository: channelRepository)
         leaveChannelUseCase = DefaultLeaveChannelUseCase(channelRepository: channelRepository)
@@ -43,6 +52,10 @@ final class ChatCoordinator: Coordinator {
         observeMessageUseCase = DefaultObserveMessageUseCase(messageRepository: messageRepository)
         fetchMessagesUseCase = DefaultFetchMessagesUseCase(messageRepository: messageRepository)
         sendMessageUseCase = DefaultSendMessageUseCase(messageRepository: messageRepository)
+        
+        // 다른 유저의 프로필을 보여줄 경우
+        fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
+        downloadFileUseCase = DefaultDownloadFileUseCase(fileRepository: fileRepository)
     }
     
     func start() {
@@ -74,15 +87,22 @@ extension ChatCoordinator {
         let channelViewController = ChannelViewController(viewModel: channelViewModel)
         navigationController.pushViewController(channelViewController, animated: true)
     }
+    
+    func showProfileViewController(of userID: String) {
+        let otherUserProfileViewModel = OtherUserProfileViewModel(
+            coordinator: self,
+            userID: userID,
+            fetchProfileUseCase: fetchProfileUseCase,
+            downloadFileUseCase: downloadFileUseCase
+        )
+        let otherUserProfileViewController = OtherUserProfileViewController(viewModel: otherUserProfileViewModel)
+        navigationController.pushViewController(otherUserProfileViewController, animated: true)
+    }
 }
 
 // MARK: - Auth
 extension ChatCoordinator {
     func showSignInViewController() {
         delegate?.showSignInViewController()
-    }
-    
-    func showProfileViewController(of userID: String) {
-        delegate?.showProfileViewController(of: userID, navigationController: navigationController)
     }
 }

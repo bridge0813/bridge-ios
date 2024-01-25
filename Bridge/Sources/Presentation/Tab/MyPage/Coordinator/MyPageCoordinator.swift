@@ -127,17 +127,6 @@ extension MyPageCoordinator {
         navigationController.pushViewController(profileViewController, animated: true)
     }
     
-    func showOtherUserProfileViewController(userID: String) {
-        let otherUserProfileViewModel = OtherUserProfileViewModel(
-            coordinator: self,
-            userID: userID,
-            fetchProfileUseCase: fetchProfileUseCase,
-            downloadFileUseCase: downloadFileUseCase
-        )
-        let otherUserProfileViewController = OtherUserProfileViewController(viewModel: otherUserProfileViewModel)
-        navigationController.pushViewController(otherUserProfileViewController, animated: true)
-    }
-    
     func showCreateProfileViewController() {
         let createProfileViewModel = CreateProfileViewModel(
             coordinator: self,
@@ -191,7 +180,7 @@ extension MyPageCoordinator {
     }
     
     /// 프로필에서 참고링크를 보여주는 메서드.
-    func showReferenceLink(with urlString: String) {
+    func showReferenceLink(with urlString: URLString) {
         delegate?.showWebPage(
             with: urlString,
             navigationController: navigationController

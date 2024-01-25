@@ -1553,6 +1553,7 @@
 			children = (
 				7BB2C2442A98542700AA2328 /* Coordinator */,
 				7CA04F102AFDF645007B9191 /* ProjectDetail */,
+				7C35604A2B62C03100CF79CE /* Profile */,
 				7CF93E012A9C64EB0013EBD6 /* Main */,
 				7CDFB60E2B20113200272F77 /* Management */,
 				7BB2C24A2A985A0400AA2328 /* Chat */,
@@ -1615,7 +1616,6 @@
 			children = (
 				7BEA738C2B2B2DF100CECF44 /* ProfileViewModel.swift */,
 				7BEA738E2B2B2E0E00CECF44 /* ProfileViewController.swift */,
-				7C3560492B625B5300CF79CE /* OtherUser */,
 				7CD834BA2B50472600F3EED7 /* Base */,
 				7C91C9712B3BD4F3002E5ABF /* Views */,
 				7CD5A5362B4270E100343F9F /* Update */,
@@ -1731,13 +1731,13 @@
 			path = Multipart;
 			sourceTree = "<group>";
 		};
-		7C3560492B625B5300CF79CE /* OtherUser */ = {
+		7C35604A2B62C03100CF79CE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				7C3560462B62590000CF79CE /* OtherUserProfileViewModel.swift */,
 				7C3560442B6258D400CF79CE /* OtherUserProfileViewController.swift */,
 			);
-			path = OtherUser;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		7C55E6342ADC06C30018FA5D /* HeaderView */ = {

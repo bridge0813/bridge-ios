@@ -158,7 +158,7 @@ extension TabBarCoordinator: CoordinatorDelegate {
         }
     }
     
-    func showWebPage(with urlString: URLString, navigationController: UINavigationController) {
+    func showWebPage(with urlString: URLString, navigationController: UINavigationController?) {
         // HTTP와 HTTPS URL만 처리할 수 있도록
         guard let url = URL(string: urlString), ["http", "https"].contains(url.scheme?.lowercased()) else {
             showErrorAlert(configuration: ErrorAlertConfiguration(
@@ -168,7 +168,7 @@ extension TabBarCoordinator: CoordinatorDelegate {
             return
         }
         let safariViewController = SFSafariViewController(url: url)
-        navigationController.present(safariViewController, animated: true)
+        navigationController?.present(safariViewController, animated: true)
     }
     
     func showSignInViewController() {
@@ -189,18 +189,5 @@ extension TabBarCoordinator: CoordinatorDelegate {
             }
         }
         childCoordinators.append(chatCoordinator)
-    }
-    
-    func showProfileViewController(of userID: String, navigationController: UINavigationController) {
-        let myPageCoordinator = MyPageCoordinator(navigationController: navigationController)
-        myPageCoordinator.showOtherUserProfileViewController(userID: userID)
-        myPageCoordinator.delegate = self
-        myPageCoordinator.didFinishEventClosure = { [weak self] in
-            guard let self else { return }
-            if let index = self.childCoordinators.firstIndex(where: { $0 === myPageCoordinator }) {
-                self.childCoordinators.remove(at: index)
-            }
-        }
-        childCoordinators.append(myPageCoordinator)
     }
 }

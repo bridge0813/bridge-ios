@@ -76,8 +76,8 @@ final class ProfileViewModel: ViewModelType {
         // 링크 이동
         input.selectedLinkURL
             .withUnretained(self)
-            .subscribe(onNext: { owner, url in
-                owner.coordinator?.showReferenceLink(with: url)
+            .subscribe(onNext: { owner, urlString in
+                owner.coordinator?.showReferenceLink(with: urlString)
             })
             .disposed(by: disposeBag)
         
