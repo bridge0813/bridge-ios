@@ -12,7 +12,7 @@ enum UserEndpoint {
     case changeField(requestDTO: ChangeFieldRequestDTO)
     case fetchBookmarkedProjects(userID: String)
     case createProfile(multipartData: ProfileMultipartData, userID: String)
-    case updateProfile(requestDTO: UpdateProfileRequestDTO, userID: String)
+    case updateProfile(multipartData: ProfileMultipartData, userID: String)
     
     /// Multipart에서 각 데이터의 경계를 나타낼 바운더리
     var boundaryName: String {
@@ -128,7 +128,7 @@ extension UserEndpoint: Endpoint {
                 body.appendFileDataForMultipart(
                     profileFormData,
                     fieldName: "profile",
-                    fileName: "profile.json",
+                    fileName: "createProfile.json",
                     mimeType: "application/json",
                     boundary: boundaryName
                 )
@@ -158,16 +158,33 @@ extension UserEndpoint: Endpoint {
         
             return body
             
-        case .updateProfile(let requestDTO, _):
+        case .updateProfile(let multipartData, _):
             var body = Data()
             
-            // 업로드를 위한 이미지 데이터 추가
-            if let imageData = requestDTO.imageData {
-                body.appendFileDataForMultipart(imageData, fieldName: "photo", fileName: "profileImage.jpg", mimeType: "image/jpeg", boundary: boundaryName)
+            // 프로필 데이터 추가
+            if let profileFormData = try? JSONEncoder().encode(multipartData.updateProfile) {
+                body.appendFileDataForMultipart(
+                    profileFormData,
+                    fieldName: "request",
+                    fileName: "updateProfile.json",
+                    mimeType: "application/json",
+                    boundary: boundaryName
+                )
             }
             
-            // 업로드를 위한 파일 데이터 추가
-            requestDTO.newFiles.forEach { file in
+            // 이미지 데이터 추가
+            if let imageFormData = multipartData.imageData {
+                body.appendFileDataForMultipart(
+                    imageFormData,
+                    fieldName: "photo",
+                    fileName: "profileImage.jpg",
+                    mimeType: "image/jpeg",
+                    boundary: boundaryName
+                )
+            }
+            
+            // 파일 데이터 추가
+            multipartData.files.forEach { file in
                 body.appendFileDataForMultipart(
                     file.data,
                     fieldName: "refFiles",

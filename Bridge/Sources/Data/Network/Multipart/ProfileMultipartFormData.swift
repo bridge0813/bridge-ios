@@ -10,6 +10,7 @@ import Foundation
 /// Multipart/form-data 형식의 Body를 구현하기 위한 객체
 struct ProfileMultipartData {
     let createProfile: CreateProfileRequestDTO
+    let updateProfile: UpdateProfileRequestDTO
     let imageData: Data?
-    let files: [ReferenceFile]
+    let files: [ReferenceFileRequestDTO]
 }

@@ -35,14 +35,17 @@ final class UpdateProfileViewModel: ViewModelType {
     private weak var coordinator: MyPageCoordinator?
     
     private var profile: Profile
+    private let updateProfileUseCase: UpdateProfileUseCase
     
     // MARK: - Init
     init(
         coordinator: MyPageCoordinator,
-        profile: Profile
+        profile: Profile,
+        updateProfileUseCase: UpdateProfileUseCase
     ) {
         self.coordinator = coordinator
         self.profile = profile
+        self.updateProfileUseCase = updateProfileUseCase
     }
     
     // MARK: - Transformation
@@ -160,8 +163,22 @@ final class UpdateProfileViewModel: ViewModelType {
         // 수정 완료
         input.completeButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                // 요청
+            .flatMapLatest { owner, _ in
+                return owner.updateProfileUseCase.update(owner.profile).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success:
+                    owner.coordinator?.pop()
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "프로필 수정에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
             })
             .disposed(by: disposeBag)
         

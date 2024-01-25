@@ -33,6 +33,7 @@ final class MyPageCoordinator: Coordinator {
     
     private let fetchProfileUseCase: FetchProfileUseCase
     private let createProfileUseCase: CreateProfileUseCase
+    private let updateProfileUseCase: UpdateProfileUseCase
     private let downloadFileUseCase: DownloadFileUseCase
     
     // MARK: - Init
@@ -41,15 +42,15 @@ final class MyPageCoordinator: Coordinator {
         self.childCoordinators = []
         
         let networkService = DefaultNetworkService()
-//        authRepository = DefaultAuthRepository(networkService: networkService)
-//        userRepository = DefaultUserRepository(networkService: networkService)
-//        alertRepository = DefaultAlertRepository(networkService: networkService)
-//        projectRepository = DefaultProjectRepository(networkService: networkService)
+        authRepository = DefaultAuthRepository(networkService: networkService)
+        userRepository = DefaultUserRepository(networkService: networkService)
+        alertRepository = DefaultAlertRepository(networkService: networkService)
+        projectRepository = DefaultProjectRepository(networkService: networkService)
         fileRepository = DefaultFileRepository(networkService: networkService)
-        authRepository = MockAuthRepository()
-        userRepository = MockUserRepository()
-        alertRepository = MockAlertRepository()
-        projectRepository = MockProjectRepository()
+//        authRepository = MockAuthRepository()
+//        userRepository = MockUserRepository()
+//        alertRepository = MockAlertRepository()
+//        projectRepository = MockProjectRepository()
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
@@ -64,6 +65,8 @@ final class MyPageCoordinator: Coordinator {
         
         fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
         createProfileUseCase = DefaultCreateProfileUseCase(userRepository: userRepository)
+        updateProfileUseCase = DefaultUpdateProfileUseCase(userRepository: userRepository)
+        
         downloadFileUseCase = DefaultDownloadFileUseCase(fileRepository: fileRepository)
     }
     
@@ -138,7 +141,8 @@ extension MyPageCoordinator {
     func showUpdatProfileViewController(with profile: Profile) {
         let updateProfileViewModel = UpdateProfileViewModel(
             coordinator: self,
-            profile: profile
+            profile: profile, 
+            updateProfileUseCase: updateProfileUseCase
         )
         let updateProfileViewController = UpdateProfileViewController(viewModel: updateProfileViewModel)
         navigationController.pushViewController(updateProfileViewController, animated: true)
