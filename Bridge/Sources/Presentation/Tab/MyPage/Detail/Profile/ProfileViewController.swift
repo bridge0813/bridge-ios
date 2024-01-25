@@ -47,6 +47,8 @@ final class ProfileViewController: BaseProfileViewController {
     
     // MARK: - Binding
     override func bind() {
+        super.bind()
+        
         let input = ProfileViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             editProfileButtonTapped: editProfileButton.rx.tap,

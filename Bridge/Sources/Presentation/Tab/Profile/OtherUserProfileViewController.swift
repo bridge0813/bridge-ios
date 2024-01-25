@@ -47,6 +47,8 @@ final class OtherUserProfileViewController: BaseProfileViewController {
     
     // MARK: - Binding
     override func bind() {
+        super.bind()
+        
         let input = OtherUserProfileViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             selectedLinkURL: selectedLinkURL,
