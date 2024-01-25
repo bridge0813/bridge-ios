@@ -177,32 +177,24 @@ extension MyPageCoordinator {
     }
     
     func showOpenSourceLicense() {
-        guard let url = URL(string: "https://shell-cardinal-3e8.notion.site/aa00892a9e5a4355824fc29680cf11e8?pvs=4") else {
-            return
-        }
-        let safariViewController = SFSafariViewController(url: url)
-        navigationController.present(safariViewController, animated: true)
+        delegate?.showWebPage(
+            with: "https://shell-cardinal-3e8.notion.site/aa00892a9e5a4355824fc29680cf11e8?pvs=4",
+            navigationController: navigationController
+        )
     }
     
     func showPrivacyPolicy() {
-        guard let url = URL(string: "https://shell-cardinal-3e8.notion.site/976beef192834c0daba4cd97835bf133?pvs=4") else {
-            return
-        }
-        let safariViewController = SFSafariViewController(url: url)
-        navigationController.present(safariViewController, animated: true)
+        delegate?.showWebPage(
+            with: "https://shell-cardinal-3e8.notion.site/976beef192834c0daba4cd97835bf133?pvs=4",
+            navigationController: navigationController
+        )
     }
     
     /// 프로필에서 참고링크를 보여주는 메서드.
     func showReferenceLink(with urlString: String) {
-        // HTTP와 HTTPS URL만 처리할 수 있도록
-        guard let url = URL(string: urlString), ["http", "https"].contains(url.scheme?.lowercased()) else {
-            showErrorAlert(configuration: ErrorAlertConfiguration(
-                title: "해당 링크를 열 수 없습니다.",
-                description: "URL 형식을 확인해주세요. ex) \"https://bridge.com\""
-            ))
-            return
-        }
-        let safariViewController = SFSafariViewController(url: url)
-        navigationController.present(safariViewController, animated: true)
+        delegate?.showWebPage(
+            with: urlString,
+            navigationController: navigationController
+        )
     }
 }
