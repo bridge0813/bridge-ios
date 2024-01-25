@@ -99,6 +99,16 @@ extension UserEndpoint: Endpoint {
         }
     }
     
+    var task: Task {
+        switch self {
+        case .createProfile, .updateProfile:
+            return .uploadMultipartFormData
+            
+        default:
+            return .requestPlain
+        }
+    }
+    
     var body: Encodable? {
         switch self {
         case .fetchProfilePreview:

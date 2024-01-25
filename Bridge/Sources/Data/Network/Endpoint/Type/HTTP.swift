@@ -20,3 +20,8 @@ enum HTTPRequestParameter {
     case query([String: String])
     case body(Encodable)
 }
+
+enum Task {
+    case requestPlain
+    case uploadMultipartFormData
+}

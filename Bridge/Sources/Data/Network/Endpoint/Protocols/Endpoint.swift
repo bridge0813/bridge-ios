@@ -15,6 +15,7 @@ protocol Endpoint {
     var method: HTTPMethod { get }
     var headers: HTTPHeaders { get }
     
+    var task: Task { get }
     var body: Encodable? { get }
     
     func toURLRequest() -> URLRequest?
@@ -28,14 +29,23 @@ extension Endpoint {
     var headers: HTTPHeaders {
         ["Content-Type": "application/json"]
     }
+    
+    var task: Task {
+        .requestPlain
+    }
  
     func toURLRequest() -> URLRequest? {
         guard let url = configureURL() else { return nil }
         
-        return URLRequest(url: url)
-            .setMethod(method)
-            .appendingHeaders(headers)
-            .setBody(body)
+        let urlRequest = URLRequest(url: url).setMethod(method).appendingHeaders(headers)
+            
+        switch task {
+        case .requestPlain:
+            return urlRequest.setBody(body)
+            
+        case .uploadMultipartFormData:
+            return urlRequest.setMultipartBody(body)
+        }
     }
     
     private func configureURL() -> URL? {
@@ -75,6 +85,14 @@ extension URLRequest {
         
         var urlRequest = self
         urlRequest.httpBody = try? JSONEncoder().encode(body)
+        return urlRequest
+    }
+    
+    func setMultipartBody(_ body: Encodable?) -> URLRequest {
+        guard let bodyData = body as? Data else { return self }
+        
+        var urlRequest = self
+        urlRequest.httpBody = bodyData
         return urlRequest
     }
 }
