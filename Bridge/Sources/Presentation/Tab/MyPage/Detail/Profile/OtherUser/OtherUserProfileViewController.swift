@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import FlexLayout
+import PinLayout
+import RxCocoa
+import RxSwift
 
 /// 다른 유저의 프로필
 final class OtherUserProfileViewController: BaseProfileViewController {
     // MARK: - Property
-    private let viewModel: ProfileViewModel
+    private let viewModel: OtherUserProfileViewModel
     
     // MARK: - Init
-    init(viewModel: ProfileViewModel) {
+    init(viewModel: OtherUserProfileViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -43,11 +47,11 @@ final class OtherUserProfileViewController: BaseProfileViewController {
     
     // MARK: - Binding
     override func bind() {
-        let input = ProfileViewModel.Input(
+        let input = OtherUserProfileViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            editProfileButtonTapped: editProfileButton.rx.tap,
             selectedLinkURL: selectedLinkURL,
-            selectedFile: selectedFile
+            selectedFile: selectedFile,
+            viewDidDisappear: self.rx.viewDidDisappear.asObservable()
         )
         let output = viewModel.transform(input: input)
         

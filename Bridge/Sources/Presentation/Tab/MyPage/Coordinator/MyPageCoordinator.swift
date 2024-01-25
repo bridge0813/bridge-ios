@@ -13,6 +13,7 @@ final class MyPageCoordinator: Coordinator {
     weak var delegate: CoordinatorDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
+    var didFinishEventClosure: (() -> Void)?  // disAppear 시점에 자식 코디네이터에서 할당을 제거하기 위함.
     
     private let authRepository: AuthRepository
     private let userRepository: UserRepository
@@ -126,6 +127,17 @@ extension MyPageCoordinator {
         )
         let profileViewController = ProfileViewController(viewModel: profileViewModel)
         navigationController.pushViewController(profileViewController, animated: true)
+    }
+    
+    func showOtherUserProfileViewController(userID: Int) {
+        let otherUserProfileViewModel = OtherUserProfileViewModel(
+            coordinator: self,
+            userID: userID,
+            fetchProfileUseCase: fetchProfileUseCase,
+            downloadFileUseCase: downloadFileUseCase
+        )
+        let otherUserProfileViewController = OtherUserProfileViewController(viewModel: otherUserProfileViewModel)
+        navigationController.pushViewController(otherUserProfileViewController, animated: true)
     }
     
     func showCreateProfileViewController() {

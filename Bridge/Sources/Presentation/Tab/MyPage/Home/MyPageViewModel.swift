@@ -73,7 +73,7 @@ final class MyPageViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 // TODO: - 임시
-                owner.coordinator?.showProfileViewController(with: .me)
+                owner.coordinator?.showProfileViewController()
             })
             .disposed(by: disposeBag)
         
@@ -94,7 +94,7 @@ final class MyPageViewModel: ViewModelType {
         input.manageProfileButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showProfileViewController(with: .me)
+                owner.coordinator?.showProfileViewController()
             })
             .disposed(by: disposeBag)
         

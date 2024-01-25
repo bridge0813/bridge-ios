@@ -15,6 +15,7 @@ final class OtherUserProfileViewModel: ViewModelType {
         let viewWillAppear: Observable<Bool>
         let selectedLinkURL: Observable<String>      // 링크 이동
         let selectedFile: Observable<ReferenceFile>  // 파일 이동
+        let viewDidDisappear: Observable<Bool>
     }
     
     struct Output {
@@ -26,16 +27,19 @@ final class OtherUserProfileViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: MyPageCoordinator?
     
+    private let userID: Int
     private let fetchProfileUseCase: FetchProfileUseCase
     private let downloadFileUseCase: DownloadFileUseCase
     
     // MARK: - Init
     init(
         coordinator: MyPageCoordinator,
+        userID: Int,
         fetchProfileUseCase: FetchProfileUseCase,
         downloadFileUseCase: DownloadFileUseCase
     ) {
         self.coordinator = coordinator
+        self.userID = userID
         self.fetchProfileUseCase = fetchProfileUseCase
         self.downloadFileUseCase = downloadFileUseCase
     }
@@ -100,6 +104,16 @@ final class OtherUserProfileViewModel: ViewModelType {
                         title: "파일 다운로드에 실패했습니다.",
                         description: error.localizedDescription
                     ))
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // 뷰가 Disappear 될 때, 코디네이터 할당제거
+        input.viewDidDisappear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                if let didFinish = owner.coordinator?.didFinishEventClosure {
+                    didFinish()
                 }
             })
             .disposed(by: disposeBag)
