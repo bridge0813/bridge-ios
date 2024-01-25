@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import MobileCoreServices
-import UniformTypeIdentifiers
 import PhotosUI
 import FlexLayout
 import PinLayout

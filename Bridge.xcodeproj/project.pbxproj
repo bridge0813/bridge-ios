@@ -207,6 +207,7 @@
 		7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */; };
 		7C35603C2B60F87B00CF79CE /* CreateProfileRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C35603B2B60F87B00CF79CE /* CreateProfileRequestDTO.swift */; };
 		7C35603F2B60FC4500CF79CE /* ProfileMultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C35603E2B60FC4500CF79CE /* ProfileMultipartFormData.swift */; };
+		7C3560422B62540000CF79CE /* BaseProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560412B62540000CF79CE /* BaseProfileViewController.swift */; };
 		7C40CBA12AC3E595000F4C9F /* BridgeTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */; };
 		7C40CBA32AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */; };
 		7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */; };
@@ -549,6 +550,7 @@
 		7C2400482AB7D46E00D9D5F1 /* ProjectDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDataStorage.swift; sourceTree = "<group>"; };
 		7C35603B2B60F87B00CF79CE /* CreateProfileRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileRequestDTO.swift; sourceTree = "<group>"; };
 		7C35603E2B60FC4500CF79CE /* ProfileMultipartFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMultipartFormData.swift; sourceTree = "<group>"; };
+		7C3560412B62540000CF79CE /* BaseProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileViewController.swift; sourceTree = "<group>"; };
 		7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeTechTagButton.swift; sourceTree = "<group>"; };
 		7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeOutlinedTechTagButton.swift; sourceTree = "<group>"; };
 		7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeButton.swift; sourceTree = "<group>"; };
@@ -1609,6 +1611,7 @@
 		7BEA738B2B2B2DCD00CECF44 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				7C3560412B62540000CF79CE /* BaseProfileViewController.swift */,
 				7BEA738C2B2B2DF100CECF44 /* ProfileViewModel.swift */,
 				7BEA738E2B2B2E0E00CECF44 /* ProfileViewController.swift */,
 				7CD834BA2B50472600F3EED7 /* Base */,
@@ -2866,6 +2869,7 @@
 				7BA36C9B2A9C5091000DAB02 /* Channel.swift in Sources */,
 				7CBDE2692B3FF7D800518AA9 /* ProfileResponseDTO.swift in Sources */,
 				7B8DE8112B034E6B003EA34A /* Stomp.swift in Sources */,
+				7C3560422B62540000CF79CE /* BaseProfileViewController.swift in Sources */,
 				7B6C204A2AF887E0005689F5 /* MyPageViewModel.swift in Sources */,
 				7BEA738F2B2B2E0E00CECF44 /* ProfileViewController.swift in Sources */,
 				7CD834B42B4EFD5B00F3EED7 /* Data+Multipart.swift in Sources */,

@@ -20,7 +20,6 @@ final class ProfileViewModel: ViewModelType {
     
     struct Output {
         let profile: Driver<Profile>
-        let profileOwner: Driver<ProfileOwner>
         let downloadedFile: Observable<URL>
     }
     
@@ -28,19 +27,16 @@ final class ProfileViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: MyPageCoordinator?
     
-    private let profileOwner: ProfileOwner
     private let fetchProfileUseCase: FetchProfileUseCase
     private let downloadFileUseCase: DownloadFileUseCase
     
     // MARK: - Init
     init(
         coordinator: MyPageCoordinator,
-        profileOwner: ProfileOwner,
         fetchProfileUseCase: FetchProfileUseCase,
         downloadFileUseCase: DownloadFileUseCase
     ) {
         self.coordinator = coordinator
-        self.profileOwner = profileOwner
         self.fetchProfileUseCase = fetchProfileUseCase
         self.downloadFileUseCase = downloadFileUseCase
     }
@@ -112,8 +108,7 @@ final class ProfileViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            profile: profile.asDriver(), 
-            profileOwner: Observable.just(profileOwner).asDriver(onErrorJustReturn: .me),
+            profile: profile.asDriver(),
             downloadedFile: downloadedFile
         )
     }
@@ -123,43 +118,26 @@ final class ProfileViewModel: ViewModelType {
 extension ProfileViewModel {
     /// 네트워킹 에러에 대한 핸들링
     private func handleNetworkError(_ error: Error) {
-        // 내 프로필일 경우, 프로필 등록을 할 것인지 Alert
-        // 다른 유저의 프로필일 경우, 즉시 Error
-        switch profileOwner {
-        case .me:
-            // 404일 경우, 프로필 등록 이동
-            if let networkError = error as? NetworkError, case .statusCode(404) = networkError {
-                showCreateProfileAlert()
-            } else {
-                showErrorAlert(error)
-            }
-            
-        case .other:
-            showErrorAlert(error)
+        // 404일 경우, 프로필 등록 이동
+        if let networkError = error as? NetworkError, case .statusCode(404) = networkError {
+            coordinator?.showAlert(
+                configuration: .createProfile,
+                primaryAction: { [weak self] in
+                    self?.coordinator?.showCreateProfileViewController()
+                },
+                cancelAction: { [weak self] in
+                    self?.coordinator?.pop()
+                }
+            )
+        } else {
+            coordinator?.showErrorAlert(
+                configuration: ErrorAlertConfiguration(
+                    title: "프로필 조회에 실패했습니다.",
+                    description: error.localizedDescription
+                ),
+                primaryAction: { [weak self] in self?.coordinator?.pop() }
+            )
         }
-    }
-    
-    /// 프로필 등록 이동에 대한 Alert
-    private func showCreateProfileAlert() {
-        coordinator?.showAlert(
-            configuration: .createProfile,
-            primaryAction: { [weak self] in
-                self?.coordinator?.showCreateProfileViewController()
-            },
-            cancelAction: { [weak self] in
-                self?.coordinator?.pop()
-            }
-        )
-    }
-    
-    private func showErrorAlert(_ error: Error) {
-        coordinator?.showErrorAlert(
-            configuration: ErrorAlertConfiguration(
-                title: "프로필 조회에 실패했습니다.",
-                description: error.localizedDescription
-            ),
-            primaryAction: { [weak self] in self?.coordinator?.pop() }
-        )
     }
 }
 
@@ -189,12 +167,5 @@ extension ProfileViewModel {
             
             return Disposables.create()
         }
-    }
-}
-
-extension ProfileViewModel {
-    enum ProfileOwner {
-        case me
-        case other(userID: Int)
     }
 }

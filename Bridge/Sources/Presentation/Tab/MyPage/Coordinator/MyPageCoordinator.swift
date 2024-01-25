@@ -42,15 +42,15 @@ final class MyPageCoordinator: Coordinator {
         self.childCoordinators = []
         
         let networkService = DefaultNetworkService()
-        authRepository = DefaultAuthRepository(networkService: networkService)
-        userRepository = DefaultUserRepository(networkService: networkService)
-        alertRepository = DefaultAlertRepository(networkService: networkService)
-        projectRepository = DefaultProjectRepository(networkService: networkService)
+//        authRepository = DefaultAuthRepository(networkService: networkService)
+//        userRepository = DefaultUserRepository(networkService: networkService)
+//        alertRepository = DefaultAlertRepository(networkService: networkService)
+//        projectRepository = DefaultProjectRepository(networkService: networkService)
         fileRepository = DefaultFileRepository(networkService: networkService)
-//        authRepository = MockAuthRepository()
-//        userRepository = MockUserRepository()
-//        alertRepository = MockAlertRepository()
-//        projectRepository = MockProjectRepository()
+        authRepository = MockAuthRepository()
+        userRepository = MockUserRepository()
+        alertRepository = MockAlertRepository()
+        projectRepository = MockProjectRepository()
         
         fetchProfilePreviewUseCase = DefaultFetchProfilePreviewUseCase(userRepository: userRepository)
         signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
@@ -118,10 +118,9 @@ extension MyPageCoordinator {
         navigationController.pushViewController(bookmarkedProjectViewController, animated: true)
     }
     
-    func showProfileViewController(with profileOwner: ProfileViewModel.ProfileOwner) {
+    func showProfileViewController() {
         let profileViewModel = ProfileViewModel(
-            coordinator: self, 
-            profileOwner: profileOwner,
+            coordinator: self,
             fetchProfileUseCase: fetchProfileUseCase,
             downloadFileUseCase: downloadFileUseCase
         )
