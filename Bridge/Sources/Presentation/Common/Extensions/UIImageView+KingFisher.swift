@@ -22,7 +22,7 @@ extension UIImageView {
         guard let urlString else { return self.image = placeholderImage }
         let url = URL(string: urlString)
         
-        // 다운샘플링 후 Readius 적용
+        // 다운샘플링 후 Radius 적용
         let processor = DownsamplingImageProcessor(size: size)
         |> RoundCornerImageProcessor(cornerRadius: self.layer.cornerRadius)
         
