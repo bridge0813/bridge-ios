@@ -21,7 +21,7 @@ enum HTTPRequestParameter {
     case body(Encodable)
 }
 
-enum Task {
+enum NetworkTask {
     case requestPlain
     case uploadMultipartFormData
 }

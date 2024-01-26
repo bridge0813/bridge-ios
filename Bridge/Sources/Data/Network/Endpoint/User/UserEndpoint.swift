@@ -113,7 +113,7 @@ extension UserEndpoint: Endpoint {
         }
     }
     
-    var task: Task {
+    var task: NetworkTask {
         switch self {
         case .createProfile, .updateProfile:
             return .uploadMultipartFormData

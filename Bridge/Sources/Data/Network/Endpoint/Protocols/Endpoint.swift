@@ -15,7 +15,7 @@ protocol Endpoint {
     var method: HTTPMethod { get }
     var headers: HTTPHeaders { get }
     
-    var task: Task { get }
+    var task: NetworkTask { get }
     var body: Encodable? { get }
     
     func toURLRequest() -> URLRequest?
@@ -30,7 +30,7 @@ extension Endpoint {
         ["Content-Type": "application/json"]
     }
     
-    var task: Task {
+    var task: NetworkTask {
         .requestPlain
     }
  
