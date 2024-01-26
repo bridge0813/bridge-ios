@@ -19,8 +19,10 @@ final class DefaultUserRepository: UserRepository {
     }
     
     /// 프로필 조회
-    func fetchMyProfile() -> Observable<Profile> {
-        let userID = tokenStorage.get(.userID)
+    func fetchProfile(otherUserID: String?) -> Observable<Profile> {
+        // otherUserID가 있을 경우, 다른 유저의 프로필을 조회
+        // 없을 경우, 내 프로필 조회
+        let userID = otherUserID ?? tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.fetchProfile(userID: userID)
         
         return networkService.request(to: userEndpoint, interceptor: nil)

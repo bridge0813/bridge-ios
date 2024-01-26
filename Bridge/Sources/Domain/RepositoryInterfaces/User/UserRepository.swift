@@ -8,8 +8,7 @@
 import RxSwift
 
 protocol UserRepository {
-    func fetchMyProfile() -> Observable<Profile>
-    func fetchOtherUserProfile(userID: String) -> Observable<Profile>
+    func fetchProfile(otherUserID: String?) -> Observable<Profile>
     func fetchProfilePreview() -> Observable<ProfilePreview>
     func createProfile(_ profile: Profile) -> Observable<Void>
     func updateProfile(_ profile: Profile) -> Observable<Void>

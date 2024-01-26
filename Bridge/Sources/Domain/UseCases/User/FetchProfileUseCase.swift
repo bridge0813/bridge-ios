@@ -8,9 +8,16 @@
 import RxSwift
 
 protocol FetchProfileUseCase {
-    func fetchMyProfile() -> Observable<Profile>
-    func fetchOtherUserProfile(userID: String) -> Observable<Profile>
+    func fetchProfile(otherUserID: String?) -> Observable<Profile>
     func fetchProfilePreview() -> Observable<ProfilePreview>
+}
+
+extension FetchProfileUseCase {
+    // otherUserID가 있을 경우, 다른 유저의 프로필
+    // 없을 경우, 내 프로필
+    func fetchProfile(otherUserID: String? = nil) -> Observable<Profile> {
+        fetchProfile(otherUserID: otherUserID)
+    }
 }
 
 final class DefaultFetchProfileUseCase: FetchProfileUseCase {
@@ -20,12 +27,8 @@ final class DefaultFetchProfileUseCase: FetchProfileUseCase {
         self.userRepository = userRepository
     }
     
-    func fetchMyProfile() -> Observable<Profile> {
-        userRepository.fetchMyProfile()
-    }
-    
-    func fetchOtherUserProfile(userID: String) -> Observable<Profile> {
-        userRepository.fetchOtherUserProfile(userID: userID)
+    func fetchProfile(otherUserID: String?) -> Observable<Profile> {
+        userRepository.fetchProfile(otherUserID: otherUserID)
     }
     
     func fetchProfilePreview() -> Observable<ProfilePreview> {

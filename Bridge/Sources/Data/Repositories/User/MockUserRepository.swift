@@ -8,12 +8,7 @@
 import RxSwift
 
 final class MockUserRepository: UserRepository {
-    func fetchMyProfile() -> Observable<Profile> {
-        return .just(ProfileResponseDTO.testData.toEntity())
-//        .error(NetworkError.statusCode(404))
-    }
-    
-    func fetchOtherUserProfile(userID: String) -> RxSwift.Observable<Profile> {
+    func fetchProfile(otherUserID: String?) -> RxSwift.Observable<Profile> {
         return .just(ProfileResponseDTO.testData.toEntity())
 //        .error(NetworkError.statusCode(404))
     }
