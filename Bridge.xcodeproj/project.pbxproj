@@ -214,6 +214,7 @@
 		7C35604F2B65705D00CF79CE /* StorageExpiration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C35604E2B65705D00CF79CE /* StorageExpiration.swift */; };
 		7C3560512B6571E900CF79CE /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560502B6571E900CF79CE /* MemoryStorage.swift */; };
 		7C3560532B6573D100CF79CE /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560522B6573D100CF79CE /* DiskStorage.swift */; };
+		7C3560552B6576C600CF79CE /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560542B6576C600CF79CE /* ImageCache.swift */; };
 		7C40CBA12AC3E595000F4C9F /* BridgeTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */; };
 		7C40CBA32AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */; };
 		7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */; };
@@ -562,6 +563,7 @@
 		7C35604E2B65705D00CF79CE /* StorageExpiration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageExpiration.swift; sourceTree = "<group>"; };
 		7C3560502B6571E900CF79CE /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		7C3560522B6573D100CF79CE /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
+		7C3560542B6576C600CF79CE /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeTechTagButton.swift; sourceTree = "<group>"; };
 		7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeOutlinedTechTagButton.swift; sourceTree = "<group>"; };
 		7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeButton.swift; sourceTree = "<group>"; };
@@ -1751,10 +1753,11 @@
 		7C35604B2B656F8700CF79CE /* ImageCache */ = {
 			isa = PBXGroup;
 			children = (
-				7C35604C2B656FBB00CF79CE /* StorageObject.swift */,
-				7C35604E2B65705D00CF79CE /* StorageExpiration.swift */,
+				7C3560542B6576C600CF79CE /* ImageCache.swift */,
 				7C3560502B6571E900CF79CE /* MemoryStorage.swift */,
 				7C3560522B6573D100CF79CE /* DiskStorage.swift */,
+				7C35604C2B656FBB00CF79CE /* StorageObject.swift */,
+				7C35604E2B65705D00CF79CE /* StorageExpiration.swift */,
 			);
 			path = ImageCache;
 			sourceTree = "<group>";
@@ -3036,6 +3039,7 @@
 				7C569CF32A9F67C60063D362 /* ProjectPreview.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
 				7C56E16F2B145E3000454F5E /* FieldRequestDTO.swift in Sources */,
+				7C3560552B6576C600CF79CE /* ImageCache.swift in Sources */,
 				7B1E5ABC2ADCFD790053E9B3 /* ChannelViewController.swift in Sources */,
 				7C3560532B6573D100CF79CE /* DiskStorage.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChannelUseCase.swift in Sources */,
