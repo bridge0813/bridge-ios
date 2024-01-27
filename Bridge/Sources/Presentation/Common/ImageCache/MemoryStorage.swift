@@ -19,6 +19,8 @@ final class MemoryStorage {
         return cache
     }()
     
+    private var keys = Set<NSURL>()  // 캐시에 저장된 객체들의 키를 추적하는 데 사용
+    
     // MARK: - Init
     init() { }
     
@@ -27,6 +29,7 @@ final class MemoryStorage {
     func store(_ imageData: Data, forKey key: NSURL) {
         let storageObject = StorageObject(imageData: imageData, expiration: .seconds(300))
         storage.setObject(storageObject, forKey: key)
+        keys.insert(key)
     }
     
     /// 데이터 조회
@@ -37,5 +40,6 @@ final class MemoryStorage {
     /// 저장된 모든 데이터 제거
     func removeAll() {
         storage.removeAllObjects()
+        keys.removeAll()
     }
 }
