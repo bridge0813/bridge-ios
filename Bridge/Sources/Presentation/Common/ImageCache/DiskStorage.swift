@@ -67,7 +67,6 @@ final class DiskStorage {
         }
     }
     
-    // MARK: - Helpers
     /// 데이터를 저장할 디렉토리 생성(존재하지 않을 경우)
     private func createDirectory() {
         guard let directoryURL else { return }
@@ -80,6 +79,52 @@ final class DiskStorage {
                 
             } catch {
                 print("디렉토리 생성 실패: \(error)")
+            }
+        }
+    }
+}
+
+// MARK: - 만료 데이터 제거
+extension DiskStorage {
+    /// 저장된 모든 파일의 URL을 가져오기
+    private func getAllFileURLs() -> [URL]? {
+        guard let directoryURL else { return nil }
+        
+        guard let directoryEnumerator = fileManager.enumerator(
+            at: directoryURL,
+            includingPropertiesForKeys: [.contentModificationDateKey],
+            options: [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+        else { return nil }
+        
+        guard let urls = directoryEnumerator.allObjects as? [URL] else { return nil }
+        return urls
+    }
+    
+    /// 만료된 데이터 제거
+    private func removeExpired() {
+        guard let urls = getAllFileURLs() else { return }
+        
+        // 만료된 파일 조회
+        let expiredFiles = urls.filter { url in
+            do {
+                let attributes = try fileManager.attributesOfItem(atPath: url.path)
+                if let expirationDate = attributes[.modificationDate] as? Date {
+                    return expirationDate.isPast
+                }
+            } catch {
+                print("파일 속성 조회 실패: \(error.localizedDescription)")
+            }
+            return false
+        }
+        
+        // 만료된 데이터 제거
+        expiredFiles.forEach { url in
+            do {
+                try fileManager.removeItem(at: url)
+                print("디렉토리 내 만료된 데이터 제거 성공: \(url)")
+                
+            } catch {
+                print("디렉토리 내 만료된 데이터 제거 실패: \(error.localizedDescription)")
             }
         }
     }
