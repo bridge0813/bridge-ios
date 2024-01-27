@@ -211,6 +211,7 @@
 		7C3560452B6258D400CF79CE /* OtherUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560442B6258D400CF79CE /* OtherUserProfileViewController.swift */; };
 		7C3560472B62590000CF79CE /* OtherUserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560462B62590000CF79CE /* OtherUserProfileViewModel.swift */; };
 		7C35604D2B656FBB00CF79CE /* StorageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C35604C2B656FBB00CF79CE /* StorageObject.swift */; };
+		7C35604F2B65705D00CF79CE /* StorageExpiration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C35604E2B65705D00CF79CE /* StorageExpiration.swift */; };
 		7C40CBA12AC3E595000F4C9F /* BridgeTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */; };
 		7C40CBA32AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */; };
 		7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */; };
@@ -556,6 +557,7 @@
 		7C3560442B6258D400CF79CE /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
 		7C3560462B62590000CF79CE /* OtherUserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewModel.swift; sourceTree = "<group>"; };
 		7C35604C2B656FBB00CF79CE /* StorageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageObject.swift; sourceTree = "<group>"; };
+		7C35604E2B65705D00CF79CE /* StorageExpiration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageExpiration.swift; sourceTree = "<group>"; };
 		7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeTechTagButton.swift; sourceTree = "<group>"; };
 		7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeOutlinedTechTagButton.swift; sourceTree = "<group>"; };
 		7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeButton.swift; sourceTree = "<group>"; };
@@ -1746,6 +1748,7 @@
 			isa = PBXGroup;
 			children = (
 				7C35604C2B656FBB00CF79CE /* StorageObject.swift */,
+				7C35604E2B65705D00CF79CE /* StorageExpiration.swift */,
 			);
 			path = ImageCache;
 			sourceTree = "<group>";
@@ -2850,6 +2853,7 @@
 				7BA36C982A9C503C000DAB02 /* FetchChannelsUseCase.swift in Sources */,
 				7C91C9752B3BDAF2002E5ABF /* ProfileTechStackCell.swift in Sources */,
 				7B93AAA82B21997300650EA5 /* UnreadMessageCountView.swift in Sources */,
+				7C35604F2B65705D00CF79CE /* StorageExpiration.swift in Sources */,
 				7CE080492AD79ADD00230C86 /* FieldCategoryAnchorButton.swift in Sources */,
 				7CA04F252AFE7B6E007B9191 /* BridgeLinedChip.swift in Sources */,
 				7B93B3AC2B35378600912202 /* RemoveAlertUseCase.swift in Sources */,
