@@ -20,9 +20,10 @@ final class MemoryStorage {
     }()
     
     private var keys = Set<NSURL>()  // 캐시에 저장된 객체들의 키를 추적하는 데 사용
+    private let lock = NSLock()
     
     // MARK: - Init
-    init() { 
+    init() {
         // 240초 주기로 만료된 데이터를 제거
         Timer.scheduledTimer(withTimeInterval: 240, repeats: true) { [weak self] _ in
             guard let self else { return }
@@ -33,6 +34,9 @@ final class MemoryStorage {
     // MARK: - CRUD
     /// 데이터 저장
     func store(_ imageData: Data, forKey key: NSURL) {
+        lock.lock()
+        defer { lock.unlock() }
+        
         let storageObject = StorageObject(imageData: imageData, expiration: .seconds(300))
         storage.setObject(storageObject, forKey: key)
         keys.insert(key)
@@ -45,12 +49,18 @@ final class MemoryStorage {
     
     /// 저장된 모든 데이터 제거
     func removeAll() {
+        lock.lock()
+        defer { lock.unlock() }
+        
         storage.removeAllObjects()
         keys.removeAll()
     }
     
     /// 만료된 데이터 제거
     private func removeExpired() {
+        lock.lock()
+        defer { lock.unlock() }
+        
         for key in keys {
             guard let object = storage.object(forKey: key) else {
                 keys.remove(key)
