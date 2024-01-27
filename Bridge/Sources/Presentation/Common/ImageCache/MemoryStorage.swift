@@ -22,7 +22,13 @@ final class MemoryStorage {
     private var keys = Set<NSURL>()  // 캐시에 저장된 객체들의 키를 추적하는 데 사용
     
     // MARK: - Init
-    init() { }
+    init() { 
+        // 240초 주기로 만료된 데이터를 제거
+        Timer.scheduledTimer(withTimeInterval: 240, repeats: true) { [weak self] _ in
+            guard let self else { return }
+            self.removeExpired()
+        }
+    }
     
     // MARK: - CRUD
     /// 데이터 저장
@@ -41,5 +47,21 @@ final class MemoryStorage {
     func removeAll() {
         storage.removeAllObjects()
         keys.removeAll()
+    }
+    
+    /// 만료된 데이터 제거
+    private func removeExpired() {
+        for key in keys {
+            guard let object = storage.object(forKey: key) else {
+                keys.remove(key)
+                continue
+            }
+            
+            // 데이터가 만료된 경우 제거
+            if object.isExpired {
+                storage.removeObject(forKey: key)
+                keys.remove(key)
+            }
+        }
     }
 }
