@@ -13,6 +13,7 @@ final class ApplicantListViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
+        let nameButtonTapped: Observable<ApplicantID>
         let startChatButtonTapped: Observable<ApplicantID>
         let acceptButtonTapped: Observable<ApplicantID>
         let rejectButtonTapped: Observable<ApplicantID>
@@ -129,6 +130,13 @@ final class ApplicantListViewModel: ViewModelType {
                         description: error.localizedDescription
                     ))
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        input.nameButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, userID in
+                owner.coordinator?.showProfileViewController(of: String(userID))
             })
             .disposed(by: disposeBag)
         

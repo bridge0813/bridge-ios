@@ -10,23 +10,15 @@ import FlexLayout
 import PinLayout
 import RxCocoa
 import RxSwift
+import Kingfisher
 
 final class ChannelViewController: BaseViewController {
     // MARK: - UI
-    private let profileButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.image = UIImage(named: "profile")?.resize(to: CGSize(width: 28, height: 28))
-        configuration.imagePadding = 8
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -4, bottom: 0, trailing: 0)
-        
-        let button = UIButton(configuration: configuration)
-        button.imageView?.backgroundColor = BridgeColor.gray09
-        button.imageView?.layer.cornerRadius = 14
-        button.imageView?.clipsToBounds = true
-        button.imageView?.contentMode = .scaleAspectFit
-        return button
+    private let profileView: ChannelProfileView = {
+        let view = ChannelProfileView()
+        view.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
+        return view
     }()
-    private lazy var profileBarButton = UIBarButtonItem(customView: profileButton)
     
     private lazy var menuBarButton = UIBarButtonItem(
         image: UIImage(named: "hamburger")?.resize(to: CGSize(width: 24, height: 24)).withRenderingMode(.alwaysTemplate),
@@ -103,16 +95,9 @@ final class ChannelViewController: BaseViewController {
     }
     
     private func configureNavigationBar() {
-        navigationItem.leftBarButtonItem = profileBarButton
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileView)
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.rightBarButtonItem = menuBarButton
-    }
-    
-    private func configureProfileButton(with channel: Channel) {
-        profileButton.configuration?.attributedTitle = AttributedString(
-            channel.name,
-            attributes: AttributeContainer([.font: BridgeFont.subtitle2.font, .foregroundColor: BridgeColor.gray01])
-        )
     }
     
     // MARK: - Layout
@@ -150,7 +135,7 @@ final class ChannelViewController: BaseViewController {
         
         let input = ChannelViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
-            profileButtonTapped: profileButton.rx.tap.asObservable(),
+            profileButtonTapped: profileView.nameButtonTapped,
             dropdownItemSelected: dropdown.itemSelected.map { $0.title }.asObservable(),
             sendMessage: messageInputBar.sendMessage,
             viewDidDisappear: self.rx.viewDidDisappear.asObservable()
@@ -159,7 +144,7 @@ final class ChannelViewController: BaseViewController {
         
         output.channel
             .drive { [weak self] channel in
-                self?.configureProfileButton(with: channel)
+                self?.profileView.configure(with: channel)
             }
             .disposed(by: disposeBag)
         

@@ -25,6 +25,12 @@ final class ChatCoordinator: Coordinator {
     private let fetchMessagesUseCase: FetchMessagesUseCase
     private let sendMessageUseCase: SendMessageUseCase
     
+    // 다른 유저의 프로필 보여주기
+    private let userRepository: UserRepository
+    private let fileRepository: FileRepository
+    private let fetchProfileUseCase: FetchProfileUseCase
+    private let downloadFileUseCase: DownloadFileUseCase
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.childCoordinators = []
@@ -32,10 +38,10 @@ final class ChatCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
         let stompService = DefaultStompService(webSocketService: DefaultWebSocketService.shared)
         authRepository = DefaultAuthRepository(networkService: networkService)
-        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
-        messageRepository = DefaultMessageRepository(networkService: networkService, stompService: stompService)
-//        channelRepository = MockChannelRepository()
-//        messageRepository = MockMessageRepository()
+//        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
+//        messageRepository = DefaultMessageRepository(networkService: networkService, stompService: stompService)
+        channelRepository = MockChannelRepository()
+        messageRepository = MockMessageRepository()
         
         fetchChannelsUseCase = DefaultFetchChannelsUseCase(channelRepository: channelRepository)
         leaveChannelUseCase = DefaultLeaveChannelUseCase(channelRepository: channelRepository)
@@ -43,6 +49,13 @@ final class ChatCoordinator: Coordinator {
         observeMessageUseCase = DefaultObserveMessageUseCase(messageRepository: messageRepository)
         fetchMessagesUseCase = DefaultFetchMessagesUseCase(messageRepository: messageRepository)
         sendMessageUseCase = DefaultSendMessageUseCase(messageRepository: messageRepository)
+        
+        // 다른 유저의 프로필 보여주기
+//        userRepository = DefaultUserRepository(networkService: networkService)
+        fileRepository = DefaultFileRepository(networkService: networkService)
+        userRepository = MockUserRepository()
+        fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
+        downloadFileUseCase = DefaultDownloadFileUseCase(fileRepository: fileRepository)
     }
     
     func start() {
@@ -75,7 +88,17 @@ extension ChatCoordinator {
         navigationController.pushViewController(channelViewController, animated: true)
     }
     
-    func showProfileViewController(of userID: String) { }
+    // 프로필 보여주기
+    func showProfileViewController(of userID: String) {
+        let otherUserProfileViewModel = OtherUserProfileViewModel(
+            coordinator: self,
+            userID: userID,
+            fetchProfileUseCase: fetchProfileUseCase,
+            downloadFileUseCase: downloadFileUseCase
+        )
+        let otherUserProfileViewController = OtherUserProfileViewController(viewModel: otherUserProfileViewModel)
+        navigationController.pushViewController(otherUserProfileViewController, animated: true)
+    }
 }
 
 // MARK: - Auth

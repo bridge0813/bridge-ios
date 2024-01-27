@@ -8,14 +8,23 @@
 import UIKit
 import FlexLayout
 
-/// 팀원의 기술스택을 추가하는 버튼(스택이 추가되면, 타이틀이 수정으로 변경됨)
-final class AddTechStackButton: BaseButton {
-    
+/// 특정 컨텐츠(기술 스택, 링크, 파일 등)를 추가하는 버튼(isAdded를 통해 타이틀 수정도 가능)
+final class BridgeAddButton: BaseButton {
+    // MARK: - Property
+    /// 추가된 컨텐츠가 있을 경우를 나타내는 프로퍼티
     var isAdded: Bool = false {
         didSet {
-            updateConfigurationForEdit()
+            updateTitle()
             flex.markDirty()
         }
+    }
+    
+    private var titleFont: UIFont
+    
+    // MARK: - Init
+    init(titleFont: UIFont) {
+        self.titleFont = titleFont
+        super.init(frame: .zero)
     }
     
     override func configureAttributes() {
@@ -33,17 +42,17 @@ final class AddTechStackButton: BaseButton {
         configuration.imagePadding = 1
         
         var titleContainer = AttributeContainer()
-        titleContainer.font = BridgeFont.body1.font
+        titleContainer.font = titleFont
         titleContainer.foregroundColor = BridgeColor.primary1
         configuration.attributedTitle = AttributedString("추가", attributes: titleContainer)
         
         self.configuration = configuration
     }
     
-    // 추가된 스택이 있을 경우
-    private func updateConfigurationForEdit() {
+    /// 컨텐츠가 추가되었을 경우, 버튼 타이틀을 변경
+    private func updateTitle() {
         var titleContainer = AttributeContainer()
-        titleContainer.font = BridgeFont.body1.font
+        titleContainer.font = titleFont
         titleContainer.foregroundColor = BridgeColor.primary1
         configuration?.attributedTitle = AttributedString("수정", attributes: titleContainer)
         configuration?.image = nil

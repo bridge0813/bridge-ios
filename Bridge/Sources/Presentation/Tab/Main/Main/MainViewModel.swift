@@ -31,7 +31,7 @@ final class MainViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
     
-    private let fetchProfilePreviewUseCase: FetchProfilePreviewUseCase
+    private let fetchProfileUseCase: FetchProfileUseCase
     private let fetchAllProjectsUseCase: FetchAllProjectsUseCase
     private let fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
@@ -43,7 +43,7 @@ final class MainViewModel: ViewModelType {
     // MARK: - Init
     init(
         coordinator: MainCoordinator,
-        fetchProfilePreviewUseCase: FetchProfilePreviewUseCase,
+        fetchProfileUseCase: FetchProfileUseCase,
         fetchAllProjectsUseCase: FetchAllProjectsUseCase,
         fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase,
         fetchHotProjectsUseCase: FetchHotProjectsUseCase,
@@ -51,7 +51,7 @@ final class MainViewModel: ViewModelType {
         bookmarkUseCase: BookmarkUseCase
     ) {
         self.coordinator = coordinator
-        self.fetchProfilePreviewUseCase = fetchProfilePreviewUseCase
+        self.fetchProfileUseCase = fetchProfileUseCase
         self.fetchAllProjectsUseCase = fetchAllProjectsUseCase
         self.fetchProjectsByFieldUseCase = fetchProjectsByFieldUseCase
         self.fetchHotProjectsUseCase = fetchHotProjectsUseCase
@@ -70,7 +70,7 @@ final class MainViewModel: ViewModelType {
         input.viewWillAppear
             .withUnretained(self)
             .flatMapLatest { owner, _ in
-                owner.fetchProfilePreviewUseCase.fetchProfilePreview().toResult()
+                owner.fetchProfileUseCase.fetchProfilePreview().toResult()
             }
             .do(onNext: { result in
                 switch result {

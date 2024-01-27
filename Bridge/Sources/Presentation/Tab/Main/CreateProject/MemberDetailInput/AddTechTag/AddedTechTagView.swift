@@ -91,9 +91,7 @@ extension AddedTechTagView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
 
-        cell.tagButton.updateTitle(with: tagNames[indexPath.row])
-        cell.tagButton.changesSelectionAsPrimaryAction = false
-        cell.configureLayout()
+        cell.configure(tagName: tagNames[indexPath.row], changesSelectionAsPrimaryAction: false)
 
         return cell
     }

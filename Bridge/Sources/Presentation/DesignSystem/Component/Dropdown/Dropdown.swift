@@ -204,6 +204,13 @@ final class DropDown: BaseView {
 
 // MARK: - 레이아웃 및 제약조건 설정
 extension DropDown {
+    /// 드롭다운의 레이아웃을 재 계산하는 메서드
+    func updateDropdownLayout() {
+        tableViewContainerTopConstraint?.isActive = false
+        tableViewContainerHeightConstraint?.isActive = false
+        computeLayout()
+        setupConstraints()
+    }
     
     override func updateConstraints() {
         computeLayout()
@@ -220,22 +227,26 @@ extension DropDown {
         
         addSubview(tableViewContainer)
         
+        // top
         tableViewContainerTopConstraint = tableViewContainer.topAnchor.constraint(
             equalTo: self.topAnchor,
             constant: yConstant ?? .zero
         )
         tableViewContainerTopConstraint?.isActive = true
 
+        // height
         tableViewContainerHeightConstraint = tableViewContainer.heightAnchor.constraint(
             equalToConstant: heightConstant ?? .zero
         )
         tableViewContainerHeightConstraint?.isActive = true
         
+        // leading
         tableViewContainer.leadingAnchor.constraint(
             equalTo: self.leadingAnchor,
             constant: xConstant ?? .zero
         ).isActive = true
 
+        // width
         tableViewContainer.widthAnchor.constraint(
             equalToConstant: widthConstant ?? .zero
         ).isActive = true
@@ -443,7 +454,7 @@ extension DropDown {
         )
     }
     
-    func setDropdownConstraints() {
+    private func setDropdownConstraints() {
         let visibleWindow = UIWindow.visibleWindow() ?? UIWindow()
         visibleWindow.addSubview(self)
         visibleWindow.bringSubviewToFront(self)  // 드롭다운을 윈도우의 최상단으로 이동.

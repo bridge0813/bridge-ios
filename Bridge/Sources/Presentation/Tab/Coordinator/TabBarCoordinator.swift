@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 final class TabBarCoordinator: Coordinator {
     // MARK: - Property
@@ -155,6 +156,19 @@ extension TabBarCoordinator: CoordinatorDelegate {
         if let index = childCoordinators.firstIndex(where: { $0 === childCoordinator }) {
             childCoordinators.remove(at: index)
         }
+    }
+    
+    func showWebPage(with urlString: URLString, navigationController: UINavigationController?) {
+        // HTTP와 HTTPS URL만 처리할 수 있도록
+        guard let url = URL(string: urlString), ["http", "https"].contains(url.scheme?.lowercased()) else {
+            showErrorAlert(configuration: ErrorAlertConfiguration(
+                title: "해당 링크를 열 수 없습니다.",
+                description: "URL 형식을 확인해주세요. ex) \"https://bridge.com\""
+            ))
+            return
+        }
+        let safariViewController = SFSafariViewController(url: url)
+        navigationController?.present(safariViewController, animated: true)
     }
     
     func showSignInViewController() {

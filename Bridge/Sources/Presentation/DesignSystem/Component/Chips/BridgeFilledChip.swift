@@ -46,11 +46,13 @@ extension BridgeFilledChip {
     enum ChipType {
         case short
         case long
+        case custom(padding: UIEdgeInsets, radius: CGFloat)
         
         var padding: UIEdgeInsets {
             switch self {
             case .short: return UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
             case .long: return UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
+            case .custom(let padding, _): return padding
             }
         }
         
@@ -58,6 +60,7 @@ extension BridgeFilledChip {
             switch self {
             case .short: return 11
             case .long: return 13
+            case .custom(_, let radius): return radius
             }
         }
     }

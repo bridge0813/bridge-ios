@@ -74,7 +74,7 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
     }()
     
     private let tagContainer = UIView()
-    private var tags: [ProjectDetailTechTag] = []
+    private var tags: [BridgeTechStackTag] = []
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -186,7 +186,7 @@ extension RecruitFieldDetailCell {
         
         // 태그버튼 생성
         let tags = data.requiredSkills.map { tagName in
-            return ProjectDetailTechTag(tagName)
+            return BridgeTechStackTag(tagName: tagName, textColor: BridgeColor.gray02)
         }
         self.tags = tags
         

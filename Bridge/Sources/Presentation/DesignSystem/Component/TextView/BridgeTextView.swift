@@ -25,11 +25,10 @@ final class BridgeTextView: BaseView {
     
     private lazy var textView: UITextView = {
         let textView = UITextView()
-        textView.text = textViewPlaceholder
+        textView.text = placeholder
         textView.font = BridgeFont.body2.font
         textView.textColor = BridgeColor.gray04
         textView.textContainerInset = UIEdgeInsets(top: 16, left: 10, bottom: 0, right: 10)
-        
         return textView
     }()
     
@@ -51,12 +50,23 @@ final class BridgeTextView: BaseView {
             .distinctUntilChanged()
     }
     
-    private let textViewPlaceholder: String
-    private let maxCount: Int
+    /// TextView의 text
+    var text = "" {
+        didSet {
+            textView.text = text
+            textView.textColor = textColor
+            countLabel.text = "\(text.count)/\(maxCount)"
+        }
+    }
     
-    init(textViewPlaceholder: String, maxCount: Int) {
-        self.textViewPlaceholder = textViewPlaceholder
+    private let placeholder: String
+    private let maxCount: Int
+    private let textColor: UIColor
+    
+    init(placeholder: String, maxCount: Int, textColor: UIColor = BridgeColor.gray01) {
+        self.placeholder = placeholder
         self.maxCount = maxCount
+        self.textColor = textColor
         super.init(frame: .zero)
     }
     
@@ -82,9 +92,9 @@ final class BridgeTextView: BaseView {
         textView.rx.didBeginEditing
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                if owner.textView.text == owner.textViewPlaceholder {
+                if owner.textView.text == owner.placeholder {
                     owner.textView.text = nil
-                    owner.textView.textColor = BridgeColor.gray01
+                    owner.textView.textColor = owner.textColor
                 }
             })
             .disposed(by: disposeBag)
@@ -96,8 +106,8 @@ final class BridgeTextView: BaseView {
             .distinctUntilChanged()
             .withUnretained(self)
             .subscribe(onNext: { owner, text in
-                // 텍스트가 빈 문자열이지 않고, 텍스트홀더도 아닐 경우 활성화
-                if !text.isEmpty && text != owner.textViewPlaceholder {
+                // 텍스트가 빈 문자열이지 않고 && 플레이스홀더가 아니고 && 설정한 텍스트가 아닐 경우 활성화
+                if !text.isEmpty && text != owner.placeholder && text != owner.text {
                     owner.updateCountLabel(text.count)
                     owner.rootFlexContainer.layer.borderColor = BridgeColor.primary1.cgColor
                     
@@ -118,7 +128,7 @@ final class BridgeTextView: BaseView {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 if owner.textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    owner.textView.text = self.textViewPlaceholder
+                    owner.textView.text = self.placeholder
                     owner.textView.textColor = BridgeColor.gray04
                 }
                 

@@ -7,13 +7,15 @@
 
 import UIKit
 
-/// 관리 탭의 '지원', '모집' 에 사용되는 전환용 버튼
-final class ManagementTabButton: BaseButton {
+/// 전환용 탭 버튼(관리 탭, 분야 및 스택 선택 등에서 사용)
+final class BridgeTabButton: BaseButton {
     
     private var title: String
+    private var titleFont: UIFont
     
-    init(_ title: String) {
+    init(title: String, titleFont: UIFont) {
         self.title = title
+        self.titleFont = titleFont
         super.init(frame: .zero)
     }
     
@@ -22,7 +24,7 @@ final class ManagementTabButton: BaseButton {
         configuration.baseBackgroundColor = .clear
         
         var titleContainer = AttributeContainer()
-        titleContainer.font = BridgeFont.headline1.font
+        titleContainer.font = titleFont
         titleContainer.foregroundColor = BridgeColor.gray04
         configuration.attributedTitle = AttributedString(title, attributes: titleContainer)
         

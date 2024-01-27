@@ -78,7 +78,7 @@ class BridgeBasePopUpView: BaseView {
     
     // MARK: - HandleGesture
     @objc
-    private func handlePanGesture(sender: UIPanGestureRecognizer) {
+    func handlePanGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: rootFlexContainer)
         let velocity = sender.velocity(in: rootFlexContainer)
         

@@ -15,15 +15,15 @@ final class ManagementViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
-    private let applyTabButton: ManagementTabButton = {
-        let button = ManagementTabButton("지원")
+    private let applyTabButton: BridgeTabButton = {
+        let button = BridgeTabButton(title: "지원", titleFont: BridgeFont.headline1.font)
         button.isSelected = true
         button.configuration?.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         return button
     }()
-    private let recruitmentTabButton: ManagementTabButton = {
-        let button = ManagementTabButton("모집")
+    private let recruitmentTabButton: BridgeTabButton = {
+        let button = BridgeTabButton(title: "모집", titleFont: BridgeFont.headline1.font)
         button.configuration?.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 0)
         return button
         

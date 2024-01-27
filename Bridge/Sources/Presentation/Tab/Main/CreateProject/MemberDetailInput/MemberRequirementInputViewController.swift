@@ -75,7 +75,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         return label
     }()
-    private let addTechStackButton = AddTechStackButton()
+    private let addTechStackButton = BridgeAddButton(titleFont: BridgeFont.body1.font)
     private let addedTechTagView = AddedTechTagView()
     private let addTechTagPopUpView = AddTechTagPopUpView()
     
@@ -87,7 +87,7 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         return label
     }()
-    private let requirementTextView = BridgeTextView(textViewPlaceholder: "팀원들에게 나를 소개해보세요.", maxCount: 100)
+    private let requirementTextView = BridgeTextView(placeholder: "이런 팀원이었으면 좋겠어요.", maxCount: 100)
     
     private let nextButton: BridgeButton = {
         let button = BridgeButton(

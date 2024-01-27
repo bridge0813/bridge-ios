@@ -57,7 +57,7 @@ final class ManagementViewModel: ViewModelType {
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         let projects = BehaviorRelay<[ProjectPreview]>(value: [])
-        let selectedTab = BehaviorRelay<ManagementTabType>(value: .apply)    // 현재 선택된 탭(지원 or 모집)
+        let selectedTab = BehaviorRelay<ManagementTabType>(value: .apply)  // 현재 선택된 탭(지원 or 모집)
         let viewState = BehaviorRelay<ViewState>(value: .general)
         
         // viewWillAppear 시점 데이터 가져오기

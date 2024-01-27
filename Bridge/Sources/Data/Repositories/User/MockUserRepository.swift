@@ -8,10 +8,23 @@
 import RxSwift
 
 final class MockUserRepository: UserRepository {
-
+    func fetchProfile(otherUserID: String?) -> RxSwift.Observable<Profile> {
+        return .just(ProfileResponseDTO.testData.toEntity())
+//        .error(NetworkError.statusCode(404))
+    }
+    
     func fetchProfilePreview() -> Observable<ProfilePreview> {
         .just(ProfilePreviewResponseDTO.testData.toEntity())
 //        .error(NetworkError.statusCode(401))
+    }
+    
+    func createProfile(_ profile: Profile) -> Observable<Void> {
+        .just(())
+//        .error(NetworkError.statusCode(401))
+    }
+    
+    func updateProfile(_ profile: Profile) -> Observable<Void> {
+        .just(())
     }
     
     func changeField(selectedFields: [String]) -> Observable<Void> {

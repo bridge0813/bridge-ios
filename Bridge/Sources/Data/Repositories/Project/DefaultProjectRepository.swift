@@ -33,7 +33,7 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // MARK: - FetchProjectsByField
     func fetchProjectsByField(for field: String) -> Observable<[ProjectPreview]> {
-        let fieldRequestDTO = convertToFieldDTO(from: field)
+        let fieldRequestDTO = FieldRequestDTO(field: field.convertToUpperCaseFormat())
         let fetchProjectsEndPoint = ProjectEndpoint.fetchProjectsByField(requestDTO: fieldRequestDTO)
         
         return networkService.request(to: fetchProjectsEndPoint, interceptor: AuthInterceptor())
@@ -171,22 +171,5 @@ private extension DefaultProjectRepository {
             progressStep: project.progressStep,
             userID: userID
         )
-    }
-    
-    /// '특정 분야에 맞는 모집글 조회'의 네트워킹을 위한 DTO를 만들어주는 메서드.
-    func convertToFieldDTO(from field: String) -> FieldRequestDTO {
-        let requestfield = String(describing: FieldType(rawValue: field) ?? .ios).uppercased()
-        return FieldRequestDTO(field: requestfield)
-    }
-    
-    enum FieldType: String {
-        case ios = "iOS"
-        case android = "안드로이드"
-        case frontend = "프론트엔드"
-        case backend = "백엔드"
-        case uiux = "UI/UX"
-        case bibx = "BI/BX"
-        case videomotion = "영상/모션"
-        case pm = "PM"
     }
 }

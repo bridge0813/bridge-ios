@@ -12,11 +12,13 @@ protocol CoordinatorDelegate: AnyObject {
     
     func showSignInViewController()
     func showChannelViewController(of channel: Channel, navigationController: UINavigationController)
+    func showWebPage(with urlString: URLString, navigationController: UINavigationController?)
 }
 
 extension CoordinatorDelegate {
     func showSignInViewController() { }
     func showChannelViewController(of channel: Channel, navigationController: UINavigationController) { }
+    func showWebPage(with urlString: URLString, navigationController: UINavigationController?) { }
 }
 
 protocol Coordinator: AnyObject, Alertable {
