@@ -1501,7 +1501,6 @@
 				7C24003F2AB4235800D9D5F1 /* UITextField+.swift */,
 				7B6123852AC1B199006E72C1 /* UIImage+.swift */,
 				7CD834C72B52A92B00F3EED7 /* UIImageView+KingFisher.swift */,
-				7CD834AE2B4D4AE300F3EED7 /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1799,6 +1798,7 @@
 			isa = PBXGroup;
 			children = (
 				7C569D052A9F776B0063D362 /* Date+.swift */,
+				7CD834AE2B4D4AE300F3EED7 /* String+.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
