@@ -5,7 +5,7 @@
 //  Created by 엄지호 on 1/28/24.
 //
 
-import Foundation
+import UIKit
 
 /// 디스크 저장소
 final class DiskStorage {
@@ -16,6 +16,7 @@ final class DiskStorage {
     // MARK: - Init
     init() {
         createDirectory()
+        observeBackgroundNotification()
         directoryURL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first?
             .appendingPathComponent("Bridge")
     }
@@ -127,5 +128,21 @@ extension DiskStorage {
                 print("디렉토리 내 만료된 데이터 제거 실패: \(error.localizedDescription)")
             }
         }
+    }
+}
+
+// MARK: - Notification
+extension DiskStorage {
+    private func observeBackgroundNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didEnterBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func didEnterBackground() {
+        removeExpired()
     }
 }
