@@ -30,8 +30,14 @@ final class DiskStorage {
             // 디스크 캐싱
             try storageObject.imageData.write(to: resultURL)
             
+            // 속성 정의(만료날짜) 및 저장
+            let attributes: [FileAttributeKey: Any] = [
+                .modificationDate: storageObject.estimatedExpiration.fileAttributeDate
+            ]
+            try fileManager.setAttributes(attributes, ofItemAtPath: resultURL.path)
+            
         } catch {
-            print("데이터 저장 실패  \(error.localizedDescription)")
+            print("데이터 및 속성 저장 실패  \(error.localizedDescription)")
         }
     }
     

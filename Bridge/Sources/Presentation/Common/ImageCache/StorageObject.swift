@@ -29,4 +29,9 @@ extension Date {
     var isPast: Bool {
         return timeIntervalSince(Date()) <= 0
     }
+    
+    /// 파일 속성에 사용될 날짜를 반환(처리 일관성을 위해)
+    var fileAttributeDate: Date {
+        return Date(timeIntervalSince1970: ceil(timeIntervalSince1970))
+    }
 }
