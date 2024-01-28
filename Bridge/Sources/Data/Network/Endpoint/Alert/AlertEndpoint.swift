@@ -19,7 +19,7 @@ extension AlertEndpoint: Endpoint {
         case .fetchAlerts:
             return "/alarms"
             
-        case .removeAlert(let id):
+        case .removeAlert:
             return "/alarm"
             
         case .removeAllAlerts:
@@ -45,7 +45,7 @@ extension AlertEndpoint: Endpoint {
         case .fetchAlerts:
             return .get
             
-        case .removeAlert(let id):
+        case .removeAlert:
             return .delete
             
         case .removeAllAlerts:
