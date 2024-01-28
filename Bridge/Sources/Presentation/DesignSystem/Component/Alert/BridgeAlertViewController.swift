@@ -53,8 +53,9 @@ final class BridgeAlertViewController: BaseViewController {
     private lazy var leftButton = BridgeButton(title: "", font: BridgeFont.button2.font, backgroundColor: BridgeColor.gray04)
     private lazy var rightButton = BridgeButton(title: "", font: BridgeFont.button2.font, backgroundColor: BridgeColor.primary1)
     
-    private var primaryAction: PrimaryActionClosure?
-    private var cancelAction: CancelActionClosure?
+    private let configuration: AlertConfiguration
+    private let primaryAction: PrimaryActionClosure?
+    private let cancelAction: CancelActionClosure?
     
     // MARK: - Initializer
     init(
@@ -62,16 +63,22 @@ final class BridgeAlertViewController: BaseViewController {
         primaryAction: PrimaryActionClosure?,
         cancelAction: CancelActionClosure?
     ) {
+        self.configuration = configuration
         self.primaryAction = primaryAction
         self.cancelAction = cancelAction
         
         super.init()
-        
+    }
+    
+    // MARK: - Configuration
+    override func configureAttributes() {
+        // 이미지 뷰 유/무에 따른 처리
         if let imageName = configuration.imageName {
             imageView.image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal)
         } else {
             imageView.isHidden = true
         }
+        
         titleLabel.text = configuration.title
         descriptionLabel.text = configuration.description
         leftButton.setTitle(configuration.leftButtonTitle, for: .normal)
@@ -131,9 +138,14 @@ final class BridgeAlertViewController: BaseViewController {
                     flex.addItem(descriptionLabel).marginTop(6).isIncludedInLayout(descriptionLabel.text?.isEmpty != nil)
                 }
                 
-                flex.addItem().direction(.row).define { flex in
-                    flex.addItem(leftButton).width(123.5).height(44).marginRight(12)
+                if configuration.isSingleButton {
                     flex.addItem(rightButton).width(123.5).height(44)
+                    
+                } else {
+                    flex.addItem().direction(.row).define { flex in
+                        flex.addItem(leftButton).width(123.5).height(44).marginRight(12)
+                        flex.addItem(rightButton).width(123.5).height(44)
+                    }
                 }
                 
                 flex.addItem().size(30)

@@ -11,32 +11,37 @@ struct AlertConfiguration {
     var description: String?
     let leftButtonTitle: String
     let rightButtonTitle: String
+    let isSingleButton: Bool  // Alert이 하나의 버튼만을 필요로 할 경우 사용(이 때, 사용되는 버튼은 rightButton)
     
     init(
         imageName: String,
         title: String,
         description: String,
         leftButtonTitle: String = "취소하기",
-        rightButtonTitle: String
+        rightButtonTitle: String,
+        isSingleButton: Bool = false
     ) {
         self.imageName = imageName
         self.title = title
         self.description = description
         self.leftButtonTitle = leftButtonTitle
         self.rightButtonTitle = rightButtonTitle
+        self.isSingleButton = isSingleButton
     }
     
     init(
         title: String,
         description: String?,
         leftButtonTitle: String = "취소하기",
-        rightButtonTitle: String
+        rightButtonTitle: String,
+        isSingleButton: Bool = false
     ) {
         self.imageName = nil
         self.title = title
         self.description = description
         self.leftButtonTitle = leftButtonTitle
         self.rightButtonTitle = rightButtonTitle
+        self.isSingleButton = isSingleButton
     }
 }
 
@@ -150,7 +155,8 @@ extension AlertConfiguration {
     static let fieldChanged = AlertConfiguration(
         title: "관심분야 변경 완료",
         description: "관심분야 변경이 완료되었어요.",
-        rightButtonTitle: "확인하기"
+        rightButtonTitle: "확인하기",
+        isSingleButton: true
     )
     
     static let createProfile = AlertConfiguration(
