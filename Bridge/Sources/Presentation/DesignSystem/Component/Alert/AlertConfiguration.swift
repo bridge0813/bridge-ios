@@ -148,6 +148,13 @@ extension AlertConfiguration {
         description: "프로젝트의 팀원이 되어 함께 해보세요.",
         rightButtonTitle: "지원하기"
     )
+    
+    static let completedApplication = AlertConfiguration(
+        title: "지원 완료",
+        description: "프로젝트 지원이 완료되었어요.",
+        rightButtonTitle: "확인하기",
+        isSingleButton: true
+    )
 }
 
 // MARK: - User

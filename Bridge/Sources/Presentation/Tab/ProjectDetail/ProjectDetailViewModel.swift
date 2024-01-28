@@ -160,9 +160,7 @@ final class ProjectDetailViewModel: ViewModelType {
             .subscribe(onNext: { owner, result in
                 switch result {
                 case .success:
-                    owner.coordinator?.showErrorAlert(
-                        configuration: ErrorAlertConfiguration(title: "프로젝트 지원이 정상적으로 처리되었습니다.")
-                    )
+                    owner.coordinator?.showAlert(configuration: .completedApplication)
                     
                 case .failure(let error):
                     owner.handleNetworkError(error)
