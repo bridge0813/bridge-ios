@@ -23,25 +23,13 @@ final class ImageCache {
         
         // 1. 캐시 메모리에서 이미지 데이터 찾기
         if let cachedImageData = memoryStorage.value(forKey: url as NSURL) {
-            DispatchQueue.global(qos: .userInitiated).async {
-                let processedImage = processor.process(data: cachedImageData)
-                
-                DispatchQueue.main.async {
-                    completion(processedImage)
-                }
-            }
+            performImageProcessing(cachedImageData, with: processor, completion: completion)
             return
         }
         
         // 2. 디스크 메모리에서 이미지 데이터 찾기
         if let diskImageData = diskStorage.value(with: url.lastPathComponent) {
-            DispatchQueue.global(qos: .userInitiated).async {
-                let processedImage = processor.process(data: diskImageData)
-                
-                DispatchQueue.main.async {
-                    completion(processedImage)
-                }
-            }
+            performImageProcessing(diskImageData, with: processor, completion: completion)
             memoryStorage.store(diskImageData, forKey: url as NSURL)
             return
         }
@@ -66,7 +54,6 @@ final class ImageCache {
             }
         
             let processedImage = processor.process(data: data)
-            
             DispatchQueue.main.async {
                 completion(processedImage)
             }
@@ -92,6 +79,20 @@ extension ImageCache {
         switch option {
         case .downsampling(let size):
             return DownsamplingImageProcessor(size: size)
+        }
+    }
+    
+    private func performImageProcessing(
+        _ imageData: Data,
+        with processor: ImageProcessor,
+        completion: @escaping (UIImage?) -> Void
+    ) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let processedImage = processor.process(data: imageData)
+
+            DispatchQueue.main.async {
+                completion(processedImage)
+            }
         }
     }
 }
