@@ -66,6 +66,7 @@ final class BookmarkedProjectViewController: BaseViewController {
     override func bind() {
         let input = BookmarkedProjectViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            itemSelected: bookmarkedProjectCollectionView.rx.itemSelected.map { $0.row },
             bookmarkButtonTapped: bookmarkButtonTapped.asObservable()
         )
         

@@ -12,6 +12,7 @@ final class BookmarkedProjectViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
+        let itemSelected: Observable<Int>
         let bookmarkButtonTapped: Observable<Int>
     }
     
@@ -48,6 +49,18 @@ final class BookmarkedProjectViewModel: ViewModelType {
             .bind(to: bookmarkedProjects)
             .disposed(by: disposeBag)
         
+        // 프로젝트 상세 이동
+        input.itemSelected
+            .withLatestFrom(bookmarkedProjects) { index, bookmarkedProjects in
+                bookmarkedProjects[index].id
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, projectID in
+                owner.coordinator?.connectToProjectDetailFlow(with: projectID)
+            })
+            .disposed(by: disposeBag)
+        
+        // 북마크 해제
         input.bookmarkButtonTapped
             .debug()
             .withUnretained(self)
