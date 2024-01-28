@@ -65,13 +65,27 @@ final class BookmarkedProjectViewModel: ViewModelType {
             .debug()
             .withUnretained(self)
             .flatMap { owner, projectID in
-                owner.bookmarkUseCase.bookmark(projectID: projectID)
+                owner.bookmarkUseCase.bookmark(projectID: projectID).toResult()
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.fetchBookmarkedProjectUseCase.fetch()
-            }
-            .bind(to: bookmarkedProjects)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projectID):
+                    var currentProjectList = bookmarkedProjects.value
+                    
+                    if let deletedProjectIndex = currentProjectList.firstIndex(where: { $0.id == projectID }) {
+                        currentProjectList.remove(at: deletedProjectIndex)
+                        bookmarkedProjects.accept(currentProjectList)
+                    }
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "북마크 해제에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
+            })
             .disposed(by: disposeBag)
         
         return Output(
