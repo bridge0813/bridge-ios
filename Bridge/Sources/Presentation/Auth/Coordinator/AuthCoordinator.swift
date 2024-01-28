@@ -23,8 +23,8 @@ final class AuthCoordinator: Coordinator {
         
         let networkService = DefaultNetworkService()
         let tokenStorage = KeychainTokenStorage()
-        authRepository = DefaultAuthRepository(networkService: networkService, tokenStorage: tokenStorage)
-//        authRepository = MockAuthRepository()
+//        authRepository = DefaultAuthRepository(networkService: networkService, tokenStorage: tokenStorage)
+        authRepository = MockAuthRepository()
         signInUseCase = DefaultSignInUseCase(authRepository: authRepository)
         signUpUseCase = DefaultSignUpUseCase(authRepository: authRepository)
     }

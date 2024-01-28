@@ -17,6 +17,7 @@ final class SetFieldViewController: BaseViewController {
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
+        scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
     
@@ -82,7 +83,6 @@ final class SetFieldViewController: BaseViewController {
             flex.addItem(descriptionLabel).marginTop(32).marginBottom(16)
             flex.addItem(tipMessageBox).marginBottom(40)
             flex.addItem(setFieldView).marginBottom(35)
-            flex.addItem().size(60)
         }
     }
     
@@ -90,7 +90,7 @@ final class SetFieldViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         rootFlexContainer.pin.all(view.pin.safeArea)
         completeButton.pin.horizontally(16).bottom(view.pin.safeArea + 24).height(52)
-        scrollView.pin.all()
+        scrollView.pin.top().horizontally().above(of: completeButton).marginBottom(20)
         
         contentView.pin.top().horizontally()
         contentView.flex.layout(mode: .adjustHeight)
