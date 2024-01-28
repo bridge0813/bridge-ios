@@ -24,13 +24,37 @@ extension UIImageView {
             return
         }
         
+        // 기존 이미지 제거
+        image = nil
+        
+        // 인디케이터 설정
+        let indicator = addActivityIndicator()
+        indicator.startAnimating()
+        
         ImageCache.shared.load(url: url, withOption: .downsampling(size: size)) { [weak self] image in
             guard let self else { return }
             
             UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve) {
+                indicator.removeFromSuperview()
+                
                 // 이미지가 없으면 플레이스홀더 적용, 있으면 해당 이미지 적용
                 self.image = image == nil ? placeholderImage : image
             }
         }
+    }
+    
+    /// 이미지 로드 중 보여 줄  인디케이터를 설정하는 메서드
+    private func addActivityIndicator() -> UIActivityIndicatorView {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.hidesWhenStopped = true
+        addSubview(indicator)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+        
+        return indicator
     }
 }
