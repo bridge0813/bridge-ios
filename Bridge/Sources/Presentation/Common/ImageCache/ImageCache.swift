@@ -17,16 +17,31 @@ final class ImageCache {
     private init() { }
     
     // MARK: - Load
-    func load(url: URL, downsampleSize: CGSize, completion: @escaping (UIImage?) -> Void) {
+    func load(url: URL, withOption option: ImageProcessOption, completion: @escaping (UIImage?) -> Void) {
+        // 이미지 처리 프로세서 생성
+        let processor = createProcessor(for: option)
+        
         // 1. 캐시 메모리에서 이미지 데이터 찾기
         if let cachedImageData = memoryStorage.value(forKey: url as NSURL) {
-            // 이미지 작업 후 리턴
+            DispatchQueue.global(qos: .userInitiated).async {
+                let processedImage = processor.process(data: cachedImageData)
+                
+                DispatchQueue.main.async {
+                    completion(processedImage)
+                }
+            }
             return
         }
         
         // 2. 디스크 메모리에서 이미지 데이터 찾기
         if let diskImageData = diskStorage.value(with: url.lastPathComponent) {
-            // 이미지 작업 후 리턴
+            DispatchQueue.global(qos: .userInitiated).async {
+                let processedImage = processor.process(data: diskImageData)
+                
+                DispatchQueue.main.async {
+                    completion(processedImage)
+                }
+            }
             memoryStorage.store(diskImageData, forKey: url as NSURL)
             return
         }
@@ -50,7 +65,11 @@ final class ImageCache {
                 return
             }
         
-            // 이미지 작업 후 리턴
+            let processedImage = processor.process(data: data)
+            
+            DispatchQueue.main.async {
+                completion(processedImage)
+            }
             
             self.memoryStorage.store(data, forKey: url as NSURL)
             self.diskStorage.store(data, identifier: url.lastPathComponent)
@@ -65,5 +84,14 @@ final class ImageCache {
     
     func clearDiskCache() {
         diskStorage.removeAll()
+    }
+}
+
+extension ImageCache {
+    private func createProcessor(for option: ImageProcessOption) -> ImageProcessor {
+        switch option {
+        case .downsampling(let size):
+            return DownsamplingImageProcessor(size: size)
+        }
     }
 }
