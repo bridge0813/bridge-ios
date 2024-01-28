@@ -44,4 +44,3 @@ extension ApplicantProfileResponseDTO {
         ApplicantProfileResponseDTO(userID: 5, imageURL: nil, name: "이규현", fields: ["프론트엔드", "백엔드"], career: "취준생")
     ]
 }
-

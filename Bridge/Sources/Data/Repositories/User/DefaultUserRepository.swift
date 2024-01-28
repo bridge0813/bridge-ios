@@ -68,7 +68,9 @@ final class DefaultUserRepository: UserRepository {
             multipartData: createProfileMultipartData(profile: profile),
             userID: userID
         )
-        return .just(())
+        
+        return networkService.request(to: userEndpoint, interceptor: nil)
+            .map { _ in }
     }
     
     /// 관심분야 수정

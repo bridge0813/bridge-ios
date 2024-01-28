@@ -1627,8 +1627,8 @@
 				7BEA738E2B2B2E0E00CECF44 /* ProfileViewController.swift */,
 				7CD834BA2B50472600F3EED7 /* Base */,
 				7C91C9712B3BD4F3002E5ABF /* Views */,
-				7CD5A5362B4270E100343F9F /* Update */,
 				7CD834BD2B50F7A300F3EED7 /* Create */,
+				7CD5A5362B4270E100343F9F /* Update */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
