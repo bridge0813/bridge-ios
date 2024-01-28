@@ -114,7 +114,7 @@ final class ApplicantCell: BaseCollectionViewCell {
 
 extension ApplicantCell {
     func configureCell(with data: ApplicantProfile) {
-        profileImageView.setImage(with: data.imageURL, size: CGSize(width: 44, height: 44), placeholderImage: nil)
+        profileImageView.setImage(from: data.imageURL, size: CGSize(width: 44, height: 44), placeholderImage: nil)
         
         let fieldsText = data.fields.joined(separator: ", ")
         

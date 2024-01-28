@@ -82,7 +82,7 @@ final class ChannelCell: BaseTableViewCell {
 extension ChannelCell {
     func configure(with channel: Channel) {
         profileImageView.setImage(
-            with: channel.imageURL,
+            from: channel.imageURL,
             size: CGSize(width: 48, height: 48),
             placeholderImage: UIImage(named: "profile")
         )

@@ -51,7 +51,7 @@ extension ChannelProfileView {
     func configure(with channel: Channel) {
         nameButton.setTitle(channel.name, for: .normal)
         imageView.setImage(
-            with: channel.imageURL,
+            from: channel.imageURL,
             size: CGSize(width: 28, height: 28),
             placeholderImage: UIImage(named: "profile")
         )

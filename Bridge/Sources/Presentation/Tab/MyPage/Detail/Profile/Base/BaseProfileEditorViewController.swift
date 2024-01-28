@@ -293,7 +293,7 @@ extension BaseProfileEditorViewController {
             profileImageView.image = profileImage
         } else {
             profileImageView.setImage(
-                with: profile.imageURL,
+                from: profile.imageURL,
                 size: CGSize(width: 92, height: 92),
                 placeholderImage: UIImage(named: "profile.medium")
             )
