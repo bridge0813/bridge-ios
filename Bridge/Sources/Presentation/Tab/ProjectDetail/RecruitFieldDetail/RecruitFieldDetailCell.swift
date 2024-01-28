@@ -142,41 +142,10 @@ final class RecruitFieldDetailCell: BaseCollectionViewCell {
 
 // MARK: - Configuration
 extension RecruitFieldDetailCell {
-    struct FieldStyle {
-        let tag: String
-        let field: String
-    }
-    
-    enum FieldType: String {
-        case ios = "iOS"
-        case android = "안드로이드"
-        case frontend = "프론트엔드"
-        case backend = "백엔드"
-        case uiux = "UI/UX"
-        case bibx = "BI/BX"
-        case videomotion = "영상/모션"
-        case pm = "PM"
-        
-        var style: FieldStyle {
-            switch self {
-            case .ios: return FieldStyle(tag: "개발", field: "iOS")
-            case .android: return FieldStyle(tag: "개발", field: "안드로이드")
-            case .frontend: return FieldStyle(tag: "개발", field: "프론트엔드")
-            case .backend: return FieldStyle(tag: "개발", field: "백엔드")
-            case .uiux: return FieldStyle(tag: "디자인", field: "UI/UX")
-            case .bibx: return FieldStyle(tag: "디자인", field: "BI/BX")
-            case .videomotion: return FieldStyle(tag: "디자인", field: "영상/모션")
-            case .pm: return FieldStyle(tag: "기획", field: "PM")
-            }
-        }
-    }
-    
     func configureCell(with data: MemberRequirement) {
-        guard let type = FieldType(rawValue: data.field) else { return }
-        
         // 분야에 맞는 텍스트 설정.
-        tagLabel.text = type.style.tag
-        fieldLabel.text = type.style.field
+        tagLabel.text = data.field.categoryForField()
+        fieldLabel.text = data.field
         
         // 모집인원 수 텍스트 설정.
         recruitNumberLabel.text = "\(data.recruitNumber)명 모집중"
