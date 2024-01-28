@@ -143,7 +143,7 @@ extension ProfileHeaderView {
             
             
         case .authorized(let profilePreview):
-            profileImageView.setImage(with: profilePreview.imageURL, size: CGSize(width: 64, height: 64))
+            profileImageView.setImage(from: profilePreview.imageURL, size: CGSize(width: 64, height: 64))
             nameLabel.text = "\(profilePreview.name) 님"
             nameLabel.textColor = BridgeColor.gray01
             manageProfileButton.flex.display(.flex)

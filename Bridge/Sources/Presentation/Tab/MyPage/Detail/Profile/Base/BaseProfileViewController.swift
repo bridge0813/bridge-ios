@@ -212,7 +212,7 @@ class BaseProfileViewController: BaseViewController {
 extension BaseProfileViewController {
     func configure(with profile: Profile) {
         // 프로필 이미지 설정
-        profileImageView.setImage(with: profile.imageURL, size: CGSize(width: 155, height: 153))
+        profileImageView.setImage(from: profile.imageURL, size: CGSize(width: 155, height: 153))
         
         // 이름 설정
         nameLabel.text = "\(profile.name) 님"

@@ -210,6 +210,12 @@
 		7C3560422B62540000CF79CE /* BaseProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560412B62540000CF79CE /* BaseProfileViewController.swift */; };
 		7C3560452B6258D400CF79CE /* OtherUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560442B6258D400CF79CE /* OtherUserProfileViewController.swift */; };
 		7C3560472B62590000CF79CE /* OtherUserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560462B62590000CF79CE /* OtherUserProfileViewModel.swift */; };
+		7C35604D2B656FBB00CF79CE /* StorageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C35604C2B656FBB00CF79CE /* StorageObject.swift */; };
+		7C35604F2B65705D00CF79CE /* StorageExpiration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C35604E2B65705D00CF79CE /* StorageExpiration.swift */; };
+		7C3560512B6571E900CF79CE /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560502B6571E900CF79CE /* MemoryStorage.swift */; };
+		7C3560532B6573D100CF79CE /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560522B6573D100CF79CE /* DiskStorage.swift */; };
+		7C3560552B6576C600CF79CE /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560542B6576C600CF79CE /* ImageCache.swift */; };
+		7C3560582B6578B500CF79CE /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560572B6578B500CF79CE /* ImageProcessor.swift */; };
 		7C40CBA12AC3E595000F4C9F /* BridgeTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */; };
 		7C40CBA32AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */; };
 		7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */; };
@@ -351,8 +357,7 @@
 		7CD834BF2B50F7C500F3EED7 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834BE2B50F7C500F3EED7 /* CreateProfileViewController.swift */; };
 		7CD834C12B50F95400F3EED7 /* CreateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834C02B50F95400F3EED7 /* CreateProfileViewModel.swift */; };
 		7CD834C32B52507F00F3EED7 /* CreateProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834C22B52507F00F3EED7 /* CreateProfileUseCase.swift */; };
-		7CD834C62B52A02F00F3EED7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7CD834C52B52A02F00F3EED7 /* Kingfisher */; };
-		7CD834C82B52A92B00F3EED7 /* UIImageView+KingFisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834C72B52A92B00F3EED7 /* UIImageView+KingFisher.swift */; };
+		7CD834C82B52A92B00F3EED7 /* UIImageView+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD834C72B52A92B00F3EED7 /* UIImageView+ImageCache.swift */; };
 		7CDFB6122B2011AB00272F77 /* ManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */; };
 		7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */; };
 		7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */; };
@@ -554,6 +559,12 @@
 		7C3560412B62540000CF79CE /* BaseProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileViewController.swift; sourceTree = "<group>"; };
 		7C3560442B6258D400CF79CE /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
 		7C3560462B62590000CF79CE /* OtherUserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewModel.swift; sourceTree = "<group>"; };
+		7C35604C2B656FBB00CF79CE /* StorageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageObject.swift; sourceTree = "<group>"; };
+		7C35604E2B65705D00CF79CE /* StorageExpiration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageExpiration.swift; sourceTree = "<group>"; };
+		7C3560502B6571E900CF79CE /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
+		7C3560522B6573D100CF79CE /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
+		7C3560542B6576C600CF79CE /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		7C3560572B6578B500CF79CE /* ImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
 		7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeTechTagButton.swift; sourceTree = "<group>"; };
 		7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeOutlinedTechTagButton.swift; sourceTree = "<group>"; };
 		7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeButton.swift; sourceTree = "<group>"; };
@@ -694,7 +705,7 @@
 		7CD834BE2B50F7C500F3EED7 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		7CD834C02B50F95400F3EED7 /* CreateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewModel.swift; sourceTree = "<group>"; };
 		7CD834C22B52507F00F3EED7 /* CreateProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileUseCase.swift; sourceTree = "<group>"; };
-		7CD834C72B52A92B00F3EED7 /* UIImageView+KingFisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+KingFisher.swift"; sourceTree = "<group>"; };
+		7CD834C72B52A92B00F3EED7 /* UIImageView+ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageCache.swift"; sourceTree = "<group>"; };
 		7CDFB6112B2011AB00272F77 /* ManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewController.swift; sourceTree = "<group>"; };
 		7CDFB6132B2012AE00272F77 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		7CDFB6152B2015A400272F77 /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
@@ -766,7 +777,6 @@
 				7BA96EC12B28140B000D48AE /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				7B71E7612A933C18001B5D2C /* FlexLayoutYoga in Frameworks */,
 				7BA96EC32B28140B000D48AE /* FirebaseAppCheck in Frameworks */,
-				7CD834C62B52A02F00F3EED7 /* Kingfisher in Frameworks */,
 				7B1D9FB52ADE11A9005F42D9 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1295,6 +1305,7 @@
 				7BA36CC52A9E148C000DAB02 /* Extensions */,
 				7B0CFB8A2AD3D19500EA9C0D /* RxExtensions */,
 				7CC719EE2B2777F800CFA827 /* Typealias */,
+				7C35604B2B656F8700CF79CE /* ImageCache */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1500,7 +1511,6 @@
 				7C42701B2AA394EF009BE6AF /* UILabel+.swift */,
 				7C24003F2AB4235800D9D5F1 /* UITextField+.swift */,
 				7B6123852AC1B199006E72C1 /* UIImage+.swift */,
-				7CD834C72B52A92B00F3EED7 /* UIImageView+KingFisher.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1737,6 +1747,36 @@
 				7C3560442B6258D400CF79CE /* OtherUserProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		7C35604B2B656F8700CF79CE /* ImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				7C3560542B6576C600CF79CE /* ImageCache.swift */,
+				7C3560502B6571E900CF79CE /* MemoryStorage.swift */,
+				7C3560522B6573D100CF79CE /* DiskStorage.swift */,
+				7C35604C2B656FBB00CF79CE /* StorageObject.swift */,
+				7C35604E2B65705D00CF79CE /* StorageExpiration.swift */,
+				7C3560562B65782800CF79CE /* ImageProcessor */,
+				7C3560592B6614A400CF79CE /* Extensions */,
+			);
+			path = ImageCache;
+			sourceTree = "<group>";
+		};
+		7C3560562B65782800CF79CE /* ImageProcessor */ = {
+			isa = PBXGroup;
+			children = (
+				7C3560572B6578B500CF79CE /* ImageProcessor.swift */,
+			);
+			path = ImageProcessor;
+			sourceTree = "<group>";
+		};
+		7C3560592B6614A400CF79CE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7CD834C72B52A92B00F3EED7 /* UIImageView+ImageCache.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7C55E6342ADC06C30018FA5D /* HeaderView */ = {
@@ -2638,7 +2678,6 @@
 				7BA96EEA2B28140B000D48AE /* FirebaseRemoteConfigSwift */,
 				7BA96EEC2B28140B000D48AE /* FirebaseStorage */,
 				7BA96EEE2B28140B000D48AE /* FirebaseStorageCombine-Community */,
-				7CD834C52B52A02F00F3EED7 /* Kingfisher */,
 			);
 			productName = Bridge;
 			productReference = 7B71E73D2A9330C6001B5D2C /* Bridge.app */;
@@ -2675,7 +2714,6 @@
 				7B1D9FB32ADE11A9005F42D9 /* XCRemoteSwiftPackageReference "Starscream" */,
 				7CA04F6A2B0C5D29007B9191 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				7BA96EB92B28140B000D48AE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				7CD834C42B52A02E00F3EED7 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 7B71E73E2A9330C6001B5D2C /* Products */;
 			projectDirPath = "";
@@ -2739,6 +2777,7 @@
 			files = (
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
 				7CD834BC2B504B4600F3EED7 /* BaseListView.swift in Sources */,
+				7C3560582B6578B500CF79CE /* ImageProcessor.swift in Sources */,
 				7CD834AB2B4D34AE00F3EED7 /* UpdateProfileUseCase.swift in Sources */,
 				7B93B3B72B353B1100912202 /* AlertEndpoint.swift in Sources */,
 				7CA04F212AFE772C007B9191 /* BaseLabel.swift in Sources */,
@@ -2777,7 +2816,7 @@
 				7B2D76F32AA9941C00E5907B /* SignInViewController.swift in Sources */,
 				7BA36CBF2A9DA44F000DAB02 /* NetworkError.swift in Sources */,
 				7C569CFA2A9F6D5A0063D362 /* FetchAllProjectsUseCase.swift in Sources */,
-				7CD834C82B52A92B00F3EED7 /* UIImageView+KingFisher.swift in Sources */,
+				7CD834C82B52A92B00F3EED7 /* UIImageView+ImageCache.swift in Sources */,
 				7B93B3A42B352C9C00912202 /* AlertCell.swift in Sources */,
 				7B1922CC2AE14E1C00EBDD2E /* UIView+RxKeyboard.swift in Sources */,
 				7C91C9772B3C3B9C002E5ABF /* Profile.swift in Sources */,
@@ -2839,6 +2878,7 @@
 				7BA36C982A9C503C000DAB02 /* FetchChannelsUseCase.swift in Sources */,
 				7C91C9752B3BDAF2002E5ABF /* ProfileTechStackCell.swift in Sources */,
 				7B93AAA82B21997300650EA5 /* UnreadMessageCountView.swift in Sources */,
+				7C35604F2B65705D00CF79CE /* StorageExpiration.swift in Sources */,
 				7CE080492AD79ADD00230C86 /* FieldCategoryAnchorButton.swift in Sources */,
 				7CA04F252AFE7B6E007B9191 /* BridgeLinedChip.swift in Sources */,
 				7B93B3AC2B35378600912202 /* RemoveAlertUseCase.swift in Sources */,
@@ -2934,6 +2974,7 @@
 				7C55E64E2AE44BCF0018FA5D /* CompositionalLayoutConfiguration.swift in Sources */,
 				7CDFB6162B2015A400272F77 /* ManagementCoordinator.swift in Sources */,
 				7CDFB6142B2012AE00272F77 /* ManagementViewModel.swift in Sources */,
+				7C35604D2B656FBB00CF79CE /* StorageObject.swift in Sources */,
 				7CD834A92B4BEB3800F3EED7 /* RxDocumentInteractionControllerDelegateProxy.swift in Sources */,
 				7BA5336B2B0EED5E00E69BFB /* ObserveMessageUseCase.swift in Sources */,
 				7C55E64A2AE44B5F0018FA5D /* HotProjectCell.swift in Sources */,
@@ -3014,7 +3055,9 @@
 				7C569CF32A9F67C60063D362 /* ProjectPreview.swift in Sources */,
 				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
 				7C56E16F2B145E3000454F5E /* FieldRequestDTO.swift in Sources */,
+				7C3560552B6576C600CF79CE /* ImageCache.swift in Sources */,
 				7B1E5ABC2ADCFD790053E9B3 /* ChannelViewController.swift in Sources */,
+				7C3560532B6573D100CF79CE /* DiskStorage.swift in Sources */,
 				7BA36C9F2A9C6229000DAB02 /* LeaveChannelUseCase.swift in Sources */,
 				7CA04F692B0A6F02007B9191 /* CreateProjectUseCase.swift in Sources */,
 				7CC719F22B277A3500CFA827 /* ApplicantProfile.swift in Sources */,
@@ -3024,6 +3067,7 @@
 				7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */,
 				7C40CBCA2AC6B597000F4C9F /* BridgeCreateProjectButton.swift in Sources */,
 				7B9C31AF2B07761C007E36B2 /* DefaultStompService.swift in Sources */,
+				7C3560512B6571E900CF79CE /* MemoryStorage.swift in Sources */,
 				7C8CC41C2AF522A10032F237 /* BridgeBasePopUpView.swift in Sources */,
 				7CBDE2672B3FDAB800518AA9 /* ReferenceFileCell.swift in Sources */,
 				7BA36C8E2A9C4B33000DAB02 /* ViewModelType.swift in Sources */,
@@ -3337,14 +3381,6 @@
 				minimumVersion = 4.0.0;
 			};
 		};
-		7CD834C42B52A02E00F3EED7 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.10.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3532,11 +3568,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7CA04F6A2B0C5D29007B9191 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
-		};
-		7CD834C52B52A02F00F3EED7 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7CD834C42B52A02E00F3EED7 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
