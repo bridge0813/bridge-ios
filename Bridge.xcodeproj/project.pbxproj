@@ -215,6 +215,7 @@
 		7C3560512B6571E900CF79CE /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560502B6571E900CF79CE /* MemoryStorage.swift */; };
 		7C3560532B6573D100CF79CE /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560522B6573D100CF79CE /* DiskStorage.swift */; };
 		7C3560552B6576C600CF79CE /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560542B6576C600CF79CE /* ImageCache.swift */; };
+		7C3560582B6578B500CF79CE /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3560572B6578B500CF79CE /* ImageProcessor.swift */; };
 		7C40CBA12AC3E595000F4C9F /* BridgeTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */; };
 		7C40CBA32AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */; };
 		7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */; };
@@ -564,6 +565,7 @@
 		7C3560502B6571E900CF79CE /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		7C3560522B6573D100CF79CE /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
 		7C3560542B6576C600CF79CE /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		7C3560572B6578B500CF79CE /* ImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
 		7C40CBA02AC3E595000F4C9F /* BridgeTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeTechTagButton.swift; sourceTree = "<group>"; };
 		7C40CBA22AC3E5A8000F4C9F /* BridgeOutlinedTechTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeOutlinedTechTagButton.swift; sourceTree = "<group>"; };
 		7C40CBBB2AC557BE000F4C9F /* BridgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeButton.swift; sourceTree = "<group>"; };
@@ -1758,8 +1760,17 @@
 				7C3560522B6573D100CF79CE /* DiskStorage.swift */,
 				7C35604C2B656FBB00CF79CE /* StorageObject.swift */,
 				7C35604E2B65705D00CF79CE /* StorageExpiration.swift */,
+				7C3560562B65782800CF79CE /* ImageProcessor */,
 			);
 			path = ImageCache;
+			sourceTree = "<group>";
+		};
+		7C3560562B65782800CF79CE /* ImageProcessor */ = {
+			isa = PBXGroup;
+			children = (
+				7C3560572B6578B500CF79CE /* ImageProcessor.swift */,
+			);
+			path = ImageProcessor;
 			sourceTree = "<group>";
 		};
 		7C55E6342ADC06C30018FA5D /* HeaderView */ = {
@@ -2762,6 +2773,7 @@
 			files = (
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
 				7CD834BC2B504B4600F3EED7 /* BaseListView.swift in Sources */,
+				7C3560582B6578B500CF79CE /* ImageProcessor.swift in Sources */,
 				7CD834AB2B4D34AE00F3EED7 /* UpdateProfileUseCase.swift in Sources */,
 				7B93B3B72B353B1100912202 /* AlertEndpoint.swift in Sources */,
 				7CA04F212AFE772C007B9191 /* BaseLabel.swift in Sources */,
