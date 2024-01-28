@@ -60,9 +60,8 @@ final class MyFieldViewModel: ViewModelType {
                         configuration: .fieldChanged,
                         primaryAction: {
                             owner.coordinator?.pop()
-                        }, cancelAction: {
-                            owner.coordinator?.pop()
-                        })
+                        }
+                    )
                 },
                 onError: { owner, _ in
                     owner.coordinator?.showErrorAlert(configuration: .defaultError) {
