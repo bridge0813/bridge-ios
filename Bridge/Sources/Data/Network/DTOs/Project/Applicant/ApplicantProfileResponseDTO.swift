@@ -15,7 +15,7 @@ struct ApplicantProfileResponseDTO: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case userID = "userId"
-        case imageURL = "image"
+        case imageURL = "photoUrl"
         case name
         case fields
         case career
