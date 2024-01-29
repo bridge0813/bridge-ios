@@ -18,10 +18,6 @@ protocol ImageProcessor {
 struct DownsamplingImageProcessor: ImageProcessor {
     let size: CGSize
     
-    init(size: CGSize) {
-        self.size = size
-    }
-    
     func process(data: Data) -> UIImage? {
         // 이미지 소스를 생성할 때, 캐시를 사용할 지 여부를 결정
         let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
