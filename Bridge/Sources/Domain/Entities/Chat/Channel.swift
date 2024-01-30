@@ -22,7 +22,7 @@ struct Channel {
     var imageURL: URLString?
 
     /// 채팅방 이름 (수신자 이름)
-    let name: String
+    var name: String
     
     /// 가장 최근에 수신된 메시지에 대한 정보
     let lastMessage: LastMessage

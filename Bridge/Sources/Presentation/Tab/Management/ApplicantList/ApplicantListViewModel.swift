@@ -14,7 +14,7 @@ final class ApplicantListViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>
         let nameButtonTapped: Observable<ApplicantID>
-        let startChatButtonTapped: Observable<ApplicantID>
+        let startChatButtonTapped: Observable<ApplicantProfile>
         let acceptButtonTapped: Observable<ApplicantID>
         let rejectButtonTapped: Observable<ApplicantID>
     }
@@ -114,15 +114,21 @@ final class ApplicantListViewModel: ViewModelType {
         // 채팅방 개설 후 채팅방 이동
         input.startChatButtonTapped
             .withUnretained(self)
-            .flatMapLatest { owner, applicantID in
-                owner.createChannelUseCase.create(opponentID: applicantID).toResult()
+            .flatMapLatest { owner, applicantProfile in
+                owner.createChannelUseCase.create(opponentID: applicantProfile.userID)
+                    .toResult()
+                    .map { result in (result, applicantProfile) }
             }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { owner, result in
+            .subscribe(onNext: { owner, resultAndProfile in
+                let (result, applicantProfile) = resultAndProfile
+                
                 switch result {
                 case .success(let channel):
-                    owner.coordinator?.showChannelViewController(of: channel)
+                    var updatedChannel = channel
+                    updatedChannel.name = applicantProfile.name
+                    owner.coordinator?.showChannelViewController(of: updatedChannel)
                     
                 case .failure(let error):
                     owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
