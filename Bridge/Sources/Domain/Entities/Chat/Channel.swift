@@ -19,7 +19,7 @@ struct Channel {
     let opponentID: String
     
     /// 채팅방 썸네일 이미지 (수신자 프로필 이미지)
-    var imageURL: URLString?
+    let imageURL: URLString?
 
     /// 채팅방 이름 (수신자 이름)
     var name: String
