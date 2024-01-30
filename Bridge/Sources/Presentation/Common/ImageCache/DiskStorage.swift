@@ -17,8 +17,6 @@ final class DiskStorage {
     init() {
         createDirectory()
         observeBackgroundNotification()
-        directoryURL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first?
-            .appendingPathComponent("Bridge")
     }
     
     // MARK: - CRUD
@@ -70,17 +68,21 @@ final class DiskStorage {
     
     /// 데이터를 저장할 디렉토리 생성(존재하지 않을 경우)
     private func createDirectory() {
-        guard let directoryURL else { return }
+        guard let cacheDirectoryURL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first 
+        else { return }
         
-        if !fileManager.fileExists(atPath: directoryURL.path) {
+        let bridgeDirectoryURL = cacheDirectoryURL.appendingPathComponent("Bridge")
+        
+        if !fileManager.fileExists(atPath: bridgeDirectoryURL.path) {
             do {
-                try fileManager.createDirectory(
-                    atPath: directoryURL.path, withIntermediateDirectories: true
-                )
+                try fileManager.createDirectory(at: bridgeDirectoryURL, withIntermediateDirectories: true)
+                directoryURL = bridgeDirectoryURL
                 
             } catch {
                 print("디렉토리 생성 실패: \(error)")
             }
+        } else {
+            directoryURL = bridgeDirectoryURL
         }
     }
 }
@@ -112,6 +114,7 @@ extension DiskStorage {
                 if let expirationDate = attributes[.modificationDate] as? Date {
                     return expirationDate.isPast
                 }
+                
             } catch {
                 print("파일 속성 조회 실패: \(error.localizedDescription)")
             }
