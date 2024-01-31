@@ -17,10 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        
+
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
-        
+
         UNUserNotificationCenter.current().delegate = self
         
         // 푸시 알림 권한 요청
@@ -45,7 +45,7 @@ extension AppDelegate: MessagingDelegate {
             print("fcm token is nil")
             return
         }
-        print(fcmToken)
+        print("FCM 토큰: \(fcmToken)")
         tokenStorage.save(fcmToken, for: .fcmToken)
     }
 }
