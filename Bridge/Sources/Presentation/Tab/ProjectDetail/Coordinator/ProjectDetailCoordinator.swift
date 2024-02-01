@@ -28,10 +28,10 @@ final class ProjectDetailCoordinator: Coordinator {
         self.navigationController = navigationController
         
         let networkService = DefaultNetworkService()
-//        projectRepository = DefaultProjectRepository(networkService: networkService)
-//        applicantRepository = DefaultApplicantRepository(networkService: networkService)
-        projectRepository = MockProjectRepository()
-        applicantRepository = MockApplicantRepository()
+        projectRepository = DefaultProjectRepository(networkService: networkService)
+        applicantRepository = DefaultApplicantRepository(networkService: networkService)
+//        projectRepository = MockProjectRepository()
+//        applicantRepository = MockApplicantRepository()
         
         projectDetailUseCase = DefaultFetchProjectDetailUseCase(projectRepository: projectRepository)
         bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)

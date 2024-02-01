@@ -42,15 +42,15 @@ final class MyPageCoordinator: Coordinator {
         self.childCoordinators = []
         
         let networkService = DefaultNetworkService()
-//        authRepository = DefaultAuthRepository(networkService: networkService)
-//        userRepository = DefaultUserRepository(networkService: networkService)
-//        alertRepository = DefaultAlertRepository(networkService: networkService)
-//        projectRepository = DefaultProjectRepository(networkService: networkService)
+        authRepository = DefaultAuthRepository(networkService: networkService)
+        userRepository = DefaultUserRepository(networkService: networkService)
+        alertRepository = DefaultAlertRepository(networkService: networkService)
+        projectRepository = DefaultProjectRepository(networkService: networkService)
         fileRepository = DefaultFileRepository(networkService: networkService)
-        authRepository = MockAuthRepository()
-        userRepository = MockUserRepository()
-        alertRepository = MockAlertRepository()
-        projectRepository = MockProjectRepository()
+//        authRepository = MockAuthRepository()
+//        userRepository = MockUserRepository()
+//        alertRepository = MockAlertRepository()
+//        projectRepository = MockProjectRepository()
         
         signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
         withdrawUseCase = DefaultWithdrawUseCase(authRepository: authRepository)
@@ -158,7 +158,6 @@ extension MyPageCoordinator {
             }
         }
         childCoordinators.append(detailCoordinator)
-        print(childCoordinators)
     }
 }
 

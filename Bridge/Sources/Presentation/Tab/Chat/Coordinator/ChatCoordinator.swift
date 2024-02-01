@@ -38,10 +38,10 @@ final class ChatCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
         let stompService = DefaultStompService(webSocketService: DefaultWebSocketService.shared)
         authRepository = DefaultAuthRepository(networkService: networkService)
-//        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
-//        messageRepository = DefaultMessageRepository(networkService: networkService, stompService: stompService)
-        channelRepository = MockChannelRepository()
-        messageRepository = MockMessageRepository()
+        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
+        messageRepository = DefaultMessageRepository(networkService: networkService, stompService: stompService)
+//        channelRepository = MockChannelRepository()
+//        messageRepository = MockMessageRepository()
         
         fetchChannelsUseCase = DefaultFetchChannelsUseCase(channelRepository: channelRepository)
         leaveChannelUseCase = DefaultLeaveChannelUseCase(channelRepository: channelRepository)
@@ -51,9 +51,9 @@ final class ChatCoordinator: Coordinator {
         sendMessageUseCase = DefaultSendMessageUseCase(messageRepository: messageRepository)
         
         // 다른 유저의 프로필 보여주기
-//        userRepository = DefaultUserRepository(networkService: networkService)
+        userRepository = DefaultUserRepository(networkService: networkService)
         fileRepository = DefaultFileRepository(networkService: networkService)
-        userRepository = MockUserRepository()
+//        userRepository = MockUserRepository()
         fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
         downloadFileUseCase = DefaultDownloadFileUseCase(fileRepository: fileRepository)
     }
