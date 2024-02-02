@@ -168,6 +168,9 @@ extension UserEndpoint: Endpoint {
                 )
             }
         
+            // 요청의 마무리 경계선 추가
+            body.append("--\(boundaryName)--\r\n".data(using: .utf8)!)
+            
             return body
             
         case .updateProfile(let multipartData, _, let boundaryName):
