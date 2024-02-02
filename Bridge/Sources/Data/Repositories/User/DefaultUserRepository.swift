@@ -54,7 +54,8 @@ final class DefaultUserRepository: UserRepository {
         let userID = tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.createProfile(
             multipartData: createProfileMultipartData(profile: profile),
-            userID: userID
+            userID: userID,
+            boundaryName: "Boundary-\(UUID().uuidString)"
         )
         
         return networkService.request(to: userEndpoint, interceptor: nil)
@@ -66,7 +67,8 @@ final class DefaultUserRepository: UserRepository {
         let userID = tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.updateProfile(
             multipartData: createProfileMultipartData(profile: profile),
-            userID: userID
+            userID: userID,
+            boundaryName: "Boundary-\(UUID().uuidString)"
         )
         
         return networkService.request(to: userEndpoint, interceptor: nil)
