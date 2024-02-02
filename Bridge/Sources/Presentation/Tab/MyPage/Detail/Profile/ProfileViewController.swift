@@ -61,6 +61,7 @@ final class ProfileViewController: BaseProfileViewController {
         output.profile
             .drive(onNext: { [weak self] profile in
                 guard let self else { return }
+                print("profile - \(profile)")
                 self.configure(with: profile)
             })
             .disposed(by: disposeBag)

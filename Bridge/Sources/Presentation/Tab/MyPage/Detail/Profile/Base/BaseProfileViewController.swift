@@ -220,7 +220,6 @@ extension BaseProfileViewController {
         // 직업 설정
         if let career = profile.career {
             careerLabel.text = career
-            careerLabel.text = "취준생"
             careerLabel.flex.display(.flex).width(careerLabel.intrinsicContentSize.width).height(30)
         } else {
             careerLabel.flex.display(.none)
