@@ -126,7 +126,7 @@ final class DefaultProjectRepository: ProjectRepository {
         let userIDDTO = UserIDDTO(userID: Int(tokenStorage.get(.userID)) ?? 0)
         let deleteEndpoint = ProjectEndpoint.delete(requestDTO: userIDDTO, projectID: String(projectID))
         
-        return networkService.request(to: deleteEndpoint, interceptor: nil)
+        return networkService.request(to: deleteEndpoint, interceptor: AuthInterceptor())
             .map { _ in projectID }
     }
     
@@ -135,7 +135,7 @@ final class DefaultProjectRepository: ProjectRepository {
         let projectIDDTO = ProjectIDDTO(projectID: projectID)  // 마감 할 모집글의 ID
         let closeEndpoint = ProjectEndpoint.close(requestDTO: projectIDDTO)
         
-        return networkService.request(to: closeEndpoint, interceptor: nil)
+        return networkService.request(to: closeEndpoint, interceptor: AuthInterceptor())
             .map { _ in projectID }
     }
 }

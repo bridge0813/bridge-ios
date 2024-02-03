@@ -58,7 +58,7 @@ final class DefaultUserRepository: UserRepository {
             boundaryName: "Boundary-\(UUID().uuidString)"
         )
         
-        return networkService.request(to: userEndpoint, interceptor: nil)
+        return networkService.request(to: userEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
     }
     
@@ -71,7 +71,7 @@ final class DefaultUserRepository: UserRepository {
             boundaryName: "Boundary-\(UUID().uuidString)"
         )
         
-        return networkService.request(to: userEndpoint, interceptor: nil)
+        return networkService.request(to: userEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
     }
     
@@ -82,7 +82,7 @@ final class DefaultUserRepository: UserRepository {
             requestDTO: ChangeFieldRequestDTO(userID: Int(userID) ?? -1, selectedFields: selectedFields)
         )
         
-        return networkService.request(to: userEndpoint, interceptor: nil)
+        return networkService.request(to: userEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
     }
     

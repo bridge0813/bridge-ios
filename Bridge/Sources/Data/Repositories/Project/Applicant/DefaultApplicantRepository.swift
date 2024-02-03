@@ -22,7 +22,7 @@ final class DefaultApplicantRepository: ApplicantRepository {
     func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]> {
         let fetchApplicantListEndpoint = ApplicantEndpoint.fetchApplicantList(projectID: String(projectID))
         
-        return networkService.request(to: fetchApplicantListEndpoint, interceptor: nil)
+        return networkService.request(to: fetchApplicantListEndpoint, interceptor: AuthInterceptor())
             .decode(type: [ApplicantProfileResponseDTO].self, decoder: JSONDecoder())
             .map { applicantListDTOs in
                 let applicantList = Set(applicantListDTOs.map { $0.toEntity() })  // 중복요소 제거
@@ -37,7 +37,7 @@ final class DefaultApplicantRepository: ApplicantRepository {
             projectID: String(projectID)
         )
         
-        return networkService.request(to: acceptEndpoint, interceptor: nil)
+        return networkService.request(to: acceptEndpoint, interceptor: AuthInterceptor())
             .map { _ in applicantID }
     }
     
@@ -48,7 +48,7 @@ final class DefaultApplicantRepository: ApplicantRepository {
             projectID: String(projectID)
         )
         
-        return networkService.request(to: rejectEndpoint, interceptor: nil)
+        return networkService.request(to: rejectEndpoint, interceptor: AuthInterceptor())
             .map { _ in applicantID }
     }
     
