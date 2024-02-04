@@ -16,6 +16,7 @@ final class FilteredProjectListViewModel: ViewModelType {
     }
     
     struct Output {
+        let fieldTechStack: Driver<FieldTechStack>
         let projects: Driver<[ProjectPreview]>
     }
 
@@ -65,6 +66,7 @@ final class FilteredProjectListViewModel: ViewModelType {
         
         
         return Output(
+            fieldTechStack: .just(fieldTechStack),
             projects: projects.asDriver()
         )
     }
