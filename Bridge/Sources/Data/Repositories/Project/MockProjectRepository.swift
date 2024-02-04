@@ -38,6 +38,10 @@ final class MockProjectRepository: ProjectRepository {
         .just(MyProjectResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }
     
+    func fetchFilteredProjects(filterBy fieldTechStack: FieldTechStack) -> Observable<[ProjectPreview]> {
+        .just(ProjectPreviewResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+    }
+    
     func create(project: Project) -> Observable<Int> {
         .just(0)
     }

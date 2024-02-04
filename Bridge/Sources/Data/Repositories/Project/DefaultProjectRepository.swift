@@ -85,6 +85,11 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
+    // MARK: - FetchMyProjects
+    func fetchFilteredProjects(filterBy fieldTechStack: FieldTechStack) -> Observable<[ProjectPreview]> {
+        .just(ProjectPreviewResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+    }
+    
     // MARK: - FetchProjectDetail
     func fetchProjectDetail(with projectID: Int) -> Observable<Project> {
         let userID = tokenStorage.get(.userID)

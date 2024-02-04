@@ -65,10 +65,10 @@ extension MainCoordinator {
         navigationController.pushViewController(mainVC, animated: true)
     }
     
-    func showFilterViewController(with filterOption: FieldTechStack) {
+    func showFilterViewController(with fieldTechStack: FieldTechStack) {
         let filterViewModel = FilteredProjectListViewModel(
             coordinator: self,
-            filterOption: filterOption
+            fieldTechStack: fieldTechStack
         )
         
         let filterVC = FilteredProjectListViewController(viewModel: filterViewModel)

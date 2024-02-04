@@ -18,6 +18,8 @@ protocol ProjectRepository {
     func fetchAppliedProjects() -> Observable<[ProjectPreview]>
     func fetchMyProjects() -> Observable<[ProjectPreview]>
     
+    func fetchFilteredProjects(filterBy fieldTechStack: FieldTechStack) -> Observable<[ProjectPreview]>
+    
     // MARK: - Create
     func create(project: Project) -> Observable<Int>
     
