@@ -18,7 +18,7 @@ final class DefaultUserRepository: UserRepository {
         self.tokenStorage = tokenStorage
     }
     
-    /// 프로필 조회
+    // 프로필 조회
     func fetchProfile(otherUserID: String?) -> Observable<Profile> {
         // otherUserID가 있을 경우, 다른 유저의 프로필을 조회
         // 없을 경우, 내 프로필 조회
@@ -30,16 +30,7 @@ final class DefaultUserRepository: UserRepository {
             .map { $0.toEntity() }
     }
     
-    /// 프로필 조회
-    func fetchOtherUserProfile(userID: String) -> Observable<Profile> {
-        let userEndpoint = UserEndpoint.fetchProfile(userID: userID)
-        
-        return networkService.request(to: userEndpoint, interceptor: nil)
-            .decode(type: ProfileResponseDTO.self, decoder: JSONDecoder())
-            .map { $0.toEntity() }
-    }
-    
-    /// 프로필 간략형 조회(마이페이지)
+    // 마이 페이지 정보 조회(프로필의 약식정보)
     func fetchProfilePreview() -> Observable<ProfilePreview> {
         let userID = tokenStorage.get(.userID) 
         let userEndpoint = UserEndpoint.fetchProfilePreview(userID: userID)
@@ -49,7 +40,7 @@ final class DefaultUserRepository: UserRepository {
             .map { $0.toEntity() }
     }
     
-    /// 프로필 생성
+    // 프로필 생성
     func createProfile(_ profile: Profile) -> Observable<Void> {
         let userID = tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.createProfile(
@@ -62,7 +53,7 @@ final class DefaultUserRepository: UserRepository {
             .map { _ in }
     }
     
-    /// 프로필 수정
+    // 프로필 수정
     func updateProfile(_ profile: Profile) -> Observable<Void> {
         let userID = tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.updateProfile(
@@ -75,7 +66,7 @@ final class DefaultUserRepository: UserRepository {
             .map { _ in }
     }
     
-    /// 관심분야 수정
+    // 관심분야 수정
     func changeField(selectedFields: [String]) -> Observable<Void> {
         let userID = tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.changeField(
@@ -86,7 +77,7 @@ final class DefaultUserRepository: UserRepository {
             .map { _ in }
     }
     
-    /// 북마크 모집글 조회
+    // 북마크한 모집글 조회
     func fetchBookmarkedProjects() -> Observable<[BookmarkedProject]> {
         let userID = tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.fetchBookmarkedProjects(userID: userID)
