@@ -51,22 +51,22 @@ final class ApplicantCell: BaseCollectionViewCell {
     }
     
     // MARK: - Property
-    private var applicantID = 0
+    private var applicantProfile = ApplicantProfile(userID: 0, imageURL: "", name: "", fields: [], career: "")
     
     var nameButtonTapped: Observable<ApplicantID> {
         return nameButton.rx.tap
             .withUnretained(self)
             .map { owner, _ in
-                return owner.applicantID
+                return owner.applicantProfile.userID
             }
     }
     
     /// 지원자 목록 or 프로젝트 상세
-    var buttonGroupTapped: Observable<(String, ApplicantID)> {
+    var buttonGroupTapped: Observable<(String, ApplicantProfile)> {
         return menuButtonGroup.buttonGroupTapped
             .withUnretained(self)
             .map { owner, title in
-                return (title, owner.applicantID)
+                return (title, owner.applicantProfile)
             }
     }
     
@@ -127,6 +127,6 @@ extension ApplicantCell {
         
         nameButton.setTitle(data.name, for: .normal)
         nameButton.flex.width(nameButton.intrinsicContentSize.width).height(22).markDirty()
-        applicantID = data.userID
+        applicantProfile = data
     }
 }

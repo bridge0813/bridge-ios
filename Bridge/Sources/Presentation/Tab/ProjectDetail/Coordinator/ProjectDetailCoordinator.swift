@@ -30,6 +30,8 @@ final class ProjectDetailCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
         projectRepository = DefaultProjectRepository(networkService: networkService)
         applicantRepository = DefaultApplicantRepository(networkService: networkService)
+//        projectRepository = MockProjectRepository()
+//        applicantRepository = MockApplicantRepository()
         
         projectDetailUseCase = DefaultFetchProjectDetailUseCase(projectRepository: projectRepository)
         bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)

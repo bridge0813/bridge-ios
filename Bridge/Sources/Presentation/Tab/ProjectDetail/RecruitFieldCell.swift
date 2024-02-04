@@ -12,7 +12,7 @@ import PinLayout
 /// 모집하는 분야를 나타내는 Cell
 final class RecruitFieldCell: BaseCollectionViewCell {
     // MARK: - UI
-    private let tagLabel = BridgeFilledChip(backgroundColor: BridgeColor.primary1, type: .short)
+    private let categoryLabel = BridgeFilledChip(backgroundColor: BridgeColor.primary1, type: .short)
     
     private let fieldLabel: UILabel = {
         let label = UILabel()
@@ -46,7 +46,7 @@ final class RecruitFieldCell: BaseCollectionViewCell {
     // MARK: - Layout
     override func configureLayouts() {
         contentView.flex.paddingLeft(14).define { flex in
-            flex.addItem(tagLabel).marginTop(14)
+            flex.addItem(categoryLabel).marginTop(14)
             
             flex.addItem().direction(.row).justifyContent(.spaceBetween).marginTop(31).define { flex in
                 flex.addItem().grow(1).define { flex in
@@ -68,47 +68,30 @@ final class RecruitFieldCell: BaseCollectionViewCell {
 
 // MARK: - Configuration
 extension RecruitFieldCell {
-    struct FieldStyle {
-        let tag: String
-        let field: String
-        let imageName: String
-    }
-    
-    enum FieldType: String {
-        case ios = "iOS"
-        case android = "안드로이드"
-        case frontend = "프론트엔드"
-        case backend = "백엔드"
-        case uiux = "UI/UX"
-        case bibx = "BI/BX"
-        case videomotion = "영상/모션"
-        case pm = "PM"
-        
-        var style: FieldStyle {
-            switch self {
-            case .ios: return FieldStyle(tag: "개발", field: "iOS", imageName: "field_ios")
-            case .android: return FieldStyle(tag: "개발", field: "안드로이드", imageName: "field_android")
-            case .frontend: return FieldStyle(tag: "개발", field: "프론트엔드", imageName: "field_frontend")
-            case .backend: return FieldStyle(tag: "개발", field: "백엔드", imageName: "field_backend")
-            case .uiux: return FieldStyle(tag: "디자인", field: "UI/UX", imageName: "field_uiux")
-            case .bibx: return FieldStyle(tag: "디자인", field: "BI/BX", imageName: "field_bibx")
-            case .videomotion: return FieldStyle(tag: "디자인", field: "영상/모션", imageName: "field_videomotion")
-            case .pm: return FieldStyle(tag: "기획", field: "PM", imageName: "field_pm")
-            }
-        }
-    }
-    
     func configureCell(with data: MemberRequirement) {
-        guard let type = FieldType(rawValue: data.field) else { return }
-        
         // 분야에 맞는 text 및 이미지 설정
-        tagLabel.text = type.style.tag
-        fieldLabel.text = type.style.field
-        emojiImageView.image = UIImage(named: type.style.imageName)
+        categoryLabel.text = data.field.categoryForField()
+        fieldLabel.text = data.field
+        emojiImageView.image = image(forField: data.field)
         
         // 모집인원 수 텍스트 설정.
         recruitNumberLabel.text = "\(data.recruitNumber)명 모집중"
         
-        tagLabel.flex.width(tagLabel.intrinsicContentSize.width).height(22).markDirty()
+        categoryLabel.flex.width(categoryLabel.intrinsicContentSize.width).height(22).markDirty()
+    }
+    
+    /// 분야에 맞는 이미지 반환
+    private func image(forField field: String) -> UIImage? {
+        switch field {
+        case "iOS": return UIImage(named: "field_ios")
+        case "안드로이드": return UIImage(named: "field_android")
+        case "프론트엔드": return UIImage(named: "field_frontend")
+        case "백엔드": return UIImage(named: "field_backend")
+        case "UI/UX": return UIImage(named: "field_uiux")
+        case "BI/BX": return UIImage(named: "field_bibx")
+        case "영상/모션": return UIImage(named: "field_videomotion")
+        case "PM": return UIImage(named: "field_pm")
+        default: return nil
+        }
     }
 }

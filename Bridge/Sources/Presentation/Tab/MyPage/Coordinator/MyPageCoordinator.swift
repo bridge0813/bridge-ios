@@ -42,15 +42,15 @@ final class MyPageCoordinator: Coordinator {
         self.childCoordinators = []
         
         let networkService = DefaultNetworkService()
-//        authRepository = DefaultAuthRepository(networkService: networkService)
-//        userRepository = DefaultUserRepository(networkService: networkService)
-//        alertRepository = DefaultAlertRepository(networkService: networkService)
-//        projectRepository = DefaultProjectRepository(networkService: networkService)
+        authRepository = DefaultAuthRepository(networkService: networkService)
+        userRepository = DefaultUserRepository(networkService: networkService)
+        alertRepository = DefaultAlertRepository(networkService: networkService)
+        projectRepository = DefaultProjectRepository(networkService: networkService)
         fileRepository = DefaultFileRepository(networkService: networkService)
-        authRepository = MockAuthRepository()
-        userRepository = MockUserRepository()
-        alertRepository = MockAlertRepository()
-        projectRepository = MockProjectRepository()
+//        authRepository = MockAuthRepository()
+//        userRepository = MockUserRepository()
+//        alertRepository = MockAlertRepository()
+//        projectRepository = MockProjectRepository()
         
         signOutUseCase = DefaultSignOutUseCase(authRepository: authRepository)
         withdrawUseCase = DefaultWithdrawUseCase(authRepository: authRepository)
@@ -145,6 +145,19 @@ extension MyPageCoordinator {
         )
         let updateProfileViewController = UpdateProfileViewController(viewModel: updateProfileViewModel)
         navigationController.pushViewController(updateProfileViewController, animated: true)
+    }
+    
+    // MARK: - Connect
+    func connectToProjectDetailFlow(with projectID: Int) {
+        let detailCoordinator = ProjectDetailCoordinator(navigationController: navigationController)
+        detailCoordinator.showProjectDetailViewController(projectID: projectID)
+        detailCoordinator.didFinishEventClosure = { [weak self] in
+            guard let self else { return }
+            if let index = self.childCoordinators.firstIndex(where: { $0 === detailCoordinator }) {
+                self.childCoordinators.remove(at: index)
+            }
+        }
+        childCoordinators.append(detailCoordinator)
     }
 }
 

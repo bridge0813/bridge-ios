@@ -54,10 +54,11 @@ final class DefaultUserRepository: UserRepository {
         let userID = tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.createProfile(
             multipartData: createProfileMultipartData(profile: profile),
-            userID: userID
+            userID: userID,
+            boundaryName: "Boundary-\(UUID().uuidString)"
         )
         
-        return networkService.request(to: userEndpoint, interceptor: nil)
+        return networkService.request(to: userEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
     }
     
@@ -66,9 +67,12 @@ final class DefaultUserRepository: UserRepository {
         let userID = tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.updateProfile(
             multipartData: createProfileMultipartData(profile: profile),
-            userID: userID
+            userID: userID,
+            boundaryName: "Boundary-\(UUID().uuidString)"
         )
-        return .just(())
+        
+        return networkService.request(to: userEndpoint, interceptor: AuthInterceptor())
+            .map { _ in }
     }
     
     /// 관심분야 수정
@@ -78,7 +82,7 @@ final class DefaultUserRepository: UserRepository {
             requestDTO: ChangeFieldRequestDTO(userID: Int(userID) ?? -1, selectedFields: selectedFields)
         )
         
-        return networkService.request(to: userEndpoint, interceptor: nil)
+        return networkService.request(to: userEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
     }
     

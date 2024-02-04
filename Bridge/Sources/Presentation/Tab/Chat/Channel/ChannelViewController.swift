@@ -10,7 +10,6 @@ import FlexLayout
 import PinLayout
 import RxCocoa
 import RxSwift
-import Kingfisher
 
 final class ChannelViewController: BaseViewController {
     // MARK: - UI

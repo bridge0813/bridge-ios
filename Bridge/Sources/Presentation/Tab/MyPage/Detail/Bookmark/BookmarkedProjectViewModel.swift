@@ -12,6 +12,7 @@ final class BookmarkedProjectViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
+        let itemSelected: Observable<Int>
         let bookmarkButtonTapped: Observable<Int>
     }
     
@@ -48,17 +49,43 @@ final class BookmarkedProjectViewModel: ViewModelType {
             .bind(to: bookmarkedProjects)
             .disposed(by: disposeBag)
         
+        // 프로젝트 상세 이동
+        input.itemSelected
+            .withLatestFrom(bookmarkedProjects) { index, bookmarkedProjects in
+                bookmarkedProjects[index].id
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, projectID in
+                owner.coordinator?.connectToProjectDetailFlow(with: projectID)
+            })
+            .disposed(by: disposeBag)
+        
+        // 북마크 해제
         input.bookmarkButtonTapped
             .debug()
             .withUnretained(self)
             .flatMap { owner, projectID in
-                owner.bookmarkUseCase.bookmark(projectID: projectID)
+                owner.bookmarkUseCase.bookmark(projectID: projectID).toResult()
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.fetchBookmarkedProjectUseCase.fetch()
-            }
-            .bind(to: bookmarkedProjects)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projectID):
+                    var currentProjectList = bookmarkedProjects.value
+                    
+                    if let deletedProjectIndex = currentProjectList.firstIndex(where: { $0.id == projectID }) {
+                        currentProjectList.remove(at: deletedProjectIndex)
+                        bookmarkedProjects.accept(currentProjectList)
+                    }
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "북마크 해제에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
+            })
             .disposed(by: disposeBag)
         
         return Output(

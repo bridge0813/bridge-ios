@@ -44,10 +44,10 @@ final class ManagementCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
         let stompService = DefaultStompService(webSocketService: DefaultWebSocketService.shared)
         
-//        projectRepository = DefaultProjectRepository(networkService: networkService)
-//        applicantRepository = DefaultApplicantRepository(networkService: networkService)
-        projectRepository = MockProjectRepository()
-        applicantRepository = MockApplicantRepository()
+        projectRepository = DefaultProjectRepository(networkService: networkService)
+        applicantRepository = DefaultApplicantRepository(networkService: networkService)
+//        projectRepository = MockProjectRepository()
+//        applicantRepository = MockApplicantRepository()
         
         // 관리
         fetchAppliedProjectsUseCase = DefaultFetchAppliedProjectsUseCase(projectRepository: projectRepository)
@@ -61,14 +61,14 @@ final class ManagementCoordinator: Coordinator {
         cancelApplicationUseCase = DefaultCancelApplicationUseCase(applicantRepository: applicantRepository)
         
         // 채팅방 개설
-//        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
-        channelRepository = MockChannelRepository()
+        channelRepository = DefaultChannelRepository(networkService: networkService, stompService: stompService)
+//        channelRepository = MockChannelRepository()
         createChannelUseCase = DefaultCreateChannelUseCase(channelRepository: channelRepository)
         
         // 다른 유저의 프로필 보여주기
-//        userRepository = DefaultUserRepository(networkService: networkService)
+        userRepository = DefaultUserRepository(networkService: networkService)
         fileRepository = DefaultFileRepository(networkService: networkService)
-        userRepository = MockUserRepository()
+//        userRepository = MockUserRepository()
         fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
         downloadFileUseCase = DefaultDownloadFileUseCase(fileRepository: fileRepository)
     }

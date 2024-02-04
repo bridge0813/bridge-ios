@@ -20,7 +20,6 @@ extension Reactive where Base: URLSession {
                     return
                 }
                 
-                
                 guard let httpResponse = response as? HTTPURLResponse else {
                     observer.on(.error(RxCocoaURLError.nonHTTPResponse(response: response)))
                     return

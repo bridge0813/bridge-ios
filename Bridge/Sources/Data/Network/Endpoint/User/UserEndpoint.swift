@@ -13,13 +13,8 @@ enum UserEndpoint {
     case fetchBookmarkedProjects(userID: String)
     
     case fetchProfile(userID: String)
-    case createProfile(multipartData: ProfileMultipartData, userID: String)
-    case updateProfile(multipartData: ProfileMultipartData, userID: String)
-    
-    /// Multipart에서 각 데이터의 경계를 나타낼 바운더리
-    var boundaryName: String {
-        return "Boundary-\(UUID().uuidString)"
-    }
+    case createProfile(multipartData: ProfileMultipartData, userID: String, boundaryName: String)
+    case updateProfile(multipartData: ProfileMultipartData, userID: String, boundaryName: String)
 }
 
 extension UserEndpoint: Endpoint {
@@ -59,10 +54,10 @@ extension UserEndpoint: Endpoint {
         case .fetchProfile(let userID):
             return ["userId": userID]
             
-        case .createProfile(_, let userID):
+        case .createProfile(_, let userID, _):
             return ["userId": userID]
             
-        case .updateProfile(_, let userID):
+        case .updateProfile(_, let userID, _):
             return ["userId": userID]
         }
     }
@@ -103,11 +98,11 @@ extension UserEndpoint: Endpoint {
         case .fetchProfile:
             return ["Content-Type": "application/json"]
             
-        case .createProfile:
+        case .createProfile(_, _, let boundaryName):
             let contentType = "multipart/form-data; boundary=\(boundaryName)"
             return ["Content-Type": contentType]
             
-        case .updateProfile:
+        case .updateProfile(_, _, let boundaryName):
             let contentType = "multipart/form-data; boundary=\(boundaryName)"
             return ["Content-Type": contentType]
         }
@@ -137,7 +132,7 @@ extension UserEndpoint: Endpoint {
         case .fetchProfile:
             return nil
             
-        case .createProfile(let multipartData, _):
+        case .createProfile(let multipartData, _, let boundaryName):
             var body = Data()
             
             // 프로필 데이터 추가
@@ -173,9 +168,12 @@ extension UserEndpoint: Endpoint {
                 )
             }
         
+            // 요청의 마무리 경계선 추가
+            body.append("--\(boundaryName)--\r\n".data(using: .utf8)!)
+            
             return body
             
-        case .updateProfile(let multipartData, _):
+        case .updateProfile(let multipartData, _, let boundaryName):
             var body = Data()
             
             // 프로필 데이터 추가
@@ -210,6 +208,9 @@ extension UserEndpoint: Endpoint {
                     boundary: boundaryName
                 )
             }
+            
+            // 요청의 마무리 경계선 추가
+            body.append("--\(boundaryName)--\r\n".data(using: .utf8)!)
         
             return body
         }
