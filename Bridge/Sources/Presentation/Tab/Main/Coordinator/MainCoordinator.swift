@@ -21,6 +21,7 @@ final class MainCoordinator: Coordinator {
     private let fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     private let fetchDeadlineProjectsUseCase: FetchDeadlineProjectsUseCase
+    private let fetchFilteredProjectsUseCase: FetchFilteredProjectsUseCase
     private let bookmarkUseCase: BookmarkUseCase
     
     // MARK: - Init
@@ -39,6 +40,7 @@ final class MainCoordinator: Coordinator {
         fetchProjectsByFieldUseCase = DefaultFetchProjectsByFieldUseCase(projectRepository: projectRepository)
         fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
         fetchDeadlineProjectsUseCase = DefaultFetchDeadlineProjectsUseCase(projectRepository: projectRepository)
+        fetchFilteredProjectsUseCase = DefaultFetchFilteredProjectsUseCase(projectRepository: projectRepository)
         bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
     }
     
@@ -68,7 +70,8 @@ extension MainCoordinator {
     func showFilterViewController(with fieldTechStack: FieldTechStack) {
         let filterViewModel = FilteredProjectListViewModel(
             coordinator: self,
-            fieldTechStack: fieldTechStack
+            fieldTechStack: fieldTechStack,
+            fetchFilteredProjectsUseCase: fetchFilteredProjectsUseCase
         )
         
         let filterVC = FilteredProjectListViewController(viewModel: filterViewModel)

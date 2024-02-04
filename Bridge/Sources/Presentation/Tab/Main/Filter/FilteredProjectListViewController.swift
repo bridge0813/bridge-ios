@@ -60,7 +60,7 @@ final class FilteredProjectListViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = FilteredProjectListViewModel.Input(
-            
+            viewWillAppear: self.rx.viewWillAppear.asObservable()
         )
         let output = viewModel.transform(input: input)
     }
