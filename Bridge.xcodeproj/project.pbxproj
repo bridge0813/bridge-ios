@@ -265,6 +265,7 @@
 		7C6203412B6F43E400438E69 /* FilteredProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6203402B6F43E400438E69 /* FilteredProjectListViewController.swift */; };
 		7C6203432B6F54DC00438E69 /* FilteredProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6203422B6F54DC00438E69 /* FilteredProjectListViewModel.swift */; };
 		7C6203462B6F591600438E69 /* FetchFilteredProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6203452B6F591600438E69 /* FetchFilteredProjectsUseCase.swift */; };
+		7C6203492B6FE62400438E69 /* FilteredProjectRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6203482B6FE62400438E69 /* FilteredProjectRequestDTO.swift */; };
 		7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8639582AC28B4F00064588 /* BaseButton.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7C87EE0F2B1B72290066691D /* BookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */; };
@@ -670,6 +671,7 @@
 		7C6203402B6F43E400438E69 /* FilteredProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredProjectListViewController.swift; sourceTree = "<group>"; };
 		7C6203422B6F54DC00438E69 /* FilteredProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredProjectListViewModel.swift; sourceTree = "<group>"; };
 		7C6203452B6F591600438E69 /* FetchFilteredProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFilteredProjectsUseCase.swift; sourceTree = "<group>"; };
+		7C6203482B6FE62400438E69 /* FilteredProjectRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredProjectRequestDTO.swift; sourceTree = "<group>"; };
 		7C8639582AC28B4F00064588 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkUseCase.swift; sourceTree = "<group>"; };
@@ -2033,6 +2035,14 @@
 			path = Filter;
 			sourceTree = "<group>";
 		};
+		7C6203472B6FE53800438E69 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				7C6203482B6FE62400438E69 /* FilteredProjectRequestDTO.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		7C87EE0D2B1B72070066691D /* Bookmark */ = {
 			isa = PBXGroup;
 			children = (
@@ -2201,6 +2211,7 @@
 				7C569D012A9F720B0063D362 /* List */,
 				7CA04F4F2B04AA52007B9191 /* Detail */,
 				7CECB7912B369A8900D903D7 /* Applicant */,
+				7C6203472B6FE53800438E69 /* Filter */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -3258,6 +3269,7 @@
 				7BA36CD32A9F3F6B000DAB02 /* BaseView.swift in Sources */,
 				7B61238F2AC2FBD8006E72C1 /* BridgeMessageBox.swift in Sources */,
 				7BEA73932B2B2F1300CECF44 /* MyFieldViewController.swift in Sources */,
+				7C6203492B6FE62400438E69 /* FilteredProjectRequestDTO.swift in Sources */,
 				7CDFB6182B201A7E00272F77 /* BridgeTabButton.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,

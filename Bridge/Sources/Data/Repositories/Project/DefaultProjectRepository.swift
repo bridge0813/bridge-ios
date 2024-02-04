@@ -85,9 +85,24 @@ final class DefaultProjectRepository: ProjectRepository {
             }
     }
     
-    // MARK: - FetchMyProjects
+    // Filter
     func fetchFilteredProjects(filterBy fieldTechStack: FieldTechStack) -> Observable<[ProjectPreview]> {
-        .just(ProjectPreviewResponseDTO.projectTestArray.compactMap { $0.toEntity() })
+        let filterRequestDTO = FilteredProjectRequestDTO(
+            field: fieldTechStack.field.convertToUpperCaseFormat(),
+            techStacks: fieldTechStack.techStacks.map { stack in
+                // 서버측 워딩에 맞게 수정. 대문자 처리 및 띄어쓰기 제거
+                if stack == "C++" { return "CPP" }
+                else { return stack.uppercased().replacingOccurrences(of: " ", with: "") }
+            }
+        )
+        
+        let filterEndpoint = ProjectEndpoint.fetchFilteredProjects(requestDTO: filterRequestDTO)
+        
+        return networkService.request(to: filterEndpoint, interceptor: AuthInterceptor())
+            .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
+            .map { projectPreviewDTOs in
+                projectPreviewDTOs.map { $0.toEntity() }
+            }
     }
     
     // MARK: - FetchProjectDetail
