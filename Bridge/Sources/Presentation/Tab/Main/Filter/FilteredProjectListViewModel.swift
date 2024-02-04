@@ -23,11 +23,15 @@ final class FilteredProjectListViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
     
+    private let filterOption: FieldTechStack
+    
     // MARK: - Init
     init(
-        coordinator: MainCoordinator
+        coordinator: MainCoordinator,
+        filterOption: FieldTechStack
     ) {
         self.coordinator = coordinator
+        self.filterOption = filterOption
     }
     
     // MARK: - Transformation

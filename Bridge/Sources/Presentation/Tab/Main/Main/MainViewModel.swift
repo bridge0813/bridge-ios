@@ -153,7 +153,7 @@ final class MainViewModel: ViewModelType {
         input.filterButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, fieldTechStack in
-                //
+                owner.coordinator?.showFilterViewController(with: fieldTechStack)
             })
             .disposed(by: disposeBag)
         

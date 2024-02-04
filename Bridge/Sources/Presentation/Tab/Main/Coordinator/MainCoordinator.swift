@@ -65,6 +65,16 @@ extension MainCoordinator {
         navigationController.pushViewController(mainVC, animated: true)
     }
     
+    func showFilterViewController(with filterOption: FieldTechStack) {
+        let filterViewModel = FilteredProjectListViewModel(
+            coordinator: self,
+            filterOption: filterOption
+        )
+        
+        let filterVC = FilteredProjectListViewController(viewModel: filterViewModel)
+        navigationController.pushViewController(filterVC, animated: true)
+    }
+    
     func showSignInViewController() {
         delegate?.showSignInViewController()
     }
