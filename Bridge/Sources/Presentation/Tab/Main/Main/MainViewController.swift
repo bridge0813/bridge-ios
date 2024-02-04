@@ -48,6 +48,7 @@ final class MainViewController: BaseViewController {
         target: self,
         action: nil
     )
+    private let fieldTechStackPickerView = FieldTechStackPickerPopUpView()
     
     private lazy var searchButton = UIBarButtonItem(
         image: UIImage(named: "magnifyingglass")?
@@ -158,6 +159,7 @@ final class MainViewController: BaseViewController {
     override func bind() {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            filterButtonTapped: fieldTechStackPickerView.selectedFieldTechStack,
             createButtonTapped: createProjectButton.rx.tap,
             itemSelected: itemSelected,
             bookmarkButtonTapped: bookmarkButtonTapped,
@@ -270,7 +272,7 @@ final class MainViewController: BaseViewController {
         filterButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                
+                owner.fieldTechStackPickerView.show()
             })
             .disposed(by: disposeBag)
     }

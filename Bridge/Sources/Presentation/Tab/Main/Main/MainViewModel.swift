@@ -13,6 +13,7 @@ final class MainViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let viewWillAppear: Observable<Bool>
+        let filterButtonTapped: Observable<FieldTechStack>
         let createButtonTapped: ControlEvent<Void>
         let itemSelected: Observable<Int>
         let bookmarkButtonTapped: Observable<Int>
@@ -144,6 +145,15 @@ final class MainViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, result in
                 owner.handleFetchProjectsResult(for: result, projects: projects)
+            })
+            .disposed(by: disposeBag)
+        
+        
+        // 필터링 결과 뷰 이동
+        input.filterButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, fieldTechStack in
+                //
             })
             .disposed(by: disposeBag)
         
