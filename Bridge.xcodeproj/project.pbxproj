@@ -262,6 +262,8 @@
 		7C56E1712B14860100454F5E /* HotProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1702B14860100454F5E /* HotProjectResponseDTO.swift */; };
 		7C56E1732B14907800454F5E /* DeadlineProjectResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1722B14907800454F5E /* DeadlineProjectResponseDTO.swift */; };
 		7C56E1752B14917900454F5E /* FetchDeadlineProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56E1742B14917900454F5E /* FetchDeadlineProjectsUseCase.swift */; };
+		7C6203412B6F43E400438E69 /* FilteredProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6203402B6F43E400438E69 /* FilteredProjectListViewController.swift */; };
+		7C6203432B6F54DC00438E69 /* FilteredProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6203422B6F54DC00438E69 /* FilteredProjectListViewModel.swift */; };
 		7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8639582AC28B4F00064588 /* BaseButton.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7C87EE0F2B1B72290066691D /* BookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */; };
@@ -664,6 +666,8 @@
 		7C56E1702B14860100454F5E /* HotProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProjectResponseDTO.swift; sourceTree = "<group>"; };
 		7C56E1722B14907800454F5E /* DeadlineProjectResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineProjectResponseDTO.swift; sourceTree = "<group>"; };
 		7C56E1742B14917900454F5E /* FetchDeadlineProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDeadlineProjectsUseCase.swift; sourceTree = "<group>"; };
+		7C6203402B6F43E400438E69 /* FilteredProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredProjectListViewController.swift; sourceTree = "<group>"; };
+		7C6203422B6F54DC00438E69 /* FilteredProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredProjectListViewModel.swift; sourceTree = "<group>"; };
 		7C8639582AC28B4F00064588 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkUseCase.swift; sourceTree = "<group>"; };
@@ -2017,6 +2021,15 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		7C62033F2B6F438700438E69 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				7C6203422B6F54DC00438E69 /* FilteredProjectListViewModel.swift */,
+				7C6203402B6F43E400438E69 /* FilteredProjectListViewController.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		7C87EE0D2B1B72070066691D /* Bookmark */ = {
 			isa = PBXGroup;
 			children = (
@@ -2692,6 +2705,7 @@
 				7CF93E022A9C65040013EBD6 /* Coordinator */,
 				7CF93E032A9C650D0013EBD6 /* Main */,
 				7CC9F6C12AAEE9E800685EA9 /* CreateProject */,
+				7C62033F2B6F438700438E69 /* Filter */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -2986,6 +3000,7 @@
 				7BB8C5212AE7CAD600B264C3 /* BridgeErrorAlertViewController.swift in Sources */,
 				7B14DB212AB04AE9009A00EB /* SetFieldViewModel.swift in Sources */,
 				7C56E1732B14907800454F5E /* DeadlineProjectResponseDTO.swift in Sources */,
+				7C6203432B6F54DC00438E69 /* FilteredProjectListViewModel.swift in Sources */,
 				7B3B373C2B038FE400C2F8AD /* SendMessageUseCase.swift in Sources */,
 				7CECB7992B36B2C300D903D7 /* ApplicantRepository.swift in Sources */,
 				7BA36CD02A9E1888000DAB02 /* BaseTableViewCell.swift in Sources */,
@@ -3129,6 +3144,7 @@
 				7BA5336B2B0EED5E00E69BFB /* ObserveMessageUseCase.swift in Sources */,
 				7C55E64A2AE44B5F0018FA5D /* HotProjectCell.swift in Sources */,
 				7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */,
+				7C6203412B6F43E400438E69 /* FilteredProjectListViewController.swift in Sources */,
 				7C569D0D2AA0AACC0063D362 /* BaseCollectionViewCell.swift in Sources */,
 				7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */,
 				7CC9F6C52AAEEAF300685EA9 /* MemberFieldSelectionViewModel.swift in Sources */,
