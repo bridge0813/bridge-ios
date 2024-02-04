@@ -15,6 +15,14 @@ final class FilteredProjectListViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
+    private lazy var searchButton = UIBarButtonItem(
+        image: UIImage(named: "magnifyingglass")?
+            .resize(to: CGSize(width: 24, height: 24))
+            .withRenderingMode(.alwaysTemplate),
+        style: .plain,
+        target: self,
+        action: nil
+    )
     
     // MARK: - Property
     private let viewModel: FilteredProjectListViewModel
@@ -44,7 +52,7 @@ final class FilteredProjectListViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        
+        navigationItem.rightBarButtonItem = searchButton
     }
     
     // MARK: - Layout
