@@ -266,7 +266,6 @@
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7C87EE0F2B1B72290066691D /* BookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */; };
 		7C87EE112B1C4B180066691D /* ProjectCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE102B1C4B180066691D /* ProjectCellDelegate.swift */; };
-		7C87EE142B1C55C20066691D /* FilterPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE132B1C55C20066691D /* FilterPopUpView.swift */; };
 		7C87EE162B1D83FB0066691D /* MockUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE152B1D83FB0066691D /* MockUserRepository.swift */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
@@ -669,7 +668,6 @@
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkUseCase.swift; sourceTree = "<group>"; };
 		7C87EE102B1C4B180066691D /* ProjectCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCellDelegate.swift; sourceTree = "<group>"; };
-		7C87EE132B1C55C20066691D /* FilterPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPopUpView.swift; sourceTree = "<group>"; };
 		7C87EE152B1D83FB0066691D /* MockUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserRepository.swift; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
@@ -2027,14 +2025,6 @@
 			path = Bookmark;
 			sourceTree = "<group>";
 		};
-		7C87EE122B1C55970066691D /* Filter */ = {
-			isa = PBXGroup;
-			children = (
-				7C87EE132B1C55C20066691D /* FilterPopUpView.swift */,
-			);
-			path = Filter;
-			sourceTree = "<group>";
-		};
 		7C8B822C2AC8498C00F7B889 /* ButtonGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -2726,7 +2716,6 @@
 				7C55E62A2AD7F0390018FA5D /* MainCategoryView.swift */,
 				7C55E6352ADC06E20018FA5D /* Cell */,
 				7C55E6342ADC06C30018FA5D /* HeaderView */,
-				7C87EE122B1C55970066691D /* Filter */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -3069,7 +3058,6 @@
 				7CC719F52B281CC600CFA827 /* ApplicantNumberHeaderView.swift in Sources */,
 				7B14DB312AB1DACF009A00EB /* AuthRepository.swift in Sources */,
 				7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */,
-				7C87EE142B1C55C20066691D /* FilterPopUpView.swift in Sources */,
 				7B1E5ABE2ADCFD880053E9B3 /* ChannelViewModel.swift in Sources */,
 				7C8B82402ACE91C500F7B889 /* ChannelDropdownMenuCell.swift in Sources */,
 				7B1742EC2AF9003E004F0953 /* NavigationBarAppearanceConfigurable.swift in Sources */,
