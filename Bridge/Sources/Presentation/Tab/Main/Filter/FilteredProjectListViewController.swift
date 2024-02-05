@@ -26,6 +26,7 @@ final class FilteredProjectListViewController: BaseViewController {
     
     private lazy var filterOptionListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureFilterOptionListCollectionViewLayout())
+        collectionView.flex.height(86)
         collectionView.backgroundColor = BridgeColor.gray10
         collectionView.register(FilterOptionCell.self)
         
@@ -34,6 +35,7 @@ final class FilteredProjectListViewController: BaseViewController {
     
     private lazy var projectListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureProjectListCollectionViewLayout())
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = BridgeColor.gray09
         collectionView.register(ProjectCell.self)
         collectionView.register(
@@ -104,7 +106,7 @@ final class FilteredProjectListViewController: BaseViewController {
     override func configureLayouts() {
         view.addSubview(rootFlexContainer)
         rootFlexContainer.flex.define { flex in
-            flex.addItem(filterOptionListCollectionView).height(86)
+            flex.addItem(filterOptionListCollectionView)
             flex.addItem().backgroundColor(BridgeColor.gray08).height(1)
             flex.addItem(projectListCollectionView).display(.flex).grow(1)
             flex.addItem(placeholderView).display(.none).grow(1)
