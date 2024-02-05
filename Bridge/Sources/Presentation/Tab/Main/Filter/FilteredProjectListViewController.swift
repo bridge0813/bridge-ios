@@ -23,9 +23,21 @@ final class FilteredProjectListViewController: BaseViewController {
     )
     
     private lazy var filterOptionCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureFilterOptionCollectionViewLayout())
         collectionView.backgroundColor = BridgeColor.gray10
         collectionView.register(FilterOptionCell.self)
+        
+        return collectionView
+    }()
+    
+    private lazy var projectListCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureProjectListCollectionViewLayout())
+        collectionView.backgroundColor = BridgeColor.gray09
+        collectionView.register(ProjectCell.self)
+        collectionView.register(
+            ProjectCountHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
+        )
         
         return collectionView
     }()
@@ -33,12 +45,19 @@ final class FilteredProjectListViewController: BaseViewController {
     // MARK: - Property
     private let viewModel: FilteredProjectListViewModel
     
-    private typealias FilterOptionDataSource = UICollectionViewDiffableDataSource<FilteredProjectListViewModel.FilterOptionSection, String>
+    // Filtering Option List
+    private typealias FilterOptionDataSource = 
+    UICollectionViewDiffableDataSource<FilteredProjectListViewModel.Section, String>
     private typealias FilterOptionSectionSnapshot = NSDiffableDataSourceSectionSnapshot<String>
     
     private var filterOptionDataSource: FilterOptionDataSource?
     private let optionDeleteButtonTapped = PublishSubject<String>()
     
+    // ProjectList
+    private typealias ProjectListDataSource =
+    UICollectionViewDiffableDataSource<FilteredProjectListViewModel.Section, ProjectPreview>
+    private typealias ProjectListSectionSnapshot = NSDiffableDataSourceSectionSnapshot<ProjectPreview>
+    private var projectListDataSource: ProjectListDataSource?
     
     // MARK: - Init
     init(viewModel: FilteredProjectListViewModel) {
@@ -67,16 +86,19 @@ final class FilteredProjectListViewController: BaseViewController {
     override func configureAttributes() {
         navigationItem.rightBarButtonItem = searchButton
         configureFilterOptionDataSource()
+        configureProjectListDataSource()
     }
     
     // MARK: - Layout
     override func configureLayouts() {
         view.addSubview(filterOptionCollectionView)
+        view.addSubview(projectListCollectionView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         filterOptionCollectionView.pin.top(view.pin.safeArea).left().right().height(86)
+        projectListCollectionView.pin.below(of: filterOptionCollectionView).left().bottom().right()
     }
     
     // MARK: - Binding
@@ -92,6 +114,14 @@ final class FilteredProjectListViewController: BaseViewController {
                 guard let self else { return }
                 self.navigationItem.title = self.configureNavigationTitle(from: fieldTechStack.field)
                 self.applyFilterOptionSectionSnapshot(with: fieldTechStack.techStacks)
+            })
+            .disposed(by: disposeBag)
+        
+        output.projects
+            .drive(onNext: { [weak self] projects in
+                guard let self else { return }
+                self.configureProjectListSupplementaryView(projectCount: projects.count)
+                self.applyProjectListSectionSnapshot(with: projects)
             })
             .disposed(by: disposeBag)
     }
@@ -113,9 +143,9 @@ extension FilteredProjectListViewController {
     }
 }
 
-// MARK: - 필터링 옵션 컬렉션뷰에 대한 레이아웃 구성
+// MARK: - 필터링 옵션에 대한 레이아웃 구성
 extension FilteredProjectListViewController {
-    private func configureLayout() -> UICollectionViewLayout {
+    private func configureFilterOptionCollectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .estimated(120),
             heightDimension: .absolute(38)
@@ -138,7 +168,7 @@ extension FilteredProjectListViewController {
     }
 }
 
-// MARK: - 필터링 옵션 컬렉션뷰에 대한 데이터소스 구성
+// MARK: - 필터링 옵션에 대한 데이터소스 구성
 extension FilteredProjectListViewController {
     private func configureFilterOptionDataSource() {
         filterOptionDataSource = FilterOptionDataSource(
@@ -153,7 +183,7 @@ extension FilteredProjectListViewController {
             // Cell 구성
             cell.configure(with: option)
             cell.deleteButtonTapped
-                .bind(to: optionDeleteButtonTapped)
+                .bind(to: self.optionDeleteButtonTapped)
                 .disposed(by: cell.disposeBag)
             
             return cell
@@ -164,5 +194,80 @@ extension FilteredProjectListViewController {
         var snapshot = FilterOptionSectionSnapshot()
         snapshot.append(options)
         filterOptionDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
+    }
+}
+
+// MARK: - 프로젝트 리스트에 대한 레이아웃
+extension FilteredProjectListViewController {
+    private func configureProjectListCollectionViewLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+        
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(149)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(38)
+        )
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 8
+        section.boundarySupplementaryItems = [header]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 24, leading: 0, bottom: 30, trailing: 0)
+        
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+}
+
+// MARK: - 프로젝트 리스트에 대한 데이터소스 구성
+extension FilteredProjectListViewController {
+    private func configureProjectListDataSource() {
+        projectListDataSource = ProjectListDataSource(
+            collectionView: projectListCollectionView
+        ) { collectionView, indexPath, project in
+            guard let cell = collectionView.dequeueReusableCell(ProjectCell.self, for: indexPath) else {
+                return UICollectionViewCell()
+            }
+            cell.configureCell(with: project)
+            
+            return cell
+        }
+    }
+    
+    private func configureProjectListSupplementaryView(projectCount: Int) {
+        projectListDataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                ProjectCountHeaderView.self,
+                ofKind: kind,
+                for: indexPath
+            ) else { return UICollectionReusableView() }
+            
+            headerView.configureCountLabel(with: String(projectCount))
+            
+            return headerView
+        }
+        
+        projectListCollectionView.reloadData()  // 헤더 뷰 갱신
+    }
+    
+    private func applyProjectListSectionSnapshot(with projectList: [ProjectPreview]) {
+        var snapshot = ProjectListSectionSnapshot()
+        snapshot.append(projectList)
+        projectListDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
     }
 }
