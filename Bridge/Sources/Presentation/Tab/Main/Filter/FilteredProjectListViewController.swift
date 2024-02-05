@@ -22,8 +22,8 @@ final class FilteredProjectListViewController: BaseViewController {
         action: nil
     )
     
-    private lazy var filterOptionCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureFilterOptionCollectionViewLayout())
+    private lazy var filterOptionListCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureFilterOptionListCollectionViewLayout())
         collectionView.backgroundColor = BridgeColor.gray10
         collectionView.register(FilterOptionCell.self)
         
@@ -45,12 +45,12 @@ final class FilteredProjectListViewController: BaseViewController {
     // MARK: - Property
     private let viewModel: FilteredProjectListViewModel
     
-    // Filtering Option List
-    private typealias FilterOptionDataSource = 
+    // Filter Option List
+    private typealias FilterOptionListDataSource =
     UICollectionViewDiffableDataSource<FilteredProjectListViewModel.Section, String>
-    private typealias FilterOptionSectionSnapshot = NSDiffableDataSourceSectionSnapshot<String>
+    private typealias FilterOptionListSectionSnapshot = NSDiffableDataSourceSectionSnapshot<String>
     
-    private var filterOptionDataSource: FilterOptionDataSource?
+    private var filterOptionListDataSource: FilterOptionListDataSource?
     private let optionDeleteButtonTapped = PublishSubject<String>()
     
     // ProjectList
@@ -85,20 +85,20 @@ final class FilteredProjectListViewController: BaseViewController {
     // MARK: - Configuration
     override func configureAttributes() {
         navigationItem.rightBarButtonItem = searchButton
-        configureFilterOptionDataSource()
+        configureFilterOptionListDataSource()
         configureProjectListDataSource()
     }
     
     // MARK: - Layout
     override func configureLayouts() {
-        view.addSubview(filterOptionCollectionView)
+        view.addSubview(filterOptionListCollectionView)
         view.addSubview(projectListCollectionView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        filterOptionCollectionView.pin.top(view.pin.safeArea).left().right().height(86)
-        projectListCollectionView.pin.below(of: filterOptionCollectionView).left().bottom().right()
+        filterOptionListCollectionView.pin.top(view.pin.safeArea).left().right().height(86)
+        projectListCollectionView.pin.below(of: filterOptionListCollectionView).left().bottom().right()
     }
     
     // MARK: - Binding
@@ -113,7 +113,7 @@ final class FilteredProjectListViewController: BaseViewController {
             .drive(onNext: { [weak self] fieldTechStack in
                 guard let self else { return }
                 self.navigationItem.title = self.configureNavigationTitle(from: fieldTechStack.field)
-                self.applyFilterOptionSectionSnapshot(with: fieldTechStack.techStacks)
+                self.applyFilterOptionListSectionSnapshot(with: fieldTechStack.techStacks)
             })
             .disposed(by: disposeBag)
         
@@ -145,7 +145,7 @@ extension FilteredProjectListViewController {
 
 // MARK: - 필터링 옵션에 대한 레이아웃 구성
 extension FilteredProjectListViewController {
-    private func configureFilterOptionCollectionViewLayout() -> UICollectionViewLayout {
+    private func configureFilterOptionListCollectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .estimated(120),
             heightDimension: .absolute(38)
@@ -170,9 +170,9 @@ extension FilteredProjectListViewController {
 
 // MARK: - 필터링 옵션에 대한 데이터소스 구성
 extension FilteredProjectListViewController {
-    private func configureFilterOptionDataSource() {
-        filterOptionDataSource = FilterOptionDataSource(
-            collectionView: filterOptionCollectionView
+    private func configureFilterOptionListDataSource() {
+        filterOptionListDataSource = FilterOptionListDataSource(
+            collectionView: filterOptionListCollectionView
         ) { [weak self] collectionView, indexPath, option in
             guard let cell = collectionView.dequeueReusableCell(FilterOptionCell.self, for: indexPath) else {
                 return UICollectionViewCell()
@@ -190,10 +190,10 @@ extension FilteredProjectListViewController {
         }
     }
     
-    private func applyFilterOptionSectionSnapshot(with options: [String]) {
-        var snapshot = FilterOptionSectionSnapshot()
+    private func applyFilterOptionListSectionSnapshot(with options: [String]) {
+        var snapshot = FilterOptionListSectionSnapshot()
         snapshot.append(options)
-        filterOptionDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
+        filterOptionListDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
     }
 }
 

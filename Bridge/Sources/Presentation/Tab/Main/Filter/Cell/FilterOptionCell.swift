@@ -32,7 +32,6 @@ final class FilterOptionCell: BaseCollectionViewCell {
         
         return button
     }()
-
     
     // MARK: - Preparation
     override func prepareForReuse() {
