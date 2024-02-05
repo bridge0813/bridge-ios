@@ -126,6 +126,9 @@ final class FilteredProjectListViewController: BaseViewController {
             .drive(onNext: { [weak self] fieldTechStack in
                 guard let self else { return }
                 self.navigationItem.title = self.configureNavigationTitle(from: fieldTechStack.field)
+                self.filterOptionListCollectionView.flex.display(fieldTechStack.techStacks.isEmpty ? .none : .flex)
+                self.rootFlexContainer.flex.layout()
+                
                 self.applyFilterOptionListSectionSnapshot(with: fieldTechStack.techStacks)
             })
             .disposed(by: disposeBag)
