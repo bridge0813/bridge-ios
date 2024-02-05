@@ -32,8 +32,7 @@ final class FilterOptionCell: BaseCollectionViewCell {
         
         return button
     }()
-    
-    private let optioButton = BridgeOutlinedTechTagButton()
+
     
     // MARK: - Preparation
     override func prepareForReuse() {
@@ -55,7 +54,6 @@ final class FilterOptionCell: BaseCollectionViewCell {
         contentView.layer.cornerRadius = 4
         contentView.clipsToBounds = true
     }
-    
     
     // MARK: - Layout
     override func configureLayouts() {
