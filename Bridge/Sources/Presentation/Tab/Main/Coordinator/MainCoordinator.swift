@@ -71,7 +71,8 @@ extension MainCoordinator {
         let filterViewModel = FilteredProjectListViewModel(
             coordinator: self,
             fieldTechStack: fieldTechStack,
-            fetchFilteredProjectsUseCase: fetchFilteredProjectsUseCase
+            fetchFilteredProjectsUseCase: fetchFilteredProjectsUseCase, 
+            bookmarkUseCase: bookmarkUseCase
         )
         
         let filterVC = FilteredProjectListViewController(viewModel: filterViewModel)

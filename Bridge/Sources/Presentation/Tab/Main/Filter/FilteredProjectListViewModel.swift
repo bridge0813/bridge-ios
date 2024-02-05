@@ -29,16 +29,19 @@ final class FilteredProjectListViewModel: ViewModelType {
     
     private let fieldTechStack: FieldTechStack
     private let fetchFilteredProjectsUseCase: FetchFilteredProjectsUseCase
+    private let bookmarkUseCase: BookmarkUseCase
     
     // MARK: - Init
     init(
         coordinator: MainCoordinator,
         fieldTechStack: FieldTechStack,
-        fetchFilteredProjectsUseCase: FetchFilteredProjectsUseCase
+        fetchFilteredProjectsUseCase: FetchFilteredProjectsUseCase,
+        bookmarkUseCase: BookmarkUseCase
     ) {
         self.coordinator = coordinator
         self.fieldTechStack = fieldTechStack
         self.fetchFilteredProjectsUseCase = fetchFilteredProjectsUseCase
+        self.bookmarkUseCase = bookmarkUseCase
     }
     
     // MARK: - Transformation
@@ -81,6 +84,43 @@ final class FilteredProjectListViewModel: ViewModelType {
                 owner.handleProjectFilteringResult(result, projectListRelay: projectListRelay)
             })
             .disposed(by: disposeBag)
+        
+        // 선택한 모집글의 상세로 이동
+        input.itemSelected
+            .withUnretained(self)
+            .subscribe(onNext: { owner, projectID in
+                owner.coordinator?.connectToProjectDetailFlow(with: projectID)
+            })
+            .disposed(by: disposeBag)
+        
+        // 북마크
+        input.bookmarkButtonTapped
+            .withUnretained(self)
+            .flatMap { owner, projectID -> Observable<Result<Int, Error>> in
+                return owner.bookmarkUseCase.bookmark(projectID: projectID).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projectID):
+                    var updatedProjectList = projectListRelay.value
+                
+                    // 북마크 여부 수정 후 accept
+                    if let index = updatedProjectList.firstIndex(where: { $0.projectID == projectID }) {
+                        updatedProjectList[index].isBookmarked.toggle()
+                        projectListRelay.accept(updatedProjectList)
+                    }
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "북마크 실패",
+                        description: error.localizedDescription
+                    ))
+                }
+            })
+            .disposed(by: disposeBag)
+        
         
         return Output(
             fieldTechStack: fieldTechStackRelay.asDriver(),
