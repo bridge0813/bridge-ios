@@ -67,6 +67,9 @@ final class FilteredProjectListViewController: BaseViewController {
     private typealias ProjectListSectionSnapshot = NSDiffableDataSourceSectionSnapshot<ProjectPreview>
     private var projectListDataSource: ProjectListDataSource?
     
+    private let bookmarkButtonTapped = PublishSubject<ProjectID>()
+    private let itemSelected = PublishSubject<ProjectID>()
+    
     // MARK: - Init
     init(viewModel: FilteredProjectListViewModel) {
         self.viewModel = viewModel
@@ -118,7 +121,9 @@ final class FilteredProjectListViewController: BaseViewController {
     override func bind() {
         let input = FilteredProjectListViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(), 
-            optionDeleteButtonTapped: optionDeleteButtonTapped
+            optionDeleteButtonTapped: optionDeleteButtonTapped,
+            itemSelected: itemSelected,
+            bookmarkButtonTapped: bookmarkButtonTapped
         )
         let output = viewModel.transform(input: input)
         
@@ -266,7 +271,7 @@ extension FilteredProjectListViewController {
                 return UICollectionViewCell()
             }
             cell.configureCell(with: project)
-            
+            cell.delegate = self
             return cell
         }
     }
@@ -291,5 +296,16 @@ extension FilteredProjectListViewController {
         var snapshot = ProjectListSectionSnapshot()
         snapshot.append(projectList)
         projectListDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
+    }
+}
+
+// MARK: - CellDelgate
+extension FilteredProjectListViewController: ProjectCellDelegate {
+    func bookmarkButtonTapped(projectID: Int) {
+        bookmarkButtonTapped.onNext(projectID)
+    }
+    
+    func itemSelected(projectID: Int) {
+        itemSelected.onNext(projectID)
     }
 }

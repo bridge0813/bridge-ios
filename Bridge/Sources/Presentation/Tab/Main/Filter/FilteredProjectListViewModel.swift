@@ -14,6 +14,8 @@ final class FilteredProjectListViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>
         let optionDeleteButtonTapped: Observable<String>
+        let itemSelected: Observable<ProjectID>
+        let bookmarkButtonTapped: Observable<ProjectID>
     }
     
     struct Output {
@@ -57,48 +59,28 @@ final class FilteredProjectListViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         // 필터링 옵션 제거
-//        input.optionDeleteButtonTapped
-//            .withUnretained(self)
-//            .flatMap { owner, option -> Observable<Result<[ProjectPreview], Error>> in
-//                var updatedFieldTechStack = fieldTechStackRelay.value
-//
-//                // 인덱스 체크
-//                guard let deletedIndex = updatedFieldTechStack.techStacks.firstIndex(where: { $0 == option })
-//                else { return .empty() }
-//                
-//                // 해당 옵션을 제거 및 업데이트
-//                updatedFieldTechStack.techStacks.remove(at: deletedIndex)
-//                fieldTechStackRelay.accept(updatedFieldTechStack)
-//            
-//                // 업데이트 된 내용을 통해 다시 필터링
-//                return owner.fetchFilteredProjectsUseCase.fetch(filterBy: fieldTechStackRelay.value).toResult()
-//            }
-//            .observe(on: MainScheduler.instance)
-//            .withUnretained(self)
-//            .subscribe(onNext: { owner, result in
-//                owner.handleProjectFilteringResult(result, projectListRelay: projectListRelay)
-//            })
-//            .disposed(by: disposeBag)
-        
-        // 테스트용
         input.optionDeleteButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, option in
+            .flatMap { owner, option -> Observable<Result<[ProjectPreview], Error>> in
                 var updatedFieldTechStack = fieldTechStackRelay.value
-                
+
+                // 인덱스 체크
                 guard let deletedIndex = updatedFieldTechStack.techStacks.firstIndex(where: { $0 == option })
-                else { return }
+                else { return .empty() }
                 
                 // 해당 옵션을 제거 및 업데이트
                 updatedFieldTechStack.techStacks.remove(at: deletedIndex)
                 fieldTechStackRelay.accept(updatedFieldTechStack)
-                
-                var projectList = projectListRelay.value
-                projectList.removeFirst()
-                projectListRelay.accept(projectList)
+            
+                // 업데이트 된 내용을 통해 다시 필터링
+                return owner.fetchFilteredProjectsUseCase.fetch(filterBy: fieldTechStackRelay.value).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                owner.handleProjectFilteringResult(result, projectListRelay: projectListRelay)
             })
             .disposed(by: disposeBag)
-            
         
         return Output(
             fieldTechStack: fieldTechStackRelay.asDriver(),
