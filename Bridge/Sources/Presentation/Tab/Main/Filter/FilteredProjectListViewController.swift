@@ -13,6 +13,8 @@ import RxSwift
 
 final class FilteredProjectListViewController: BaseViewController {
     // MARK: - UI
+    private let rootFlexContainer = UIView()
+    
     private lazy var searchButton = UIBarButtonItem(
         image: UIImage(named: "magnifyingglass")?
             .resize(to: CGSize(width: 24, height: 24))
@@ -40,6 +42,12 @@ final class FilteredProjectListViewController: BaseViewController {
         )
         
         return collectionView
+    }()
+    
+    private let placeholderView: BridgePlaceholderView = {
+        let view = BridgePlaceholderView()
+        view.configurePlaceholderView(for: .emptySearchedProject)
+        return view
     }()
     
     // MARK: - Property
@@ -91,14 +99,19 @@ final class FilteredProjectListViewController: BaseViewController {
     
     // MARK: - Layout
     override func configureLayouts() {
-        view.addSubview(filterOptionListCollectionView)
-        view.addSubview(projectListCollectionView)
+        view.addSubview(rootFlexContainer)
+        rootFlexContainer.flex.define { flex in
+            flex.addItem(filterOptionListCollectionView).height(86)
+            flex.addItem().backgroundColor(BridgeColor.gray08).height(1)
+            flex.addItem(projectListCollectionView).display(.flex).grow(1)
+            flex.addItem(placeholderView).display(.none).grow(1)
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        filterOptionListCollectionView.pin.top(view.pin.safeArea).left().right().height(86)
-        projectListCollectionView.pin.below(of: filterOptionListCollectionView).left().bottom().right()
+        rootFlexContainer.pin.all(view.pin.safeArea)
+        rootFlexContainer.flex.layout()
     }
     
     // MARK: - Binding
@@ -120,6 +133,12 @@ final class FilteredProjectListViewController: BaseViewController {
         output.projects
             .drive(onNext: { [weak self] projects in
                 guard let self else { return }
+                
+                self.projectListCollectionView.flex.display(projects.isEmpty ? .none : .flex)
+                self.placeholderView.flex.display(projects.isEmpty ? .flex : .none)
+                self.placeholderView.isHidden = projects.isEmpty ? false : true
+                self.rootFlexContainer.flex.layout()
+                
                 self.configureProjectListSupplementaryView(projectCount: projects.count)
                 self.applyProjectListSectionSnapshot(with: projects)
             })
