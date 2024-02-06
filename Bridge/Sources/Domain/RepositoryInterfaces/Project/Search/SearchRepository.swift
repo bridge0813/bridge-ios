@@ -11,4 +11,6 @@ protocol SearchRepository {
     /// 최근 검색어 조회
     func fetchRecentSearch() -> Observable<[RecentSearch]>
     
+    /// 모집글 검색
+    func searchProjects(by query: String) -> Observable<[ProjectPreview]>
 }
