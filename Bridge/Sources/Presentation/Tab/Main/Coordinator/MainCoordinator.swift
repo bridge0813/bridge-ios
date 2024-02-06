@@ -79,6 +79,15 @@ extension MainCoordinator {
         navigationController.pushViewController(filterVC, animated: true)
     }
     
+    func showSearchViewController() {
+        let searchProjectViewModel = SearchProjectViewModel(
+            coordinator: self
+        )
+        
+        let searchVC = SearchProjectViewController(viewModel: searchProjectViewModel)
+        navigationController.pushViewController(searchVC, animated: true)
+    }
+    
     func showSignInViewController() {
         delegate?.showSignInViewController()
     }
