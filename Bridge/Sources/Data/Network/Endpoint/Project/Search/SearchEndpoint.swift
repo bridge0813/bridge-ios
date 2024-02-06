@@ -1,15 +1,15 @@
 //
-//  RecentSearchEndpoint.swift
+//  SearchEndpoint.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2/6/24.
 //
 
-enum RecentSearchEndpoint {
+enum SearchEndpoint {
     case fetchRecentSearch
 }
 
-extension RecentSearchEndpoint: Endpoint {
+extension SearchEndpoint: Endpoint {
     var path: String {
         switch self {
         case .fetchRecentSearch:
