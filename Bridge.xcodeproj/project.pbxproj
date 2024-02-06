@@ -284,6 +284,7 @@
 		7C88C6D92B72376F00FAA612 /* RecentSearchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6D82B72376F00FAA612 /* RecentSearchesView.swift */; };
 		7C88C6DC2B7240D800FAA612 /* RecentSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6DB2B7240D800FAA612 /* RecentSearchCell.swift */; };
 		7C88C6DE2B729ED200FAA612 /* SearchProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6DD2B729ED200FAA612 /* SearchProjectsUseCase.swift */; };
+		7C88C6E22B72A23D00FAA612 /* SearchProjectRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6E12B72A23D00FAA612 /* SearchProjectRequestDTO.swift */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
 		7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */; };
@@ -703,6 +704,7 @@
 		7C88C6D82B72376F00FAA612 /* RecentSearchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesView.swift; sourceTree = "<group>"; };
 		7C88C6DB2B7240D800FAA612 /* RecentSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCell.swift; sourceTree = "<group>"; };
 		7C88C6DD2B729ED200FAA612 /* SearchProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProjectsUseCase.swift; sourceTree = "<group>"; };
+		7C88C6E12B72A23D00FAA612 /* SearchProjectRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProjectRequestDTO.swift; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorView.swift; sourceTree = "<group>"; };
@@ -2112,6 +2114,7 @@
 			isa = PBXGroup;
 			children = (
 				7C88C6C52B72202C00FAA612 /* RecentSearchResponseDTO.swift */,
+				7C88C6E12B72A23D00FAA612 /* SearchProjectRequestDTO.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -3348,6 +3351,7 @@
 				7B9142E02B01D4EB006EA52F /* MessageDTO.swift in Sources */,
 				7CA73D952B285A0F007D88FB /* RejectApplicantUseCase.swift in Sources */,
 				7B02A6672ADFFCD900C8D4A1 /* DefaultWebSocketService.swift in Sources */,
+				7C88C6E22B72A23D00FAA612 /* SearchProjectRequestDTO.swift in Sources */,
 				7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */,
 				7B153C112AD6D0E100618280 /* AuthInterceptor.swift in Sources */,
 				7B9142DA2B01CF61006EA52F /* MockMessageRepository.swift in Sources */,
