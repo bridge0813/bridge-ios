@@ -273,6 +273,7 @@
 		7C87EE162B1D83FB0066691D /* MockUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE152B1D83FB0066691D /* MockUserRepository.swift */; };
 		7C88C6BE2B720F9500FAA612 /* SearchProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6BD2B720F9500FAA612 /* SearchProjectViewModel.swift */; };
 		7C88C6C02B720FE700FAA612 /* SearchProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6BF2B720FE700FAA612 /* SearchProjectViewController.swift */; };
+		7C88C6C32B7210E100FAA612 /* BridgeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6C22B7210E100FAA612 /* BridgeSearchBar.swift */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
 		7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */; };
@@ -681,6 +682,7 @@
 		7C87EE152B1D83FB0066691D /* MockUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserRepository.swift; sourceTree = "<group>"; };
 		7C88C6BD2B720F9500FAA612 /* SearchProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProjectViewModel.swift; sourceTree = "<group>"; };
 		7C88C6BF2B720FE700FAA612 /* SearchProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProjectViewController.swift; sourceTree = "<group>"; };
+		7C88C6C22B7210E100FAA612 /* BridgeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSearchBar.swift; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorView.swift; sourceTree = "<group>"; };
@@ -2068,8 +2070,17 @@
 			children = (
 				7C88C6BD2B720F9500FAA612 /* SearchProjectViewModel.swift */,
 				7C88C6BF2B720FE700FAA612 /* SearchProjectViewController.swift */,
+				7C88C6C12B7210C000FAA612 /* View */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		7C88C6C12B7210C000FAA612 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C88C6C22B7210E100FAA612 /* BridgeSearchBar.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		7C8B822C2AC8498C00F7B889 /* ButtonGroup */ = {
@@ -3118,6 +3129,7 @@
 				7B9142DE2B01D080006EA52F /* MessageEndpoint.swift in Sources */,
 				7CC9F6C32AAEEA2200685EA9 /* MemberFieldSelectionViewController.swift in Sources */,
 				7B93B3AA2B35372F00912202 /* FetchAlertsUseCase.swift in Sources */,
+				7C88C6C32B7210E100FAA612 /* BridgeSearchBar.swift in Sources */,
 				7BA36C9B2A9C5091000DAB02 /* Channel.swift in Sources */,
 				7CBDE2692B3FF7D800518AA9 /* ProfileResponseDTO.swift in Sources */,
 				7B8DE8112B034E6B003EA34A /* Stomp.swift in Sources */,
