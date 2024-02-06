@@ -96,5 +96,10 @@ final class SearchProjectViewController: BaseViewController {
             cancelButtonTapped: cancelButton.rx.tap
         )
         let output = viewModel.transform(input: input)
+        
+        output.recentSearches
+            .skip(1)
+            .bind(to: recentSearchesView.recentSearchesUpdated)
+            .disposed(by: disposeBag)
     }
 }

@@ -19,6 +19,7 @@ final class SearchProjectViewModel: ViewModelType {
     
     struct Output {
         let projects: Driver<[ProjectPreview]>
+        let recentSearches: Observable<[RecentSearch]>
     }
 
     // MARK: - Property
@@ -77,7 +78,8 @@ final class SearchProjectViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            projects: projectListRelay.asDriver()
+            projects: projectListRelay.asDriver(),
+            recentSearches: recentSearchesRelay.asObservable()
         )
     }
 }
