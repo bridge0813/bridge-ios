@@ -271,6 +271,8 @@
 		7C87EE0F2B1B72290066691D /* BookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */; };
 		7C87EE112B1C4B180066691D /* ProjectCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE102B1C4B180066691D /* ProjectCellDelegate.swift */; };
 		7C87EE162B1D83FB0066691D /* MockUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE152B1D83FB0066691D /* MockUserRepository.swift */; };
+		7C88C6BE2B720F9500FAA612 /* SearchProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6BD2B720F9500FAA612 /* SearchProjectViewModel.swift */; };
+		7C88C6C02B720FE700FAA612 /* SearchProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6BF2B720FE700FAA612 /* SearchProjectViewController.swift */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
 		7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */; };
@@ -677,6 +679,8 @@
 		7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkUseCase.swift; sourceTree = "<group>"; };
 		7C87EE102B1C4B180066691D /* ProjectCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCellDelegate.swift; sourceTree = "<group>"; };
 		7C87EE152B1D83FB0066691D /* MockUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserRepository.swift; sourceTree = "<group>"; };
+		7C88C6BD2B720F9500FAA612 /* SearchProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProjectViewModel.swift; sourceTree = "<group>"; };
+		7C88C6BF2B720FE700FAA612 /* SearchProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProjectViewController.swift; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorView.swift; sourceTree = "<group>"; };
@@ -2059,6 +2063,15 @@
 			path = Bookmark;
 			sourceTree = "<group>";
 		};
+		7C88C6BC2B720F7200FAA612 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7C88C6BD2B720F9500FAA612 /* SearchProjectViewModel.swift */,
+				7C88C6BF2B720FE700FAA612 /* SearchProjectViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		7C8B822C2AC8498C00F7B889 /* ButtonGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -2728,6 +2741,7 @@
 				7CF93E032A9C650D0013EBD6 /* Main */,
 				7CC9F6C12AAEE9E800685EA9 /* CreateProject */,
 				7C62033F2B6F438700438E69 /* Filter */,
+				7C88C6BC2B720F7200FAA612 /* Search */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -2962,6 +2976,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C88C6BE2B720F9500FAA612 /* SearchProjectViewModel.swift in Sources */,
 				7BE1C6D82ACE852C00C7B730 /* BridgeSetFieldView.swift in Sources */,
 				7CD834BC2B504B4600F3EED7 /* BaseListView.swift in Sources */,
 				7C3560582B6578B500CF79CE /* ImageProcessor.swift in Sources */,
@@ -3266,6 +3281,7 @@
 				7B61238D2AC2F320006E72C1 /* BridgeWarningMessageBox.swift in Sources */,
 				7C42701E2AA4540C009BE6AF /* BaseCollectionReusableView.swift in Sources */,
 				7C55E6632AEBBCBF0018FA5D /* AddTechTagPopUpView.swift in Sources */,
+				7C88C6C02B720FE700FAA612 /* SearchProjectViewController.swift in Sources */,
 				7BFECA242AECE632009B4C7D /* ApplicationResultCell.swift in Sources */,
 				7CA73D992B28B481007D88FB /* CreateChannelResponseDTO.swift in Sources */,
 				7CE080402ACF147500230C86 /* BridgeDropdownAnchorView.swift in Sources */,
