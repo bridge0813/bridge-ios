@@ -15,6 +15,8 @@ final class SearchProjectViewModel: ViewModelType {
         let textFieldEditingDidBegin: Observable<Void>
         let searchButtonTapped: Observable<String>
         let cancelButtonTapped: ControlEvent<Void>
+        let recentSearchSelected: Observable<RecentSearch>
+        let removeAllButtonTapped: Observable<Void>
     }
     
     struct Output {

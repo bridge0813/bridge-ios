@@ -93,7 +93,9 @@ final class SearchProjectViewController: BaseViewController {
         let input = SearchProjectViewModel.Input(
             textFieldEditingDidBegin: searchBar.editingDidBegin,
             searchButtonTapped: searchBar.searchButtonTapped,
-            cancelButtonTapped: cancelButton.rx.tap
+            cancelButtonTapped: cancelButton.rx.tap,
+            recentSearchSelected: recentSearchesView.recentSearchSelected,
+            removeAllButtonTapped: recentSearchesView.removeAllButtonTapped
         )
         let output = viewModel.transform(input: input)
         
