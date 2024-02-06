@@ -160,6 +160,7 @@ final class MainViewController: BaseViewController {
         let input = MainViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             filterButtonTapped: fieldTechStackPickerView.selectedFieldTechStack,
+            searchButtonTapped: searchButton.rx.tap,
             createButtonTapped: createProjectButton.rx.tap,
             itemSelected: itemSelected,
             bookmarkButtonTapped: bookmarkButtonTapped,
