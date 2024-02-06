@@ -15,6 +15,7 @@ final class MainCoordinator: Coordinator {
     
     private let userRepository: UserRepository
     private let projectRepository: ProjectRepository
+    private let searchRepository: SearchRepository
     
     private let fetchProfileUseCase: FetchProfileUseCase
     private let fetchAllProjectsUseCase: FetchAllProjectsUseCase
@@ -24,6 +25,8 @@ final class MainCoordinator: Coordinator {
     private let fetchFilteredProjectsUseCase: FetchFilteredProjectsUseCase
     private let bookmarkUseCase: BookmarkUseCase
     
+    private let fetchRecentSearchUseCase: FetchRecentSearchUseCase
+    
     // MARK: - Init
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -32,8 +35,10 @@ final class MainCoordinator: Coordinator {
         let networkService = DefaultNetworkService()
 //        userRepository = DefaultUserRepository(networkService: networkService)  // 프로필 리포지토리
 //        projectRepository = DefaultProjectRepository(networkService: networkService)  // 모집글 리포지토리
+//        searchRepository = DefaultSearchRepository(networkService: networkService)
         userRepository = MockUserRepository()
         projectRepository = MockProjectRepository()
+        searchRepository = MockSearchRepository()
         
         fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
         fetchAllProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
@@ -42,6 +47,8 @@ final class MainCoordinator: Coordinator {
         fetchDeadlineProjectsUseCase = DefaultFetchDeadlineProjectsUseCase(projectRepository: projectRepository)
         fetchFilteredProjectsUseCase = DefaultFetchFilteredProjectsUseCase(projectRepository: projectRepository)
         bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
+        
+        fetchRecentSearchUseCase = DefaultFetchRecentSearchUseCase(searchRepository: searchRepository)
     }
     
     // MARK: - Methods
@@ -81,7 +88,8 @@ extension MainCoordinator {
     
     func showSearchViewController() {
         let searchProjectViewModel = SearchProjectViewModel(
-            coordinator: self
+            coordinator: self, 
+            fetchRecentSearchUseCase: fetchRecentSearchUseCase
         )
         
         let searchVC = SearchProjectViewController(viewModel: searchProjectViewModel)

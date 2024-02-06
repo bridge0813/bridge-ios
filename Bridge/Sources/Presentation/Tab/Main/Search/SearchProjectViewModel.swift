@@ -25,22 +25,40 @@ final class SearchProjectViewModel: ViewModelType {
     let disposeBag = DisposeBag()
     private weak var coordinator: MainCoordinator?
     
+    private let fetchRecentSearchUseCase: FetchRecentSearchUseCase
+    
     // MARK: - Init
     init(
-        coordinator: MainCoordinator
+        coordinator: MainCoordinator,
+        fetchRecentSearchUseCase: FetchRecentSearchUseCase
     ) {
         self.coordinator = coordinator
+        self.fetchRecentSearchUseCase = fetchRecentSearchUseCase
     }
     
     // MARK: - Transformation
     func transform(input: Input) -> Output {
         let projectListRelay = BehaviorRelay<[ProjectPreview]>(value: [])
-        let recentSearchesRelay = BehaviorRelay<[String]>(value: [])
+        let recentSearchesRelay = BehaviorRelay<[RecentSearch]>(value: [])
         
         input.textFieldEditingDidBegin
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                print("최근 검색어 가져오기")
+            .flatMapLatest { owner, _ in
+                owner.fetchRecentSearchUseCase.fetch().toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let recentSearches):
+                    recentSearchesRelay.accept(recentSearches)
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "최근 검색어 조회에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
             })
             .disposed(by: disposeBag)
         
