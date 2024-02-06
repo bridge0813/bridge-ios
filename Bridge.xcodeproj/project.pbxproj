@@ -276,6 +276,7 @@
 		7C88C6C32B7210E100FAA612 /* BridgeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6C22B7210E100FAA612 /* BridgeSearchBar.swift */; };
 		7C88C6C62B72202C00FAA612 /* RecentSearchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6C52B72202C00FAA612 /* RecentSearchResponseDTO.swift */; };
 		7C88C6C92B72210F00FAA612 /* RecentSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6C82B72210F00FAA612 /* RecentSearch.swift */; };
+		7C88C6CC2B7221EE00FAA612 /* RecentSearchEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6CB2B7221EE00FAA612 /* RecentSearchEndpoint.swift */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
 		7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */; };
@@ -687,6 +688,7 @@
 		7C88C6C22B7210E100FAA612 /* BridgeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSearchBar.swift; sourceTree = "<group>"; };
 		7C88C6C52B72202C00FAA612 /* RecentSearchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchResponseDTO.swift; sourceTree = "<group>"; };
 		7C88C6C82B72210F00FAA612 /* RecentSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearch.swift; sourceTree = "<group>"; };
+		7C88C6CB2B7221EE00FAA612 /* RecentSearchEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchEndpoint.swift; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorView.swift; sourceTree = "<group>"; };
@@ -1591,6 +1593,7 @@
 				7B9C31B02B0788C0007E36B2 /* Protocols */,
 				7B153C092AD64E2A00618280 /* Auth */,
 				7CA04F632B0A6134007B9191 /* Project */,
+				7C88C6CA2B7221C100FAA612 /* Search */,
 				7B153C0A2AD64E3200618280 /* Chat */,
 				7C56E15D2B10F8CD00454F5E /* User */,
 				7B9C31AD2B07756F007E36B2 /* WebSocket */,
@@ -2100,6 +2103,14 @@
 			isa = PBXGroup;
 			children = (
 				7C88C6C82B72210F00FAA612 /* RecentSearch.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		7C88C6CA2B7221C100FAA612 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7C88C6CB2B7221EE00FAA612 /* RecentSearchEndpoint.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -3305,6 +3316,7 @@
 				7BEA73952B2B2F3F00CECF44 /* MyFieldViewModel.swift in Sources */,
 				7B922CFC2AD02EE400F3A336 /* SignUpUseCase.swift in Sources */,
 				7C40CBCA2AC6B597000F4C9F /* BridgeCreateProjectButton.swift in Sources */,
+				7C88C6CC2B7221EE00FAA612 /* RecentSearchEndpoint.swift in Sources */,
 				7B9C31AF2B07761C007E36B2 /* DefaultStompService.swift in Sources */,
 				7C3560512B6571E900CF79CE /* MemoryStorage.swift in Sources */,
 				7C8CC41C2AF522A10032F237 /* BridgeBasePopUpView.swift in Sources */,
