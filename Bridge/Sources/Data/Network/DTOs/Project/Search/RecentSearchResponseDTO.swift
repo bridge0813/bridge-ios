@@ -5,7 +5,6 @@
 //  Created by 엄지호 on 2/6/24.
 //
 
-import Foundation
 
 struct RecentSearchResponseDTO: Decodable {
     let searchWordID: Int
@@ -18,7 +17,7 @@ struct RecentSearchResponseDTO: Decodable {
 }
 
 extension RecentSearchResponseDTO {
-    func toEntity() {
-        
+    func toEntity() -> RecentSearch {
+        RecentSearch(searchWordID: searchWordID, searchWord: searchWord)
     }
 }

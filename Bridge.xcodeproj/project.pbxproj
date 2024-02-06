@@ -275,6 +275,7 @@
 		7C88C6C02B720FE700FAA612 /* SearchProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6BF2B720FE700FAA612 /* SearchProjectViewController.swift */; };
 		7C88C6C32B7210E100FAA612 /* BridgeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6C22B7210E100FAA612 /* BridgeSearchBar.swift */; };
 		7C88C6C62B72202C00FAA612 /* RecentSearchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6C52B72202C00FAA612 /* RecentSearchResponseDTO.swift */; };
+		7C88C6C92B72210F00FAA612 /* RecentSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88C6C82B72210F00FAA612 /* RecentSearch.swift */; };
 		7C8B82322AC97F0700F7B889 /* DropdownConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */; };
 		7C8B82362ACB208700F7B889 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B82352ACB208700F7B889 /* UIWindow+.swift */; };
 		7C8B823E2ACE7CDC00F7B889 /* AnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */; };
@@ -685,6 +686,7 @@
 		7C88C6BF2B720FE700FAA612 /* SearchProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProjectViewController.swift; sourceTree = "<group>"; };
 		7C88C6C22B7210E100FAA612 /* BridgeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSearchBar.swift; sourceTree = "<group>"; };
 		7C88C6C52B72202C00FAA612 /* RecentSearchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchResponseDTO.swift; sourceTree = "<group>"; };
+		7C88C6C82B72210F00FAA612 /* RecentSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearch.swift; sourceTree = "<group>"; };
 		7C8B82312AC97F0700F7B889 /* DropdownConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownConstant.swift; sourceTree = "<group>"; };
 		7C8B82352ACB208700F7B889 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		7C8B823D2ACE7CDC00F7B889 /* AnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorView.swift; sourceTree = "<group>"; };
@@ -1452,6 +1454,7 @@
 				7BA36C992A9C5081000DAB02 /* Chat */,
 				7C56E1602B10FF6200454F5E /* Profile */,
 				7CA04F0D2AF8F852007B9191 /* TechStack */,
+				7C88C6C72B7220FA00FAA612 /* Search */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2089,6 +2092,14 @@
 			isa = PBXGroup;
 			children = (
 				7C88C6C52B72202C00FAA612 /* RecentSearchResponseDTO.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		7C88C6C72B7220FA00FAA612 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7C88C6C82B72210F00FAA612 /* RecentSearch.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -3114,6 +3125,7 @@
 				7C40CBBC2AC557BE000F4C9F /* BridgeButton.swift in Sources */,
 				7C55E63B2ADEA2A40018FA5D /* MockProjectRepository.swift in Sources */,
 				7BA36CB22A9D961F000DAB02 /* ChannelDTO.swift in Sources */,
+				7C88C6C92B72210F00FAA612 /* RecentSearch.swift in Sources */,
 				7B93B3C02B36AA6400912202 /* BookmarkedProjectResponseDTO.swift in Sources */,
 				7BCA18072AFDCC0F00257B04 /* ProfileHeaderView.swift in Sources */,
 				7B14DB282AB15E7E009A00EB /* SignInUseCase.swift in Sources */,
