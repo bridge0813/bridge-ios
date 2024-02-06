@@ -19,6 +19,22 @@ final class SearchProjectViewController: BaseViewController {
         return view
     }()
     
+    private let searchContainer: UIView = {
+        let view = UIView()
+        view.flex.height(88)
+        view.backgroundColor = BridgeColor.gray10
+        return view
+    }()
+    private let searchBar = BridgeSearchBar()
+    
+    private let cancelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("취소", for: .normal)
+        button.setTitleColor(BridgeColor.secondary1, for: .normal)
+        button.titleLabel?.font = BridgeFont.body2.font
+        return button
+    }()
+    
     // MARK: - Property
     private let viewModel: SearchProjectViewModel
     
@@ -55,7 +71,10 @@ final class SearchProjectViewController: BaseViewController {
         view.addSubview(rootFlexContainer)
         
         rootFlexContainer.flex.define { flex in
-            
+            flex.addItem(searchContainer).direction(.row).alignItems(.center).padding(22, 15, 22, 15).define { flex in
+                flex.addItem(searchBar).grow(1).height(44)
+                flex.addItem(cancelButton).marginLeft(16)
+            }
         }
     }
     

@@ -40,6 +40,7 @@ final class BridgeSearchBar: BaseView {
         )
         textField.font = BridgeFont.body2.font
         textField.textColor = BridgeColor.gray01
+        textField.returnKeyType = .search
         return textField
     }()
     
@@ -53,14 +54,18 @@ final class BridgeSearchBar: BaseView {
             for: .normal
         )
         button.tintColor = BridgeColor.gray04
+        button.isHidden = true
         return button
     }()
     
-    
     // MARK: - Property
+    var editingDidBegin: Observable<Void> {
+        return textField.rx.controlEvent(.editingDidBegin).asObservable()
+    }
     
-    // MARK: - Init
-    
+    var searchButtonTapped: Observable<Void> {
+        return textField.rx.controlEvent(.editingDidEndOnExit).asObservable()
+    }
     
     // MARK: - Layout
     override func configureLayouts() {
@@ -81,6 +86,20 @@ final class BridgeSearchBar: BaseView {
     
     // MARK: - bind
     override func bind() {
-       
+        deleteButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.textField.text = ""
+                owner.deleteButton.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
+        // 텍스트 필드에 텍스트 여부에 따라 삭제 버튼 활성화
+        textField.rx.text
+            .orEmpty
+            .distinctUntilChanged()
+            .map { $0.isEmpty }
+            .bind(to: deleteButton.rx.isHidden)
+            .disposed(by: disposeBag)
     }
 }
