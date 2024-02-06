@@ -29,14 +29,17 @@ final class SearchProjectViewModel: ViewModelType {
     private weak var coordinator: MainCoordinator?
     
     private let fetchRecentSearchUseCase: FetchRecentSearchUseCase
+    private let searchProjectsUseCase: SearchProjectsUseCase
     
     // MARK: - Init
     init(
         coordinator: MainCoordinator,
-        fetchRecentSearchUseCase: FetchRecentSearchUseCase
+        fetchRecentSearchUseCase: FetchRecentSearchUseCase,
+        searchProjectsUseCase: SearchProjectsUseCase
     ) {
         self.coordinator = coordinator
         self.fetchRecentSearchUseCase = fetchRecentSearchUseCase
+        self.searchProjectsUseCase = searchProjectsUseCase
     }
     
     // MARK: - Transformation
@@ -65,10 +68,26 @@ final class SearchProjectViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 검색
         input.searchButtonTapped
             .withUnretained(self)
-            .subscribe(onNext: { owner, text in
-                print("검색 시작 \(text)")
+            .flatMapLatest { owner, query in
+                owner.searchProjectsUseCase.search(by: query).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projects):
+                    projectListRelay.accept(projects)
+                    
+                case .failure(let error):
+                    projectListRelay.accept([])
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "검색에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
             })
             .disposed(by: disposeBag)
         

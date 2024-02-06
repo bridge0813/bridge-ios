@@ -20,12 +20,23 @@ final class DefaultSearchRepository: SearchRepository {
     
     // 최근 검색어 조회
     func fetchRecentSearch() -> Observable<[RecentSearch]> {
-        let endpoint = SearchEndpoint.fetchRecentSearch
+        let recentSearchEndpoint = SearchEndpoint.fetchRecentSearch
         
-        return networkService.request(to: endpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: recentSearchEndpoint, interceptor: AuthInterceptor())
             .decode(type: [RecentSearchResponseDTO].self, decoder: JSONDecoder())
             .map { recentSearchDTOs in
                 return recentSearchDTOs.map { $0.toEntity() }
+            }
+    }
+    
+    func searchProjects(by query: String) -> Observable<[ProjectPreview]> {
+        let searchProjectDTO = SearchProjectRequestDTO(searchWord: query)
+        let searchProjectEndpoint = SearchEndpoint.searchProjects(requestDTO: searchProjectDTO)
+        
+        return networkService.request(to: searchProjectEndpoint, interceptor: nil)
+            .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
+            .map { projectPreviewDTOs in
+                projectPreviewDTOs.map { $0.toEntity() }
             }
     }
 }

@@ -26,6 +26,7 @@ final class MainCoordinator: Coordinator {
     private let bookmarkUseCase: BookmarkUseCase
     
     private let fetchRecentSearchUseCase: FetchRecentSearchUseCase
+    private let searchProjectsUseCase: SearchProjectsUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -49,6 +50,7 @@ final class MainCoordinator: Coordinator {
         bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
         
         fetchRecentSearchUseCase = DefaultFetchRecentSearchUseCase(searchRepository: searchRepository)
+        searchProjectsUseCase = DefaultSearchProjectsUseCase(searchRepository: searchRepository)
     }
     
     // MARK: - Methods
@@ -89,7 +91,8 @@ extension MainCoordinator {
     func showSearchViewController() {
         let searchProjectViewModel = SearchProjectViewModel(
             coordinator: self, 
-            fetchRecentSearchUseCase: fetchRecentSearchUseCase
+            fetchRecentSearchUseCase: fetchRecentSearchUseCase,
+            searchProjectsUseCase: searchProjectsUseCase
         )
         
         let searchVC = SearchProjectViewController(viewModel: searchProjectViewModel)
