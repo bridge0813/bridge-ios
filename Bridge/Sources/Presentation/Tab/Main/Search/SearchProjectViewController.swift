@@ -35,6 +35,8 @@ final class SearchProjectViewController: BaseViewController {
         return button
     }()
     
+    private let recentSearchesView = RecentSearchesView()
+    
     // MARK: - Property
     private let viewModel: SearchProjectViewModel
     
@@ -75,6 +77,8 @@ final class SearchProjectViewController: BaseViewController {
                 flex.addItem(searchBar).grow(1).height(44)
                 flex.addItem(cancelButton).marginLeft(16)
             }
+            
+            flex.addItem(recentSearchesView).grow(1).marginTop(4)
         }
     }
     
