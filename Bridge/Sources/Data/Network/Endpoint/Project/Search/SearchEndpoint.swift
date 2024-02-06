@@ -7,6 +7,7 @@
 
 enum SearchEndpoint {
     case fetchRecentSearch
+    case searchProjects(requestDTO: SearchProjectRequestDTO)
 }
 
 extension SearchEndpoint: Endpoint {
@@ -14,12 +15,18 @@ extension SearchEndpoint: Endpoint {
         switch self {
         case .fetchRecentSearch:
             return "/searchWords"
+            
+        case .searchProjects:
+            return "/projects/searchWord"
         }
     }
     
     var queryParameters: QueryParameters? {
         switch self {
         case .fetchRecentSearch:
+            return nil
+            
+        case .searchProjects:
             return nil
         }
     }
@@ -28,6 +35,9 @@ extension SearchEndpoint: Endpoint {
         switch self {
         case .fetchRecentSearch:
             return .get
+            
+        case .searchProjects:
+            return .post
         }
     }
     
@@ -35,6 +45,9 @@ extension SearchEndpoint: Endpoint {
         switch self {
         case .fetchRecentSearch:
             return nil
+            
+        case .searchProjects(let requestDTO):
+            return requestDTO
         }
     }
 }
