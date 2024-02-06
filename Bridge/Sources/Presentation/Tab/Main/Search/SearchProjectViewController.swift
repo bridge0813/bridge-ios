@@ -87,7 +87,8 @@ final class SearchProjectViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         let input = SearchProjectViewModel.Input(
-            
+            textFieldEditingDidBegin: searchBar.editingDidBegin,
+            searchButtonTapped: searchBar.searchButtonTapped
         )
         let output = viewModel.transform(input: input)
     }

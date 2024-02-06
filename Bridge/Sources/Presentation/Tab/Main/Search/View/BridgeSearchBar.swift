@@ -63,8 +63,9 @@ final class BridgeSearchBar: BaseView {
         return textField.rx.controlEvent(.editingDidBegin).asObservable()
     }
     
-    var searchButtonTapped: Observable<Void> {
-        return textField.rx.controlEvent(.editingDidEndOnExit).asObservable()
+    var searchButtonTapped: Observable<String> {
+        return textField.rx.controlEvent(.editingDidEndOnExit)
+            .withLatestFrom(textField.rx.text.orEmpty)
     }
     
     // MARK: - Layout
