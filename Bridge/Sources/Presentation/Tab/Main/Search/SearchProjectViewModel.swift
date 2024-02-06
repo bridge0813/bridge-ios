@@ -14,6 +14,7 @@ final class SearchProjectViewModel: ViewModelType {
     struct Input {
         let textFieldEditingDidBegin: Observable<Void>
         let searchButtonTapped: Observable<String>
+        let cancelButtonTapped: ControlEvent<Void>
     }
     
     struct Output {
@@ -47,6 +48,13 @@ final class SearchProjectViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, text in
                 print("검색 시작 \(text)")
+            })
+            .disposed(by: disposeBag)
+        
+        input.cancelButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.pop()
             })
             .disposed(by: disposeBag)
         
