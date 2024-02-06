@@ -21,6 +21,7 @@ final class MainCoordinator: Coordinator {
     private let fetchProjectsByFieldUseCase: FetchProjectsByFieldUseCase
     private let fetchHotProjectsUseCase: FetchHotProjectsUseCase
     private let fetchDeadlineProjectsUseCase: FetchDeadlineProjectsUseCase
+    private let fetchFilteredProjectsUseCase: FetchFilteredProjectsUseCase
     private let bookmarkUseCase: BookmarkUseCase
     
     // MARK: - Init
@@ -29,16 +30,17 @@ final class MainCoordinator: Coordinator {
         self.childCoordinators = []
 
         let networkService = DefaultNetworkService()
-        userRepository = DefaultUserRepository(networkService: networkService)  // 프로필 리포지토리
-        projectRepository = DefaultProjectRepository(networkService: networkService)  // 모집글 리포지토리
-//        userRepository = MockUserRepository()
-//        projectRepository = MockProjectRepository()
+//        userRepository = DefaultUserRepository(networkService: networkService)  // 프로필 리포지토리
+//        projectRepository = DefaultProjectRepository(networkService: networkService)  // 모집글 리포지토리
+        userRepository = MockUserRepository()
+        projectRepository = MockProjectRepository()
         
         fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
         fetchAllProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
         fetchProjectsByFieldUseCase = DefaultFetchProjectsByFieldUseCase(projectRepository: projectRepository)
         fetchHotProjectsUseCase = DefaultFetchHotProjectsUseCase(projectRepository: projectRepository)
         fetchDeadlineProjectsUseCase = DefaultFetchDeadlineProjectsUseCase(projectRepository: projectRepository)
+        fetchFilteredProjectsUseCase = DefaultFetchFilteredProjectsUseCase(projectRepository: projectRepository)
         bookmarkUseCase = DefaultBookmarkUseCase(projectRepository: projectRepository)
     }
     
@@ -63,6 +65,18 @@ extension MainCoordinator {
         
         let mainVC = MainViewController(viewModel: mainViewModel)
         navigationController.pushViewController(mainVC, animated: true)
+    }
+    
+    func showFilterViewController(with fieldTechStack: FieldTechStack) {
+        let filterViewModel = FilteredProjectListViewModel(
+            coordinator: self,
+            fieldTechStack: fieldTechStack,
+            fetchFilteredProjectsUseCase: fetchFilteredProjectsUseCase, 
+            bookmarkUseCase: bookmarkUseCase
+        )
+        
+        let filterVC = FilteredProjectListViewController(viewModel: filterViewModel)
+        navigationController.pushViewController(filterVC, animated: true)
     }
     
     func showSignInViewController() {

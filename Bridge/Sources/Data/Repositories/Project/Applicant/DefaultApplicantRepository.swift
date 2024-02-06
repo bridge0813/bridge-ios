@@ -18,7 +18,7 @@ final class DefaultApplicantRepository: ApplicantRepository {
         self.tokenStorage = tokenStorage
     }
     
-    // MARK: - ApplicantList
+    // 지원자 조회
     func fetchApplicantList(projectID: Int) -> Observable<[ApplicantProfile]> {
         let fetchApplicantListEndpoint = ApplicantEndpoint.fetchApplicantList(projectID: String(projectID))
         
@@ -30,7 +30,7 @@ final class DefaultApplicantRepository: ApplicantRepository {
             }
     }
     
-    // MARK: - Accept
+    // 지원 수락
     func accept(projectID: Int, applicantID: Int) -> Observable<Int> {
         let acceptEndpoint = ApplicantEndpoint.accept(
             userID: String(applicantID),
@@ -41,7 +41,7 @@ final class DefaultApplicantRepository: ApplicantRepository {
             .map { _ in applicantID }
     }
     
-    // MARK: - Reject
+    // 지원 거절
     func reject(projectID: Int, applicantID: Int) -> Observable<Int> {
         let rejectEndpoint = ApplicantEndpoint.reject(
             userID: String(applicantID),
@@ -52,7 +52,7 @@ final class DefaultApplicantRepository: ApplicantRepository {
             .map { _ in applicantID }
     }
     
-    // MARK: - CancelApplication
+    // 지원 취소
     func cancel(projectID: Int) -> Observable<Int> {
         let cancelEndpoint = ApplicantEndpoint.cancel(projectID: String(projectID))
         
@@ -60,7 +60,7 @@ final class DefaultApplicantRepository: ApplicantRepository {
             .map { _ in projectID }
     }
     
-    // MARK: - Apply
+    // 모집글 지원
     func apply(projectID: Int) -> Observable<Void> {
         let applyEndpoint = ApplicantEndpoint.apply(projectID: String(projectID))
         
