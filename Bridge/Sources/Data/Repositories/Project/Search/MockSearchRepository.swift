@@ -12,6 +12,10 @@ final class MockSearchRepository: SearchRepository {
         .just(RecentSearchResponseDTO.testArray.map { $0.toEntity() })
     }
     
+    func removeAllSearch() -> Observable<Void> {
+        .just(())
+    }
+    
     func searchProjects(by query: String) -> Observable<[ProjectPreview]> {
         .just(ProjectPreviewResponseDTO.projectTestArray.compactMap { $0.toEntity() })
     }

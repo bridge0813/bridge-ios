@@ -13,4 +13,6 @@ protocol SearchRepository {
     
     /// 모집글 검색
     func searchProjects(by query: String) -> Observable<[ProjectPreview]>
+    
+    func removeAllSearch() -> Observable<Void>
 }

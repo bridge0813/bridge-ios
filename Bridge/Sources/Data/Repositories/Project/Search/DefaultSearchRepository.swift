@@ -29,6 +29,13 @@ final class DefaultSearchRepository: SearchRepository {
             }
     }
     
+    func removeAllSearch() -> Observable<Void> {
+        let removeAllSearchEndpoint = SearchEndpoint.removeAllSearch
+        
+        return networkService.request(to: removeAllSearchEndpoint, interceptor: AuthInterceptor())
+            .map { _ in }
+    }
+    
     func searchProjects(by query: String) -> Observable<[ProjectPreview]> {
         let searchProjectDTO = SearchProjectRequestDTO(searchWord: query)
         let searchProjectEndpoint = SearchEndpoint.searchProjects(requestDTO: searchProjectDTO)
