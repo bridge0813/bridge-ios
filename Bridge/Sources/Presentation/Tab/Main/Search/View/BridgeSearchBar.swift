@@ -63,10 +63,15 @@ final class BridgeSearchBar: BaseView {
         return textField.rx.controlEvent(.editingDidBegin).asObservable()
     }
     
-    var searchButtonTapped: Observable<String> {
-        return textField.rx.controlEvent(.editingDidEndOnExit)
-            .withLatestFrom(textField.rx.text.orEmpty)
+    /// 텍스트 필드의 텍스트. 입력 시, 검색 시작
+    var text: String = "" {
+        didSet {
+            textField.text = text
+            searchButtonTapped.onNext(text)
+        }
     }
+    
+    let searchButtonTapped = PublishSubject<String>()
     
     // MARK: - Configuration
     override func configureAttributes() {
@@ -106,6 +111,12 @@ final class BridgeSearchBar: BaseView {
             .distinctUntilChanged()
             .map { $0.isEmpty }
             .bind(to: deleteButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        
+        textField.rx.controlEvent(.editingDidEndOnExit)
+            .withLatestFrom(textField.rx.text.orEmpty)
+            .bind(to: searchButtonTapped)
             .disposed(by: disposeBag)
     }
 }

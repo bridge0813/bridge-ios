@@ -135,11 +135,20 @@ final class SearchProjectViewController: BaseViewController {
             textFieldEditingDidBegin: searchBar.editingDidBegin,
             searchButtonTapped: searchBar.searchButtonTapped,
             cancelButtonTapped: cancelButton.rx.tap,
-            recentSearchSelected: recentSearchesView.recentSearchSelected,
             removeAllButtonTapped: recentSearchesView.removeAllButtonTapped
         )
         let output = viewModel.transform(input: input)
         
+        // 최근 검색어 선택
+        recentSearchesView.recentSearchSelected
+            .withUnretained(self)
+            .subscribe(onNext: { owner, recentSearch in
+                owner.view.endEditing(true)
+                owner.searchBar.text = recentSearch.searchWord  // 텍스트 필드의 텍스트 변경 후 검색 시작
+            })
+            .disposed(by: disposeBag)
+        
+        // 검색 결과(모집글)
         output.projects
             .skip(1)
             .drive(onNext: { [weak self] projects in
@@ -160,6 +169,7 @@ final class SearchProjectViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        // 최근 검색어 조회 결과
         output.recentSearches
             .skip(1)
             .bind(to: recentSearchesView.recentSearchesUpdated)

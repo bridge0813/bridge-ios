@@ -15,7 +15,6 @@ final class SearchProjectViewModel: ViewModelType {
         let textFieldEditingDidBegin: Observable<Void>
         let searchButtonTapped: Observable<String>
         let cancelButtonTapped: ControlEvent<Void>
-        let recentSearchSelected: Observable<RecentSearch>
         let removeAllButtonTapped: Observable<Void>
     }
     
@@ -91,6 +90,7 @@ final class SearchProjectViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 취소 버튼
         input.cancelButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
