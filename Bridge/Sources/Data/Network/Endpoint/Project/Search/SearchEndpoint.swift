@@ -8,6 +8,7 @@
 enum SearchEndpoint {
     case fetchRecentSearch
     case searchProjects(requestDTO: SearchProjectRequestDTO)
+    case removeAllSearch
 }
 
 extension SearchEndpoint: Endpoint {
@@ -18,6 +19,9 @@ extension SearchEndpoint: Endpoint {
             
         case .searchProjects:
             return "/projects/searchWord"
+            
+        case .removeAllSearch:
+            return "/searchWords"
         }
     }
     
@@ -27,6 +31,9 @@ extension SearchEndpoint: Endpoint {
             return nil
             
         case .searchProjects:
+            return nil
+            
+        case .removeAllSearch:
             return nil
         }
     }
@@ -38,6 +45,9 @@ extension SearchEndpoint: Endpoint {
             
         case .searchProjects:
             return .post
+            
+        case .removeAllSearch:
+            return .delete
         }
     }
     
@@ -48,6 +58,9 @@ extension SearchEndpoint: Endpoint {
             
         case .searchProjects(let requestDTO):
             return requestDTO
+            
+        case .removeAllSearch:
+            return nil
         }
     }
 }
