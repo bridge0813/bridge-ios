@@ -55,6 +55,7 @@ final class RecentSearchesView: BaseView {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(RecentSearchCell.self)
+        tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
         tableView.rowHeight = 35
         return tableView

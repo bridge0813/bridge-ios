@@ -43,7 +43,12 @@ final class SearchProjectViewController: BaseViewController {
         return divider
     }()
     
-    private let recentSearchesView = RecentSearchesView()
+    private let recentSearchesView: RecentSearchesView = {
+        let view = RecentSearchesView()
+        view.flex.width(100%).height(100%)
+        view.isHidden = true
+        return view
+    }()
     
     private lazy var projectListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
@@ -112,9 +117,9 @@ final class SearchProjectViewController: BaseViewController {
             }
             
             flex.addItem(dividerView)
-            flex.addItem(recentSearchesView).display(.flex).grow(1).marginTop(4)
-            flex.addItem(projectListCollectionView).display(.none).grow(1)
-            flex.addItem(placeholderView).display(.none).grow(1)
+            flex.addItem(recentSearchesView).isIncludedInLayout(true).marginTop(4)
+            flex.addItem(projectListCollectionView).isIncludedInLayout(false).grow(1)
+            flex.addItem(placeholderView).isIncludedInLayout(false).grow(1)
         }
     }
     
@@ -140,11 +145,13 @@ final class SearchProjectViewController: BaseViewController {
             .drive(onNext: { [weak self] projects in
                 guard let self else { return }
                 
+                // recentSearchesView를 제거하고, 컬렉션 뷰 혹은 플레이스홀더를 보여주기
                 self.dividerView.isHidden = false
+                self.recentSearchesView.flex.isIncludedInLayout(false)
                 self.recentSearchesView.isHidden = true
-                self.recentSearchesView.flex.display(.none)
-                self.projectListCollectionView.flex.display(projects.isEmpty ? .none : .flex)
-                self.placeholderView.flex.display(projects.isEmpty ? .flex : .none)
+                self.projectListCollectionView.flex.isIncludedInLayout(projects.isEmpty ? false : true)
+                self.projectListCollectionView.isHidden = projects.isEmpty ? true : false
+                self.placeholderView.flex.isIncludedInLayout(projects.isEmpty ? true : false)
                 self.placeholderView.isHidden = projects.isEmpty ? false : true
                 self.rootFlexContainer.flex.layout()
                 
@@ -156,6 +163,34 @@ final class SearchProjectViewController: BaseViewController {
         output.recentSearches
             .skip(1)
             .bind(to: recentSearchesView.recentSearchesUpdated)
+            .disposed(by: disposeBag)
+        
+        
+        // 키보드가 올라올 때, recentSearchesView를 보여주기.
+        recentSearchesView.rx.keyboardLayoutChanged
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, keyboardHeight in
+                // 키보드가 내려갔을 경우
+                guard keyboardHeight > 0 else {
+                    return
+                }
+                
+                let viewHeight = owner.view.frame.size.height
+                let safeAreaInset = owner.view.safeAreaInsets.top
+                let recentSearchesViewMarginTop: CGFloat = 93
+                let newHeight = viewHeight - recentSearchesViewMarginTop - keyboardHeight - safeAreaInset
+                
+                owner.projectListCollectionView.isHidden = true
+                owner.projectListCollectionView.flex.isIncludedInLayout(false)
+                owner.placeholderView.isHidden = true
+                owner.placeholderView.flex.isIncludedInLayout(false)
+                owner.dividerView.isHidden = true
+                
+                owner.recentSearchesView.flex.isIncludedInLayout(true).height(newHeight).markDirty()
+                owner.recentSearchesView.isHidden = false
+                owner.rootFlexContainer.flex.layout()
+            })
             .disposed(by: disposeBag)
     }
 }
