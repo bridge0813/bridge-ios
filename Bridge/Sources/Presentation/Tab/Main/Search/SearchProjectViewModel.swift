@@ -104,3 +104,10 @@ final class SearchProjectViewModel: ViewModelType {
         )
     }
 }
+
+// MARK: - Data source
+extension SearchProjectViewModel {
+    enum Section: CaseIterable {
+        case main
+    }
+}

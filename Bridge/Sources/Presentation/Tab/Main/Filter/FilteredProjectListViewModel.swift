@@ -149,7 +149,6 @@ extension FilteredProjectListViewModel {
     }
 }
 
-
 // MARK: - Data source
 extension FilteredProjectListViewModel {
     enum Section: CaseIterable {
