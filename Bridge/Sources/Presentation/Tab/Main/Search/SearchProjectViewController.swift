@@ -35,6 +35,14 @@ final class SearchProjectViewController: BaseViewController {
         return button
     }()
     
+    private let dividerView: UIView = {
+        let divider = UIView()
+        divider.flex.width(100%).height(1)
+        divider.backgroundColor = BridgeColor.gray06
+        divider.isHidden = true
+        return divider
+    }()
+    
     private let recentSearchesView = RecentSearchesView()
     
     private lazy var projectListCollectionView: UICollectionView = {
@@ -103,6 +111,7 @@ final class SearchProjectViewController: BaseViewController {
                 flex.addItem(cancelButton).marginLeft(16)
             }
             
+            flex.addItem(dividerView)
             flex.addItem(recentSearchesView).display(.flex).grow(1).marginTop(4)
             flex.addItem(projectListCollectionView).display(.none).grow(1)
             flex.addItem(placeholderView).display(.none).grow(1)
@@ -131,6 +140,7 @@ final class SearchProjectViewController: BaseViewController {
             .drive(onNext: { [weak self] projects in
                 guard let self else { return }
                 
+                self.dividerView.isHidden = false
                 self.recentSearchesView.isHidden = true
                 self.recentSearchesView.flex.display(.none)
                 self.projectListCollectionView.flex.display(projects.isEmpty ? .none : .flex)
