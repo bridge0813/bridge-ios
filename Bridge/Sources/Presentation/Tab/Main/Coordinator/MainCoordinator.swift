@@ -27,6 +27,7 @@ final class MainCoordinator: Coordinator {
     
     private let fetchRecentSearchUseCase: FetchRecentSearchUseCase
     private let searchProjectsUseCase: SearchProjectsUseCase
+    private let removeSearchUseCase: RemoveSearchUseCase
     
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -51,6 +52,7 @@ final class MainCoordinator: Coordinator {
         
         fetchRecentSearchUseCase = DefaultFetchRecentSearchUseCase(searchRepository: searchRepository)
         searchProjectsUseCase = DefaultSearchProjectsUseCase(searchRepository: searchRepository)
+        removeSearchUseCase = DefaultRemoveSearchUseCase(searchRepository: searchRepository)
     }
     
     // MARK: - Methods
@@ -91,7 +93,8 @@ extension MainCoordinator {
     func showSearchViewController() {
         let searchProjectViewModel = SearchProjectViewModel(
             coordinator: self, 
-            fetchRecentSearchUseCase: fetchRecentSearchUseCase,
+            fetchRecentSearchUseCase: fetchRecentSearchUseCase, 
+            removeSearchUseCase: removeSearchUseCase,
             searchProjectsUseCase: searchProjectsUseCase
         )
         
