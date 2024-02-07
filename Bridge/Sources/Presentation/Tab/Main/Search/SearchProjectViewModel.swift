@@ -16,6 +16,8 @@ final class SearchProjectViewModel: ViewModelType {
         let searchButtonTapped: Observable<String>
         let cancelButtonTapped: ControlEvent<Void>
         let removeAllButtonTapped: Observable<Void>
+        let itemSelected: Observable<ProjectID>
+        let bookmarkButtonTapped: Observable<ProjectID>
     }
     
     struct Output {
@@ -30,18 +32,21 @@ final class SearchProjectViewModel: ViewModelType {
     private let fetchRecentSearchUseCase: FetchRecentSearchUseCase
     private let removeSearchUseCase: RemoveSearchUseCase
     private let searchProjectsUseCase: SearchProjectsUseCase
+    private let bookmarkUseCase: BookmarkUseCase
     
     // MARK: - Init
     init(
         coordinator: MainCoordinator,
         fetchRecentSearchUseCase: FetchRecentSearchUseCase,
         removeSearchUseCase: RemoveSearchUseCase,
-        searchProjectsUseCase: SearchProjectsUseCase
+        searchProjectsUseCase: SearchProjectsUseCase,
+        bookmarkUseCase: BookmarkUseCase
     ) {
         self.coordinator = coordinator
         self.fetchRecentSearchUseCase = fetchRecentSearchUseCase
         self.removeSearchUseCase = removeSearchUseCase
         self.searchProjectsUseCase = searchProjectsUseCase
+        self.bookmarkUseCase = bookmarkUseCase
     }
     
     // MARK: - Transformation
@@ -109,6 +114,42 @@ final class SearchProjectViewModel: ViewModelType {
                 case .failure(let error):
                     owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
                         title: "검색에 삭제에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // 선택한 모집글의 상세로 이동
+        input.itemSelected
+            .withUnretained(self)
+            .subscribe(onNext: { owner, projectID in
+                owner.coordinator?.connectToProjectDetailFlow(with: projectID)
+            })
+            .disposed(by: disposeBag)
+        
+        // 북마크
+        input.bookmarkButtonTapped
+            .withUnretained(self)
+            .flatMap { owner, projectID -> Observable<Result<Int, Error>> in
+                return owner.bookmarkUseCase.bookmark(projectID: projectID).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projectID):
+                    var updatedProjectList = projectListRelay.value
+                
+                    // 북마크 여부 수정 후 accept
+                    if let index = updatedProjectList.firstIndex(where: { $0.projectID == projectID }) {
+                        updatedProjectList[index].isBookmarked.toggle()
+                        projectListRelay.accept(updatedProjectList)
+                    }
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "북마크 실패",
                         description: error.localizedDescription
                     ))
                 }

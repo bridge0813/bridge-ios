@@ -78,6 +78,9 @@ final class SearchProjectViewController: BaseViewController {
     
     private var dataSource: DataSource?
     
+    private let itemSelected = PublishSubject<ProjectID>()
+    private let bookmarkButtonTapped = PublishSubject<ProjectID>()
+    
     // MARK: - Init
     init(viewModel: SearchProjectViewModel) {
         self.viewModel = viewModel
@@ -135,7 +138,9 @@ final class SearchProjectViewController: BaseViewController {
             textFieldEditingDidBegin: searchBar.editingDidBegin,
             searchButtonTapped: searchBar.searchButtonTapped,
             cancelButtonTapped: cancelButton.rx.tap,
-            removeAllButtonTapped: recentSearchesView.removeAllButtonTapped
+            removeAllButtonTapped: recentSearchesView.removeAllButtonTapped,
+            itemSelected: itemSelected,
+            bookmarkButtonTapped: bookmarkButtonTapped
         )
         let output = viewModel.transform(input: input)
         
@@ -252,6 +257,7 @@ extension SearchProjectViewController {
                 return UICollectionViewCell()
             }
             cell.configureCell(with: project)
+            cell.delegate = self
             return cell
         }
     }
@@ -276,5 +282,16 @@ extension SearchProjectViewController {
         var snapshot = SectionSnapshot()
         snapshot.append(projectList)
         dataSource?.apply(snapshot, to: .main, animatingDifferences: true)
+    }
+}
+
+// MARK: - CellDelgate
+extension SearchProjectViewController: ProjectCellDelegate {
+    func bookmarkButtonTapped(projectID: Int) {
+        bookmarkButtonTapped.onNext(projectID)
+    }
+    
+    func itemSelected(projectID: Int) {
+        itemSelected.onNext(projectID)
     }
 }

@@ -95,7 +95,8 @@ extension MainCoordinator {
             coordinator: self, 
             fetchRecentSearchUseCase: fetchRecentSearchUseCase, 
             removeSearchUseCase: removeSearchUseCase,
-            searchProjectsUseCase: searchProjectsUseCase
+            searchProjectsUseCase: searchProjectsUseCase,
+            bookmarkUseCase: bookmarkUseCase
         )
         
         let searchVC = SearchProjectViewController(viewModel: searchProjectViewModel)
