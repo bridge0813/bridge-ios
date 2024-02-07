@@ -11,8 +11,9 @@ protocol SearchRepository {
     /// 최근 검색어 조회
     func fetchRecentSearch() -> Observable<[RecentSearch]>
     
+    /// 검색어 전체 삭제
+    func removeAllSearch() -> Observable<Void>
+    
     /// 모집글 검색
     func searchProjects(by query: String) -> Observable<[ProjectPreview]>
-    
-    func removeAllSearch() -> Observable<Void>
 }

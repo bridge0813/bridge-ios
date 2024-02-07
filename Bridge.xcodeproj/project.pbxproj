@@ -266,6 +266,7 @@
 		7C6203462B6F591600438E69 /* FetchFilteredProjectsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6203452B6F591600438E69 /* FetchFilteredProjectsUseCase.swift */; };
 		7C6203492B6FE62400438E69 /* FilteredProjectRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6203482B6FE62400438E69 /* FilteredProjectRequestDTO.swift */; };
 		7C62034C2B6FF56100438E69 /* FilterOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C62034B2B6FF56100438E69 /* FilterOptionCell.swift */; };
+		7C63C1512B736FC100A50434 /* RemoveSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C63C1502B736FC100A50434 /* RemoveSearchUseCase.swift */; };
 		7C8639592AC28B4F00064588 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8639582AC28B4F00064588 /* BaseButton.swift */; };
 		7C86EEF22A949C2400C5EB6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */; };
 		7C87EE0F2B1B72290066691D /* BookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */; };
@@ -686,6 +687,7 @@
 		7C6203452B6F591600438E69 /* FetchFilteredProjectsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFilteredProjectsUseCase.swift; sourceTree = "<group>"; };
 		7C6203482B6FE62400438E69 /* FilteredProjectRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredProjectRequestDTO.swift; sourceTree = "<group>"; };
 		7C62034B2B6FF56100438E69 /* FilterOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionCell.swift; sourceTree = "<group>"; };
+		7C63C1502B736FC100A50434 /* RemoveSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveSearchUseCase.swift; sourceTree = "<group>"; };
 		7C8639582AC28B4F00064588 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		7C86EEF12A949C2400C5EB6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7C87EE0E2B1B72290066691D /* BookmarkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkUseCase.swift; sourceTree = "<group>"; };
@@ -2139,6 +2141,7 @@
 			isa = PBXGroup;
 			children = (
 				7C88C6CE2B72235200FAA612 /* FetchRecentSearchUseCase.swift */,
+				7C63C1502B736FC100A50434 /* RemoveSearchUseCase.swift */,
 				7C88C6DD2B729ED200FAA612 /* SearchProjectsUseCase.swift */,
 			);
 			path = Search;
@@ -3163,6 +3166,7 @@
 				7B93AAA32B2012D800650EA5 /* StompMessageRequestDTO.swift in Sources */,
 				7C50EC0A2B39D9B300A69F12 /* FetchApplicantListUseCase.swift in Sources */,
 				7B9C31AB2B07752C007E36B2 /* StompService.swift in Sources */,
+				7C63C1512B736FC100A50434 /* RemoveSearchUseCase.swift in Sources */,
 				7B14DB542AB938E3009A00EB /* AuthEndpoint.swift in Sources */,
 				7CC719F02B27781100CFA827 /* Typealias.swift in Sources */,
 				7CEC06D32B553AF000C1700A /* ChannelProfileView.swift in Sources */,
