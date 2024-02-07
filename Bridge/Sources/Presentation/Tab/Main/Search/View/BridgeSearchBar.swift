@@ -68,6 +68,11 @@ final class BridgeSearchBar: BaseView {
             .withLatestFrom(textField.rx.text.orEmpty)
     }
     
+    // MARK: - Configuration
+    override func configureAttributes() {
+        textField.becomeFirstResponder()
+    }
+    
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)

@@ -96,8 +96,8 @@ final class SearchProjectViewController: BaseViewController {
                 flex.addItem(cancelButton).marginLeft(16)
             }
             
-            flex.addItem(recentSearchesView).display(.none).grow(1).marginTop(4)
-            flex.addItem(projectListCollectionView).grow(1)
+            flex.addItem(recentSearchesView).display(.flex).grow(1).marginTop(4)
+            flex.addItem(projectListCollectionView).display(.none).grow(1)
         }
     }
     
