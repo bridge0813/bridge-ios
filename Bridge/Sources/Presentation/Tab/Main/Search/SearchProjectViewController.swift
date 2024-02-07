@@ -50,6 +50,13 @@ final class SearchProjectViewController: BaseViewController {
         return collectionView
     }()
     
+    private let placeholderView: BridgePlaceholderView = {
+        let view = BridgePlaceholderView()
+        view.configurePlaceholderView(for: .emptySearchedProject)
+        view.isHidden = true
+        return view
+    }()
+    
     // MARK: - Property
     private let viewModel: SearchProjectViewModel
     
@@ -98,6 +105,7 @@ final class SearchProjectViewController: BaseViewController {
             
             flex.addItem(recentSearchesView).display(.flex).grow(1).marginTop(4)
             flex.addItem(projectListCollectionView).display(.none).grow(1)
+            flex.addItem(placeholderView).display(.none).grow(1)
         }
     }
     
@@ -119,8 +127,16 @@ final class SearchProjectViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.projects
+            .skip(1)
             .drive(onNext: { [weak self] projects in
                 guard let self else { return }
+                
+                self.recentSearchesView.isHidden = true
+                self.recentSearchesView.flex.display(.none)
+                self.projectListCollectionView.flex.display(projects.isEmpty ? .none : .flex)
+                self.placeholderView.flex.display(projects.isEmpty ? .flex : .none)
+                self.placeholderView.isHidden = projects.isEmpty ? false : true
+                self.rootFlexContainer.flex.layout()
                 
                 self.configureSupplementaryView(projectCount: projects.count)
                 self.applySectionSnapshot(with: projects)
