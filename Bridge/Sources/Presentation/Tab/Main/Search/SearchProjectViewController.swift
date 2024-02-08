@@ -116,7 +116,7 @@ final class SearchProjectViewController: BaseViewController {
         rootFlexContainer.flex.define { flex in
             flex.addItem(searchContainer).direction(.row).alignItems(.center).padding(22, 15, 22, 15).define { flex in
                 flex.addItem(searchBar).grow(1).height(44)
-                flex.addItem(cancelButton).marginLeft(16)
+                flex.addItem(cancelButton).marginLeft(15)
             }
             
             flex.addItem(dividerView)
