@@ -125,7 +125,8 @@ final class FilteredProjectListViewController: BaseViewController {
             viewWillAppear: self.rx.viewWillAppear.asObservable(), 
             optionDeleteButtonTapped: optionDeleteButtonTapped,
             itemSelected: itemSelected,
-            bookmarkButtonTapped: bookmarkButtonTapped
+            bookmarkButtonTapped: bookmarkButtonTapped,
+            searchButtonTapped: searchButton.rx.tap
         )
         let output = viewModel.transform(input: input)
         

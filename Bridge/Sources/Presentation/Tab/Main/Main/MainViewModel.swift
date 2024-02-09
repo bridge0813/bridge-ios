@@ -14,6 +14,7 @@ final class MainViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Bool>
         let filterButtonTapped: Observable<FieldTechStack>
+        let searchButtonTapped: ControlEvent<Void>
         let createButtonTapped: ControlEvent<Void>
         let itemSelected: Observable<Int>
         let bookmarkButtonTapped: Observable<Int>
@@ -154,6 +155,14 @@ final class MainViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, fieldTechStack in
                 owner.coordinator?.showFilterViewController(with: fieldTechStack)
+            })
+            .disposed(by: disposeBag)
+        
+        // 검색 이동
+        input.searchButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showSearchViewController()
             })
             .disposed(by: disposeBag)
         

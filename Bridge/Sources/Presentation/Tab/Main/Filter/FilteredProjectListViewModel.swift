@@ -16,6 +16,7 @@ final class FilteredProjectListViewModel: ViewModelType {
         let optionDeleteButtonTapped: Observable<String>
         let itemSelected: Observable<ProjectID>
         let bookmarkButtonTapped: Observable<ProjectID>
+        let searchButtonTapped: ControlEvent<Void>
     }
     
     struct Output {
@@ -121,6 +122,13 @@ final class FilteredProjectListViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 검색 이동
+        input.searchButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.showSearchViewController()
+            })
+            .disposed(by: disposeBag)
         
         return Output(
             fieldTechStack: fieldTechStackRelay.asDriver(),
@@ -148,7 +156,6 @@ extension FilteredProjectListViewModel {
         }
     }
 }
-
 
 // MARK: - Data source
 extension FilteredProjectListViewModel {

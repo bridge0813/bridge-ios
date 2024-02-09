@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FilteredProjectRequestDTO: Codable {
+struct FilteredProjectRequestDTO: Encodable {
     let field: String
     let techStacks: [String]
     
@@ -16,4 +16,3 @@ struct FilteredProjectRequestDTO: Codable {
         case techStacks = "skills"
     }
 }
-
