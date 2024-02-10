@@ -195,6 +195,8 @@
 		7C1366422AC27F9100EB415D /* BridgeSendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */; };
 		7C16F8E32B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16F8E22B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift */; };
 		7C199FF42B779D2300D95FB9 /* UpdateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C199FF32B779D2300D95FB9 /* UpdateProjectCoordinator.swift */; };
+		7C199FF72B77A1E900D95FB9 /* UpdateMemberFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C199FF62B77A1E900D95FB9 /* UpdateMemberFieldViewController.swift */; };
+		7C199FF92B77A21700D95FB9 /* UpdateMemberFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C199FF82B77A21700D95FB9 /* UpdateMemberFieldViewModel.swift */; };
 		7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */; };
 		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
 		7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */; };
@@ -617,6 +619,8 @@
 		7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSendMessageButton.swift; sourceTree = "<group>"; };
 		7C16F8E22B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTechStackPickerPopUpView.swift; sourceTree = "<group>"; };
 		7C199FF32B779D2300D95FB9 /* UpdateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProjectCoordinator.swift; sourceTree = "<group>"; };
+		7C199FF62B77A1E900D95FB9 /* UpdateMemberFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemberFieldViewController.swift; sourceTree = "<group>"; };
+		7C199FF82B77A21700D95FB9 /* UpdateMemberFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemberFieldViewModel.swift; sourceTree = "<group>"; };
 		7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
 		7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
@@ -1857,6 +1861,7 @@
 			isa = PBXGroup;
 			children = (
 				7C199FF22B779D0B00D95FB9 /* Coordinator */,
+				7C199FF52B77A1D400D95FB9 /* MemberField */,
 			);
 			path = UpdateProject;
 			sourceTree = "<group>";
@@ -1867,6 +1872,15 @@
 				7C199FF32B779D2300D95FB9 /* UpdateProjectCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		7C199FF52B77A1D400D95FB9 /* MemberField */ = {
+			isa = PBXGroup;
+			children = (
+				7C199FF82B77A21700D95FB9 /* UpdateMemberFieldViewModel.swift */,
+				7C199FF62B77A1E900D95FB9 /* UpdateMemberFieldViewController.swift */,
+			);
+			path = MemberField;
 			sourceTree = "<group>";
 		};
 		7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */ = {
@@ -3181,6 +3195,7 @@
 				7C56E1712B14860100454F5E /* HotProjectResponseDTO.swift in Sources */,
 				7C56E16B2B11043400454F5E /* DefaultUserRepository.swift in Sources */,
 				7CC719E42B27117800CFA827 /* DeleteProjectUseCase.swift in Sources */,
+				7C199FF92B77A21700D95FB9 /* UpdateMemberFieldViewModel.swift in Sources */,
 				7B9142D62B01CE8B006EA52F /* MessageRepository.swift in Sources */,
 				7B93AAA32B2012D800650EA5 /* StompMessageRequestDTO.swift in Sources */,
 				7C50EC0A2B39D9B300A69F12 /* FetchApplicantListUseCase.swift in Sources */,
@@ -3264,6 +3279,7 @@
 				7C88C6D72B7224FE00FAA612 /* MockSearchRepository.swift in Sources */,
 				7C35603F2B60FC4500CF79CE /* ProfileMultipartFormData.swift in Sources */,
 				7C569D062A9F776B0063D362 /* Date+.swift in Sources */,
+				7C199FF72B77A1E900D95FB9 /* UpdateMemberFieldViewController.swift in Sources */,
 				7C2400492AB7D46E00D9D5F1 /* ProjectDataStorage.swift in Sources */,
 				7CDFB6202B204D4F00272F77 /* ManagementProjectCell.swift in Sources */,
 				7CC9F6CB2AAF0EEC00685EA9 /* MemberRequirementInputViewModel.swift in Sources */,
