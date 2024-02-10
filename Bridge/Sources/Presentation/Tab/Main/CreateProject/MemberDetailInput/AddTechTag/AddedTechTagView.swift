@@ -32,13 +32,13 @@ final class AddedTechTagView: BaseView {
     // MARK: - Property
     var tagNames: [String] = [] {
         didSet {
-            collectionView.backgroundColor = .clear
+            collectionView.backgroundColor = tagNames.isEmpty ? BridgeColor.gray09 : .clear
             collectionView.reloadData()
             collectionView.layoutIfNeeded()
             
-            let collectionViewHeight = collectionView.contentSize.height
-            collectionView.flex.height(collectionViewHeight)
-            collectionView.flex.markDirty()
+            let collectionViewHeight = tagNames.isEmpty ? 52 : collectionView.contentSize.height
+            collectionView.flex.height(collectionViewHeight).markDirty()
+            rootFlexContainer.flex.layout()
         }
     }
     
