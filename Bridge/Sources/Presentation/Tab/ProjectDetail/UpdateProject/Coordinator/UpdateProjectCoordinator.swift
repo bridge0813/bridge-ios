@@ -50,6 +50,7 @@ final class UpdateProjectCoordinator: Coordinator {
 
 // MARK: - Show
 extension UpdateProjectCoordinator {
+    /// 멤버 요구사항 정의 이동
     func showUpdateMemberRequirementViewController(selectedFields: [String]) {
          let updateMemberRequirementViewModel = UpdateMemberRequirementViewModel(
              coordinator: self,
@@ -62,6 +63,19 @@ extension UpdateProjectCoordinator {
          )
          updateProjectNavigationController?.pushViewController(updateMemberRequirementVC, animated: true)
      }
+    
+    /// 팀원 제한 정의 이동
+    func showUpdateApplicantRestrictionViewController() {
+        let updateApplicantRestrictionViewModel = UpdateApplicantRestrictionViewModel(
+            coordinator: self,
+            dataStorage: projectDataStorage
+        )
+        
+        let updateApplicantRestrictionVC = UpdateApplicantRestrictionViewController(
+            viewModel: updateApplicantRestrictionViewModel
+        )
+        updateProjectNavigationController?.pushViewController(updateApplicantRestrictionVC, animated: true)
+    }
 }
 
 // MARK: - CoordinatorDelegate

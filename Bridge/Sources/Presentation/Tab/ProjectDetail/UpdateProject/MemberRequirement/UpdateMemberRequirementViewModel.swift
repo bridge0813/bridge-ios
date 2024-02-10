@@ -99,7 +99,7 @@ final class UpdateMemberRequirementViewModel: ViewModelType {
                 // 더 이상 작성할 분야가 없다면, 다음 스텝으로 이동
                 // 있다면, 현재 스텝 다시 한 번 보여주기
                 if owner.selectedFields.isEmpty {
-//                    owner.coordinator?.showApplicantRestrictionViewController()
+                    owner.coordinator?.showUpdateApplicantRestrictionViewController()
                 } else {
                     owner.coordinator?.showUpdateMemberRequirementViewController(
                         selectedFields: owner.selectedFields

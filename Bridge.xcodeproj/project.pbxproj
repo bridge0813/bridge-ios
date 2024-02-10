@@ -199,6 +199,8 @@
 		7C199FF92B77A21700D95FB9 /* UpdateMemberFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C199FF82B77A21700D95FB9 /* UpdateMemberFieldViewModel.swift */; };
 		7C199FFC2B77A5DB00D95FB9 /* UpdateMemberRequirementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C199FFB2B77A5DB00D95FB9 /* UpdateMemberRequirementViewModel.swift */; };
 		7C199FFE2B77A62900D95FB9 /* UpdateMemberRequirementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C199FFD2B77A62900D95FB9 /* UpdateMemberRequirementViewController.swift */; };
+		7C19A0012B77AA1C00D95FB9 /* UpdateApplicantRestrictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C19A0002B77AA1C00D95FB9 /* UpdateApplicantRestrictionViewController.swift */; };
+		7C19A0032B77AA3300D95FB9 /* UpdateApplicantRestrictionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C19A0022B77AA3300D95FB9 /* UpdateApplicantRestrictionViewModel.swift */; };
 		7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */; };
 		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
 		7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */; };
@@ -625,6 +627,8 @@
 		7C199FF82B77A21700D95FB9 /* UpdateMemberFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemberFieldViewModel.swift; sourceTree = "<group>"; };
 		7C199FFB2B77A5DB00D95FB9 /* UpdateMemberRequirementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemberRequirementViewModel.swift; sourceTree = "<group>"; };
 		7C199FFD2B77A62900D95FB9 /* UpdateMemberRequirementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemberRequirementViewController.swift; sourceTree = "<group>"; };
+		7C19A0002B77AA1C00D95FB9 /* UpdateApplicantRestrictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateApplicantRestrictionViewController.swift; sourceTree = "<group>"; };
+		7C19A0022B77AA3300D95FB9 /* UpdateApplicantRestrictionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateApplicantRestrictionViewModel.swift; sourceTree = "<group>"; };
 		7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
 		7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
@@ -1867,6 +1871,7 @@
 				7C199FF22B779D0B00D95FB9 /* Coordinator */,
 				7C199FF52B77A1D400D95FB9 /* MemberField */,
 				7C199FFA2B77A5B400D95FB9 /* MemberRequirement */,
+				7C199FFF2B77AA0D00D95FB9 /* ApplicantRestriction */,
 			);
 			path = UpdateProject;
 			sourceTree = "<group>";
@@ -1895,6 +1900,15 @@
 				7C199FFD2B77A62900D95FB9 /* UpdateMemberRequirementViewController.swift */,
 			);
 			path = MemberRequirement;
+			sourceTree = "<group>";
+		};
+		7C199FFF2B77AA0D00D95FB9 /* ApplicantRestriction */ = {
+			isa = PBXGroup;
+			children = (
+				7C19A0022B77AA3300D95FB9 /* UpdateApplicantRestrictionViewModel.swift */,
+				7C19A0002B77AA1C00D95FB9 /* UpdateApplicantRestrictionViewController.swift */,
+			);
+			path = ApplicantRestriction;
 			sourceTree = "<group>";
 		};
 		7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */ = {
@@ -3161,6 +3175,7 @@
 				7CBDE26E2B3FFC3500518AA9 /* ReferenceFileResponseDTO.swift in Sources */,
 				7CA04F232AFE77AB007B9191 /* BridgeFilledChip.swift in Sources */,
 				7BA36CD52A9F7D38000DAB02 /* BridgeNavigationTitleView.swift in Sources */,
+				7C19A0032B77AA3300D95FB9 /* UpdateApplicantRestrictionViewModel.swift in Sources */,
 				7B93B3C22B36AB0900912202 /* BookmarkedProject.swift in Sources */,
 				7CBDE2622B3EA0F600518AA9 /* BaseListCell.swift in Sources */,
 				7CA04F1E2AFE4B0F007B9191 /* RecruitFieldCell.swift in Sources */,
@@ -3315,6 +3330,7 @@
 				7C55E6332ADBFAFB0018FA5D /* SectionDividerHeaderView.swift in Sources */,
 				7C40CBC82AC69447000F4C9F /* BridgeSmallButtonGroup.swift in Sources */,
 				7C56E1622B10FF8300454F5E /* ProfilePreview.swift in Sources */,
+				7C19A0012B77AA1C00D95FB9 /* UpdateApplicantRestrictionViewController.swift in Sources */,
 				7BEA739A2B2B2FC500CECF44 /* AlertViewController.swift in Sources */,
 				7B153C0F2AD6CF0D00618280 /* Interceptor.swift in Sources */,
 				7C56E1752B14917900454F5E /* FetchDeadlineProjectsUseCase.swift in Sources */,
