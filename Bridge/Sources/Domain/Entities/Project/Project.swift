@@ -10,7 +10,7 @@ import Foundation
 struct Project {
     var title: String
     var description: String
-    let dDays: Int
+    var dDays: Int
     var deadline: Date
     var startDate: Date?
     var endDate: Date?
@@ -18,10 +18,10 @@ struct Project {
     var applicantRestrictions: [String]
     var progressMethod: String
     var progressStep: String
-    let userName: String
+    var userName: String
     var isBookmarked: Bool
-    let isMyProject: Bool
-    let totalRecruitNumber: Int
+    var isMyProject: Bool
+    var totalRecruitNumber: Int
 }
 
 extension Project {
