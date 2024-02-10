@@ -83,3 +83,24 @@ extension ProjectDataStorage {
         project.description = text
     }
 }
+
+// MARK: - Update
+extension ProjectDataStorage {
+    /// 업데이트 할 프로젝트를 주입
+    func updateProject(with newProject: Project) {
+        project.title = newProject.title
+        project.description = newProject.description
+        project.dDays = newProject.dDays
+        project.deadline = newProject.deadline
+        project.startDate = newProject.startDate
+        project.endDate = newProject.endDate
+        project.memberRequirements = newProject.memberRequirements
+        project.applicantRestrictions = newProject.applicantRestrictions
+        project.progressMethod = newProject.progressMethod
+        project.progressStep = newProject.progressStep
+        project.userName = newProject.userName
+        project.isBookmarked = newProject.isBookmarked
+        project.isMyProject = newProject.isMyProject
+        project.totalRecruitNumber = newProject.totalRecruitNumber
+    }
+}

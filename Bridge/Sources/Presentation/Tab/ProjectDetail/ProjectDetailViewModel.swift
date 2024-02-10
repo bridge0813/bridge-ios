@@ -93,9 +93,9 @@ final class ProjectDetailViewModel: ViewModelType {
                 
                 switch managementType {
                 case .edit:
-                    // TODO: - 수정하기 구현 후 이동
                     owner.coordinator?.showAlert(
-                        configuration: .editProject
+                        configuration: .editProject,
+                        primaryAction: { owner.coordinator?.connectToUpdateProjectFlow(with: project.value) }
                     )
                     
                 case .close:

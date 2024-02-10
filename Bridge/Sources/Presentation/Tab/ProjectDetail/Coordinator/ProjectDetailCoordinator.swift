@@ -44,8 +44,8 @@ final class ProjectDetailCoordinator: Coordinator {
     func start() { }
 }
 
+// MARK: - Show
 extension ProjectDetailCoordinator {
-    // MARK: - Show
     func showProjectDetailViewController(projectID: Int) {
         let viewModel = ProjectDetailViewModel(
             coordinator: self, 
@@ -73,5 +73,26 @@ extension ProjectDetailCoordinator {
     
     func showSignInViewController() {
         delegate?.showSignInViewController()
+    }
+}
+
+// MARK: - Connect
+extension ProjectDetailCoordinator {
+    func connectToUpdateProjectFlow(with newProject: Project) {
+        let updateProjectCoordinator = UpdateProjectCoordinator(navigationController: navigationController)
+        updateProjectCoordinator.delegate = self
+        updateProjectCoordinator.start(with: newProject)
+        childCoordinators.append(updateProjectCoordinator)
+    }
+}
+
+// MARK: - CoordinatorDelegate
+extension ProjectDetailCoordinator: CoordinatorDelegate {
+    func didFinish(childCoordinator: Coordinator) {
+        navigationController.dismiss(animated: true)
+
+        if let index = childCoordinators.firstIndex(where: { $0 === childCoordinator }) {
+            childCoordinators.remove(at: index)
+        }
     }
 }

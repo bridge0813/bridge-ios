@@ -28,8 +28,23 @@ final class UpdateProjectCoordinator: Coordinator {
     }
 
     // MARK: - Methods
-    func start() {
-
+    func start() { }
+    func start(with newProject: Project) {
+        projectDataStorage.updateProject(with: newProject)
+        
+        let updateMemberFieldViewModel = UpdateMemberFieldViewModel(
+            coordinator: self,
+            dataStorage: projectDataStorage
+        )
+        
+        let updateMemberFieldVC = UpdateMemberFieldViewController(viewModel: updateMemberFieldViewModel)
+        updateProjectNavigationController = UINavigationController(rootViewController: updateMemberFieldVC)
+        updateProjectNavigationController?.modalPresentationStyle = .fullScreen
+        
+        navigationController.present(
+            updateProjectNavigationController ?? UINavigationController(),
+            animated: true
+        )
     }
 }
 
