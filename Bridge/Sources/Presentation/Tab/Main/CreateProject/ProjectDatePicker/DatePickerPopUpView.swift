@@ -35,9 +35,9 @@ final class DatePickerPopUpView: BridgeBasePopUpView {
         }
     }
     
-    private var deadlineDate = Date()
-    private var startDate: Date?
-    private var endDate: Date?
+    var deadlineDate = Date()
+    var startDate: Date?
+    var endDate: Date?
     
     /// 어떤 날짜를 설정하는지, 무슨 날짜로 결정했는지를 전달.
     var completeButtonTapped: Observable<(type: String, date: Date)> {
@@ -103,15 +103,20 @@ extension DatePickerPopUpView {
     
     private func setDatePicker() {
         completeButton.isEnabled = false
-        let maximumDate = Date().calculateMaximumDate()  // 최대 1년까지만 설정이 가능.
+        
+        // 초기화
+        datePicker.minimumDate = nil
+        datePicker.maximumDate = nil
+        
+        // 최대 1년까지만 설정 가능
+        let maximumDate = Date().calculateMaximumDate()
         
         switch setDateType {
         case .deadline:
             titleLabel.text = "모집 마감일"
-            datePicker.minimumDate = Date()  // 초기화
+            datePicker.minimumDate = Date()
             datePicker.maximumDate = maximumDate
             datePicker.date = deadlineDate
-            
             
         case .start:
             titleLabel.text = "시작일"
@@ -119,10 +124,9 @@ extension DatePickerPopUpView {
             datePicker.maximumDate = endDate ?? maximumDate  // endDate가 존재하지 않는다면, 최대 1년으로 설정.
             datePicker.date = startDate ?? Date()
             
-            
         case .end:
             titleLabel.text = "예상 완료일"
-            datePicker.minimumDate = startDate
+            datePicker.minimumDate = startDate ?? Date()
             datePicker.maximumDate = maximumDate
             datePicker.date = endDate ?? Date()
         }

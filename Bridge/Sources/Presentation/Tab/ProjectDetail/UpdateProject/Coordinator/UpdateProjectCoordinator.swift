@@ -76,6 +76,17 @@ extension UpdateProjectCoordinator {
         )
         updateProjectNavigationController?.pushViewController(updateApplicantRestrictionVC, animated: true)
     }
+    
+    /// 모집글 스케줄 관리 이동
+    func showUpdateProjectScheduleViewController() {
+        let updateProjectScheduleViewModel = UpdateProjectScheduleViewModel(
+            coordinator: self,
+            dataStorage: projectDataStorage
+        )
+        
+        let updateProjectScheduleVC = UpdateProjectScheduleViewController(viewModel: updateProjectScheduleViewModel)
+        updateProjectNavigationController?.pushViewController(updateProjectScheduleVC, animated: true)
+    }
 }
 
 // MARK: - CoordinatorDelegate

@@ -68,7 +68,7 @@ final class UpdateApplicantRestrictionViewController: BaseViewController {
 
     // MARK: - Configuration
     override func configureAttributes() {
-        navigationItem.title = "모집글 작성"
+        navigationItem.title = "모집글 수정"
     }
 
     // MARK: - Layout

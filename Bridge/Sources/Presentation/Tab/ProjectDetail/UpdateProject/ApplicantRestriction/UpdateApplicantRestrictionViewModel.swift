@@ -60,7 +60,7 @@ final class UpdateApplicantRestrictionViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.dataStorage.updateApplicantRestriction(with: selectedRestrictions.value)
-
+                owner.coordinator?.showUpdateProjectScheduleViewController()
             })
             .disposed(by: disposeBag)
 
