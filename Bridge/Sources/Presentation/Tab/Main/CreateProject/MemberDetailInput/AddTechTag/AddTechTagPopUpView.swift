@@ -27,37 +27,8 @@ final class AddTechTagPopUpView: BridgeBasePopUpView {
     override var containerHeight: CGFloat { 576 }
     override var dismissYPosition: CGFloat { 300 }
     
+    /// 데이터소스
     let fieldUpdated = PublishSubject<[String]>()
-    
-//    var field = String() {
-//        didSet {
-//            Observable.of(TechStack(rawValue: field)?.techStacks ?? [])
-//                .bind(
-//                    to: collectionView.rx.items(
-//                        cellIdentifier: TechTagCell.reuseIdentifier,
-//                        cellType: TechTagCell.self
-//                    )
-//                ) { [weak self] _, element, cell in
-//                    guard let self else { return }
-//                
-//                    cell.configure(tagName: element, cornerRadius: 4)
-//                    
-//                    cell.tagButtonTapped
-//                        .withUnretained(self)
-//                        .bind(onNext: { owner, tagName in
-//                            if let index = owner.selectedTags.firstIndex(of: tagName) {
-//                                owner.selectedTags.remove(at: index)
-//                            } else {
-//                                owner.selectedTags.append(tagName)
-//                            }
-//                            
-//                            owner.completeButton.isEnabled = !owner.selectedTags.isEmpty
-//                        })
-//                        .disposed(by: cell.disposeBag)
-//                }
-//                .disposed(by: disposeBag)
-//        }
-//    }
     
     private var selectedTags: [String] = []     // 선택한 기술태그를 저장
     

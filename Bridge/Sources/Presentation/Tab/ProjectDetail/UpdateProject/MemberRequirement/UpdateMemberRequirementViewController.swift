@@ -215,7 +215,9 @@ final class UpdateMemberRequirementViewController: BaseViewController {
                 self.fieldTagButton.flex.width(fieldTagButton.intrinsicContentSize.width).height(38).markDirty()
 
                 // 기술 스택들의 분야
-                self.addTechTagPopUpView.field = requirement.field.convertToDisplayFormat()
+                self.addTechTagPopUpView.fieldUpdated.onNext(
+                    TechStack(rawValue: requirement.field.convertToDisplayFormat())?.techStacks ?? []
+                )
 
                 // 모집 인원
                 self.setRecruitNumberButton.updateTitle(
