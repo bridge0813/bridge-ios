@@ -35,12 +35,12 @@ final class MainCoordinator: Coordinator {
         self.childCoordinators = []
 
         let networkService = DefaultNetworkService()
-        userRepository = DefaultUserRepository(networkService: networkService)  // 프로필 리포지토리
-        projectRepository = DefaultProjectRepository(networkService: networkService)  // 모집글 리포지토리
-        searchRepository = DefaultSearchRepository(networkService: networkService)
-//        userRepository = MockUserRepository()
-//        projectRepository = MockProjectRepository()
-//        searchRepository = MockSearchRepository()
+//        userRepository = DefaultUserRepository(networkService: networkService)  // 프로필 리포지토리
+//        projectRepository = DefaultProjectRepository(networkService: networkService)  // 모집글 리포지토리
+//        searchRepository = DefaultSearchRepository(networkService: networkService)
+        userRepository = MockUserRepository()
+        projectRepository = MockProjectRepository()
+        searchRepository = MockSearchRepository()
         
         fetchProfileUseCase = DefaultFetchProfileUseCase(userRepository: userRepository)
         fetchAllProjectsUseCase = DefaultFetchAllProjectsUseCase(projectRepository: projectRepository)
