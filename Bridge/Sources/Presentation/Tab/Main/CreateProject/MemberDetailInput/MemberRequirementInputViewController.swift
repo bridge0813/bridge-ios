@@ -1,5 +1,5 @@
 //
-//  MemberDetailInputViewController.swift
+//  MemberRequirementInputViewController.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -183,8 +183,9 @@ final class MemberRequirementInputViewController: BaseViewController {
         // 현재 모집하려는 분야
         output.selectedField
             .drive(onNext: { [weak self] field in
-                self?.fieldTagButton.updateTitle(with: field, textColor: BridgeColor.primary1)
-                self?.addTechTagPopUpView.field = field  // 기술 태그 선택하는 팝업 뷰에 선택된 분야를 전달
+                guard let self else { return }
+                self.fieldTagButton.updateTitle(with: field, textColor: BridgeColor.primary1)
+                self.addTechTagPopUpView.fieldUpdated.onNext(TechStack(rawValue: field)?.techStacks ?? [])
             })
             .disposed(by: disposeBag)
         

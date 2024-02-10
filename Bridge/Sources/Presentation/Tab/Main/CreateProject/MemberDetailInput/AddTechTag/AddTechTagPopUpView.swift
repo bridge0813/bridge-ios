@@ -27,38 +27,37 @@ final class AddTechTagPopUpView: BridgeBasePopUpView {
     override var containerHeight: CGFloat { 576 }
     override var dismissYPosition: CGFloat { 300 }
     
-    /// 선택된 분야를 전달받으면
-    /// willSet - 데이터소스를 결정 할 타입을 저장
-    /// didSet - 데이터소스를 바인딩하여 CollectionView Cell을 구현(CollectionViewDataSource 역할)
-    var field = String() {
-        didSet {
-            Observable.of(TechStack(rawValue: field)?.techStacks ?? [])
-                .bind(
-                    to: collectionView.rx.items(
-                        cellIdentifier: TechTagCell.reuseIdentifier,
-                        cellType: TechTagCell.self
-                    )
-                ) { [weak self] _, element, cell in
-                    guard let self else { return }
-                
-                    cell.configure(tagName: element, cornerRadius: 4)
-                    
-                    cell.tagButtonTapped
-                        .withUnretained(self)
-                        .bind(onNext: { owner, tagName in
-                            if let index = owner.selectedTags.firstIndex(of: tagName) {
-                                owner.selectedTags.remove(at: index)
-                            } else {
-                                owner.selectedTags.append(tagName)
-                            }
-                            
-                            owner.completeButton.isEnabled = !owner.selectedTags.isEmpty
-                        })
-                        .disposed(by: cell.disposeBag)
-                }
-                .disposed(by: disposeBag)
-        }
-    }
+    let fieldUpdated = PublishSubject<[String]>()
+    
+//    var field = String() {
+//        didSet {
+//            Observable.of(TechStack(rawValue: field)?.techStacks ?? [])
+//                .bind(
+//                    to: collectionView.rx.items(
+//                        cellIdentifier: TechTagCell.reuseIdentifier,
+//                        cellType: TechTagCell.self
+//                    )
+//                ) { [weak self] _, element, cell in
+//                    guard let self else { return }
+//                
+//                    cell.configure(tagName: element, cornerRadius: 4)
+//                    
+//                    cell.tagButtonTapped
+//                        .withUnretained(self)
+//                        .bind(onNext: { owner, tagName in
+//                            if let index = owner.selectedTags.firstIndex(of: tagName) {
+//                                owner.selectedTags.remove(at: index)
+//                            } else {
+//                                owner.selectedTags.append(tagName)
+//                            }
+//                            
+//                            owner.completeButton.isEnabled = !owner.selectedTags.isEmpty
+//                        })
+//                        .disposed(by: cell.disposeBag)
+//                }
+//                .disposed(by: disposeBag)
+//        }
+//    }
     
     private var selectedTags: [String] = []     // 선택한 기술태그를 저장
     
@@ -99,6 +98,34 @@ final class AddTechTagPopUpView: BridgeBasePopUpView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+    }
+    
+    // MARK: - Binding
+    override func bind() {
+        // 데이터소스 설정
+        fieldUpdated
+            .bind(to: collectionView.rx.items(
+                cellIdentifier: TechTagCell.reuseIdentifier,
+                cellType: TechTagCell.self
+            )) { [weak self] _, element, cell in
+                guard let self else { return }
+                
+                cell.configure(tagName: element, cornerRadius: 4)
+                
+                cell.tagButtonTapped
+                    .withUnretained(self)
+                    .bind(onNext: { owner, tagName in
+                        if let index = owner.selectedTags.firstIndex(of: tagName) {
+                            owner.selectedTags.remove(at: index)
+                        } else {
+                            owner.selectedTags.append(tagName)
+                        }
+                        
+                        owner.completeButton.isEnabled = !owner.selectedTags.isEmpty
+                    })
+                    .disposed(by: cell.disposeBag)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
