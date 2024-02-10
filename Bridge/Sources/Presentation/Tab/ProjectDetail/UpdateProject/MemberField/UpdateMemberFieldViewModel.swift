@@ -70,7 +70,7 @@ final class UpdateMemberFieldViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-
+                owner.coordinator?.showUpdateMemberRequirementViewController(selectedFields: selectedFields)
             })
             .disposed(by: disposeBag)
 

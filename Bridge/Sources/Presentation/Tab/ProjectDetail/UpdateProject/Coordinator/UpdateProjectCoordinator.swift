@@ -50,7 +50,18 @@ final class UpdateProjectCoordinator: Coordinator {
 
 // MARK: - Show
 extension UpdateProjectCoordinator {
+    func showUpdateMemberRequirementViewController(selectedFields: [String]) {
+         let updateMemberRequirementViewModel = UpdateMemberRequirementViewModel(
+             coordinator: self,
+             selectedFields: selectedFields,
+             dataStorage: projectDataStorage
+         )
 
+         let updateMemberRequirementVC = UpdateMemberRequirementViewController(
+             viewModel: updateMemberRequirementViewModel
+         )
+         updateProjectNavigationController?.pushViewController(updateMemberRequirementVC, animated: true)
+     }
 }
 
 // MARK: - CoordinatorDelegate
