@@ -94,7 +94,14 @@ extension ProjectDataStorage {
         project.deadline = newProject.deadline
         project.startDate = newProject.startDate
         project.endDate = newProject.endDate
-        project.memberRequirements = newProject.memberRequirements
+        project.memberRequirements = newProject.memberRequirements.map { requirement -> MemberRequirement in
+            MemberRequirement(
+                field: requirement.field.convertToUpperCaseFormat(),
+                recruitNumber: requirement.recruitNumber,
+                requiredSkills: requirement.requiredSkills,
+                requirementText: requirement.requirementText
+            )
+        }
         project.applicantRestrictions = newProject.applicantRestrictions
         project.progressMethod = newProject.progressMethod
         project.progressStep = newProject.progressStep
@@ -102,5 +109,10 @@ extension ProjectDataStorage {
         project.isBookmarked = newProject.isBookmarked
         project.isMyProject = newProject.isMyProject
         project.totalRecruitNumber = newProject.totalRecruitNumber
+    }
+    
+    /// 해당 분야에 있는 MemberRequirement 제거
+    func removeMemberRequirement(for field: String) {
+        project.memberRequirements.removeAll { $0.field == field }
     }
 }
