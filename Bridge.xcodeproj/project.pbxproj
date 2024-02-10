@@ -194,6 +194,7 @@
 		7C1366392AC16C4D00EB415D /* BridgeRemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366382AC16C4D00EB415D /* BridgeRemoveButton.swift */; };
 		7C1366422AC27F9100EB415D /* BridgeSendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */; };
 		7C16F8E32B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16F8E22B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift */; };
+		7C199FF42B779D2300D95FB9 /* UpdateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C199FF32B779D2300D95FB9 /* UpdateProjectCoordinator.swift */; };
 		7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */; };
 		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
 		7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */; };
@@ -615,6 +616,7 @@
 		7C1366382AC16C4D00EB415D /* BridgeRemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeRemoveButton.swift; sourceTree = "<group>"; };
 		7C1366412AC27F9100EB415D /* BridgeSendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeSendMessageButton.swift; sourceTree = "<group>"; };
 		7C16F8E22B43D96500D093A5 /* FieldTechStackPickerPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTechStackPickerPopUpView.swift; sourceTree = "<group>"; };
+		7C199FF32B779D2300D95FB9 /* UpdateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProjectCoordinator.swift; sourceTree = "<group>"; };
 		7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
 		7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
@@ -1851,6 +1853,22 @@
 			path = PopUp;
 			sourceTree = "<group>";
 		};
+		7C199FF12B779D0000D95FB9 /* UpdateProject */ = {
+			isa = PBXGroup;
+			children = (
+				7C199FF22B779D0B00D95FB9 /* Coordinator */,
+			);
+			path = UpdateProject;
+			sourceTree = "<group>";
+		};
+		7C199FF22B779D0B00D95FB9 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7C199FF32B779D2300D95FB9 /* UpdateProjectCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */ = {
 			isa = PBXGroup;
 			children = (
@@ -2275,6 +2293,7 @@
 				7CA04F1D2AFE4B0F007B9191 /* RecruitFieldCell.swift */,
 				7CA04F2B2B01F822007B9191 /* ProjectDetailMenuBar.swift */,
 				7CA04F2A2AFFDF70007B9191 /* RecruitFieldDetail */,
+				7C199FF12B779D0000D95FB9 /* UpdateProject */,
 			);
 			path = ProjectDetail;
 			sourceTree = "<group>";
@@ -3412,6 +3431,7 @@
 				7CDFB6182B201A7E00272F77 /* BridgeTabButton.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
 				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
+				7C199FF42B779D2300D95FB9 /* UpdateProjectCoordinator.swift in Sources */,
 				7BA96EB82B249630000D48AE /* Notification+Stomp.swift in Sources */,
 				7CA04F432B029B3A007B9191 /* FetchProjectDetailUseCase.swift in Sources */,
 				7C8CC4132AEEB5CC0032F237 /* TechTagCell.swift in Sources */,
