@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 /// 모집글 진행방식, 진행단계를 수정하는 VC
-final class UpdateProgressStatusViewController: BaseViewController {
+final class UpdateProjectProgressStatusViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
@@ -100,10 +100,10 @@ final class UpdateProgressStatusViewController: BaseViewController {
     }()
     
     // MARK: - Property
-    private let viewModel: UpdateProgressStatusViewModel
+    private let viewModel: UpdateProjectProgressStatusViewModel
     
     // MARK: - Init
-    init(viewModel: UpdateProgressStatusViewModel) {
+    init(viewModel: UpdateProjectProgressStatusViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -158,7 +158,7 @@ final class UpdateProgressStatusViewController: BaseViewController {
     
     // MARK: - Bind
     override func bind() {
-        let input = UpdateProgressStatusViewModel.Input(
+        let input = UpdateProjectProgressStatusViewModel.Input(
             progressMethodButtonTapped: progressMethodButtonTapped,
             progressStep: progressStepDropdown.itemSelected.map { $0.title },
             nextButtonTapped: nextButton.rx.tap.asObservable()
@@ -197,7 +197,7 @@ final class UpdateProgressStatusViewController: BaseViewController {
     }
 }
 
-extension UpdateProgressStatusViewController {
+extension UpdateProjectProgressStatusViewController {
     private var progressMethodButtonTapped: Observable<String> {
         Observable.merge(
             onlineButton.rx.tap.map { "온라인" },

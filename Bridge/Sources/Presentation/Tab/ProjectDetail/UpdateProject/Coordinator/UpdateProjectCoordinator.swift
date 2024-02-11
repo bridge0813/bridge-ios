@@ -89,14 +89,16 @@ extension UpdateProjectCoordinator {
     }
     
     /// 모집글 진행 방식 관리 이동
-    func showUpdateProgressStatusViewController() {
-        let updateProgressStatusViewModel = UpdateProgressStatusViewModel(
+    func showUpdateProjectProgressStatusViewController() {
+        let updateProgressStatusViewModel = UpdateProjectProgressStatusViewModel(
             coordinator: self,
             dataStorage: projectDataStorage
         )
         
-        let updateProgressStatusVC = UpdateProgressStatusViewController(viewModel: updateProgressStatusViewModel)
-        updateProjectNavigationController?.pushViewController(updateProgressStatusVC, animated: true)
+        let updateProjectProgressStatusVC = UpdateProjectProgressStatusViewController(
+            viewModel: updateProgressStatusViewModel
+        )
+        updateProjectNavigationController?.pushViewController(updateProjectProgressStatusVC, animated: true)
     }
 }
 

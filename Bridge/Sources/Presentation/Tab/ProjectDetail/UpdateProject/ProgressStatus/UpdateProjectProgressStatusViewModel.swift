@@ -8,7 +8,7 @@
 import RxSwift
 import RxCocoa
 
-final class UpdateProgressStatusViewModel: ViewModelType {
+final class UpdateProjectProgressStatusViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let progressMethodButtonTapped: Observable<String>

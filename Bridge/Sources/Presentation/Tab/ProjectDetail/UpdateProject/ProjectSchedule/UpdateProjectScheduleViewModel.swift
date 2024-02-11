@@ -60,7 +60,7 @@ final class UpdateProjectScheduleViewModel: ViewModelType {
                 owner.dataStorage.updateDeadline(with: deadlineDateRelay.value)
                 owner.dataStorage.updateStartDate(with: startDateRelay.value)
                 owner.dataStorage.updateEndDate(with: endDateRelay.value)
-                owner.coordinator?.showUpdateProgressStatusViewController()
+                owner.coordinator?.showUpdateProjectProgressStatusViewController()
             })
             .disposed(by: disposeBag)
         
