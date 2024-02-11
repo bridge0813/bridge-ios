@@ -11,6 +11,7 @@ import RxCocoa
 
 final class ProjectDataStorage {
     private var project = Project(
+        id: 0, 
         title: "",
         description: "",
         dDays: 0,

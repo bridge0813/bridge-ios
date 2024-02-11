@@ -116,7 +116,9 @@ final class DefaultProjectRepository: ProjectRepository {
         return networkService.request(to: fetchProjectDetailEndpoint, interceptor: nil)
             .decode(type: ProjectDetailDTO.self, decoder: JSONDecoder())
             .map { dto in
-                return dto.toEntity()
+                var project = dto.toEntity()
+                project.id = projectID
+                return project
             }
     }
     

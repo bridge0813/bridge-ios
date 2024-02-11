@@ -37,6 +37,7 @@ struct ProjectDetailDTO: Codable {
 extension ProjectDetailDTO {
     func toEntity() -> Project {
         Project(
+            id: 0,
             title: title,
             description: description,
             dDays: Date().calculateDDay(to: deadline.toDateType() ?? Date()),

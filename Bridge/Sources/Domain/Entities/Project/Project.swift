@@ -8,6 +8,7 @@
 import Foundation
 
 struct Project {
+    var id: Int
     var title: String
     var description: String
     var dDays: Int
@@ -26,6 +27,7 @@ struct Project {
 
 extension Project {
     static let onError = Project(
+        id: 0, 
         title: "모집글을 불러올 수 없습니다.",
         description: "",
         dDays: 0,
