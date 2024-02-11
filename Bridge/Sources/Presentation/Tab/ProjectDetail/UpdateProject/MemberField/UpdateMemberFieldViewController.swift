@@ -40,6 +40,7 @@ final class UpdateMemberFieldViewController: BaseViewController {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .clear
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.alwaysBounceVertical = true
         return scrollView
     }()
 
