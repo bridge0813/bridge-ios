@@ -100,6 +100,19 @@ extension UpdateProjectCoordinator {
         )
         updateProjectNavigationController?.pushViewController(updateProjectProgressStatusVC, animated: true)
     }
+    
+    /// 모집글 소개 수정 이동
+    func showUpdateProjectDescriptionViewController() {
+        let updateProjectDescriptionViewModel = UpdateProjectDescriptionViewModel(
+            coordinator: self,
+            dataStorage: projectDataStorage
+        )
+        
+        let updateProjectDescriptionVC = UpdateProjectDescriptionViewController(
+            viewModel: updateProjectDescriptionViewModel
+        )
+        updateProjectNavigationController?.pushViewController(updateProjectDescriptionVC, animated: true)
+    }
 }
 
 // MARK: - CoordinatorDelegate

@@ -116,7 +116,7 @@ final class UpdateProjectProgressStatusViewController: BaseViewController {
     
     // MARK: - Configuration
     override func configureAttributes() {
-        navigationItem.title = "모집글 작성"
+        navigationItem.title = "모집글 수정"
         progressStepAnchorView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(anchorViewTapped))
         )

@@ -61,6 +61,7 @@ final class UpdateProjectProgressStatusViewModel: ViewModelType {
             .subscribe(onNext: { owner, _ in
                 owner.dataStorage.updateProgressMethod(with: progressMethod.value)
                 owner.dataStorage.updateProgressStep(with: progressStep.value)
+                owner.coordinator?.showUpdateProjectDescriptionViewController()
             })
             .disposed(by: disposeBag)
                 

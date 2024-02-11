@@ -205,6 +205,8 @@
 		7C19A0082B77B2FD00D95FB9 /* UpdateProjectScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C19A0072B77B2FD00D95FB9 /* UpdateProjectScheduleViewController.swift */; };
 		7C19A00B2B78A17600D95FB9 /* UpdateProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C19A00A2B78A17600D95FB9 /* UpdateProjectProgressStatusViewModel.swift */; };
 		7C19A00D2B78A18C00D95FB9 /* UpdateProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C19A00C2B78A18C00D95FB9 /* UpdateProjectProgressStatusViewController.swift */; };
+		7C19A0102B78AEB100D95FB9 /* UpdateProjectDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C19A00F2B78AEB100D95FB9 /* UpdateProjectDescriptionViewModel.swift */; };
+		7C19A0122B78AEE000D95FB9 /* UpdateProjectDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C19A0112B78AEE000D95FB9 /* UpdateProjectDescriptionViewController.swift */; };
 		7C2400262AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */; };
 		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
 		7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */; };
@@ -637,6 +639,8 @@
 		7C19A0072B77B2FD00D95FB9 /* UpdateProjectScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProjectScheduleViewController.swift; sourceTree = "<group>"; };
 		7C19A00A2B78A17600D95FB9 /* UpdateProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7C19A00C2B78A18C00D95FB9 /* UpdateProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
+		7C19A00F2B78AEB100D95FB9 /* UpdateProjectDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProjectDescriptionViewModel.swift; sourceTree = "<group>"; };
+		7C19A0112B78AEE000D95FB9 /* UpdateProjectDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProjectDescriptionViewController.swift; sourceTree = "<group>"; };
 		7C2400252AB1B83700D9D5F1 /* ProjectProgressStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewModel.swift; sourceTree = "<group>"; };
 		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
 		7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
@@ -1882,6 +1886,7 @@
 				7C199FFF2B77AA0D00D95FB9 /* ApplicantRestriction */,
 				7C19A0042B77AF4C00D95FB9 /* ProjectSchedule */,
 				7C19A0092B78A0F000D95FB9 /* ProgressStatus */,
+				7C19A00E2B78AE8000D95FB9 /* ProjectDescription */,
 			);
 			path = UpdateProject;
 			sourceTree = "<group>";
@@ -1937,6 +1942,15 @@
 				7C19A00C2B78A18C00D95FB9 /* UpdateProjectProgressStatusViewController.swift */,
 			);
 			path = ProgressStatus;
+			sourceTree = "<group>";
+		};
+		7C19A00E2B78AE8000D95FB9 /* ProjectDescription */ = {
+			isa = PBXGroup;
+			children = (
+				7C19A00F2B78AEB100D95FB9 /* UpdateProjectDescriptionViewModel.swift */,
+				7C19A0112B78AEE000D95FB9 /* UpdateProjectDescriptionViewController.swift */,
+			);
+			path = ProjectDescription;
 			sourceTree = "<group>";
 		};
 		7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */ = {
@@ -3175,6 +3189,7 @@
 				7CD834AB2B4D34AE00F3EED7 /* UpdateProfileUseCase.swift in Sources */,
 				7B93B3B72B353B1100912202 /* AlertEndpoint.swift in Sources */,
 				7CA04F212AFE772C007B9191 /* BaseLabel.swift in Sources */,
+				7C19A0122B78AEE000D95FB9 /* UpdateProjectDescriptionViewController.swift in Sources */,
 				7BFA13172AD2AF5900EF4112 /* MockAuthRepository.swift in Sources */,
 				7C88C6DC2B7240D800FAA612 /* RecentSearchCell.swift in Sources */,
 				7BEA73982B2B2FB000CECF44 /* AlertViewModel.swift in Sources */,
@@ -3248,6 +3263,7 @@
 				7C55E6612AEB783E0018FA5D /* SetRecruitmentNumberPopUpView.swift in Sources */,
 				7C8CC41A2AF40A100032F237 /* BaseProgressView.swift in Sources */,
 				7CBDE2652B3FDA6E00518AA9 /* ProfileFileListView.swift in Sources */,
+				7C19A0102B78AEB100D95FB9 /* UpdateProjectDescriptionViewModel.swift in Sources */,
 				7C55E62D2AD867010018FA5D /* ProjectCell.swift in Sources */,
 				7C56E1712B14860100454F5E /* HotProjectResponseDTO.swift in Sources */,
 				7C56E16B2B11043400454F5E /* DefaultUserRepository.swift in Sources */,
