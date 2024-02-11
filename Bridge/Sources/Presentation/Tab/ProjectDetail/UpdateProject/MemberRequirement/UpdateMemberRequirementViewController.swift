@@ -108,6 +108,7 @@ final class UpdateMemberRequirementViewController: BaseViewController {
         textView.flex.width(100%).height(106)
         return textView
     }()
+    
     private let nextButton: BridgeButton = {
         let button = BridgeButton(
             title: "다음",
