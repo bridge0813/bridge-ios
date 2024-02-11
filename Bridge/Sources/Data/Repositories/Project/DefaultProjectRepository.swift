@@ -137,7 +137,9 @@ final class DefaultProjectRepository: ProjectRepository {
     // 모집글 수정
     func update(project: Project) -> Observable<Void> {
         let updateProjectDTO = convertToUpdateProjectDTO(from: project)
-        let updateProjectEndpoint = ProjectEndpoint.update(requestDTO: updateProjectDTO, projectID: "")
+        let updateProjectEndpoint = ProjectEndpoint.update(
+            requestDTO: updateProjectDTO, projectID: String(project.id)
+        )
         
         return networkService.request(to: updateProjectEndpoint, interceptor: nil)
             .map { _ in }

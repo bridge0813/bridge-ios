@@ -17,6 +17,7 @@ final class UpdateProjectCoordinator: Coordinator {
     private var updateProjectNavigationController: UINavigationController?
 
     private let projectRepository: ProjectRepository
+    private let updateProjectUseCase: UpdateProjectUseCase
    
     // MARK: - Init
     init(navigationController: UINavigationController) {
@@ -25,6 +26,7 @@ final class UpdateProjectCoordinator: Coordinator {
 
         let networkService = DefaultNetworkService()
         projectRepository = DefaultProjectRepository(networkService: networkService)
+        updateProjectUseCase = DefaultUpdateProjectUseCase(projectRepository: projectRepository)
     }
 
     // MARK: - Methods
@@ -105,7 +107,8 @@ extension UpdateProjectCoordinator {
     func showUpdateProjectDescriptionViewController() {
         let updateProjectDescriptionViewModel = UpdateProjectDescriptionViewModel(
             coordinator: self,
-            dataStorage: projectDataStorage
+            dataStorage: projectDataStorage, 
+            updateProjectUseCase: updateProjectUseCase
         )
         
         let updateProjectDescriptionVC = UpdateProjectDescriptionViewController(

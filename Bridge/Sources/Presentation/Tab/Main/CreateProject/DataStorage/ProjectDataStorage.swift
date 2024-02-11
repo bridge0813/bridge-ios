@@ -89,6 +89,7 @@ extension ProjectDataStorage {
 extension ProjectDataStorage {
     /// 업데이트 할 프로젝트를 주입
     func updateProject(with newProject: Project) {
+        project.id = newProject.id
         project.title = newProject.title
         project.description = newProject.description
         project.dDays = newProject.dDays

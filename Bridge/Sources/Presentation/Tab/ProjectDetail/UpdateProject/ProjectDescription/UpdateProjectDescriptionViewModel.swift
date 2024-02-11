@@ -27,14 +27,17 @@ final class UpdateProjectDescriptionViewModel: ViewModelType {
     private weak var coordinator: UpdateProjectCoordinator?
     
     private let dataStorage: ProjectDataStorage
+    private let updateProjectUseCase: UpdateProjectUseCase
     
     // MARK: - Init
     init(
         coordinator: UpdateProjectCoordinator,
-        dataStorage: ProjectDataStorage
+        dataStorage: ProjectDataStorage,
+        updateProjectUseCase: UpdateProjectUseCase
     ) {
         self.coordinator = coordinator
         self.dataStorage = dataStorage
+        self.updateProjectUseCase = updateProjectUseCase
     }
     
     // MARK: - Transformation
@@ -65,31 +68,35 @@ final class UpdateProjectDescriptionViewModel: ViewModelType {
             return titleIsValid && descriptionIsValid
         }
         
-//        owner.dataStorage.updateTitle(with: text)
-//        owner.dataStorage.updateDescription(with: text)
         
-//        input.nextButtonTapped
-//            .withUnretained(self)
-//            .flatMap { owner, _ in
-//                return owner.createProjectUseCase.create(project: owner.dataStorage.currentProject).toResult()
-//            }
-//            .observe(on: MainScheduler.instance)
-//            .withUnretained(self)
-//            .subscribe(onNext: { owner, result in
-//                switch result {
-//                case .success(let projectID):
-//                    owner.coordinator?.showCompletionViewController(with: projectID)
-//                    
-//                case .failure(let error):
-//                    let errorMessage = (error as? NetworkError)?.errorDescription ?? error.localizedDescription
-//                    
-//                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-//                        title: "모집글 작성에 실패했습니다.",
-//                        description: errorMessage
-//                    ))
-//                }
-//            })
-//            .disposed(by: disposeBag)
+        // 수정 요청
+        input.nextButtonTapped
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                // 데이터 수정
+                owner.dataStorage.updateTitle(with: updatedTitle)
+                owner.dataStorage.updateDescription(with: updatedDescription)
+                
+                // 업데이트 요청
+                return owner.updateProjectUseCase.update(project: owner.dataStorage.currentProject).toResult()
+            }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success:
+                    owner.coordinator?.finish()
+                    
+                case .failure(let error):
+                    let errorMessage = (error as? NetworkError)?.errorDescription ?? error.localizedDescription
+                    
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "모집글 수정에 실패했습니다.",
+                        description: errorMessage
+                    ))
+                }
+            })
+            .disposed(by: disposeBag)
         
         return Output(
             existingTitle: .just(updatedTitle).asDriver(),
