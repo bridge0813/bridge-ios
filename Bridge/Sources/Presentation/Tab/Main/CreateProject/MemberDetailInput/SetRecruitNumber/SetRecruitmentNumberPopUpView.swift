@@ -42,6 +42,7 @@ final class SetRecruitmentNumberPopUpView: BridgeBasePopUpView {
     override func configureAttributes() {
         super.configureAttributes()
         titleLabel.text = "모집 인원"
+        addTapGestureForHide()
     }
     
     // MARK: - Layout

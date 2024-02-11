@@ -81,6 +81,7 @@ final class FieldTechStackPickerPopUpView: BridgeBasePopUpView {
     override func configureAttributes() {
         super.configureAttributes()
         completeButton.isHidden = true
+        addTapGestureForHide()
     }
     
     // MARK: - Layout

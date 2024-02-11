@@ -30,6 +30,7 @@ final class PDFPopUpView: BridgeBasePopUpView {
     // MARK: - Configuration
     override func configureAttributes() {
         super.configureAttributes()
+        addTapGestureForHide()
     }
     
     // MARK: - Layout

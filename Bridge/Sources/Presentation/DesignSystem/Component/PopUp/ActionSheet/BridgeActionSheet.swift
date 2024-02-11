@@ -91,6 +91,7 @@ final class BridgeActionSheet: BridgeBasePopUpView {
     // MARK: - Configuration
     override func configureAttributes() {
         super.configureAttributes()
+        addTapGestureForHide()
     }
     
     // MARK: - Layout

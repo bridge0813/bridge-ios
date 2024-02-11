@@ -47,6 +47,7 @@ final class AddTechTagPopUpView: BridgeBasePopUpView {
     override func configureAttributes() {
         super.configureAttributes()
         titleLabel.text = "스택"
+        addTapGestureForHide()
     }
     
     // MARK: - Layout
