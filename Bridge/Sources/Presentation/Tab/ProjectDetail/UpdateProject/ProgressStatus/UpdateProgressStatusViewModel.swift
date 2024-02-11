@@ -43,16 +43,14 @@ final class UpdateProgressStatusViewModel: ViewModelType {
         
         // 진행 방식
         input.progressMethodButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, method in
+            .subscribe(onNext: { method in
                 progressMethod.accept(method)
             })
             .disposed(by: disposeBag)
         
         // 진행 단계
         input.progressStep
-            .withUnretained(self)
-            .subscribe(onNext: { owner, step in
+            .subscribe(onNext: { step in
                 progressStep.accept(step)
             })
             .disposed(by: disposeBag)
