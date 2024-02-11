@@ -16,7 +16,7 @@ enum ProjectEndpoint {
     case fetchProjectDetail(userID: String, projectID: String)
     
     case create(requestDTO: CreateProjectRequestDTO)
-    case update(requestDTO: CreateProjectRequestDTO, projectID: String)
+    case update(requestDTO: UpdateProjectRequestDTO, projectID: String)
     case delete(requestDTO: UserIDDTO, projectID: String)
     case bookmark(requestDTO: ProjectIDDTO)
     case close(requestDTO: ProjectIDDTO)

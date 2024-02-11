@@ -122,7 +122,7 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // 모집글 생성
     func create(project: Project) -> Observable<Int> {
-        let createProjectDTO = convertToCreateDTO(from: project)
+        let createProjectDTO = convertToCreateProjectDTO(from: project)
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)
         
         return networkService.request(to: createProjectEndpoint, interceptor: AuthInterceptor())
@@ -130,6 +130,15 @@ final class DefaultProjectRepository: ProjectRepository {
             .map { dto in
                 return dto.projectID
             }
+    }
+    
+    // 모집글 수정
+    func update(project: Project) -> Observable<Void> {
+        let updateProjectDTO = convertToUpdateProjectDTO(from: project)
+        let updateProjectEndpoint = ProjectEndpoint.update(requestDTO: updateProjectDTO, projectID: "")
+        
+        return networkService.request(to: updateProjectEndpoint, interceptor: nil)
+            .map { _ in }
     }
     
     // 모집글 제거
@@ -162,8 +171,8 @@ final class DefaultProjectRepository: ProjectRepository {
 
 // MARK: - Methods
 private extension DefaultProjectRepository {
-    /// '모집글 작성'의 네트워킹을 위한 DTO를 만들어주는 메서드.
-    func convertToCreateDTO(from project: Project) -> CreateProjectRequestDTO {
+    /// '모집글 작성'의 requestDTO를 만들어주는 메서드.
+    func convertToCreateProjectDTO(from project: Project) -> CreateProjectRequestDTO {
         let userID = Int(tokenStorage.get(.userID)) ?? 0
         
         let memberRequirementsDTO = project.memberRequirements.map { requirement -> MemberRequirementDTO in
@@ -190,6 +199,34 @@ private extension DefaultProjectRepository {
             progressMethod: project.progressMethod,
             progressStep: project.progressStep,
             userID: userID
+        )
+    }
+    
+    /// '모집글 수정'의 requestDTO를 만들어주는 메서드.
+    func convertToUpdateProjectDTO(from project: Project) -> UpdateProjectRequestDTO {
+        let memberRequirementsDTO = project.memberRequirements.map { requirement -> MemberRequirementDTO in
+            MemberRequirementDTO(
+                field: requirement.field,
+                recruitNumber: requirement.recruitNumber,
+                requiredSkills: requirement.requiredSkills.map { skill in
+                    // 서버측 워딩에 맞게 수정. 대문자 처리 및 띄어쓰기 제거
+                    if skill == "C++" { return "CPP" }
+                    else { return skill.uppercased().replacingOccurrences(of: " ", with: "") }
+                },
+                requirementText: requirement.requirementText
+            )
+        }
+        
+        return UpdateProjectRequestDTO(
+            title: project.title,
+            description: project.description,
+            deadline: project.deadline.toString(format: "yyyy-MM-dd'T'HH:mm:ss"),
+            startDate: project.startDate?.toString(format: "yyyy-MM-dd'T'HH:mm:ss"),
+            endDate: project.endDate?.toString(format: "yyyy-MM-dd'T'HH:mm:ss"),
+            memberRequirements: memberRequirementsDTO,
+            applicantRestrictions: project.applicantRestrictions,
+            progressMethod: project.progressMethod,
+            progressStep: project.progressStep
         )
     }
 }

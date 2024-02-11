@@ -46,6 +46,10 @@ final class MockProjectRepository: ProjectRepository {
         .just(0)
     }
     
+    func update(project: Project) -> Observable<Void> {
+        .just(())
+    }
+    
     func bookmark(projectID: Int) -> Observable<Int> {
         .just(projectID)
     }
