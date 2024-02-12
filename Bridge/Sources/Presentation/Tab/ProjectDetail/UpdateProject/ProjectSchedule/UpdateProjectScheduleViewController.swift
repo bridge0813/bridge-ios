@@ -160,7 +160,7 @@ final class UpdateProjectScheduleViewController: BaseViewController {
             .drive(onNext: { [weak self] date in
                 guard let self else { return }
                 self.datePickerPopUpView.deadlineDate = date
-                self.setDeadlineButton.updateTitle(date.toString(format: "yyyy년 MM월 dd일"))
+                self.setDeadlineButton.updateTitle(date.toISO8601String())
             })
             .disposed(by: disposeBag)
         
@@ -169,7 +169,7 @@ final class UpdateProjectScheduleViewController: BaseViewController {
             .drive(onNext: { [weak self] date in
                 guard let self, let date else { return }
                 self.datePickerPopUpView.startDate = date
-                self.setStartDateButton.updateTitle(date.toString(format: "yyyy년 MM월 dd일"))
+                self.setStartDateButton.updateTitle(date.toISO8601String())
             })
             .disposed(by: disposeBag)
         
@@ -178,7 +178,7 @@ final class UpdateProjectScheduleViewController: BaseViewController {
             .drive(onNext: { [weak self] date in
                 guard let self, let date else { return }
                 self.datePickerPopUpView.endDate = date
-                self.setEndDateButton.updateTitle(date.toString(format: "yyyy년 MM월 dd일"))
+                self.setEndDateButton.updateTitle(date.toISO8601String())
             })
             .disposed(by: disposeBag)
         
