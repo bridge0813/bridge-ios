@@ -31,19 +31,19 @@ final class CreateProjectCoordinator: Coordinator {
     
     // MARK: - Methods
     func start() {
-        showMemberFieldSelectionViewController()
+        showSetMemberFieldViewController()
     }
 }
 
 // MARK: - Show
 extension CreateProjectCoordinator {
-    private func showMemberFieldSelectionViewController() {
-        let viewModel = MemberFieldSelectionViewModel(
+    private func showSetMemberFieldViewController() {
+        let viewModel = SetMemberFieldViewModel(
             coordinator: self,
             dataStorage: projectDataStorage
         )
         
-        let viewController = MemberFieldSelectionViewController(viewModel: viewModel)
+        let viewController = SetMemberFieldViewController(viewModel: viewModel)
         createProjectNavigationController = UINavigationController(rootViewController: viewController)
         createProjectNavigationController?.modalPresentationStyle = .fullScreen
         

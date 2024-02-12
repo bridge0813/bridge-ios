@@ -1,5 +1,5 @@
 //
-//  MemberFieldSelectionViewController.swift
+//  SetMemberFieldViewController.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 /// 모집하려는 팀원의 분야를 선택하는 VC
-final class MemberFieldSelectionViewController: BaseViewController {
+final class SetMemberFieldViewController: BaseViewController {
     // MARK: - UI
     private lazy var dismissButton: UIBarButtonItem = {
         let image = UIImage(named: "xmark")?.resize(to: CGSize(width: 24, height: 24))
@@ -68,10 +68,10 @@ final class MemberFieldSelectionViewController: BaseViewController {
     )
     
     // MARK: - Property
-    private let viewModel: MemberFieldSelectionViewModel
+    private let viewModel: SetMemberFieldViewModel
     
     // MARK: - Init
-    init(viewModel: MemberFieldSelectionViewModel) {
+    init(viewModel: SetMemberFieldViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -126,7 +126,7 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     // MARK: - Binding
     override func bind() {
-        let input = MemberFieldSelectionViewModel.Input(
+        let input = SetMemberFieldViewModel.Input(
             dismissButtonTapped: dismissButton.rx.tap,
             fieldTagButtonTapped: setFieldView.fieldTagButtonTapped,
             nextButtonTapped: nextButton.rx.tap.asObservable()

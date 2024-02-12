@@ -1,5 +1,5 @@
 //
-//  MemberFieldSelectionViewModel.swift
+//  SetMemberFieldViewModel.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -8,7 +8,7 @@
 import RxSwift
 import RxCocoa
 
-final class MemberFieldSelectionViewModel: ViewModelType {
+final class SetMemberFieldViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let dismissButtonTapped: ControlEvent<Void>
