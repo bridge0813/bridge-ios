@@ -14,67 +14,83 @@ import RxSwift
 /// 선택한 분야에서 모집하는 팀원의 요구사항(모집인원, 기술스택, 바라는 점)을 기입하는 VC
 final class SetMemberRequirementViewController: BaseViewController {
     // MARK: - UI
-    private let rootFlexContainer = UIView()
-   
-    private let progressView = BridgeProgressView(0.4)
-    
+    private let progressContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = BridgeColor.gray10
+        return view
+    }()
+
+    private let progressView: BridgeProgressView = {
+        let view = BridgeProgressView(0.4)
+        view.flex.height(6)
+        return view
+    }()
+
     private let dividerView: UIView = {
         let divider = UIView()
+        divider.flex.width(100%).height(1)
         divider.backgroundColor = BridgeColor.gray06
         divider.isHidden = true
-        
+
         return divider
     }()
-    
+
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .clear
+        scrollView.alwaysBounceVertical = true
         scrollView.showsVerticalScrollIndicator = false
-        
+
         return scrollView
     }()
-    
+
     private let contentContainer = UIView()
-    
+
     private let descriptionLabel: UILabel = {
         let label = UILabel()
+        label.flex.width(187).height(60)
         label.configureTextWithLineHeight(text: "당신이 찾고 있는 팀원의\n정보를 알려주세요!", lineHeight: 30)
         label.font = BridgeFont.headline1Long.font
         label.textColor = BridgeColor.gray01
         label.numberOfLines = 2
-        
+
         return label
     }()
-    
+
     private let fieldTagButton: BridgeFieldTagButton = {
         let button = BridgeFieldTagButton("")
         button.changesSelectionAsPrimaryAction = false
         button.isSelected = true
-        
+
         return button
     }()
-    
-    
+
     private let recruitLabel: UILabel = {
         let label = UILabel()
+        label.flex.width(60).height(24)
         label.text = "모집 인원"
         label.font = BridgeFont.subtitle2.font
         label.textColor = BridgeColor.gray01
-        
+
         return label
     }()
-    private let setRecruitNumberButton = BridgeSetDisplayButton("몇 명을 모집할까요?")
+    private let setRecruitNumberButton: BridgeSetDisplayButton = {
+        let button = BridgeSetDisplayButton("몇 명을 모집할까요?")
+        button.flex.width(150).height(52)
+        return button
+    }()
     private let setRecruitmentNumberView = SetRecruitmentNumberPopUpView()
-    
-    
+
     private let memberTechStackLabel: UILabel = {
         let label = UILabel()
+        label.flex.width(60).height(24)
         label.text = "팀원 스택"
         label.font = BridgeFont.subtitle2.font
         label.textColor = BridgeColor.gray01
-        
+
         return label
     }()
+    
     private let addTechStackButton: BridgeAddButton = {
         let button = BridgeAddButton(titleFont: BridgeFont.body1.font)
         button.flex.width(100).height(24)
@@ -83,16 +99,21 @@ final class SetMemberRequirementViewController: BaseViewController {
     }()
     private let addedTechTagView = AddedTechTagView()
     private let addTechTagPopUpView = AddTechTagPopUpView()
-    
+
     private let requirementLabel: UILabel = {
         let label = UILabel()
+        label.flex.width(60).height(24)
         label.text = "바라는 점"
         label.font = BridgeFont.subtitle2.font
         label.textColor = BridgeColor.gray01
-        
+
         return label
     }()
-    private let requirementTextView = BridgeTextView(placeholder: "이런 팀원이었으면 좋겠어요.", maxCount: 100)
+    private let requirementTextView: BridgeTextView = {
+        let textView = BridgeTextView(placeholder: "이런 팀원이었으면 좋겠어요.", maxCount: 100)
+        textView.flex.width(100%).height(106)
+        return textView
+    }()
     
     private let nextButton: BridgeButton = {
         let button = BridgeButton(
@@ -101,7 +122,7 @@ final class SetMemberRequirementViewController: BaseViewController {
             backgroundColor: BridgeColor.gray04
         )
         button.isEnabled = false
-        
+
         return button
     }()
     
@@ -132,28 +153,23 @@ final class SetMemberRequirementViewController: BaseViewController {
     
     // MARK: - Layout
     override func configureLayouts() {
-        view.addSubview(rootFlexContainer)
+        view.addSubview(scrollView)
+        view.addSubview(progressContainer)
+        view.addSubview(nextButton)
         scrollView.addSubview(contentContainer)
-        
-        rootFlexContainer.flex.justifyContent(.spaceBetween).define { flex in
-            // grow(1)로 레이아웃을 배치하면, height가 원활하게 잡히지 않고 화면 밖을 벗어나는 문제가 발생.(디바이스)
-            flex.addItem(scrollView).position(.absolute).width(100%).top(35).bottom(101)
-            
-            flex.addItem().backgroundColor(BridgeColor.gray10).height(35).define { flex in
-                flex.addItem(progressView).height(6).marginTop(10).marginHorizontal(16)
-                flex.addItem(dividerView).height(1).marginTop(18)
-            }
-            
-            flex.addItem(nextButton).height(52).marginBottom(24).marginHorizontal(16)
+
+        progressContainer.flex.define { flex in
+            flex.addItem(progressView).marginTop(10).marginHorizontal(16)
+            flex.addItem(dividerView).marginTop(18)
         }
-        
+
         contentContainer.flex.paddingHorizontal(16).define { flex in
-            flex.addItem(descriptionLabel).width(187).height(60).marginTop(21)
-            flex.addItem(fieldTagButton).alignSelf(.start).marginTop(40)
-            
-            flex.addItem(recruitLabel).width(60).height(24).marginTop(20)
-            flex.addItem(setRecruitNumberButton).alignSelf(.start).height(52).marginTop(14)
-        
+            flex.addItem(descriptionLabel).marginTop(21)
+            flex.addItem(fieldTagButton).marginTop(40)
+
+            flex.addItem(recruitLabel).marginTop(20)
+            flex.addItem(setRecruitNumberButton).marginTop(14)
+
             flex.addItem()
                 .direction(.row)
                 .justifyContent(.spaceBetween)
@@ -163,18 +179,22 @@ final class SetMemberRequirementViewController: BaseViewController {
                     flex.addItem(addTechStackButton).marginRight(0)
                 }
             flex.addItem(addedTechTagView).marginTop(14)
-            
-            flex.addItem(requirementLabel).width(60).height(24).marginTop(32)
-            flex.addItem(requirementTextView).height(106).marginTop(14).marginBottom(15)
+
+            flex.addItem(requirementLabel).marginTop(32)
+            flex.addItem(requirementTextView).marginTop(14).marginBottom(24)
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
-        
+        progressContainer.pin.top(view.pin.safeArea.top).horizontally().height(35)
+        progressContainer.flex.layout()
+
+        scrollView.pin.below(of: progressContainer).horizontally().bottom(view.pin.safeArea + 101)
+        nextButton.pin.below(of: scrollView).marginTop(25).horizontally(16).height(52)
+
         contentContainer.pin.all()
         contentContainer.flex.layout(mode: .adjustHeight)
+
         scrollView.contentSize = contentContainer.frame.size
     }
     
@@ -193,29 +213,35 @@ final class SetMemberRequirementViewController: BaseViewController {
             .drive(onNext: { [weak self] field in
                 guard let self else { return }
                 self.fieldTagButton.updateTitle(with: field, textColor: BridgeColor.primary1)
+                self.fieldTagButton.flex.width(fieldTagButton.intrinsicContentSize.width).height(38).markDirty()
                 self.addTechTagPopUpView.fieldUpdated.onNext(TechStack(rawValue: field)?.techStacks ?? [])
+                self.contentContainer.flex.layout()
             })
             .disposed(by: disposeBag)
         
         // 모집인원 선택완료 이벤트.
         output.recruitNumber
             .drive(onNext: { [weak self] number in
-                self?.setRecruitNumberButton.updateTitle("\(number)명")
+                guard let self else { return }
+                self.setRecruitNumberButton.updateTitle("\(number)명")
             })
             .disposed(by: disposeBag)
         
         // 기술태그 선택완료 이벤트.
         output.techTags
             .drive(onNext: { [weak self] tagNames in
-                self?.addTechStackButton.isAdded = true
-                self?.addedTechTagView.tagNames = tagNames
-                self?.view.setNeedsLayout()
+                guard let self else { return }
+                self.addTechStackButton.isAdded = true
+                self.addedTechTagView.tagNames = tagNames
+                self.addedTechTagView.flex.markDirty()
+                self.view.setNeedsLayout()
             })
             .disposed(by: disposeBag)
         
         output.isNextButtonEnabled
             .drive(onNext: { [weak self] isNextButtonEnabled in
-                self?.nextButton.isEnabled = isNextButtonEnabled
+                guard let self else { return }
+                self.nextButton.isEnabled = isNextButtonEnabled
             })
             .disposed(by: disposeBag)
         
@@ -236,8 +262,24 @@ final class SetMemberRequirementViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         // 키보드에 맞춰 뷰 이동
-        scrollView.rx.keyboardLayoutChanged
-            .bind(to: scrollView.rx.yPosition)
+        contentContainer.rx.keyboardLayoutChanged
+            .withUnretained(self)
+            .subscribe(onNext: { owner, keyboardHeight in
+                UIView.animate(withDuration: 0.3) {
+                    if keyboardHeight == 0 {
+                        owner.contentContainer.transform = CGAffineTransform.identity
+                    } else {
+                        // contentContainer가 아래에서 어느정도 띄워져있는지 체크
+                        let window = UIWindow.visibleWindow() ?? UIWindow()
+                        let contentContainerMaxY = owner.contentContainer.windowFrame?.maxY ?? 550
+                        let windowMaxY = window.bounds.maxY
+                        let contentContainerBottomMargin = windowMaxY - contentContainerMaxY
+
+                        let yPosition = keyboardHeight - (contentContainerBottomMargin)
+                        owner.contentContainer.transform = CGAffineTransform(translationX: 0, y: -yPosition)
+                    }
+                }
+            })
             .disposed(by: disposeBag)
         
         // 구분선 등장
