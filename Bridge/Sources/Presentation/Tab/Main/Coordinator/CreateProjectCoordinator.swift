@@ -64,13 +64,13 @@ extension CreateProjectCoordinator {
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showApplicantRestrictionViewController() {
-        let viewModel = ApplicantRestrictionViewModel(
+    func showSetApplicantRestrictionViewController() {
+        let viewModel = SetApplicantRestrictionViewModel(
             coordinator: self,
             dataStorage: projectDataStorage
         )
         
-        let viewController = ApplicantRestrictionViewController(viewModel: viewModel)
+        let viewController = SetApplicantRestrictionViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     

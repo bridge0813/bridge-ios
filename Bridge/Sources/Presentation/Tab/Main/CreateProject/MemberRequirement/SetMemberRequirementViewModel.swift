@@ -71,7 +71,7 @@ final class SetMemberRequirementViewModel: ViewModelType {
                 owner.dataStorage.updateMemberRequirements(with: requirement)
                 
                 if owner.selectedFields.isEmpty {
-                    owner.coordinator?.showApplicantRestrictionViewController()
+                    owner.coordinator?.showSetApplicantRestrictionViewController()
                     
                 } else {
                     owner.coordinator?.showSetMemberRequirementViewController(

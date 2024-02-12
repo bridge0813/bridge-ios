@@ -213,8 +213,8 @@
 		7C2400282AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */; };
 		7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */; };
 		7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */; };
-		7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */; };
-		7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */; };
+		7C2400392AB2C85700D9D5F1 /* SetApplicantRestrictionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400382AB2C85700D9D5F1 /* SetApplicantRestrictionViewModel.swift */; };
+		7C24003B2AB2C86100D9D5F1 /* SetApplicantRestrictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003A2AB2C86100D9D5F1 /* SetApplicantRestrictionViewController.swift */; };
 		7C24003D2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003C2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift */; };
 		7C2400402AB4235800D9D5F1 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003F2AB4235800D9D5F1 /* UITextField+.swift */; };
 		7C2400442AB6BB8C00D9D5F1 /* MemberRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */; };
@@ -649,8 +649,8 @@
 		7C2400272AB1B85600D9D5F1 /* ProjectProgressStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProgressStatusViewController.swift; sourceTree = "<group>"; };
 		7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
 		7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewController.swift; sourceTree = "<group>"; };
-		7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRestrictionViewModel.swift; sourceTree = "<group>"; };
-		7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantRestrictionViewController.swift; sourceTree = "<group>"; };
+		7C2400382AB2C85700D9D5F1 /* SetApplicantRestrictionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetApplicantRestrictionViewModel.swift; sourceTree = "<group>"; };
+		7C24003A2AB2C86100D9D5F1 /* SetApplicantRestrictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetApplicantRestrictionViewController.swift; sourceTree = "<group>"; };
 		7C24003C2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFieldTagButton.swift; sourceTree = "<group>"; };
 		7C24003F2AB4235800D9D5F1 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		7C2400432AB6BB8C00D9D5F1 /* MemberRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRequirement.swift; sourceTree = "<group>"; };
@@ -1984,8 +1984,8 @@
 		7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */ = {
 			isa = PBXGroup;
 			children = (
-				7C2400382AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift */,
-				7C24003A2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift */,
+				7C2400382AB2C85700D9D5F1 /* SetApplicantRestrictionViewModel.swift */,
+				7C24003A2AB2C86100D9D5F1 /* SetApplicantRestrictionViewController.swift */,
 			);
 			path = ApplicantRestriction;
 			sourceTree = "<group>";
@@ -2628,7 +2628,7 @@
 			children = (
 				7C2400472AB7D45500D9D5F1 /* DataStorage */,
 				7CC9F6C82AAF087A00685EA9 /* MemberField */,
-				7CC9F6C92AAF0E1500685EA9 /* MemberDetailInput */,
+				7CC9F6C92AAF0E1500685EA9 /* MemberRequirement */,
 				7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */,
 				7CC9F6CE2AAF118600685EA9 /* ProjectDatePicker */,
 				7CC9F6D32AAF13C300685EA9 /* ProjectProgressStatus */,
@@ -2647,14 +2647,14 @@
 			path = MemberField;
 			sourceTree = "<group>";
 		};
-		7CC9F6C92AAF0E1500685EA9 /* MemberDetailInput */ = {
+		7CC9F6C92AAF0E1500685EA9 /* MemberRequirement */ = {
 			isa = PBXGroup;
 			children = (
 				7CC9F6CA2AAF0EEC00685EA9 /* SetMemberRequirementViewModel.swift */,
 				7CC9F6CC2AAF0EF800685EA9 /* SetMemberRequirementViewController.swift */,
 				7C8CC4102AEEA3810032F237 /* View */,
 			);
-			path = MemberDetailInput;
+			path = MemberRequirement;
 			sourceTree = "<group>";
 		};
 		7CC9F6CE2AAF118600685EA9 /* ProjectDatePicker */ = {
@@ -3445,7 +3445,7 @@
 				7C6203462B6F591600438E69 /* FetchFilteredProjectsUseCase.swift in Sources */,
 				7B5752B32B287E2A00B1A2DC /* WithdrawUseCase.swift in Sources */,
 				7C55E63D2ADEE1CB0018FA5D /* MainBookmarkButton.swift in Sources */,
-				7C24003B2AB2C86100D9D5F1 /* ApplicantRestrictionViewController.swift in Sources */,
+				7C24003B2AB2C86100D9D5F1 /* SetApplicantRestrictionViewController.swift in Sources */,
 				7CA04F532B04B6E7007B9191 /* MemberRequirementDTO.swift in Sources */,
 				7B16F3282B21E1BF00A50B2F /* StompMessageUpdateDTO.swift in Sources */,
 				7BEA73832B2B2B7400CECF44 /* BookmarkedProjectViewModel.swift in Sources */,
@@ -3488,7 +3488,7 @@
 				7C3560472B62590000CF79CE /* OtherUserProfileViewModel.swift in Sources */,
 				7C87EE0F2B1B72290066691D /* BookmarkUseCase.swift in Sources */,
 				7B14DB382AB3040F009A00EB /* BridgePlaceholderView.swift in Sources */,
-				7C2400392AB2C85700D9D5F1 /* ApplicantRestrictionViewModel.swift in Sources */,
+				7C2400392AB2C85700D9D5F1 /* SetApplicantRestrictionViewModel.swift in Sources */,
 				7B14DB4B2AB86099009A00EB /* KeychainError.swift in Sources */,
 				7B9142E02B01D4EB006EA52F /* MessageDTO.swift in Sources */,
 				7CA73D952B285A0F007D88FB /* RejectApplicantUseCase.swift in Sources */,

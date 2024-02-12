@@ -1,5 +1,5 @@
 //
-//  ApplicantRestrictionViewModel.swift
+//  SetApplicantRestrictionViewModel.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/14.
@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class ApplicantRestrictionViewModel: ViewModelType {
+final class SetApplicantRestrictionViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let selectedRestriction: Observable<String>

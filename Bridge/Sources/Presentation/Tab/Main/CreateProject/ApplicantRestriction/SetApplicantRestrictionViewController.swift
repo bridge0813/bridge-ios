@@ -1,5 +1,5 @@
 //
-//  ApplicantRestrictionViewController.swift
+//  SetApplicantRestrictionViewController.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/14.
@@ -11,8 +11,8 @@ import PinLayout
 import RxCocoa
 import RxSwift
 
-/// 지원을 제한하는 VC
-final class ApplicantRestrictionViewController: BaseViewController {
+/// 모집글 지원 제한
+final class SetApplicantRestrictionViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
@@ -51,10 +51,10 @@ final class ApplicantRestrictionViewController: BaseViewController {
     )
     
     // MARK: - Property
-    private let viewModel: ApplicantRestrictionViewModel
+    private let viewModel: SetApplicantRestrictionViewModel
     
     // MARK: - Init
-    init(viewModel: ApplicantRestrictionViewModel) {
+    init(viewModel: SetApplicantRestrictionViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -107,7 +107,7 @@ final class ApplicantRestrictionViewController: BaseViewController {
     
     // MARK: - Bind
     override func bind() {
-        let input = ApplicantRestrictionViewModel.Input(
+        let input = SetApplicantRestrictionViewModel.Input(
             selectedRestriction: restrictionButtonTapped,
             nextButtonTapped: nextButton.rx.tap.asObservable()
         )
@@ -137,7 +137,7 @@ final class ApplicantRestrictionViewController: BaseViewController {
     }
 }
 
-extension ApplicantRestrictionViewController {
+extension SetApplicantRestrictionViewController {
     private var restrictionButtonTapped: Observable<String> {
         Observable.merge(
             studentButton.rx.tap.map { "학생" },
