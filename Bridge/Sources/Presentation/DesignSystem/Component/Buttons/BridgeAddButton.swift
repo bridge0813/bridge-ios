@@ -14,7 +14,7 @@ final class BridgeAddButton: BaseButton {
     /// 추가된 컨텐츠가 있을 경우를 나타내는 프로퍼티
     var isAdded: Bool = false {
         didSet {
-            updateTitle()
+            updateButtonConfiguration()
         }
     }
     
@@ -49,11 +49,15 @@ final class BridgeAddButton: BaseButton {
     }
     
     /// 컨텐츠가 추가되었을 경우, 버튼 타이틀을 변경
-    private func updateTitle() {
-        var titleContainer = AttributeContainer()
-        titleContainer.font = titleFont
-        titleContainer.foregroundColor = BridgeColor.primary1
-        configuration?.attributedTitle = AttributedString("수정", attributes: titleContainer)
-        configuration?.image = nil
+    private func updateButtonConfiguration() {
+        if isAdded {
+            var titleContainer = AttributeContainer()
+            titleContainer.font = titleFont
+            titleContainer.foregroundColor = BridgeColor.primary1
+            configuration?.attributedTitle = AttributedString("수정", attributes: titleContainer)
+            configuration?.image = nil
+        } else {
+            configureAttributes()
+        }
     }
 }

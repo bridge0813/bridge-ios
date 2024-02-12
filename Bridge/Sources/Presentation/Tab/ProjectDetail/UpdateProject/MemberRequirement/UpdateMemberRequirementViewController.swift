@@ -232,7 +232,7 @@ final class UpdateMemberRequirementViewController: BaseViewController {
                 )
 
                 // 기술 태그
-                self.addTechStackButton.isAdded = true
+                self.addTechStackButton.isAdded = !requirement.requiredSkills.isEmpty
                 self.addedTechTagView.tagNames = requirement.requiredSkills
                 self.addedTechTagView.flex.markDirty()
 
