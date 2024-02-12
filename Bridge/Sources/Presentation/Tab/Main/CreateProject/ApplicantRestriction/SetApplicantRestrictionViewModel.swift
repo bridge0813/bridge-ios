@@ -54,7 +54,7 @@ final class SetApplicantRestrictionViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.dataStorage.updateApplicantRestriction(with: selectedRestrictions.value.map { $0 })
-                owner.coordinator?.showProjectDatePickerViewController()
+                owner.coordinator?.showSetProjectScheduleViewController()
             })
             .disposed(by: disposeBag)
         

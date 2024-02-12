@@ -1,5 +1,5 @@
 //
-//  ProjectDatePickerViewController.swift
+//  SetProjectScheduleViewController.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 /// 날짜(모집 마감일, 시작일, 완료일)를 설정하는 VC
-final class ProjectDatePickerViewController: BaseViewController {
+final class SetProjectScheduleViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
@@ -92,10 +92,10 @@ final class ProjectDatePickerViewController: BaseViewController {
     }()
     
     // MARK: - Property
-    private let viewModel: ProjectDatePickerViewModel
+    private let viewModel: SetProjectScheduleViewModel
     
     // MARK: - Init
-    init(viewModel: ProjectDatePickerViewModel) {
+    init(viewModel: SetProjectScheduleViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -154,7 +154,7 @@ final class ProjectDatePickerViewController: BaseViewController {
     
     // MARK: - Bind
     override func bind() {
-        let input = ProjectDatePickerViewModel.Input(
+        let input = SetProjectScheduleViewModel.Input(
             date: datePickerPopUpView.completeButtonTapped,
             nextButtonTapped: nextButton.rx.tap.asObservable()
         )

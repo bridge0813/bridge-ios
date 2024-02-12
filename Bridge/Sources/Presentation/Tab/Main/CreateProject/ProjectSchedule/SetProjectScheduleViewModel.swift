@@ -1,5 +1,5 @@
 //
-//  ProjectDatePickerViewModel.swift
+//  SetProjectScheduleViewModel.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class ProjectDatePickerViewModel: ViewModelType {
+final class SetProjectScheduleViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let date: Observable<(type: String, date: Date)>

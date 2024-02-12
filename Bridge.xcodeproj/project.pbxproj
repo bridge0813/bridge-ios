@@ -421,8 +421,8 @@
 		7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */; };
 		7CC9F6CB2AAF0EEC00685EA9 /* SetMemberRequirementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6CA2AAF0EEC00685EA9 /* SetMemberRequirementViewModel.swift */; };
 		7CC9F6CD2AAF0EF800685EA9 /* SetMemberRequirementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6CC2AAF0EF800685EA9 /* SetMemberRequirementViewController.swift */; };
-		7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6CF2AAF132E00685EA9 /* ProjectDatePickerViewController.swift */; };
-		7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */; };
+		7CC9F6D02AAF132E00685EA9 /* SetProjectScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6CF2AAF132E00685EA9 /* SetProjectScheduleViewController.swift */; };
+		7CC9F6D22AAF133900685EA9 /* SetProjectScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6D12AAF133900685EA9 /* SetProjectScheduleViewModel.swift */; };
 		7CC9F6DF2AAF191500685EA9 /* CompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */; };
 		7CC9F6E12AAF192D00685EA9 /* CompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */; };
 		7CD023BE2B2C158300F55648 /* ProjectIDDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD023BD2B2C158300F55648 /* ProjectIDDTO.swift */; };
@@ -802,8 +802,8 @@
 		7CC9F6C62AAEEEF900685EA9 /* CreateProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectCoordinator.swift; sourceTree = "<group>"; };
 		7CC9F6CA2AAF0EEC00685EA9 /* SetMemberRequirementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMemberRequirementViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6CC2AAF0EF800685EA9 /* SetMemberRequirementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMemberRequirementViewController.swift; sourceTree = "<group>"; };
-		7CC9F6CF2AAF132E00685EA9 /* ProjectDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDatePickerViewController.swift; sourceTree = "<group>"; };
-		7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDatePickerViewModel.swift; sourceTree = "<group>"; };
+		7CC9F6CF2AAF132E00685EA9 /* SetProjectScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProjectScheduleViewController.swift; sourceTree = "<group>"; };
+		7CC9F6D12AAF133900685EA9 /* SetProjectScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProjectScheduleViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6DE2AAF191500685EA9 /* CompletionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewModel.swift; sourceTree = "<group>"; };
 		7CC9F6E02AAF192D00685EA9 /* CompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewController.swift; sourceTree = "<group>"; };
 		7CD023BD2B2C158300F55648 /* ProjectIDDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectIDDTO.swift; sourceTree = "<group>"; };
@@ -2630,7 +2630,7 @@
 				7CC9F6C82AAF087A00685EA9 /* MemberField */,
 				7CC9F6C92AAF0E1500685EA9 /* MemberRequirement */,
 				7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */,
-				7CC9F6CE2AAF118600685EA9 /* ProjectDatePicker */,
+				7CC9F6CE2AAF118600685EA9 /* ProjectSchedule */,
 				7CC9F6D32AAF13C300685EA9 /* ProjectProgressStatus */,
 				7CC9F6D82AAF161600685EA9 /* ProjectOverviewInput */,
 				7CC9F6DD2AAF180900685EA9 /* Completion */,
@@ -2657,14 +2657,14 @@
 			path = MemberRequirement;
 			sourceTree = "<group>";
 		};
-		7CC9F6CE2AAF118600685EA9 /* ProjectDatePicker */ = {
+		7CC9F6CE2AAF118600685EA9 /* ProjectSchedule */ = {
 			isa = PBXGroup;
 			children = (
-				7CC9F6D12AAF133900685EA9 /* ProjectDatePickerViewModel.swift */,
-				7CC9F6CF2AAF132E00685EA9 /* ProjectDatePickerViewController.swift */,
+				7CC9F6D12AAF133900685EA9 /* SetProjectScheduleViewModel.swift */,
+				7CC9F6CF2AAF132E00685EA9 /* SetProjectScheduleViewController.swift */,
 				7C8CC4142AF024060032F237 /* DatePickerPopUpView.swift */,
 			);
-			path = ProjectDatePicker;
+			path = ProjectSchedule;
 			sourceTree = "<group>";
 		};
 		7CC9F6D32AAF13C300685EA9 /* ProjectProgressStatus */ = {
@@ -3384,7 +3384,7 @@
 				7CEC06CC2B544EA400C1700A /* DefaultFileRepository.swift in Sources */,
 				7CD023C12B2EB8E200F55648 /* ApplyProjectUseCase.swift in Sources */,
 				7C199FFC2B77A5DB00D95FB9 /* UpdateMemberRequirementViewModel.swift in Sources */,
-				7CC9F6D22AAF133900685EA9 /* ProjectDatePickerViewModel.swift in Sources */,
+				7CC9F6D22AAF133900685EA9 /* SetProjectScheduleViewModel.swift in Sources */,
 				7B71E7412A9330C6001B5D2C /* AppDelegate.swift in Sources */,
 				7B2D76EC2AA993C700E5907B /* AuthCoordinator.swift in Sources */,
 				7B71E7432A9330C6001B5D2C /* SceneDelegate.swift in Sources */,
@@ -3410,7 +3410,7 @@
 				7B14DB2B2AB16272009A00EB /* UserCredentials.swift in Sources */,
 				7CC9F6C72AAEEEF900685EA9 /* CreateProjectCoordinator.swift in Sources */,
 				7B61239A2AC446D1006E72C1 /* AlertConfiguration.swift in Sources */,
-				7CC9F6D02AAF132E00685EA9 /* ProjectDatePickerViewController.swift in Sources */,
+				7CC9F6D02AAF132E00685EA9 /* SetProjectScheduleViewController.swift in Sources */,
 				7C3560452B6258D400CF79CE /* OtherUserProfileViewController.swift in Sources */,
 				7CBDE2602B3E9FCE00518AA9 /* ReferenceLinkCell.swift in Sources */,
 				7CC719FC2B2848EC00CFA827 /* AcceptApplicantUseCase.swift in Sources */,

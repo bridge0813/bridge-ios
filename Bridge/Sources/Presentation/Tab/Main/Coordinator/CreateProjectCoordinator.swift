@@ -74,13 +74,13 @@ extension CreateProjectCoordinator {
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showProjectDatePickerViewController() {
-        let viewModel = ProjectDatePickerViewModel(
+    func showSetProjectScheduleViewController() {
+        let viewModel = SetProjectScheduleViewModel(
             coordinator: self,
             dataStorage: projectDataStorage
         )
         
-        let viewController = ProjectDatePickerViewController(viewModel: viewModel)
+        let viewController = SetProjectScheduleViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
