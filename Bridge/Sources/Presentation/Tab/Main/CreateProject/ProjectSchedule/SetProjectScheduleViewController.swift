@@ -14,15 +14,12 @@ import RxSwift
 /// 날짜(모집 마감일, 시작일, 완료일)를 설정하는 VC
 final class SetProjectScheduleViewController: BaseViewController {
     // MARK: - UI
-    private let rootFlexContainer = UIView()
-    
     private let progressView = BridgeProgressView(0.6)
     
     private let dividerView: UIView = {
         let divider = UIView()
         divider.backgroundColor = BridgeColor.gray06
         divider.isHidden = true
-        
         return divider
     }()
     
@@ -30,7 +27,7 @@ final class SetProjectScheduleViewController: BaseViewController {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .clear
         scrollView.showsVerticalScrollIndicator = false
-        
+        scrollView.alwaysBounceVertical = true
         return scrollView
     }()
     
@@ -38,6 +35,7 @@ final class SetProjectScheduleViewController: BaseViewController {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
+        label.flex.width(190).height(60)
         label.configureTextWithLineHeight(text: "당신의 프로젝트에 대한\n기본 정보를 알려주세요!", lineHeight: 30)
         label.font = BridgeFont.headline1Long.font
         label.textColor = BridgeColor.gray01
@@ -52,6 +50,7 @@ final class SetProjectScheduleViewController: BaseViewController {
     
     private let deadlineLabel: UILabel = {
         let label = UILabel()
+        label.flex.width(73).height(24)
         label.text = "모집 마감일"
         label.font = BridgeFont.subtitle2.font
         label.textColor = BridgeColor.gray01
@@ -62,6 +61,7 @@ final class SetProjectScheduleViewController: BaseViewController {
     
     private let startLabel: UILabel = {
         let label = UILabel()
+        label.flex.width(42).height(24)
         label.text = "시작일"
         label.font = BridgeFont.subtitle2.font
         label.textColor = BridgeColor.gray01
@@ -72,6 +72,7 @@ final class SetProjectScheduleViewController: BaseViewController {
     
     private let endLabel: UILabel = {
         let label = UILabel()
+        label.flex.width(73).height(24)
         label.text = "예상 완료일"
         label.font = BridgeFont.subtitle2.font
         label.textColor = BridgeColor.gray01
@@ -113,42 +114,36 @@ final class SetProjectScheduleViewController: BaseViewController {
     
     // MARK: - Layout
     override func configureLayouts() {
-        view.addSubview(rootFlexContainer)
+        view.addSubview(progressView)
+        view.addSubview(dividerView)
+        view.addSubview(scrollView)
+        view.addSubview(nextButton)
         scrollView.addSubview(contentContainer)
        
-        rootFlexContainer.flex.define { flex in
-            flex.addItem(progressView).height(6).marginTop(10).marginHorizontal(16)
-            flex.addItem(dividerView).height(1).marginTop(18)
-            
-            flex.addItem().grow(1)
-            
-            // grow(1)로 레이아웃을 배치하면, height가 원활하게 잡히지 않고 화면 밖을 벗어나는 문제가 발생.(디바이스)
-            flex.addItem(scrollView).position(.absolute).width(100%).top(35).bottom(91)
-            
-            flex.addItem(nextButton).height(52).marginBottom(24).marginHorizontal(16)
-        }
-        
         contentContainer.flex.paddingHorizontal(16).define { flex in
-            flex.addItem(descriptionLabel).width(190).height(60).marginTop(21)
+            flex.addItem(descriptionLabel).marginTop(21)
             flex.addItem(tipMessageBox).height(38).marginTop(16)
             
-            flex.addItem(deadlineLabel).width(73).height(24).marginTop(40)
+            flex.addItem(deadlineLabel).marginTop(40)
             flex.addItem(setDeadlineButton).height(52).marginTop(14)
             
-            flex.addItem(startLabel).width(42).height(24).marginTop(32)
+            flex.addItem(startLabel).marginTop(32)
             flex.addItem(setStartDateButton).height(52).marginTop(14)
             
-            flex.addItem(endLabel).width(73).height(24).marginTop(32)
+            flex.addItem(endLabel).marginTop(32)
             flex.addItem(setEndDateButton).height(52).marginTop(14).marginBottom(20)
         }
     }
     
     override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
+        progressView.pin.top(view.pin.safeArea.top + 10).horizontally(16).height(6)
+        dividerView.pin.below(of: progressView).marginTop(18).horizontally().height(1)
+        scrollView.pin.below(of: dividerView).horizontally().bottom(view.pin.safeArea + 101)
+        nextButton.pin.below(of: scrollView).marginTop(25).horizontally(16).height(52)
         
         contentContainer.pin.all()
         contentContainer.flex.layout(mode: .adjustHeight)
+        
         scrollView.contentSize = contentContainer.frame.size
     }
     
