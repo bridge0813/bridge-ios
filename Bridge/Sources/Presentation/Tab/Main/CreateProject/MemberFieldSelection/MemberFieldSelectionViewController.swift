@@ -25,43 +25,42 @@ final class MemberFieldSelectionViewController: BaseViewController {
         )
         return button
     }()
-    
-    private let rootFlexContainer = UIView()
-    
+
     private let progressView = BridgeProgressView(0.2)
-    
+
     private let dividerView: UIView = {
         let divider = UIView()
         divider.backgroundColor = BridgeColor.gray06
         divider.isHidden = true
-        
+
         return divider
     }()
-    
+
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .clear
         scrollView.showsVerticalScrollIndicator = false
-        
+        scrollView.alwaysBounceVertical = true
         return scrollView
     }()
-    
+
     private let contentContainer = UIView()
-    
+
     private let descriptionLabel: UILabel = {
         let label = UILabel()
+        label.flex.width(148).height(60)
         label.configureTextWithLineHeight(text: "어떤 분야의 팀원을\n찾고 있나요?", lineHeight: 30)
         label.font = BridgeFont.headline1Long.font
         label.textColor = BridgeColor.gray01
         label.numberOfLines = 2
-        
+
         return label
     }()
-    
+
     private let tipMessageBox = BridgeTipMessageBox("복수 선택이 가능해요")
-    
+
     private let setFieldView = BridgeSetFieldView()
-    
+
     private let nextButton = BridgeButton(
         title: "다음",
         font: BridgeFont.button1.font,
@@ -100,35 +99,28 @@ final class MemberFieldSelectionViewController: BaseViewController {
     
     // MARK: - Layout
     override func configureLayouts() {
-        view.addSubview(rootFlexContainer)
+        view.addSubview(progressView)
+        view.addSubview(dividerView)
+        view.addSubview(scrollView)
+        view.addSubview(nextButton)
         scrollView.addSubview(contentContainer)
-        
-        rootFlexContainer.flex.define { flex in
-            flex.addItem(progressView).height(6).marginTop(10).marginHorizontal(16)
-            
-            flex.addItem(dividerView).height(1).marginTop(18)
-            
-            flex.addItem().grow(1)  // ScrollView의 사이즈만큼 빈 공간.
-            
-            // grow(1)로 레이아웃을 배치하면, height가 원활하게 잡히지 않고 화면 밖을 벗어나는 문제가 발생.(디바이스)
-            flex.addItem(scrollView).position(.absolute).width(100%).top(35).bottom(84)
-            
-            flex.addItem(nextButton).height(52).marginBottom(24).marginHorizontal(16)
-        }
-        
+
         contentContainer.flex.paddingHorizontal(16).define { flex in
-            flex.addItem(descriptionLabel).width(148).height(60).marginTop(16)
+            flex.addItem(descriptionLabel).marginTop(16)
             flex.addItem(tipMessageBox).height(38).marginTop(16)
             flex.addItem(setFieldView).height(396).marginTop(40).marginBottom(15)
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
-        rootFlexContainer.pin.all(view.pin.safeArea)
-        rootFlexContainer.flex.layout()
+        progressView.pin.top(view.pin.safeArea.top + 10).horizontally(16).height(6)
+        dividerView.pin.below(of: progressView).marginTop(18).horizontally().height(1)
+        scrollView.pin.below(of: dividerView).horizontally().bottom(view.pin.safeArea + 101)
+        nextButton.pin.below(of: scrollView).marginTop(25).horizontally(16).height(52)
         
         contentContainer.pin.all()
         contentContainer.flex.layout(mode: .adjustHeight)
+        
         scrollView.contentSize = contentContainer.frame.size
     }
     
