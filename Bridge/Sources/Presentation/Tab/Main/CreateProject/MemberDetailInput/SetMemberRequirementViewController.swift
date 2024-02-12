@@ -1,5 +1,5 @@
 //
-//  MemberRequirementInputViewController.swift
+//  SetMemberRequirementViewController.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 /// 선택한 분야에서 모집하는 팀원의 요구사항(모집인원, 기술스택, 바라는 점)을 기입하는 VC
-final class MemberRequirementInputViewController: BaseViewController {
+final class SetMemberRequirementViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
    
@@ -106,10 +106,10 @@ final class MemberRequirementInputViewController: BaseViewController {
     }()
     
     // MARK: - Property
-    private let viewModel: MemberRequirementInputViewModel
+    private let viewModel: SetMemberRequirementViewModel
     
     // MARK: - Init
-    init(viewModel: MemberRequirementInputViewModel) {
+    init(viewModel: SetMemberRequirementViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -180,7 +180,7 @@ final class MemberRequirementInputViewController: BaseViewController {
     
     // MARK: - Bind
     override func bind() {
-        let input = MemberRequirementInputViewModel.Input(
+        let input = SetMemberRequirementViewModel.Input(
             recruitNumber: setRecruitmentNumberView.completeButtonTapped,
             techTags: addTechTagPopUpView.completeButtonTapped,
             requirementText: requirementTextView.resultText,

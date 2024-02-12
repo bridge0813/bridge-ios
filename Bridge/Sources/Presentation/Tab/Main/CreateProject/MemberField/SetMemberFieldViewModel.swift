@@ -64,7 +64,7 @@ final class SetMemberFieldViewModel: ViewModelType {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.dataStorage.removeAllMemberRequirements()  // 기존에 저장되었던 데이터 제거.
-                owner.coordinator?.showMemberRequirementInputViewController(with: selectedFields)
+                owner.coordinator?.showSetMemberRequirementViewController(with: selectedFields)
             })
             .disposed(by: disposeBag)
         

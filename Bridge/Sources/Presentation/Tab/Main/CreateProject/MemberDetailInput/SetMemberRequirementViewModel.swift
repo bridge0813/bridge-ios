@@ -1,5 +1,5 @@
 //
-//  MemberDetailInputViewModel.swift
+//  SetMemberRequirementViewModel.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -8,7 +8,7 @@
 import RxSwift
 import RxCocoa
 
-final class MemberRequirementInputViewModel: ViewModelType {
+final class SetMemberRequirementViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let recruitNumber: Observable<Int>
@@ -74,7 +74,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
                     owner.coordinator?.showApplicantRestrictionViewController()
                     
                 } else {
-                    owner.coordinator?.showMemberRequirementInputViewController(
+                    owner.coordinator?.showSetMemberRequirementViewController(
                         with: owner.selectedFields
                     )
                 }
@@ -99,7 +99,7 @@ final class MemberRequirementInputViewModel: ViewModelType {
     }
 }
 
-extension MemberRequirementInputViewModel {
+extension SetMemberRequirementViewModel {
     /// 유저에게 보이는 문자열로 맵핑처리
     enum FieldTagType: String {
         case ios = "iOS"
