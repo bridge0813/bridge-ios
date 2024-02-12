@@ -90,7 +90,13 @@ final class UpdateMemberRequirementViewController: BaseViewController {
 
         return label
     }()
-    private let addTechStackButton = BridgeAddButton(titleFont: BridgeFont.body1.font)
+    
+    private let addTechStackButton: BridgeAddButton = {
+        let button = BridgeAddButton(titleFont: BridgeFont.body1.font)
+        button.flex.width(100).height(24)
+        button.contentHorizontalAlignment = .right
+        return button
+    }()
     private let addedTechTagView = AddedTechTagView()
     private let addTechTagPopUpView = AddTechTagPopUpView()
 
@@ -167,7 +173,6 @@ final class UpdateMemberRequirementViewController: BaseViewController {
             flex.addItem()
                 .direction(.row)
                 .justifyContent(.spaceBetween)
-                .alignItems(.center)
                 .marginTop(32)
                 .define { flex in
                     flex.addItem(memberTechStackLabel)

@@ -19,7 +19,8 @@ final class ManagementProjectCell: BaseCollectionViewCell {
             UIImage(named: "xmark")?.resize(to: CGSize(width: 18, height: 18)).withRenderingMode(.alwaysTemplate),
             for: .normal
         )
-        button.flex.size(18)
+        button.flex.width(50).height(30)
+        button.contentHorizontalAlignment = .right
         button.tintColor = BridgeColor.gray04
         return button
     }()
@@ -156,7 +157,7 @@ final class ManagementProjectCell: BaseCollectionViewCell {
         contentView.flex.padding(0, 18, 24, 18).define { flex in
             flex.addItem().direction(.row).justifyContent(.spaceBetween).define { flex in
                 flex.addItem(statusLabel).marginTop(24)
-                flex.addItem(deleteButton).marginTop(20).marginRight(-4)
+                flex.addItem(deleteButton).marginTop(12).marginRight(-4)
             }
             
             flex.addItem(titleLabel).marginTop(8)

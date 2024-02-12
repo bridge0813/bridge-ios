@@ -75,7 +75,12 @@ final class MemberRequirementInputViewController: BaseViewController {
         
         return label
     }()
-    private let addTechStackButton = BridgeAddButton(titleFont: BridgeFont.body1.font)
+    private let addTechStackButton: BridgeAddButton = {
+        let button = BridgeAddButton(titleFont: BridgeFont.body1.font)
+        button.flex.width(100).height(24)
+        button.contentHorizontalAlignment = .right
+        return button
+    }()
     private let addedTechTagView = AddedTechTagView()
     private let addTechTagPopUpView = AddTechTagPopUpView()
     
@@ -149,11 +154,14 @@ final class MemberRequirementInputViewController: BaseViewController {
             flex.addItem(recruitLabel).width(60).height(24).marginTop(20)
             flex.addItem(setRecruitNumberButton).alignSelf(.start).height(52).marginTop(14)
         
-            flex.addItem().direction(.row).alignItems(.center).marginTop(32).define { flex in
-                flex.addItem(memberTechStackLabel).width(60).height(24)
-                flex.addItem().grow(1)
-                flex.addItem(addTechStackButton).marginRight(0)
-            }
+            flex.addItem()
+                .direction(.row)
+                .justifyContent(.spaceBetween)
+                .marginTop(32)
+                .define { flex in
+                    flex.addItem(memberTechStackLabel)
+                    flex.addItem(addTechStackButton).marginRight(0)
+                }
             flex.addItem(addedTechTagView).marginTop(14)
             
             flex.addItem(requirementLabel).width(60).height(24).marginTop(32)

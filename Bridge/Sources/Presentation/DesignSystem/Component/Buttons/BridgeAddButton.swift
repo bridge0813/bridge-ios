@@ -15,7 +15,6 @@ final class BridgeAddButton: BaseButton {
     var isAdded: Bool = false {
         didSet {
             updateTitle()
-            flex.markDirty()
         }
     }
     

@@ -218,10 +218,11 @@ final class ProjectDetailHeaderView: BaseCollectionReusableView {
                 .backgroundColor(BridgeColor.gray10)
                 .direction(.row)
                 .justifyContent(.spaceBetween)
+                .padding(32, 16, 0, 13)
                 .height(70)
                 .define { flex in
-                    flex.addItem(recruitNumberLabel).height(32).marginTop(32).marginLeft(16)
-                    flex.addItem(goToDetailButton).width(100).height(16).marginTop(38).marginRight(13)
+                    flex.addItem(recruitNumberLabel).height(32)
+                    flex.addItem(goToDetailButton).width(150).height(32).marginRight(0)
                 }
         }
     }
