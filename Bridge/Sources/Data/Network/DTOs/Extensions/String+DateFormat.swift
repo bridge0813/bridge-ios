@@ -76,13 +76,10 @@ extension String {
         return dateFormatter.string(from: date)
     }
     
-    /// ISO 8601 형식의 문자열 -> Date 타입으로 변환하는 함수
     func toDateType() -> Date? {
-        var isoString = self
-        isoString.append("+09:00")  // 표준 시간대 추가
-        
-        // ISO 8601 형식의 문자열을 Date 객체로 변환
-        let isoFormatter = ISO8601DateFormatter()
-        return isoFormatter.date(from: isoString)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" // 입력 문자열 형식에 맞추어 설정
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        return dateFormatter.date(from: self)
     }
 }

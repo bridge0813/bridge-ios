@@ -30,7 +30,7 @@ extension ProjectPreviewResponseDTO {
             title: title,
             description: "",
             dDays: Date().calculateDDay(to: deadline.toDateType() ?? Date()),
-            deadline: deadline.toDate(format: "yyyy.MM.dd") ?? "",
+            deadline: deadline.toDateType()?.toString(format: "yyyy.M.dd") ?? "",
             totalRecruitNumber: totalRecruitNumber,
             rank: 0,
             deadlineRank: 0,
