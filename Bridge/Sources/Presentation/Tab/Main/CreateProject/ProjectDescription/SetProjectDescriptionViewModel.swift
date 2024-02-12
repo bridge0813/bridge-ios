@@ -1,5 +1,5 @@
 //
-//  ProjectDescriptionInputViewModel.swift
+//  SetProjectDescriptionViewModel.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -8,7 +8,7 @@
 import RxSwift
 import RxCocoa
 
-final class ProjectDescriptionInputViewModel: ViewModelType {
+final class SetProjectDescriptionViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let titleTextChanged: Observable<String>

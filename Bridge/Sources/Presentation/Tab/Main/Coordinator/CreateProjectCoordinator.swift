@@ -94,14 +94,14 @@ extension CreateProjectCoordinator {
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showProjectDescriptionInputViewController() {
-        let viewModel = ProjectDescriptionInputViewModel(
+    func showSetProjectDescriptionViewController() {
+        let viewModel = SetProjectDescriptionViewModel(
             coordinator: self,
             dataStorage: projectDataStorage,
             createProjectUseCase: createProjectUseCase
         )
         
-        let viewController = ProjectDescriptionInputViewController(viewModel: viewModel)
+        let viewController = SetProjectDescriptionViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     

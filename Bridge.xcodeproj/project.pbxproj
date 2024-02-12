@@ -211,8 +211,8 @@
 		7C19A0182B78C2C900D95FB9 /* UpdateProjectRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C19A0172B78C2C900D95FB9 /* UpdateProjectRequestDTO.swift */; };
 		7C2400262AB1B83700D9D5F1 /* SetProjectProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400252AB1B83700D9D5F1 /* SetProjectProgressViewModel.swift */; };
 		7C2400282AB1B85600D9D5F1 /* SetProjectProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400272AB1B85600D9D5F1 /* SetProjectProgressViewController.swift */; };
-		7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */; };
-		7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */; };
+		7C24002A2AB1B87400D9D5F1 /* SetProjectDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400292AB1B87400D9D5F1 /* SetProjectDescriptionViewModel.swift */; };
+		7C24002C2AB1B88C00D9D5F1 /* SetProjectDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24002B2AB1B88C00D9D5F1 /* SetProjectDescriptionViewController.swift */; };
 		7C2400392AB2C85700D9D5F1 /* SetApplicantRestrictionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2400382AB2C85700D9D5F1 /* SetApplicantRestrictionViewModel.swift */; };
 		7C24003B2AB2C86100D9D5F1 /* SetApplicantRestrictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003A2AB2C86100D9D5F1 /* SetApplicantRestrictionViewController.swift */; };
 		7C24003D2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24003C2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift */; };
@@ -647,8 +647,8 @@
 		7C19A0172B78C2C900D95FB9 /* UpdateProjectRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProjectRequestDTO.swift; sourceTree = "<group>"; };
 		7C2400252AB1B83700D9D5F1 /* SetProjectProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProjectProgressViewModel.swift; sourceTree = "<group>"; };
 		7C2400272AB1B85600D9D5F1 /* SetProjectProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProjectProgressViewController.swift; sourceTree = "<group>"; };
-		7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionInputViewModel.swift; sourceTree = "<group>"; };
-		7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewInputViewController.swift; sourceTree = "<group>"; };
+		7C2400292AB1B87400D9D5F1 /* SetProjectDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProjectDescriptionViewModel.swift; sourceTree = "<group>"; };
+		7C24002B2AB1B88C00D9D5F1 /* SetProjectDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProjectDescriptionViewController.swift; sourceTree = "<group>"; };
 		7C2400382AB2C85700D9D5F1 /* SetApplicantRestrictionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetApplicantRestrictionViewModel.swift; sourceTree = "<group>"; };
 		7C24003A2AB2C86100D9D5F1 /* SetApplicantRestrictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetApplicantRestrictionViewController.swift; sourceTree = "<group>"; };
 		7C24003C2AB34BFA00D9D5F1 /* BridgeFieldTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFieldTagButton.swift; sourceTree = "<group>"; };
@@ -2632,7 +2632,7 @@
 				7C2400372AB2C84800D9D5F1 /* ApplicantRestriction */,
 				7CC9F6CE2AAF118600685EA9 /* ProjectSchedule */,
 				7CC9F6D32AAF13C300685EA9 /* ProjectProgress */,
-				7CC9F6D82AAF161600685EA9 /* ProjectOverviewInput */,
+				7CC9F6D82AAF161600685EA9 /* ProjectDescription */,
 				7CC9F6DD2AAF180900685EA9 /* Completion */,
 			);
 			path = CreateProject;
@@ -2676,13 +2676,13 @@
 			path = ProjectProgress;
 			sourceTree = "<group>";
 		};
-		7CC9F6D82AAF161600685EA9 /* ProjectOverviewInput */ = {
+		7CC9F6D82AAF161600685EA9 /* ProjectDescription */ = {
 			isa = PBXGroup;
 			children = (
-				7C2400292AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift */,
-				7C24002B2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift */,
+				7C2400292AB1B87400D9D5F1 /* SetProjectDescriptionViewModel.swift */,
+				7C24002B2AB1B88C00D9D5F1 /* SetProjectDescriptionViewController.swift */,
 			);
-			path = ProjectOverviewInput;
+			path = ProjectDescription;
 			sourceTree = "<group>";
 		};
 		7CC9F6DD2AAF180900685EA9 /* Completion */ = {
@@ -3509,7 +3509,7 @@
 				7CD5A5382B42711E00343F9F /* UpdateProfileViewController.swift in Sources */,
 				7C2400282AB1B85600D9D5F1 /* SetProjectProgressViewController.swift in Sources */,
 				7C569CF32A9F67C60063D362 /* ProjectPreview.swift in Sources */,
-				7C24002A2AB1B87400D9D5F1 /* ProjectDescriptionInputViewModel.swift in Sources */,
+				7C24002A2AB1B87400D9D5F1 /* SetProjectDescriptionViewModel.swift in Sources */,
 				7C56E16F2B145E3000454F5E /* FieldRequestDTO.swift in Sources */,
 				7C3560552B6576C600CF79CE /* ImageCache.swift in Sources */,
 				7B1E5ABC2ADCFD790053E9B3 /* ChannelViewController.swift in Sources */,
@@ -3550,7 +3550,7 @@
 				7C6203492B6FE62400438E69 /* FilteredProjectRequestDTO.swift in Sources */,
 				7CDFB6182B201A7E00272F77 /* BridgeTabButton.swift in Sources */,
 				7B14DB252AB04BC5009A00EB /* RxASAuthorizationControllerDelegateProxy.swift in Sources */,
-				7C24002C2AB1B88C00D9D5F1 /* ProjectOverviewInputViewController.swift in Sources */,
+				7C24002C2AB1B88C00D9D5F1 /* SetProjectDescriptionViewController.swift in Sources */,
 				7C199FF42B779D2300D95FB9 /* UpdateProjectCoordinator.swift in Sources */,
 				7BA96EB82B249630000D48AE /* Notification+Stomp.swift in Sources */,
 				7CA04F432B029B3A007B9191 /* FetchProjectDetailUseCase.swift in Sources */,

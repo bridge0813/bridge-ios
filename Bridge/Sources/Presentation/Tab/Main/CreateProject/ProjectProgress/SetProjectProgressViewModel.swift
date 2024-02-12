@@ -42,7 +42,7 @@ final class SetProjectProgressViewModel: ViewModelType {
         input.nextButtonTapped
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.coordinator?.showProjectDescriptionInputViewController()
+                owner.coordinator?.showSetProjectDescriptionViewController()
             })
             .disposed(by: disposeBag)
         

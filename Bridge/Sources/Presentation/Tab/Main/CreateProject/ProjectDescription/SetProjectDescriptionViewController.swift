@@ -1,5 +1,5 @@
 //
-//  ProjectOverviewInputViewController.swift
+//  SetProjectDescriptionViewController.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 /// 프로젝트의 제목과 소개를 기입하는 VC
-final class ProjectDescriptionInputViewController: BaseViewController {
+final class SetProjectDescriptionViewController: BaseViewController {
     // MARK: - UI
     private let rootFlexContainer = UIView()
     
@@ -96,10 +96,10 @@ final class ProjectDescriptionInputViewController: BaseViewController {
     }()
     
     // MARK: - Property
-    private let viewModel: ProjectDescriptionInputViewModel
+    private let viewModel: SetProjectDescriptionViewModel
     
     // MARK: - Init
-    init(viewModel: ProjectDescriptionInputViewModel) {
+    init(viewModel: SetProjectDescriptionViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -150,7 +150,7 @@ final class ProjectDescriptionInputViewController: BaseViewController {
     
     // MARK: - Bind
     override func bind() {
-        let input = ProjectDescriptionInputViewModel.Input(
+        let input = SetProjectDescriptionViewModel.Input(
             titleTextChanged: titleTextField.rx.controlEvent(.editingDidEnd)
                 .withLatestFrom(titleTextField.rx.text.orEmpty)
                 .distinctUntilChanged(),
