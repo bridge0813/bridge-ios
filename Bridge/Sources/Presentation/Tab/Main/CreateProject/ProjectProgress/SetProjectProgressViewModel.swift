@@ -1,5 +1,5 @@
 //
-//  ProjectProgressStatusViewModel.swift
+//  SetProjectProgressViewModel.swift
 //  Bridge
 //
 //  Created by 엄지호 on 2023/09/11.
@@ -8,7 +8,7 @@
 import RxSwift
 import RxCocoa
 
-final class ProjectProgressStatusViewModel: ViewModelType {
+final class SetProjectProgressViewModel: ViewModelType {
     // MARK: - Input & Output
     struct Input {
         let progressMethodButtonTapped: Observable<String>

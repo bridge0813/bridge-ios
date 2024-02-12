@@ -53,7 +53,7 @@ final class SetProjectScheduleViewModel: ViewModelType {
             .subscribe(
                 with: self,
                 onNext: { owner, _ in
-                    owner.coordinator?.showProjectProgressStatusViewController()
+                    owner.coordinator?.showSetProjectProgressViewController()
                 }
             )
             .disposed(by: disposeBag)

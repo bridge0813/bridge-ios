@@ -84,13 +84,13 @@ extension CreateProjectCoordinator {
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showProjectProgressStatusViewController() {
-        let viewModel = ProjectProgressStatusViewModel(
+    func showSetProjectProgressViewController() {
+        let viewModel = SetProjectProgressViewModel(
             coordinator: self,
             dataStorage: projectDataStorage
         )
         
-        let viewController = ProjectProgressStatusViewController(viewModel: viewModel)
+        let viewController = SetProjectProgressViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
