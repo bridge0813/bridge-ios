@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol RemoveAlertUseCase {
-    func remove(id: String) -> Observable<Void>
+    func remove(id: String) -> Observable<String>
     func removeAll() -> Observable<Void>
 }
 
@@ -20,7 +20,7 @@ final class DefaultRemoveAlertUseCase: RemoveAlertUseCase {
         self.alertRepository = alertRepository
     }
     
-    func remove(id: String) -> Observable<Void> {
+    func remove(id: String) -> Observable<String> {
         alertRepository.removeAlert(id: id)
     }
     
