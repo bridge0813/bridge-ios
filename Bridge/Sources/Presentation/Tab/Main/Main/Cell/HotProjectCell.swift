@@ -50,7 +50,11 @@ final class HotProjectCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let bookmarkButton = MainBookmarkButton()
+    private let bookmarkButton: MainBookmarkButton = {
+        let button = MainBookmarkButton()
+        button.contentHorizontalAlignment = .right
+        return button
+    }()
     
     // MARK: - Property
     weak var delegate: ProjectCellDelegate?
@@ -79,14 +83,19 @@ final class HotProjectCell: BaseCollectionViewCell {
         rootFlexContainer.flex.direction(.row).alignItems(.center).define { flex in
             flex.addItem(rankingLabel).width(48).height(100)
             
-            flex.addItem().width(206).height(62).marginLeft(18).define { flex in
-                flex.addItem(dDayLabel).height(14)
-                flex.addItem(titleLabel).marginTop(6)
-            }
-            
-            flex.addItem().grow(1)
-            
-            flex.addItem(bookmarkButton).size(24).marginRight(14)
+            flex.addItem()
+                .direction(.row)
+                .justifyContent(.spaceBetween)
+                .alignItems(.center)
+                .grow(1)
+                .define { flex in
+                    flex.addItem().width(206).height(62).marginLeft(18).define { flex in
+                        flex.addItem(dDayLabel).height(14)
+                        flex.addItem(titleLabel).marginTop(6)
+                    }
+                    
+                    flex.addItem(bookmarkButton).size(50).marginRight(14)
+                }
         }
     }
     

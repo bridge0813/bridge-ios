@@ -14,8 +14,11 @@ final class BookmarkedProjectCell: BaseCollectionViewCell {
     // MARK: - UI
     private let bookmarkButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "bookmark.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.flex.width(40).height(32)
+        button.setImage(UIImage(named: "bookmark.fill")?.resize(to: CGSize(width: 20, height: 20)).withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = BridgeColor.primary1
+        button.contentHorizontalAlignment = .right
+        button.contentVerticalAlignment = .top
         return button
     }()
     
@@ -76,8 +79,10 @@ final class BookmarkedProjectCell: BaseCollectionViewCell {
     
     override func configureLayouts() {
         contentView.flex.padding(12, 16).define { flex in
-            flex.addItem(bookmarkButton).alignSelf(.end).size(20)
-            flex.addItem(dueDateLabel)
+            flex.addItem().direction(.row).justifyContent(.spaceBetween).height(32).define { flex in
+                flex.addItem(dueDateLabel).marginTop(18)
+                flex.addItem(bookmarkButton).marginRight(-4)
+            }
             flex.addItem(titleLabel).marginTop(6).width(120)
             
             flex.addItem().grow(1)

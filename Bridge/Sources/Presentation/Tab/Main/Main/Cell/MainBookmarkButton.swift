@@ -20,7 +20,8 @@ final class MainBookmarkButton: BaseButton {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = .clear
         configuration.baseForegroundColor = BridgeColor.gray06
-
+        configuration.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
         self.configuration = configuration
     }
     
@@ -35,6 +36,7 @@ final class MainBookmarkButton: BaseButton {
         var updatedConfiguration = configuration
         updatedConfiguration?.image = buttonImage
         updatedConfiguration?.baseForegroundColor = tintColor
+        
         configuration = updatedConfiguration
     }
 }
