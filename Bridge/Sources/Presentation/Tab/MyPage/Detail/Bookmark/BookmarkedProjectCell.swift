@@ -101,11 +101,15 @@ extension BookmarkedProjectCell {
         titleLabel.text = bookmarkedProject.title
         totalRecruitNumberLabel.text = "\(bookmarkedProject.totalRecruitNumber)명 모집"
         
-        if let startDate = bookmarkedProject.startDate,
-           let endDate = bookmarkedProject.endDate {
-            dateLabel.text = "\(startDate) - \(endDate)"
-        } else {
+        
+        let startDate = bookmarkedProject.startDate ?? "날짜미정"
+        let endDate = bookmarkedProject.endDate ?? "날짜미정"
+        
+        // startDate와 endDate 모두 미정일 경우
+        if startDate == "날짜미정", endDate == "날짜미정" {
             dateLabel.text = "날짜미정"
+        } else {
+            dateLabel.text = "\(startDate) - \(endDate)"
         }
         
         dueDateLabel.flex.markDirty()

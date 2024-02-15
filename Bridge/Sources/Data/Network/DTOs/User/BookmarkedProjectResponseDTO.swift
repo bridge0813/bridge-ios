@@ -31,8 +31,8 @@ extension BookmarkedProjectResponseDTO {
             id: id,
             title: title,
             dDay: dDay,
-            startDate: startDate,
-            endDate: endDate,
+            startDate: startDate?.toDateType()?.toString(format: "yyyy.M.dd"),
+            endDate: endDate?.toDateType()?.toString(format: "yyyy.M.dd"),
             totalRecruitNumber: totalRecruitNumber
         )
     }
