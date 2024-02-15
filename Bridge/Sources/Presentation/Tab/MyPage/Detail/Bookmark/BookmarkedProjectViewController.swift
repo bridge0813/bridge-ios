@@ -73,7 +73,7 @@ final class BookmarkedProjectViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.bookmarkedProjects
-            .bind(to: bookmarkedProjectCollectionView.rx.items(
+            .drive(bookmarkedProjectCollectionView.rx.items(
                 cellIdentifier: BookmarkedProjectCell.reuseIdentifier,
                 cellType: BookmarkedProjectCell.self)
             ) { [weak self] _, element, cell in

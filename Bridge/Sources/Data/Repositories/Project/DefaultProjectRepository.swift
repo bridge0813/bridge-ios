@@ -141,7 +141,7 @@ final class DefaultProjectRepository: ProjectRepository {
             requestDTO: updateProjectDTO, projectID: String(project.id)
         )
         
-        return networkService.request(to: updateProjectEndpoint, interceptor: nil)
+        return networkService.request(to: updateProjectEndpoint, interceptor: AuthInterceptor())
             .map { _ in }
     }
     
@@ -215,7 +215,9 @@ private extension DefaultProjectRepository {
                 requiredSkills: requirement.requiredSkills.map { skill in
                     // 서버측 워딩에 맞게 수정. 대문자 처리 및 띄어쓰기 제거
                     if skill == "C++" { return "CPP" }
-                    else { return skill.uppercased().replacingOccurrences(of: " ", with: "") }
+                    if skill == "Objective-c" { return "OBJECTIVE_C" }
+                    
+                    return skill.uppercased().replacingOccurrences(of: " ", with: "")
                 },
                 requirementText: requirement.requirementText
             )

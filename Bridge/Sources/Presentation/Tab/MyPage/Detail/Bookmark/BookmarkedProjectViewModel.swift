@@ -17,7 +17,7 @@ final class BookmarkedProjectViewModel: ViewModelType {
     }
     
     struct Output {
-        let bookmarkedProjects: BehaviorRelay<[BookmarkedProject]>
+        let bookmarkedProjects: Driver<[BookmarkedProject]>
     }
     
     // MARK: - Property
@@ -44,9 +44,22 @@ final class BookmarkedProjectViewModel: ViewModelType {
         input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
-                owner.fetchBookmarkedProjectUseCase.fetch()
+                owner.fetchBookmarkedProjectUseCase.fetch().toResult()
             }
-            .bind(to: bookmarkedProjects)
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let projectList):
+                    bookmarkedProjects.accept(projectList)
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "조회에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
+            })
             .disposed(by: disposeBag)
         
         // 프로젝트 상세 이동
@@ -89,7 +102,7 @@ final class BookmarkedProjectViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            bookmarkedProjects: bookmarkedProjects
+            bookmarkedProjects: bookmarkedProjects.asDriver()
         )
     }
 }

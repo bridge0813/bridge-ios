@@ -47,7 +47,7 @@ extension ProjectEndpoint: Endpoint {
             return "/projects/category"
             
         case .fetchProjectDetail:
-            return "/project"
+            return "/project/one"
             
         case .create:
             return "/project"
