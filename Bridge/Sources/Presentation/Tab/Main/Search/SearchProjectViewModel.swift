@@ -67,10 +67,9 @@ final class SearchProjectViewModel: ViewModelType {
                     recentSearchesRelay.accept(recentSearches)
                     
                 case .failure(let error):
-                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                        title: "최근 검색어 조회에 실패했습니다.",
-                        description: error.localizedDescription
-                    ))
+                    // 에러에 대한 Alert을 보여주지 않음.
+                    // 로그인을 하지 않은 유저, 검색어 저장 끄기를 한 유저들은 이에 대한 리액션을 받을 필요가 없음.
+                    print(error.localizedDescription)
                 }
             })
             .disposed(by: disposeBag)

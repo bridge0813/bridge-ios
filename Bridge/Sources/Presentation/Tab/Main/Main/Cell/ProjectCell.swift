@@ -101,7 +101,7 @@ final class ProjectCell: BaseCollectionViewCell {
                     flex.addItem(dDayLabel)
                     flex.addItem(titleLabel).marginTop(6)
                 }
-                flex.addItem(bookmarkButton).size(50).marginRight(0)
+                flex.addItem(bookmarkButton).size(50).marginRight(-2)
             }
             
             flex.addItem().backgroundColor(BridgeColor.gray08).height(1).marginTop(24)
