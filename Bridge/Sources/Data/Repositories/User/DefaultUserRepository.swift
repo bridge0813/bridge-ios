@@ -85,10 +85,7 @@ final class DefaultUserRepository: UserRepository {
         return networkService.request(to: userEndpoint, interceptor: AuthInterceptor())
             .decode(type: [BookmarkedProjectResponseDTO].self, decoder: JSONDecoder())
             .map { dtos in
-                print("dday \(dtos.map { $0.dDay })")
-                print("startDate \(dtos.map { $0.startDate })")
-                print("endDate \(dtos.map { $0.endDate })")
-                return dtos.map { $0.toEntity() }
+                dtos.map { $0.toEntity() }
             }
     }
 }

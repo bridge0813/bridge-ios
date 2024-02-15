@@ -99,7 +99,7 @@ final class DefaultProjectRepository: ProjectRepository {
         
         let filterEndpoint = ProjectEndpoint.fetchFilteredProjects(requestDTO: filterRequestDTO)
         
-        return networkService.request(to: filterEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: filterEndpoint, interceptor: nil)
             .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
             .map { projectPreviewDTOs in
                 projectPreviewDTOs.map { $0.toEntity() }

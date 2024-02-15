@@ -48,7 +48,7 @@ final class DefaultAuthRepository: AuthRepository {
         let signUpRequestDTO = SignUpRequestDTO(userID: userID, selectedFields: selectedFields)
         let authEndpoint = AuthEndpoint.signUp(requestDTO: signUpRequestDTO)
         
-        return networkService.request(to: authEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: authEndpoint, interceptor: nil)
             .map { _ in }
     }
     
@@ -70,7 +70,7 @@ final class DefaultAuthRepository: AuthRepository {
         let userID = tokenStorage.get(.userID)
         let authEndpoint = AuthEndpoint.withdrawal(userID: userID)
         
-        return networkService.request(to: authEndpoint, interceptor: nil)
+        return networkService.request(to: authEndpoint, interceptor: AuthInterceptor())
             .withUnretained(self)
             .do(onNext: { owner, _ in
                 owner.tokenStorage.delete(.userID)

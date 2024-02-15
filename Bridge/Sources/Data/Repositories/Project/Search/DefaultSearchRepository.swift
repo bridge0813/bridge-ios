@@ -40,7 +40,7 @@ final class DefaultSearchRepository: SearchRepository {
         let searchProjectDTO = SearchProjectRequestDTO(searchWord: query)
         let searchProjectEndpoint = SearchEndpoint.searchProjects(requestDTO: searchProjectDTO)
         
-        return networkService.request(to: searchProjectEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: searchProjectEndpoint, interceptor: nil)
             .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
             .map { projectPreviewDTOs in
                 projectPreviewDTOs.map { $0.toEntity() }

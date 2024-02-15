@@ -30,7 +30,7 @@ extension UserEndpoint: Endpoint {
             return "/users/bookmark"
             
         case .fetchProfile:
-            return "/users/profile"
+            return "/users/profile/one"
             
         case .createProfile:
             return "/users/profile"

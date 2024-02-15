@@ -82,6 +82,11 @@ final class CompletionViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = true
+    }
+    
     // MARK: - Configuration
     override func configureAttributes() {
         navigationItem.title = "모집글 작성"
