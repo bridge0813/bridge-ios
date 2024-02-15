@@ -60,8 +60,7 @@ final class SearchProjectViewModel: ViewModelType {
                 owner.fetchRecentSearchUseCase.fetch().toResult()
             }
             .observe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .subscribe(onNext: { owner, result in
+            .subscribe(onNext: { result in
                 switch result {
                 case .success(let recentSearches):
                     recentSearchesRelay.accept(recentSearches)

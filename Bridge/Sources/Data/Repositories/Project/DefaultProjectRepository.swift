@@ -72,7 +72,8 @@ final class DefaultProjectRepository: ProjectRepository {
         return networkService.request(to: ProjectEndpoint.fetchAppliedProjects, interceptor: AuthInterceptor())
             .decode(type: [AppliedProjectResponseDTO].self, decoder: JSONDecoder())
             .map { appliedProjectDTOs in
-                appliedProjectDTOs.map { $0.toEntity() }
+                let appliedProjectList = Set(appliedProjectDTOs.map { $0.toEntity() })  // 중복 요소 제거
+                return Array(appliedProjectList)
             }
     }
     
