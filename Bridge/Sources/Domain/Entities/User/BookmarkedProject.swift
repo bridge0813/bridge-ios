@@ -8,7 +8,7 @@
 struct BookmarkedProject {
     let id: Int
     let title: String
-    let dDay: String?
+    let dDay: String
     let startDate: String?
     let endDate: String?
     let totalRecruitNumber: Int

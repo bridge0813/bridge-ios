@@ -10,7 +10,7 @@ import Foundation
 struct BookmarkedProjectResponseDTO: Decodable {
     let id: Int
     let title: String
-    let dDay: String?
+    let dDay: String
     let startDate: String?
     let endDate: String?
     let totalRecruitNumber: Int
@@ -18,7 +18,7 @@ struct BookmarkedProjectResponseDTO: Decodable {
     enum CodingKeys: String, CodingKey {
         case id = "projectId"
         case title
-        case dDay
+        case dDay = "dday"
         case startDate
         case endDate
         case totalRecruitNumber = "recruitTotalNum"
