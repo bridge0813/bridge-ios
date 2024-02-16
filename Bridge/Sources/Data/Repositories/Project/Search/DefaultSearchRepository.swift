@@ -37,7 +37,8 @@ final class DefaultSearchRepository: SearchRepository {
     }
     
     func searchProjects(by query: String) -> Observable<[ProjectPreview]> {
-        let searchProjectDTO = SearchProjectRequestDTO(searchWord: query)
+        let userID = tokenStorage.get(.userID)
+        let searchProjectDTO = SearchProjectRequestDTO(userID: Int(userID) ?? -1, searchWord: query)
         let searchProjectEndpoint = SearchEndpoint.searchProjects(requestDTO: searchProjectDTO)
         
         return networkService.request(to: searchProjectEndpoint, interceptor: nil)
