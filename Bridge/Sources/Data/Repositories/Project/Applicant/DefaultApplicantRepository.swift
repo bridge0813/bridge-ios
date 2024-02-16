@@ -25,8 +25,7 @@ final class DefaultApplicantRepository: ApplicantRepository {
         return networkService.request(to: fetchApplicantListEndpoint, interceptor: AuthInterceptor())
             .decode(type: [ApplicantProfileResponseDTO].self, decoder: JSONDecoder())
             .map { applicantListDTOs in
-                let applicantList = Set(applicantListDTOs.map { $0.toEntity() })  // 중복요소 제거
-                return Array(applicantList)
+                applicantListDTOs.map { $0.toEntity() }
             }
     }
     
