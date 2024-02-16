@@ -34,8 +34,9 @@ extension Date {
     
     func calculateDDay(to deadline: Date) -> Int {
         let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: self, to: deadline)
         
-        let components = calendar.dateComponents([.day], from: self, to: deadline)   
-        return components.day ?? 0
+        // 계산된 일수와 0 중 더 큰 값을 반환하여 음수 값을 방지
+        return max(components.day ?? 0, 0)
     }
 }

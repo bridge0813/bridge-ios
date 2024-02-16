@@ -99,10 +99,19 @@ final class ProjectDetailViewModel: ViewModelType {
                     )
                     
                 case .close:
-                    owner.coordinator?.showAlert(
-                        configuration: .closeProject,
-                        primaryAction: { projectManagementAction.onNext(.close) }
-                    )
+                    // 마감된 모집글의 경우
+                    if project.value.dDays == 0 {
+                        owner.coordinator?.showErrorAlert(
+                            configuration: ErrorAlertConfiguration(title: "이미 마감된 프로젝트입니다.")
+                        )
+                        
+                    } else {
+                        // 마감되지 않은 모집글의 경우
+                        owner.coordinator?.showAlert(
+                            configuration: .closeProject,
+                            primaryAction: { projectManagementAction.onNext(.close) }
+                        )
+                    }
                     
                 case .delete:
                     owner.coordinator?.showAlert(
