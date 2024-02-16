@@ -87,7 +87,9 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // 필터링된 모집글 조회
     func fetchFilteredProjects(filterBy fieldTechStack: FieldTechStack) -> Observable<[ProjectPreview]> {
+        let userID = tokenStorage.get(.userID)
         let filterRequestDTO = FilteredProjectRequestDTO(
+            userID: Int(userID) ?? -1, 
             field: fieldTechStack.field.convertToUpperCaseFormat(),
             techStacks: fieldTechStack.techStacks.map { stack in
                 // 서버측 워딩에 맞게 수정. 대문자 처리 및 띄어쓰기 제거
