@@ -101,7 +101,7 @@ final class ChannelViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        messageCollectionView.pin.top(view.pin.safeArea.top).horizontally().bottom(60)
+        messageCollectionView.pin.top(view.pin.safeArea.top).horizontally().bottom(60 + view.pin.safeArea.bottom)
         messageInputBar.pin.below(of: messageCollectionView).horizontally().height(60)
     }
     
@@ -115,9 +115,21 @@ final class ChannelViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         messageInputBar.rx.keyboardLayoutChanged
-            .bind(to: messageInputBar.rx.yPosition)
+            .subscribe(onNext: { keyboardHeight in
+                UIView.animate(withDuration: 0.3) { [weak self] in
+                    guard let self else { return }
+                    // 키보드가 내려갔을 경우
+                    guard keyboardHeight > 0 else {
+                        self.messageInputBar.transform = .identity
+                        return
+                    }
+                    
+                    let yPosition = keyboardHeight - view.pin.safeArea.bottom
+                    messageInputBar.transform = CGAffineTransform(translationX: 0, y: -yPosition)
+                }
+            })
             .disposed(by: disposeBag)
-        
+  
         messageCollectionView.rx.keyboardLayoutChanged
             .bind(to: messageCollectionView.rx.yPosition)
             .disposed(by: disposeBag)
