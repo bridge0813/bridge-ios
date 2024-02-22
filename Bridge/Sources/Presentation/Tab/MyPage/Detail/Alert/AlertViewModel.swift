@@ -17,7 +17,7 @@ final class AlertViewModel: ViewModelType {
     }
     
     struct Output {
-        let alerts: BehaviorRelay<[BridgeAlert]>
+        let alerts: Driver<[BridgeAlert]>
     }
     
     // MARK: - Property
@@ -44,21 +44,43 @@ final class AlertViewModel: ViewModelType {
         input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
-                owner.fetchAlertsUseCase.fetch()
+                owner.fetchAlertsUseCase.fetch().toResult()
             }
-            .bind(to: alertsRelay)
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let alertList):
+                    alertsRelay.accept(alertList)
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "조회에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
+            })
             .disposed(by: disposeBag)
         
         input.removeAllAlert
             .withUnretained(self)
             .flatMap { owner, _ in
-                owner.removeAlertUseCase.removeAll()
-            }            
-            .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.fetchAlertsUseCase.fetch()
+                owner.removeAlertUseCase.removeAll().toResult()
             }
-            .bind(to: alertsRelay)
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success:
+                    alertsRelay.accept([])
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "알림 제거에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
+            })
             .disposed(by: disposeBag)
         
         input.removeAlert
@@ -67,17 +89,31 @@ final class AlertViewModel: ViewModelType {
             }
             .withUnretained(self)
             .flatMap { owner, id in
-                owner.removeAlertUseCase.remove(id: id)
+                owner.removeAlertUseCase.remove(id: id).toResult()
             }
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .flatMap { owner, _ in
-                owner.fetchAlertsUseCase.fetch()
-            }
-            .bind(to: alertsRelay)
+            .subscribe(onNext: { owner, result in
+                switch result {
+                case .success(let alertID):
+                    var updatedAlertList = alertsRelay.value
+                    
+                    if let deletedAlertIndex = updatedAlertList.firstIndex(where: { $0.id == alertID }) {
+                        updatedAlertList.remove(at: deletedAlertIndex)
+                        alertsRelay.accept(updatedAlertList)
+                    }
+                    
+                case .failure(let error):
+                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                        title: "알림 제거에 실패했습니다.",
+                        description: error.localizedDescription
+                    ))
+                }
+            })
             .disposed(by: disposeBag)
-        
+    
         return Output(
-            alerts: alertsRelay
+            alerts: alertsRelay.asDriver()
         )
     }
 }

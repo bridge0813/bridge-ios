@@ -12,8 +12,8 @@ final class MockAlertRepository: AlertRepository {
         .just(BridgeAlertResponseDTO.testAlerts.map { $0.toEntity() })
     }
     
-    func removeAlert(id: String) -> Observable<Void> {
-        .just(())
+    func removeAlert(id: String) -> Observable<String> {
+        .just(id)
     }
     
     func removeAllAlerts() -> Observable<Void> {

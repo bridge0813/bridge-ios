@@ -16,6 +16,7 @@ enum ProjectEndpoint {
     case fetchProjectDetail(userID: String, projectID: String)
     
     case create(requestDTO: CreateProjectRequestDTO)
+    case update(requestDTO: UpdateProjectRequestDTO, projectID: String)
     case delete(requestDTO: UserIDDTO, projectID: String)
     case bookmark(requestDTO: ProjectIDDTO)
     case close(requestDTO: ProjectIDDTO)
@@ -46,9 +47,12 @@ extension ProjectEndpoint: Endpoint {
             return "/projects/category"
             
         case .fetchProjectDetail:
-            return "/project"
+            return "/project/one"
             
         case .create:
+            return "/project"
+            
+        case .update:
             return "/project"
             
         case .delete:
@@ -91,6 +95,9 @@ extension ProjectEndpoint: Endpoint {
         case .create:
             return nil
             
+        case .update(_, let projectID):
+            return ["projectId": projectID]
+            
         case .delete(_, let projectID):
             return ["projectId": projectID]
             
@@ -131,6 +138,9 @@ extension ProjectEndpoint: Endpoint {
         case .create:
             return .post
             
+        case .update:
+            return .put
+            
         case .delete:
             return .delete
             
@@ -169,6 +179,9 @@ extension ProjectEndpoint: Endpoint {
             return nil
             
         case .create(let requestDTO):
+            return requestDTO
+            
+        case .update(let requestDTO, _):
             return requestDTO
             
         case .delete(let requestDTO, _):

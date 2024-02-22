@@ -28,11 +28,11 @@ final class DefaultAlertRepository: AlertRepository {
             }
     }
     
-    func removeAlert(id: String) -> Observable<Void> {
+    func removeAlert(id: String) -> Observable<String> {
         let alertEndpoint = AlertEndpoint.removeAlert(id: id)
         
         return networkService.request(to: alertEndpoint, interceptor: AuthInterceptor())
-            .map { _ in }
+            .map { _ in id }
     }
     
     func removeAllAlerts() -> Observable<Void> {

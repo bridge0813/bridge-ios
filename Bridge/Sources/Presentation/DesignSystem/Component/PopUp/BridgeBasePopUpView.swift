@@ -140,3 +140,17 @@ class BridgeBasePopUpView: BaseView {
     }
     
 }
+
+extension BridgeBasePopUpView {
+    func addTapGestureForHide() {
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
+    }
+    
+    @objc private func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: self)
+        
+        if !rootFlexContainer.frame.contains(location) {
+            hide()
+        }
+    }
+}

@@ -32,13 +32,14 @@ class BaseListCell: BaseTableViewCell {
     
     let deleteButton: UIButton = {
         let button = UIButton()
-        button.flex.size(20)
+        button.flex.width(80).size(40)
         button.setImage(
             UIImage(named: "delete.circle")?
                 .resize(to: CGSize(width: 20, height: 20))
                 .withRenderingMode(.alwaysTemplate),
             for: .normal
         )
+        button.contentHorizontalAlignment = .right
         button.tintColor = BridgeColor.gray04
         return button
     }()

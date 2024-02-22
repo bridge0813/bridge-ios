@@ -8,9 +8,10 @@
 import Foundation
 
 struct Project {
+    var id: Int
     var title: String
     var description: String
-    let dDays: Int
+    var dDays: Int
     var deadline: Date
     var startDate: Date?
     var endDate: Date?
@@ -18,14 +19,15 @@ struct Project {
     var applicantRestrictions: [String]
     var progressMethod: String
     var progressStep: String
-    let userName: String
+    var userName: String
     var isBookmarked: Bool
-    let isMyProject: Bool
-    let totalRecruitNumber: Int
+    var isMyProject: Bool
+    var totalRecruitNumber: Int
 }
 
 extension Project {
     static let onError = Project(
+        id: 0, 
         title: "모집글을 불러올 수 없습니다.",
         description: "",
         dDays: 0,

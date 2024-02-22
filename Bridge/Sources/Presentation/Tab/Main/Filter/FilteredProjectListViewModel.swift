@@ -114,10 +114,7 @@ final class FilteredProjectListViewModel: ViewModelType {
                     }
                     
                 case .failure(let error):
-                    owner.coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                        title: "북마크 실패",
-                        description: error.localizedDescription
-                    ))
+                    owner.handleNetworkError(error)
                 }
             })
             .disposed(by: disposeBag)
@@ -151,6 +148,23 @@ extension FilteredProjectListViewModel {
             projectListRelay.accept([])
             coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
                 title: "모집글 조회에 실패했습니다.",
+                description: error.localizedDescription
+            ))
+        }
+    }
+    
+    /// 네트워크 에러가 401일 경우 로그인 Alert을 보여주고, 나머지 경우에는 Error Alert
+    private func handleNetworkError(_ error: Error) {
+        if let networkError = error as? NetworkError, case .statusCode(401) = networkError {
+            coordinator?.showAlert(
+                configuration: .signIn,
+                primaryAction: { [weak self] in
+                    self?.coordinator?.showSignInViewController()
+                }
+            )
+        } else {
+            coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                title: "오류",
                 description: error.localizedDescription
             ))
         }

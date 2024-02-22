@@ -8,10 +8,12 @@
 import Foundation
 
 struct FilteredProjectRequestDTO: Encodable {
+    let userID: Int
     let field: String
     let techStacks: [String]
     
     enum CodingKeys: String, CodingKey {
+        case userID = "userId"
         case field = "part"
         case techStacks = "skills"
     }

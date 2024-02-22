@@ -11,6 +11,7 @@ import RxCocoa
 
 final class ProjectDataStorage {
     private var project = Project(
+        id: 0, 
         title: "",
         description: "",
         dDays: 0,
@@ -81,5 +82,39 @@ extension ProjectDataStorage {
     
     func updateDescription(with text: String) {
         project.description = text
+    }
+}
+
+// MARK: - Update
+extension ProjectDataStorage {
+    /// 업데이트 할 프로젝트를 주입
+    func updateProject(with newProject: Project) {
+        project.id = newProject.id
+        project.title = newProject.title
+        project.description = newProject.description
+        project.dDays = newProject.dDays
+        project.deadline = newProject.deadline
+        project.startDate = newProject.startDate
+        project.endDate = newProject.endDate
+        project.memberRequirements = newProject.memberRequirements.map { requirement -> MemberRequirement in
+            MemberRequirement(
+                field: requirement.field.convertToUpperCaseFormat(),
+                recruitNumber: requirement.recruitNumber,
+                requiredSkills: requirement.requiredSkills,
+                requirementText: requirement.requirementText
+            )
+        }
+        project.applicantRestrictions = newProject.applicantRestrictions
+        project.progressMethod = newProject.progressMethod
+        project.progressStep = newProject.progressStep
+        project.userName = newProject.userName
+        project.isBookmarked = newProject.isBookmarked
+        project.isMyProject = newProject.isMyProject
+        project.totalRecruitNumber = newProject.totalRecruitNumber
+    }
+    
+    /// 해당 분야에 있는 MemberRequirement 제거
+    func removeMemberRequirement(for field: String) {
+        project.memberRequirements.removeAll { $0.field == field }
     }
 }

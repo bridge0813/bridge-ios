@@ -40,12 +40,6 @@ final class ChannelViewController: BaseViewController {
         }
     )
     
-    private let rootFlexConatiner: UIView = {
-        let view = UIView()
-        view.backgroundColor = BridgeColor.gray09
-        return view
-    }()
-    
     private lazy var messageCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.backgroundColor = BridgeColor.gray09
@@ -101,18 +95,14 @@ final class ChannelViewController: BaseViewController {
     
     // MARK: - Layout
     override func configureLayouts() {
-        view.addSubview(rootFlexConatiner)
-        
-        rootFlexConatiner.flex.define { flex in
-            flex.addItem(messageCollectionView).grow(1)
-            flex.addItem(messageInputBar)
-        }
+        view.addSubview(messageCollectionView)
+        view.addSubview(messageInputBar)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        rootFlexConatiner.pin.all(view.pin.safeArea)
-        rootFlexConatiner.flex.layout()
+        messageCollectionView.pin.top(view.pin.safeArea.top).horizontally().bottom(60 + view.pin.safeArea.bottom)
+        messageInputBar.pin.below(of: messageCollectionView).horizontally().height(60)
     }
     
     // MARK: - Binding
@@ -125,9 +115,21 @@ final class ChannelViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         messageInputBar.rx.keyboardLayoutChanged
-            .bind(to: messageInputBar.rx.yPosition)
+            .subscribe(onNext: { keyboardHeight in
+                UIView.animate(withDuration: 0.3) { [weak self] in
+                    guard let self else { return }
+                    // 키보드가 내려갔을 경우
+                    guard keyboardHeight > 0 else {
+                        self.messageInputBar.transform = .identity
+                        return
+                    }
+                    
+                    let yPosition = keyboardHeight - view.pin.safeArea.bottom
+                    messageInputBar.transform = CGAffineTransform(translationX: 0, y: -yPosition)
+                }
+            })
             .disposed(by: disposeBag)
-        
+  
         messageCollectionView.rx.keyboardLayoutChanged
             .bind(to: messageCollectionView.rx.yPosition)
             .disposed(by: disposeBag)

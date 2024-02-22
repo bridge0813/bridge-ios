@@ -81,6 +81,7 @@ final class FieldTechStackPickerPopUpView: BridgeBasePopUpView {
     override func configureAttributes() {
         super.configureAttributes()
         completeButton.isHidden = true
+        addTapGestureForHide()
     }
     
     // MARK: - Layout
@@ -144,7 +145,7 @@ final class FieldTechStackPickerPopUpView: BridgeBasePopUpView {
                 owner.fieldTechStack.techStacks = []    // 기술스택 초기화
                 
                 // 버튼 선택 상태 업데이트
-                owner.setFieldView.updateButtonState(field)
+                owner.setFieldView.updateButtonStateToSingleSelection(field)
                 owner.completeButton.isEnabled = false
                 
                 // data 전달
@@ -187,7 +188,7 @@ final class FieldTechStackPickerPopUpView: BridgeBasePopUpView {
     override func show() {
         // 초기화
         fieldTechStack = FieldTechStack(field: "", techStacks: [])
-        setFieldView.updateButtonState("")
+        setFieldView.updateButtonStateToSingleSelection("")
         super.show()
     }
     

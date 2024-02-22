@@ -82,7 +82,7 @@ final class DefaultUserRepository: UserRepository {
         let userID = tokenStorage.get(.userID)
         let userEndpoint = UserEndpoint.fetchBookmarkedProjects(userID: userID)
         
-        return networkService.request(to: userEndpoint, interceptor: nil)
+        return networkService.request(to: userEndpoint, interceptor: AuthInterceptor())
             .decode(type: [BookmarkedProjectResponseDTO].self, decoder: JSONDecoder())
             .map { dtos in
                 dtos.map { $0.toEntity() }
@@ -100,7 +100,9 @@ extension DefaultUserRepository {
                 techStacks: fieldTechStack.techStacks.map { stack in
                     // 서버측 워딩에 맞게 수정. 대문자 처리 및 띄어쓰기 제거
                     if stack == "C++" { return "CPP" }
-                    else { return stack.uppercased().replacingOccurrences(of: " ", with: "") }
+                    if stack == "Objective-c" { return "OBJECTIVE_C" }
+                    
+                    return stack.uppercased().replacingOccurrences(of: " ", with: "")
                 }
             )
         }

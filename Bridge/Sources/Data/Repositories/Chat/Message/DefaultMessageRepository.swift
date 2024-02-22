@@ -27,7 +27,7 @@ final class DefaultMessageRepository: MessageRepository {
     func fetchMessages(channelID: String) -> Observable<[Message]> {
         let messageEndpoint = MessageEndpoint.fetchMessages(channelID: channelID)
         
-        return networkService.request(to: messageEndpoint, interceptor: nil)
+        return networkService.request(to: messageEndpoint, interceptor: AuthInterceptor())
             .decode(type: MessageDTO.self, decoder: JSONDecoder())
             .map { [weak self] messageDTO in
                 let userID = self?.tokenStorage.get(.userID) ?? invalidToken

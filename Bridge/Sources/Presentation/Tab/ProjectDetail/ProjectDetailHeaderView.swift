@@ -218,10 +218,11 @@ final class ProjectDetailHeaderView: BaseCollectionReusableView {
                 .backgroundColor(BridgeColor.gray10)
                 .direction(.row)
                 .justifyContent(.spaceBetween)
+                .padding(32, 16, 0, 13)
                 .height(70)
                 .define { flex in
-                    flex.addItem(recruitNumberLabel).height(32).marginTop(32).marginLeft(16)
-                    flex.addItem(goToDetailButton).width(100).height(16).marginTop(38).marginRight(13)
+                    flex.addItem(recruitNumberLabel).height(32)
+                    flex.addItem(goToDetailButton).width(150).height(32).marginRight(0)
                 }
         }
     }
@@ -260,9 +261,10 @@ extension ProjectDetailHeaderView {
             warningMessageBox.isHidden = true  // 이미지가 남아있는 에러에 대응
             
         } else {
+            warningMessageBox.flex.isIncludedInLayout(true).markDirty()
+            warningMessageBox.isHidden = false  // 이미지가 남아있는 에러에 대응
             warningMessageBox.updateTitle("이 프로젝트는 \(restrictionText)의 지원이 제한되어 있습니다.")
         }
-        
         
         recruitNumberLabel.highlightedTextColor(
             text: "\(data.totalRecruitNumber)명 모집중",
@@ -271,9 +273,13 @@ extension ProjectDetailHeaderView {
         
         titleLabel.flex.markDirty()
         descriptionLabel.flex.markDirty()
-        dDayLabel.flex.width(dDayLabel.intrinsicContentSize.width).height(22)
-        dDayLabel.flex.markDirty()
-        setNeedsLayout()
+        dDayLabel.flex.width(dDayLabel.intrinsicContentSize.width).height(22).markDirty()
+        deadlineLabel.flex.markDirty()
+        periodLabel.flex.markDirty()
+        progressMethodLabel.flex.markDirty()
+        progressStepLabel.flex.markDirty()
+        recruitNumberLabel.flex.markDirty()
+        rootFlexContainer.flex.layout()
     }
     
     func configurePeriodLabel(with data: Project) {

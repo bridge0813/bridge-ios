@@ -62,13 +62,7 @@ final class OtherUserProfileViewModel: ViewModelType {
                     profile.accept(profileData)
                     
                 case .failure(let error):
-                    owner.coordinator?.showErrorAlert(
-                        configuration: ErrorAlertConfiguration(
-                            title: "프로필 조회에 실패했습니다.",
-                            description: error.localizedDescription
-                        ),
-                        primaryAction: { [weak self] in self?.coordinator?.pop() }
-                    )
+                    owner.handleNetworkError(error)
                 }
             })
             .disposed(by: disposeBag)
@@ -113,6 +107,29 @@ final class OtherUserProfileViewModel: ViewModelType {
         return Output(
             profile: profile.asDriver(),
             downloadedFile: downloadedFile
+        )
+    }
+}
+
+// MARK: - ErrorHandling
+extension OtherUserProfileViewModel {
+    /// 네트워킹 에러에 대한 핸들링
+    private func handleNetworkError(_ error: Error) {
+        var description = ""
+        
+        // 404일 경우, 프로필 등록 이동
+        if let networkError = error as? NetworkError, case .statusCode(404) = networkError {
+            description = "프로필이 등록되지 않은 유저입니다."
+        } else {
+            description = error.localizedDescription
+        }
+        
+        coordinator?.showErrorAlert(
+            configuration: ErrorAlertConfiguration(
+                title: "프로필 조회에 실패했습니다.",
+                description: description
+            ),
+            primaryAction: { [weak self] in self?.coordinator?.pop() }
         )
     }
 }

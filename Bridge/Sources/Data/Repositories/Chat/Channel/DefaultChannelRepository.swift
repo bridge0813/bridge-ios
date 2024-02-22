@@ -47,7 +47,7 @@ final class DefaultChannelRepository: ChannelRepository {
         let createChannelDTO = CreateChannelRequestDTO(myID: myID, opponentID: opponentID)
         let createChannelEndpoint = ChannelEndpoint.createChannel(requestDTO: createChannelDTO)
         
-        return networkService.request(to: createChannelEndpoint, interceptor: nil)
+        return networkService.request(to: createChannelEndpoint, interceptor: AuthInterceptor())
             .decode(type: CreateChannelResponseDTO.self, decoder: JSONDecoder())
             .map { createChannelDTO in
                 createChannelDTO.toEntity()

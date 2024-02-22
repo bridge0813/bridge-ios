@@ -28,50 +28,23 @@ extension Reactive where Base: UICollectionView {
                         // 아이템의 frame을 window 좌표계로 변환
                         let frameInWindow = collectionView.convert(attributes.frame, to: nil)
                         
-                        // 활성화된 window scene 찾음
-                        var windowScene: UIWindowScene?
-                        if let scene = UIApplication.shared
-                            .connectedScenes
-                            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene { windowScene = scene }
+                        // 활성화된 window 찾음
+                        let window = UIWindow.visibleWindow() ?? UIWindow()
+                        let windowMaxY = window.bounds.maxY  // 윈도우 하단 계산
                         
-                        let bottomOfWindow = windowScene?.windows.first?.frame.height ?? 0  // 윈도우 하단 계산
-                        let topOfKeyboard = bottomOfWindow - keyboardHeight                 // 키보드 상단 계산
+                        // 키보드 + inputBar 상단
+                        let topOfInputBar = windowMaxY - (keyboardHeight + 60)
                         
-                        // 키보드 + input bar가 가리는 높이 계산
-                        let coveredHeight = frameInWindow.maxY - (topOfKeyboard - 38)
+                        // 가리는 높이 계산
+                        let coveredHeight = frameInWindow.maxY - topOfInputBar
                         
-                        if coveredHeight > 0 {  // 키보드가 마지막 셀을 가리는 경우에만 collection view 올림
-                            // safe area 만큼 더 올려야 함
-                            let yPosition = coveredHeight + (collectionView.superview?.superview?.safeAreaInsets.bottom ?? 34)
+                        // 키보드가 마지막 셀을 가리는 경우에만 collection view 올림
+                        if coveredHeight > 0 {
+                            // 컬렉션 뷰의 Bottom Content Inset 만큼 더 올려주기
+                            let yPosition = coveredHeight + 16
                             collectionView.transform = CGAffineTransform(translationX: 0, y: -yPosition)
                         }
                     }
-                }
-            }
-        }
-    }
-}
-
-extension Reactive where Base: UIScrollView {
-    var yPosition: Binder<CGFloat> {
-        Binder(base) { scrollView, keyboardHeight in
-            UIView.animate(withDuration: 0.3) {
-                if keyboardHeight == 0 {
-                    scrollView.transform = CGAffineTransform.identity
-                } else {
-                    // ScrollView 최하단으로 내리기
-                    let contentSize = scrollView.contentSize.height
-                    let scrollViewHeight = scrollView.bounds.height
-                    scrollView.setContentOffset(CGPoint(x: 0, y: contentSize - scrollViewHeight), animated: true)
-                    
-                    // ScrollView가 아래에서 어느정도 띄워져있는지 체크
-                    let window = UIWindow.visibleWindow() ?? UIWindow()
-                    let scrollViewMaxY = scrollView.windowFrame?.maxY ?? 550
-                    let windowMaxY = window.bounds.maxY
-                    let scrollViewBottomMargin = windowMaxY - scrollViewMaxY
-                    
-                    let yPosition = keyboardHeight - (scrollViewBottomMargin)
-                    scrollView.transform = CGAffineTransform(translationX: 0, y: -yPosition)
                 }
             }
         }

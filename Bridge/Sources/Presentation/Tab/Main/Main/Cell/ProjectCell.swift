@@ -47,7 +47,12 @@ final class ProjectCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let bookmarkButton = MainBookmarkButton()
+    private let bookmarkButton: MainBookmarkButton = {
+        let button = MainBookmarkButton()
+        button.contentHorizontalAlignment = .right
+        button.contentVerticalAlignment = .top
+        return button
+    }()
     
     private let recruitNumberLabel: UILabel = {
         let label = UILabel()
@@ -89,15 +94,14 @@ final class ProjectCell: BaseCollectionViewCell {
     // MARK: - Layout
     override func configureLayouts() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.paddingHorizontal(18).define { flex in
+        rootFlexContainer.flex.padding(19, 18, 0, 18).define { flex in
             
-            flex.addItem().direction(.row).marginTop(19).define { flex in
-                flex.addItem().width(200).height(68).define { flex in
+            flex.addItem().direction(.row).justifyContent(.spaceBetween).define { flex in
+                flex.addItem().width(210).height(68).define { flex in
                     flex.addItem(dDayLabel)
                     flex.addItem(titleLabel).marginTop(6)
                 }
-                flex.addItem().grow(1)
-                flex.addItem(bookmarkButton).size(24).marginRight(0)
+                flex.addItem(bookmarkButton).size(50).marginRight(-2)
             }
             
             flex.addItem().backgroundColor(BridgeColor.gray08).height(1).marginTop(24)

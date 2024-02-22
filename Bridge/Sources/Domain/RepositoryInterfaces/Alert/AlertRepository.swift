@@ -9,6 +9,6 @@ import RxSwift
 
 protocol AlertRepository {
     func fetchAlerts() -> Observable<[BridgeAlert]>
-    func removeAlert(id: String) -> Observable<Void>
+    func removeAlert(id: String) -> Observable<String>
     func removeAllAlerts() -> Observable<Void>
 }

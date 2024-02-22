@@ -61,8 +61,8 @@ final class MainCoordinator: Coordinator {
     }
 }
 
+// MARK: - Show
 extension MainCoordinator {
-    // MARK: - Show
     func showMainViewController() {
         let mainViewModel = MainViewModel(
             coordinator: self,

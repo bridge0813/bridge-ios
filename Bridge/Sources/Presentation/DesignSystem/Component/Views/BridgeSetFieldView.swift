@@ -143,8 +143,8 @@ extension BridgeSetFieldView {
 }
 
 extension BridgeSetFieldView {
-    /// 중복 선택이 불가능하도록 버튼의 선택상태를 업데이트하는 메서드.
-    func updateButtonState(_ selectedField: String) {
+    /// 버튼의 선택 상태를 업데이트하는 메서드(중복 선택 불가)
+    func updateButtonStateToSingleSelection(_ selectedField: String) {
         let allButtons = [iosButton, androidButton, frontendButton, backendButton, uiuxButton, bibxButton, videomotionButton, pmButton]
         allButtons.forEach { $0.isSelected = false }
         
@@ -173,6 +173,39 @@ extension BridgeSetFieldView {
                 
             case .pm:
                 pmButton.isSelected = true
+            }
+        }
+    }
+    
+    /// 버튼의 선택 상태를 업데이트하는 메서드(중복 선택 가능)
+    func updateButtonStateToMultipleSelections(_ selectedFields: [String]) {
+        selectedFields.forEach { field in
+            if let buttonType = FieldTagButtonType(rawValue: field) {
+                switch buttonType {
+                case .ios:
+                    iosButton.isSelected = true
+                    
+                case .android:
+                    androidButton.isSelected = true
+                    
+                case .frontend:
+                    frontendButton.isSelected = true
+                    
+                case .backend:
+                    backendButton.isSelected = true
+                    
+                case .uiux:
+                    uiuxButton.isSelected = true
+                    
+                case .bibx:
+                    bibxButton.isSelected = true
+                    
+                case .videomotion:
+                    videomotionButton.isSelected = true
+                    
+                case .pm:
+                    pmButton.isSelected = true
+                }
             }
         }
     }

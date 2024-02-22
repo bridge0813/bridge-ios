@@ -31,19 +31,19 @@ final class CreateProjectCoordinator: Coordinator {
     
     // MARK: - Methods
     func start() {
-        showMemberFieldSelectionViewController()
+        showSetMemberFieldViewController()
     }
 }
 
 // MARK: - Show
 extension CreateProjectCoordinator {
-    private func showMemberFieldSelectionViewController() {
-        let viewModel = MemberFieldSelectionViewModel(
+    private func showSetMemberFieldViewController() {
+        let viewModel = SetMemberFieldViewModel(
             coordinator: self,
             dataStorage: projectDataStorage
         )
         
-        let viewController = MemberFieldSelectionViewController(viewModel: viewModel)
+        let viewController = SetMemberFieldViewController(viewModel: viewModel)
         createProjectNavigationController = UINavigationController(rootViewController: viewController)
         createProjectNavigationController?.modalPresentationStyle = .fullScreen
         
@@ -53,55 +53,55 @@ extension CreateProjectCoordinator {
         )
     }
     
-    func showMemberRequirementInputViewController(with selectedFields: [String]) {
-        let viewModel = MemberRequirementInputViewModel(
+    func showSetMemberRequirementViewController(with selectedFields: [String]) {
+        let viewModel = SetMemberRequirementViewModel(
             coordinator: self,
             selectedFields: selectedFields,
             dataStorage: projectDataStorage
         )
 
-        let viewController = MemberRequirementInputViewController(viewModel: viewModel)
+        let viewController = SetMemberRequirementViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showApplicantRestrictionViewController() {
-        let viewModel = ApplicantRestrictionViewModel(
+    func showSetApplicantRestrictionViewController() {
+        let viewModel = SetApplicantRestrictionViewModel(
             coordinator: self,
             dataStorage: projectDataStorage
         )
         
-        let viewController = ApplicantRestrictionViewController(viewModel: viewModel)
+        let viewController = SetApplicantRestrictionViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showProjectDatePickerViewController() {
-        let viewModel = ProjectDatePickerViewModel(
+    func showSetProjectScheduleViewController() {
+        let viewModel = SetProjectScheduleViewModel(
             coordinator: self,
             dataStorage: projectDataStorage
         )
         
-        let viewController = ProjectDatePickerViewController(viewModel: viewModel)
+        let viewController = SetProjectScheduleViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showProjectProgressStatusViewController() {
-        let viewModel = ProjectProgressStatusViewModel(
+    func showSetProjectProgressViewController() {
+        let viewModel = SetProjectProgressViewModel(
             coordinator: self,
             dataStorage: projectDataStorage
         )
         
-        let viewController = ProjectProgressStatusViewController(viewModel: viewModel)
+        let viewController = SetProjectProgressViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showProjectDescriptionInputViewController() {
-        let viewModel = ProjectDescriptionInputViewModel(
+    func showSetProjectDescriptionViewController() {
+        let viewModel = SetProjectDescriptionViewModel(
             coordinator: self,
             dataStorage: projectDataStorage,
             createProjectUseCase: createProjectUseCase
         )
         
-        let viewController = ProjectDescriptionInputViewController(viewModel: viewModel)
+        let viewController = SetProjectDescriptionViewController(viewModel: viewModel)
         createProjectNavigationController?.pushViewController(viewController, animated: true)
     }
     

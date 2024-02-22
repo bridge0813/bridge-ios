@@ -87,7 +87,9 @@ final class DefaultProjectRepository: ProjectRepository {
     
     // 필터링된 모집글 조회
     func fetchFilteredProjects(filterBy fieldTechStack: FieldTechStack) -> Observable<[ProjectPreview]> {
+        let userID = tokenStorage.get(.userID)
         let filterRequestDTO = FilteredProjectRequestDTO(
+            userID: Int(userID) ?? -1, 
             field: fieldTechStack.field.convertToUpperCaseFormat(),
             techStacks: fieldTechStack.techStacks.map { stack in
                 // 서버측 워딩에 맞게 수정. 대문자 처리 및 띄어쓰기 제거
@@ -98,7 +100,7 @@ final class DefaultProjectRepository: ProjectRepository {
         
         let filterEndpoint = ProjectEndpoint.fetchFilteredProjects(requestDTO: filterRequestDTO)
         
-        return networkService.request(to: filterEndpoint, interceptor: AuthInterceptor())
+        return networkService.request(to: filterEndpoint, interceptor: nil)
             .decode(type: [ProjectPreviewResponseDTO].self, decoder: JSONDecoder())
             .map { projectPreviewDTOs in
                 projectPreviewDTOs.map { $0.toEntity() }
@@ -116,13 +118,15 @@ final class DefaultProjectRepository: ProjectRepository {
         return networkService.request(to: fetchProjectDetailEndpoint, interceptor: nil)
             .decode(type: ProjectDetailDTO.self, decoder: JSONDecoder())
             .map { dto in
-                return dto.toEntity()
+                var project = dto.toEntity()
+                project.id = projectID
+                return project
             }
     }
     
     // 모집글 생성
     func create(project: Project) -> Observable<Int> {
-        let createProjectDTO = convertToCreateDTO(from: project)
+        let createProjectDTO = convertToCreateProjectDTO(from: project)
         let createProjectEndpoint = ProjectEndpoint.create(requestDTO: createProjectDTO)
         
         return networkService.request(to: createProjectEndpoint, interceptor: AuthInterceptor())
@@ -130,6 +134,17 @@ final class DefaultProjectRepository: ProjectRepository {
             .map { dto in
                 return dto.projectID
             }
+    }
+    
+    // 모집글 수정
+    func update(project: Project) -> Observable<Void> {
+        let updateProjectDTO = convertToUpdateProjectDTO(from: project)
+        let updateProjectEndpoint = ProjectEndpoint.update(
+            requestDTO: updateProjectDTO, projectID: String(project.id)
+        )
+        
+        return networkService.request(to: updateProjectEndpoint, interceptor: AuthInterceptor())
+            .map { _ in }
     }
     
     // 모집글 제거
@@ -162,8 +177,8 @@ final class DefaultProjectRepository: ProjectRepository {
 
 // MARK: - Methods
 private extension DefaultProjectRepository {
-    /// '모집글 작성'의 네트워킹을 위한 DTO를 만들어주는 메서드.
-    func convertToCreateDTO(from project: Project) -> CreateProjectRequestDTO {
+    /// '모집글 작성'의 requestDTO를 만들어주는 메서드.
+    func convertToCreateProjectDTO(from project: Project) -> CreateProjectRequestDTO {
         let userID = Int(tokenStorage.get(.userID)) ?? 0
         
         let memberRequirementsDTO = project.memberRequirements.map { requirement -> MemberRequirementDTO in
@@ -190,6 +205,36 @@ private extension DefaultProjectRepository {
             progressMethod: project.progressMethod,
             progressStep: project.progressStep,
             userID: userID
+        )
+    }
+    
+    /// '모집글 수정'의 requestDTO를 만들어주는 메서드.
+    func convertToUpdateProjectDTO(from project: Project) -> UpdateProjectRequestDTO {
+        let memberRequirementsDTO = project.memberRequirements.map { requirement -> MemberRequirementDTO in
+            MemberRequirementDTO(
+                field: requirement.field,
+                recruitNumber: requirement.recruitNumber,
+                requiredSkills: requirement.requiredSkills.map { skill in
+                    // 서버측 워딩에 맞게 수정. 대문자 처리 및 띄어쓰기 제거
+                    if skill == "C++" { return "CPP" }
+                    if skill == "Objective-c" { return "OBJECTIVE_C" }
+                    
+                    return skill.uppercased().replacingOccurrences(of: " ", with: "")
+                },
+                requirementText: requirement.requirementText
+            )
+        }
+        
+        return UpdateProjectRequestDTO(
+            title: project.title,
+            description: project.description,
+            deadline: project.deadline.toString(format: "yyyy-MM-dd'T'HH:mm:ss"),
+            startDate: project.startDate?.toString(format: "yyyy-MM-dd'T'HH:mm:ss"),
+            endDate: project.endDate?.toString(format: "yyyy-MM-dd'T'HH:mm:ss"),
+            memberRequirements: memberRequirementsDTO,
+            applicantRestrictions: project.applicantRestrictions,
+            progressMethod: project.progressMethod,
+            progressStep: project.progressStep
         )
     }
 }

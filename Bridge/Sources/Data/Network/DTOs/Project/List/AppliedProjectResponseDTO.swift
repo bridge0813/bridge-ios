@@ -30,7 +30,7 @@ extension AppliedProjectResponseDTO {
             title: title,
             description: description,
             dDays: 0,
-            deadline: deadline.toDate(format: "yyyy.MM.dd") ?? "",
+            deadline: deadline.toDateType()?.toString(format: "yyyy.M.dd") ?? "",
             totalRecruitNumber: 0,
             rank: 0,
             deadlineRank: 0,

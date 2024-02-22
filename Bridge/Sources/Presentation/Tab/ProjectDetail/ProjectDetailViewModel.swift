@@ -74,7 +74,7 @@ final class ProjectDetailViewModel: ViewModelType {
                 case .failure(let error):
                     owner.coordinator?.showErrorAlert(
                         configuration: ErrorAlertConfiguration(
-                            title: "오류",
+                            title: "조회에 실패했습니다.",
                             description: error.localizedDescription
                         ),
                         primaryAction: {
@@ -93,16 +93,25 @@ final class ProjectDetailViewModel: ViewModelType {
                 
                 switch managementType {
                 case .edit:
-                    // TODO: - 수정하기 구현 후 이동
                     owner.coordinator?.showAlert(
-                        configuration: .editProject
+                        configuration: .editProject,
+                        primaryAction: { owner.coordinator?.connectToUpdateProjectFlow(with: project.value) }
                     )
                     
                 case .close:
-                    owner.coordinator?.showAlert(
-                        configuration: .closeProject,
-                        primaryAction: { projectManagementAction.onNext(.close) }
-                    )
+                    // 마감된 모집글의 경우
+                    if project.value.dDays == 0 {
+                        owner.coordinator?.showErrorAlert(
+                            configuration: ErrorAlertConfiguration(title: "이미 마감된 프로젝트입니다.")
+                        )
+                        
+                    } else {
+                        // 마감되지 않은 모집글의 경우
+                        owner.coordinator?.showAlert(
+                            configuration: .closeProject,
+                            primaryAction: { projectManagementAction.onNext(.close) }
+                        )
+                    }
                     
                 case .delete:
                     owner.coordinator?.showAlert(
@@ -215,20 +224,29 @@ final class ProjectDetailViewModel: ViewModelType {
 
 // MARK: - 네트워킹 결과처리
 extension ProjectDetailViewModel {
-    private func handleNetworkError(_ error: Error) {
+    private func handleNetworkError(_ error: Error, notFoundErrorTitle: String = "오류") {
         // 네트워크 에러가 401일 경우 로그인 Alert을 보여주고, 나머지 경우에는 Error Alert
-        if let networkError = error as? NetworkError, case .statusCode(401) = networkError {
-            coordinator?.showAlert(
-                configuration: .signIn,
-                primaryAction: { [weak self] in
-                    self?.coordinator?.showSignInViewController()
-                }
-            )
-        } else {
-            coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
-                title: "오류",
-                description: error.localizedDescription
-            ))
+        if let networkError = error as? NetworkError {
+            switch networkError {
+            case .statusCode(401):
+                coordinator?.showAlert(
+                    configuration: .signIn,
+                    primaryAction: { [weak self] in
+                        self?.coordinator?.showSignInViewController()
+                    }
+                )
+                
+            case .statusCode(409):
+                coordinator?.showErrorAlert(
+                    configuration: ErrorAlertConfiguration(title: "이미 지원한 프로젝트입니다")
+                )
+                
+            default:
+                coordinator?.showErrorAlert(configuration: ErrorAlertConfiguration(
+                    title: "오류",
+                    description: error.localizedDescription
+                ))
+            }
         }
     }
 }

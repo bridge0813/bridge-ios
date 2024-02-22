@@ -32,9 +32,7 @@ extension Reactive where Base: UIView {
                 if keyboardHeight == 0 {
                     view.transform = CGAffineTransform.identity
                 } else {
-                    // rootFlexContainer의 superview에 접근하기 위해 superview 두 번 체이닝
-                    let yPosition = keyboardHeight - (view.superview?.superview?.safeAreaInsets.bottom ?? 34)
-                    view.transform = CGAffineTransform(translationX: 0, y: -yPosition)
+                    view.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight)
                 }
             }
         }

@@ -88,7 +88,7 @@ final class AlertViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.alerts
-            .bind(to: alertListTableView.rx.items(
+            .drive(alertListTableView.rx.items(
                 cellIdentifier: AlertCell.reuseIdentifier,
                 cellType: AlertCell.self) 
             ) { _, element, cell in

@@ -34,10 +34,10 @@ final class BridgeSetDisplayButton: BaseButton {
         contentHorizontalAlignment = .leading
     }
     
-    func updateTitle(_ title: String) {
+    func updateTitle(_ title: String, textColor: UIColor = BridgeColor.gray02) {
         var titleContainer = AttributeContainer()
         titleContainer.font = BridgeFont.body2.font
-        titleContainer.foregroundColor = BridgeColor.gray02
+        titleContainer.foregroundColor = textColor
         configuration?.attributedTitle = AttributedString(title, attributes: titleContainer)
     }
 }

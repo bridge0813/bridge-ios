@@ -7,5 +7,11 @@
 
 
 struct SearchProjectRequestDTO: Encodable {
+    let userID: Int
     let searchWord: String
+    
+    enum CodingKeys: String, CodingKey {
+        case userID = "userId"
+        case searchWord
+    }
 }
